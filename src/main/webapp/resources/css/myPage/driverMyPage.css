@@ -1,0 +1,77 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+@font-face {
+	font-family: 'yg-jalnan';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.btn_ydl {
+	color: #fff;
+	background-color: rgb(87, 187, 138);
+	border-color: rgb(87, 187, 138);
+}.btn_ydl_r {
+	color: #fff;
+	background-color: rgb(241,95,95);
+	border-color: rgb(241,95,95);
+}
+
+.ydl_color {
+	background-color: rgb(87, 187, 138);
+}
+
+.ft_gr li>a{
+	color: darkgray;
+}
+.ft_gr li>a:hover{
+	
+	color: rgb(87, 187, 138);;
+}
+
+.bgNo {
+	background: none;
+}
+
+.jal {
+	font-family: 'yg-jalnan', Arial, Helvetica, sans-serif
+}
+
+.na {
+	font-family: 'nanumsquare', Arial, Helvetica, sans-serif
+}
+
+.noto {
+	font-family: 'Noto Sans KR', Arial, Helvetica, sans-serif
+}
+
+.step_sh {
+	margin-top: 5em;
+}
+
+.nago {
+	font-family: 'nanumgothic', Arial, Helvetica, sans-serif;
+}
+
+a {
+	color: gray;
+}
+
+.fw6 {
+	font-weight: 600;
+}
+
+#pro_img{
+    background-position-x: 50%;
+    background-position-y: 50%;
+    background-size: cover;
+    cursor: pointer;
+    display: block !important;
+	height: 195px;
+	width: 150px;
+    text-size-adjust: 100%;
+	z-index: 2;
+	margin-top: 15px;
+}

@@ -1,0 +1,251 @@
+@charset "UTF-8";
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+/* 잘난체 폰트 적용 */
+@font-face {
+    font-family: 'yg-jalnan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 나눔 폰트 적용 */
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800');
+
+
+/* h3 */
+.jal{
+    font-family: 'yg-jalnan', Arial, Helvetica, sans-serif;
+    padding-top:10px;
+}
+
+/* a태그 */
+a{
+    color: black;
+    font-style: none;
+}
+
+
+/* 전체화면 1199px까지 */
+@media (max-width: 1199px){
+    .sidebar_li{
+        float: left;
+    }
+
+    .sidebar{
+        display:flex;
+        border-bottom: 1px solid #eee;
+    }
+    
+}
+
+/* 전체화면 1200px부터 */
+@media (min-width: 1200px){
+    .sidebar{
+        width:17%;
+        border-right: 1px solid gray;
+    }
+    
+}
+
+/* 사이드바 span태그 */
+.sidebar_span{
+    display: inline-block;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    font-family: 'yg-jalnan', Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    color: rgb(43, 43, 43);
+}
+
+.sidebar_span:after {
+    display:block;
+    content: '';
+    border-bottom: solid 2px rgb(87, 187, 138);
+    transform: scaleX(0);  
+    transition: all .3s ease-in-out 0s;
+}
+
+.sidebar_span:hover:after { 
+    transform: scaleX(1); 
+}
+
+.sidebar_span:after{
+    transform-origin:  0% 50%; 
+}
+
+/* 공지사항 상세 내용 div */
+.text_area{
+    width:100%;
+}
+
+/* 공지사항 제목 부분 */
+.text_area_tit{
+    width:100%;
+    border-top: 2px solid rgb(87, 187, 138);
+    border-bottom: 1px solid #b8b6aa;
+    padding:30px 0 30px 0;
+}
+
+/* 공지사항 제목 글씨 */
+.text_area_tit h4{
+    display: inline-block;
+    padding-left:10px;
+    font-family : 'Nanum Gothic';
+    font-weight: bold;
+    
+} 
+
+/* 공지사항 등록일 / 작성자 */
+.text_area_tit .title_ul{
+    float:right;
+    list-style: none;
+    padding-right: 10px;
+    font-size:12px;
+    font-family : 'Nanum Gothic';
+    color: gray;
+    margin-top: 5px;
+}
+
+.text_area_tit .title_ul .write, .text_area_tit .title_ul .regist_day {
+    margin-left: 9px;
+    
+}
+
+.write_tit_area {
+    margin-left: 30px;
+}
+
+/* 내용 부분 */
+.detail_text_area{
+    padding: 35px 13px;
+    border-bottom: solid 1px #b8b6aa;
+    line-height: 24px;
+    font-family : 'Nanum Gothic';
+    font-size: 14px;
+}
+
+/* 이전글/ 다음글 */
+.pagemove_area_wrap{
+    margin: 0 10px 0 10px;
+}
+.pagemove_area_wrap ul{
+    border-bottom: solid 1px #b8b6aa;
+    list-style: none;
+}
+
+.pagemove_area_wrap li{
+    border-bottom: 1px solid #e6e6e6;
+    padding: 15px 14px;
+    font-size: 0;
+}
+
+.pagemove_area_wrap li div{
+    display: inline-block;
+    font-size: 11px;
+    font-family : 'Nanum Gothic';
+}
+
+.pagemove_area_wrap li a{
+    color:rgb(37, 37, 37);
+}
+
+.pagemove_area_wrap li .left, .pagemove_area_wrap li .date {
+    width: 95px;
+}
+
+.pagemove_area_wrap li .tit {
+    width: calc(100% - 214px);
+    /* overflow: hidden; */
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.pagemove_area_wrap li .date{
+    font-size: 11px;
+    color: #999;
+    text-align: right;
+}
+
+/* 목록 */
+.list{
+    text-align: center;
+    margin-top:20px;
+}
+
+.list button{
+    width:50px;
+    height: 30px;
+    background-color: rgb(87, 187, 138);
+    color:white;
+    border: 1px solid #47b98f;
+    border-radius: 2px;
+    font-family : 'Nanum Gothic';
+    font-size: 15px;
+    
+}
+
+.list #listbtn:hover, .list #listbtn:active {
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out; 
+}
+
+.list #listbtn:hover {
+    border: 1px solid #37a97f;
+    background-color: #37a97f; 
+}
+
+.list #listbtn:active {
+    outline: none;
+    border: 1px solid #1b8d6d;
+    background-color: #1b8d6d; 
+}
+
+/* 수정 / 삭제 */
+
+.editDelete{
+    text-align: right;
+    margin-top:10px;
+}
+
+.editDelete button{
+    width:50px;
+    height: 30px;
+    background-color: rgb(87, 187, 138);
+    color:white;
+    border: 1px solid #47b98f;
+    border-radius: 2px;
+    font-family : 'Nanum Gothic';
+    font-size: 15px;
+    
+}
+
+.editDelete #editBtn:hover, .editDelete #editBtn:active,
+.editDelete #deleteBtn:hover, .editDelete #deleteBtn:active {
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out; 
+}
+
+.editDelete #editBtn:hover,
+.editDelete #deleteBtn:hover {
+    border: 1px solid #37a97f;
+    background-color: #37a97f; 
+}
+
+.editDelete #editBtn:active,
+.editDelete #deleteBtn:active{
+    outline: none;
+    border: 1px solid #1b8d6d;
+    background-color: #1b8d6d; 
+}

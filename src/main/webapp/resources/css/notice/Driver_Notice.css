@@ -1,0 +1,264 @@
+@charset "UTF-8";
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+/* 잘난체 폰트 적용 */
+@font-face {
+    font-family: 'yg-jalnan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 나눔 폰트 적용 */
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800');
+
+
+/* h3 */
+.jal{
+    font-family: 'yg-jalnan', Arial, Helvetica, sans-serif;
+    padding-top:10px;
+}
+
+/* a태그 */
+a{
+    color: black;
+    font-style: none;
+}
+
+.container{
+    min-height: 100%;
+}
+
+
+/* 전체화면 1199px까지 */
+@media (max-width: 1199px){
+    .sidebar_li{
+        float: left;
+    }
+
+    .sidebar{
+        display:flex;
+        border-bottom: 1px solid #eee;
+    }
+    
+}
+
+/* 전체화면 1200px부터 */
+@media (min-width: 1200px){
+    .sidebar{
+        width:17%;
+        border-right: 1px solid gray;
+    }
+    
+}
+
+/* 사이드바 span태그 */
+.sidebar_span{
+    display: inline-block;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    font-size: 15px;
+    font-family: 'yg-jalnan', Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    color: rgb(43, 43, 43);
+}
+
+.sidebar_span:after {
+    display:block;
+    content: '';
+    border-bottom: solid 2px rgb(241,95,95);
+    transform: scaleX(0);  
+    transition: all .3s ease-in-out 0s;
+}
+
+.sidebar_span:hover:after { 
+    transform: scaleX(1); 
+}
+
+.sidebar_span:after{
+    transform-origin:  0% 50%; 
+}
+
+/* 공지사항 table 외부 div */
+.tbl_wrap{
+    width:100%;
+}
+
+/* 공지사항 table */
+table.tbl {
+    border-collapse: collapse;
+    border-spacing: 1px;
+    line-height: 1.5;
+    border-top: 2px solid rgb(241,95,95);
+    table-layout: fixed;
+    font-family : 'Nanum Gothic';
+}
+
+/* 공지사항 table th */
+table.tbl th {
+    width: 150px;
+    padding: 10px;
+    font-weight: bold;
+    font-size:15px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    background-color: rgb(243, 243, 243);
+}
+
+/* 공지사항 table td */
+table.tbl td {
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    font-size:14px;
+    color:rgb(82, 81, 81);
+}
+
+/* 공지사항 table td 내용에만 포인터 */
+table.tbl td:first-child{
+    cursor: pointer;
+}
+
+/* 공지사항 table a태그 기본속성 제거 */
+table.tb1 td>a{
+    color: rgb(82, 81, 81);
+    text-decoration: none;
+}
+
+/* 공지사항 table 내용 hover */
+table.tbl:hover tbody tr:hover td {
+    font-weight: bolder;
+    color: rgb(241,95,95);
+}
+
+/* Pagination bar */
+.pagination{
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* 페이징 전체 span */
+.inner_paging{
+    display: inline-block;
+}
+
+/* 페이징 처리 a태그 */
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    font-family : 'Nanum Gothic';
+    font-size:13px;
+}
+
+/* 페이징 현재 페이지 클릭 시 active */
+.pagination a.active {
+    background-color: rgb(241,95,95);
+    color: white;
+}
+
+/* Add a grey background color on mouse-over */
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
+
+/* 검색 부분 div */
+.search_write{
+    margin-right: 15px;
+}
+
+/* 검색창 form */
+#search-box {
+    height: 30px;
+    width: 250px; 
+}
+
+#search-box #search-form, #search-box #search-button {
+    box-sizing: border-box;
+    height: 100%; 
+}
+
+/* 검색창 input */
+#search-box #search-form {
+    width: 80%;
+    border: 1px solid #ccc;
+    border-right: none;
+    border-radius: 2px 0 0 2px;
+    padding: 0 4px;
+    outline: none;
+    float: left; 
+}
+
+/* 검색창 눌렀을 시 */
+#search-box #search-form:focus {
+    outline: none;
+    border: 1px solid rgb(241,95,95); 
+}
+
+/* 검색 버튼 */
+#search-box #search-button {
+    width: 20%;
+    border: 1px solid rgb(241,95,95);
+    border-radius: 0 2px 2px 0;
+    color:white;
+    background-color: rgb(241,95,95);
+    float: right;
+    position: relative;
+    left: -2px; 
+    font-family : 'Nanum Gothic';
+    font-size: 15px;
+    
+}
+
+/* -- 검색 버튼 hover, active */
+#search-box #search-button:hover, #search-box #search-button:active,
+.admin_write #admin_write_btn:hover, .admin_write #admin_write_btn:active {
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out; 
+}
+
+#search-box #search-button:hover,
+.admin_write #admin_write_btn:hover {
+    border: 1px solid rgb(240, 66, 66);
+    background-color: rgb(240, 66, 66);
+}
+
+#search-box #search-button:active,
+.admin_write #admin_write_btn:active {
+    outline: none;
+    border: 1px solid rgb(240, 47, 47);
+    background-color: rgb(240, 47, 47);
+}
+
+/* -- */
+
+/* 관리자 로그인 시 작성하기 */
+.admin_write{
+    float:right;
+}
+
+/* 관리자 로그인 시 작성하기 버튼 */
+.admin_write #admin_write_btn{
+    width:80px;
+    height: 30px;
+    background-color: rgb(241,95,95);
+    color:white;
+    border: 1px solid rgb(241,95,95);
+    border-radius: 2px;
+    font-family : 'Nanum Gothic';
+    font-size: 15px;
+}

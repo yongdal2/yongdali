@@ -1,0 +1,672 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'yg-jalnan'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800');
+
+select, textarea, input, button{
+    outline: none;
+}
+
+.edge11{
+    width: 380px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px 0px;
+    padding: 0px;
+    margin-right: 30px;
+}
+.edge22{
+    width: 380px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px 0px;
+    padding: 0px;
+    margin-bottom: 2px;
+}
+.title11{
+    width: 380px;
+    height: 64px;
+    background: white;
+    margin-bottom: 1px;
+    padding: 18px 20px 20px 21px;
+    font-size: 15pt;
+    font-family: 'yg-jalnan';
+}
+.content22{
+    background: white;
+    text-align: center;
+    font-family: 'Nanum Gothic';
+}
+.content33{
+    font-family : 'Nanum Gothic';
+}
+
+.checkbox-wrap{
+    cursor: pointer;
+}
+
+.checkbox-wrap .check-icon{
+    display: inline-block;
+    width: 18px; 
+    height: 18px;
+    background: url(../images/reservation/uncheck.svg) left center no-repeat;
+    vertical-align: middle;
+    transition-duration: .1s;
+    background-size: 18px 18px;
+}
+.checkbox-wrap input[type=checkbox]{ 
+    display: none;
+}
+.checkbox-wrap input[type=checkbox]:checked + .check-icon{
+    background-image: url(../images/reservation/check.png);
+    background-size: 18px 18px;
+}
+
+
+/* 이삿짐 선택 모달*/
+/* The Modal (background) */
+.modal11 {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 150px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content11 {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0px;
+    border: 1px solid #888;
+    width: 400px;
+}
+
+/* The Close Button */
+.close11 {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close11:hover,
+.close11:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.move-topic1{
+    width: 112px; height: 40px; border: none; background-color: rgb(236, 240, 242); font-weight: bold; border-bottom: 2px solid black
+}
+.move-topic11{
+    display: none; width: 336px; height: 261px; border: 2px solid black; border-top: 0px; margin-left: auto; margin-right: auto;
+}
+.move-topic22{
+    width: 331px; height: 259px; overflow-y: scroll; padding-top: 10px;
+}
+
+.move-content11{
+    height: 35px; border-bottom: 1px solid rgb(236, 240, 242);
+}
+.move-content111{
+    display: flex; float: right; margin-right: 20px; margin-top: 6px;
+}
+.move-content112{
+    font-size: 9pt; margin-left: 20px; padding-top: 9px;
+}
+.move-content1111{
+    width: 20px; height: 20px; border: 1px solid black; text-align: center; cursor: pointer;
+}
+.move-content1112{
+    width: 30px; height: 20px; border: 1px solid black; border-left: none; border-right: none; text-align: center; font-size: 11pt;
+}
+.move-content1113{
+    width: 30px; height: 20px; border: 1px solid black; border-left: none; border-right: none; text-align: center; font-size: 11pt;
+}
+.move-minus-img{
+    padding-bottom: 2px; width: 15px; height: 20px;
+}
+.move-plus-img{
+    padding-bottom:2px; padding-right: 2px; width: 20px; height: 20px;
+}
+
+#body-div{
+	width: 1300px;
+	height: 890px;
+	background: rgb(236, 240, 242);
+	border-radius: 30px;
+	margin: 20px auto 20px auto;
+	padding: 20px 50px 0px 50px;
+}
+
+#line1{
+	display: flex;
+	margin-bottom: 15px;
+}
+
+#carGuide1{
+	float: right;
+	font-size: 10pt;
+	padding-top: 5px;
+	cursor: pointer;
+}
+
+#carGuide-ment{
+	font-size: 9pt;
+	font-family: 'Nanum Gothic';
+	margin-right: 3px;
+}
+
+#carOption-div{
+	width: 380px;
+	height: 82px;
+	padding-top: 24px;
+}
+
+#sl1{
+	width: 137px;
+	height: 32px;
+	font-size: 10pt;
+	border-radius: 7px;
+	border: 1px solid rgb(169, 169, 169);
+    margin-right: 15px;
+    padding-left: 10px;
+    color: #8e8e8e;
+    letter-spacing: 1px;
+}
+
+.opt1{
+	color: #8e8e8e;
+}
+
+.opt2{
+	color: black;
+}
+
+#sl2{
+	width: 180px;
+	height: 32px;
+	font-size: 10pt;
+	border-radius: 7px;
+	border: 1px solid rgb(169, 169, 169);
+	padding-left: 10px;
+	color: #8e8e8e;
+	letter-spacing: 1px;
+}
+
+#myBtn11{
+	float: right;
+	font-size: 10pt;
+	padding-top: 5px;
+	cursor: pointer;
+}
+
+#load-title{
+	font-size: 9pt;
+	font-family: 'Nanum Gothic';
+	margin-right: 3px;
+}
+
+#load-content-div{
+	height: 82px;
+	padding-top: 10px;
+}
+
+#load-content-area{
+	width: 335px;
+	height: 61.6px;
+	font-size: 9pt;
+	border-radius: 7px;
+	resize: none;
+	padding: 7px 10px 10px 10px;
+}
+
+#selectLoad-div{
+	width: 380px;
+	height: 460px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#selectLoad-title-div{
+	padding: 10px 20px 10px 20px;
+	border-bottom: 1px solid rgb(236, 240, 242);
+	margin-bottom: 20px;
+}
+
+#selectLoad-title{
+	font-family: 'yg-jalnan';
+	font-size: 22pt;
+}
+
+#selectLoad-topic{
+	width: 336px;
+	display: flex;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#funiture11{
+	background: white;
+	border: 2px solid black;
+	border-bottom: none;
+}
+
+#addList-btn{
+	font-family: 'NanumSquare';
+	font-weight: normal;
+	font-size: 12pt;
+	width: 130px;
+	height: 35px;
+	background: rgb(87, 187, 138);
+	padding-top: 7px;
+	color: white;
+	border: none;
+	border-radius: 30px;
+	cursor: pointer;
+}
+
+#capacity-div{
+	margin-right: 6px;
+	margin-top: 7px;
+}
+
+#xmark-div{
+	cursor:pointer;
+}
+
+#xmark-img{
+	width: 15px;
+	height: 15px;
+}
+
+#writeLoad{
+	width: 120px;
+	height: 25px;
+	margin-top:5px;
+	margin-left: 20px;
+	font-size: 9pt;
+}
+
+#loadBtn{
+	width: 200px;
+	height: 50px;
+	border: none;
+	margin-top: 13px;
+	background-color: green;
+	color: white;
+	font-family: 'yg-jalnan';
+	font-size: 14pt;
+	padding-top: 2px;"	
+}
+
+#line2{
+	display: flex;
+	margin-bottom: 15px;
+}
+
+#startAddr-div{
+	width: 380px;
+	height: 340px;
+	padding: 22px 22px 0px 22px;
+}
+
+#searchAddr-div1{
+	width: 336px;
+	height: 70px;
+	border: 1px solid rgb(169, 169, 169);
+	border-radius: 10px;
+	margin-bottom: 20px;
+}
+
+#searchAddr-div11{
+	display: flex;
+	border-bottom: 2px solid #ebeef3;
+	padding: 1px;
+}
+
+#startAddr{
+	width: 290px;
+	font-size: 10pt; 
+	height: 32px;
+	border: none;
+	margin-left: 12px;
+	letter-spacing: 1px;
+}
+
+#startDetailAddr{
+	width: 310px;
+	height: 32px;
+	border: none; 
+	font-size: 10pt;
+	letter-spacing: 1px;
+}
+
+#startPhone{
+	width: 336px;
+	height: 40px;
+	font-size: 10pt;
+	border: 1px solid rgb(169, 169, 169);
+	border-radius: 7px;
+	padding-left: 10px;
+	margin-bottom: 20px;
+	letter-spacing: 2px;
+}
+
+#start-check{
+	height: 35px;
+	display: flex;
+}
+
+#start-date-div{
+	width: 180px;
+	margin-right: 10px;
+	margin-bottom: 22px;
+}
+
+#datepicker1{
+	width: 160px;
+	height: 32px;
+	font-size: 10pt;
+	border: 1px solid rgb(169, 169, 169);
+	border-radius: 7px 0px 0px 7px;
+	border-right: 0px;
+	padding-left: 10px;
+	letter-spacing: 1px;
+}
+
+#dt1{
+	background-color: rgb(105, 113, 120);
+	border: 1px solid rgb(169, 169, 169);
+	border-radius: 0px 7px 7px 0px;
+	cursor: pointer;
+}
+
+
+#sl3{
+	width: 126px;
+	height: 32px;
+	font-size: 10pt;
+	border: 1px solid rgb(169, 169, 169);
+	border-radius: 7px;
+	color: #8e8e8e;
+	padding-left: 10px;
+	letter-spacing: 1px;
+}
+
+#load-method-title{
+	font-size: 12pt;
+	font-weight: bold;
+	margin: 0px 0px 5px 0px;
+}
+
+#endAddr-div{
+	width: 380px;
+	height: 340px;
+	padding: 22px 22px 0px 22px;
+}
+
+#searchAddr-div2{
+	width: 336px;
+	height: 70px;
+	border: 1px solid rgb(169, 169, 169);
+	border-radius: 10px;
+	margin-bottom: 20px;
+}
+
+#searchAddr-div22{
+	display: flex;
+	border-bottom: 2px solid #ebeef3;
+	padding: 1px;
+}
+
+#endAddr{
+	width: 290px;
+	font-size: 10pt; 
+	height: 32px;
+	border: none;
+	margin-left: 12px;
+	letter-spacing: 1px;
+}
+
+#endDetailAddr{
+	width: 310px;
+	height: 32px;
+	border: none; 
+	font-size: 10pt;
+	letter-spacing: 1px;
+}
+
+#endPhone{
+	width: 336px;
+	height: 40px;
+	font-size: 10pt;
+	border: 1px solid rgb(169, 169, 169);
+	border-radius: 7px;
+	padding-left: 10px;
+	margin-bottom: 20px;
+	letter-spacing: 2px;
+}
+
+#end-check{
+	height: 35px;
+	display: flex;
+}
+
+#end-date-div{
+	width: 180px;
+	margin-right: 10px;
+	margin-bottom: 22px;
+}
+
+#datepicker2{
+	width: 160px;
+	height: 32px;
+	font-size: 10pt;
+	border: 1px solid rgb(169, 169, 169);
+	border-radius: 7px 0px 0px 7px;
+	border-right: 0px;
+	padding-left: 10px;
+	letter-spacing: 1px;
+}
+
+#dt2{
+	background-color: rgb(105, 113, 120);
+	border: 1px solid rgb(169, 169, 169);
+	border-radius: 0px 7px 7px 0px;
+	cursor: pointer;
+}
+
+
+#sl4{
+	width: 126px;
+	height: 32px;
+	font-size: 10pt;
+	border: 1px solid rgb(169, 169, 169);
+	border-radius: 7px;
+	color: #8e8e8e;
+	padding-left: 10px;
+	letter-spacing: 1px;
+}
+
+.opt3{
+	color: #8e8e8e;
+}
+
+.opt4{
+	color: black;
+}
+.load-method-title{
+	font-size: 12pt;
+	font-weight: bold;
+	margin: 0px 0px 5px 0px;
+}
+
+.load-method-label{
+	font-size: 10pt;
+	font-weight: bold;
+}
+
+#line3{
+	display: flex;
+	margin-bottom: 15px;
+}
+
+#upload-label{
+	float: right;
+	font-size: 10pt;
+	padding-top: 5px;
+	cursor: pointer;
+}
+
+#upload-title{
+	font-size: 9pt;
+	font-family: 'Nanum Gothic';
+	margin-right: 3px;
+}
+
+#upload-div{
+	height: 82px;
+	padding-top: 10px;
+}
+
+#upload-area{
+	width: 335px;
+	height: 61.6px;
+	font-size: 11pt;
+	border-radius: 7px;
+	border: 1px solid rgb(169, 169, 169);
+	margin-left: auto; margin-right: auto;
+}
+
+#upload-capa{
+	color: #8e8e8e;
+	margin-top: 18px;
+	margin-left: 18px;
+}
+
+#delivery-div{
+	height: 82px;
+	padding-top: 10px;
+}
+
+#delivery-area{
+	width: 335px;
+	height: 61.6px;
+	font-size: 9pt;
+	border-radius: 7px;
+	resize: none;
+	padding: 7px;
+}
+
+#charge1{
+	color: rgb(227, 76, 27);
+	float: right;
+}
+
+#charge-content{
+	width: 380px;
+	height: 130px;
+	padding: 10px 22px 10px 22px;
+	text-align: left;
+}
+
+.charge-line{
+	padding-bottom: 8px;
+}
+
+.charge-content-div{
+	float: right;
+}
+
+.charge-content{
+	font-size: 10pt;
+	font-weight: bold;
+}
+
+.charge-title{
+	font-size: 11pt;
+	font-weight: bold;
+}
+
+#booking-div{
+	width: 380px;
+	height: 105px;
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px 0px;
+	padding: 0px; 
+	text-align: center;
+	background: white;
+}
+
+#booking-btn{
+	width: 256px;
+	height: 64px;
+	font-family: 'yg-jalnan';
+	background: green;
+	font-size: 24px;
+	color: white;
+	border: none;
+	border-radius: 40px;
+}
+
+
+/* 주소 모달 */
+#myModal12{
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 10000; /* Sit on top */
+	padding-top: 150px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+#layer{
+	display:none;
+	position:fixed;
+	overflow:hidden;
+	z-index:1;
+	-webkit-overflow-scrolling:touch;
+	background: white;
+}
+
+#searchAddr{
+	cursor:pointer;
+	position:absolute;
+	right:0px;
+	top:0px;
+	z-index:1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

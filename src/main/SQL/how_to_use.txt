@@ -1,0 +1,17 @@
+나중에 프로젝트 시연을 위해 DB생성 시 한 번에 가능하게끔 사용한 sql은 모두 여기에 남겨주세요
+
+DB수정 및 요청사항도 적어주세요
+
+03.31)장원태
+예약 테이블 생성시
+reNo 예약번호(SEQ_RE.NEXTVAL)
+reDATE 예약일
+START 출발지
+END 도착지
+coDATE 등록일
+conYN 배차여부
+D_CODE 배차기사 코드(REFERENCES DRIVER(D_CODE))
+이부분 추가 부탁드립니다.
+
+04.01)장원태
+테이블 설명 추가

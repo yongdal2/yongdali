@@ -1,0 +1,362 @@
+
+
+@font-face {
+	font-family: 'yg-jalnan'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face { font-family: 'Chosunilbo_myungjo'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Chosunilbo_myungjo.woff') format('woff'); font-weight: normal; font-style: normal; }
+
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800');
+
+.jal{
+    font-family: 'yg-jalnan', Arial, Helvetica, sans-serif
+}
+
+.chosun{
+    font-family: 'Chosunilbo_myungjo';
+}
+
+.nanum{
+	font-family: 'Nanum+Gothic';
+}
+
+.modal11{
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 10000; /* Sit on top */
+	padding-top: 150px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+
+.section {
+	position: relative;
+	height: 100vh;
+}
+
+.section .section-center {
+	position: absolute;
+	top: 43%;
+	left: 0;
+	right: 0;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+.col-md-6 {
+	width: 50%;
+}
+
+.booking-cta {
+	margin-top: 45px;
+}
+
+.booking-cta h1 {
+	font-size: 52px;
+	text-transform: uppercase;
+	color: #181818;
+	font-weight: 900;
+}
+
+.booking-cta p {
+	font-size: 22px;
+	color: #181818;
+}
+
+.booking-form {
+	background: #fff;
+	-webkit-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.3);
+	box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.3);
+	max-width: 400px;
+	width: 100%;
+	margin: auto;
+	padding: 40px 30px;
+}
+
+.booking-form .form-group {
+	position: relative;
+	margin-bottom: 20px;
+}
+
+.booking-form .form-control {
+	background-color: #fff;
+	height: 55px;
+	padding: 0px;
+	padding-top: 15px;
+	color: #181818;
+	font-size: 16px;
+	font-weight: 700;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	border: none;
+	border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+	border-radius: 0px;
+	-webkit-transition: 0.2s;
+	transition: 0.2s;
+}
+
+.booking-form .form-control::-webkit-input-placeholder {
+	color: rgba(0, 0, 0, 0.2);
+}
+
+.booking-form .form-control:-ms-input-placeholder {
+	color: rgba(0, 0, 0, 0.2);
+}
+
+.booking-form .form-control::placeholder {
+	color: rgba(0, 0, 0, 0.2);
+}
+
+.booking-form input[type="date"].form-control:invalid {
+	color: rgba(0, 0, 0, 0.2);
+}
+
+.booking-form .form-group:not(.input-not-empty) .form-control:not(:focus) {
+	color: transparent;
+}
+
+.booking-form select.form-control {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+.booking-form select.form-control+.select-arrow {
+	position: absolute;
+	right: 0px;
+	bottom: 7px;
+	width: 32px;
+	line-height: 32px;
+	height: 32px;
+	text-align: center;
+	pointer-events: none;
+	color: rgba(0, 0, 0, 0.2);
+	font-size: 14px;
+}
+
+.booking-form select.form-control+.select-arrow:after {
+	content: '\279C';
+	display: block;
+	-webkit-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
+
+.booking-form .form-label {
+	color: rgba(0, 0, 0, 0.2);
+	font-weight: 700;
+	position: absolute;
+	top: 20px;
+	left: 0px;
+	text-transform: uppercase;
+	line-height: 24px;
+	height: 23px;
+	font-size: 16px;
+	pointer-events: none;
+	-webkit-transition: 0.2s all;
+	transition: 0.2s all;
+}
+
+.booking-form .form-group .form-control:focus+.form-label {
+	top: 0px;
+	color: #2b9328;
+	font-size: 14px;
+}
+
+.booking-form .form-group.input-not-empty .form-label {
+	top: 0px;
+	color: #2b9328;
+	font-size: 14px;
+}
+
+.booking-form .submit-btn {
+	color: #fff;
+	background: rgb(87,187,138);
+	font-weight: 700;
+	height: 55px;
+	padding: 10px 35px;
+	font-size: 18px;
+	border: none;
+	display: block;
+	width: 100%;
+	text-transform: capitalize;
+}
+
+#booking {
+	font-family: 'Montserrat', sans-serif;
+	background-image: url('../../images/home/background.gif');
+	background-size: 65%;
+	background-position: 20% 30%;
+	background-repeat: no-repeat;
+	height: 870px;
+}
+
+#booking::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+	background: rgba(233, 246, 240, 0.4);
+}
+
+#container1{
+	width: 95%;
+	margin-left: 22%;
+}
+
+#mentDiv{
+	width:40%;
+}
+
+#ment-title{
+	font-size:30pt;
+	margin:0px;
+}
+
+#ment-content{
+	font-size: 12pt;
+	font-weight: bold;
+}
+
+#ment-content-initcap{
+	font-family: 'yg-jalnan';
+}
+
+#preEstimateDiv{
+	margin: 0px;
+	padding: 0px;
+	margin-top:30px;
+}
+
+#preEstimateForm{
+	padding: 15px 50px 20px 50px;
+	margin: 0px;
+	width: 100%;
+	margin-bottom: 7px;
+}
+
+#preEstimate-title{
+	text-align: center;
+}
+
+#startAddrDiv1{
+	padding-left: 20px;
+	padding-right: 15px;
+}
+
+#form-group1{
+	display:flex;
+}
+
+#startAddr{
+	padding-left: 15px;
+	padding-right: 15px;
+	font-size: 10pt;
+	text-align:center;
+	font-family: 'Nanum+Gothic';
+}
+
+#startAddr-title{
+	padding-left: 105px;
+}
+
+#startAddr-img{
+	padding-top: 13px;
+	margin-left: 10px;
+	margin-right: 10px;
+	cursor:pointer;
+}
+
+#endAddrDiv1{
+	padding-left: 20px;
+	padding-right: 15px;
+}
+
+#form-group2{
+	display:flex;
+}
+
+#endAddr{
+	padding-left: 15px;
+	padding-right: 15px;
+	font-size: 10pt;
+	text-align:center;
+	font-family: 'Nanum+Gothic';
+}
+
+#endAddr-title{
+	padding-left: 105px;
+}
+
+#endAddr-img{
+	padding-top: 13px;
+	margin-left: 10px;
+	margin-right: 10px;
+	cursor:pointer;
+}
+
+#carSelectDiv{
+	display: flex;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+#slDiv1{
+	width: 50%;
+}
+
+#sl1{
+	padding-left: 40px;
+}
+
+#slDiv2{
+	width: 50%;
+}
+
+#sl2{
+	padding-left: 35px;
+}
+.opt1{
+	color:rgba(0, 0, 0, 0.2);
+}
+.opt2{
+	color:black;
+}
+
+#layer{
+	display:none;
+	position:fixed;
+	overflow:hidden;
+	z-index:1;
+	-webkit-overflow-scrolling:touch;
+	background: white;
+}
+
+#searchAddr{
+	cursor:pointer;
+	position:absolute;
+	right:0px;
+	top:0px;
+	z-index:1;
+}
+
+#preEstimateChargeDiv{
+	padding-right: 20px;
+}
+
+#preEstimateCharge{
+	font-weight: bold;
+}
+
+#preCondition{
+	margin-top:20px;
+}
