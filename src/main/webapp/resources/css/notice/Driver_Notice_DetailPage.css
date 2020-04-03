@@ -46,7 +46,7 @@ a{
 /* 전체화면 1200px부터 */
 @media (min-width: 1200px){
     .sidebar{
-        width:17%;
+        width:16% !important;
         border-right: 1px solid gray;
     }
     
