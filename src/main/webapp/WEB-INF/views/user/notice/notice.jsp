@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,8 +13,9 @@
 </head>
 <body>
     <!-- Navigation -->
-
-	<%@ include file="../../common/nav.jsp"%>
+	
+	<c:import url="../../common/nav.jsp"/>
+	<%-- <%@ include file="../../common/nav.jsp"%> --%>
 	
 	<!-- main -->
     <div class="container">
@@ -48,36 +50,25 @@
                         </tr>
                         </thead>
                         <tbody>
+                        <c:forEach var="n" items="${ list }">                        
                         <tr>
-                            <td onClick="location.href='User_Notice_DetailPage.html'">어쩌고저쩌고</td>
-                            <td>2020-02-13</td>
-                            <td>관리자</td>
+                            <td>
+                            	<c:url var="ndetail" value="ndetail.no">
+                            		<c:param name="nNo" value="${n.nNo }"/>
+                            		<c:param name="currentPage" value="${pi.currentPage }"/>
+                            	</c:url>
+                            	<a href="${ndetail }">${n.nTitle}</a>
+                            </td>
+                            <td>${ n.nCreateDate }</td>
+                            <td>${ n.nWriter }</td>
                         </tr>
-                        <tr>
-                            <td>어쩌구저쩌구</td>
-                            <td>2020-02-13</td>
-                            <td>관리자</td>
-                        </tr>
-                        <tr>
-                            <td>어쩌구저쩌구</td>
-                            <td>2020-02-13</td>
-                            <td>관리자</td>
-                        </tr>
-                        <tr>
-                            <td>어쩌구저쩌구</td>
-                            <td>2020-02-13</td>
-                            <td>관리자</td>
-                        </tr>
-                        <tr>
-                            <td>어쩌구저쩌구</td>
-                            <td>2020-02-13</td>
-                            <td>관리자</td>
-                        </tr>
-                        
+                        </c:forEach>                                        
                     </table>
                 </div>
                 <div class="pagination">
                     <span class="inner_paging"> 
+                     <!-- 이전 -->
+                     
                     <a href="#">&laquo;</a>
                     <a href="#">1</a>
                     <a href="#">2</a>
