@@ -68,8 +68,23 @@
                 <div class="pagination">
                     <span class="inner_paging"> 
                      <!-- 이전 -->
+                     <c:if test="${pi.currentPage eq 1 }">
+                     	&laquo;
+                     </c:if>
+                     <c:if test="${pi.currentPage ne 1 }">
+                     	<c:url var="before" value="noticeMain.no">
+                     		<c:param name="currentPage" value="${pi.currentPage - 1 }"/>
+                     	</c:url>
+                     	<a href="${ before }">&laquo;</a>
+                     </c:if>
                      
-                    <a href="#">&laquo;</a>
+                     <!-- 페이지 -->
+                     <c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
+                     	
+                     
+                     </c:forEach>
+                     
+                    
                     <a href="#">1</a>
                     <a href="#">2</a>
                     <a href="#">3</a>
