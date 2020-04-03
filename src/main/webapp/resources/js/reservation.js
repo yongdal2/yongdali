@@ -1,3 +1,11 @@
+
+
+/* 차량 안내 */
+$('#carGuide-ment').click(function(){
+	$('#myModal1').css('display','block');
+});
+
+
 /* preEstimate Contents*/
 // 필요한 변수들
 var sl1 = document.getElementById('sl1');

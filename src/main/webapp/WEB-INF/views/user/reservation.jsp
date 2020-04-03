@@ -319,13 +319,52 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Modal4 : 도움x -->
-                        <div id="myModal14" class="modal11">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!-- Modal4 : 차량 정보 -->
+                        <div id="myModal1" class="modal11">
 							<div class="modal-content11">
 	                            <span id="modal-close3" class="close11" style="width: 30px;">&times;</span>
-                                <div id="modal-helpLoad-div"></div>
+	                            <div id="carInfo-div">
+                                	<div id="carInfo-title-div">
+                                        <span id="carInfo-title">이삿짐 선택</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         
                         

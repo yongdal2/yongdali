@@ -25,32 +25,32 @@
 	rel="stylesheet" type="text/css">
 <style>
 #header1 {
-	font-family: 'nanumsquare', Arial, Helvetica, sans-serif
+	font-family: 'nanumsquare', Arial, Helvetica, sans-serif !important;
 }
 </style>
 
 <header id="header1">
 	<nav class="navbar navbar-expand navbar-dark mai-top-header"
-		style="margin-bottom: 0px; margin-top: 20px; font-size: 18px">
+		style="margin-bottom: 18px; padding-top: 23px; font-size: 18px;">
 		<div class="container">
 			<div class="row">
 				<div class="navbar-header col-lg-4">
-					<a class="navbar-brand" href="#"
-						style="font-size: 20px; color: #F15F5F;"> <img alt="사진안들어감"
-						src="web/resources/homepage/images/yongdal.png"
-						class="d-inline-block align-top">
+					<a class="navbar-brand" href="driverMain.ydl"
+						style="font-size: 20px; color: #F15F5F; padding-top: 0px;" > <img alt="용달이로고(red)"
+						src="${pageContext.request.contextPath}/resources/images/ydl_logo/ydl_lg_red(150X50).png"
+						class="d-inline-block align-top" style="height: 48px;">
 					</a>
 				</div>
 				<div class="col-lg-5">
 					<ul class="nav navbar-nav navbar-center">
 						<li class="nav-item"><a class="nav-link" href="${contextPath}/driverMain.ydl"
-							style="color: grey;">실시간예약</a></li>
+							style="color: black; font-weight: bold;">실시간예약</a></li>
 						<li class="nav-item"><a class="nav-link" href="${contextPath}/drivercal.ydl"
-							style="color: grey;">배차일정</a></li>
+							style="color: black; font-weight: bold"">배차일정</a></li>
 						<li class="nav-item"><a class="nav-link" href="${contextPath}/2yong.ydl"
-							style="color: grey;">이용안내</a></li>
+							style="color: black; font-weight: bold"">이용안내</a></li>
 						<li class="nav-item"><a class="nav-link" href=""
-							style="color: grey;">고객센터</a></li>
+							style="color: black; font-weight: bold"">고객센터</a></li>
 					</ul>
 				</div>
 				<div class="col-lg-3">

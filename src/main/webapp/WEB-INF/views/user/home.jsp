@@ -53,6 +53,7 @@
 										</span>
 										<img id="endAddr-img" src="${pageContext.request.contextPath}/resources/images/home/magnifying-glass-black.svg" alt="검색" onclick="searchEndAddr();">
 									</div>
+							
 								</div>
 								<div id="carSelectDiv" class="row">
 									<div id="slDiv1" class="form-group">

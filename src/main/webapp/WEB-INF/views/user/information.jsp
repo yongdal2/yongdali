@@ -23,12 +23,12 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mainInfo.css" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-</style>
 <title>용달이 | 이용 안내 / 차량 안내</title>
 </head>
 <body>
@@ -42,7 +42,7 @@
 		<!-- 이용안내 -->
 		<div class="row" id="use_info">
 			<div class="h2 jal">
-				<a href="#use" id="use">이용 안내 </a> / <a href="#car" class="a">차량
+				<a href="#use" class="inf" id="use">이용 안내 </a> / <a href="#car" class="a">차량
 					안내</a> / <a href="#size" class="a">적재 크기 안내</a>
 				<hr>
 			</div>
@@ -308,6 +308,7 @@
 	</div>
 	<br>
 	<br>
+	<c:import url="../common/footer.jsp"/>
 </body>
 
 </html>
