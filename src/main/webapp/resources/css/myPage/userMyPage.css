@@ -16,9 +16,9 @@
 }
 
 .btn_ydl_l {
-	color: rgb(87, 187, 138);
-	background-color: white;
-	border-color: rgb(87, 187, 138);
+	color: rgb(87, 187, 138) !important;
+	background-color: white !important;
+	border-color: rgb(87, 187, 138) !important;
 }
 
 .ydl_color {
@@ -30,15 +30,15 @@
 }
 
 .jal {
-	font-family: 'yg-jalnan', Arial, Helvetica, sans-serif
+	font-family: 'yg-jalnan', Arial, Helvetica, sans-serif !important;
 }
 
 .na {
-	font-family: 'nanumsquare', Arial, Helvetica, sans-serif
+	font-family: 'nanumsquare', Arial, Helvetica, sans-serif !important;
 }
 
 .noto {
-	font-family: 'Noto Sans KR', Arial, Helvetica, sans-serif
+	font-family: 'Noto Sans KR', Arial, Helvetica, sans-serif !important;
 }
 
 .step_sh {
@@ -59,4 +59,9 @@ a {
 
 .red {
 	color: red;
+}
+
+<!-- 주소록 -->
+.mb_pd {
+	padding: 0px 15px 15px 15px !important;
 }

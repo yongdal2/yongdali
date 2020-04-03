@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="noticeMapper">
+	
+	<!-- resultMap -->
+	<resultMap id="noticeResultSet" type="Notice">
+		<id property="nNo" column="N_NO"/>
+		<result property="nTitle" column="N_TITLE"/>
+		<result property="nWriter" column="N_WRITER"/>
+		<result property="nContent" column="N_CONTENT"/>
+		<result property="nImgOrigin" column="N_IMG_ORIGIN"/>
+		<result property="nImgRename" column="N_IMG_RENAME"/>
+		<result property="nSort" column="N_SORT"/>
+		<result property="nCreateDate" column="N_CREATEDATE"/>
+		<result property="nModifyDate" column="N_MODIFYDATE"/>
+		<result property="nStatus" column="N_STATUS"/>
+	
+	
+	</resultMap>
+	
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM NOTICE
+		WHERE N_STATUS='Y'
+		AND N_SORT IN ('공통','일반')	
+	</select>
+	
+	<select id="selectListUser" resultMap="noticeResultSet">
+		SELECT *
+		FROM NOTICE
+		WHERE N_STATUS='Y'
+		AND N_SORT IN ('공통','일반')
+		ORDER BY N_NO DESC
+	</select>
+
+
+
+
+
+
+</mapper>

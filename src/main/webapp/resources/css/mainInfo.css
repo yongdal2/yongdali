@@ -1,0 +1,43 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'yg-jalnan'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800');
+
+.ydl_c {
+	background-color: rgb(87, 187, 138) !important;
+}
+
+.jal {
+	font-family: 'yg-jalnan', Arial, Helvetica, sans-serif !important;
+}
+
+.na {
+	font-family: 'nanumsquare', Arial, Helvetica, sans-serif !important;
+}
+
+.noto {
+	font-family: 'Noto Sans KR', Arial, Helvetica, sans-serif !important;
+}
+
+.step_sh {
+	margin-top: 5em;
+}
+
+a {
+	
+	color: black!important;
+	font-style: none;
+}
+
+.fw6 {
+	font-weight: 600;
+}
+
+.lh15 {
+	line-height: 17px;
+	vertical-align: middle;
+}

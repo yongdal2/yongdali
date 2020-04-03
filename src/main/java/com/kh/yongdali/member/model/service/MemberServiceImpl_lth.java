@@ -1,19 +1,28 @@
 package com.kh.yongdali.member.model.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.yongdali.common.Notice;
+import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.member.model.dao.MemberDao_lth;
 
-//@Service("mServiceL")
+@Service("mServiceL")
 public class MemberServiceImpl_lth implements MemberService_lth {
 
-//	@Autowired
-//	private MemberDao_lth mDaoL;
-//	@Override
-//	public int getListCount() {
-//		
-//		return mDaoL.getListCount();
-//	}
+	@Autowired
+	private MemberDao_lth mDaoL;
+	@Override
+	public int getListCount() {
+		
+		return mDaoL.getListCount();
+	}
+	@Override
+	public ArrayList<Notice> selectList(PageInfo pi) {
+		
+		return mDaoL.selectList(pi);
+	}
 	
 }
