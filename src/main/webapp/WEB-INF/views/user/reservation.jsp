@@ -16,7 +16,6 @@
     <!-- map API -->
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=03ea077d7ecc6636dffede985cc5c57d&libraries=services"></script>
-	
     <!-- font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"/>
@@ -72,13 +71,13 @@
                            	 이삿짐
                         </div>
                         <div id="load-content-div" class="content22">
-                            <textarea name="" id="load-content-area" cols="64" rows="3" placeholder="이삿짐 품목을 선택해주세요." readonly required></textarea>
+                            <textarea name="" id="load-content-area" cols="64" rows="3" placeholder="파손이나 분실시 확인할 수 있도록&#13;&#10;이삿짐 품목을 선택해주세요." readonly required></textarea>
                         </div>
                         <!-- Modal -->
                         <div id="myModal11" class="modal11">
                             <!-- Modal content -->
                             <div class="modal-content11">
-                                <span class="close11" style="width: 30px;">&times;</span>
+                                <span id="modal-close1" class="close11" style="width: 30px;">&times;</span>
                                 <div id="selectLoad-div">
                                     <div id="selectLoad-title-div">
                                         <span id="selectLoad-title">이삿짐 선택</span>
@@ -295,7 +294,7 @@
                                                     <div class="move-content1111 plus11">
                                                         <img class="move-plus-img" src="${pageContext.request.contextPath}/resources/images/reservation/add_plus-512.png" alt="">
                                                     </div>
-                                                    &nbsp;&nbsp;&nbsp;<div id="xmark-div" class="item1"><img id="xmark-img" src="${pageContext.request.contextPath}/resources/images/reservation/x-mark.png" alt=""></div>
+                                                    &nbsp;&nbsp;&nbsp;<div id="xmark-div" class="item1"><img id="xmark-img" src="${pageContext.request.contextPath}/resources/images/reservation/x-mark.png" alt="" style="margin-bottom: 3px;"></div>
                                                 </div>
                                                 <div style="height: 35px;"><input id="writeLoad" class="move-content113" type="text"></div>
                                             </div>
@@ -308,6 +307,31 @@
                                 </div>
                             </div>
                         </div>
+                        
+                        <!-- Modal3 : 도움 -->
+                        <div id="myModal13" class="modal11">
+							<div class="modal-content11">
+	                            <span id="modal-close2" class="close11" style="width: 30px;">&times;</span>
+                                <div id="modal-helpLoad-div">
+                                	<div id="helpLoad-title-div">
+                                        <span id="helpLoad-title">인력이 필요하시나요 ?</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal4 : 도움x -->
+                        <div id="myModal14" class="modal11">
+							<div class="modal-content11">
+	                            <span id="modal-close3" class="close11" style="width: 30px;">&times;</span>
+                                <div id="modal-helpLoad-div"></div>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        
+                        
+                        
                     </div>
                 </div>
                 <div id="line2">
@@ -326,7 +350,7 @@
                             </div>
                             <div align="left">
                                 <label id="start-check" class="checkbox-wrap">
-                                    <input id="checkLoad1" type="checkbox" name="" value="">
+                                    <input id="checkLoad1" type="checkbox" name="rightLoad" value="바로 상차">
                                     <i class="check-icon" style="margin-top: 2px;"></i>
                                     <div style="font-size: 16px;">&nbsp;&nbsp;바로 상차</div>
                                 </label>
@@ -392,16 +416,6 @@
                                     </select>
                                 </div>
                             </div>
-                            <div>
-                                <p class="load-method-title" align="left">상차 방법</p>
-                                <div>
-                                    <input type="radio" id="help1" name="helper1" required>
-                                    <label class="load-method-label" for="help1" id="help11">상차 도움 필요함</label>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input type="radio" id="help2" name="helper1">
-                                    <label class="load-method-label" for="help2" id="help22">상차 도움 필요 없음</label>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div class="edge11">
@@ -426,7 +440,7 @@
                             </div>
                             <div style="display: flex;">
                                 <div id="end-date-div" class="input-group date">
-                                    <input id="datepicker2" type="text" placeholder="날짜 선택" required>
+                                    <input id="datepicker2" type="text" placeholder="날짜 선택">
                                     <div id="dt2" class="input-group-addon">
                                       <span class="glyphicon glyphicon-th" style="color: white;"></span>
                                     </div>
@@ -485,33 +499,22 @@
                                     </select>
                                 </div>
                             </div>
-                            <div>
-                                <p class="load-method-title" align="left">하차 방법</p>
-                                <div>
-                                    <input type="radio" id="help3" name="helper2" required>
-                                    <label for="help3" class="load-method-label">하차 도움 필요함</label>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input type="radio" id="help4" name="helper2">
-                                    <label for="help4" class="load-method-label">하차 도움 필요 없음</label>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
                 <div id="line3">
                     <div class="edge11">
-                        <div class="title11">
-                            <label id="upload-label">
-                                <img src="${pageContext.request.contextPath}/resources/images/reservation/round-add.svg" alt="안내">
-                                <span id="upload-title">파일 첨부</span>
-                                <input type="file" style="display: none;">
-                            </label>
-                                                     첨부 파일
-                        </div>
-                        <div id="upload-div" class="content22">
-                            <div id="upload-area">
-                                <div id="upload-capa" align="left">0MB / 10MB</div>
-                            </div>
+                        <div class="title11">상·하차 방법</div>
+                        <div id="help-div" class="content22">
+							<label class="rad">
+								<input type="radio" name="rad1" value="a">
+								<i></i>&nbsp;&nbsp;도움 필요하지 않아요
+							</label>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<label class="rad">
+								<input type="radio" name="rad1" value="b" checked>
+								<i></i>&nbsp;&nbsp;도움 필요해요
+							</label>
                         </div>
                     </div>
                     <div class="edge11">
@@ -526,7 +529,7 @@
                 <div class="edge22">
                     <div class="title11">
                         <span id="charge1">0원</span>
-                                            최종 결제 금액
+                                                      최종 결제 금액
                     </div>
                     <div id="charge-content" class="content22">
                         <div class="charge-line">
@@ -547,20 +550,21 @@
                         </div>
                         <div class="charge-line">
                             <div class="charge-content-div">
-                                <span class="charge-content">상차 (일요일), 하차 (화요일)</span>
-                            </div>
-                            <div align="left">
-                                <span class="charge-title">요일 옵션</span>
-                            </div>
-                        </div>
-                        <div class="charge-line">
-                            <div class="charge-content-div">
-                                <span class="charge-content">예</span>
+                                <span class="charge-content"></span>
                             </div>
                             <div align="left">
                                 <span class="charge-title">하차 예약</span>
                             </div>
                         </div>
+                        <div class="charge-line">
+                            <div class="charge-content-div">
+                                <span id="helpload" class="charge-content"></span>
+                            </div>
+                            <div align="left">
+                                <span class="charge-title">상·하차 도움</span>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
                 <div id="booking-div">
@@ -570,6 +574,11 @@
             </div>
         </div>
     </div>
+    
+    
+    
+    
+    <!-- 주소 API Modal -->
     <div id="myModal12">
 		<div id="layer">
 			<img id="searchAddr" src="https://t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" onclick="closeDaumPostcode()" alt="닫기 버튼">
