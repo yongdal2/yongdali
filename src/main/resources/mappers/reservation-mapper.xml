@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reservationMapper">
+	<resultMap type="Reservation" id="reservationResultSet">
+		<id property="rId" column="RID"/>
+		<result property="rStatus" column="R_STATUS"/>
+	</resultMap>
+	
+	<select id="mibaechar">
+		SELECT *
+		FROM RESERVATION
+		WHERE R_STATUS='N'
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

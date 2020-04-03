@@ -8,63 +8,6 @@ var precharge_opt2 = 0;
 
 
 
-/* 시간 설정 */
-$('#datepicker1').datepicker({
-	dateFormat:'yy년 mm월 dd일',
-	changeMonth: true,
-	changeYear: true,
-	yearRange: 'c-99:c+99',
-	maxDate: '+1y',
-	beforeShowDay: noBefore
-});
-  
-$("#datepicker2").datepicker({
-	dateFormat:'yy년 mm월 dd일',
-	changeMonth: true,
-	changeYear: true,
-	maxDate: '+1y',
-	beforeShewDay:noBefore,
-	beforeShow: function(input,inst){
-		var condition = confirm("하차 예약시, 보관료 목적으로\n상차일부터 하차일까지의 기간을  \n1일당 100,000원이 적용되어 추가금이 청구됩니다.\n그래도 하차 예약 하시겠습니까?");
-		if(condition){
-			return true;
-		} else {
-			return false;
-		}
-	}
-});
-
-
-
-// 이전 날짜 disabled 적용
-function noBefore(date){
-    if (date < new Date())
-        return [false];
-    return [true];
-}
-
-/* 바로 상하차 시 날짜시간 무효 */
-$("#checkLoad1").click(function(){
-	if($(this).prop("checked") == true) {
-		$("#datepicker1").attr('disabled','disabled').css('background','#F8F8F8');
-		$("#sl3").attr('disabled','disabled').css('background','#F8F8F8');
-	} else if($(this).prop("checked") == false) {    	  
-		$("#datepicker1").attr('disabled',false).css('background','white');
-		$("#sl3").attr('disabled',false).css('background','white');
-	}
-});
-$("#checkLoad2").click(function(){
-	if($(this).prop("checked") == true) {
-		$("#datepicker2").attr('disabled','disabled').css('background','#F8F8F8');
-		$("#sl4").attr('disabled','disabled').css('background','#F8F8F8');
-	} else if($(this).prop("checked") == false) {    	  
-		$("#datepicker2").attr('disabled',false).css('background','white');
-		$("#sl4").attr('disabled',false).css('background','white');
-	}
-});
-
-
-
 
 /* select 태그 선택시 효과 적용 */
 function cl1(){
@@ -121,27 +64,33 @@ function addCarInfo2(){
 var modal = document.getElementById("myModal11");
 
 //Get the button that opens the modal
-var btn = document.getElementById("myBtn11");
+var btn1 = document.getElementById("myBtn11");
 
 //Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close11")[0];
+var span1 = document.getElementsByClassName("close11")[0];
 
 //When the user clicks the button, open the modal 
-btn.onclick = function() {
-modal.style.display = "block";
+btn1.onclick = function() {
+	modal.style.display = "block";
 }
 
 //When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-modal.style.display = "none";
+span1.onclick = function() {
+	modal.style.display = "none";
 }
 
 //When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-	if (event.target == modal) {
-	   modal.style.display = "none";
+// window 연결이 끊겨서 mouseenter로 연결하여 해결함
+$("#myModal11").mouseenter(function(){
+	window.onclick = function(event) {
+		if (event.target == modal) {
+		   modal.style.display = "none";
+		}
 	}
-}
+})
+//$("#myModal11").click(function(){
+//	$(this).css("display","none")
+//})
 
 
 /* 가구, 가전, 기타 클릭시마다 borderline 변경 */
@@ -171,6 +120,7 @@ $('#funiture11').click(function(){
         'display':'none'
     });
 });
+
 $('#appliance11').click(function(){
     $('#funiture11').css({
         'background':'rgb(236, 240, 242)',
@@ -196,8 +146,8 @@ $('#appliance11').click(function(){
     $('#etc22').css({
         'display':'none'
     });
-    
 });
+
 $('#etc11').click(function(){
     $('#appliance11').css({
         'background':'rgb(236, 240, 242)',
@@ -230,7 +180,7 @@ $(function(){
     $(document).on('click','#addList-btn',function(){
     	var src = "${pageContext.request.contextPath}";
         $('#div11')
-        .append('<div class="move-content11"><div class="move-content111" style="margin-right: 6px; margin-top: 7px;"><div class="move-content1111 minus11"><img src="/yongdali/resources/images/reservation/iconfinder_minus_172505.png" alt="111" class="move-minus-img"></div><span class="move-content1113">0</span><div class="move-content1111 plus11"><img src="/yongdali/resources/images/reservation/add_plus-512.png" alt="" class="move-plus-img"></div>&nbsp;&nbsp;&nbsp;<div class="item1" style="cursor:pointer;"><img src="/yongdali/resources/images/reservation/x-mark.png" alt="" style="width: 15px; height: 15px;"></div></div><div style="height: 35px;"><input class="move-content113" type="text" style="width: 120px; height: 25px; margin-top:5px; margin-left: 20px; font-size:9pt;"></div></div>');       
+        .append('<div class="move-content11"><div class="move-content111" style="margin-right: 6px; margin-top: 7px;"><div class="move-content1111 minus11"><img src="/yongdali/resources/images/reservation/iconfinder_minus_172505.png" alt="111" class="move-minus-img"></div><span class="move-content1113">0</span><div class="move-content1111 plus11"><img src="/yongdali/resources/images/reservation/add_plus-512.png" alt="" class="move-plus-img"></div>&nbsp;&nbsp;&nbsp;<div class="item1" style="cursor:pointer;"><img src="/yongdali/resources/images/reservation/x-mark.png" alt="" style="width: 15px; height: 15px; style="margin-bottom: 3px;""></div></div><div style="height: 35px;"><input class="move-content113" type="text" style="width: 120px; height: 25px; margin-top:5px; margin-left: 20px; font-size:9pt;"></div></div>');       
     });
     
     $(document).on('click','.item1',function(){
@@ -292,7 +242,6 @@ $(function(){
 
 
 
-
 /* 출발지,도착지 주소 검색 후 위경도 변환 */
 
 //모달 배경화면 생성
@@ -306,9 +255,9 @@ var element_layer = document.getElementById('layer');
 
 //주소창 닫기
 function closeDaumPostcode() {
- // iframe을 넣은 element를 안보이게 한다.
- element_layer.style.display = 'none';
- modal2.style.display = "none";
+	// iframe을 넣은 element를 안보이게 한다.
+	element_layer.style.display = 'none';
+	modal2.style.display = "none";
 }
 
 //출발지 위도 경도 변수
@@ -318,8 +267,6 @@ var startLong = 0;
 //도착치 위도 경도 변수
 var endLat = 0;
 var endLong = 0;
-
-
 
 //출발지 주소 검색 후 위경도 변환
 function searchStartAddr() {
@@ -461,12 +408,14 @@ function initLayerPosition(){
  element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
 }
 
-//When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
- if (event.target == modal2) {
-     modal2.style.display = "none";
- }
-}
+//window 클릭시 modal3 닫기
+$("#myModal12").mouseenter(function(){
+	window.onclick = function(event) {
+		if (event.target == modal2) {
+		   modal2.style.display = "none";
+		}
+	}
+});
 
 //비용 관련 변수
 var distanceCharge = 0;
@@ -535,6 +484,59 @@ function inputPhoneNumber(obj) {
 }
 
 
+/* 시간 설정 */
+// 이전 날짜 disabled 적용
+function noBefore(date){
+	if (date < new Date())
+		return [false];
+	return [true];
+}
+$('#datepicker1').datepicker({
+	dateFormat:'yy년 mm월 dd일',
+	changeMonth: true,
+	changeYear: true,
+	yearRange: 'c-99:c+99',
+	maxDate: '+1y',
+	beforeShowDay: noBefore
+});
+$('#datepicker2').datepicker({
+	dateFormat:'yy년 mm월 dd일',
+	changeMonth: true,
+	changeYear: true,
+	yearRange: 'c-99:c+99',
+	maxDate: '+1y',
+	beforeShowDay: noBefore
+});
+
+
+
+
+/* 바로 상하차 시 날짜시간 무효 */
+$("#checkLoad1").click(function(){
+	if($(this).prop("checked") == true) {
+		$("#datepicker1").attr('disabled','disabled').css('background','#F8F8F8');
+		$("#sl3").attr('disabled','disabled').css('background','#F8F8F8');
+		$('#datepicker1').datepicker('setDate',null);
+		document.getElementById('sl3').selectedIndex = 0;
+		document.getElementById('sl3').style.color="#8e8e8e";
+		
+	} else if($(this).prop("checked") == false) {    	  
+		$("#datepicker1").attr('disabled',false).css('background','white').val("");
+		$("#sl3").attr('disabled',false).css('background','white').val("");
+	}
+});
+$("#checkLoad2").click(function(){
+	if($(this).prop("checked") == true) {
+		$("#datepicker2").attr('disabled','disabled').css('background','#F8F8F8');
+		$("#sl4").attr('disabled','disabled').css('background','#F8F8F8');
+		$('#datepicker2').datepicker('setDate',null);
+		document.getElementById('sl4').selectedIndex = 0;
+		document.getElementById('sl4').style.color="#8e8e8e";
+	} else if($(this).prop("checked") == false) {    	  
+		$("#datepicker2").attr('disabled',false).css('background','white');
+		$("#sl4").attr('disabled',false).css('background','white');
+	}
+});
 
 
 
@@ -549,6 +551,80 @@ function inputPhoneNumber(obj) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 상하차 도움 */
+var modal3 = document.getElementById("myModal13");
+var span2 = document.getElementById("modal-close2");
+
+span2.onclick = function(){
+	modal3.style.display="none";
+}
+// 상차 도움
+function helpLoad(){
+	modal3.style.display="block";
+}
+
+// 상차 도움 필요없음
+$("#help2").click(function(){
+	$("#helpLoad").html($("#help2").val());
+});
+
+// 하차 도움 필요없음
+$("#help4").click(function(){
+	$("#helpUnload").html($("#help4").val());
+});
+
+
+// window 클릭시 modal3 닫기
+$("#myModal13").mouseenter(function(){
+	window.onclick = function(event) {
+		if (event.target == modal3) {
+		   modal3.style.display = "none";
+		}
+	}
+});
+
+
+
+/* 상하차 도움 */
+var modal4 = document.getElementById("myModal14");
+var span3 = document.getElementById("modal-close3");
+
+span3.onclick = function(){
+	modal4.style.display="none";
+}
+// 상차 도움
+function helpUnload(){
+	modal4.style.display="block";
+}
+
+
+// window 클릭시 modal3 닫기
+$("#myModal14").mouseenter(function(){
+	window.onclick = function(event) {
+		if (event.target == modal4) {
+			modal4.style.display = "none";
+		}
+	}
+});
 
 
 

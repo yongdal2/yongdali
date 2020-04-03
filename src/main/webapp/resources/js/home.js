@@ -205,6 +205,17 @@ window.onclick = function(event) {
     }
 }
 
+/* 상하차 기사 도움 필요 기능 */
+// 상차 도움 필요없음
+var helpLoad = $("#helpLoad");
+
+$("#help1").clcick(function(){
+	alert();
+});
+
+
+
+
 
 
 
