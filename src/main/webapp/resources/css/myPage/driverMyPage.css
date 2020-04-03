@@ -36,15 +36,15 @@
 }
 
 .jal {
-	font-family: 'yg-jalnan', Arial, Helvetica, sans-serif
+	font-family: 'yg-jalnan', Arial, Helvetica, sans-serif !important;
 }
 
 .na {
-	font-family: 'nanumsquare', Arial, Helvetica, sans-serif
+	font-family: 'nanumsquare', Arial, Helvetica, sans-serif !important;
 }
 
 .noto {
-	font-family: 'Noto Sans KR', Arial, Helvetica, sans-serif
+	font-family: 'Noto Sans KR', Arial, Helvetica, sans-serif !important;
 }
 
 .step_sh {
