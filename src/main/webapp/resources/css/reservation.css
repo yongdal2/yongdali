@@ -262,16 +262,15 @@ select, textarea, input, button{
 }
 
 #carInfo-div{
-	width: 380px;
-	height: 460px;
+	width: 702px;
+	height: 810px;
 	margin-left: auto;
 	margin-right: auto;
 }
 
 #carInfo-title-div{
 	padding: 10px 20px 10px 20px;
-	border-bottom: 1px solid rgb(236, 240, 242);
-	margin-bottom: 20px;
+	border-bottom: 2px solid rgb(236, 240, 242);
 }
 
 #carInfo-title{
@@ -279,7 +278,84 @@ select, textarea, input, button{
 	font-size: 22pt;
 }
 
-#myBtn11{
+#modal1-content{
+    width: 702px;
+    height: 720px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.car-content-title{
+    width: 351px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    background: rgb(236, 240, 242);
+}
+
+.car-content-div{
+    display: flex;
+    height: 92px;
+    margin-left: 66px;
+    margin-top: 40px;
+}
+
+.car-content-img{
+    width: 122px;
+    height: 92px;
+}
+
+.car-content-type{
+    width: 122px;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.car-content-type-font{
+    margin-top: 42px;
+}
+
+.car-each-content{
+    width: 400px;
+    font-size: 13px;
+}
+
+.car-each-content-font1{
+    margin-top: 25px;
+}
+
+.car-each-content-font2{
+    margin-top: 36px;
+}
+#standard-img{
+    width: 320px;
+    height: 220px;
+}
+
+#standard-table{
+    border: 1px solid lightgrey;
+    margin-top: 65px;
+}
+.th11{
+	padding-left: 62px;
+}
+
+.thd{
+    width: 152px;
+    height: 48px;
+    border-right: 1px solid lightgrey;
+}
+
+.bd1{
+    border: none;
+}
+
+#truck-standard>tr:nth-child(even){background-color: rgb(236, 240, 242);}
+
+#selectLoad-btn{
 	float: right;
 	font-size: 10pt;
 	padding-top: 5px;
@@ -698,7 +774,7 @@ select, textarea, input, button{
 
 
 /* 주소 모달 */
-#myModal12{
+#myModal34{
 	display: none; /* Hidden by default */
 	position: fixed; /* Stay in place */
 	z-index: 10000; /* Sit on top */

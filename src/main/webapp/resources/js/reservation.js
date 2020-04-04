@@ -1,9 +1,44 @@
-
-
 /* 차량 안내 */
 $('#carGuide-ment').click(function(){
 	$('#myModal1').css('display','block');
 });
+
+
+var modal1 = document.getElementById("myModal1");
+var span1 = document.getElementById("modal-close1");
+
+span1.onclick = function() {
+	modal1.style.display = "none";
+}
+
+$("#myModal1").mouseenter(function(){
+	window.onclick = function(event) {
+		if (event.target == modal1) {
+		   modal1.style.display = "none";
+		}
+	}
+})
+
+// 차량형태,적재크기 클릭시 css와 내용 변화 
+$("#type1").click(function(){
+    $(this).css('background','white');
+    $("#size1").css('background','rgb(236, 240, 242)');
+    $("#guide-content1").css('display','block');
+    $("#guide-content2").css('display','none');
+});
+$("#size1").click(function(){
+    $(this).css('background','white');
+    $("#type1").css('background','rgb(236, 240, 242)');
+    $("#guide-content1").css('display','none');
+    $("#guide-content2").css('display','block');
+});
+
+
+
+
+
+
+
 
 
 /* preEstimate Contents*/
@@ -69,36 +104,33 @@ function addCarInfo2(){
 
 /* 이삿짐 선택 모달 */
 //Get the modal
-var modal = document.getElementById("myModal11");
+var modal2 = document.getElementById("myModal2");
 
 //Get the button that opens the modal
-var btn1 = document.getElementById("myBtn11");
+var btn1 = document.getElementById("selectLoad-btn");
 
 //Get the <span> element that closes the modal
-var span1 = document.getElementsByClassName("close11")[0];
+var span2 = document.getElementById("modal-close2");
 
 //When the user clicks the button, open the modal 
 btn1.onclick = function() {
-	modal.style.display = "block";
+	modal2.style.display = "block";
 }
 
 //When the user clicks on <span> (x), close the modal
-span1.onclick = function() {
-	modal.style.display = "none";
+span2.onclick = function() {
+	modal2.style.display = "none";
 }
 
 //When the user clicks anywhere outside of the modal, close it
 // window 연결이 끊겨서 mouseenter로 연결하여 해결함
-$("#myModal11").mouseenter(function(){
+$("#myModal2").mouseenter(function(){
 	window.onclick = function(event) {
-		if (event.target == modal) {
-		   modal.style.display = "none";
+		if (event.target == modal2) {
+		   modal2.style.display = "none";
 		}
 	}
 })
-//$("#myModal11").click(function(){
-//	$(this).css("display","none")
-//})
 
 
 /* 가구, 가전, 기타 클릭시마다 borderline 변경 */
@@ -240,7 +272,7 @@ $(function(){
         var arrayString = userLoads.join(', ');
         $('#load-content-area').text(arrayString);
         
-        modal.style.display = "none";
+        modal2.style.display = "none";
     });
 });
 
@@ -253,7 +285,7 @@ $(function(){
 /* 출발지,도착지 주소 검색 후 위경도 변환 */
 
 //모달 배경화면 생성
-var modal2 = document.getElementById("myModal12");
+var modal34 = document.getElementById("myModal34");
 
 //주소-좌표 변환 객체를 생성
 var geocoder = new daum.maps.services.Geocoder();
@@ -265,7 +297,7 @@ var element_layer = document.getElementById('layer');
 function closeDaumPostcode() {
 	// iframe을 넣은 element를 안보이게 한다.
 	element_layer.style.display = 'none';
-	modal2.style.display = "none";
+	modal34.style.display = "none";
 }
 
 //출발지 위도 경도 변수
@@ -278,7 +310,7 @@ var endLong = 0;
 
 //출발지 주소 검색 후 위경도 변환
 function searchStartAddr() {
-	modal2.style.display = "block";
+	modal34.style.display = "block";
  new daum.Postcode({
      oncomplete: function(data) {
          // 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -297,7 +329,7 @@ function searchStartAddr() {
          /* 서울 지역 조건 */
          if(!addr.includes("서울")){
 				alert("죄송합니다. 서울지역 한해서만 운영 가능합니다. 다시 입력해주세요.");
-				modal2.style.display = "none";
+				modal34.style.display = "none";
 			} else {
 				// 주소로 상세 정보를 검색
 				geocoder.addressSearch(addr, function(results, status) {
@@ -321,7 +353,7 @@ function searchStartAddr() {
 				element_layer.style.display = 'none';
 				
 				// 모달 닫기
-				modal2.style.display = "none";
+				modal34.style.display = "none";
 				document.getElementById("startDetailAddr").focus();
 			}
      },
@@ -339,7 +371,7 @@ function searchStartAddr() {
 
 //도착지 주소 검색 후 위경도 변환
 function searchEndAddr() {
-	modal2.style.display = "block";
+	modal34.style.display = "block";
 	new daum.Postcode({
 		oncomplete: function(data) {
 			// 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -358,7 +390,7 @@ function searchEndAddr() {
 			/* 서울 지역 조건 */
 			if(!addr.includes("서울")){
 				alert("죄송합니다. 서울지역 한해서만 운영 가능합니다. 다시 입력해주세요.");
-				modal2.style.display = "none";
+				modal34.style.display = "none";
 			} else {
 				
 				// 주소로 상세 정보를 검색
@@ -383,7 +415,7 @@ function searchEndAddr() {
 				element_layer.style.display = 'none';
 				
 				// 모달 닫기
-				modal2.style.display = "none";
+				modal34.style.display = "none";
 				document.getElementById("endDetailAddr").focus();
 				
 			}
@@ -417,10 +449,10 @@ function initLayerPosition(){
 }
 
 //window 클릭시 modal3 닫기
-$("#myModal12").mouseenter(function(){
+$("#myModal34").mouseenter(function(){
 	window.onclick = function(event) {
-		if (event.target == modal2) {
-		   modal2.style.display = "none";
+		if (event.target == modal34) {
+		   modal34.style.display = "none";
 		}
 	}
 });
@@ -456,9 +488,9 @@ function preChargeFunc(){
 			distanceCharge=8;
 		}
 		
-		var distanceCharge = document.getElementById("distanceCharge");
+		var distance = document.getElementById("distance");
 		
-		distanceCharge.innerHTML = d + "km";
+		distance.innerHTML = d + " km";
 	}
 }
 
@@ -559,87 +591,13 @@ $("#checkLoad2").click(function(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 상하차 도움 */
-var modal3 = document.getElementById("myModal13");
-var span2 = document.getElementById("modal-close2");
-
-span2.onclick = function(){
-	modal3.style.display="none";
-}
-// 상차 도움
-function helpLoad(){
-	modal3.style.display="block";
-}
-
-// 상차 도움 필요없음
-$("#help2").click(function(){
-	$("#helpLoad").html($("#help2").val());
+// 도움필요없을 경우
+$('#helpUnload-ch').click(function(){
+	$('#helpLoad').html("고객님이 직접 상하차");
 });
 
-// 하차 도움 필요없음
-$("#help4").click(function(){
-	$("#helpUnload").html($("#help4").val());
-});
-
-
-// window 클릭시 modal3 닫기
-$("#myModal13").mouseenter(function(){
-	window.onclick = function(event) {
-		if (event.target == modal3) {
-		   modal3.style.display = "none";
-		}
-	}
-});
-
-
-
-/* 상하차 도움 */
-var modal4 = document.getElementById("myModal14");
-var span3 = document.getElementById("modal-close3");
-
-span3.onclick = function(){
-	modal4.style.display="none";
-}
-// 상차 도움
-function helpUnload(){
-	modal4.style.display="block";
-}
-
-
-// window 클릭시 modal3 닫기
-$("#myModal14").mouseenter(function(){
-	window.onclick = function(event) {
-		if (event.target == modal4) {
-			modal4.style.display = "none";
-		}
-	}
-});
-
-
-
-
-
-
-
+// 도움 필요할 경우
 
 
 
