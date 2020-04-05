@@ -179,23 +179,20 @@
 							                                <td class="thd">310 cm</td>
 							                                <td class="thd bd1">180 cm</td>
 							                            </tr>
-							                            </tr>
 							                            <tr>
-							                                <td class="thd ton1">1.4톤</td>
+							                                <td class="thd ton1">2.5톤</td>
 							                                <td class="thd">170 cm</td>
 							                                <td class="thd">310 cm</td>
 							                                <td class="thd bd1">180 cm</td>
 							                            </tr>
-							                            </tr>
 							                            <tr>
-							                                <td class="thd ton1">1.4톤</td>
+							                                <td class="thd ton1">3.5톤</td>
 							                                <td class="thd">170 cm</td>
 							                                <td class="thd">310 cm</td>
 							                                <td class="thd bd1">180 cm</td>
 							                            </tr>
-							                            </tr>
 							                            <tr>
-							                                <td class="thd ton1">1.4톤</td>
+							                                <td class="thd ton1">5톤</td>
 							                                <td class="thd">170 cm</td>
 							                                <td class="thd">310 cm</td>
 							                                <td class="thd bd1">180 cm</td>
@@ -458,14 +455,109 @@
                         
                         
                         
-                        <!-- Modal2 : 도움 -->
-                        <div id="myModal3" class="modal11">
-							<div class="modal-content11">
+                        
+                        
+                        <!-- Modal5 : 상하차 방법 -->
+                        <div id="myModal5" class="modal11" style="padding-top: 280px;">
+							<div id="modal5" class="modal-content11">
 	                            <span id="modal-close3" class="close11" style="width: 30px;">&times;</span>
-                                <div id="modal-helpLoad-div">
-                                	<div id="helpLoad-title-div">
-                                        <span id="helpLoad-title">인력이 필요하시나요 ?</span>
+                                <div class="modal-help-div">
+                                	<div class="help-title-div">
+                                        <span class="help-title">상하차 방법</span>
                                     </div>
+								    <div class="help-content-div1" style="border-bottom: 1px solid black;">
+								        <div class="help-content-div11" style="border-bottom: 1px solid rgb(105, 113, 120)">
+								            <div class="help-content-div111">
+								                <div class="addCharge">추가 요금</div>
+								                <div class="check-title1">상하차 방법</div>
+								            </div>
+								            <div  class="help-content-div112">
+								                <label class="checkbox-wrap2 checkHelp">
+								                    <input id="checkHelp1" type="checkbox" name="checkHelp1" value="">
+								                    <i class="check-icon2"></i>
+								                    <div class="check-title11">상차만</div>
+								                </label>
+								                <div id="helpCharge1" class="checkCharge">+0원</div>
+								            </div>
+								            <div class="help-content-div112">
+								                <label class="checkbox-wrap2 checkHelp">
+								                    <input id="checkHelp2" type="checkbox" name="checkHelp1" value="">
+								                    <i class="check-icon2"></i>
+								                    <div class="check-title11">하차만</div>
+								                </label>
+								                <div id="helpCharge2" class="checkCharge">+0원</div>
+								            </div>
+								        </div>
+								        <div class="help-content-div12">
+								            <button id="checkHelp-btn">선택하기</button>
+								        </div>
+								    </div>
+                                </div>
+                            </div>
+                            <!-- Modal5-1 : 상차 선택 모달  -->
+                            <div id="modal51" class="modal-content11" style="display:none;">
+	                            <span id="modal-close4" class="close11" style="width: 30px;">&times;</span>
+                                <div class="modal-help-div">
+                                	<div class="help-title-div">
+                                        <span class="help-title">상차 방법</span>
+                                    </div>
+								    <div class="help-content-div1" style="border-bottom: 1px solid black;">
+								        <div class="help-content-div11" style="border-bottom: 1px solid rgb(105, 113, 120)">
+								            <div class="help-content-div111">
+								                <div class="addCharge">추가 요금</div>
+								                <div class="check-title1">상차 방법</div>
+								            </div>
+								            <div class="help-content-div112">
+								                <label class="checkbox-wrap2 checkHelp">
+								                    <input id="checkHelp3" type="checkbox" name="checkHelp11" value="">
+								                    <i class="check-icon2"></i>
+								                    <div class="check-title11" style="font-size: 12pt;">기사님과 함께</div>
+								                </label>
+								                <div class="checkCharge" style="width: 152px;">+10,000원</div>
+								            </div>
+								            <div class="help-content-div112">
+								                <label class="checkbox-wrap2 checkHelp">
+								                    <input id="checkHelp4" type="checkbox" name="checkHelp12" value="">
+								                    <i class="check-icon2"></i>
+								                    <div class="check-title11" style="font-size: 12pt;">기사님 단독</div>
+								                </label>
+								                <div class="checkCharge" style="width: 168px;">+20,000원</div>
+								            </div>
+								        </div>
+								    </div>
+                                </div>
+                            </div>
+                            <!-- Modal5-2 : 하차 선택 모달  -->
+                            <div id="modal52" class="modal-content11" style="display:none;">
+	                            <span id="modal-close5" class="close11" style="width: 30px;">&times;</span>
+                                <div class="modal-help-div">
+                                	<div class="help-title-div">
+                                        <span class="help-title">하차 방법</span>
+                                    </div>
+								    <div class="help-content-div1" style="border-bottom: 1px solid black;">
+								        <div class="help-content-div11" style="border-bottom: 1px solid rgb(105, 113, 120)">
+								            <div class="help-content-div111">
+								                <div class="addCharge">추가 요금</div>
+								                <div class="check-title1">하차 방법</div>
+								            </div>
+								            <div class="help-content-div112">
+								                <label class="checkbox-wrap2 checkHelp">
+								                    <input id="checkHelp5" type="checkbox" name="checkHelp11" value="">
+								                    <i class="check-icon2"></i>
+								                    <div class="check-title11" style="font-size: 12pt;">기사님과 함께</div>
+								                </label>
+								                <div class="checkCharge" style="width: 152px;">+10,000원</div>
+								            </div>
+								            <div class="help-content-div112">
+								                <label class="checkbox-wrap2 checkHelp">
+								                    <input id="checkHelp6" type="checkbox" name="checkHelp12" value="">
+								                    <i class="check-icon2"></i>
+								                    <div class="check-title11" style="font-size: 12pt;">기사님 단독</div>
+								                </label>
+								                <div class="checkCharge" style="width: 168px;">+20,000원</div>
+								            </div>
+								        </div>
+								    </div>
                                 </div>
                             </div>
                         </div>
@@ -662,7 +754,7 @@
                         <div class="title11">상하차 방법</div>
                         <div id="help-div" class="content22">
 							<label class="rad">
-								<input id="helpUnload-ch" type="radio" name="helpLoad" value="a">
+								<input id="helpUnload-ch" type="radio" name="helpLoad" value="a" required>
 								<i></i>&nbsp;&nbsp;도움 필요하지 않아요
 							</label>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -716,7 +808,15 @@
                                 <span id="helpLoad" class="charge-content"></span>
                             </div>
                             <div align="left">
-                                <span class="charge-title">상하차 도움</span>
+                                <span class="charge-title">상차 옵션</span>
+                            </div>
+                        </div>
+                        <div class="charge-line">
+                            <div class="charge-content-div">
+                                <span id="helpUnload" class="charge-content"></span>
+                            </div>
+                            <div align="left">
+                                <span class="charge-title">하차 옵션</span>
                             </div>
                         </div>
                         
@@ -733,7 +833,7 @@
     
     
     
-    <!-- 주소 API Modal -->
+    <!-- Modal34 : 주소 API -->
     <div id="myModal34">
 		<div id="layer">
 			<img id="searchAddr" src="https://t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" onclick="closeDaumPostcode()" alt="닫기 버튼">

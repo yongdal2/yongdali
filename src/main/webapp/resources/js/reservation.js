@@ -11,6 +11,7 @@ span1.onclick = function() {
 	modal1.style.display = "none";
 }
 
+//모달 영역 밖에 클릭했을때 모달 닫기
 $("#myModal1").mouseenter(function(){
 	window.onclick = function(event) {
 		if (event.target == modal1) {
@@ -122,7 +123,7 @@ span2.onclick = function() {
 	modal2.style.display = "none";
 }
 
-//When the user clicks anywhere outside of the modal, close it
+//모달 영역 밖에 클릭했을때 모달 닫기
 // window 연결이 끊겨서 mouseenter로 연결하여 해결함
 $("#myModal2").mouseenter(function(){
 	window.onclick = function(event) {
@@ -328,7 +329,7 @@ function searchStartAddr() {
          
          /* 서울 지역 조건 */
          if(!addr.includes("서울")){
-				alert("죄송합니다. 서울지역 한해서만 운영 가능합니다. 다시 입력해주세요.");
+				alert("죄송합니다.\n서울지역 한해서만 운영 가능합니다.\n다시 입력해주세요.");
 				modal34.style.display = "none";
 			} else {
 				// 주소로 상세 정보를 검색
@@ -448,7 +449,7 @@ function initLayerPosition(){
  element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
 }
 
-//window 클릭시 modal3 닫기
+//모달 영역 밖에 클릭했을때 모달 닫기
 $("#myModal34").mouseenter(function(){
 	window.onclick = function(event) {
 		if (event.target == modal34) {
@@ -591,23 +592,132 @@ $("#checkLoad2").click(function(){
 
 
 
-/* 상하차 도움 */
-// 도움필요없을 경우
+/* 상하차 도움 모달*/
+var addCharge1=0;
+var addCharge2=0;
+
+var modal5 = document.getElementById('myModal5');
+
+// '도움 필요하지 않아요' 클릭시
 $('#helpUnload-ch').click(function(){
-	$('#helpLoad').html("고객님이 직접 상하차");
+	$('#helpLoad').text("고객님이 직접 상차");
+	$('#helpUnload').text("고객님이 직접 하차");
 });
 
-// 도움 필요할 경우
+// '도움 필요해요' 클릭시 전에 클릭했던 정보 삭제
+$('#helpLoad-ch').click(function(){
+	$('#myModal5').css('display','block');
+	$('#checkHelp1').prop('checked',false);
+	$('#checkHelp2').prop('checked',false);
+	$('#checkHelp3').prop('checked',false);
+	$('#checkHelp4').prop('checked',false);
+	$('#checkHelp5').prop('checked',false);
+	$('#checkHelp6').prop('checked',false);
+	$('#checkHelp1').val("");
+	$('#checkHelp2').val("");
+	$('#helpCharge1').html("+ 0원");
+	$('#helpCharge2').html("+ 0원");
+	addCharge1 = 0;
+	addCharge2 = 0;
+});
 
 
+// 상차만 선택
+$('#checkHelp1').click(function(){
+	$('#modal51').css('display','block');
+	$('#modal5').css('display','none');
+});
+// 하차만 선택시
+$('#checkHelp2').click(function(){
+	$('#modal52').css('display','block');
+	$('#modal5').css('display','none');
+});
+
+// 상차 : 기사님과 함께 or 단독 선택
+$('#checkHelp3').click(function(){
+	$('#modal51').css('display','none');
+	$('#modal5').css('display','block');
+	$('#checkHelp1').val("기사님과 함께 상차");
+	$('#helpCharge1').html("+10,000원");
+	$('#checkHelp1').prop('checked',true);
+	addCharge1 = 10000;
+});
+$('#checkHelp4').click(function(){
+	$('#modal51').css('display','none');
+	$('#modal5').css('display','block');
+	$('#checkHelp1').val("기사님 단독 상차");
+	$('#helpCharge1').html("+20,000원");
+	$('#checkHelp1').prop('checked',true);
+	addCharge1 = 20000;
+});
+// 하차 : 기사님과 함께 or 단독 선택
+$('#checkHelp5').click(function(){
+	$('#modal52').css('display','none');
+	$('#modal5').css('display','block');
+	$('#checkHelp2').val("기사님과 함께 하차");
+	$('#helpCharge2').html("+10,000원");
+	$('#checkHelp2').prop('checked',true);
+	addCharge2 = 10000;
+});
+$('#checkHelp6').click(function(){
+	$('#modal52').css('display','none');
+	$('#modal5').css('display','block');
+	$('#checkHelp2').val("기사님 단독 하차");
+	$('#helpCharge2').html("+20,000원");
+	$('#checkHelp2').prop('checked',true);
+	addCharge2 = 20000;
+});
 
 
+// 상하차 선택하기 혹은 닫기
+$('#checkHelp-btn').click(function(){
+	if(!$('#checkHelp1').val()=="" || !$('#checkHelp2').val()==""){
+		
+		if(!$('#checkHelp1').val()=="" && !$('#checkHelp2').val()==""){
+			$('#myModal5').css('display','none');
+			$('#helpLoad').html($('#checkHelp1').val());
+			$('#helpUnload').html($('#checkHelp2').val());	
+		} else {
+			if(!$('#checkHelp1').val()==""){
+				$('#myModal5').css('display','none');
+				$('#helpLoad').html($('#checkHelp1').val());
+				$('#helpUnload').html("고객님이 직접 하차");							
+			} else {				
+				$('#myModal5').css('display','none');
+				$('#helpLoad').html("고객님이 직접 상차");
+				$('#helpUnload').html($('#checkHelp2').val());							
+			}
+		}
+	} else {
+		alert("상차 혹은 하차 둘중 하나를 필히 선택해주세요.");
+	}
+});
+var span3 = document.getElementById("modal-close3");
+span3.onclick = function() {
+	console.log($('#checkHelp1').val());
+	console.log($('#checkHelp2').val());
+	
+	if(!$('#checkHelp1').val()=="" || !$('#checkHelp2').val()==""){
+		$('#myModal5').css('display','none');
+		$('#helpLoad').html($('#checkHelp1').val());
+		$('#helpUnload').html($('#checkHelp2').val());
+	} else {
+		alert("상차 혹은 하차 둘중 하나를 필히 선택해주세요.");
+	}
+}
 
-
-
-
-
-
-
+// 모달 상차 하차 각각 닫기 버튼 클릭
+var span4 = document.getElementById("modal-close4");
+span4.onclick = function() {
+	$('#modal51').css('display','none');
+	$('#modal5').css('display','block');
+	$('#checkHelp1').prop('checked',false);
+}
+var span5 = document.getElementById("modal-close5");
+span5.onclick = function() {
+	$('#modal52').css('display','none');
+	$('#modal5').css('display','block');
+	$('#checkHelp2').prop('checked',false);
+}
 
 

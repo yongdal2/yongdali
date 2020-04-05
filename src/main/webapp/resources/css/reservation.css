@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 @font-face {
     font-family: 'yg-jalnan'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
     font-weight: normal;
@@ -87,7 +88,7 @@ select, textarea, input, button{
 .modal11 {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 2; /* Sit on top */
     padding-top: 150px; /* Location of the box */
     left: 0;
     top: 0;
@@ -104,7 +105,7 @@ select, textarea, input, button{
     margin: auto;
     padding: 0px;
     border: 1px solid #888;
-    width: 400px;
+    width: 400px;`
 }
 
 /* The Close Button */
@@ -353,7 +354,9 @@ select, textarea, input, button{
     border: none;
 }
 
-#truck-standard>tr:nth-child(even){background-color: rgb(236, 240, 242);}
+#truck-standard>tr:nth-child(even){
+	background-color: rgb(236, 240, 242);
+}
 
 #selectLoad-btn{
 	float: right;
@@ -729,7 +732,7 @@ select, textarea, input, button{
 
 #charge-content{
 	width: 380px;
-	height: 130px;
+	height: 155px;
 	padding: 10px 22px 10px 22px;
 	text-align: left;
 }
@@ -777,7 +780,7 @@ select, textarea, input, button{
 #myModal34{
 	display: none; /* Hidden by default */
 	position: fixed; /* Stay in place */
-	z-index: 10000; /* Sit on top */
+	z-index: 2; /* Sit on top */
 	padding-top: 150px; /* Location of the box */
 	left: 0;
 	top: 0;
@@ -805,30 +808,8 @@ select, textarea, input, button{
 	z-index:1;
 }
 
-#modal-helpLoad-div{
-	width: 580px;
-	height: 460px;
-	margin-left: auto;
-	margin-right: auto;
-}
 
-#helpLoad-title-div{
-	padding: 10px 20px 10px 20px;
-	border-bottom: 1px solid rgb(236, 240, 242);
-	margin-bottom: 20px;
-}
-
-#helpLoad-title{
-	font-family: 'yg-jalnan';
-	font-size: 22pt;
-}
-
-
-
-
-
-
-/* 상하차 도움 */
+/* 상하차 도움 클릭시 효과 */
 .rad{
   cursor: pointer;
   user-select: none;
@@ -836,14 +817,12 @@ select, textarea, input, button{
   -webkit-touch-callout: none;
   color:#444;font:100%/1.4 sans-serif;
 }
-.rad > input{ /* HIDE ORG RADIO & CHECKBOX */
+.rad > input{
   position: absolute;
   opacity: 0;
   width: 0;
   height: 0;
 }
-/* RADIO & CHECKBOX STYLES */
-/* DEFAULT <i> STYLE */
 .rad > i{ 
   display: inline-block;
   vertical-align: middle;
@@ -856,21 +835,133 @@ select, textarea, input, button{
   background: gray;
   margin-top: -5px;
 }
-.rad:hover > i{ /* HOVER <i> STYLE */
+.rad:hover > i{ 
   box-shadow: inset 0 0 0 3px #fff;
   background: gray;
 }
-.rad > input:checked + i{ /* (RADIO CHECKED) <i> STYLE */
+.rad > input:checked + i{
   box-shadow: inset 0 0 0 3px #fff;
   background: rgb(87,187,138);s
 }
 
 
+/* 상하차 방법 모달 */
+.modal-help-div{
+	width: 398px;
+	height: 357px;
+	margin-left: auto;
+	margin-right: auto;
+}
 
+.help-title-div{
+	padding: 10px 20px 10px 20px;
+	border-bottom: 1px solid rgb(236, 240, 242);
+}
 
+.help-title{
+	font-family: 'yg-jalnan';
+	font-size: 22pt;
+}
 
+.checkbox-wrap2{
+    cursor: pointer;
+}
+.checkbox-wrap2 .check-icon2{
+    display: inline-block;
+    width: 30px; 
+    height: 30px;
 
+    /* url(상대경로) 경로 다시잡으면 돼 */
+    background: url(../images/reservation/uncheck.png) left center no-repeat; 
 
+    vertical-align: middle;
+    transition-duration: .1s;
+    
+    /* ① 이걸로 이미지 크기 조절하면 돼*/
+    background-size: 26px 26px;
+}
+.checkbox-wrap2 input[type=checkbox]{ 
+    display: none;
+}
+.checkbox-wrap2 input[type=checkbox]:checked + .check-icon2{
+
+    /* url(상대경로) 경로 다시잡으면 돼 */
+    background-image: url(../images/reservation/check.png);
+    
+    /* ① 이걸로 이미지 크기 조절하면 돼*/
+    background-size: 26px 26px;
+}
+
+.help-content-div1{
+    width: 398px;
+    height: 295px;
+    padding-top: 30px;
+    letter-spacing: 1px;
+    font-family: "Noto Sans KR", sans-serif;
+}
+.help-content-div11{
+    width: 360px;
+    height: 176px;
+    background-color: white;
+    margin: 0px auto 0px auto;
+}
+.help-content-div12{
+    width: 200px;
+    height: 50px;
+    margin: 19px auto 0px auto;
+}
+.help-content-div111{
+    width: 100%;
+    height: 50px;
+    background-color: rgb(236, 240, 242);
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid rgb(105, 113, 120);
+    border-bottom: 1px solid rgb(105, 113, 120);
+    font-size: 18px;
+}
+.help-content-div112{
+    font-size: 18px;
+    margin-left: 15px;
+    margin-top: 20px;
+    display: flex;
+}
+
+.addCharge{
+    margin-top: 12px;
+    margin-right: 47px;
+    float: right;
+}
+.check-title1{
+    margin-top: 12px;
+    margin-left: 15px;
+}
+
+.checkHelp{
+    display: flex;
+}
+.check-title11{
+    margin-left: 10px;
+    margin-top: 3px;
+    font-weight: normal;
+}
+.checkCharge{
+    width: 200px;
+    position: relative;
+    left: 10px;
+    text-align: right;
+	margin-top: 3px;
+}
+
+#checkHelp-btn{
+	font-size: 14pt;
+	color: white;
+	width: 200px;
+	height: 50px;
+	border: none;
+	background-color: green;
+	font-family: 'yg-jalnan'
+}
 
 
 
