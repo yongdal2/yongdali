@@ -33,7 +33,11 @@ public class MemberController {
 	
 	@RequestMapping(value="login.do", method=RequestMethod.POST)
 	public String memberLogin(@ModelAttribute Member m, Model model) {
-		/* Member loginUser = mService.loginMember(m); */
+		System.out.println(m.getmId());
+		Member loginUser = mService.loginMember(m); 
+		System.out.println(loginUser);
+		
+		
 		return null;
 	}
 }
