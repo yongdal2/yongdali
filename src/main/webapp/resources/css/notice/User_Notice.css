@@ -29,10 +29,10 @@
     text-decoration: none !important;
 }
 
-a:hover {
-	font-weight: bold !important;
+/* a:hover {
+	font-weight: normal;
     color: rgb(87, 187, 138) !important;
-}
+} */
 
 
 .container{
@@ -67,7 +67,7 @@ a:hover {
     display: inline-block;
     margin-right: 15px;
     margin-bottom: 10px;
-    font-size: 15px;
+    font-size: 17px;
     font-family: 'yg-jalnan', Arial, Helvetica, sans-serif;
     text-decoration: none;
     color: rgb(43, 43, 43);
@@ -132,9 +132,9 @@ table.tbl td:first-child{
 }
 
 /* 공지사항 table 내용 hover */
-table.tbl:hover tbody tr:hover td {
+table.tbl:hover tbody tr:hover td, .tbl td a:hover{
     font-weight: bolder;
-    color: rgb(87, 187, 138);
+    color: rgb(87, 187, 138) !important;
 }
 
 /* Pagination bar */
@@ -165,7 +165,7 @@ table.tbl:hover tbody tr:hover td {
 /* 페이징 현재 페이지 클릭 시 active */
 .pagination a.active {
     background-color: rgb(87, 187, 138);
-    color: white;
+    color: white !important;
 }
 
 /* Add a grey background color on mouse-over */

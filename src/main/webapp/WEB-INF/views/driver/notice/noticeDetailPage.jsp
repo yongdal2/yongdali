@@ -19,7 +19,7 @@
 	<!-- main -->
     <div class="container">
         <div class="row">
-            <h3 class="jal">고객센터</h3>
+            <h2 class="jal">고객센터</h3>
             <hr>
         </div>
         <div class="row">
@@ -29,7 +29,7 @@
                 <a href=""><span class="sidebar_span"> 채팅</span></a>
             </div>
             <div class="col-lg-8 col-lg-offset-1">
-                <h3 class="jal">공지사항</h3>
+                <h2 class="jal">공지사항</h3>
             </div>
         </div>
         <div class="row">
@@ -47,6 +47,15 @@
                         </div>
                         <div class="detail_text_area">
                             <p>어쩌고저쩌고</p>
+                        </div>
+                        <div class="file_area">
+                            <ul>
+                                <li>
+                                    <div class="left">첨부파일</div>
+                                    <div class="file">jinyeong.png</div>
+                                </li>
+                                
+                            </ul>
                         </div>
                     </div>
                     <div class="pagemove_area_wrap">
@@ -78,7 +87,9 @@
             </div>
         </div>
     </div>
-    
+    <br>
+    <br>
+    <br>
     <!-- Footer -->
 	<%@ include file="../../common/footer.jsp"%>
 

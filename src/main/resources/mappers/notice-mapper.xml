@@ -20,6 +20,7 @@
 	
 	</resultMap>
 	
+	<!-- 게시글 갯수 -->
 	<select id="getListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM NOTICE
@@ -27,12 +28,43 @@
 		AND N_SORT IN ('공통','일반')	
 	</select>
 	
+	<!-- 게시글 목록 -->
 	<select id="selectListUser" resultMap="noticeResultSet">
 		SELECT *
 		FROM NOTICE
 		WHERE N_STATUS='Y'
 		AND N_SORT IN ('공통','일반')
-		ORDER BY N_NO DESC
+		ORDER BY TO_NUMBER(SUBSTR(N_NO,2)) DESC
+	</select>
+	
+	<!-- 게시글 상세보기 -->
+	<select id="selectNoticeUser" resultMap="noticeResultSet">
+		SELECT *
+		FROM NOTICE
+		WHERE N_NO=#{nNo}
+		AND N_STATUS='Y'
+	</select>
+	
+	<!-- 이전글 -->
+	<select id="selectPreList" resultMap="noticeResultSet">
+		<![CDATA[
+		SELECT *
+		FROM NOTICE
+		WHERE TO_NUMBER(SUBSTR(N_NO,2))=
+		(SELECT MAX(TO_NUMBER(SUBSTR(N_NO,2))) FROM NOTICE WHERE TO_NUMBER(SUBSTR(N_NO,2)) < TO_NUMBER(SUBSTR(#{nNo},2)))
+		AND N_SORT IN ('공통','일반')
+		]]>
+	</select>
+	
+	<!-- 다음글 -->
+	<select id="selectNextList" resultMap="noticeResultSet">
+		<![CDATA[
+		SELECT *
+		FROM NOTICE
+		WHERE TO_NUMBER(SUBSTR(N_NO,2))=
+		(SELECT MIN(TO_NUMBER(SUBSTR(N_NO,2))) FROM NOTICE WHERE TO_NUMBER(SUBSTR(N_NO,2)) > TO_NUMBER(SUBSTR(#{nNo},2)))
+		AND N_SORT IN ('공통','일반')
+		]]>
 	</select>
 
 
