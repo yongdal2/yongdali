@@ -11,14 +11,13 @@
  	<typeAliases>
 		<typeAlias type="com.kh.yongdali.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.kh.yongdali.cs.model.vo.Notice" alias="Notice"/>
-		<typeAlias type="com.kh.yongdali.driver.model.vo.Reservation" alias="Notice"/>
+		<typeAlias type="com.kh.yongdali.driver.model.vo.Reservation" alias="Reservation"/>
 	</typeAliases>
 	
  	<mappers>
 		<mapper resource="mappers/member-mapper.xml"/>
 		<mapper resource="mappers/notice-mapper.xml"/>
 		<mapper resource="mappers/reservation-mapper.xml"/>
-		<mapper resource="mappers/driver-mapper.xml"/>
 	</mappers>
 	
 </configuration>  
