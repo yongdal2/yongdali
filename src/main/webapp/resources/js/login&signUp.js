@@ -1,22 +1,29 @@
 $(document).ready(function(){
-    /*-- 로그인 ----------------------------------------------*/
+	/*-- Navigation  ----------------------------------------------*/
+	$(".signUpView").click(function(){
+		location.href="policyView.me"
+	});
+	
+	$(".loginView").click(function(){
+		location.href="loginView.me"
+	})
+	
+	
+	/*-- 로그인 ----------------------------------------------*/
     $('#loginForm').submit(function(){
-        
     	var result = false;
     	result = loginValidate();
-
-    	
         
         return true;
     })
 
     // 이메일 유효성 검사
     function loginValidate(){ 
-        let emailVal = $("input[name=loginEmail]").val();  
+        let emailVal = $("input[type=email]").val();  
         let idDup = 0;
 
         // 이메일 미입력
-        if ($("input[name=loginEmail]").val() == "" ){
+        if ($("input[type=email]").val() == "" ){
             displayErrorMsg($("#emailMsg"), '이메일을 입력하세요.');
             return false;
         }
@@ -24,7 +31,6 @@ $(document).ready(function(){
             $("#emailMsg").css("display","none");
             return true;
         }
-
     }
 
 
@@ -315,10 +321,10 @@ $(document).ready(function(){
             $('#slecBiz div').text('일반회원으로 가입하기');
             $('.bizForm').show();
         }else{
-                $('#slecBiz img').attr('src', 'resources/images/login&signUp/round-add.svg').attr('alt','더하기');
-                $('#slecBiz div').text('사업자(기사)로 가입하기');
-                $('.bizForm').hide();
-                $('#bizFormMsg1').css("display","none");
+            $('#slecBiz img').attr('src', 'resources/images/login&signUp/round-add.svg').attr('alt','더하기');
+            $('#slecBiz div').text('사업자(기사)로 가입하기');
+            $('.bizForm').hide();
+            $('#bizFormMsg1').css("display","none");
         }
     });
 
@@ -341,16 +347,16 @@ $(document).ready(function(){
 
     // 차량 형태 및 적재 크기 선택
     $('.dpmSTb').click(function(){
-        $(this).css('background-color','rgb(236, 240, 242)');
-        $('.cCvWPY').css('background-color','white');
+        $(this).css('background-color','white');
+        $('.cCvWPY').css('background-color','rgb(236, 240, 242)');
  
         $('.fGXWzu').css('display','none');
         $('.ezDdUH').css({'display':'flex'});
     })
 
     $('.cCvWPY').click(function(){
-        $(this).css('background-color','rgb(236, 240, 242)');
-        $('.dpmSTb').css('background-color','white');
+        $(this).css('background-color','white');
+        $('.dpmSTb').css('background-color','rgb(236, 240, 242)');
         $('.ezDdUH').css('display','none');
         $('.fGXWzu').css('display','block');
     })

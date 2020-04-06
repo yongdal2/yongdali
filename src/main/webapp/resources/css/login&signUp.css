@@ -1,0 +1,831 @@
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800');
+
+body{
+    font-family : 'Nanum Gothic';
+    /* font-weight: 700; */
+    margin-bottom: 100px;
+}
+
+/* header */
+.header {
+    position: relative;
+    padding: 20px 0 10px;
+    text-align: center;
+    /* margin-top: 62px; */
+    margin-top: 3%;
+}
+
+.agreeHeader{
+    /* margin-top: 80px; */
+    margin-top: 6%;
+}
+
+.header img{
+    min-width: 230px;
+    max-width: 230px;
+    margin: 40px 0px;
+}
+
+.logo {
+    text-decoration-line: none;
+    color: #57BB8A;
+    font-size: 2em;
+}
+
+/* content */
+.formRow {
+    position: relative;
+    /* width: 100%; */
+}
+
+.formRow--item {
+    display: block;
+    /* width: 100%; */
+}
+
+.formRow--input {
+    position: relative;
+    padding: 15px;
+    /* padding: 15px 20px 11px; */
+    width: 100%;
+    /* outline: none; */
+    /* outline-color: #57BB8A; */
+    border: solid 1px #95989a;
+    border-radius: 4px;
+    color: #2c3235;
+    letter-spacing: .2px;
+    font-weight: 400;
+    font-size: 15px;
+    resize: none;
+    -webkit-transition: all .2s ease;
+    transition: all .2s ease;
+    display: block;
+    box-sizing: border-box;
+    /* z-index: 10; */
+}
+
+.formRow--input-wrapper {
+    position: relative;
+    display: block;
+    width: 100%;
+    /* margin: 0px; */
+    padding: 7px;
+    overflow: hidden;
+    box-sizing: border-box;
+    /* vertical-align: top; */
+    
+}
+
+.formRow--input-wrapper.active .placeholder {
+    top: -1px;
+    /* left: 20px; */
+    background-color: #ffffff;
+    color: #1a73e8;
+    text-transform: uppercase;
+    /* letter-spacing: .8px; */
+    font-size: 11px;
+    /* line-height: 14px; */
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+}
+
+.formRow--input-wrapper.active .formRow--input:not(:focus):not(:hover)~.placeholder {
+    /* color: #fec8c9; */
+    color: #2c3235;
+}
+
+/* .formRow--input-wrapper .formRow--input:hover,  */
+/* .formRow--input-wrapper .formRow--input:focus{} */
+
+/* .formRow .placeholder { */
+.placeholder {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    display: block;
+    padding-left: 10px;
+    color: #95989a;
+    white-space: nowrap;
+    letter-spacing: .2px;
+    font-weight: normal;
+    font-size: 16px;
+    -webkit-transition: all, .2s;
+    transition: all, .2s;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.content {
+    max-width: 500px;
+    min-width: 500px;
+    margin: auto;
+    background: white;
+    padding: 10px;
+}
+.loginContent{
+    max-width: 360px;
+    min-width: 360px;
+}
+
+.btnArea {
+    margin: 20px 0 20px;
+    /* padding: px; */
+}
+
+.submitBtn {
+    color: #fff;
+    background-color: #57BB8A;
+    display: block;
+    width: 100%;
+    padding: 21px 0 17px;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 40px;
+}
+
+.bizForm {
+    margin-top: 13px;
+    display: none;
+}
+
+.bizForm label {
+    margin-left: 7px;
+    margin-bottom: 15px;
+    display :inline-block;
+}
+
+.bizWrap {
+    display: table;
+}
+
+
+.carInfo {
+    display: inline-flex;        
+}
+
+.carInfo select {
+    background: white;
+}
+
+#nation {
+    width: 20%;
+    padding: 0px;
+    display: inline-flex;
+    border: none;
+}
+
+#nation select {
+    background: white;
+    border: none;
+}
+
+#btn_verify {
+    width: 30%;
+    margin-left: 20px;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #57BB8A;
+    display: block;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.pwdWrap, .bizWrap, .phoneWrap, #verifyWrap{
+    display: flex ;
+}
+
+.fa-eye, .fa-eye-slash{
+    vertical-align: 0%;
+    padding: 16px 15px 15px 10px;
+    width: 30px !important;
+    font-size:24px;
+    cursor: pointer;
+}
+
+/* #pwd1{
+    width: 15%;
+} */
+
+.pwd{
+    width: 45%;
+} 
+
+.break{
+    padding-top: 8px;
+}
+
+button{
+    outline :none;
+}
+
+.eng{
+    /* ime-mode: inactive; */
+    -ms-ime-mode: inactive;
+}
+
+/* IE 10, 11의 네이티브 화살표 숨기기 */
+select::-ms-expand {
+    display: none;
+}
+
+.msgBox{
+    display: none;
+    /* display: block; */
+    margin-top: 5px;
+    margin-left: 15px;
+    padding-bottom: 15px;
+    font-size: 15px;
+    white-space:pre;
+    color: #d93025;
+}
+
+.easyEccess{
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.forgotSignIn{
+    text-align: center;
+}
+
+.forgotSignIn a{
+    display: inline-block;
+    padding: 3px 5px;
+    margin: 0px 20px;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+
+.easyEccess {
+    display: block;
+    
+}
+
+.easyEccessTitle{
+    /* margin: 15px 0; */
+    color: #757575;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 1.33;
+    text-align: center;
+
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+
+.yongdalLogo {
+    margin: 0px 200px 0px 80px;
+}
+
+.easyEccess img{
+    width: 48px;
+    height: 48px;
+    background-position: left -80px top -80px;
+
+    display: inline-block;
+    margin: 0 10px;
+    transition: opacity .1s;
+}
+
+/* sigInAgree */
+.chooseSignIn div{
+    display: inline-block;
+    
+}
+
+.policy-list{
+    border-top: 2px solid black;
+    padding: 0.5rem 0px;
+}
+
+.policy-header{
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    padding: 0;
+}
+
+.chkAllDiv{
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+/* .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+} */
+
+.policy-list div{
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding: 0.2rem 0px;
+}
+
+.detail{
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 0.5rem;
+}
+
+/* .easyEccessLogo {
+    margin-right: 10px;
+} */
+
+.signInAgree{
+    max-width: 700px;
+    min-width: 700px;
+
+}
+
+/* .policyChk{
+    margin-right: 12px;
+} */
+
+.policy img {
+    width: 20px;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+.bizRow img{
+    margin: 0px 12px;
+    width: 16px;
+    /* margin-right: 12px; */
+    
+}
+
+.bizRow{
+    display: flex;
+    margin: 10px 0px 20px 0px;
+    vertical-align: baseline;
+    cursor: pointer;
+}
+
+.bizRow div{
+    font-size: 15px;
+}
+
+.guide{
+    margin-bottom: 10px;
+    margin-left: 290px;
+}
+
+.guide img{
+    width: 15px;
+}
+
+.guide div{ 
+    font-size: 14px;
+}
+
+
+
+/* .policy-list img{
+    width: 1rem;
+    height: 1rem;
+    margin-right: 12px;
+    cursor: pointer;
+} */
+
+/* .policy-list img:nth-child(2n){
+    width: 1rem;
+    height: 1rem;
+    margin-right: 12px;
+    cursor: pointer;
+} */
+
+.yongdalLogo img{
+    cursor: pointer;
+}
+
+
+
+
+/* -------체크박스 (feat. 남지훈)--------- */
+.checkbox-wrap{
+    cursor: pointer;
+}
+
+/* 체크 안하면 */
+.checkbox-wrap .check-icon{
+    display: inline-block;
+
+    /* ② 배경화면 가로 세로 똑같이 맞추면 돼*/
+    /* width: 50px;  */
+    /* height: 50px; */
+
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+    cursor: pointer;
+
+
+    /* url(상대경로) 경로 다시잡으면 돼 */
+    /* background: url(./img/uncheck.png) left center no-repeat; */
+    background: url(../../resources/images/login&siginIn/unchecked-circle.png) left center no-repeat;
+    vertical-align: middle;
+    transition-duration: .3s;
+    
+    /* ① 이걸로 이미지 크기 조절하면 돼*/
+    /* background-size: 50px 50px; */
+    background-size: 20px 20px;
+
+
+}
+.checkbox-wrap input[type=checkbox]{ 
+    display: none;
+}
+
+/* 체크하면 */
+.checkbox-wrap input[type=checkbox]:checked + .check-icon{
+
+    /* url(상대경로) 경로 다시잡으면 돼 */
+    /* background-image: url(./img/check.png); */
+    background: url(../../resources/images/login&siginIn/checked-circle.png);
+    
+    /* ① 이걸로 이미지 크기 조절하면 돼*/
+    /* background-size: 50px 50px; */
+    background-size: 20px 20px;
+
+
+
+    /* width: 20px;
+    height: 20px;
+    margin-right: 12px;
+    cursor: pointer; */
+}
+
+
+
+
+
+
+
+
+
+
+
+/* 이용 약관1 (모달) */
+.bdkJUD {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 50rem;
+    height: 40rem;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px;
+    z-index: 9999;
+    opacity: 1;
+    transform: translate(-50%, -50%);
+
+    width: 80%;
+}
+
+.kiqceJ {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding: 2rem;
+    border-bottom: 1px solid rgb(217, 225, 232);
+    padding: 10px;
+}
+
+.kiqceJ h1 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.kiqceJ img {
+    cursor: pointer;
+}
+
+.blblsU {
+    height: 63%;
+    overflow: scroll;
+    padding: 2rem;
+}
+
+.blblsU .title02 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.blblsU .title03 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 1.5rem;
+}
+
+.blblsU .content01 {
+    padding-left: 0.5rem;
+}
+
+.blblsU .content02 {
+    padding-left: 1rem;
+}
+
+.blblsU .content03 {
+    padding-left: 1.5rem;
+}
+
+.blblsU p {
+    line-height: 20px;
+    margin-bottom: 0.5rem;
+}
+
+/* 이용 약관2 (모달) */
+.drszGh {
+    height: 63%;
+    overflow: scroll;
+    padding: 2rem;
+}
+
+.drszGh p {
+    line-height: 20px;
+    margin-bottom: 0.5rem;
+}
+
+.drszGh .title02 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 1.5rem;
+}
+
+.drszGh .content02 {
+    margin-top: 0.5rem;
+}
+
+.drszGh .content03 {
+    padding-left: 1rem;
+}
+
+.drszGh .content04 {
+    padding-left: 2rem;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+
+
+/* 차량정보 (모달) */
+.ewJflR {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 44rem;
+
+    /* height: unset; */
+    height: 50rem;
+
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px;
+    z-index: 9999;
+    opacity: 1;
+    transform: translate(-50%, -50%);
+
+    overflow-y: hidden;
+}
+
+.kiqceJ {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding: 2rem;
+    border-bottom: 1px solid rgb(217, 225, 232);
+}
+
+.ixeUWC {
+    display: flex;
+}
+
+.cCvWPY {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 22rem;
+    height: 3rem;
+    /* background-color: rgb(236, 240, 242); */
+    /* background-color : white; */
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.dpmSTb {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 22rem;
+    height: 3rem;
+    background-color: rgb(236, 240, 242);
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.yHNZG {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding: 0px 2.5rem;
+    margin: 1.25rem 0px;
+}
+
+.yHNZG img {
+    width: 122px;
+}
+
+.yHNZG .title {
+    font-weight: bold;
+}
+
+.yHNZG .description {
+    width: 22rem;
+}
+.yHNZG .description p {
+    height: 20px;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.ezDdUH {
+    /* display: flex; */
+    display: none;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding: 2rem 3rem 2.5rem;
+
+
+}
+
+.ezDdUH img {
+    width: 15rem;
+    margin-bottom: 1.5rem;
+}
+
+.PKvoC p:first-child {
+    border-right: 1px solid rgb(216, 213, 206);
+}
+
+.PKvoC {
+    display: flex;
+    background-color: rgb(105, 113, 120);
+    height: 3rem;
+}
+
+.PKvoC p {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 9.5rem;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+
+.hiFyFn p:first-child {
+    border-right: 1px solid rgb(216, 213, 206);
+}
+
+.hiFyFn:nth-child(2n) {
+    background-color: rgb(236, 240, 242);
+}
+
+.hiFyFn p.bold {
+    font-weight: bold;
+}
+
+.hiFyFn {
+    display: flex;
+    background-color: rgb(255, 255, 255);
+    height: 3rem;
+}
+
+.hiFyFn p {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 9.5rem;
+}
+
+.customer-center {
+    margin-top: 1.5rem;
+    font-size: 14px;
+}
+
+.cs-phone-number {
+    margin-top: 1rem;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0px 20px 0px 20px;
+    border: 1px solid #888;
+    /* width: 80%; */
+}
+
+
+
+/* The Close Button */
+.modalClose {
+    color: #aaaaaa;
+    float: right;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.modalClose:hover,
+.modalClose:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 회원가입 이미지 */
+.signInImgWrap{
+    height: 14rem;
+    margin: 10px;
+    border-style: none;
+    text-align: center;
+}
+
+.signInImg{
+    border-style: ridge;
+    height: 90%;
+    width: 11rem;
+
+}

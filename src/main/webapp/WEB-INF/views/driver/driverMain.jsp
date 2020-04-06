@@ -79,14 +79,13 @@
 						</table>
 					</div>
 					<div class="modal" tabindex="-1" role="dialog" id="eventModal">
-						<form action="">
+						<form action="getB.do">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
-										<h4 id="evetitle"></h4>
-										<button type="button" class="close" data-dismiss="modal"
-											aria-label="CLose">
-											<span aria-hidden="true">x</span>
+										<h4 id="evetitle">배차신청</h4>
+										<button type="button" class="close" data-dismiss="modal"aria-label="CLose">
+											<span aria-hidden="true">X</span>
 										</button>
 									</div>
 									<div class="modal-body">
@@ -148,7 +147,7 @@
 									</div>
 									<div class="ContaineraddEvent" id="savecar">
 										<div class="modal-footer">
-
+											<button type="submit" class="btn btn-default">배차신청</button>S
 											<button type="button" class="btn btn-default"
 												data-dismiss="modal">닫기</button>
 										</div>
@@ -197,6 +196,30 @@
 				
 			});
 		} --%>
+		<%-- function mView(){
+		 var $baechar = $('#baechar tbody');
+		 $baechar.html("");
+		 
+		 $.ajax({
+			 url : "baechar.do",
+			 data : "<%= session.getAttribute("loginUser").getUserId()%>",
+			 type : "post",
+			 dataType : "json",
+			 success : function(data){
+				 $.each(data,function(index,value){
+					 var $tr = ("<tr>");
+					 var $start = ("<td>").text(value.start);
+					 
+					 $tr.append($start);
+					 
+					 $baechar.append($tr);
+					 
+				 }); 
+			 }
+		 });	 
+		} --%>
+		
+		
 	</script>
 </body>
 

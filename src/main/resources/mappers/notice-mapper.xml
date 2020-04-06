@@ -20,16 +20,16 @@
 	
 	</resultMap>
 	
-	<!-- 게시글 갯수 -->
-	<select id="getListCount" resultType="_int">
+	<!-- 사용자 게시글 갯수 -->
+	<select id="userGetListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM NOTICE
 		WHERE N_STATUS='Y'
 		AND N_SORT IN ('공통','일반')	
 	</select>
 	
-	<!-- 게시글 목록 -->
-	<select id="selectListUser" resultMap="noticeResultSet">
+	<!-- 사용자 게시글 목록 -->
+	<select id="userSelectList" resultMap="noticeResultSet">
 		SELECT *
 		FROM NOTICE
 		WHERE N_STATUS='Y'
@@ -37,16 +37,16 @@
 		ORDER BY TO_NUMBER(SUBSTR(N_NO,2)) DESC
 	</select>
 	
-	<!-- 게시글 상세보기 -->
-	<select id="selectNoticeUser" resultMap="noticeResultSet">
+	<!-- 사용자 게시글 상세보기 -->
+	<select id="selectNoticeDetail" resultMap="noticeResultSet">
 		SELECT *
 		FROM NOTICE
 		WHERE N_NO=#{nNo}
 		AND N_STATUS='Y'
 	</select>
 	
-	<!-- 이전글 -->
-	<select id="selectPreList" resultMap="noticeResultSet">
+	<!-- 사용자 게시글 상세보기 이전글 -->
+	<select id="userSelectPreList" resultMap="noticeResultSet">
 		<![CDATA[
 		SELECT *
 		FROM NOTICE
@@ -56,8 +56,8 @@
 		]]>
 	</select>
 	
-	<!-- 다음글 -->
-	<select id="selectNextList" resultMap="noticeResultSet">
+	<!-- 사용자 게시글 상세보기 다음글 -->
+	<select id="userSelectNextList" resultMap="noticeResultSet">
 		<![CDATA[
 		SELECT *
 		FROM NOTICE
@@ -66,7 +66,14 @@
 		AND N_SORT IN ('공통','일반')
 		]]>
 	</select>
-
+	
+	<!-- 게시판 등록 -->
+	<insert id="insertNotice" parameterType="Notice">
+		INSERT INTO NOTICE
+		VALUES('N' || SEQ_NNO.NEXTVAL,#{nTitle},#{nWriter},
+		#{nContent},#{nImgOrigin},#{nImgRename},
+		#{nSort},SYSDATE,SYSDATE,DEFAULT)
+	</insert>
 
 
 
