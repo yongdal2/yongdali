@@ -15,12 +15,12 @@ public class MemberController_ssh {
 	
 	//추후에 home.controller로 이동
 	@RequestMapping("information.ydl")
-	public String informationView( ) {
+	public String informationView() {
 		return "user/information";
 	}
 	
 	@RequestMapping("myPage.myp")
-	public String myPageView( ) {
+	public String myPageView() {
 		return "user/myPage/myPageRSV";
 	}
 	
