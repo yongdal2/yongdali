@@ -40,9 +40,7 @@ public class MemberController {
 		logger.debug(m.getmId());
 		Member loginUser = mService.loginMember(m); 
 		
-//		logger.debug(loginUser);
 		System.out.println(loginUser);
-		
 		
 		return null;
 	}
