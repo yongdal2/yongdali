@@ -9,7 +9,7 @@
     <title>용달이 | 로그인</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><!-- warning icon -->
-    <link rel="stylesheet" href="${contextPath}/resources/css/signIn&login.css">   
+    <link rel="stylesheet" href="${contextPath}/resources/css/login&signUp.css">   
     <script src="//code.jquery.com/jquery-3.1.1.slim.min.js"></script>
     <script src="${contextPath}/resources/js/login&signUp.js"></script>
 
@@ -18,7 +18,7 @@
 <body>
     <!-- logo header -->
     <div class="header">
-        <a href="#">
+        <a href="home.do">
             <img src="${contextPath}/resources/images/ydl_logo/ydl_lg_gr(150x50).png" alt="로고">
         </a>
     </div>

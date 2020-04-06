@@ -42,14 +42,23 @@
 			<div class="col-lg-4">
 				<ul class="nav navbar-nav float-lg-right navbar-right">
 					<li class="nav-item">
-						<button class="btn btn-default navbar-btn" style="background: rgb(87,187,138); color: white;">로그인</button>
+						<button class="btn btn-default navbar-btn loginView" style="background: rgb(87,187,138); color: white;">로그인</button>
 					</li>
 					<li class="nav-item">
-						<button class="btn btn-outline-default navbar-btn" style="background: white;">회원가입</button>
+						<button class="btn btn-outline-default navbar-btn signUpView" style="background: white;" >회원가입</button>
 					</li>
 				</ul>
 			</div>
 		</div>
 		</div>
 	</nav>
+	<script>
+ 		$(".signUpView").click(function(){
+			location.href="policyChk.me"
+		});
+ 		
+ 		$(".loginView").click(function(){
+ 			location.href="login.me"
+ 		})
+	</script>
 </header>
