@@ -38,7 +38,7 @@
 	</select>
 	
 	<!-- 사용자 게시글 상세보기 -->
-	<select id="userSelectNoticeDetail" resultMap="noticeResultSet">
+	<select id="selectNoticeDetail" resultMap="noticeResultSet">
 		SELECT *
 		FROM NOTICE
 		WHERE N_NO=#{nNo}

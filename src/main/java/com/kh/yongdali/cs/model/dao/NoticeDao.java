@@ -37,9 +37,14 @@ public class NoticeDao {
 		return (ArrayList)sqlSession.selectList("noticeMapper.userSelectList",null,rowBounds);
 	}
 
+	/**
+	 * 게시물 상세보기 
+	 * @param nNo
+	 * @return
+	 */
 	public Notice userSelectNoticeDetail(String nNo) {
 		
-		return sqlSession.selectOne("noticeMapper.userSelectNoticeDetail", nNo);
+		return sqlSession.selectOne("noticeMapper.selectNoticeDetail", nNo);
 	}
 
 	/**

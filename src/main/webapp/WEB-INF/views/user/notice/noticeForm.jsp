@@ -25,7 +25,7 @@
         <div class="row">
             <div class="col-lg-3 sidebar">
                 <a href="uNoticeMain.no"><span class="sidebar_span">공지사항</span></a><br>
-                <a href="User_Faq.html"><span class="sidebar_span">자주 묻는 질문</span></a><br>
+                <a href="uFaqView.fa"><span class="sidebar_span">자주 묻는 질문</span></a><br>
                 <a href onclick="window.open('User_Chat.html','tistory','width=500px, height=700px, scrollbars=no, resizable=no, toolbars=no, menubar=no')"><span class="sidebar_span"> 채팅</span></a>
             </div>
             <div class="col-lg-8 col-lg-offset-1">

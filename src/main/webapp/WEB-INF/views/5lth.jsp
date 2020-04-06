@@ -13,7 +13,7 @@
         <div OnClick="location.href ='uNoticeMain.no'" style="width: 100px; height: 100px; background: lightcoral; cursor: pointer; border-radius: 10px; margin-right: 20px;">
               고객센터 메인페이지(공지사항)
         </div>
-        <div OnClick="location.href =''" style="width: 100px; height: 100px; background: lightblue; cursor: pointer; border-radius: 10px; margin-right: 20px;">
+        <div OnClick="location.href ='uFaqView.fa'" style="width: 100px; height: 100px; background: lightblue; cursor: pointer; border-radius: 10px; margin-right: 20px;">
               자주묻는질문
         </div>
     </div>
