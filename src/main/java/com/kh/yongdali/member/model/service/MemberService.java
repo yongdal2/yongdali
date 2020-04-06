@@ -1,4 +1,4 @@
-package com.kh.yongdali.member.model.dao;
+package com.kh.yongdali.member.model.service;
 
 import org.springframework.stereotype.Service;
 
