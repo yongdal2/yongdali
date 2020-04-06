@@ -1,11 +1,11 @@
 $(document).ready(function(){
 	/*-- Navigation  ----------------------------------------------*/
 	$(".signUpView").click(function(){
-		location.href="policyChk.me"
+		location.href="policyView.me"
 	});
 	
 	$(".loginView").click(function(){
-		location.href="login.me"
+		location.href="loginView.me"
 	})
 	
 	
@@ -22,11 +22,11 @@ $(document).ready(function(){
 
     // 이메일 유효성 검사
     function loginValidate(){ 
-        let emailVal = $("input[name=loginEmail]").val();  
+        let emailVal = $("input[name=email]").val();  
         let idDup = 0;
 
         // 이메일 미입력
-        if ($("input[name=loginEmail]").val() == "" ){
+        if ($("input[name=email]").val() == "" ){
             displayErrorMsg($("#emailMsg"), '이메일을 입력하세요.');
             return false;
         }
