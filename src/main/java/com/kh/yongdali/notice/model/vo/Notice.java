@@ -1,4 +1,4 @@
-package com.kh.yongdali.common;
+package com.kh.yongdali.notice.model.vo;
 
 import java.sql.Date;
 
@@ -122,6 +122,4 @@ public class Notice {
 				+ ", nImgOrigin=" + nImgOrigin + ", nImgRename=" + nImgRename + ", nSort=" + nSort + ", nCreateDate="
 				+ nCreateDate + ", nModifyDate=" + nModifyDate + ", nStatus=" + nStatus + "]";
 	}
-	
-	
 }

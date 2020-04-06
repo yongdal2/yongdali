@@ -1,43 +1,41 @@
-package com.kh.yongdali.member.model.service;
+package com.kh.yongdali.notice.model.service;
 
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.yongdali.common.Notice;
 import com.kh.yongdali.common.PageInfo;
-import com.kh.yongdali.member.model.dao.MemberDao_lth;
+import com.kh.yongdali.notice.model.dao.NoticeDao;
+import com.kh.yongdali.notice.model.vo.Notice;
 
-@Service("mServiceL")
-public class MemberServiceImpl_lth implements MemberService_lth {
-
+@Service("nService")
+public class NoticeServiceImpl implements NoticeService{
 	@Autowired
-	private MemberDao_lth mDaoL;
+	private NoticeDao nDao;
 	@Override
 	public int getListCount() {
 		
-		return mDaoL.getListCount();
+		return nDao.getListCount();
 	}
 	@Override
 	public ArrayList<Notice> selectList(PageInfo pi) {
 		
-		return mDaoL.selectList(pi);
+		return nDao.selectList(pi);
 	}
 	@Override
 	public Notice selectNoticeDetail(String nNo) {
 		
-		return mDaoL.selectNoticeDatail(nNo);
+		return nDao.selectNoticeDatail(nNo);
 	}
 	@Override
 	public Notice selectPreList(String nNo) {
 		
-		return mDaoL.selectPreList(nNo);
+		return nDao.selectPreList(nNo);
 	}
 	@Override
 	public Notice selectNextList(String nNo) {
 		
-		return mDaoL.selectNextList(nNo);
+		return nDao.selectNextList(nNo);
 	}
-	
 }
