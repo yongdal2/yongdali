@@ -1,5 +1,15 @@
 $(document).ready(function(){
-    /*-- 로그인 ----------------------------------------------*/
+	/*-- Navigation  ----------------------------------------------*/
+	$(".signUpView").click(function(){
+		location.href="policyChk.me"
+	});
+	
+	$(".loginView").click(function(){
+		location.href="login.me"
+	})
+	
+	
+	/*-- 로그인 ----------------------------------------------*/
     $('#loginForm').submit(function(){
         
     	var result = false;
