@@ -82,10 +82,6 @@ var calendar = $('#calendar').fullCalendar({
 	},
 	
 	// 메뉴별 날짜 표현방식 설정
-	
-	
-
-
 	views: {
 
 		month: {

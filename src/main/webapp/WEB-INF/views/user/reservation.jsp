@@ -597,7 +597,7 @@
                             </div>
                             <div align="left">
                                 <label id="start-check" class="checkbox-wrap">
-                                    <input id="checkLoad1" type="checkbox" name="rightLoad" value="바로 상차">
+                                    <input id="checkLoad1" type="checkbox" name="rightLoad" value="">
                                     <i class="check-icon" style="margin-top: 2px;"></i>
                                     <div style="font-size: 16px;">&nbsp;&nbsp;바로 상차</div>
                                 </label>
@@ -687,7 +687,7 @@
                             </div>
                             <div style="display: flex;">
                                 <div id="end-date-div" class="input-group date">
-                                    <input id="datepicker2" type="text" placeholder="날짜 선택">
+                                    <input id="datepicker2" type="text" placeholder="날짜 선택" onchange="setEndDate();">
                                     <div id="dt2" class="input-group-addon">
                                       <span class="glyphicon glyphicon-th" style="color: white;"></span>
                                     </div>
@@ -775,7 +775,7 @@
             <div>
                 <div class="edge22">
                     <div class="title11">
-                        <span id="charge1">0원</span>
+                        <span id="amount">0원</span>
                                                       최종 결제 금액
                     </div>
                     <div id="charge-content" class="content22">
@@ -797,10 +797,18 @@
                         </div>
                         <div class="charge-line">
                             <div class="charge-content-div">
-                                <span class="charge-content"></span>
+                                <span id="book-YN" class="charge-content"></span>
                             </div>
                             <div align="left">
                                 <span class="charge-title">하차 예약</span>
+                            </div>
+                        </div>
+                        <div class="charge-line">
+                            <div class="charge-content-div">
+                                <span id="btwDay" class="charge-content"></span>
+                            </div>
+                            <div align="left">
+                                <span class="charge-title">보관 기간</span>
                             </div>
                         </div>
                         <div class="charge-line">

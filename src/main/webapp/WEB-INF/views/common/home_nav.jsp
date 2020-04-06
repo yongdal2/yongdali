@@ -17,6 +17,7 @@
 <!-- <link
 	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"
 	rel="stylesheet"> -->
+<script src="${contextPath}/resources/js/login&signUp.js"></script>	
 <style>
 #header1 {
 	font-family: 'nanumsquare', Arial, Helvetica, sans-serif
@@ -52,13 +53,4 @@
 		</div>
 		</div>
 	</nav>
-	<script>
- 		$(".signUpView").click(function(){
-			location.href="policyChk.me"
-		});
- 		
- 		$(".loginView").click(function(){
- 			location.href="login.me"
- 		})
-	</script>
 </header>

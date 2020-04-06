@@ -725,14 +725,14 @@ select, textarea, input, button{
 	padding: 7px;
 }
 
-#charge1{
+#amount{
 	color: rgb(227, 76, 27);
 	float: right;
 }
 
 #charge-content{
 	width: 380px;
-	height: 155px;
+	height: 186px;
 	padding: 10px 22px 10px 22px;
 	text-align: left;
 }

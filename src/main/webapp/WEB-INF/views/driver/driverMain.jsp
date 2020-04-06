@@ -83,10 +83,9 @@
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
-										<h4 id="evetitle"></h4>
-										<button type="button" class="close" data-dismiss="modal"
-											aria-label="CLose">
-											<span aria-hidden="true">x</span>
+										<h4 id="evetitle">배차신청</h4>
+										<button type="button" class="close" data-dismiss="modal"aria-label="CLose">
+											<span aria-hidden="true">X</span>
 										</button>
 									</div>
 									<div class="modal-body">

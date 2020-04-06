@@ -1,22 +1,29 @@
 $(document).ready(function(){
-    /*-- 로그인 ----------------------------------------------*/
+	/*-- Navigation  ----------------------------------------------*/
+	$(".signUpView").click(function(){
+		location.href="policyView.me"
+	});
+	
+	$(".loginView").click(function(){
+		location.href="loginView.me"
+	})
+	
+	
+	/*-- 로그인 ----------------------------------------------*/
     $('#loginForm').submit(function(){
-        
     	var result = false;
     	result = loginValidate();
-
-    	
         
-        return false;
+        return true;
     })
 
     // 이메일 유효성 검사
     function loginValidate(){ 
-        let emailVal = $("input[name=loginEmail]").val();  
+        let emailVal = $("input[type=email]").val();  
         let idDup = 0;
 
         // 이메일 미입력
-        if ($("input[name=loginEmail]").val() == "" ){
+        if ($("input[type=email]").val() == "" ){
             displayErrorMsg($("#emailMsg"), '이메일을 입력하세요.');
             return false;
         }
@@ -24,7 +31,6 @@ $(document).ready(function(){
             $("#emailMsg").css("display","none");
             return true;
         }
-
     }
 
 
