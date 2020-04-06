@@ -165,7 +165,8 @@ INSERT INTO NOTICE VALUES('N' || SEQ_NNO.NEXTVAL,
                         NULL, NULL,
                         '사업자', 
                         DEFAULT,DEFAULT,'Y');
-                        
+                  
+COMMIT;                        
 --SELECT * FROM MEMBER;
 --SELECT * FROM DRIVER;
 -- SELECT * FROM NOTICE;
