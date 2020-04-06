@@ -13,14 +13,15 @@
 	color: #fff;
 	background-color: rgb(87, 187, 138);
 	border-color: rgb(87, 187, 138);
+	
 }.btn_ydl_r {
-	color: #fff;
-	background-color: rgb(241,95,95);
-	border-color: rgb(241,95,95);
+	color: #fff !important;
+	background-color: rgb(241,95,95) !important;
+	border-color: rgb(241,95,95) !important;
 }
 
 .ydl_color {
-	background-color: rgb(87, 187, 138);
+	background-color: rgb(87, 187, 138) !important;
 }
 
 .ft_gr li>a{
@@ -64,14 +65,14 @@ a {
 }
 
 #pro_img{
-    background-position-x: 50%;
-    background-position-y: 50%;
-    background-size: cover;
-    cursor: pointer;
+    background-position-x: 50% !important;
+    background-position-y: 50% !important;
+    background-size: cover !important;
+    cursor: pointer !important;
     display: block !important;
-	height: 195px;
-	width: 150px;
-    text-size-adjust: 100%;
-	z-index: 2;
-	margin-top: 15px;
+	height: 195px !important;
+	width: 150px !important;
+    text-size-adjust: 100% !important;
+	z-index: 2 !important;
+	margin-top: 15px !important;
 }

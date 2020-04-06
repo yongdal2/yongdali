@@ -65,3 +65,29 @@ a {
 .mb_pd {
 	padding: 0px 15px 15px 15px !important;
 }
+
+#addr_head{
+	border-top: black solid 1px; 
+	border-bottom: 1px solid #dedede; 
+	padding: 10px;
+}
+.addr_body {
+}
+
+.addr_foot {
+	
+}
+
+#addr_lb1 {
+	padding: 0px !important;
+	margin-top: 16px !important;
+	font-size: 14px !important;
+	line-height: 24px !important;
+}
+
+.addr_lb1 {
+	padding: 0px !important;
+	margin-top: 16px !important;
+	font-size: 14px !important;
+	line-height: 24px !important;
+}

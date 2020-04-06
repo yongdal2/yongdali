@@ -8,7 +8,6 @@ public class MemberController_ssh {
 
 	@RequestMapping("addrBook.myp")
 	public String addrBookView() {
-		
 		return "user/myPage/addressBook";
 	}
 	
@@ -19,9 +18,20 @@ public class MemberController_ssh {
 		return "user/information";
 	}
 	
-	@RequestMapping("myPage.myp")
+	//유저 계정정보
+	@RequestMapping("myInfo.myp")
 	public String myPageView() {
+		return "user/myPage/myInfo";
+	}
+	
+	// 나의 예약내역
+	@RequestMapping("myRSV.myp")
+	public String myRSVView() {
 		return "user/myPage/myPageRSV";
 	}
+	
+	
+	
+	
 	
 }
