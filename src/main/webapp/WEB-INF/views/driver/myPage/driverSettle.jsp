@@ -4,7 +4,6 @@
 <%@ page session="false" %>
 
 <!DOCTYPE html>
-
 <html>
 
 <head>
@@ -12,29 +11,25 @@
     <meta name="description" content="AOS - Animate On Scroll library using CSS3">
     <meta name="keywords" content="AOS, animate on scroll, css3 scroll animations, simple scroll animations">
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myPage/userMyPage.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myPage/driverMyPage.css"/>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myPage/userMyPage.css" />
     <link href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+	<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-   	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=03ea077d7ecc6636dffede985cc5c57d&libraries=services"></script>
 
-    <title>용달이 | 예약 내역</title>
+    <title>용달이 | 정산 내역</title>
 </head>
-
 <body>
-	<c:import url="../../common/nav.jsp"/>
+	<c:import url="../../common/nav_driver.jsp"/>
 	<div class="container">
 		<div class="row">
-			<div class="h2 jal">
-				예약 내역
-				<hr>
-			</div>
+			<div class="h2 jal">정산 내역</div>
+			<hr>
 		</div>
 		<div class="row" style="margin: 20px;">
 			<div class="col-xs-12 col-md-12 well text-center">
@@ -56,7 +51,7 @@
 					</div>
 				</div>
 				<div class="col-xs-2 col-md-2">
-					<button class="btn btn_ydl">전체보기</button>
+					<button class="btn btn_ydl_r">전체보기</button>
 				</div>
 			</div>
 		</div>
@@ -76,51 +71,51 @@
 							<td>차종</td>
 						</tr>
 					</thead>
-						<tr>
-							<td>089</td>
-							<td>하차 완료</td>
-							<td>2020.01.12</td>
-							<td>부산시123</td>
-							<td>제주시 1234</td>
-							<td>123,000,34</td>
-							<td>라보99ton</td>
-						</tr>
-						<tr>
-							<td>089</td>
-							<td>하차 완료</td>
-							<td>2020.01.12</td>
-							<td>부산시123</td>
-							<td>제주시 1234</td>
-							<td>123,000,34</td>
-							<td>라보99ton</td>
-						</tr>
-						<tr>
-							<td>089</td>
-							<td>하차 완료</td>
-							<td>2020.01.12</td>
-							<td>부산시123</td>
-							<td>제주시 1234</td>
-							<td>123,000,34</td>
-							<td>라보99ton</td>
-						</tr>
-						
+					<tr>
+						<td>089</td>
+						<td>하차 완료</td>
+						<td>2020.01.12</td>
+						<td>부산시123</td>
+						<td>제주시 1234</td>
+						<td>123,000,34</td>
+						<td>라보99ton</td>
+					</tr>
+					<tr>
+						<td>089</td>
+						<td>하차 완료</td>
+						<td>2020.01.12</td>
+						<td>부산시123</td>
+						<td>제주시 1234</td>
+						<td>123,000,34</td>
+						<td>라보99ton</td>
+					</tr>
+					<tr>
+						<td>089</td>
+						<td>하차 완료</td>
+						<td>2020.01.12</td>
+						<td>부산시123</td>
+						<td>제주시 1234</td>
+						<td>123,000,34</td>
+						<td>라보99ton</td>
+					</tr>
+
 				</table>
 			</div>
-					<div class="row text-center">
-						<ul class="pagination ft_gr">
-							<li><a href="#"><<</a></li>
-							<li><a href="#"><</a></li>
-							<li><a href="#">1</a></li>
-							<li class="active"><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">></a></li>
-							<li><a href="#">>></a></li>
-						</ul>
-					</div>
+			<div class="row text-center">
+				<ul class="pagination ft_gr">
+					<li><a href="#"> <<</a></li>
+					<li><a href="#"> <</a></li>
+					<li><a href="#">1</a></li>
+					<li class="active"><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">5</a></li>
+					<li><a href="#">></a></li>
+					<li><a href="#">>></a></li>
+				</ul>
+			</div>
 		</div>
-		</div>
+	</div>
 	<c:import url="../../common/footer.jsp"/>
 </body>
 
