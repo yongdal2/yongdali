@@ -1,3 +1,15 @@
+var charge_opt1 = 0;
+var charge_opt2 = 0;
+var charge_dis = 0;
+var charge_add1=0;
+var charge_add2=0;
+var amount=0;
+
+function calc(){
+	amount=(charge_opt1+charge_opt2+charge_dis+charge_days+charge_add1+charge_add2)*10000;
+	$('#amount').html(amount.toLocaleString()+"원");
+}
+
 /* 차량 안내 */
 $('#carGuide-ment').click(function(){
 	$('#myModal1').css('display','block');
@@ -36,24 +48,10 @@ $("#size1").click(function(){
 
 
 
-
-
-
-
-
-
-/* preEstimate Contents*/
-// 필요한 변수들
 var sl1 = document.getElementById('sl1');
 var sl2 = document.getElementById('sl2');
-var precharge_opt1 = 0;
-var precharge_opt2 = 0;
 
-
-
-
-
-/* select 태그 선택시 효과 적용 */
+/* 차량 옵션 select태그 클릭시 글자색 변화 */
 function cl1(){
     document.getElementById('sl1').style.color='black';
     addCarInfo1();
@@ -69,38 +67,46 @@ function cl4(){
     document.getElementById('sl4').style.color='black';
 }
 
-
-
 //차량옵션에 정보 입력
 var carInfo = document.getElementById('carInfo');
 function addCarInfo1(){
-	carInfo.innerHTML = sl1.value;	
+	if(sl1.value=="1톤"){
+		charge_opt1 = 0;
+	} else if(sl1.value=="1.4톤"){
+		charge_opt1 = 1;
+	} else if(sl1.value=="2.5톤"){
+		charge_opt1 = 5;
+	} else if(sl1.value=="3.5톤"){
+		charge_opt1 = 6;
+	} else {
+		charge_opt1 = 8;
+	}
+	
+	// 값들 서로 연관 시킴
+	if(charge_opt2==0 || charge_dis==0){
+		carInfo.innerHTML = sl1.value;
+	} else {
+		carInfo.innerHTML = sl1.value+" / "+sl2.value;
+		calc();
+	}
 }
 function addCarInfo2(){
-	carInfo.innerHTML = sl1.value+" / "+sl2.value;
-	
-	if(sl1.value=="1톤"){
-		precharge_opt1 = 0;
-	} else if(sl1.value=="1.4톤"){
-		precharge_opt1 = 1;
-	} else if(sl1.value=="2.5톤"){
-		precharge_opt1 = 4;
-	} else if(sl1.value=="3.5톤"){
-		precharge_opt1 = 6;
-	} else {
-		precharge_opt1 = 8;
-	}
-	
 	if(sl2.value=="카고"){
-		precharge_opt2 = 0;
+		charge_opt2 = 0;
 	} else {
-		precharge_opt2 = 2;
+		charge_opt2 = 2;
 	}
 	
-	console.log("옵션1(+) : " + precharge_opt1);
-	console.log("옵션2(+) : " + precharge_opt2);
+	// 값들 서로 연관 시킴
+	if(charge_dis==0){		
+		carInfo.innerHTML = sl1.value+" / "+sl2.value;	
+	} else {
+		carInfo.innerHTML = sl1.value+" / "+sl2.value;		
+		console.log("옵션1(+) : " + charge_opt1);
+		console.log("옵션2(+) : " + charge_opt2);
+		calc();
+	}
 }
-
 
 
 /* 이삿짐 선택 모달 */
@@ -120,6 +126,29 @@ btn1.onclick = function() {
 
 //When the user clicks on <span> (x), close the modal
 span2.onclick = function() {
+	var s1 = $('.move-content1112');
+    var s2 = $('.move-content1113');
+    var userLoads = [];
+    
+    for(var i = 0; i<s1.length; i++){
+        if($(s1[i]).html()>0){
+            var title = $('.move-content112');
+            userLoads.push($(title[i]).html()+'('+$(s1[i]).html()+')');
+        }
+    }
+
+    for(var i = 0; i<s2.length; i++){
+        if($(s2[i]).html()>0){
+            var title = $('.move-content113');
+            userLoads.push($(title[i]).val()+'('+$(s2[i]).html()+')');
+        }
+    }
+    console.log(userLoads);
+
+    var arrayString = userLoads.join(', ');
+    $('#load-content-area').text(arrayString);
+    
+    modal2.style.display = "none";
 	modal2.style.display = "none";
 }
 
@@ -459,7 +488,6 @@ $("#myModal34").mouseenter(function(){
 });
 
 //비용 관련 변수
-var distanceCharge = 0;
 var carSize = parseInt($("#sl1").val());
 var carOpt = parseInt($("#sl2").val());
 
@@ -480,18 +508,20 @@ function preChargeFunc(){
 		console.log("계산 거리 : " + d + " km");
 		
 		if(d < 10){
-			distanceCharge=4;
+			charge_dis=4;
 		} else if(d < 20){
-			distanceCharge=6;
+			charge_dis=6;
 		} else if(d < 30){
-			distanceCharge=7;
-		} else if(d < 50) {
-			distanceCharge=8;
+			charge_dis=7;
+		} else if(d < 50){
+			charge_dis=8;
 		}
 		
 		var distance = document.getElementById("distance");
-		
 		distance.innerHTML = d + " km";
+		
+		console.log("거리에 따른 비용 : " + charge_dis);
+		calc();
 	}
 }
 
@@ -525,7 +555,67 @@ function inputPhoneNumber(obj) {
 }
 
 
-/* 시간 설정 */
+/* 날짜 설정 */
+/* 상차 날짜  */
+var startDateStr;
+var endDateStr;
+var days;
+var addDate;
+var stDate;
+var edDate;
+
+// 하차 예약시 기간에 따른 비용
+var charge_days=0;
+
+// 바로 상차시 날짜 선택시 변수에 담기
+$('#checkLoad1').click(function(){
+	if($(this).is(":checked")){
+		var startYear = new Date().getFullYear();
+		var startMonth = new Date().getMonth()+1;
+		var startDay = new Date().getDate();
+		var addStartDay = startDay+2;
+		startDateStr = startYear+"-"+startMonth+"-"+startDay;
+		stDate = new Date(startDateStr);
+		addDate = startYear+"년 "+startMonth+"월 "+addStartDay+"일";
+		console.log("바로 상차 선택날짜로부터 2일후 하차예약 가능날짜 : "+addDate);
+		$('#datepicker2').datepicker('option','minDate',addDate);
+		$(this).val("바로 상차");
+		if($('#datepicker2').val()!=""){
+			days = Math.round((edDate.getTime()-stDate.getTime())/1000/60/60/24);
+			console.log("시작날짜로와 종료날짜 사이 일수 : " + days);
+			charge_days = 6*days;
+			console.log(days+"*60,000원 = " + charge_days);
+			$('#btwDay').html(days+"일");
+			$('#book-YN').html("예약됨");
+			calc();
+		}
+	}
+});
+
+
+// 하차 예약시 날짜 선택시 변수에 담기
+function setEndDate(){
+	console.log($('#datepicker1').val());
+	console.log($('#checkLoad1').val());
+	if($('#datepicker1').val()=="" && $('#checkLoad1').val()==""){
+		alert("상차 날짜 먼저 입력해주세요.");
+		$('#datepicker2').datepicker('setDate',null);
+	} else {		
+		var endYMD = $('#datepicker2').val();
+		endDateStr = endYMD.substr(0,4)+"-"+endYMD.substr(6,2)+"-"+endYMD.substr(10,2);
+		stDate = new Date(startDateStr);
+		edDate = new Date(endDateStr);
+		days = Math.round((edDate.getTime()-stDate.getTime())/1000/60/60/24);
+		console.log("시작날짜로와 종료날짜 사이 일수 : " + days);
+		charge_days = 6*days;
+		console.log(days+"*60,000원 = " + charge_days);
+		$('#btwDay').html(days+"일");
+		$('#book-YN').html("예약됨");
+		calc();
+	}
+}
+
+
 // 이전 날짜 disabled 적용
 function noBefore(date){
 	if (date < new Date())
@@ -538,8 +628,27 @@ $('#datepicker1').datepicker({
 	changeYear: true,
 	yearRange: 'c-99:c+99',
 	maxDate: '+1y',
+	onSelect: function(selectedDate){	// 상차 날짜선택시 적용
+		var startYMD = $('#datepicker1').val();
+		startDateStr = startYMD.substr(0,4)+"-"+startYMD.substr(6,2)+"-"+startYMD.substr(10,2);
+		console.log(startDateStr);
+		var addDay = parseInt(selectedDate.substr(10,2)) + 2;
+		addDate = selectedDate.substr(0,10) + addDay + "일";
+		$('#datepicker2').datepicker('option','minDate',addDate);
+		
+		if($('#datepicker2').val()!=""){
+			days = Math.round((edDate.getTime()-stDate.getTime())/1000/60/60/24);
+			console.log("시작날짜로와 종료날짜 사이 일수 : " + days);
+			charge_days = 6*days;
+			console.log(days+"*60,000원 = " + charge_days);
+			$('#btwDay').html(days+"일");
+			$('#book-YN').html("예약됨");
+			calc();
+		}
+	},
 	beforeShowDay: noBefore
 });
+
 $('#datepicker2').datepicker({
 	dateFormat:'yy년 mm월 dd일',
 	changeMonth: true,
@@ -548,9 +657,6 @@ $('#datepicker2').datepicker({
 	maxDate: '+1y',
 	beforeShowDay: noBefore
 });
-
-
-
 
 /* 바로 상하차 시 날짜시간 무효 */
 $("#checkLoad1").click(function(){
@@ -581,27 +687,14 @@ $("#checkLoad2").click(function(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-/* 상하차 도움 모달*/
-var addCharge1=0;
-var addCharge2=0;
-
 var modal5 = document.getElementById('myModal5');
 
 // '도움 필요하지 않아요' 클릭시
 $('#helpUnload-ch').click(function(){
 	$('#helpLoad').text("고객님이 직접 상차");
 	$('#helpUnload').text("고객님이 직접 하차");
+	charge_add1 = 0;
+	charge_add2 = 0;
 });
 
 // '도움 필요해요' 클릭시 전에 클릭했던 정보 삭제
@@ -617,8 +710,8 @@ $('#helpLoad-ch').click(function(){
 	$('#checkHelp2').val("");
 	$('#helpCharge1').html("+ 0원");
 	$('#helpCharge2').html("+ 0원");
-	addCharge1 = 0;
-	addCharge2 = 0;
+	charge_add1 = 0;
+	charge_add2 = 0;
 });
 
 
@@ -640,7 +733,7 @@ $('#checkHelp3').click(function(){
 	$('#checkHelp1').val("기사님과 함께 상차");
 	$('#helpCharge1').html("+10,000원");
 	$('#checkHelp1').prop('checked',true);
-	addCharge1 = 10000;
+	charge_add1 = 1;
 });
 $('#checkHelp4').click(function(){
 	$('#modal51').css('display','none');
@@ -648,7 +741,7 @@ $('#checkHelp4').click(function(){
 	$('#checkHelp1').val("기사님 단독 상차");
 	$('#helpCharge1').html("+20,000원");
 	$('#checkHelp1').prop('checked',true);
-	addCharge1 = 20000;
+	charge_add1 = 2;
 });
 // 하차 : 기사님과 함께 or 단독 선택
 $('#checkHelp5').click(function(){
@@ -657,7 +750,7 @@ $('#checkHelp5').click(function(){
 	$('#checkHelp2').val("기사님과 함께 하차");
 	$('#helpCharge2').html("+10,000원");
 	$('#checkHelp2').prop('checked',true);
-	addCharge2 = 10000;
+	charge_add2 = 1;
 });
 $('#checkHelp6').click(function(){
 	$('#modal52').css('display','none');
@@ -665,7 +758,7 @@ $('#checkHelp6').click(function(){
 	$('#checkHelp2').val("기사님 단독 하차");
 	$('#helpCharge2').html("+20,000원");
 	$('#checkHelp2').prop('checked',true);
-	addCharge2 = 20000;
+	charge_add2 = 2;
 });
 
 
@@ -676,16 +769,19 @@ $('#checkHelp-btn').click(function(){
 		if(!$('#checkHelp1').val()=="" && !$('#checkHelp2').val()==""){
 			$('#myModal5').css('display','none');
 			$('#helpLoad').html($('#checkHelp1').val());
-			$('#helpUnload').html($('#checkHelp2').val());	
+			$('#helpUnload').html($('#checkHelp2').val());
+			calc();
 		} else {
 			if(!$('#checkHelp1').val()==""){
 				$('#myModal5').css('display','none');
 				$('#helpLoad').html($('#checkHelp1').val());
-				$('#helpUnload').html("고객님이 직접 하차");							
+				$('#helpUnload').html("고객님이 직접 하차");
+				calc();
 			} else {				
 				$('#myModal5').css('display','none');
 				$('#helpLoad').html("고객님이 직접 상차");
-				$('#helpUnload').html($('#checkHelp2').val());							
+				$('#helpUnload').html($('#checkHelp2').val());
+				calc();
 			}
 		}
 	} else {
