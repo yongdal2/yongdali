@@ -86,7 +86,7 @@ CREATE TABLE NOTICE(
     N_SORT VARCHAR2(9) /* 구분(일반, 사업자, 공통) */,
     N_CREATEDATE DATE DEFAULT SYSDATE /* 처음 작성일 */,
     N_MODIFYDATE DATE DEFAULT SYSDATE /* 수정 작성일 */,
-    N_STATUS VARCHAR2(1) /* 게시글 상태 값 */
+    N_STATUS VARCHAR2(1) DEFAULT 'Y' /* 게시글 상태 값 */
 );
 
 ALTER TABLE NOTICE ADD CONSTRAINT N_PK_NO PRIMARY KEY (N_NO);
@@ -152,19 +152,19 @@ INSERT INTO NOTICE VALUES('N' || SEQ_NNO.NEXTVAL,
                         '용달이 공통 공지입니다.', 
                         NULL, NULL,
                         '공통', 
-                        DEFAULT,DEFAULT,'Y');
+                        DEFAULT,DEFAULT,DEFAULT);
 INSERT INTO NOTICE VALUES('N' || SEQ_NNO.NEXTVAL, 
                         '용달이 사용자 방침', '관리자',
                         '용달이 사용자 방침입니다.', 
                         NULL, NULL,
                         '일반', 
-                        DEFAULT,DEFAULT,'Y');
+                        DEFAULT,DEFAULT,DEFAULT);
 INSERT INTO NOTICE VALUES('N' || SEQ_NNO.NEXTVAL, 
                         '용달이 기사님 방침.', '관리자',
                         '용달이 기사님 방침입니다.', 
                         NULL, NULL,
                         '사업자', 
-                        DEFAULT,DEFAULT,'Y');
+                        DEFAULT,DEFAULT,DEFAULT);
                   
 COMMIT;                        
 --SELECT * FROM MEMBER;

@@ -1,4 +1,4 @@
-package com.kh.yongdali.notice.model.vo;
+package com.kh.yongdali.cs.model.vo;
 
 import java.sql.Date;
 

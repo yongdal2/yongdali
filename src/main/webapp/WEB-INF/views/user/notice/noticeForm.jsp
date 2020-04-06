@@ -24,8 +24,8 @@
         </div>
         <div class="row">
             <div class="col-lg-3 sidebar">
-                <a href="noticeMain.no"><span class="sidebar_span">공지사항</span></a><br>
-                <a href="User_Faq.html"><span class="sidebar_span">자주 묻는 질문</span></a><br>
+                <a href="uNoticeMain.no"><span class="sidebar_span">공지사항</span></a><br>
+                <a href="uFaqView.fa"><span class="sidebar_span">자주 묻는 질문</span></a><br>
                 <a href onclick="window.open('User_Chat.html','tistory','width=500px, height=700px, scrollbars=no, resizable=no, toolbars=no, menubar=no')"><span class="sidebar_span"> 채팅</span></a>
             </div>
             <div class="col-lg-8 col-lg-offset-1">
@@ -34,7 +34,7 @@
         </div>
         <div class="row">
             <div class="col-lg-8 col-lg-offset-3">
-                <form action="ninsert.no" method="post" enctype="multipart/form-data">
+                <form action="uNinsert.no" method="post" enctype="multipart/form-data">
                     <div class="form_area_wrap">
                         <table class="form_table">
                             <colgroup>
@@ -58,8 +58,8 @@
                             </tr>
                             <tr>
                                 <td>작성자</td>
-                                <!-- 관리자 이름 갖고오기 -->
-                                <td>관리자</td>
+                                <!-- TODO value에 관리자 이름 갖고오기 -->
+                                <td><input type="text" readonly name="nWriter" value="관리자"></td>
                             </tr>
                             <tr>
                                 <td>내용</td>
