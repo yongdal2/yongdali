@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page="../common/home_nav.jsp"/>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12" style="text-align: center"><h1>ERROR</h1></div>
@@ -21,7 +20,8 @@
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
-				같은 오류 반복시 관리자에게 문의해 주세요!
+				오류가 계속될 시 관리자에게 문의해 주세요!<hr>
+				<button onclick="lth.ydl">메인페이지로 돌아가기</button>
 			</div>
 			<div class="col-md-2"></div>
 		</div>
