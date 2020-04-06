@@ -8,6 +8,8 @@
     
     <!-- Custom Css -->
     <link rel="stylesheet" href="${contextPath}/resources/css/notice/User_Notice_Form.css">
+    
+    <script type="text/javascript" src="${contextPath }/resources/js/ckeditor/ckeditor.js"></script>
 
 
 </head>
@@ -63,7 +65,7 @@
                             </tr>
                             <tr>
                                 <td>내용</td>
-                                <td><textarea name="nContent" id="content" maxlength="700"></textarea>
+                                <td><textarea name="nContent" id="editor1" maxlength="700"></textarea>
                                     <span id="remaining">(<span id="cCount"></span>/<span id="cMax" value="700">700</span>)</span></td>
                             </tr>
                             <tr>
@@ -86,7 +88,11 @@
 	<!-- Footer -->
 	<%@ include file="../../common/footer.jsp"%>
     <script>
+    
     $(function(){
+    	
+    	CKEDITOR.replace( 'editor1');
+    	
         $('#title').keydown(function(){
             var maxlength = $('#tMax').val();
             var inputlength = $(this).val().length;
@@ -100,9 +106,10 @@
             }
         });
 
-        $('#content').keydown(function(){
+        /* $('#editor1').keydown(function(){
             var maxlength = $('#cMax').val();
             var inputlength = $(this).val().length;
+            var inputlength = CKEDITOR.instances.textarea.getData().length;
             var remain = 0 + inputlength;
 
             $('#cCount').html(remain);
@@ -111,8 +118,12 @@
                 $('#cCount').val($('#cCount').val().substring(0,700));
 
             }
-        })
+        }) */
+        
+        
     })
+    
+    
     </script>
 </body>
 </html>
