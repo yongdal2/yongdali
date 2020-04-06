@@ -1,4 +1,4 @@
-package com.kh.yongdali.member.controller;
+package com.kh.yongdali.notice.controller;
 
 import java.util.ArrayList;
 
@@ -6,26 +6,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.yongdali.common.Notice;
 import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.common.Pagination;
-import com.kh.yongdali.member.model.service.MemberService_lth;
+import com.kh.yongdali.notice.model.service.NoticeService;
+import com.kh.yongdali.notice.model.vo.Notice;
 
 @Controller
-public class MemberController_lth {
+public class NoticeController {
 	
 	/* 탐희 _공지사항 */
 	@Autowired
-	private MemberService_lth mServiceL;
+	private NoticeService nService;
 	
 	@RequestMapping("noticeMain.no")
 	public ModelAndView noticeMain(ModelAndView mv, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage ) {
 		
 		System.out.println(currentPage);
 		
-		int listCount = mServiceL.getListCount();
+		int listCount = nService.getListCount();
 		
 		System.out.println(listCount);
 		
@@ -33,7 +34,7 @@ public class MemberController_lth {
 		int boardLimit = 5;
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,pageLimit,boardLimit );
 		
-		ArrayList<Notice> list = mServiceL.selectList(pi);
+		ArrayList<Notice> list = nService.selectList(pi);
 		
 		mv.addObject("list",list);
 		mv.addObject("pi",pi);
@@ -43,11 +44,11 @@ public class MemberController_lth {
 	
 	@RequestMapping("ndetail.no")
 	public ModelAndView noticeDetail(ModelAndView mv, String nNo, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
-		Notice n = mServiceL.selectNoticeDetail(nNo);
+		Notice n = nService.selectNoticeDetail(nNo);
 		
-		Notice pre = mServiceL.selectPreList(nNo);
+		Notice pre = nService.selectPreList(nNo);
 		
-		Notice next = mServiceL.selectNextList(nNo);
+		Notice next = nService.selectNextList(nNo);
 		
 		if(n != null) {
 			mv.addObject("n",n).addObject("currentPage",currentPage)
@@ -64,6 +65,19 @@ public class MemberController_lth {
 		return "user/notice/noticeForm";
 	}
 	
-
+	@RequestMapping("ninsert.no")
+		public String insertNotice(Notice n, @RequestParam(name="nSort", required=true, defaultValue="일반")String nSort,
+				@RequestParam(name="uploadFile",required=false)MultipartFile file) {
+			if(!file.getOriginalFilename().equals("")) {
+				// 서버에 업로드
+			/* String renameFileName = saveFile(File,request); */
+			}
+		
+		
+			n.setnSort(nSort);
+			
+			return "";
+			
+		}
 	
 }

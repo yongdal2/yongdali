@@ -16,25 +16,6 @@ function getDisplayEventDate(event) {
 	return displayEventDate;
 }
 
-function filtering(event) {
-	var show_username = true;
-	var show_type = true;
-
-	var username = ' ';//세션값으로 현재 아이디 받아오기;
-	var types = "all";
-
-	show_username = username;
-
-	if (types && types.length > 0) {
-		if (types[0] == "all") {
-			show_type = true;
-		} else {
-			show_type = types.indexOf(event.type) >= 0;
-		}
-	}
-
-	return show_username && show_type;
-}
 
 function calDateWhenResize(event) {
 
@@ -54,33 +35,7 @@ function calDateWhenResize(event) {
 	return newDates;
 }
 
-/*function calDateWhenDragnDrop(event) {
-	// 드랍시 수정된 날짜반영
-	var newDates = {
-			startDate: '',
-			endDate: ''
-	}
 
-	//하루짜리 all day
-	if (event.allDay && event.end === null) {
-		newDates.startDate = moment(event.start._d).format('YYYY-MM-DD');
-		newDates.endDate = newDates.startDate;
-	}
-
-	//2일이상 all day
-	else if (event.allDay && event.end !== null) {
-		newDates.startDate = moment(event.start._d).format('YYYY-MM-DD');
-		newDates.endDate = moment(event.end._d).subtract(1, 'days').format('YYYY-MM-DD');
-	}
-
-	//all day가 아님
-	else if (!event.allDay) {
-		newDates.startDate = moment(event.start._d).format('YYYY-MM-DD HH:mm');
-		newDates.endDate = moment(event.end._d).format('YYYY-MM-DD HH:mm');
-	}
-
-	return newDates;
-}*/
 
 // 달력호출
 var calendar = $('#calendar').fullCalendar({
@@ -118,23 +73,9 @@ var calendar = $('#calendar').fullCalendar({
 
 	},
 
-	//주말 숨기기 & 보이기 버튼
-	/*customButtons: {
-		viewWeekends: {
-			text: '주말',
-			click: function () {
-				activeInactiveWeekends ? activeInactiveWeekends = false : activeInactiveWeekends = true;
-				$('#calendar').fullCalendar('option', {
-					weekends: activeInactiveWeekends
-				});
-			}
-		}
-	},*/
 	
 	//상단에 담은 메뉴
 	header: {
-
-
 		left: 'today, prevYear, nextYear, viewWeekends',
 		center: 'prev, title, next',
 		right: 'month,agendaWeek,agendaDay,listWeek'
@@ -171,7 +112,8 @@ var calendar = $('#calendar').fullCalendar({
 	events: function (start, end, timezone, callback) {
 		$.ajax({
 			type: "get",
-			url: "/semi/readEvent.ev",
+			url: "dCal.do",
+			data : "<%=session.getAttribute('loginUser').getUserId();%>",
 			success: function (response) {
 				var events = [];
 				for (var i = 0; i < response.length; i++) {
@@ -209,128 +151,6 @@ var calendar = $('#calendar').fullCalendar({
 		}
 	},
 
-	//일정 리사이즈
-	eventResize: function (event, delta, revertFunc, jsEvent, ui, view) {
-		$('.popover.fade.top').remove();
-
-		/** 리사이즈시 수정된 날짜반영
-		 * 하루를 빼야 정상적으로 반영됨. */
-		var newDates = event;
-		
-		//리사이즈한 일정 업데이트
-		$.ajax({
-			type: "get",
-			url: "/semi/updateEvent.ev",
-			data: {
-				event : event.title,
-				newstart : newDates.startDate,
-				newend : newDate.endDate
-			},
-			success: function (response) {
-				alert('수정: ' + newDates.startDate + ' ~ ' + newDates.endDate);
-			}
-		});
-
-	},
-
-	//일정 드래그 시작
-	eventDragStart: function (event, jsEvent, ui, view) {
-		draggedEventIsAllDay = event.allDay;
-	},
-
-	//일정 드래그앤드롭
-	/*eventDrop: function (event, delta, revertFunc, jsEvent, ui, view) {
-		$('.popover.fade.top').remove();
-
-		//주,일 view일때 종일 <-> 시간 변경불가
-		if (view.type === 'agendaWeek' || view.type === 'agendaDay') {
-			if (draggedEventIsAllDay !== event.allDay) {
-				alert('드래그앤드롭으로 종일<->시간 변경은 불가합니다.');
-				location.reload();
-				return false;
-			}
-		}
-
-		// 드랍시 수정된 날짜반영
-		var newDates = calDateWhenDragnDrop(event);
-		//드롭한 일정 업데이트
-		console.log(event);
-		$.ajax({
-			type: "get",
-			url: "/semi/updateEvent.ev",
-			data: {
-				event : event.title,
-				newstart : newDates.startDate,
-				newend : newDates.endDate
-			},
-			success: function (response) {
-				alert('수정: ' + newDates.startDate + ' ~ ' + newDates.endDate);
-			}
-		});
-
-	},*/
-
-/*	 //날짜 선택시 일정추가 함수 호출  
-	select: function (startDate, endDate, jsEvent, view) {
-
-		$(".fc-body").unbind('click');
-		$(".fc-body").on('click', 'td', function (e) {
-
-			$("#contextMenu")
-			.addClass("contextOpened")
-			.css({
-				display: "block",
-				left: e.pageX,
-				top: e.pageY
-			});
-			return false;
-		});
-
-		var today = moment();
-
-		if (view.name == "month") {
-			startDate.set({
-				hours: today.hours(),
-				minute: today.minutes()
-			});
-			startDate = moment(startDate).format('YYYY-MM-DD HH:mm');
-			endDate = moment(endDate).subtract(1, 'days');
-
-			endDate.set({
-				hours: today.hours() + 1,
-				minute: today.minutes()
-			});
-			endDate = moment(endDate).format('YYYY-MM-DD HH:mm');
-		} else {
-			startDate = moment(startDate).format('YYYY-MM-DD HH:mm');
-			endDate = moment(endDate).format('YYYY-MM-DD HH:mm');
-		}
-
-		//날짜 클릭시 카테고리 선택메뉴
-		var $contextMenu = $("#contextMenu");
-		$contextMenu.on("click", "a", function (e) {
-			e.preventDefault();
-
-			//닫기 버튼이 아닐때
-			if ($(this).data().role !== 'close') {
-				newEvent(startDate, endDate, $(this).html());
-			}
-
-			$contextMenu.removeClass("contextOpened");
-			$contextMenu.hide();
-		});
-
-		$('body').on('click', function () {
-			$contextMenu.removeClass("contextOpened");
-			$contextMenu.hide();
-		});
-
-	},*/
-
-	//일정 클릭시 일정수정 함수 호출
-	eventClick: function (event, jsEvent, view) {
-		editEvent1(event);
-	},
 
 	locale: 'ko', //한국어설정
 	timezone: "local", //현재지역기준

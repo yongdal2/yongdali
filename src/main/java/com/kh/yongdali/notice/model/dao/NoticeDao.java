@@ -1,4 +1,4 @@
-package com.kh.yongdali.member.model.dao;
+package com.kh.yongdali.notice.model.dao;
 
 import java.util.ArrayList;
 
@@ -7,12 +7,11 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.yongdali.common.Notice;
 import com.kh.yongdali.common.PageInfo;
+import com.kh.yongdali.notice.model.vo.Notice;
 
-@Repository("mDaoL")
-public class MemberDao_lth {
-	
+@Repository("nDao")
+public class NoticeDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	

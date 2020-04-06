@@ -1,12 +1,11 @@
-package com.kh.yongdali.member.model.service;
+package com.kh.yongdali.notice.model.service;
 
 import java.util.ArrayList;
 
-import com.kh.yongdali.common.Notice;
 import com.kh.yongdali.common.PageInfo;
+import com.kh.yongdali.notice.model.vo.Notice;
 
-public interface MemberService_lth {
-
+public interface NoticeService {
 	/**
 	 * 1_1. 게시판 총 갯수 조회
 	 * @return
@@ -25,5 +24,4 @@ public interface MemberService_lth {
 	Notice selectPreList(String nNo);
 
 	Notice selectNextList(String nNo);
-
 }
