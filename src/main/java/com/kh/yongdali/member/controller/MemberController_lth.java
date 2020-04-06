@@ -41,6 +41,29 @@ public class MemberController_lth {
 		return mv;
 	}
 	
+	@RequestMapping("ndetail.no")
+	public ModelAndView noticeDetail(ModelAndView mv, String nNo, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
+		Notice n = mServiceL.selectNoticeDetail(nNo);
+		
+		Notice pre = mServiceL.selectPreList(nNo);
+		
+		Notice next = mServiceL.selectNextList(nNo);
+		
+		if(n != null) {
+			mv.addObject("n",n).addObject("currentPage",currentPage)
+			.addObject("pre",pre).addObject("next",next).setViewName("user/notice/noticeDetailPage");
+		}else {
+			System.out.println("공지사항 상세 조회 실패");
+		}
+		
+		return mv;
+	}
+	
+	@RequestMapping("ninsertView.no")
+	public String noticeInsertView() {
+		return "user/notice/noticeForm";
+	}
+	
 
 	
 }

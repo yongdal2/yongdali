@@ -29,4 +29,29 @@ public class MemberDao_lth {
 		return (ArrayList)sqlSession.selectList("noticeMapper.selectListUser",null,rowBounds);
 	}
 
+	public Notice selectNoticeDatail(String nNo) {
+		
+		return sqlSession.selectOne("noticeMapper.selectNoticeUser", nNo);
+	}
+
+	/**
+	 * 게시물 상세보기 내 이전글
+	 * @param nNo
+	 * @return
+	 */
+	public Notice selectPreList(String nNo) {
+		
+		return sqlSession.selectOne("noticeMapper.selectPreList",nNo);
+	}
+
+	/**
+	 * 게시물 상세보기 내 다음글
+	 * @param nNo
+	 * @return
+	 */
+	public Notice selectNextList(String nNo) {
+		
+		return sqlSession.selectOne("noticeMapper.selectNextList",nNo);
+	}
+
 }

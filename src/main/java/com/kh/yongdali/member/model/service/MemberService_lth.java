@@ -20,4 +20,10 @@ public interface MemberService_lth {
 	 */
 	ArrayList<Notice> selectList(PageInfo pi);
 
+	Notice selectNoticeDetail(String nNo);
+
+	Notice selectPreList(String nNo);
+
+	Notice selectNextList(String nNo);
+
 }
