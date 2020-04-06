@@ -18,6 +18,12 @@
 		WHERE R_DID= ${dId}
 	</select>
 	
+	<select id="driverCal">
+		SELECT *
+		FROM RESERVATION
+		WHERE R_DID = ${dId}
+	</select>
+	
 </mapper>
 
 

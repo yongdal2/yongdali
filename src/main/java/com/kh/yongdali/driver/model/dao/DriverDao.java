@@ -22,4 +22,9 @@ public class DriverDao {
 		return (ArrayList)sqlSession.selectList("reservationMapper.myBaechar",dId);
 	}
 
+	public ArrayList<Reservation> driverCal(int dId) {
+
+		return (ArrayList)sqlSession.selectList("reservationMapper.driverCal",dId);
+	}
+
 }

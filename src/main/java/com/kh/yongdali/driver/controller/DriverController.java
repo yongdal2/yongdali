@@ -53,5 +53,21 @@ public class DriverController {
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		gson.toJson(list,response.getWriter());
 	}
+	
+	@RequestMapping("dCal.do")
+	public void driverCal(HttpServletResponse response,int dId) throws JsonIOException, IOException {
+		ArrayList<Reservation> list = dService.driverCal(dId);
+		
+		response.setContentType("application/json; charset=utf-8");
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(list,response.getWriter());
+		
+		
+	}
 	 
 }
+
+
+
+
