@@ -79,7 +79,7 @@
 						</table>
 					</div>
 					<div class="modal" tabindex="-1" role="dialog" id="eventModal">
-						<form action="">
+						<form action="getB.do">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
@@ -148,7 +148,7 @@
 									</div>
 									<div class="ContaineraddEvent" id="savecar">
 										<div class="modal-footer">
-
+											<button type="submit" class="btn btn-default">배차신청</button>S
 											<button type="button" class="btn btn-default"
 												data-dismiss="modal">닫기</button>
 										</div>
@@ -219,6 +219,7 @@
 			 }
 		 });	 
 		} --%>
+		
 		
 	</script>
 </body>
