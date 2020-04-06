@@ -44,5 +44,14 @@ public class DriverController {
 		gson.toJson(list,response.getWriter());
 	}
 	
+	@RequestMapping("baechar.do")
+	public void myBaechar(HttpServletResponse response,int dId) throws JsonIOException, IOException {
+		ArrayList<Reservation> list = dService.myBaechar(dId);
+		
+		response.setContentType("application/json; charset=utf-8");
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(list,response.getWriter());
+	}
 	 
 }

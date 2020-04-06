@@ -18,4 +18,8 @@ public class DriverDao {
 		return (ArrayList)sqlSession.selectList("reservationMapper.mibaechar",dId);
 	}
 
+	public ArrayList<Reservation> myBaechar(int dId) {
+		return (ArrayList)sqlSession.selectList("reservationMapper.myBaechar",dId);
+	}
+
 }

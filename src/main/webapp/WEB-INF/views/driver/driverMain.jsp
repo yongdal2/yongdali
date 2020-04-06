@@ -197,6 +197,29 @@
 				
 			});
 		} --%>
+		<%-- function mView(){
+		 var $baechar = $('#baechar tbody');
+		 $baechar.html("");
+		 
+		 $.ajax({
+			 url : "baechar.do",
+			 data : "<%= session.getAttribute("loginUser").getUserId()%>",
+			 type : "post",
+			 dataType : "json",
+			 success : function(data){
+				 $.each(data,function(index,value){
+					 var $tr = ("<tr>");
+					 var $start = ("<td>").text(value.start);
+					 
+					 $tr.append($start);
+					 
+					 $baechar.append($tr);
+					 
+				 }); 
+			 }
+		 });	 
+		} --%>
+		
 	</script>
 </body>
 

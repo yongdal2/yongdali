@@ -19,4 +19,10 @@ public class DriverServiceImp implements DriverService{
 		return dDao.mibaechar(dId);
 	}
 
+	@Override
+	public ArrayList<Reservation> myBaechar(int dId) {
+		
+		return dDao.myBaechar(dId);
+	}
+
 }

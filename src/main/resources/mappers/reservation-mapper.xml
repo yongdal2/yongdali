@@ -12,6 +12,12 @@
 		WHERE R_STATUS='N'
 	</select>
 	
+	<select id="myBaechar">
+		SELECT *
+		FROM RESERVATION
+		WHERE R_DID= ${dId}
+	</select>
+	
 </mapper>
 
 
