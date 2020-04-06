@@ -1,4 +1,4 @@
-package com.kh.yongdali.notice.controller;
+package com.kh.yongdali.cs.controller;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -14,8 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.common.Pagination;
-import com.kh.yongdali.notice.model.service.NoticeService;
-import com.kh.yongdali.notice.model.vo.Notice;
+import com.kh.yongdali.cs.model.service.NoticeService;
+import com.kh.yongdali.cs.model.vo.Notice;
 
 @Controller
 public class NoticeController {

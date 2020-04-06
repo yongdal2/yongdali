@@ -10,7 +10,7 @@
 	
  	<typeAliases>
 		<typeAlias type="com.kh.yongdali.member.model.vo.Member" alias="Member"/>
-		<typeAlias type="com.kh.yongdali.notice.model.vo.Notice" alias="Notice"/>
+		<typeAlias type="com.kh.yongdali.cs.model.vo.Notice" alias="Notice"/>
 	</typeAliases>
 	
  	<mappers>

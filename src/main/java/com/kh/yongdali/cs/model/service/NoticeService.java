@@ -1,9 +1,9 @@
-package com.kh.yongdali.notice.model.service;
+package com.kh.yongdali.cs.model.service;
 
 import java.util.ArrayList;
 
 import com.kh.yongdali.common.PageInfo;
-import com.kh.yongdali.notice.model.vo.Notice;
+import com.kh.yongdali.cs.model.vo.Notice;
 
 public interface NoticeService {
 	/**

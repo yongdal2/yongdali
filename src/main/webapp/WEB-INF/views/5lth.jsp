@@ -18,6 +18,5 @@
         </div>
     </div>
     
-	<!-- <a href="noticeMain.no">고객센터 메인페이지(공지사항) 이동</a> -->
 </body>
 </html>

@@ -1,4 +1,4 @@
-package com.kh.yongdali.notice.model.dao;
+package com.kh.yongdali.cs.model.dao;
 
 import java.util.ArrayList;
 
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.yongdali.common.PageInfo;
-import com.kh.yongdali.notice.model.vo.Notice;
+import com.kh.yongdali.cs.model.vo.Notice;
 
 @Repository("nDao")
 public class NoticeDao {
