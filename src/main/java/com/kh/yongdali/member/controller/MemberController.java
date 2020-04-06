@@ -8,9 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.kh.yongdali.member.model.service.MemberService;
 import com.kh.yongdali.member.model.vo.Member;
+
+@SessionAttributes("loginUser")
 
 @Controller
 public class MemberController {
@@ -39,8 +42,13 @@ public class MemberController {
 	public String memberLogin(@ModelAttribute Member m, Model model) {
 		logger.debug(m.getmId());
 		Member loginUser = mService.loginMember(m); 
-		
 		System.out.println(loginUser);
+		
+//		if(loginUser != null && BCryptPasswordEncoder.matches(m.getPwd(), loginUser.getPwd())) {
+//			
+//		}
+			
+		
 		
 		return null;
 	}
