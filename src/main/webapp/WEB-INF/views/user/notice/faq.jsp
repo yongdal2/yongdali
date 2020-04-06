@@ -26,7 +26,7 @@
         </div>
         <div class="row">
             <div class="col-lg-3 sidebar">
-                <a href="noticeMain.no"><span class="sidebar_span">공지사항</span></a><br>
+                <a href="uNoticeMain.no"><span class="sidebar_span">공지사항</span></a><br>
                 <a href="User_Faq.html"><span class="sidebar_span">자주 묻는 질문</span></a><br>
                 <a href="User_Chat.html"><span class="sidebar_span"> 채팅</span></a>
             </div>

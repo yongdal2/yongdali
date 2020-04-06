@@ -15,22 +15,31 @@ public class NoticeDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	public int getListCount() {
+	/**
+	 * 사용자 게시판 갯수 가져오기
+	 * @return
+	 */
+	public int userGetListCount() {
 		
-		return sqlSession.selectOne("noticeMapper.getListCount");
+		return sqlSession.selectOne("noticeMapper.userGetListCount");
 	}
 
-	public ArrayList<Notice> selectList(PageInfo pi) {
+	/**
+	 * 사용자 게시판 목록
+	 * @param pi
+	 * @return
+	 */
+	public ArrayList<Notice> userSelectList(PageInfo pi) {
 		
 		int offset = (pi.getCurrentPage()-1)* pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("noticeMapper.selectListUser",null,rowBounds);
+		return (ArrayList)sqlSession.selectList("noticeMapper.userSelectList",null,rowBounds);
 	}
 
-	public Notice selectNoticeDatail(String nNo) {
+	public Notice userSelectNoticeDetail(String nNo) {
 		
-		return sqlSession.selectOne("noticeMapper.selectNoticeUser", nNo);
+		return sqlSession.selectOne("noticeMapper.userSelectNoticeDetail", nNo);
 	}
 
 	/**
@@ -38,9 +47,9 @@ public class NoticeDao {
 	 * @param nNo
 	 * @return
 	 */
-	public Notice selectPreList(String nNo) {
+	public Notice userSelectPreList(String nNo) {
 		
-		return sqlSession.selectOne("noticeMapper.selectPreList",nNo);
+		return sqlSession.selectOne("noticeMapper.userSelectPreList",nNo);
 	}
 
 	/**
@@ -48,9 +57,14 @@ public class NoticeDao {
 	 * @param nNo
 	 * @return
 	 */
-	public Notice selectNextList(String nNo) {
+	public Notice userSelectNextList(String nNo) {
 		
-		return sqlSession.selectOne("noticeMapper.selectNextList",nNo);
+		return sqlSession.selectOne("noticeMapper.userSelectNextList",nNo);
+	}
+
+	public int insertNotice(Notice n) {
+		
+		return sqlSession.insert("noticeMapper.insertNotice",n);
 	}
 
 }

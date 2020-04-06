@@ -13,29 +13,36 @@ import com.kh.yongdali.notice.model.vo.Notice;
 public class NoticeServiceImpl implements NoticeService{
 	@Autowired
 	private NoticeDao nDao;
+	
+	
 	@Override
-	public int getListCount() {
+	public int userGetListCount() {
 		
-		return nDao.getListCount();
+		return nDao.userGetListCount();
 	}
 	@Override
-	public ArrayList<Notice> selectList(PageInfo pi) {
+	public ArrayList<Notice> userSelectList(PageInfo pi) {
 		
-		return nDao.selectList(pi);
+		return nDao.userSelectList(pi);
 	}
 	@Override
-	public Notice selectNoticeDetail(String nNo) {
+	public Notice userSelectNoticeDetail(String nNo) {
 		
-		return nDao.selectNoticeDatail(nNo);
+		return nDao.userSelectNoticeDetail(nNo);
 	}
 	@Override
-	public Notice selectPreList(String nNo) {
+	public Notice userSelectPreList(String nNo) {
 		
-		return nDao.selectPreList(nNo);
+		return nDao.userSelectPreList(nNo);
 	}
 	@Override
-	public Notice selectNextList(String nNo) {
+	public Notice userSelectNextList(String nNo) {
 		
-		return nDao.selectNextList(nNo);
+		return nDao.userSelectNextList(nNo);
+	}
+	@Override
+	public int insertNotice(Notice n) {
+		
+		return nDao.insertNotice(n);
 	}
 }

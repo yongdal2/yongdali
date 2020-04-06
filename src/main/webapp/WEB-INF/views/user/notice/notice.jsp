@@ -25,7 +25,7 @@
         </div>
         <div class="row">
             <div class="col-lg-3 sidebar">
-                <a href="noticeMain.no"><span class="sidebar_span">공지사항</span></a><br>
+                <a href="uNoticeMain.no"><span class="sidebar_span">공지사항</span></a><br>
                 <a href="User_Faq.html"><span class="sidebar_span">자주 묻는 질문</span></a><br>
                 <a href=""><span class="sidebar_span"> 채팅</span></a>
             </div>
@@ -53,7 +53,7 @@
                         <c:forEach var="n" items="${ list }">                        
                         <tr>
                             <td>
-                            	<c:url var="ndetail" value="ndetail.no">
+                            	<c:url var="ndetail" value="uNdetail.no">
                             		<c:param name="nNo" value="${n.nNo }"/>
                             		<c:param name="currentPage" value="${pi.currentPage }"/>
                             	</c:url>
@@ -72,7 +72,7 @@
                      	<a>&laquo;</a>
                      </c:if>
                      <c:if test="${pi.currentPage ne 1 }">
-                     	<c:url var="before" value="noticeMain.no">
+                     	<c:url var="before" value="uNoticeMain.no">
                      		<c:param name="currentPage" value="${pi.currentPage - 1 }"/>
                      	</c:url>
                      	<a href="${ before }">&laquo;</a>
@@ -84,7 +84,7 @@
                      		<a class="active">${p}</a>
                      	</c:if>
                      	<c:if test="${p ne pi.currentPage }">
-                     		<c:url var="pagination" value="noticeMain.no">
+                     		<c:url var="pagination" value="uNoticeMain.no">
                      			<c:param name="currentPage" value="${p }"/>
                      		</c:url>
                      		<a href="${pagination }">${ p }</a>
@@ -97,7 +97,7 @@
                      	<a>&raquo;</a>
                      </c:if>
                      <c:if test="${pi.currentPage ne pi.maxPage}">
-                     	<c:url var="after" value="noticeMain.no">
+                     	<c:url var="after" value="uNoticeMain.no">
                      		<c:param name="currentPage" value="${pi.currentPage + 1 }"/>
                      	</c:url>
                      	<a href="${after }">&raquo;</a>
@@ -111,7 +111,7 @@
                     </form>
                     <!-- 관리자일 경우 뜨는 곳 -->
                     <div class="admin_write">
-                        <button id="admin_write_btn" onclick="location.href='ninsertView.no';">작성하기</button>
+                        <button id="admin_write_btn" onclick="location.href='uNinsertView.no';">작성하기</button>
                     </div>
                 </div>
             </div>

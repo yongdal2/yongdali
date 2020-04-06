@@ -25,7 +25,7 @@
         </div>
         <div class="row">
             <div class="col-lg-3 sidebar">
-                <a href="noticeMain.no"><span class="sidebar_span">공지사항</span></a><br>
+                <a href="uNoticeMain.no"><span class="sidebar_span">공지사항</span></a><br>
                 <a href="User_Faq.html"><span class="sidebar_span">자주 묻는 질문</span></a><br>
                 <a href="User_Chat.html"><span class="sidebar_span"> 채팅</span></a>
             </div>
@@ -65,7 +65,7 @@
                         <ul>
                             <li>
                             	<c:if test="${!empty pre }">
-	                                <a href="ndetail.no?nNo=${pre.nNo }&currentPage=${currentPage }">
+	                                <a href="uNdetail.no?nNo=${pre.nNo }&currentPage=${currentPage }">
 	                                    <div class="left prev">이전글</div>
 	                                    <div class="tit">${pre.nTitle }</div>
 	                                    <div class="date">${pre.nCreateDate }</div>
@@ -81,7 +81,7 @@
                             </li>
                             <li> 
                             	<c:if test="${!empty next }">
-	                                <a href="ndetail.no?nNo=${next.nNo }&currentPage=${currentPage }">
+	                                <a href="uNdetail.no?nNo=${next.nNo }&currentPage=${currentPage }">
 	                                    <div class="left next">다음글</div>
 	                                    <div class="tit">${next.nTitle }</div>
 	                                    <div class="date">${next.nCreateDate}</div>
@@ -101,7 +101,7 @@
                             <button id="deleteBtn" onclick="location.href='' ">삭제</button>
                         </div>
                         <div class="list">
-	                        <c:url var="nlist" value="noticeMain.no">
+	                        <c:url var="nlist" value="uNoticeMain.no">
 								<c:param name="currentPage" value="${ currentPage}"/>
 							</c:url>
                             <button id="listbtn" onclick="location.href='${nlist}' ">목록</button>

@@ -7,21 +7,43 @@ import com.kh.yongdali.notice.model.vo.Notice;
 
 public interface NoticeService {
 	/**
-	 * 1_1. 게시판 총 갯수 조회
+	 * 1_1. 사용자 게시판 총 갯수 조회
 	 * @return
 	 */
-	int getListCount();
+	int userGetListCount();
 
 	/**
-	 * 1_2. 게시판 리스트 조회
+	 * 1_2. 사용자 게시판 리스트 조회
 	 * @param pi
 	 * @return
 	 */
-	ArrayList<Notice> selectList(PageInfo pi);
+	ArrayList<Notice> userSelectList(PageInfo pi);
 
-	Notice selectNoticeDetail(String nNo);
+	/**
+	 * 2_1. 사용자 게시판 상세보기
+	 * @param nNo
+	 * @return
+	 */
+	Notice userSelectNoticeDetail(String nNo);
 
-	Notice selectPreList(String nNo);
+	/**
+	 * 2_2. 사용자 게시판 상세보기 내 이전글
+	 * @param nNo
+	 * @return
+	 */
+	Notice userSelectPreList(String nNo);
 
-	Notice selectNextList(String nNo);
+	/**
+	 * 2_3. 사용자 게시판 상세보기 내 다음글
+	 * @param nNo
+	 * @return
+	 */
+	Notice userSelectNextList(String nNo);
+
+	/**
+	 * 3. 게시판 등록하기
+	 * @param n
+	 * @return
+	 */
+	int insertNotice(Notice n);
 }
