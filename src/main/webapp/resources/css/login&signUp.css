@@ -664,7 +664,8 @@ select::-ms-expand {
     justify-content: center;
     width: 22rem;
     height: 3rem;
-    background-color: rgb(236, 240, 242);
+    /* background-color: rgb(236, 240, 242); */
+    /* background-color : white; */
     font-size: 18px;
     font-weight: 500;
     cursor: pointer;
@@ -678,7 +679,7 @@ select::-ms-expand {
     justify-content: center;
     width: 22rem;
     height: 3rem;
-    /* background-color: rgb(236, 240, 242); */
+    background-color: rgb(236, 240, 242);
     font-size: 18px;
     font-weight: 500;
     cursor: pointer;
