@@ -20,7 +20,7 @@
 	<!-- main -->
     <div class="container">
         <div class="row">
-            <h3 class="jal">고객센터</h3>
+            <h2 class="jal">고객센터</h3>
             <hr>
         </div>
         <div class="row">
@@ -30,7 +30,7 @@
                 <a href=""><span class="sidebar_span"> 채팅</span></a>
             </div>
             <div class="col-lg-8 col-lg-offset-1">
-                <h3 class="jal">공지사항</h3>
+                <h2 class="jal">공지사항</h3>
             </div>
         </div>
         <div class="row">
@@ -69,7 +69,7 @@
                     <span class="inner_paging"> 
                      <!-- 이전 -->
                      <c:if test="${pi.currentPage eq 1 }">
-                     	&laquo;
+                     	<a>&laquo;</a>
                      </c:if>
                      <c:if test="${pi.currentPage ne 1 }">
                      	<c:url var="before" value="noticeMain.no">
@@ -80,18 +80,28 @@
                      
                      <!-- 페이지 -->
                      <c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
-                     	
+                     	<c:if test="${p eq pi.currentPage }">
+                     		<a class="active">${p}</a>
+                     	</c:if>
+                     	<c:if test="${p ne pi.currentPage }">
+                     		<c:url var="pagination" value="noticeMain.no">
+                     			<c:param name="currentPage" value="${p }"/>
+                     		</c:url>
+                     		<a href="${pagination }">${ p }</a>
+                     	</c:if>
                      
                      </c:forEach>
                      
-                    
-                    <a href="#">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                    <a href="#">6</a>
-                    <a href="#">&raquo;</a>
+                     <!-- 다음 -->
+                     <c:if test="${pi.currentPage eq pi.maxPage }">
+                     	<a>&raquo;</a>
+                     </c:if>
+                     <c:if test="${pi.currentPage ne pi.maxPage}">
+                     	<c:url var="after" value="noticeMain.no">
+                     		<c:param name="currentPage" value="${pi.currentPage + 1 }"/>
+                     	</c:url>
+                     	<a href="${after }">&raquo;</a>
+                     </c:if>
                     </span>
                 </div>
                 <div class="search_write" align="center">
@@ -99,13 +109,17 @@
                         <input id="search-form" type="text" placeholder="Search">
                         <button id="search-button" type="submit">검색</button>
                     </form>
+                    <!-- 관리자일 경우 뜨는 곳 -->
                     <div class="admin_write">
-                        <button id="admin_write_btn" onclick="location.href='User_Notice_Form.html';">작성하기</button>
+                        <button id="admin_write_btn" onclick="location.href='ninsertView.no';">작성하기</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <br>
+    <br>
+    <br>
     <!-- Footer -->
 	<%@ include file="../../common/footer.jsp"%>
 

@@ -24,5 +24,20 @@ public class MemberServiceImpl_lth implements MemberService_lth {
 		
 		return mDaoL.selectList(pi);
 	}
+	@Override
+	public Notice selectNoticeDetail(String nNo) {
+		
+		return mDaoL.selectNoticeDatail(nNo);
+	}
+	@Override
+	public Notice selectPreList(String nNo) {
+		
+		return mDaoL.selectPreList(nNo);
+	}
+	@Override
+	public Notice selectNextList(String nNo) {
+		
+		return mDaoL.selectNextList(nNo);
+	}
 	
 }

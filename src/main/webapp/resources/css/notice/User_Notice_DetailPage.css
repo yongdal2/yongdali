@@ -57,7 +57,7 @@ a{
     display: inline-block;
     margin-right: 15px;
     margin-bottom: 10px;
-    font-size: 15px;
+    font-size: 17px;
     font-family: 'yg-jalnan', Arial, Helvetica, sans-serif;
     text-decoration: none;
     color: rgb(43, 43, 43);
@@ -124,17 +124,43 @@ a{
 /* 내용 부분 */
 .detail_text_area{
     padding: 35px 13px;
-    border-bottom: solid 1px #b8b6aa;
     line-height: 24px;
     font-family : 'Nanum Gothic';
     font-size: 14px;
 }
 
-/* 이전글/ 다음글 */
-.pagemove_area_wrap{
-    margin: 0 10px 0 10px;
+/* 첨부파일 부분 */
+
+.file_area ul{
+    /* border-bottom: solid 1px #b8b6aa; */
+    list-style: none;
 }
+
+.file_area li{
+    padding: 15px 14px;
+    font-size: 0;
+}
+
+.file_area li div{
+    display: inline-block;
+    font-size: 13px;
+    font-family : 'Nanum Gothic';
+}
+
+.file_area li .left{
+    width: 95px;
+    font-weight: bold;
+}
+
+.file_area li .file a{
+    color: blue;
+    text-decoration: underline;
+}
+
+/* 이전글/ 다음글 */
+
 .pagemove_area_wrap ul{
+	border-top: solid 1px #b8b6aa;
     border-bottom: solid 1px #b8b6aa;
     list-style: none;
 }
@@ -152,7 +178,7 @@ a{
 }
 
 .pagemove_area_wrap li a{
-    color:rgb(37, 37, 37);
+    color:rgb(97, 97, 97);
 }
 
 .pagemove_area_wrap li .left, .pagemove_area_wrap li .date {

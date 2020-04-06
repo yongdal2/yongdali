@@ -19,7 +19,7 @@
 	<!-- main -->
     <div class="container">
         <div class="row">
-            <h3 class="jal">고객센터</h3>
+            <h2 class="jal">고객센터</h3>
             <hr>
         </div>
         <div class="row">
@@ -29,7 +29,7 @@
                 <a href onclick="window.open('User_Chat.html','tistory','width=500px, height=700px, scrollbars=no, resizable=no, toolbars=no, menubar=no')"><span class="sidebar_span"> 채팅</span></a>
             </div>
             <div class="col-lg-8 col-lg-offset-1">
-                <h3 class="jal">공지사항</h3>
+                <h2 class="jal">공지사항</h3>
             </div>
         </div>
         <div class="row">
@@ -58,6 +58,7 @@
                             </tr>
                             <tr>
                                 <td>작성자</td>
+                                <!-- 관리자 이름 갖고오기 -->
                                 <td>관리자</td>
                             </tr>
                             <tr>
@@ -79,6 +80,9 @@
             </div>
         </div>
     </div>
+    <br>
+    <br>
+    <br>
 	<!-- Footer -->
 	<%@ include file="../../common/footer.jsp"%>
     <script>

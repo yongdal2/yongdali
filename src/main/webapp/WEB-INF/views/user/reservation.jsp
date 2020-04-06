@@ -20,7 +20,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"/>
     <link type="text/css" rel="stylesheet" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"/>
-
 </head>
 <body>
 	<!-- header -->
@@ -61,10 +60,155 @@
                                 <option class="opt2" value="리프트">리프트</option>
                             </select>
                         </div>
+                        <!-- Modal1 : 차량 정보 -->
+                        <div id="myModal1" class="modal11" style="padding-top: 65px;">
+							<div class="modal-content11" style="width: 704px;">
+	                            <span id="modal-close1" class="close11" style="width: 30px;">&times;</span>
+	                            <div id="carInfo-div">
+                                	<div id="carInfo-title-div" align="center">
+                                        <span id="carInfo-title">차량 안내</span>
+                                    </div>
+							        <div id="modal1-content">
+							            <div style="display: flex;">
+							                <div id="type1" class="car-content-title" style="background: white;">
+							                                    차량 형태 
+							                </div>
+							                <div id="size1" class="car-content-title">
+							                                    적재 크기
+							                </div>
+							            </div>
+							            <div id="guide-content1">
+							                <div class="car-content-div">
+							                    <div>
+							                        <img src="${pageContext.request.contextPath}/resources/images/truck/cargo-image.png" alt="" class="car-content-img">
+							                    </div>
+							                    <div class="car-content-type">
+							                        <div class="car-content-type-font">카고</div>
+							                    </div>
+							                    <div class="car-each-content">
+							                        <div class="car-each-content-font1">
+							                            - 흔히 알고 있는 일반 것인 형태의 트럭<br>
+							                            - 적재함이 오픈되어 있어 적재물 파악이 쉬움<br>
+							                            - 비나 눈 등 날씨의 영향으로부터 적재물을 보호하기 어려움
+							                        </div>
+							                    </div>
+							                </div>
+							                <div class="car-content-div">
+							                    <div>
+							                        <img src="${pageContext.request.contextPath}/resources/images/truck/horu-image.png" alt="" class="car-content-img">
+							                    </div>
+							                    <div class="car-content-type">
+							                        <div class="car-content-type-font">호루</div>
+							                    </div>
+							                    <div class="car-each-content">
+							                        <div class="car-each-content-font2">
+							                            - 가죽이나 비닐 등의 덮개가 씌워져 있는 트럭<br>
+							                            - 비나 눈 등 날씨의 영향으로부터 적재물을 보호할 수 있음
+							                        </div>
+							                    </div>
+							                </div>
+							                <div class="car-content-div">
+							                    <div>
+							                        <img src="${pageContext.request.contextPath}/resources/images/truck/top-image.png" alt="" class="car-content-img">
+							                    </div>
+							                    <div class="car-content-type">
+							                        <div class="car-content-type-font">탑차</div>
+							                    </div>
+							                    <div class="car-each-content">
+							                        <div class="car-each-content-font1">
+							                            - 적재함이 사각 형태로 막혀 있고, 잠금장치가 있는 트럭<br>
+							                            - 날씨, 도난, 파손 등 외부의 영향으로부터 보호할 수 있음<br>
+							                            - 식자재, 택배 물품 등의 운반에 주로 쓰임
+							                        </div>
+							                    </div>
+							                </div>
+							                <div class="car-content-div">
+							                    <div>
+							                        <img src="${pageContext.request.contextPath}/resources/images/truck/wingbody-image.png" alt="" class="car-content-img">
+							                    </div>
+							                    <div class="car-content-type">
+							                        <div class="car-content-type-font">윙바디</div>
+							                    </div>
+							                    <div class="car-each-content">
+							                        <div class="car-each-content-font1">
+							                            - 적재함을 날개처럼 양쪽으로 개폐할 수 있는 트럭<br>
+							                            - 날씨, 도난, 파손 등 외부의 영향으로부터 보호할 수 있음<br>
+							                            - 또한 지게차를 이용한 상하차가 용이함
+							                        </div>
+							                    </div>
+							                </div>
+							                <div class="car-content-div">
+							                    <div>
+							                        <img src="${pageContext.request.contextPath}/resources/images/truck/lift-image.png" alt="" class="car-content-img">
+							                    </div>
+							                    <div class="car-content-type">
+							                        <div class="car-content-type-font">리프트</div>
+							                    </div>
+							                    <div class="car-each-content">
+							                        <div class="car-each-content-font2">
+							                            - 무거운 제품의 상하차를 위해 리프팅 장비를 탑재한 트럭<br>
+							                            - 대형 가전제품과 가구, 오토바이 등의 상하차에 주로 쓰임
+							                        </div>
+							                    </div>
+							                </div>
+							            </div>
+							            <div id="guide-content2" style="display: none;">
+							                <div align="center" style="margin-top: 70px;">
+							                    <img id="standard-img" src="${pageContext.request.contextPath}/resources/images/truck/carrying-capacity-image.png" alt="">
+							                </div>
+							                <div align="center">
+							                    <table id="standard-table">
+							                        <thead>
+							                            <tr style="text-align:center; background:rgb(105, 113, 120); color: white;">
+							                                <th class="thd th11">톤수</th>
+							                                <th class="thd th11">가로</th>
+							                                <th class="thd th11">세로</th>
+							                                <th class="thd th11">높이</th>
+							                            </tr>
+							                        </thead>
+							                        <tbody id="truck-standard" style="text-align: center;">
+							                            <tr>
+							                                <td class="thd ton1">1톤</td>
+							                                <td class="thd">160 cm</td>
+							                                <td class="thd">280 cm</td>
+							                                <td class="thd bd1">180 cm</td>
+							                            </tr>
+							                            <tr>
+							                                <td class="thd ton1">1.4톤</td>
+							                                <td class="thd">170 cm</td>
+							                                <td class="thd">310 cm</td>
+							                                <td class="thd bd1">180 cm</td>
+							                            </tr>
+							                            <tr>
+							                                <td class="thd ton1">2.5톤</td>
+							                                <td class="thd">170 cm</td>
+							                                <td class="thd">310 cm</td>
+							                                <td class="thd bd1">180 cm</td>
+							                            </tr>
+							                            <tr>
+							                                <td class="thd ton1">3.5톤</td>
+							                                <td class="thd">170 cm</td>
+							                                <td class="thd">310 cm</td>
+							                                <td class="thd bd1">180 cm</td>
+							                            </tr>
+							                            <tr>
+							                                <td class="thd ton1">5톤</td>
+							                                <td class="thd">170 cm</td>
+							                                <td class="thd">310 cm</td>
+							                                <td class="thd bd1">180 cm</td>
+							                            </tr>
+							                        </tbody>
+							                    </table>
+							                </div>
+							            </div>
+							        </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="edge11">
                         <div class="title11">
-                            <label id="myBtn11">
+                            <label id="selectLoad-btn">
                                 <img src="${pageContext.request.contextPath}/resources/images/reservation/round-add.svg" alt="안내">
                                 <span id="load-title">이삿짐 선택</span>
                             </label>
@@ -73,11 +217,11 @@
                         <div id="load-content-div" class="content22">
                             <textarea name="" id="load-content-area" cols="64" rows="3" placeholder="파손이나 분실시 확인할 수 있도록&#13;&#10;이삿짐 품목을 선택해주세요." readonly required></textarea>
                         </div>
-                        <!-- Modal -->
-                        <div id="myModal11" class="modal11">
+                        <!-- Modal2 : 이삿짐 선택 -->
+                        <div id="myModal2" class="modal11">
                             <!-- Modal content -->
                             <div class="modal-content11">
-                                <span id="modal-close1" class="close11" style="width: 30px;">&times;</span>
+                                <span id="modal-close2" class="close11" style="width: 30px;">&times;</span>
                                 <div id="selectLoad-div">
                                     <div id="selectLoad-title-div">
                                         <span id="selectLoad-title">이삿짐 선택</span>
@@ -308,51 +452,115 @@
                             </div>
                         </div>
                         
-                        <!-- Modal3 : 도움 -->
-                        <div id="myModal13" class="modal11">
-							<div class="modal-content11">
-	                            <span id="modal-close2" class="close11" style="width: 30px;">&times;</span>
-                                <div id="modal-helpLoad-div">
-                                	<div id="helpLoad-title-div">
-                                        <span id="helpLoad-title">인력이 필요하시나요 ?</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         
                         
                         
                         
                         
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        <!-- Modal4 : 차량 정보 -->
-                        <div id="myModal1" class="modal11">
-							<div class="modal-content11">
+                        <!-- Modal5 : 상하차 방법 -->
+                        <div id="myModal5" class="modal11" style="padding-top: 280px;">
+							<div id="modal5" class="modal-content11">
 	                            <span id="modal-close3" class="close11" style="width: 30px;">&times;</span>
-	                            <div id="carInfo-div">
-                                	<div id="carInfo-title-div">
-                                        <span id="carInfo-title">이삿짐 선택</span>
+                                <div class="modal-help-div">
+                                	<div class="help-title-div">
+                                        <span class="help-title">상하차 방법</span>
                                     </div>
+								    <div class="help-content-div1" style="border-bottom: 1px solid black;">
+								        <div class="help-content-div11" style="border-bottom: 1px solid rgb(105, 113, 120)">
+								            <div class="help-content-div111">
+								                <div class="addCharge">추가 요금</div>
+								                <div class="check-title1">상하차 방법</div>
+								            </div>
+								            <div  class="help-content-div112">
+								                <label class="checkbox-wrap2 checkHelp">
+								                    <input id="checkHelp1" type="checkbox" name="checkHelp1" value="">
+								                    <i class="check-icon2"></i>
+								                    <div class="check-title11">상차만</div>
+								                </label>
+								                <div id="helpCharge1" class="checkCharge">+0원</div>
+								            </div>
+								            <div class="help-content-div112">
+								                <label class="checkbox-wrap2 checkHelp">
+								                    <input id="checkHelp2" type="checkbox" name="checkHelp1" value="">
+								                    <i class="check-icon2"></i>
+								                    <div class="check-title11">하차만</div>
+								                </label>
+								                <div id="helpCharge2" class="checkCharge">+0원</div>
+								            </div>
+								        </div>
+								        <div class="help-content-div12">
+								            <button id="checkHelp-btn">선택하기</button>
+								        </div>
+								    </div>
+                                </div>
+                            </div>
+                            <!-- Modal5-1 : 상차 선택 모달  -->
+                            <div id="modal51" class="modal-content11" style="display:none;">
+	                            <span id="modal-close4" class="close11" style="width: 30px;">&times;</span>
+                                <div class="modal-help-div">
+                                	<div class="help-title-div">
+                                        <span class="help-title">상차 방법</span>
+                                    </div>
+								    <div class="help-content-div1" style="border-bottom: 1px solid black;">
+								        <div class="help-content-div11" style="border-bottom: 1px solid rgb(105, 113, 120)">
+								            <div class="help-content-div111">
+								                <div class="addCharge">추가 요금</div>
+								                <div class="check-title1">상차 방법</div>
+								            </div>
+								            <div class="help-content-div112">
+								                <label class="checkbox-wrap2 checkHelp">
+								                    <input id="checkHelp3" type="checkbox" name="checkHelp11" value="">
+								                    <i class="check-icon2"></i>
+								                    <div class="check-title11" style="font-size: 12pt;">기사님과 함께</div>
+								                </label>
+								                <div class="checkCharge" style="width: 152px;">+10,000원</div>
+								            </div>
+								            <div class="help-content-div112">
+								                <label class="checkbox-wrap2 checkHelp">
+								                    <input id="checkHelp4" type="checkbox" name="checkHelp12" value="">
+								                    <i class="check-icon2"></i>
+								                    <div class="check-title11" style="font-size: 12pt;">기사님 단독</div>
+								                </label>
+								                <div class="checkCharge" style="width: 168px;">+20,000원</div>
+								            </div>
+								        </div>
+								    </div>
+                                </div>
+                            </div>
+                            <!-- Modal5-2 : 하차 선택 모달  -->
+                            <div id="modal52" class="modal-content11" style="display:none;">
+	                            <span id="modal-close5" class="close11" style="width: 30px;">&times;</span>
+                                <div class="modal-help-div">
+                                	<div class="help-title-div">
+                                        <span class="help-title">하차 방법</span>
+                                    </div>
+								    <div class="help-content-div1" style="border-bottom: 1px solid black;">
+								        <div class="help-content-div11" style="border-bottom: 1px solid rgb(105, 113, 120)">
+								            <div class="help-content-div111">
+								                <div class="addCharge">추가 요금</div>
+								                <div class="check-title1">하차 방법</div>
+								            </div>
+								            <div class="help-content-div112">
+								                <label class="checkbox-wrap2 checkHelp">
+								                    <input id="checkHelp5" type="checkbox" name="checkHelp11" value="">
+								                    <i class="check-icon2"></i>
+								                    <div class="check-title11" style="font-size: 12pt;">기사님과 함께</div>
+								                </label>
+								                <div class="checkCharge" style="width: 152px;">+10,000원</div>
+								            </div>
+								            <div class="help-content-div112">
+								                <label class="checkbox-wrap2 checkHelp">
+								                    <input id="checkHelp6" type="checkbox" name="checkHelp12" value="">
+								                    <i class="check-icon2"></i>
+								                    <div class="check-title11" style="font-size: 12pt;">기사님 단독</div>
+								                </label>
+								                <div class="checkCharge" style="width: 168px;">+20,000원</div>
+								            </div>
+								        </div>
+								    </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        
-                        
                         
                         
                         
@@ -382,7 +590,7 @@
                                     <input id="startAddr" type="text" placeholder="주소 검색 (주소, 건물명)" onclick="searchStartAddr();" readonly required>
                                     <img src="${pageContext.request.contextPath}/resources/images/reservation/magnifying-glass-black.svg" alt="검색" onclick="searchStartAddr();" style="cursor: pointer;">
                                 </div>
-                                <input id="startDetailAddr" type="text" placeholder="상세 주소" required>
+                                <input id="startDetailAddr" type="text" placeholder="상세 주소">
                             </div>
                             <div>
                                 <input id="startPhone" type="text" placeholder="연락처" onKeyup="inputPhoneNumber(this);" maxlength="13" required>
@@ -396,7 +604,7 @@
                             </div>
                             <div style="display: flex;">
                                 <div id="start-date-div" class="input-group date">
-                                    <input id="datepicker1" type="text" placeholder="날짜 선택" required>
+                                    <input id="datepicker1" type="text" placeholder="날짜 선택">
                                     <div id="dt1" class="input-group-addon">
                                       <span class="glyphicon glyphicon-th" style="color: white;"></span>
                                     </div>
@@ -465,7 +673,7 @@
                                     <input id="endAddr" type="text" placeholder="주소 검색 (주소, 건물명)" onclick="searchEndAddr();" readonly required>
                                     <img src="${pageContext.request.contextPath}/resources/images/reservation/magnifying-glass-black.svg" alt="검색" onclick="searchEndAddr();" style="cursor: pointer;">
                                 </div>
-                                <input id="endDetailAddr" type="text" placeholder="상세 주소" required>
+                                <input id="endDetailAddr" type="text" placeholder="상세 주소">
                             </div>
                             <div>
                                 <input id="endPhone" type="text" placeholder="연락처" onKeyup="inputPhoneNumber(this);" required>
@@ -543,15 +751,15 @@
                 </div>
                 <div id="line3">
                     <div class="edge11">
-                        <div class="title11">상·하차 방법</div>
+                        <div class="title11">상하차 방법</div>
                         <div id="help-div" class="content22">
 							<label class="rad">
-								<input type="radio" name="rad1" value="a">
+								<input id="helpUnload-ch" type="radio" name="helpLoad" value="a" required>
 								<i></i>&nbsp;&nbsp;도움 필요하지 않아요
 							</label>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<label class="rad">
-								<input type="radio" name="rad1" value="b" checked>
+								<input id="helpLoad-ch" type="radio" name="helpLoad" value="b">
 								<i></i>&nbsp;&nbsp;도움 필요해요
 							</label>
                         </div>
@@ -581,7 +789,7 @@
                         </div>
                         <div class="charge-line">
                             <div class="charge-content-div">
-                                <span id="distanceCharge" class="charge-content"></span>
+                                <span id="distance" class="charge-content"></span>
                             </div>
                             <div align="left">
                                 <span class="charge-title">거리</span>
@@ -597,10 +805,18 @@
                         </div>
                         <div class="charge-line">
                             <div class="charge-content-div">
-                                <span id="helpload" class="charge-content"></span>
+                                <span id="helpLoad" class="charge-content"></span>
                             </div>
                             <div align="left">
-                                <span class="charge-title">상·하차 도움</span>
+                                <span class="charge-title">상차 옵션</span>
+                            </div>
+                        </div>
+                        <div class="charge-line">
+                            <div class="charge-content-div">
+                                <span id="helpUnload" class="charge-content"></span>
+                            </div>
+                            <div align="left">
+                                <span class="charge-title">하차 옵션</span>
                             </div>
                         </div>
                         
@@ -617,8 +833,8 @@
     
     
     
-    <!-- 주소 API Modal -->
-    <div id="myModal12">
+    <!-- Modal34 : 주소 API -->
+    <div id="myModal34">
 		<div id="layer">
 			<img id="searchAddr" src="https://t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" onclick="closeDaumPostcode()" alt="닫기 버튼">
 		</div>    

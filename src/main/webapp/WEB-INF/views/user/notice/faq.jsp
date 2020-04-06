@@ -21,7 +21,7 @@
 	<!-- main -->
     <div class="container">
         <div class="row">
-            <h3 class="jal">고객센터</h3>
+            <h2 class="jal">고객센터</h3>
             <hr>
         </div>
         <div class="row">
@@ -31,7 +31,7 @@
                 <a href="User_Chat.html"><span class="sidebar_span"> 채팅</span></a>
             </div>
             <div class="col-lg-8 col-lg-offset-1">
-                <h3 class="jal">자주 묻는 질문</h3>
+                <h2 class="jal">자주 묻는 질문</h3>
             </div>
         </div>
         <div class="row">
@@ -244,6 +244,9 @@
         </div>
         
     </div>
+    <br>
+    <br>
+    <br>
 
 	<!-- Footer -->
 	<%@ include file="../../common/footer.jsp"%>

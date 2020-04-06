@@ -24,9 +24,9 @@
 }
 
 /* a태그 */
-a{
-    color: black;
-    font-style: none;
+ a{
+    color: rgb(82, 81, 81) !important;
+    text-decoration: none !important;
 }
 
 .container{
@@ -61,7 +61,7 @@ a{
     display: inline-block;
     margin-right: 15px;
     margin-bottom: 10px;
-    font-size: 15px;
+    font-size: 17px;
     font-family: 'yg-jalnan', Arial, Helvetica, sans-serif;
     text-decoration: none;
     color: rgb(43, 43, 43);
@@ -126,15 +126,15 @@ table.tbl td:first-child{
 }
 
 /* 공지사항 table a태그 기본속성 제거 */
-table.tb1 td>a{
+/* table.tb1 td>a{
     color: rgb(82, 81, 81);
     text-decoration: none;
-}
+} */
 
 /* 공지사항 table 내용 hover */
-table.tbl:hover tbody tr:hover td {
+table.tbl:hover tbody tr:hover td, .tbl td a:hover {
     font-weight: bolder;
-    color: rgb(241,95,95);
+    color: rgb(241,95,95) !important;
 }
 
 /* Pagination bar */
