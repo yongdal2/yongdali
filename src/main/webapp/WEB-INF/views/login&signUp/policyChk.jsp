@@ -7,14 +7,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>용달이 | 약관동의</title>
-    <link rel="stylesheet" href="${contextPath}/resources/css/signIn&login.css">   
+    <link rel="stylesheet" href="${contextPath}/resources/css/login&signUp.css">   
     <script src="http://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
     <script src="${contextPath}/resources/js/login&signUp.js"></script>
 </head>
 <body>
     <!-- logo header -->
     <div class="header agreeHeader">
-        <a href="#">
+        <a href="home.do">
             <img src="${contextPath}/resources/images/ydl_logo/ydl_lg_gr(150x50).png" alt="로고">
         </a>
     </div>
@@ -77,7 +77,7 @@
         <div class="easyEccess chooseSignIn">
             <div class="yongdalLogo"> 
                 <h2 class="easyEccessTitle">용달이 회원가입</h2>
-                <a href="${contextPath}/policyChk.me"><img src="${contextPath}/resources/images/ydl_logo/ydl_ic_gr(70X70).png" alt="용달이"></a>
+                <a href="${contextPath}/signUpView.me"><img src="${contextPath}/resources/images/ydl_logo/ydl_ic_gr(70X70).png" alt="용달이"></a>
             </div>
             <div class="easyEccessLogo">
                 <h2 class="easyEccessTitle">간편 회원가입</h2>

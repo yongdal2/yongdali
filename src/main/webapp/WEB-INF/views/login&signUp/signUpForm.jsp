@@ -8,16 +8,16 @@
     <title>용달이 | 회원가입</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><!-- warning icon -->
-    <link rel="stylesheet" href="${contextPath}/resources/css/signIn&login.css">    
+    <link rel="stylesheet" href="${contextPath}/resources/css/login&signUp.css">    
     <script src='https://kit.fontawesome.com/a076d05399.js'></script><!-- eye icon -->
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
-    <script src="${contextPath}/resources/js/signIn&login.js"></script>
+    <script src="${contextPath}/resources/js/login&signUp.js"></script>
     
 </head>
 <body>
     <!-- logo header -->
     <div class="header">
-        <a href="#">
+        <a href="home.do">
             <img src="${contextPath}/resources/images/ydl_logo/ydl_lg_gr(150x50).png" alt="로고">
         </a>
     </div>
@@ -75,12 +75,12 @@
                     <div id="phoneMsg" class="msgBox" ></div>
                     <hr>
                     <div class="bizRow" id="slecBiz">
-                        <img src="${contextPath}/resources/images/login&siginIn/round-add.svg" alt="더하기">
+                        <img src="${contextPath}/resources/images/login&signUp/round-add.svg" alt="더하기">
                         <div>사업자(기사)로 가입하기</div>                            
                     </div>
                     <div class="bizForm">
                         <div class="bizRow guide">
-                            <img src="${contextPath}/resources/images/login&siginIn/round-question.png" alt="물음표">
+                            <img src="${contextPath}/resources/images/login&signUp/round-question.png" alt="물음표">
                             <div>차량 안내가 필요하신가요?</div>
                         </div>
                         <div class="bizWrap">

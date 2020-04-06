@@ -3,5 +3,19 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="memberMapper">
+	<resultMap type="Member" id="memberResultSet">
+		<id property="mId" column="M_ID"/>
+		<result property="pwd" column="PWD"/>
+		<result property="mName" column="NAME"/>
+		<result property="phone" column="PHONE"/>
+		<result property="mSort" column="M_SORT"/>
+		<result property="enrollDate" column="ENROLLDATE"/>
+	</resultMap>
+	
 
+	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
+		SELECT *
+		FROM MEMBER
+		WHERE M_ID = #{mId}
+	</select>
 </mapper>    

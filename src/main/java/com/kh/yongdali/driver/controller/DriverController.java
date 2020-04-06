@@ -3,6 +3,7 @@ package com.kh.yongdali.driver.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,40 @@ public class DriverController {
 		gson.toJson(list,response.getWriter());
 	}
 	
+	@RequestMapping("baechar.do")
+	public void myBaechar(HttpServletResponse response,int dId) throws JsonIOException, IOException {
+		ArrayList<Reservation> list = dService.myBaechar(dId);
+		
+		response.setContentType("application/json; charset=utf-8");
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(list,response.getWriter());
+	}
+	
+	@RequestMapping("dCal.do")
+	public void driverCal(HttpServletResponse response,int dId) throws JsonIOException, IOException {
+		ArrayList<Reservation> list = dService.driverCal(dId);
+		
+		response.setContentType("application/json; charset=utf-8");
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(list,response.getWriter());
+		
+		
+	}
+	
+	/*
+	 * @RequestMapping("getB.do") public String getBaechar(Reservation
+	 * re,HttpServletRequest request) { int dId =
+	 * request.getAttribute("loginUser").getUserId(); int result =
+	 * dService.getBaechar(dId);
+	 * 
+	 * if(result>0) { return "redirect:driverMain.ydl"; }else { return
+	 * "common/errorPage"; } }
+	 */
 	 
 }
+
+
+
+

@@ -17,6 +17,7 @@
 <!-- <link
 	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"
 	rel="stylesheet"> -->
+<script src="${contextPath}/resources/js/login&signUp.js"></script>	
 <style>
 #header1 {
 	font-family: 'nanumsquare', Arial, Helvetica, sans-serif
@@ -42,10 +43,10 @@
 			<div class="col-lg-4">
 				<ul class="nav navbar-nav float-lg-right navbar-right">
 					<li class="nav-item">
-						<button class="btn btn-default navbar-btn" style="background: rgb(87,187,138); color: white;">로그인</button>
+						<button class="btn btn-default navbar-btn loginView" style="background: rgb(87,187,138); color: white;">로그인</button>
 					</li>
 					<li class="nav-item">
-						<button class="btn btn-outline-default navbar-btn" style="background: white;">회원가입</button>
+						<button class="btn btn-outline-default navbar-btn signUpView" style="background: white;" >회원가입</button>
 					</li>
 				</ul>
 			</div>

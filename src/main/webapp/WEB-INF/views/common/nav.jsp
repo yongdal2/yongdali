@@ -3,6 +3,7 @@
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
 	type="text/javascript"></script>
+<script src="${contextPath}/resources/js/login&signUp.js"></script>		
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -45,10 +46,10 @@
 			<div class="col-lg-4">
 				<ul class="nav navbar-nav float-lg-right navbar-right">
 					<li class="nav-item">
-						<button class="btn btn-default navbar-btn" style="background: rgb(87,187,138); color: white;">로그인</button>
+						<button class="btn btn-default navbar-btn loginView" style="background: rgb(87,187,138); color: white;">로그인</button>
 					</li>
 					<li class="nav-item">
-						<button class="btn btn-outline-default navbar-btn" style="background: white;">회원가입</button>
+						<button class="btn btn-outline-default navbar-btn signUpView" style="background: white;">회원가입</button>
 					</li>
 				</ul>
 			</div>
