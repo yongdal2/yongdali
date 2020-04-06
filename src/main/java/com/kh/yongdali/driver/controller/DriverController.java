@@ -3,6 +3,7 @@ package com.kh.yongdali.driver.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,16 @@ public class DriverController {
 		
 		
 	}
+	
+	/*
+	 * @RequestMapping("getB.do") public String getBaechar(Reservation
+	 * re,HttpServletRequest request) { int dId =
+	 * request.getAttribute("loginUser").getUserId(); int result =
+	 * dService.getBaechar(dId);
+	 * 
+	 * if(result>0) { return "redirect:driverMain.ydl"; }else { return
+	 * "common/errorPage"; } }
+	 */
 	 
 }
 
