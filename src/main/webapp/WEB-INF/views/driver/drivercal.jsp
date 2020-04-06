@@ -67,12 +67,8 @@
 	<script src="${contextPath}/resources/js/fullcal/vendor/js/fullcalendar.min.js"></script>
 	<script src="${contextPath}/resources/js/fullcal/vendor/js/ko.js"></script>
 	<script src="${contextPath}/resources/js/fullcal/vendor/js/select2.min.js"></script>
-	<script
-		src="${contextPath}/resources/js/fullcal/vendor/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="${contextPath}/resources/js/fullcal/vendor/js/bootstrap-datetimepicker.min.js"></script>
 	<script src="${contextPath}/resources/js/fullcal/js/main.js"></script>
-	<script src="${contextPath}/resources/js/fullcal/js/addEvent.js"></script>
-	<script src="${contextPath}/resources/js/fullcal/js/editEvent.js"></script>
-	<script src="${contextPath}/resources/js/fullcal/js/etcSetting.js"></script>
 </body>
 
 

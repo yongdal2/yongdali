@@ -29,9 +29,9 @@
 			<div class="col-lg-12 col-md-10 mx-auto">
 				<div class="row">
 					<h1
-					style="font-size: 25px; text-align: center; color: #000; font-family: Montserrat; height: 50px">
-					<b style="font-weight: 500; letter-spacing: 5px;">실시간 예약 현황</b>
-				</h1>
+						style="font-size: 25px; text-align: center; color: #000; font-family: Montserrat; height: 50px">
+						<b style="font-weight: 500; letter-spacing: 5px;">실시간 예약 현황</b>
+					</h1>
 				</div>
 				<hr>
 				<div class="row" style="text-align-last: center;">
@@ -150,18 +150,7 @@
 										<div class="modal-footer">
 
 											<button type="button" class="btn btn-default"
-												data-dismiss="modal">취소</button>
-											<button type="button" class="btn btn-primary" id="save-event">저장</button>
-										</div>
-									</div>
-									<div class="ContainermodifyEvent" id="deletecar">
-										<div class="modal-footer">
-
-											<button type="button" class="btn btn-default"
 												data-dismiss="modal">닫기</button>
-											<button type="button" class="btn btn-danger" id="deleteEvent">삭제</button>
-											<button type="button" class="btn btn-primary"
-												id="editEvent111">저장</button>
 										</div>
 									</div>
 						</form>
