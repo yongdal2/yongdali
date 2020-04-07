@@ -72,4 +72,26 @@ public class NoticeDao {
 		return sqlSession.insert("noticeMapper.insertNotice",n);
 	}
 
+	public int updateNotice(Notice n) {
+		
+		return sqlSession.update("noticeMapper.updateNotice",n);
+	}
+
+	public int deleteNotice(String nNo) {
+		
+		return sqlSession.update("noticeMapper.deleteNotice",nNo);
+	}
+
+	public int userSearchGetListCount(String keyword) {
+		
+		return sqlSession.selectOne("noticeMapper.userSearchGetListCount", keyword);
+	}
+
+	public ArrayList<Notice> userSearchSelectList(PageInfo pi,String keyword) {
+		int offset = (pi.getCurrentPage()-1)* pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("noticeMapper.userSearchSelectList",keyword,rowBounds);
+	}
+
 }

@@ -74,8 +74,41 @@
 		#{nContent},#{nImgOrigin},#{nImgRename},
 		#{nSort},SYSDATE,SYSDATE,DEFAULT)
 	</insert>
+	
+	<!-- 게시판 수정 -->
+	<update id="updateNotice" parameterType="Notice">
+		UPDATE NOTICE
+		SET N_TITLE=#{nTitle}, N_CONTENT=#{nContent}, N_IMG_ORIGIN=#{nImgOrigin}, N_IMG_RENAME=#{nImgRename},
+			N_SORT=#{nSort}, N_MODIFYDATE=SYSDATE
+		WHERE N_NO=#{nNo}
+	</update>
+	
+	<!-- 게시판 삭제 -->
+	<update id="deleteNotice">
+		UPDATE NOTICE
+		SET N_STATUS='N'
+		WHERE N_NO=#{nNo}
+	</update>
 
-
+	<select id="userSearchGetListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM NOTICE
+		WHERE N_STATUS='Y'
+		AND N_SORT IN ('공통','일반')
+		AND N_TITLE LIKE '%' || #{keyword} || '%'
+		OR N_CONTENT LIKE '%' || #{keyword} || '%'
+		OR N_WRITER LIKE '%' || #{keyword} || '%'
+	</select>
+	
+	<select id="userSearchSelectList" resultMap="noticeResultSet">
+		SELECT *
+		FROM NOTICE
+		WHERE N_STATUS='Y'
+		AND N_SORT IN ('공통','일반')
+		AND N_TITLE LIKE '%' || #{keyword} || '%'
+		OR N_CONTENT LIKE '%' || #{keyword} || '%'
+		OR N_WRITER LIKE '%' || #{keyword} || '%'
+	</select>
 
 
 
