@@ -24,26 +24,40 @@ public class MemberController {
 	
 	private Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
+	/** 로그인 페이지
+	 * @return
+	 */
 	@RequestMapping("loginView.me") 
 	public String loginView() {
 		return "login&signUp/login";
 	}
 
+	/** 약관동의 페이지
+	 * @return
+	 */
 	@RequestMapping("policyView.me")
 	public String policyChk() {
 		return "login&signUp/policyChk";
 	}
 
+	/** 회원가입 페이지
+	 * @return
+	 */
 	@RequestMapping("signUpView.me")
 	public String signUpForm() {
 		return "login&signUp/signUpForm";
 	}
 	
+	/** 로그인
+	 * @param m
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value="login.do", method=RequestMethod.POST)
 	public String memberLogin(@ModelAttribute Member m, Model model) {
 		logger.debug("로그인을 시도한 회원 아이디 : " + m.getmId());
 		Member loginUser = mService.loginMember(m); 
-//		System.out.println(loginUser);
+		System.out.println(loginUser);
 		
 		if(loginUser != null) {
 			model.addAttribute("loginUser", loginUser);
@@ -56,6 +70,10 @@ public class MemberController {
 		}	
 	}
 	
+	/** 로그아웃
+	 * @param status
+	 * @return
+	 */
 	@RequestMapping("logout.me")
 	public String memberLogout(SessionStatus status) {
 		status.setComplete();
