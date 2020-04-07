@@ -36,7 +36,7 @@
         </div>
         <div class="row">
             <div class="col-lg-8 col-lg-offset-3">
-                <form action="uNinsert.no" method="post" enctype="multipart/form-data">
+                <form action="uNinsert.no" method="post" id="notice" enctype="multipart/form-data" onsubmit="return validate();">
                     <div class="form_area_wrap">
                         <table class="form_table">
                             <colgroup>
@@ -55,7 +55,7 @@
                             <tr>
                                 <td>제목</td>
                                 <td><input type="text" name="nTitle" id="title" maxlength="30" placeholder="내용을 입력해주세요(최대 30자)">
-                                    <span id="remaining">(<span id="tCount"></span>/<span id="tMax" value="30">30</span>)</span>
+                                    <!-- <span id="remaining">(<span id="tCount"></span>/<span id="tMax" value="30">30</span>)</span> -->
                                 </td>
                             </tr>
                             <tr>
@@ -66,7 +66,7 @@
                             <tr>
                                 <td>내용</td>
                                 <td><textarea name="nContent" id="editor1" maxlength="700"></textarea>
-                                    <span id="remaining">(<span id="cCount"></span>/<span id="cMax" value="700">700</span>)</span></td>
+                                    <!-- <span id="remaining">(<span id="cCount"></span>/<span id="cMax" value="700">700</span>)</span> --></td>
                             </tr>
                             <tr>
                                 <td>첨부파일</td>
@@ -75,7 +75,7 @@
                             </tbody>
                         </table>
                         <div class="register">
-                            <input type="submit" name="" value="등록">
+                            <input type="submit" id="noticeForm" name="" value="등록">
                         </div>
                     </div>
                 </form>
@@ -88,12 +88,28 @@
 	<!-- Footer -->
 	<%@ include file="../../common/footer.jsp"%>
     <script>
-    
-    $(function(){
+	    function validate(){
+			var title = document.getElementById("title");
+			
+			var content = document.getElementById("editor1");
+			
+			if ((title.value) == ""){
+	            alert("제목을 입력해주세요!");
+	            title.focus();
+	            return false;
+	        }
+			
+			if((content.value) == ""){
+				alert("내용을 입력해주세요!");
+				return false;
+			}
+		}
+	    
+    	$(function(){
+    		CKEDITOR.replace( 'editor1');
+
     	
-    	CKEDITOR.replace( 'editor1');
-    	
-        $('#title').keydown(function(){
+        /* $('#title').keydown(function(){
             var maxlength = $('#tMax').val();
             var inputlength = $(this).val().length;
             var remain = 0 + inputlength;
@@ -105,7 +121,7 @@
 
             }
         });
-
+ */
         /* $('#editor1').keydown(function(){
             var maxlength = $('#cMax').val();
             var inputlength = $(this).val().length;

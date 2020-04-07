@@ -44,10 +44,10 @@ CKEDITOR.editorConfig = function( config ) {
 		    showWordCount: true,
 
 		    // Whether or not you want to show the Char Count
-		    showCharCount: false,
+		    showCharCount: true,
 
 		    // Whether or not you want to count Spaces as Chars
-		    countSpacesAsChars: false,
+		    countSpacesAsChars: true,
 
 		    // Whether or not to include Html chars in the Char Count
 		    countHTML: false,
@@ -56,13 +56,13 @@ CKEDITOR.editorConfig = function( config ) {
 		    countLineBreaks: false,
 
 		    // Maximum allowed Word Count, -1 is default for unlimited
-		    maxWordCount: 700,
+		    maxWordCount: -1,
 
 		    // Maximum allowed Char Count, -1 is default for unlimited
-		    maxCharCount: 700,
+		    maxCharCount: 650,
 		    
 		    // Maximum allowed Paragraphs Count, -1 is default for unlimited
-		    maxParagraphs: 700,
+		    maxParagraphs: -1,
 
 		    // How long to show the 'paste' warning, 0 is default for not auto-closing the notification
 		    pasteWarningDuration: 0,
