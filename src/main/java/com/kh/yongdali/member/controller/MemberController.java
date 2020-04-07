@@ -41,15 +41,15 @@ public class MemberController {
 	
 	@RequestMapping(value="login.do", method=RequestMethod.POST)
 	public String memberLogin(@ModelAttribute Member m, Model model) {
-		logger.debug(m.getmId());
+		logger.debug("로그인을 시도한 회원 아이디 : " + m.getmId());
 		Member loginUser = mService.loginMember(m); 
-		System.out.println(loginUser);
+//		System.out.println(loginUser);
 		
 		if(loginUser != null) {
 			model.addAttribute("loginUser", loginUser);
 			return "redirect:home.do";
 //			return "redirect:index.jsp";
-			
+
 		}else {
 			model.addAttribute("msg","로그인 실패!");
 			return "common/errorPage";
