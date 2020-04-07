@@ -301,7 +301,7 @@
 		<br> <br> <br>
 		<div class="row text-center">
 			<button class="btn btn-lg btn-default na fw6 aos-init aos-animate"
-				onclick="location.href='#use'" data-aos="flip-left"
+				onclick="location.href='#header1'" data-aos="flip-left"
 				data-aos-duration="2000" data-aos-anchor-placement="center-bottom">페이지
 				상단으로 가기</button>
 		</div>
