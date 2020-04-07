@@ -27,6 +27,9 @@
         <div OnClick="location.href ='jwt.ydl'" style="width: 100px; height: 100px; background: lightgreen; cursor: pointer; border-radius: 10px; margin-right: 20px;">
             장원태
         </div>
+<!--         <div OnClick="location.href ='error.ydl'" style="width: 100px; height: 100px; background: lightgreen; cursor: pointer; border-radius: 10px; margin-right: 20px;">
+            에러페이지
+        </div> -->
     </div>
 </body>
 </html>

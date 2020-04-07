@@ -44,12 +44,14 @@ public class MemberController {
 		Member loginUser = mService.loginMember(m); 
 		System.out.println(loginUser);
 		
-//		if(loginUser != null && BCryptPasswordEncoder.matches(m.getPwd(), loginUser.getPwd())) {
-//			
-//		}
+		if(loginUser != null) {
+			model.addAttribute("loginUser", loginUser);
+			return "redirect:home.do";
+//			return "redirect:index.jsp";
 			
-		
-		
-		return null;
+		}else {
+			model.addAttribute("msg","로그인 실패!");
+			return "common/errorPage";
+		}	
 	}
 }
