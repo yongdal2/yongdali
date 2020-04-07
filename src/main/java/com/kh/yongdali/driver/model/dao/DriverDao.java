@@ -6,7 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.yongdali.driver.model.vo.Reservation;
+import com.kh.yongdali.reservation.model.vo.Reservation;
 
 @Repository("dDao")
 public class DriverDao {
