@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
 	type="text/javascript"></script>
 
@@ -42,12 +42,22 @@
 			</div>
 			<div class="col-lg-4">
 				<ul class="nav navbar-nav float-lg-right navbar-right">
-					<li class="nav-item">
-						<button class="btn btn-default navbar-btn loginView" style="background: rgb(87,187,138); color: white;">로그인</button>
-					</li>
-					<li class="nav-item">
-						<button class="btn btn-outline-default navbar-btn signUpView" style="background: white;" >회원가입</button>
-					</li>
+					<c:if test="${empty sessionScope.loginUser }">
+						<li class="nav-item">
+							<button class="btn btn-default navbar-btn loginView" style="background: rgb(87,187,138); color: white;">로그인</button>
+						</li>
+						<li class="nav-item">
+							<button class="btn btn-outline-default navbar-btn signUpView" style="background: white;" >회원가입</button>
+						</li>
+					</c:if>
+					<c:if test="${!empty sessionScope.loginUser }">
+						<li class="nav-item">
+							<button class="btn btn-default navbar-btn myPage" style="background: rgb(87,187,138); color: white;">마이페이지</button>
+						</li>
+						<li class="nav-item">
+							<button class="btn btn-outline-default navbar-btn logout" style="background: white;" >로그아웃</button>
+						</li>
+					</c:if>	
 				</ul>
 			</div>
 		</div>

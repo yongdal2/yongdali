@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.kh.yongdali.member.model.service.MemberService;
 import com.kh.yongdali.member.model.vo.Member;
@@ -54,4 +55,12 @@ public class MemberController {
 			return "common/errorPage";
 		}	
 	}
+	
+	@RequestMapping("logout.me")
+	public String memberLogout(SessionStatus status) {
+		status.setComplete();
+		
+		return "redirect:home.do";
+	}
+	
 }
