@@ -28,6 +28,8 @@
 	<nav class="navbar navbar-expand navbar-dark mai-top-header" style="margin-bottom: 18px; padding-top: 23px; font-size: 18px;">
 		<div class="container">
 			<div class="row">
+			
+			<%-- <input type="text" id="test1" value="${loginUser.mId}"/> --%>
 			<div class="navbar-header col-lg-4">
 				<a class="navbar-brand" href="#" style="font-size: 30px; color: rgb(87,187,138); padding-top: 0px;">
 					<img alt="사진안들어감"src="${pageContext.request.contextPath}/resources/images/ydl_logo/ydl_lg_gr(150x50).png" class="d-inline-block align-top" style="height: 48px">
@@ -42,7 +44,10 @@
 			</div>
 			<div class="col-lg-4">
 				<ul class="nav navbar-nav float-lg-right navbar-right">
-					<c:if test="${empty sessionScope.loginUser }">
+					<c:if test="${empty sessionScope.loginUser}">
+						  
+
+						  
 						<li class="nav-item">
 							<button class="btn btn-default navbar-btn loginView" style="background: rgb(87,187,138); color: white;">로그인</button>
 						</li>
@@ -50,10 +55,24 @@
 							<button class="btn btn-outline-default navbar-btn signUpView" style="background: white;" >회원가입</button>
 						</li>
 					</c:if>
-					<c:if test="${!empty sessionScope.loginUser }">
-						<li class="nav-item">
-							<button class="btn btn-default navbar-btn myPage" style="background: rgb(87,187,138); color: white;">마이페이지</button>
-						</li>
+					<c:if test="${!empty sessionScope.loginUser}">
+						<c:if test='${loginUser.mSort eq ("관리자")}'>
+							<li class="nav-item">
+								<button class="btn btn-default navbar-btn" style="background: rgb(87,187,138); color: white;">샘플데이터</button>
+							</li>
+							<li class="nav-item">
+								<button class="btn btn-default navbar-btn" style="background: rgb(87,187,138); color: white;">관리자페이지</button>
+							</li>
+						</c:if>
+						<c:if test='${loginUser.mSort ne ("관리자")}'>
+							<script>
+							 	console.log(${loginUser.mSort});
+							 </script> 
+							<li class="nav-item">
+								<button class="btn btn-default navbar-btn myPage" style="background: rgb(87,187,138); color: white;">마이페이지</button>
+							</li>
+						</c:if>
+						
 						<li class="nav-item">
 							<button class="btn btn-outline-default navbar-btn logout" style="background: white;" >로그아웃</button>
 						</li>
