@@ -46,4 +46,32 @@ public interface NoticeService {
 	 * @return
 	 */
 	int insertNotice(Notice n);
+
+	/**
+	 * 4. 공지사항 수정
+	 * @param nNo
+	 * @return
+	 */
+	Notice selectUpdateNotice(String nNo);
+	int updateNotice(Notice n);
+
+	/**
+	 * 5. 공지사항 삭제
+	 * @param nNo
+	 * @return
+	 */
+	int deleteNotice(String nNo);
+
+	/**
+	 * 6. 검색한 게시글 수 
+	 * @return
+	 */
+	int userSearchGetListCount(String keyword);
+
+	/**
+	 * 7. 검색한 게시글 출력
+	 * @param pi
+	 * @return
+	 */
+	ArrayList<Notice> userSearchSelectList(PageInfo pi,String keyword);
 }

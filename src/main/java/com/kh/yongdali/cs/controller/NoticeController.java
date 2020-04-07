@@ -121,6 +121,12 @@ public class NoticeController {
 		
 	}
 	
+	/**
+	 * 파일 저장 메소드
+	 * @param file
+	 * @param request
+	 * @return
+	 */
 	public String saveFile(MultipartFile file, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		
@@ -149,5 +155,116 @@ public class NoticeController {
 	
 	
 	}
+	
+	/**
+	 * 공지사항 수정 페이지 연결
+	 * @param mv
+	 * @param nNo
+	 * @return
+	 */
+	@RequestMapping("uNupview.no")
+	public ModelAndView noticeUpdateView(ModelAndView mv, String nNo) {
+		mv.addObject("n",nService.selectUpdateNotice(nNo)).setViewName("user/notice/noticeUpdateForm");
+		return mv;
+	}
+	
+	/**
+	 * 공지사항 수정
+	 * @param mv
+	 * @param n
+	 * @param nSort
+	 * @param request
+	 * @param file
+	 * @return
+	 */
+	@RequestMapping("uNupdate.no")	
+	public ModelAndView noticeUpdate(ModelAndView mv, Notice n, @RequestParam(name="nSort", required=true, defaultValue="일반")String nSort,
+									HttpServletRequest request, @RequestParam(value="reloadFile", required=false) MultipartFile file) {
+		if(file != null && !file.isEmpty()) {
+			if(n.getnImgRename() != null) {
+				deleteFile(n.getnImgRename(), request);
+			}
+			
+			//삭제 후 새롭게 추가
+			String renameFileName = saveFile(file,request);
+			
+			if(renameFileName != null) {
+				n.setnImgOrigin(file.getOriginalFilename());
+				n.setnImgRename(renameFileName);
+			}
+		}
+		
+		n.setnSort(nSort);
+		System.out.println(n);
+		
+		int result = nService.updateNotice(n);
+		
+		System.out.println(result);
+		
+		
+		if(result > 0) {
+			mv.addObject("nNo",n.getnNo()).setViewName("redirect:uNdetail.no");
+		}else {
+			mv.setViewName("common/errorPage");
+		}
+		
+		return mv;
+	}
+	
+	/**
+	 * 파일 삭제 메소드
+	 * @param fileName
+	 * @param request
+	 */
+	public void deleteFile(String fileName, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\nuploadFiles";
+		
+		File f = new File(savePath + "\\" +fileName);
+		
+		if(f.exists()) {
+			f.delete(); //파일 삭제
+		}
+	}
+	
+	@RequestMapping("uNdelete.no")
+	public String noticeDelete(String nNo, HttpServletRequest request) {
+		Notice n = nService.selectUpdateNotice(nNo);
+		
+		if(n.getnImgRename() != null) {
+			deleteFile(n.getnImgRename(), request);
+		}
+		
+		int result = nService.deleteNotice(nNo);
+		
+		if(result > 0) {
+			return "redirect:uNoticeMain.no";
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	@RequestMapping("uNsearch.no")
+	public ModelAndView userNoticeSearch(ModelAndView mv, @RequestParam(value="keyword", required=false) String keyword, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage ) {
+		
+		System.out.println(currentPage);
+		
+		int listCount = nService.userSearchGetListCount(keyword);
+		
+		System.out.println(listCount);
+		
+		int pageLimit = 5;
+		int boardLimit = 5;
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,pageLimit,boardLimit );
+		
+		ArrayList<Notice> list = nService.userSearchSelectList(pi,keyword);
+		
+		mv.addObject("list",list);
+		mv.addObject("pi",pi);
+		mv.setViewName("user/notice/notice");
+		return mv;
+	}
+	
+	
 	
 }

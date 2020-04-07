@@ -105,8 +105,8 @@
                     </span>
                 </div>
                 <div class="search_write" align="center">
-                    <form id="search-box">
-                        <input id="search-form" type="text" placeholder="Search">
+                    <form id="search-box" action="uNsearch.no">
+                        <input id="search-form" name="keyword" type="text" placeholder="Search">
                         <button id="search-button" type="submit">검색</button>
                     </form>
                     <!-- 관리자일 경우 뜨는 곳 -->

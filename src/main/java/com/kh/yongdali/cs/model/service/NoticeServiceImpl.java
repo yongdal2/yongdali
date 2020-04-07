@@ -45,4 +45,29 @@ public class NoticeServiceImpl implements NoticeService{
 		
 		return nDao.insertNotice(n);
 	}
+	@Override
+	public Notice selectUpdateNotice(String nNo) {
+		
+		return nDao.userSelectNoticeDetail(nNo);
+	}
+	@Override
+	public int updateNotice(Notice n) {
+		
+		return nDao.updateNotice(n);
+	}
+	@Override
+	public int deleteNotice(String nNo) {
+		
+		return nDao.deleteNotice(nNo);
+	}
+	@Override
+	public int userSearchGetListCount(String keyword) {
+		
+		return nDao.userSearchGetListCount(keyword);
+	}
+	@Override
+	public ArrayList<Notice> userSearchSelectList(PageInfo pi,String keyword) {
+		
+		return nDao.userSearchSelectList(pi,keyword);
+	}
 }
