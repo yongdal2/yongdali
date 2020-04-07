@@ -20,11 +20,11 @@ public interface NoticeService {
 	ArrayList<Notice> userSelectList(PageInfo pi);
 
 	/**
-	 * 2_1. 사용자 게시판 상세보기
+	 * 2_1. 사용자,사업자 게시판 상세보기
 	 * @param nNo
 	 * @return
 	 */
-	Notice userSelectNoticeDetail(String nNo);
+	Notice selectNoticeDetail(String nNo);
 
 	/**
 	 * 2_2. 사용자 게시판 상세보기 내 이전글
@@ -74,4 +74,38 @@ public interface NoticeService {
 	 * @return
 	 */
 	ArrayList<Notice> userSearchSelectList(PageInfo pi,String keyword);
+
+	/*
+	 * -----------------기사 service
+	 */
+	
+	
+	/**
+	 * 1_1. 기사 게시판 총 갯수 조회
+	 * @return
+	 */
+	int driverGetListCount();
+
+	/**
+	 * 1_2. 기사 게시판 리스트
+	 * @param pi
+	 * @return
+	 */
+	ArrayList<Notice> driverSelectList(PageInfo pi);
+
+	/**
+	 * 2_1. 상단에 사업자 게시판 상세보기 메소드 있음
+	 * 2_2. 사업자 게시판 상세보기 내 이전글
+	 * @param nNo
+	 * @return
+	 */
+	Notice driverSelectPreList(String nNo);
+
+	/**
+	 * 2_1. 상단에 사업자 게시판 상세보기 메소드 있음
+	 * 2_3. 사업자 게시판 상세보기 내 다음글
+	 * @param nNo
+	 * @return
+	 */
+	Notice driverSelectNextList(String nNo);
 }

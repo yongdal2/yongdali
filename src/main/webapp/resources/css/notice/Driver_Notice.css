@@ -165,7 +165,7 @@ table.tbl:hover tbody tr:hover td, .tbl td a:hover {
 /* 페이징 현재 페이지 클릭 시 active */
 .pagination a.active {
     background-color: rgb(241,95,95);
-    color: white;
+    color: white !important;
 }
 
 /* Add a grey background color on mouse-over */

@@ -50,9 +50,11 @@
 		<![CDATA[
 		SELECT *
 		FROM NOTICE
-		WHERE TO_NUMBER(SUBSTR(N_NO,2))=
-		(SELECT MAX(TO_NUMBER(SUBSTR(N_NO,2))) FROM NOTICE WHERE TO_NUMBER(SUBSTR(N_NO,2)) < TO_NUMBER(SUBSTR(#{nNo},2)))
-		AND N_SORT IN ('공통','일반')
+		WHERE TO_NUMBER(SUBSTR(N_NO,2))=(SELECT MAX(TO_NUMBER(SUBSTR(N_NO,2))) 
+                                    FROM NOTICE 
+                                    WHERE TO_NUMBER(SUBSTR(N_NO,2)) < TO_NUMBER(SUBSTR(#{nNo},2))
+                                    AND N_STATUS='Y'
+                                    AND N_SORT IN ('공통','일반'))
 		]]>
 	</select>
 	
@@ -61,9 +63,11 @@
 		<![CDATA[
 		SELECT *
 		FROM NOTICE
-		WHERE TO_NUMBER(SUBSTR(N_NO,2))=
-		(SELECT MIN(TO_NUMBER(SUBSTR(N_NO,2))) FROM NOTICE WHERE TO_NUMBER(SUBSTR(N_NO,2)) > TO_NUMBER(SUBSTR(#{nNo},2)))
-		AND N_SORT IN ('공통','일반')
+		WHERE TO_NUMBER(SUBSTR(N_NO,2))=(SELECT MIN(TO_NUMBER(SUBSTR(N_NO,2))) 
+                                    FROM NOTICE 
+                                    WHERE TO_NUMBER(SUBSTR(N_NO,2)) > TO_NUMBER(SUBSTR(#{nNo},2))
+                                    AND N_STATUS='Y'
+                                    AND N_SORT IN ('공통','일반'))
 		]]>
 	</select>
 	
@@ -90,6 +94,7 @@
 		WHERE N_NO=#{nNo}
 	</update>
 
+	<!-- 사용자 게시판 검색 리스트 갯수 -->
 	<select id="userSearchGetListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM NOTICE
@@ -100,6 +105,7 @@
 		OR N_WRITER LIKE '%' || #{keyword} || '%'
 	</select>
 	
+	<!-- 사용자 게시판 검색 리스트 -->
 	<select id="userSearchSelectList" resultMap="noticeResultSet">
 		SELECT *
 		FROM NOTICE
@@ -110,6 +116,48 @@
 		OR N_WRITER LIKE '%' || #{keyword} || '%'
 	</select>
 
+	<!-- 기사 게시글 갯수 -->
+	<select id="driverGetListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM NOTICE
+		WHERE N_STATUS='Y'
+		AND N_SORT IN ('공통','사업자')	
+	</select>
+	
+	<!-- 기사 게시글 리스트 -->
+	<select id="driverSelectList" resultMap="noticeResultSet">
+		SELECT *
+		FROM NOTICE
+		WHERE N_STATUS='Y'
+		AND N_SORT IN ('공통','사업자')
+		ORDER BY TO_NUMBER(SUBSTR(N_NO,2)) DESC
+	</select>
+	
+	<!-- 기사 게시글 상세보기 이전글 -->
+	<select id="driverSelectPreList" resultMap="noticeResultSet">
+		<![CDATA[
+		SELECT *
+		FROM NOTICE
+		WHERE TO_NUMBER(SUBSTR(N_NO,2))=(SELECT MAX(TO_NUMBER(SUBSTR(N_NO,2))) 
+                                    FROM NOTICE 
+                                    WHERE TO_NUMBER(SUBSTR(N_NO,2)) < TO_NUMBER(SUBSTR(#{nNo},2))
+                                    AND N_STATUS='Y'
+                                    AND N_SORT IN ('공통','사업자'))
+		]]>
+	</select>
+	
+	<!-- 기사 게시글 상세보기 다음글 -->
+	<select id="driverSelectNextList" resultMap="noticeResultSet">
+		<![CDATA[
+		SELECT *
+		FROM NOTICE
+		WHERE TO_NUMBER(SUBSTR(N_NO,2))=(SELECT MIN(TO_NUMBER(SUBSTR(N_NO,2))) 
+                                    FROM NOTICE 
+                                    WHERE TO_NUMBER(SUBSTR(N_NO,2)) > TO_NUMBER(SUBSTR(#{nNo},2))
+                                    AND N_STATUS='Y'
+                                    AND N_SORT IN ('공통','사업자'))
+		]]>
+	</select>
 
 
 </mapper>
