@@ -9,13 +9,14 @@
 		<result property="mName" column="NAME"/>
 		<result property="phone" column="PHONE"/>
 		<result property="mSort" column="M_SORT"/>
+		<result property="mStatus" column="M_STATUS"/>
 		<result property="enrollDate" column="ENROLLDATE"/>
 	</resultMap>
 	
-
 	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
 		SELECT *
 		FROM MEMBER
 		WHERE M_ID = #{mId}
+		  AND M_STATUS = '정상'
 	</select>
 </mapper>    

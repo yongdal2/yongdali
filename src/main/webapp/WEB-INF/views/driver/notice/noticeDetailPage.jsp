@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +25,7 @@
         </div>
         <div class="row">
             <div class="col-lg-3 sidebar">
-                <a href="Driver_Notice.html"><span class="sidebar_span">공지사항</span></a><br>
+                <a href="dNoticeMain.no"><span class="sidebar_span">공지사항</span></a><br>
                 <a href="Driver_Faq.html"><span class="sidebar_span">자주 묻는 질문</span></a><br>
                 <a href=""><span class="sidebar_span"> 채팅</span></a>
             </div>
@@ -37,50 +38,81 @@
                 <div class="text_area">
                     <div class="text_area_wrap">
                         <div class="text_area_tit">
-                            <h4>제목입니다.</h4>
+                            <h4>${n.nTitle }</h4>
                             <ul class="title_ul">
                                 <li>
-                                <span class="regist_Day_area">등록일<em class="regist_day">2020.02.27</em></span>
-                                <span class="write_tit_area">작성자<em class="write">관리자</em></span>
+                                <span class="regist_Day_area">등록일<em class="regist_day">${n.nCreateDate }</em></span>
+                                <span class="write_tit_area">작성자<em class="write">${n.nWriter }</em></span>
                                 </li>
                             </ul>
                         </div>
                         <div class="detail_text_area">
-                            <p>어쩌고저쩌고</p>
+                            <p>${n.nContent }</p>
                         </div>
-                        <div class="file_area">
-                            <ul>
-                                <li>
-                                    <div class="left">첨부파일</div>
-                                    <div class="file">jinyeong.png</div>
-                                </li>
-                                
-                            </ul>
-                        </div>
+                        <c:if test="${!empty n.nImgOrigin }">
+	                        <div class="file_area">
+	                            <ul>
+	                                <li>
+	                                	
+		                                    <div class="left">첨부파일</div>
+		                                    <div class="file"><a href="${contextPath }/resources/nuploadFiles/${n.nImgRename}" download="${n.nImgOrigin }">${n.nImgOrigin }</a></div>                                    
+	                                </li>
+	                            </ul>
+	                        </div>
+                        </c:if>
                     </div>
                     <div class="pagemove_area_wrap">
                         <ul>
                             <li>
-                                <a href="">
-                                    <div class="left next">이전글</div>
-                                    <div class="tit">이전글 입니다아아</div>
-                                    <div class="date">2019-12-13</div>
-                                </a>
+                            	<c:if test="${!empty pre }">
+	                                <a href="dNdetail.no?nNo=${pre.nNo }&currentPage=${currentPage }">
+	                                    <div class="left prev">이전글</div>
+	                                    <div class="tit">${pre.nTitle }</div>
+	                                    <div class="date">${pre.nCreateDate }</div>
+	                                </a>
+                                </c:if>
+                                <c:if test="${empty pre }">
+                                	<a>
+	                                    <div class="left prev">이전글</div>
+	                                    <div class="tit">이전 글이 없습니다.</div>
+	                                    <div class="date"></div>
+	                                </a>
+                                </c:if>
                             </li>
-                            <li>
-                                <a href="">
-                                    <div class="left prev">다음글</div>
-                                    <div class="tit">다음글 입니당아당</div>
-                                    <div class="date">2020-01-17</div>
-                                </a>
+                            <li> 
+                            	<c:if test="${!empty next }">
+	                                <a href="dNdetail.no?nNo=${next.nNo }&currentPage=${currentPage }">
+	                                    <div class="left next">다음글</div>
+	                                    <div class="tit">${next.nTitle }</div>
+	                                    <div class="date">${next.nCreateDate}</div>
+	                                </a>
+                                </c:if>
+                                <c:if test="${empty next }">
+                                	<a>
+	                                	<div class="left next">다음글</div>
+	                                    <div class="tit">다음 글이 없습니다.</div>
+	                                    <div class="date"> </div>
+                                    </a>
+                                </c:if>
                             </li>
                         </ul>
+                        <!-- TODO 관리자만 뜨도록 하기 -->
                         <div class="editDelete">
-                            <button id="editBtn" onclick="location.href='' ">수정</button>
-                            <button id="deleteBtn" onclick="location.href='' ">삭제</button>
+                        	<c:url var="uNupview" value="uNupview.no">
+                        		<c:param name="nNo" value="${n.nNo }"/>
+                        	</c:url>
+                        	<c:url var="uNdelete" value="uNdelete.no">
+                        		<c:param name="nNo" value="${n.nNo }"/>
+                        	</c:url>
+                        
+                            <button id="editBtn" onclick="location.href='${uNupview}' ">수정</button>
+                            <button id="deleteBtn" onclick="location.href='${uNdelete}' ">삭제</button>
                         </div>
                         <div class="list">
-                            <button id="listbtn" onclick="location.href='Driver_Notice.html' ">목록</button>
+	                        <c:url var="nlist" value="dNoticeMain.no">
+								<c:param name="currentPage" value="${ currentPage}"/>
+							</c:url>
+                            <button id="listbtn" onclick="location.href='${nlist}' ">목록</button>
                         </div>
                     </div>
                 </div> 

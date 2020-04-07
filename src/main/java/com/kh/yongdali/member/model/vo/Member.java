@@ -10,6 +10,7 @@ public class Member {
 	private String mName;
 	private String phone;
 	private String mSort;
+	private String mStatus;
 	private Date enrollDate;
 	
 	public Member() {
@@ -17,13 +18,14 @@ public class Member {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Member(String mId, String pwd, String mName, String phone, String mSort, Date enrollDate) {
+	public Member(String mId, String pwd, String mName, String phone, String mSort, String mStatus, Date enrollDate) {
 		super();
 		this.mId = mId;
 		this.pwd = pwd;
 		this.mName = mName;
 		this.phone = phone;
 		this.mSort = mSort;
+		this.mStatus = mStatus;
 		this.enrollDate = enrollDate;
 	}
 
@@ -67,6 +69,14 @@ public class Member {
 		this.mSort = mSort;
 	}
 
+	public String getmStatus() {
+		return mStatus;
+	}
+
+	public void setmStatus(String mStatus) {
+		this.mStatus = mStatus;
+	}
+
 	public Date getEnrollDate() {
 		return enrollDate;
 	}
@@ -78,6 +88,9 @@ public class Member {
 	@Override
 	public String toString() {
 		return "Member [mId=" + mId + ", pwd=" + pwd + ", mName=" + mName + ", phone=" + phone + ", mSort=" + mSort
-				+ ", enrollDate=" + enrollDate + "]";
+				+ ", mStatus=" + mStatus + ", enrollDate=" + enrollDate + "]";
 	}
+	
+	
+	
 }

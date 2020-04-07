@@ -26,9 +26,9 @@ public class NoticeServiceImpl implements NoticeService{
 		return nDao.userSelectList(pi);
 	}
 	@Override
-	public Notice userSelectNoticeDetail(String nNo) {
+	public Notice selectNoticeDetail(String nNo) {
 		
-		return nDao.userSelectNoticeDetail(nNo);
+		return nDao.selectNoticeDetail(nNo);
 	}
 	@Override
 	public Notice userSelectPreList(String nNo) {
@@ -48,7 +48,7 @@ public class NoticeServiceImpl implements NoticeService{
 	@Override
 	public Notice selectUpdateNotice(String nNo) {
 		
-		return nDao.userSelectNoticeDetail(nNo);
+		return nDao.selectNoticeDetail(nNo);
 	}
 	@Override
 	public int updateNotice(Notice n) {
@@ -69,5 +69,31 @@ public class NoticeServiceImpl implements NoticeService{
 	public ArrayList<Notice> userSearchSelectList(PageInfo pi,String keyword) {
 		
 		return nDao.userSearchSelectList(pi,keyword);
+	}
+	
+	/*
+	 * -----------------기사 service
+	 */
+	
+	
+	@Override
+	public int driverGetListCount() {
+		
+		return nDao.driverGetListCount();
+	}
+	@Override
+	public ArrayList<Notice> driverSelectList(PageInfo pi) {
+		
+		return nDao.driverSelectList(pi);
+	}
+	@Override
+	public Notice driverSelectPreList(String nNo) {
+		
+		return nDao.driverSelectPreList(nNo);
+	}
+	@Override
+	public Notice driverSelectNextList(String nNo) {
+		
+		return nDao.driverSelectNextList(nNo);
 	}
 }

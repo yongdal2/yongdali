@@ -8,6 +8,7 @@
 
     <!-- Custom Css -->
     <link rel="stylesheet" href="${contextPath}/resources/css/notice/Driver_Notice_Form.css">
+     <script type="text/javascript" src="${contextPath }/resources/js/ckeditor/ckeditor.js"></script>
     
 </head>
 <body>
@@ -23,7 +24,7 @@
         </div>
         <div class="row">
             <div class="col-lg-3 sidebar">
-                <a href="Driver_Notice.html"><span class="sidebar_span">공지사항</span></a><br>
+                <a href="dNdetail.no"><span class="sidebar_span">공지사항</span></a><br>
                 <a href="Driver_Faq.html"><span class="sidebar_span">자주 묻는 질문</span></a><br>
                 <a href=""><span class="sidebar_span"> 채팅</span></a>
             </div>
@@ -33,7 +34,7 @@
         </div>
         <div class="row">
             <div class="col-lg-8 col-lg-offset-3">
-                <form action="" method="post" enctype="multipart/form-data">
+                <form action="dNinsert.no" method="post" id="notice" enctype="multipart/form-data">
                     <div class="form_area_wrap">
                         <table class="form_table">
                             <colgroup>
@@ -43,35 +44,35 @@
                             <tbody>
                             <tr>
                                 <td>구분</td>
-                                <td><select name="" id="">
+                                <td><select name="nSort" id="nSort">
                                     <option value="일반">일반</option>
-                                    <option value="사업자">사업자</option>
+                                    <option value="사업자" selected>사업자</option>
                                     <option value="공통">공통</option>
                                 </select></td>
                             </tr>
                             <tr>
                                 <td>제목</td>
-                                <td><input type="text" name="" id="title" maxlength="30" placeholder="내용을 입력해주세요(최대 30자)">
-                                    <span id="remaining">(<span id="tCount"></span>/<span id="tMax" value="30">30</span>)</span>
+                                <td><input type="text" name="nTitle" id="title" maxlength="30" placeholder="내용을 입력해주세요(최대 30자)">
+                                    <!-- <span id="remaining">(<span id="tCount"></span>/<span id="tMax" value="30">30</span>)</span> -->
                                 </td>
                             </tr>
                             <tr>
                                 <td>작성자</td>
-                                <td>관리자</td>
+                                <td><input type="text" readonly name="nWriter" value="관리자"></td>
                             </tr>
                             <tr>
                                 <td>내용</td>
-                                <td><textarea name="" id="content" maxlength="700"></textarea>
-                                    <span id="remaining">(<span id="cCount"></span>/<span id="cMax" value="700">700</span>)</span></td>
+                                <td><textarea name="nContent" id="editor1" maxlength="700"></textarea>
+                                    <!-- <span id="remaining">(<span id="cCount"></span>/<span id="cMax" value="700">700</span>)</span></td> -->
                             </tr>
                             <tr>
                                 <td>첨부파일</td>
-                                <td><input type="file" name=""></td>
+                                <td><input type="file" name="uploadFile"></td>
                             </tr>
                             </tbody>
                         </table>
                         <div class="register">
-                            <input type="submit" name="" value="등록">
+                            <input type="submit" id="noticeForm" name="" value="등록">
                         </div>
                     </div>
                 </form>
@@ -84,32 +85,49 @@
 	<!-- Footer -->
 	<%@ include file="../../common/footer.jsp"%>
     <script>
-    $(function(){
-        $('#title').keydown(function(){
-            var maxlength = $('#tMax').val();
-            var inputlength = $(this).val().length;
-            var remain = 0 + inputlength;
-
-            $('#tCount').html(remain);
-
-            if(inputlength > maxlength){
-                $('#tCount').val($('#tCount').val().substring(0,30));
-
-            }
-        });
-
-        $('#content').keydown(function(){
-            var maxlength = $('#cMax').val();
-            var inputlength = $(this).val().length;
-            var remain = 0 + inputlength;
-
-            $('#cCount').html(remain);
-
-            if(inputlength > maxlength){
-                $('#cCount').val($('#cCount').val().substring(0,700));
-
-            }
-        })
+	    function validate(){
+			var title = document.getElementById("title");
+			
+			var content = document.getElementById("editor1");
+			
+			if ((title.value) == ""){
+	            alert("제목을 입력해주세요!");
+	            title.focus();
+	            return false;
+	        }
+			
+			if((content.value) == ""){
+				alert("내용을 입력해주세요!");
+				return false;
+			}
+		}
+    	$(function(){
+    		CKEDITOR.replace( 'editor1');
+	        /* $('#title').keydown(function(){
+	            var maxlength = $('#tMax').val();
+	            var inputlength = $(this).val().length;
+	            var remain = 0 + inputlength;
+	
+	            $('#tCount').html(remain);
+	
+	            if(inputlength > maxlength){
+	                $('#tCount').val($('#tCount').val().substring(0,30));
+	
+	            }
+	        });
+	
+	        $('#content').keydown(function(){
+	            var maxlength = $('#cMax').val();
+	            var inputlength = $(this).val().length;
+	            var remain = 0 + inputlength;
+	
+	            $('#cCount').html(remain);
+	
+	            if(inputlength > maxlength){
+	                $('#cCount').val($('#cCount').val().substring(0,700));
+	
+	            }
+	        }) */
     })
     </script>
 </body>
