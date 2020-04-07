@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.kh.yongdali.driver.model.service.DriverService;
-import com.kh.yongdali.driver.model.vo.Reservation;
+import com.kh.yongdali.reservation.model.vo.Reservation;
 
 @Controller
 public class DriverController {

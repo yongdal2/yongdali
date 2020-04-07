@@ -7,7 +7,9 @@ var amount=0;
 
 function calc(){
 	amount=(charge_opt1+charge_opt2+charge_dis+charge_days+charge_add1+charge_add2)*10000;
+	
 	$('#amount').html(amount.toLocaleString()+"원");
+	$('#amountVal').val(amount);
 }
 
 /* 차량 안내 */
@@ -30,7 +32,7 @@ $("#myModal1").mouseenter(function(){
 		   modal1.style.display = "none";
 		}
 	}
-})
+});
 
 // 차량형태,적재크기 클릭시 css와 내용 변화 
 $("#type1").click(function(){
@@ -83,7 +85,7 @@ function addCarInfo1(){
 	}
 	
 	// 값들 서로 연관 시킴
-	if(charge_opt2==0 || charge_dis==0){
+	if(charge_opt2==0 && charge_dis==0){
 		carInfo.innerHTML = sl1.value;
 	} else {
 		carInfo.innerHTML = sl1.value+" / "+sl2.value;
@@ -104,8 +106,8 @@ function addCarInfo2(){
 		carInfo.innerHTML = sl1.value+" / "+sl2.value;		
 		console.log("옵션1(+) : " + charge_opt1);
 		console.log("옵션2(+) : " + charge_opt2);
-		calc();
 	}
+	calc();
 }
 
 
@@ -160,7 +162,7 @@ $("#myModal2").mouseenter(function(){
 		   modal2.style.display = "none";
 		}
 	}
-})
+});
 
 
 /* 가구, 가전, 기타 클릭시마다 borderline 변경 */
@@ -518,8 +520,9 @@ function preChargeFunc(){
 		}
 		
 		var distance = document.getElementById("distance");
-		distance.innerHTML = d + " km";
 		
+		distance.innerHTML = d + " km";
+		$("distanceVal").val(d);
 		console.log("거리에 따른 비용 : " + charge_dis);
 		calc();
 	}
@@ -582,15 +585,35 @@ $('#checkLoad1').click(function(){
 		$(this).val("바로 상차");
 		if($('#datepicker2').val()!=""){
 			days = Math.round((edDate.getTime()-stDate.getTime())/1000/60/60/24);
-			console.log("시작날짜로와 종료날짜 사이 일수 : " + days);
-			charge_days = 6*days;
-			console.log(days+"*60,000원 = " + charge_days);
-			$('#btwDay').html(days+"일");
-			$('#book-YN').html("예약됨");
-			calc();
+			
+			if(days != 0){
+				console.log("시작날짜로와 종료날짜 사이 일수 : " + days);
+				charge_days = 6*days;
+				console.log(days+"*60,000원 = " + charge_days);
+				$('#btwDay').html(days+"일");
+				$('#book-YN').html("O");
+				$('#days').val(days);
+				console.log("히든에 들어갈 일수 : "+$('#days').val());
+			}
+			calc();	
 		}
 	}
 });
+
+
+
+
+// 출발지와 도착지 각각의 주소 붙여 input hidden에다가 담기
+function addAddr(){
+	var stAddr1 = $('#startAddr').val();
+	var stAddr2 = $('#startDetailAddr').val();
+	var edAddr1 = $('#endAddr').val();
+	var edAddr2 = $('#endDetailAddr').val();
+	$('#addStAddr').val(stAddr1+","+stAddr2);
+	$('#addEdAddr').val(edAddr1+","+edAddr2);
+	console.log(stAddr1+","+stAddr2);
+	console.log(edAddr1+","+edAddr2);
+}
 
 
 // 하차 예약시 날짜 선택시 변수에 담기
@@ -610,7 +633,11 @@ function setEndDate(){
 		charge_days = 6*days;
 		console.log(days+"*60,000원 = " + charge_days);
 		$('#btwDay').html(days+"일");
-		$('#book-YN').html("예약됨");
+		$('#book-YN').html("O");
+		$('#days').val(days);
+		console.log("히든에 들어갈 일수 : "+$('#days').val());
+		
+		addAddr();
 		calc();
 	}
 }
@@ -642,7 +669,9 @@ $('#datepicker1').datepicker({
 			charge_days = 6*days;
 			console.log(days+"*60,000원 = " + charge_days);
 			$('#btwDay').html(days+"일");
-			$('#book-YN').html("예약됨");
+			$('#book-YN').html("O");
+			$('#days').val(days);
+			console.log("히든에 들어갈 일수 : "+$('#days').val());
 			calc();
 		}
 	},
@@ -679,20 +708,25 @@ $("#checkLoad2").click(function(){
 		$('#datepicker2').datepicker('setDate',null);
 		document.getElementById('sl4').selectedIndex = 0;
 		document.getElementById('sl4').style.color="#8e8e8e";
+		$('#book-YN').html("X");
+		$('#btwDay').html("X");
+		$('#days').val("0");
+		addAddr();
 	} else if($(this).prop("checked") == false) {    	  
 		$("#datepicker2").attr('disabled',false).css('background','white');
 		$("#sl4").attr('disabled',false).css('background','white');
+		$('#book-YN').html("");
+		$('#btwDay').html("");
+		$('#days').val("0");
 	}
 });
-
-
-
-var modal5 = document.getElementById('myModal5');
 
 // '도움 필요하지 않아요' 클릭시
 $('#helpUnload-ch').click(function(){
 	$('#helpLoad').text("고객님이 직접 상차");
 	$('#helpUnload').text("고객님이 직접 하차");
+	$('#helpLoadVal').val("고객님이 직접 상차");
+	$('#helpUnloadVal').val("고객님이 직접 하차");
 	charge_add1 = 0;
 	charge_add2 = 0;
 });
@@ -776,11 +810,16 @@ $('#checkHelp-btn').click(function(){
 				$('#myModal5').css('display','none');
 				$('#helpLoad').html($('#checkHelp1').val());
 				$('#helpUnload').html("고객님이 직접 하차");
+
+				$('#helpLoadVal').val($('#checkHelp1').val());
+				$('#helpUnloadVal').val("고객님이 직접 하차");
 				calc();
 			} else {				
 				$('#myModal5').css('display','none');
 				$('#helpLoad').html("고객님이 직접 상차");
 				$('#helpUnload').html($('#checkHelp2').val());
+				$('#helpLoadVal').val("고객님이 직접 하차");
+				$('#helpUnloadVal').val($('#checkHelp2').val());
 				calc();
 			}
 		}

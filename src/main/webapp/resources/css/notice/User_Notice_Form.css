@@ -107,6 +107,10 @@ a{
     height:250px;
 }
 
+input[type=file]{
+	display:inline-block !important;
+}
+
 /* 등록하기 */
 .register{
     margin-top: 20px;

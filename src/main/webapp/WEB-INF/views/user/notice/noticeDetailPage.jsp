@@ -55,7 +55,7 @@
 	                                <li>
 	                                	
 		                                    <div class="left">첨부파일</div>
-		                                    <div class="file"><a href="">${n.nImgOrigin }</a></div>                                    
+		                                    <div class="file"><a href="${contextPath }/resources/nuploadFiles/${n.nImgRename}" download="${n.nImgOrigin }">${n.nImgOrigin }</a></div>                                    
 	                                </li>
 	                            </ul>
 	                        </div>
@@ -98,8 +98,15 @@
                         </ul>
                         <!-- TODO 관리자만 뜨도록 하기 -->
                         <div class="editDelete">
-                            <button id="editBtn" onclick="location.href='' ">수정</button>
-                            <button id="deleteBtn" onclick="location.href='' ">삭제</button>
+                        	<c:url var="uNupview" value="uNupview.no">
+                        		<c:param name="nNo" value="${n.nNo }"/>
+                        	</c:url>
+                        	<c:url var="uNdelete" value="uNdelete.no">
+                        		<c:param name="nNo" value="${n.nNo }"/>
+                        	</c:url>
+                        
+                            <button id="editBtn" onclick="location.href='${uNupview}' ">수정</button>
+                            <button id="deleteBtn" onclick="location.href='${uNdelete}' ">삭제</button>
                         </div>
                         <div class="list">
 	                        <c:url var="nlist" value="uNoticeMain.no">
