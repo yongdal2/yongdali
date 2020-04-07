@@ -8,6 +8,11 @@ $(document).ready(function(){
 		location.href="loginView.me"
 	})
 	
+	$(".logout").click(function(){
+		
+		location.href="logout.me"
+	})
+	
 	
 	/*-- 로그인 ----------------------------------------------*/
     $('#loginForm').submit(function(){

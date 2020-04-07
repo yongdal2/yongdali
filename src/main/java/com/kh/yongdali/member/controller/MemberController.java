@@ -8,9 +8,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.kh.yongdali.member.model.service.MemberService;
 import com.kh.yongdali.member.model.vo.Member;
+
+@SessionAttributes("loginUser")
 
 @Controller
 public class MemberController {
@@ -37,11 +41,26 @@ public class MemberController {
 	
 	@RequestMapping(value="login.do", method=RequestMethod.POST)
 	public String memberLogin(@ModelAttribute Member m, Model model) {
-		logger.debug(m.getmId());
+		logger.debug("로그인을 시도한 회원 아이디 : " + m.getmId());
 		Member loginUser = mService.loginMember(m); 
+//		System.out.println(loginUser);
 		
-		System.out.println(loginUser);
-		
-		return null;
+		if(loginUser != null) {
+			model.addAttribute("loginUser", loginUser);
+			return "redirect:home.do";
+//			return "redirect:index.jsp";
+
+		}else {
+			model.addAttribute("msg","로그인 실패!");
+			return "common/errorPage";
+		}	
 	}
+	
+	@RequestMapping("logout.me")
+	public String memberLogout(SessionStatus status) {
+		status.setComplete();
+		
+		return "redirect:home.do";
+	}
+	
 }

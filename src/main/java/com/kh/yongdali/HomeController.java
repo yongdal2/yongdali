@@ -62,6 +62,8 @@ public class HomeController {
 	public String jwtView() {
 		return "6jwt";
 	}
-	
-	
+//	@RequestMapping("error.ydl")
+//	public String errorPageView() {
+//		return "common/errorPage";
+//	}
 }
