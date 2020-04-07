@@ -42,7 +42,7 @@ public class NoticeDao {
 	 * @param nNo
 	 * @return
 	 */
-	public Notice userSelectNoticeDetail(String nNo) {
+	public Notice selectNoticeDetail(String nNo) {
 		
 		return sqlSession.selectOne("noticeMapper.selectNoticeDetail", nNo);
 	}
@@ -70,6 +70,54 @@ public class NoticeDao {
 	public int insertNotice(Notice n) {
 		
 		return sqlSession.insert("noticeMapper.insertNotice",n);
+	}
+
+	public int updateNotice(Notice n) {
+		
+		return sqlSession.update("noticeMapper.updateNotice",n);
+	}
+
+	public int deleteNotice(String nNo) {
+		
+		return sqlSession.update("noticeMapper.deleteNotice",nNo);
+	}
+
+	public int userSearchGetListCount(String keyword) {
+		
+		return sqlSession.selectOne("noticeMapper.userSearchGetListCount", keyword);
+	}
+
+	public ArrayList<Notice> userSearchSelectList(PageInfo pi,String keyword) {
+		int offset = (pi.getCurrentPage()-1)* pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("noticeMapper.userSearchSelectList",keyword,rowBounds);
+	}
+
+	/*
+	 * -----------------기사 service
+	 */
+	
+	public int driverGetListCount() {
+		
+		return sqlSession.selectOne("noticeMapper.driverGetListCount");
+	}
+
+	public ArrayList<Notice> driverSelectList(PageInfo pi) {
+		int offset = (pi.getCurrentPage()-1)* pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
+				
+		return (ArrayList)sqlSession.selectList("noticeMapper.driverSelectList",null,rowBounds);
+	}
+
+	public Notice driverSelectPreList(String nNo) {
+		
+		return sqlSession.selectOne("noticeMapper.driverSelectPreList",nNo);
+	}
+
+	public Notice driverSelectNextList(String nNo) {
+		
+		return sqlSession.selectOne("noticeMapper.driverSelectNextList",nNo);
 	}
 
 }

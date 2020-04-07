@@ -45,6 +45,7 @@
 			</div>
 			<div class="col-md-2" style="height: 2px; background: grey"></div>
 		</div>
+		<br>
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-1">
@@ -114,14 +115,19 @@
 			</div>		
 		</div>
 		<div class="row" style="margin-bottom: 10px">
-			<div class="col-md-12" style="height: 2px; background: lightgray"></div>
+		
+			<div class="col-md-2"></div>
+			<div class="col-md-8" style="height: 2px; background: lightgray"></div>
+			<div class="col-md-2"></div>
 		</div>
+		<br>
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-1">
 				<button class="btn btn-lg btn-disable btn-block" disabled="disabled" style="color: white;">&nbsp;정산방법&nbsp;</button>
 			</div>
 		</div>
+		<br>
 		<br>
 		<div class="row">
 			<div class="col-md-2"></div>

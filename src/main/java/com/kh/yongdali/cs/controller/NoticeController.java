@@ -52,6 +52,32 @@ public class NoticeController {
 		return mv;
 	}
 	
+	/**
+	 * 기사 공지사항 목록 보기
+	 * @param mv
+	 * @param currentPage
+	 * @return
+	 */
+	@RequestMapping("dNoticeMain.no")
+	public ModelAndView driverNoticeMain(ModelAndView mv, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage ) {
+		
+		System.out.println(currentPage);
+		
+		int listCount = nService.driverGetListCount();
+		
+		System.out.println(listCount);
+		
+		int pageLimit = 5;
+		int boardLimit = 5;
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,pageLimit,boardLimit );
+		
+		ArrayList<Notice> list = nService.driverSelectList(pi);
+		
+		mv.addObject("list",list);
+		mv.addObject("pi",pi);
+		mv.setViewName("driver/notice/notice");
+		return mv;
+	}
 	
 	/**
 	 * 사용자 공지사항 상세 내용 보기
@@ -62,7 +88,7 @@ public class NoticeController {
 	 */
 	@RequestMapping("uNdetail.no")
 	public ModelAndView userNoticeDetail(ModelAndView mv, String nNo, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
-		Notice n = nService.userSelectNoticeDetail(nNo);
+		Notice n = nService.selectNoticeDetail(nNo);
 		
 		Notice pre = nService.userSelectPreList(nNo);
 		
@@ -78,6 +104,30 @@ public class NoticeController {
 		return mv;
 	}
 	
+	/**
+	 * 기사 공지사항 상세 내용 보기
+	 * @param mv
+	 * @param nNo
+	 * @param currentPage
+	 * @return
+	 */
+	@RequestMapping("dNdetail.no")
+	public ModelAndView driverNoticeDetail(ModelAndView mv, String nNo, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
+		Notice n = nService.selectNoticeDetail(nNo);
+		
+		Notice pre = nService.driverSelectPreList(nNo);
+		
+		Notice next = nService.driverSelectNextList(nNo);
+		
+		if(n != null) {
+			mv.addObject("n",n).addObject("currentPage",currentPage)
+			.addObject("pre",pre).addObject("next",next).setViewName("driver/notice/noticeDetailPage");
+		}else {
+			System.out.println("공지사항 상세 조회 실패");
+		}
+		
+		return mv;
+	}
 	
 	/**
 	 * 사용자 공지사항 입력 창 연결
@@ -89,6 +139,15 @@ public class NoticeController {
 	}
 	
 	/**
+	 * 기사 공지사항 입력 창 연결
+	 * @return
+	 */
+	@RequestMapping("dNinsertView.no")
+	public String driverNoticeInsertView() {
+		return "driver/notice/noticeForm";
+	}
+	
+	/**
 	 * 사용자 공지사항 입력 폼
 	 * @param n
 	 * @param request
@@ -97,7 +156,7 @@ public class NoticeController {
 	 * @return
 	 */
 	@RequestMapping("uNinsert.no")
-	public String insertNotice(Notice n, HttpServletRequest request, @RequestParam(name="nSort", required=true, defaultValue="일반")String nSort,
+	public String userInsertNotice(Notice n, HttpServletRequest request, @RequestParam(name="nSort", required=true, defaultValue="일반")String nSort,
 			@RequestParam(name="uploadFile",required=false)MultipartFile file) {
 		if(!file.getOriginalFilename().equals("")) {
 			// 서버에 업로드
@@ -121,6 +180,37 @@ public class NoticeController {
 		
 	}
 	
+	@RequestMapping("dNinsert.no")
+	public String driverInsertNotice(Notice n, HttpServletRequest request, @RequestParam(name="nSort", required=true, defaultValue="일반")String nSort,
+			@RequestParam(name="uploadFile",required=false)MultipartFile file) {
+		if(!file.getOriginalFilename().equals("")) {
+			// 서버에 업로드
+			String renameFileName = saveFile(file,request);
+			
+			if(renameFileName != null) {
+				n.setnImgOrigin(file.getOriginalFilename());
+				n.setnImgRename(renameFileName);
+			}
+		}
+		n.setnSort(nSort);
+		
+		int result = nService.insertNotice(n);
+		
+		if(result > 0) {
+			return "redirect:dNoticeMain.no";
+		}else {
+			return "common/errorPage";		
+			
+		}
+		
+	}
+	
+	/**
+	 * 파일 저장 메소드
+	 * @param file
+	 * @param request
+	 * @return
+	 */
 	public String saveFile(MultipartFile file, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		
@@ -149,5 +239,129 @@ public class NoticeController {
 	
 	
 	}
+	
+	/**
+	 * 공지사항 수정 페이지 연결
+	 * @param mv
+	 * @param nNo
+	 * @return
+	 */
+	@RequestMapping("uNupview.no")
+	public ModelAndView noticeUpdateView(ModelAndView mv, String nNo) {
+		mv.addObject("n",nService.selectUpdateNotice(nNo)).setViewName("user/notice/noticeUpdateForm");
+		return mv;
+	}
+	
+	/**
+	 * 공지사항 수정
+	 * @param mv
+	 * @param n
+	 * @param nSort
+	 * @param request
+	 * @param file
+	 * @return
+	 */
+	@RequestMapping("uNupdate.no")	
+	public ModelAndView noticeUpdate(ModelAndView mv, Notice n, @RequestParam(name="nSort", required=true, defaultValue="일반")String nSort,
+									HttpServletRequest request, @RequestParam(value="reloadFile", required=false) MultipartFile file) {
+		if(file != null && !file.isEmpty()) {
+			if(n.getnImgRename() != null) {
+				deleteFile(n.getnImgRename(), request);
+			}
+			
+			//삭제 후 새롭게 추가
+			String renameFileName = saveFile(file,request);
+			
+			if(renameFileName != null) {
+				n.setnImgOrigin(file.getOriginalFilename());
+				n.setnImgRename(renameFileName);
+			}
+		}
+		
+		n.setnSort(nSort);
+		System.out.println(n);
+		
+		int result = nService.updateNotice(n);
+		
+		System.out.println(result);
+		
+		
+		if(result > 0) {
+			mv.addObject("nNo",n.getnNo()).setViewName("redirect:uNdetail.no");
+		}else {
+			mv.setViewName("common/errorPage");
+		}
+		
+		return mv;
+	}
+	
+	/**
+	 * 파일 삭제 메소드
+	 * @param fileName
+	 * @param request
+	 */
+	public void deleteFile(String fileName, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\nuploadFiles";
+		
+		File f = new File(savePath + "\\" +fileName);
+		
+		if(f.exists()) {
+			f.delete(); //파일 삭제
+		}
+	}
+	
+	/**
+	 * 게시물 삭제
+	 * @param nNo
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("uNdelete.no")
+	public String noticeDelete(String nNo, HttpServletRequest request) {
+		Notice n = nService.selectUpdateNotice(nNo);
+		
+		if(n.getnImgRename() != null) {
+			deleteFile(n.getnImgRename(), request);
+		}
+		
+		int result = nService.deleteNotice(nNo);
+		
+		if(result > 0) {
+			return "redirect:uNoticeMain.no";
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	/**
+	 * 게시물 검색
+	 * @param mv
+	 * @param keyword
+	 * @param currentPage
+	 * @return
+	 */
+	@RequestMapping("uNsearch.no")
+	public ModelAndView userNoticeSearch(ModelAndView mv, @RequestParam(value="keyword", required=false) String keyword, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage ) {
+		
+		System.out.println(currentPage);
+		
+		int listCount = nService.userSearchGetListCount(keyword);
+		
+		System.out.println(listCount);
+		
+		int pageLimit = 5;
+		int boardLimit = 5;
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,pageLimit,boardLimit );
+		
+		ArrayList<Notice> list = nService.userSearchSelectList(pi,keyword);
+		
+		mv.addObject("list",list);
+		mv.addObject("pi",pi);
+		mv.setViewName("user/notice/notice");
+		return mv;
+	}
+	
+	
 	
 }
