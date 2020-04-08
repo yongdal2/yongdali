@@ -97,6 +97,7 @@
                             </li>
                         </ul>
                         <!-- TODO 관리자만 뜨도록 하기 -->
+                        <!-- location.href='${uNdelete}'  -->
                         <div class="editDelete">
                         	<c:url var="uNupview" value="uNupview.no">
                         		<c:param name="nNo" value="${n.nNo }"/>
@@ -106,7 +107,7 @@
                         	</c:url>
                         
                             <button id="editBtn" onclick="location.href='${uNupview}' ">수정</button>
-                            <button id="deleteBtn" onclick="location.href='${uNdelete}' ">삭제</button>
+                            <button id="deleteBtn" onclick="delete();">삭제</button>
                         </div>
                         <div class="list">
 	                        <c:url var="nlist" value="uNoticeMain.no">
@@ -127,7 +128,15 @@
 	<%@ include file="../../common/footer.jsp"%>
 
     <script>
-        
+        function delete(){
+        	var result = window.confirm("삭제하시겠습니까?");
+        	
+        	if(result){
+        		location.href="${uNdelete}";
+        	}else{
+        		
+        	}
+        }
     </script>
 </body>
 </html>
