@@ -124,7 +124,8 @@
     <!-- Footer -->
 	<%@ include file="../../common/footer.jsp"%>
 
-    <script>
+    <script  type="text/javascript">
+    	
     </script>
 </body>
 </html>
