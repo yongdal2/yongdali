@@ -106,7 +106,7 @@
                         	</c:url>
                         
                             <button id="editBtn" onclick="location.href='${dNupview}' ">수정</button>
-                            <button id="deleteBtn" onclick="location.href='${dNdelete}' ">삭제</button>
+                            <button id="deleteBtn" onclick="deleteNotice(); ">삭제</button>
                         </div>
                         <div class="list">
 	                        <c:url var="nlist" value="dNoticeMain.no">
@@ -126,7 +126,13 @@
 	<%@ include file="../../common/footer.jsp"%>
 
     <script>
-        
+	    function deleteNotice(){
+	    	var result = window.confirm("삭제하시겠습니까?");
+	    	
+	    	if(result){
+	    		location.href="${dNdelete}";
+	    	}
+	    }
     </script>
 </body>
 </html>
