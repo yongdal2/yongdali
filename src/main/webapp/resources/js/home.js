@@ -272,7 +272,4 @@ function preChargeFunc(){
 	}
 	
 	
-	
-	
-	
 }
