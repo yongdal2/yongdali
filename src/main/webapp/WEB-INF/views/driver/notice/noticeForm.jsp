@@ -17,15 +17,15 @@
 	<%@ include file="../../common/nav_driver.jsp"%>
 	
 	<!-- main -->
-    <div class="container">
+    <div class="content container">
         <div class="row">
             <h2 class="jal">고객센터</h3>
             <hr>
         </div>
         <div class="row">
             <div class="col-lg-3 sidebar">
-                <a href="dNdetail.no"><span class="sidebar_span">공지사항</span></a><br>
-                <a href="Driver_Faq.html"><span class="sidebar_span">자주 묻는 질문</span></a><br>
+                <a href="dNoticeMain.no"><span class="sidebar_span">공지사항</span></a><br>
+                <a href="dFaqView.fa"><span class="sidebar_span">자주 묻는 질문</span></a><br>
                 <a href=""><span class="sidebar_span"> 채팅</span></a>
             </div>
             <div class="col-lg-8 col-lg-offset-1">

@@ -71,11 +71,10 @@ public class NoticeServiceImpl implements NoticeService{
 		return nDao.userSearchSelectList(pi,keyword);
 	}
 	
+	
 	/*
 	 * -----------------기사 service
 	 */
-	
-	
 	@Override
 	public int driverGetListCount() {
 		
@@ -95,5 +94,15 @@ public class NoticeServiceImpl implements NoticeService{
 	public Notice driverSelectNextList(String nNo) {
 		
 		return nDao.driverSelectNextList(nNo);
+	}
+	@Override
+	public int driverSearchGetListCount(String keyword) {
+		
+		return nDao.driverSearchGetListCount(keyword);
+	}
+	@Override
+	public ArrayList<Notice> driverSearchSelectList(PageInfo pi, String keyword) {
+		
+		return nDao.driverSearchSelectList(pi,keyword);
 	}
 }

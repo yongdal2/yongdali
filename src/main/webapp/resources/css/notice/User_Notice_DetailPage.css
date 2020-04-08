@@ -41,6 +41,10 @@ a{
         border-bottom: 1px solid #eee;
     }
     
+    .content{
+    	padding-bottom: 100px !important;
+    }
+    
 }
 
 /* 전체화면 1200px부터 */
@@ -50,6 +54,9 @@ a{
         border-right: 1px solid gray;
     }
     
+    .content{
+    	padding-bottom: 100px !important;
+    }
 }
 
 /* 사이드바 span태그 */
