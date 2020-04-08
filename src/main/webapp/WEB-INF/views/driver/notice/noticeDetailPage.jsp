@@ -26,7 +26,7 @@
         <div class="row">
             <div class="col-lg-3 sidebar">
                 <a href="dNoticeMain.no"><span class="sidebar_span">공지사항</span></a><br>
-                <a href="Driver_Faq.html"><span class="sidebar_span">자주 묻는 질문</span></a><br>
+                <a href="dFaqView.fa"><span class="sidebar_span">자주 묻는 질문</span></a><br>
                 <a href=""><span class="sidebar_span"> 채팅</span></a>
             </div>
             <div class="col-lg-8 col-lg-offset-1">
@@ -98,15 +98,15 @@
                         </ul>
                         <!-- TODO 관리자만 뜨도록 하기 -->
                         <div class="editDelete">
-                        	<c:url var="uNupview" value="uNupview.no">
+                        	<c:url var="dNupview" value="dNupview.no">
                         		<c:param name="nNo" value="${n.nNo }"/>
                         	</c:url>
-                        	<c:url var="uNdelete" value="uNdelete.no">
+                        	<c:url var="dNdelete" value="dNdelete.no">
                         		<c:param name="nNo" value="${n.nNo }"/>
                         	</c:url>
                         
-                            <button id="editBtn" onclick="location.href='${uNupview}' ">수정</button>
-                            <button id="deleteBtn" onclick="location.href='${uNdelete}' ">삭제</button>
+                            <button id="editBtn" onclick="location.href='${dNupview}' ">수정</button>
+                            <button id="deleteBtn" onclick="location.href='${dNdelete}' ">삭제</button>
                         </div>
                         <div class="list">
 	                        <c:url var="nlist" value="dNoticeMain.no">
