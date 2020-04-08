@@ -37,7 +37,7 @@
 		ORDER BY TO_NUMBER(SUBSTR(N_NO,2)) DESC
 	</select>
 	
-	<!-- 사용자 게시글 상세보기 -->
+	<!-- 공통 게시글 상세보기 -->
 	<select id="selectNoticeDetail" resultMap="noticeResultSet">
 		SELECT *
 		FROM NOTICE
@@ -50,9 +50,11 @@
 		<![CDATA[
 		SELECT *
 		FROM NOTICE
-		WHERE TO_NUMBER(SUBSTR(N_NO,2))=
-		(SELECT MAX(TO_NUMBER(SUBSTR(N_NO,2))) FROM NOTICE WHERE TO_NUMBER(SUBSTR(N_NO,2)) < TO_NUMBER(SUBSTR(#{nNo},2)))
-		AND N_SORT IN ('공통','일반')
+		WHERE TO_NUMBER(SUBSTR(N_NO,2))=(SELECT MAX(TO_NUMBER(SUBSTR(N_NO,2))) 
+                                    FROM NOTICE 
+                                    WHERE TO_NUMBER(SUBSTR(N_NO,2)) < TO_NUMBER(SUBSTR(#{nNo},2))
+                                    AND N_STATUS='Y'
+                                    AND N_SORT IN ('공통','일반'))
 		]]>
 	</select>
 	
@@ -61,13 +63,15 @@
 		<![CDATA[
 		SELECT *
 		FROM NOTICE
-		WHERE TO_NUMBER(SUBSTR(N_NO,2))=
-		(SELECT MIN(TO_NUMBER(SUBSTR(N_NO,2))) FROM NOTICE WHERE TO_NUMBER(SUBSTR(N_NO,2)) > TO_NUMBER(SUBSTR(#{nNo},2)))
-		AND N_SORT IN ('공통','일반')
+		WHERE TO_NUMBER(SUBSTR(N_NO,2))=(SELECT MIN(TO_NUMBER(SUBSTR(N_NO,2))) 
+                                    FROM NOTICE 
+                                    WHERE TO_NUMBER(SUBSTR(N_NO,2)) > TO_NUMBER(SUBSTR(#{nNo},2))
+                                    AND N_STATUS='Y'
+                                    AND N_SORT IN ('공통','일반'))
 		]]>
 	</select>
 	
-	<!-- 게시판 등록 -->
+	<!-- 공통 게시판 등록 -->
 	<insert id="insertNotice" parameterType="Notice">
 		INSERT INTO NOTICE
 		VALUES('N' || SEQ_NNO.NEXTVAL,#{nTitle},#{nWriter},
@@ -75,7 +79,7 @@
 		#{nSort},SYSDATE,SYSDATE,DEFAULT)
 	</insert>
 	
-	<!-- 게시판 수정 -->
+	<!-- 공통 게시판 수정 -->
 	<update id="updateNotice" parameterType="Notice">
 		UPDATE NOTICE
 		SET N_TITLE=#{nTitle}, N_CONTENT=#{nContent}, N_IMG_ORIGIN=#{nImgOrigin}, N_IMG_RENAME=#{nImgRename},
@@ -83,33 +87,109 @@
 		WHERE N_NO=#{nNo}
 	</update>
 	
-	<!-- 게시판 삭제 -->
+	<!-- 공통 게시판 삭제 -->
 	<update id="deleteNotice">
 		UPDATE NOTICE
 		SET N_STATUS='N'
 		WHERE N_NO=#{nNo}
 	</update>
 
+	<!-- 사용자 게시판 검색 리스트 갯수 -->
 	<select id="userSearchGetListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM NOTICE
-		WHERE N_STATUS='Y'
-		AND N_SORT IN ('공통','일반')
-		AND N_TITLE LIKE '%' || #{keyword} || '%'
-		OR N_CONTENT LIKE '%' || #{keyword} || '%'
-		OR N_WRITER LIKE '%' || #{keyword} || '%'
+		WHERE N_SORT IN ('공통','일반')
+		AND N_STATUS='Y'
+		AND (N_TITLE,N_CONTENT,N_WRITER) IN (SELECT N_TITLE,N_CONTENT,N_WRITER
+		                                    FROM NOTICE
+		                                    WHERE N_TITLE LIKE '%' || #{keyword} || '%'
+		                                    OR N_CONTENT LIKE '%' || #{keyword} || '%'
+		                                    OR N_WRITER LIKE '%' || #{keyword} || '%')
 	</select>
 	
+	<!-- 사용자 게시판 검색 리스트 -->
 	<select id="userSearchSelectList" resultMap="noticeResultSet">
 		SELECT *
 		FROM NOTICE
-		WHERE N_STATUS='Y'
-		AND N_SORT IN ('공통','일반')
-		AND N_TITLE LIKE '%' || #{keyword} || '%'
-		OR N_CONTENT LIKE '%' || #{keyword} || '%'
-		OR N_WRITER LIKE '%' || #{keyword} || '%'
+		WHERE N_SORT IN ('공통','일반')
+		AND N_STATUS='Y'
+		AND (N_TITLE,N_CONTENT,N_WRITER) IN (SELECT N_TITLE,N_CONTENT,N_WRITER
+		                                    FROM NOTICE
+		                                    WHERE N_TITLE LIKE '%' || #{keyword} || '%'
+		                                    OR N_CONTENT LIKE '%' || #{keyword} || '%'
+		                                    OR N_WRITER LIKE '%' || #{keyword} || '%')
+		ORDER BY TO_NUMBER(SUBSTR(N_NO,2)) DESC		                                   
 	</select>
 
+	<!-- 기사 게시글 갯수 -->
+	<select id="driverGetListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM NOTICE
+		WHERE N_STATUS='Y'
+		AND N_SORT IN ('공통','사업자')	
+	</select>
+	
+	<!-- 기사 게시글 리스트 -->
+	<select id="driverSelectList" resultMap="noticeResultSet">
+		SELECT *
+		FROM NOTICE
+		WHERE N_STATUS='Y'
+		AND N_SORT IN ('공통','사업자')
+		ORDER BY TO_NUMBER(SUBSTR(N_NO,2)) DESC
+	</select>
+	
+	<!-- 기사 게시글 상세보기 이전글 -->
+	<select id="driverSelectPreList" resultMap="noticeResultSet">
+		<![CDATA[
+		SELECT *
+		FROM NOTICE
+		WHERE TO_NUMBER(SUBSTR(N_NO,2))=(SELECT MAX(TO_NUMBER(SUBSTR(N_NO,2))) 
+                                    FROM NOTICE 
+                                    WHERE TO_NUMBER(SUBSTR(N_NO,2)) < TO_NUMBER(SUBSTR(#{nNo},2))
+                                    AND N_STATUS='Y'
+                                    AND N_SORT IN ('공통','사업자'))
+		]]>
+	</select>
+	
+	<!-- 기사 게시글 상세보기 다음글 -->
+	<select id="driverSelectNextList" resultMap="noticeResultSet">
+		<![CDATA[
+		SELECT *
+		FROM NOTICE
+		WHERE TO_NUMBER(SUBSTR(N_NO,2))=(SELECT MIN(TO_NUMBER(SUBSTR(N_NO,2))) 
+                                    FROM NOTICE 
+                                    WHERE TO_NUMBER(SUBSTR(N_NO,2)) > TO_NUMBER(SUBSTR(#{nNo},2))
+                                    AND N_STATUS='Y'
+                                    AND N_SORT IN ('공통','사업자'))
+		]]>
+	</select>
+	
+	<!-- 기사 게시판 검색 리스트 갯수 -->
+	<select id="driverSearchGetListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM NOTICE
+		WHERE N_SORT IN ('공통','사업자')
+		AND N_STATUS='Y'
+		AND (N_TITLE,N_CONTENT,N_WRITER) IN (SELECT N_TITLE,N_CONTENT,N_WRITER
+		                                    FROM NOTICE
+		                                    WHERE N_TITLE LIKE '%' || #{keyword} || '%'
+		                                    OR N_CONTENT LIKE '%' || #{keyword} || '%'
+		                                    OR N_WRITER LIKE '%' || #{keyword} || '%')
+	</select>
+	
+	<!-- 기사 게시판 검색 리스트 -->
+	<select id="driverSearchSelectList" resultMap="noticeResultSet">
+		SELECT *
+		FROM NOTICE
+		WHERE N_SORT IN ('공통','사업자')
+		AND N_STATUS='Y'
+		AND (N_TITLE,N_CONTENT,N_WRITER) IN (SELECT N_TITLE,N_CONTENT,N_WRITER
+		                                    FROM NOTICE
+		                                    WHERE N_TITLE LIKE '%' || #{keyword} || '%'
+		                                    OR N_CONTENT LIKE '%' || #{keyword} || '%'
+		                                    OR N_WRITER LIKE '%' || #{keyword} || '%')
+		ORDER BY TO_NUMBER(SUBSTR(N_NO,2)) DESC		                                    
+	</select>
 
 
 </mapper>
