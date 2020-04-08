@@ -15,6 +15,10 @@
 
 // 모달 배경화면 생성
 
+$(document).ready(function() {
+	$("#header1>.jumbotron").css("display","none");
+});
+
 var modalAd = document.getElementById("modalAd");
 var modalEd = document.getElementById("modalEd");
 

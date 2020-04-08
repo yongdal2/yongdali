@@ -61,6 +61,31 @@ a {
 	color: red;
 }
 
+.semibar_span{
+    display: inline-block;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    font-family: 'yg-jalnan', Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    color: rgb(43, 43, 43);
+}
+
+.semibar_span:after {
+    display:block;
+    content: '';
+    border-bottom: solid 2px rgb(241,95,95);
+    transform: scaleX(0);  
+    transition: all .3s ease-in-out 0s;
+}
+
+.semibar_span:hover:after { 
+    transform: scaleX(1); 
+}
+
+.semibar_span:after{
+    transform-origin:  0% 50%; 
+}
+
 <!-- 주소록 -->
 .mb_pd {
 	padding: 0px 15px 15px 15px !important;
