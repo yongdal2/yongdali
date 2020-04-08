@@ -18,7 +18,7 @@
 	<%@ include file="../../common/nav.jsp"%>
 	
 	<!-- main -->
-    <div class="container">
+    <div class="content container">
         <div class="row">
             <h2 class="jal">고객센터</h3>
             <hr>
@@ -106,7 +106,7 @@
                         	</c:url>
                         
                             <button id="editBtn" onclick="location.href='${uNupview}' ">수정</button>
-                            <button id="deleteBtn" onclick="location.href='${uNdelete}' ">삭제</button>
+                            <button id="deleteBtn" onclick="deleteNotice();">삭제</button>
                         </div>
                         <div class="list">
 	                        <c:url var="nlist" value="uNoticeMain.no">
@@ -127,7 +127,13 @@
 	<%@ include file="../../common/footer.jsp"%>
 
     <script>
-        
+        function deleteNotice(){
+        	var result = window.confirm("삭제하시겠습니까?");
+        	
+        	if(result){
+        		location.href="${uNdelete}";
+        	}
+        }
     </script>
 </body>
 </html>

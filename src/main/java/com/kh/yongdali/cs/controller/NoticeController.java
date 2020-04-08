@@ -26,7 +26,7 @@ public class NoticeController {
 	private NoticeService nService;
 	
 	/**
-	 * 사용자 공지사항 목록 보기
+	 * (사용자) 공지사항 목록 보기
 	 * @param mv
 	 * @param currentPage
 	 * @return
@@ -53,7 +53,7 @@ public class NoticeController {
 	}
 	
 	/**
-	 * 기사 공지사항 목록 보기
+	 * (기사) 공지사항 목록 보기
 	 * @param mv
 	 * @param currentPage
 	 * @return
@@ -80,7 +80,7 @@ public class NoticeController {
 	}
 	
 	/**
-	 * 사용자 공지사항 상세 내용 보기
+	 * (사용자) 공지사항 상세 내용 보기
 	 * @param mv
 	 * @param nNo
 	 * @param currentPage
@@ -105,7 +105,7 @@ public class NoticeController {
 	}
 	
 	/**
-	 * 기사 공지사항 상세 내용 보기
+	 * (기사) 공지사항 상세 내용 보기
 	 * @param mv
 	 * @param nNo
 	 * @param currentPage
@@ -130,7 +130,7 @@ public class NoticeController {
 	}
 	
 	/**
-	 * 사용자 공지사항 입력 창 연결
+	 * (사용자) 공지사항 입력 창 연결
 	 * @return
 	 */
 	@RequestMapping("uNinsertView.no")
@@ -139,7 +139,7 @@ public class NoticeController {
 	}
 	
 	/**
-	 * 기사 공지사항 입력 창 연결
+	 * (기사) 공지사항 입력 창 연결
 	 * @return
 	 */
 	@RequestMapping("dNinsertView.no")
@@ -148,7 +148,7 @@ public class NoticeController {
 	}
 	
 	/**
-	 * 사용자 공지사항 입력 폼
+	 * (사용자) 공지사항 입력 폼
 	 * @param n
 	 * @param request
 	 * @param nSort
@@ -180,6 +180,14 @@ public class NoticeController {
 		
 	}
 	
+	/**
+	 * (기사) 공지사항 입력 폼
+	 * @param n
+	 * @param request
+	 * @param nSort
+	 * @param file
+	 * @return
+	 */
 	@RequestMapping("dNinsert.no")
 	public String driverInsertNotice(Notice n, HttpServletRequest request, @RequestParam(name="nSort", required=true, defaultValue="일반")String nSort,
 			@RequestParam(name="uploadFile",required=false)MultipartFile file) {
@@ -241,19 +249,31 @@ public class NoticeController {
 	}
 	
 	/**
-	 * 공지사항 수정 페이지 연결
+	 * (사용자) 공지사항 수정 페이지 연결
 	 * @param mv
 	 * @param nNo
 	 * @return
 	 */
 	@RequestMapping("uNupview.no")
-	public ModelAndView noticeUpdateView(ModelAndView mv, String nNo) {
+	public ModelAndView userNoticeUpdateView(ModelAndView mv, String nNo) {
 		mv.addObject("n",nService.selectUpdateNotice(nNo)).setViewName("user/notice/noticeUpdateForm");
 		return mv;
 	}
 	
 	/**
-	 * 공지사항 수정
+	 * (기사) 공지사항 수정 페이지 연결
+	 * @param mv
+	 * @param nNo
+	 * @return
+	 */
+	@RequestMapping("dNupview.no")
+	public ModelAndView driverNoticeUpdateView(ModelAndView mv, String nNo) {
+		mv.addObject("n",nService.selectUpdateNotice(nNo)).setViewName("driver/notice/noticeUpdateForm");
+		return mv;
+	}
+	
+	/**
+	 * (사용자) 공지사항 수정
 	 * @param mv
 	 * @param n
 	 * @param nSort
@@ -262,7 +282,7 @@ public class NoticeController {
 	 * @return
 	 */
 	@RequestMapping("uNupdate.no")	
-	public ModelAndView noticeUpdate(ModelAndView mv, Notice n, @RequestParam(name="nSort", required=true, defaultValue="일반")String nSort,
+	public ModelAndView userNoticeUpdate(ModelAndView mv, Notice n, @RequestParam(name="nSort", required=true, defaultValue="일반")String nSort,
 									HttpServletRequest request, @RequestParam(value="reloadFile", required=false) MultipartFile file) {
 		if(file != null && !file.isEmpty()) {
 			if(n.getnImgRename() != null) {
@@ -296,6 +316,49 @@ public class NoticeController {
 	}
 	
 	/**
+	 * (기사) 공지사항 수정
+	 * @param mv
+	 * @param n
+	 * @param nSort
+	 * @param request
+	 * @param file
+	 * @return
+	 */
+	@RequestMapping("dNupdate.no")	
+	public ModelAndView driverNoticeUpdate(ModelAndView mv, Notice n, @RequestParam(name="nSort", required=true, defaultValue="일반")String nSort,
+									HttpServletRequest request, @RequestParam(value="reloadFile", required=false) MultipartFile file) {
+		if(file != null && !file.isEmpty()) {
+			if(n.getnImgRename() != null) {
+				deleteFile(n.getnImgRename(), request);
+			}
+			
+			//삭제 후 새롭게 추가
+			String renameFileName = saveFile(file,request);
+			
+			if(renameFileName != null) {
+				n.setnImgOrigin(file.getOriginalFilename());
+				n.setnImgRename(renameFileName);
+			}
+		}
+		
+		n.setnSort(nSort);
+		System.out.println(n);
+		
+		int result = nService.updateNotice(n);
+		
+		System.out.println(result);
+		
+		
+		if(result > 0) {
+			mv.addObject("nNo",n.getnNo()).setViewName("redirect:dNdetail.no");
+		}else {
+			mv.setViewName("common/errorPage");
+		}
+		
+		return mv;
+	}
+	
+	/**
 	 * 파일 삭제 메소드
 	 * @param fileName
 	 * @param request
@@ -312,13 +375,13 @@ public class NoticeController {
 	}
 	
 	/**
-	 * 게시물 삭제
+	 * (사용자) 게시물 삭제
 	 * @param nNo
 	 * @param request
 	 * @return
 	 */
 	@RequestMapping("uNdelete.no")
-	public String noticeDelete(String nNo, HttpServletRequest request) {
+	public String userNoticeDelete(String nNo, HttpServletRequest request) {
 		Notice n = nService.selectUpdateNotice(nNo);
 		
 		if(n.getnImgRename() != null) {
@@ -335,7 +398,30 @@ public class NoticeController {
 	}
 	
 	/**
-	 * 게시물 검색
+	 * (기사) 게시물 삭제
+	 * @param nNo
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("dNdelete.no")
+	public String driverNoticeDelete(String nNo, HttpServletRequest request) {
+		Notice n = nService.selectUpdateNotice(nNo);
+		
+		if(n.getnImgRename() != null) {
+			deleteFile(n.getnImgRename(), request);
+		}
+		
+		int result = nService.deleteNotice(nNo);
+		
+		if(result > 0) {
+			return "redirect:dNoticeMain.no";
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	/**
+	 * (사용자) 게시물 검색
 	 * @param mv
 	 * @param keyword
 	 * @param currentPage
@@ -362,6 +448,33 @@ public class NoticeController {
 		return mv;
 	}
 	
+	/**
+	 * (기사) 게시물 검색
+	 * @param mv
+	 * @param keyword
+	 * @param currentPage
+	 * @return
+	 */
+	@RequestMapping("dNsearch.no")
+	public ModelAndView driverNoticeSearch(ModelAndView mv, @RequestParam(value="keyword", required=false) String keyword, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage ) {
+		
+		System.out.println(currentPage);
+		
+		int listCount = nService.driverSearchGetListCount(keyword);
+		
+		System.out.println(listCount);
+		
+		int pageLimit = 5;
+		int boardLimit = 5;
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,pageLimit,boardLimit );
+		
+		ArrayList<Notice> list = nService.driverSearchSelectList(pi,keyword);
+		
+		mv.addObject("list",list);
+		mv.addObject("pi",pi);
+		mv.setViewName("driver/notice/notice");
+		return mv;
+	}
 	
 	
 }
