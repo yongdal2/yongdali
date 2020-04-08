@@ -81,4 +81,15 @@ public class MemberController {
 		return "redirect:home.do";
 	}
 	
+	@RequestMapping("sample.me")
+	public String insertSample() {
+		Member m1 = new Member();
+		
+		
+		
+		
+		
+		return null;
+	}
+	
 }
