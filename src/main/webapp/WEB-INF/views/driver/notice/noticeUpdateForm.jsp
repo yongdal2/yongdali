@@ -20,7 +20,7 @@
 	<%@ include file="../../common/nav_driver.jsp"%>
 	
 	<!-- main -->
-    <div class="container">
+    <div class="content container">
         <div class="row">
             <h2 class="jal">고객센터</h3>
             <hr>

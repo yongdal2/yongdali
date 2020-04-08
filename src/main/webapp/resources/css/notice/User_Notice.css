@@ -51,6 +51,10 @@
         border-bottom: 1px solid #eee;
     }
     
+    .content{
+    	padding-bottom: 145px;
+    }
+    
 }
 
 /* 전체화면 1200px부터 */
@@ -58,6 +62,10 @@
     .sidebar{
         width:16% !important;
         border-right: 1px solid gray;
+    }
+    
+    .content{
+    	padding-bottom: 145px;
     }
     
 }
