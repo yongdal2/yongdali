@@ -20,6 +20,12 @@
 	border-color: rgb(241,95,95) !important;
 }
 
+.btn_ydl_l {
+	color: rgb(241,95,95) !important;
+	background-color: white !important;
+	border-color: rgb(241,95,95) !important;
+}
+
 .ydl_color {
 	background-color: rgb(87, 187, 138) !important;
 }
@@ -34,6 +40,9 @@
 
 .bgNo {
 	background: none;
+	font-size: 0.8em !important;
+	padding: 0 !important;
+	cursor: pointer;
 }
 
 .jal {
@@ -64,15 +73,92 @@ a {
 	font-weight: 600;
 }
 
+/* mypage nav span태그 */
+.semibar_span{
+    display: inline-block;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    font-family: 'yg-jalnan', Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    color: rgb(43, 43, 43);
+}
+
+.semibar_span:after {
+    display:block;
+    content: '';
+    border-bottom: solid 2px rgb(241,95,95);
+    transform: scaleX(0);  
+    transition: all .3s ease-in-out 0s;
+}
+
+.semibar_span:hover:after { 
+    transform: scaleX(1); 
+}
+
+.semibar_span:after{
+    transform-origin:  0% 50%; 
+}
+
+
+/* 점보트론 */
+#driverMyPjumbo {
+	 background-color: #fafbfc!important;
+	 border-top: rgba(241,95,95,0.9) solid 3px !important;
+	 
+}
+
+/* 프로필 사진 */
 #pro_img{
     background-position-x: 50% !important;
     background-position-y: 50% !important;
     background-size: cover !important;
-    cursor: pointer !important;
     display: block !important;
-	height: 195px !important;
-	width: 150px !important;
+	height: 13em !important;
+	width: 13em !important;
     text-size-adjust: 100% !important;
 	z-index: 2 !important;
-	margin-top: 15px !important;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	}
+
+.editP {
+	position: absolute;
+	right: 5px;
+	bottom: 0px;
+	cursor: pointer !important;
+	z-index: 3 !important;
+	color: white !important;
+	background-color: rgb(241,95,95) !important;
+	border: white 3px solid;
+	border-radius: 50%;
+	height: 2em;
+	width: 2em;
+	line-height: 2em;
+	margin: inherit;
+	font-size: 1.8em;
 }
+
+.lg {
+	color: gray !important;
+}
+
+.mgt {
+	margin-top: 10px !important;
+}
+
+.hvDr {
+	background: none;
+	font-size: 0.8em !important;
+	padding: 0 !important;
+	cursor: pointer;
+}
+
+.hvDr:hover {
+	background: none;
+	font-size: 0.8em !important;
+	padding: 0 !important;
+	cursor: pointer;
+	color: rgb(241,95,95);
+}
+
