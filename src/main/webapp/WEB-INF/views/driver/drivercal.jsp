@@ -59,7 +59,7 @@
 		<hr>
 	</div>
 	<br>
-	<hr>
+	
 
 	<!-- Footer -->
 	<%@ include file="../common/footer.jsp"%>
