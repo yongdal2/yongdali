@@ -65,9 +65,6 @@
 							</li>
 						</c:if>
 						<c:if test='${loginUser.mSort ne ("관리자")}'>
-							<script>
-							 	console.log(${loginUser.mSort});
-							 </script> 
 							<li class="nav-item">
 								<button class="btn btn-default navbar-btn myPage" style="background: rgb(87,187,138); color: white;">마이페이지</button>
 							</li>
