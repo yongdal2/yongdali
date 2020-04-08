@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -372,6 +373,13 @@ public class NoticeController {
 		if(f.exists()) {
 			f.delete(); //파일 삭제
 		}
+	}
+	
+	@RequestMapping("fileDelete.no")
+	@ResponseBody
+	public String deleteReNameFile(@RequestParam("fileName") String fileName, HttpServletRequest request) {
+		System.out.println(fileName);
+		return "";
 	}
 	
 	/**

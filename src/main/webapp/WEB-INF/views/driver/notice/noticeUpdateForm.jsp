@@ -76,7 +76,13 @@
                                 <td>첨부파일</td>
                                 <td>
                                 <c:if test="${!empty n.nImgOrigin }">
-                                	<a href="${contextPath }/resources/nuploadFiles/${n.nImgRename}" download="${n.nImgOrigin }">${n.nImgOrigin}</a>
+                                	<span class="filespan">
+	                                	<a href="${contextPath }/resources/nuploadFiles/${n.nImgRename}" download="${n.nImgOrigin }">${n.nImgOrigin}</a>
+	                                	<button onclick="filedelete();"><svg class="bi bi-x" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										  <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z" clip-rule="evenodd"/>
+										  <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z" clip-rule="evenodd"/>
+										</svg></button>
+									</span>
                                 </c:if>
                                 <input type="file" name="reloadFile">
                                 </td>
@@ -114,9 +120,25 @@
 			}
 		}
 	    
+	    function filedelete(){
+	    	$('.filespan').remove();
+	    	
+	    	$.ajax({
+	    		url:"fileDelete.no",
+	    		data:{fileName :'${n.nImgRename}'},
+	    		type:"post",
+	    		success:function(data){
+	    			console.log(data);
+	    			console.log("삭제완료");
+	    		},error:function(){
+	    			console.log("전송실패");
+	    		}
+	    	});
+	    }
+	    
     	$(function(){
     		CKEDITOR.replace( 'editor1');
-
+    		
     	
         /* $('#title').keydown(function(){
             var maxlength = $('#tMax').val();
