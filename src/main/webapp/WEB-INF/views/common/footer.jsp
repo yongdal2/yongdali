@@ -8,7 +8,7 @@
 			<div class="col-md-8" style="height: 2px; background: lightgray"></div>
 			<div class="col-md-2"></div>
 		</div> -->
-		<hr>
+	<hr>
       <div class="container">
          <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto"  style="text-align: center; float:none; margin:0 auto">

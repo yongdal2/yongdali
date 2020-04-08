@@ -29,6 +29,16 @@ public class Member {
 		this.enrollDate = enrollDate;
 	}
 
+	public Member(String mId, String pwd, String mName, String phone, String mSort, String mStatus) {
+		super();
+		this.mId = mId;
+		this.pwd = pwd;
+		this.mName = mName;
+		this.phone = phone;
+		this.mSort = mSort;
+		this.mStatus = mStatus;
+	}
+
 	public String getmId() {
 		return mId;
 	}

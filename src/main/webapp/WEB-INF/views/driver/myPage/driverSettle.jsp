@@ -38,39 +38,42 @@
 <body>
 	<c:import url="../../common/nav_driver.jsp" />
 	<c:import url="../../driver/myPage/driverInfo.jsp" />
+	
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-md-12 h2 jal">
 				정산
-				<hr>
+				<br>
 			</div>
-			<div class="row" style="margin: 20px;">
-				<div class="col-xs-12 col-md-12 well text-center">
-					<div class="col-xs-3 col-md-3">
-						<select class="form-control" id="">
-							<option value="ㅇㅇ">상태별 조회</option>
-							<option value="ㅇㅇ">예약 대기</option>
-							<option value="ㅇㅇ">상태별 조회</option>
-						</select>
-					</div>
-					<div class="col-xs-7 col-md-7">
-						<div class="row">
-							<div class="col-xs-6 col-md-6">
-								<input type="date" class="form-control">
-							</div>
-							<div class="col-xs-6 col-md-6">
-								<input type="date" class="form-control">
-							</div>
+			<div class="col-xs-12 col-md-12 text-center">
+				<div class="col-xs-3 col-md-3">
+					<select class="form-control" id="">
+						<option value="ㅇㅇ">상태별 조회</option>
+						<option value="ㅇㅇ">예약 대기</option>
+						<option value="ㅇㅇ">상태별 조회</option>
+					</select>
+				</div>
+				<div class="col-xs-7 col-md-7">
+					<div class="row">
+						<div class="col-xs-6 col-md-6">
+							<input type="date" class="form-control">
+						</div>
+						<div class="col-xs-6 col-md-6">
+							<input type="date" class="form-control">
 						</div>
 					</div>
-					<div class="col-xs-2 col-md-2">
-						<button class="btn btn_ydl_r">전체보기</button>
-					</div>
+				</div>
+				<div class="col-xs-2 col-md-2">
+					<button class="btn btn_ydl_r">전체보기</button>
 				</div>
 			</div>
+
+
+
+
 			<div class="row" style="margin: 20px;">
 				<div class="col-xs-12 col-md-12"
-					style="padding: 0; border-radius: 16px; border: solid 1px #dedede; background-color: #ffffff;">
+					style="padding: 0; border-radius: 16px; border: solid 1px #dedede; background-color: #f3f5f7;">
 					<Br>
 					<table class="table table-striped table-hover text-center">
 						<thead>

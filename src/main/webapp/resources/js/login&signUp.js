@@ -9,7 +9,6 @@ $(document).ready(function(){
 	})
 	
 	$(".logout").click(function(){
-		
 		location.href="logout.me"
 	})
 	
