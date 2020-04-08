@@ -7,7 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-박정연
+    <div style="display: flex; margin-left: 400px; margin-top:300px">
+        <div OnClick="location.href ='adminHome.ydl'" style="width: 100px; height: 100px; background: lightcoral; cursor: pointer; border-radius: 10px; margin-right: 20px;">
+              관리자 페이지
+        </div>
+    </div>
  
 </body>
 </html>
