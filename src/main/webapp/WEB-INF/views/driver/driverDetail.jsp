@@ -149,7 +149,7 @@
 	<%@ include file="../common/footer.jsp"%>
 	<script type="text/javascript">
 		$(function(){
-			$("#baechar").on('click',function(){
+			$(".baechar").on('click',function(){
 				$("#eventModal").modal();
 				$("#deletecar").hide();
 				$("#savecar").show();
