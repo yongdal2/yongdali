@@ -446,7 +446,7 @@
 	                                        </div>
 	                                    </div>
 	                                    <div align="center">
-	                                        <button type="button" id="loadBtn">선택하기</button>
+	                                        <button type="button" id="loadBtn">선 택 하 기</button>
 	                                    </div>
 	                                </div>
 	                            </div>
@@ -459,7 +459,7 @@
 	                                	<div class="help-title-div">
 	                                        <span class="help-title">상하차 방법</span>
 	                                    </div>
-									    <div class="help-content-div1" style="border-bottom: 1px solid black;">
+									    <div class="help-content-div1">
 									        <div class="help-content-div11" style="border-bottom: 1px solid rgb(105, 113, 120)">
 									            <div class="help-content-div111">
 									                <div class="addCharge">추가 요금</div>
@@ -483,7 +483,7 @@
 									            </div>
 									        </div>
 									        <div class="help-content-div12">
-									            <button type="button" id="checkHelp-btn">선택하기</button>
+									            <button type="button" id="checkHelp-btn">선 택 하 기</button>
 									        </div>
 									    </div>
 	                                </div>
@@ -822,7 +822,7 @@
 	                </div>
 	                <div id="booking-div">
 	                    <br>
-	                    <button id="booking-btn" type="submit">예약하기</button>
+	                    <button id="booking-btn" type="submit">예 약 하 기</button>
 	                </div>
 	            </div>
 	        </div>
@@ -865,7 +865,7 @@
 			        </div>
                 </div>
                 <div align="center">
-                    <button type="button" id="stALBtn">선택하기</button>
+                    <button type="button" id="stALBtn">선 택 하 기</button>
                 </div>
                 <br>
             </div>
@@ -908,7 +908,7 @@
 			        </div>
                 </div>
                 <div align="center">
-                    <button type="button" id="edALBtn">선택하기</button>
+                    <button type="button" id="edALBtn">선 택 하 기</button>
                 </div>
                 <br>
             </div>
@@ -928,7 +928,6 @@
 		<input type="hidden" id="helpUnloadVal" name="helpUnload">
 		<input type="hidden" id="days" name="days" value="0">
 	</form>
-	
 	
 	
     <!-- javascript files -->
