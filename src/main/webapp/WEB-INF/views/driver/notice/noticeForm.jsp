@@ -58,6 +58,7 @@
                             </tr>
                             <tr>
                                 <td>작성자</td>
+                                <!-- TODO value에 관리자 이름 갖고오기 ${loginUser.mName }-->
                                 <td><input type="text" readonly name="nWriter" value="관리자"></td>
                             </tr>
                             <tr>

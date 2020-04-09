@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -63,21 +64,29 @@ public class MemberController {
 	 * @param model
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping(value="login.do", method=RequestMethod.POST)
 	public String memberLogin(@ModelAttribute Member m, Model model) {
 		logger.debug("로그인을 시도한 회원 아이디 : " + m.getmId());
 		Member loginUser = mService.loginMember(m); 
 		System.out.println(loginUser);
 		
+		// 로그인 성공 
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getPwd(), loginUser.getPwd())) {
 			model.addAttribute("loginUser", loginUser);
 			logger.debug(loginUser.getmId());
+			return "loginSuccess"; 
+		}
+		
+		// 이메일 없음
+		else if(loginUser == null){
+			return "nonExistentId";
+		}
+		
+		// 비밀번호 틀림
+		else {
+			return "wrongPwd";
 			
-			return "redirect:home.do";
-//			return "redirect:index.jsp";
-		}else {
-			model.addAttribute("msg","로그인 실패!");
-			return "common/errorPage";
 		}	
 	}
 	
@@ -104,7 +113,7 @@ public class MemberController {
 		Date[] date = new Date[4];
 		String[] encPwdArr = new String[4];
 		
-		mList.add(new Member("admin@naver.com", "Admin!234", "유승제", "010-1111-1111", "관리자", "정상")); 
+		mList.add(new Member("admin@naver.com", "Admin!234", "관리자", "010-1111-1111", "관리자", "정상")); 
 		mList.add(new Member("mem01@naver.com", "Mem!234", "홍멤버", "010-2222-2222", "일반", "정상"));
 		mList.add(new Member("biz01@naver.com", "Biz!234", "김거상", "010-3333-3333", "사업자", "정상"));
 		mList.add(new Member("biz02@naver.com", "Biz!234", "최거상", "010-4444-4444", "사업자", "정상"));

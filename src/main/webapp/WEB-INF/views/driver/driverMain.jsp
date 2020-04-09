@@ -28,6 +28,7 @@
 		<div class="row">
 			<div class="col-lg-12 col-md-10 mx-auto">
 				<div class="row">
+				<a href="test.do">테스트 버튼</a>
 					<h1
 						style="font-size: 25px; text-align: center; color: #000; font-family: Montserrat; height: 50px">
 						<b style="font-weight: 500; letter-spacing: 5px;">실시간 예약 현황</b>
