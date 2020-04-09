@@ -30,12 +30,10 @@ public class ReservationController {
 	@RequestMapping("rev.do")
 	public String InsertReservation(@ModelAttribute Reservation r, Model model,
 									@RequestParam(value="startDate1", required=false) String stDate1,
-									@RequestParam(value="startDate2", required=false) String stDate2,
-									@RequestParam(value="endDate1", required=false) String edDate1,
-									@RequestParam(value="endDate2", required=false) String edDate2) throws ParseException {
+									@RequestParam(value="endDate1", required=false) String edDate1) throws ParseException {
 		
 		// 차량크기, 거리, 결제금액 int로 변환하기
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String stDate = "";
 		String edDate = "";
 		// 상하차일 타입 Date로 변환하기
@@ -43,7 +41,7 @@ public class ReservationController {
 			String sy = stDate1.substring(0,3);
 			String sm = stDate1.substring(6,7);
 			String sd = stDate1.substring(10,11);
-			stDate = sy+"-"+sm+"-"+sd+" "+stDate2;			
+			stDate = sy+"-"+sm+"-"+sd+" ";			
 			Date startDate = sdf.parse(stDate);
 			r.setStartDate(startDate);
 		}
@@ -51,7 +49,7 @@ public class ReservationController {
 			String ey = edDate1.substring(0,3);
 			String em = edDate1.substring(6,7);
 			String ed = edDate1.substring(10,11);
-			edDate = ey+"-"+em+"-"+ed+" "+edDate2;
+			edDate = ey+"-"+em+"-"+ed+" ";
 			Date endDate = sdf.parse(edDate);
 			r.setEndDate(endDate);
 		}

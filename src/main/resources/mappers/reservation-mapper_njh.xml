@@ -8,7 +8,7 @@
 		VALUES('R' || SEQ_RNO.NEXTVAL, NULL, NULL,
 		#{capacity},#{type},#{startAddr},#{endAddr},
 		#{distance},#{phone1},#{phone2},#{rightLoad},
-		#{rightUnload},#{startDate},#{endDate},
+		#{rightUnload},#{startDate},#{startTime},#{endDate},#{endTime},
 		#{helpLoad},#{helpUnload},#{luggage},#{msg},#{amount},
 		DEFAULT,DEFAULT,DEFAULT,DEFAULT)
 	</insert>

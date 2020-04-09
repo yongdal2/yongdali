@@ -593,7 +593,7 @@
 	                                    </div>
 	                                </div>
 	                                <div>
-	                                    <select name="startDate2" id="sl3" onchange="cl3();" >
+	                                    <select name="startTime" id="sl3" onchange="cl3();" >
 	                                        <option class="opt3" value="" disabled selected>시간 선택</option>
 	                                        <option class="opt4" value="00:00">00시 00분</option>
 	                                        <option class="opt4" value="00:30">00시 30분</option>
@@ -683,7 +683,7 @@
 	                                    </div>
 	                                </div>
 	                                <div>
-	                                    <select name="endDate2" id="sl4" onchange="cl4();" >
+	                                    <select name="endTime" id="sl4" onchange="cl4();" >
 	                                        <option class="opt3" value="" disabled selected>시간 선택</option>
 	                                        <option class="opt4" value="00:00">00시 00분</option>
 	                                        <option class="opt4" value="00:30">00시 30분</option>
