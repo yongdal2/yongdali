@@ -242,6 +242,7 @@
 	margin: 0px;
 	width: 100%;
 	margin-bottom: 7px;
+	border-radius: 10px;
 }
 
 #preEstimate-title{
@@ -367,4 +368,5 @@
 	text-decoration: none;
 	cursor: pointer;
 	font-size: 16pt;
+	border-radius: 10px;
 }

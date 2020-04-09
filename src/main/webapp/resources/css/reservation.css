@@ -105,7 +105,8 @@ select, textarea, input, button{
     margin: auto;
     padding: 0px;
     border: 1px solid #888;
-    width: 400px;`
+    width: 400px;
+    border-radius: 10px;
 }
 
 /* The Close Button */
@@ -458,11 +459,12 @@ select, textarea, input, button{
 	height: 50px;
 	border: none;
 	margin-top: 13px;
-	background-color: green;
+	background-color: rgb(87,187,138);
 	color: white;
 	font-family: 'yg-jalnan';
 	font-size: 14pt;
 	padding-top: 2px;
+	border-radius: 25px;
 }
 
 #line2{
@@ -510,22 +512,24 @@ select, textarea, input, button{
 	height: 50px;
 	border: none;
 	margin-top: 13px;
-	background-color: green;
+	background-color: rgb(87,187,138);
 	color: white;
 	font-family: 'yg-jalnan';
 	font-size: 14pt;
 	padding-top: 2px;
+	border-radius: 25px;
 }
 #edALBtn{
 	width: 200px;
 	height: 50px;
 	border: none;
 	margin-top: 13px;
-	background-color: green;
+	background-color: rgb(87,187,138);
 	color: white;
 	font-family: 'yg-jalnan';
 	font-size: 14pt;
 	padding-top: 2px;
+	border-radius: 25px;
 }
 
 .aL-row{
@@ -833,7 +837,7 @@ select, textarea, input, button{
 	width: 256px;
 	height: 64px;
 	font-family: 'yg-jalnan';
-	background: green;
+	background: rgb(87,187,138);
 	font-size: 24px;
 	color: white;
 	border: none;
@@ -1025,6 +1029,7 @@ select, textarea, input, button{
 	width: 200px;
 	height: 50px;
 	border: none;
-	background-color: green;
-	font-family: 'yg-jalnan'
+	background-color: rgb(87,187,138);
+	font-family: 'yg-jalnan';
+	border-radius: 25px;
 }
