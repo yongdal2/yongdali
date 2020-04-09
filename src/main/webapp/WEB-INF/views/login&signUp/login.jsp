@@ -10,7 +10,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><!-- warning icon -->
     <link rel="stylesheet" href="${contextPath}/resources/css/login&signUp.css">   
-    <script src="//code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
     <script src="${contextPath}/resources/js/login&signUp.js"></script>
 </head>
 
@@ -24,30 +24,30 @@
 
     <!-- content -->
     <div class="content loginContent">
-        <form action="login.do" method="post" id="loginForm" novalidate>
+        <!-- <form action="login.do" method="post" id="loginForm" novalidate> -->
             <div class="formRow">
                 <div class="formRow--item">
                     <!-- 이메일 -->
                     <div class="emailWrap">
                         <div class="formRow--input-wrapper js-inputWrapper">
-                            <input type="email" class="formRow--input js-input eng" name="mId" placeholder="이메일"
+                            <input type="email" class="formRow--input js-input eng" name="mId" id="mId" placeholder="이메일"
                                 maxlength="50">
                         </div>
                     </div>
                     <div id="emailMsg" class="msgBox"></div>
                     <div class="pwdWrap">
                         <div class="formRow--input-wrapper js-inputWrapper">
-                            <input type="password" class="formRow--input js-input" name="pwd" placeholder="비밀번호"
+                            <input type="password" class="formRow--input js-input" name="pwd" id="pwd" placeholder="비밀번호"
                                 maxlength="16" >
                         </div>
                     </div>
-                    <div id="loginPwdMsg" class="msgBox"></div>
+                    <div id="pwdMsg" class="msgBox"></div>
                 </div>
             </div>
             <div class="btnArea">
-                <button type="submit" class="submitBtn">로그인</button>
+                <button type="button" class="submitBtn">로그인</button>
             </div>
-        </form>
+        <!-- </form> -->
         <div class="forgotSignIn">
             <a class="" href="#">비밀번호 재설정</a>
             <a class="" href="policyView.me">회원가입</a>
