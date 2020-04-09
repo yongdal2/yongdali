@@ -328,6 +328,9 @@ public class NoticeController {
 	@RequestMapping("dNupdate.no")	
 	public ModelAndView driverNoticeUpdate(ModelAndView mv, Notice n, @RequestParam(name="nSort", required=true, defaultValue="일반")String nSort,
 									HttpServletRequest request, @RequestParam(value="reloadFile", required=false) MultipartFile file) {
+		
+		
+		System.out.println("fileName : " + file.getOriginalFilename());
 		if(file != null && !file.isEmpty()) {
 			if(n.getnImgRename() != null) {
 				deleteFile(n.getnImgRename(), request);
@@ -351,7 +354,7 @@ public class NoticeController {
 		
 		
 		if(result > 0) {
-			mv.addObject("nNo",n.getnNo()).setViewName("redirect:dNdetail.no");
+			mv.addObject("nNo",n.getnNo()).setViewName("redirect:dNoticeMain.no");
 		}else {
 			mv.setViewName("common/errorPage");
 		}

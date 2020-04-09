@@ -1,5 +1,7 @@
 package com.kh.yongdali.member.model.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,6 +16,10 @@ public class MemberDao {
 	
 	public Member loginMember(Member m) {
 		return sqlSession.selectOne("memberMapper.loginMember", m);
+	}
+
+	public int insertSampleMembers(ArrayList<Member> mList) {
+		return sqlSession.insert("memberMapper.insertSampleMembers", mList);
 	}
 	
 }
