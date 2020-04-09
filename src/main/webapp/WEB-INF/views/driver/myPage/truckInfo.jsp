@@ -30,7 +30,7 @@
 				차량 정보
 			</div>
 			
-			<div class="col-xs-12 col-md-12 na truckInfo">
+			<div class="col-xs-12 col-md-12 na bBoxb">
 				<div class="row">
 					<div class="col-xs-6 col-md-6">
 						<p class="carInf bdbt1">

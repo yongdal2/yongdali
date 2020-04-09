@@ -31,51 +31,50 @@
     <c:import url="../../common/nav.jsp" />
     <c:import url="../../user/myPage/userInfo.jsp" />
     
-    
-    
-    
-    
     <div class="container">
-        <div class="row">
-            <div class="h2 jal">마이페이지(주소록)</div>
-            <hr>
-            <div class="row na" style="margin-bottom: 30px">
-                <div class="col-xs-10 col-md-10 h4">배송지 목록</div>
-                <div class="col-xs-2 col-md-2 text-center">
-                    <button class="btn btn_ydl_l" data-toggle="modal" data-target="#addAddr">배송지 추가</button>
-                </div>
-                <div class="col-xs-12 col-md-12 text-center noto">
-                    <div class="col-xs-12 col-md-12">
-                        <div class="row fw6" style="border-top: black solid 1px; border-bottom: 1px solid #dedede; padding: 10px;">
-                            <div class="col-xs-2 col-md-2">배송지</div>
-                            <div class="col-xs-5 col-md-5">주소</div>
-                            <div class="col-xs-2 col-md-2">연락처</div>
-                            <div class="col-xs-3 col-md-3">수정 · 삭제</div>
-                        </div>
-                        <div class="row small" style="border-bottom: 1px solid #dedede; padding: 10px;">
-                            <div class="col-xs-2 col-md-2">
-                                <span>회사</span>
-                                <br> <span>도로리</span>
-                            </div>
-                            <div class="col-xs-5 col-md-5">
-                                <span>강남구 대치동 123-556로 24번지</span>
-                                <br>
-                                <span>123층 12호</span>
-                            </div>
-                            <div class="col-xs-2 col-md-2">
-                                <span>02-222-2222</span>
-                                <br> <span>010-2711-1111</span>
-                            </div>
-                            <div class="col-xs-3 col-md-3">
-                                <button class="btn btn-sm btn_ydl" data-toggle="modal" data-target="#editAddr">수정</button>
-                                <button class="btn btn-sm">삭제</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+		<div class="row">
+			<div class="col-xs-12 col-md-12 h2 jal">주소록</div>
+			<div class="col-xs-12 col-md-12 na">
+				<div class="row na" style="margin-bottom: 30px">
+					<div class="col-xs-9 col-md-10 h4">배송지 목록</div>
+					<div class="col-xs-3 col-md-2 text-right">
+						<button class="btn btn_ydl_l" data-toggle="modal"
+							data-target="#addAddr">배송지 추가</button>
+					</div>
+					<div class="col-xs-12 col-md-12 text-center noto">
+						<div class="col-xs-12 col-md-12">
+							<div class="row fw6"
+								style="border-top: black solid 1px; border-bottom: 1px solid #dedede; padding: 10px;">
+								<div class="col-xs-2 col-md-2">배송지</div>
+								<div class="col-xs-5 col-md-5">주소</div>
+								<div class="col-xs-2 col-md-2">연락처</div>
+								<div class="col-xs-3 col-md-3">수정 · 삭제</div>
+							</div>
+							<div class="row small"
+								style="border-bottom: 1px solid #dedede; padding: 10px;">
+								<div class="col-xs-2 col-md-2">
+									<span>회사</span> <br> <span>도로리</span>
+								</div>
+								<div class="col-xs-5 col-md-5">
+									<span>강남구 대치동 123-556로 24번지</span> <br> <span>123층
+										12호</span>
+								</div>
+								<div class="col-xs-2 col-md-2">
+									<span>02-222-2222</span> <br> <span>010-2711-1111</span>
+								</div>
+								<div class="col-xs-3 col-md-3">
+									<button class="btn btn-sm btn_ydl" data-toggle="modal"
+										data-target="#editAddr">수정</button>
+									<button class="btn btn-sm">삭제</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
     <!-- 주소 추가 -->
     <div class="modal fade" id="addAddr" role="dialog">
         <div class="modal-dialog">

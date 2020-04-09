@@ -44,9 +44,10 @@
 			<div class="col-xs-12 col-md-12 h2 jal">
 				정산
 				<br>
+				<br>
 			</div>
 			<div class="col-xs-12 col-md-12 text-center">
-				<div class="col-xs-3 col-md-3">
+				<div class="col-xs-3 col-md-3 h54">
 					<select class="form-control" id="">
 						<option value="ㅇㅇ">상태별 조회</option>
 						<option value="ㅇㅇ">예약 대기</option>
@@ -67,10 +68,9 @@
 					<button class="btn btn_ydl_r">전체보기</button>
 				</div>
 			</div>
-
-
-
-
+			<div class="h2">d
+			<br>
+			</div>
 			<div class="row" style="margin: 20px;">
 				<div class="col-xs-12 col-md-12"
 					style="padding: 0; border-radius: 16px; border: solid 1px #dedede; background-color: #f3f5f7;">
