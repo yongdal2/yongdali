@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false" %>
 <html>
 <head>
@@ -86,9 +86,8 @@
 									<h4 id="preEstimateCharge" class="jal" style="font-size: 14pt;">예상 요금 &nbsp;&nbsp;&nbsp;<span id="preCharge">0</span>&nbsp;원 ~</h4>
 								</div>
 								<br>
-								<div id="reservation-go" class="form-btn" onclick="location.href='reservation.go'" >
-									<button class="submit-btn jal" style="font-size: 16pt;" onclick="location.href='reservation.go'"><a href="reservation.go">예약하러 가자</a></button>
-									<!-- https://stackoverflow.com/questions/2091168/how-to-disable-a-link-using-only-css -->
+								<div class="form-btn">
+									<a href="reservation.go" id="submit-btn" class="submit-btn jal" style="font-size: 16pt;">예약하러 가기</a>
 								</div>
 							</form>
 						</div>
