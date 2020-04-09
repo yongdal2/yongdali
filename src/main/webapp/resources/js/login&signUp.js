@@ -14,11 +14,41 @@ $(document).ready(function(){
 	
 	
 	/*-- 로그인 ----------------------------------------------*/
-    $('#loginForm').submit(function(){
-    	var result = false;
-    	result = loginValidate();
-    	
-        return result;
+    // 엔터시 로그인 클릭
+	$('#pwd, #mId').keypress(function(event){
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if(keycode == '13'){
+        	$(".submitBtn").trigger("click");
+        }
+    }); 
+	
+	
+    $(".submitBtn").click(function(){
+    	var mId = $("input[type=email]").val();
+    	var pwd = $("#pwd").val();
+    	if(mId == "" ){
+    		displayErrorMsg($("#emailMsg"), '이메일을 입력하세요.');
+    	}else{
+    		$.ajax({
+    			url : "login.do",
+    			data : {
+    					 mId : mId,
+    					 pwd : pwd
+    					},
+    			type : "post",
+    			success : function(result){
+    				console.log(result);
+    				if(result == 'loginSuccess'){
+    					location.href="home.do";
+    				}else if(result == 'nonExistentId'){
+    					displayErrorMsg($("#emailMsg"), '존재하지 않는 이메일입니다.');
+    				}else{
+    					displayErrorMsg($("#pwdMsg"), '비밀번호가 틀렸습니다.');
+    					$("#emailMsg").css("display","none");
+    				}
+    			}
+    		})
+    	}
     })
 
     // 이메일 유효성 검사
@@ -37,6 +67,11 @@ $(document).ready(function(){
         }
     }
 
+	$("input[type=email]").focusout(function(){
+		
+
+	})
+	
 
     /*-- 회원가입 ----------------------------------------------*/
     // focus legend
