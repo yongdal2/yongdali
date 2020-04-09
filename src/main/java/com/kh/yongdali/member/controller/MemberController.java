@@ -92,6 +92,10 @@ public class MemberController {
 		return "redirect:home.do";
 	}
 	
+	/** 샘플데이터
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("insertSample.me")
 	public String insertSampleMembers(Model model) {
 		ArrayList<Member> mList = new ArrayList<Member>();

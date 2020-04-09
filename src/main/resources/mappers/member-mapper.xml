@@ -21,18 +21,18 @@
 	</select>
 	
 	<insert id="insertSampleMembers" parameterType="java.util.List">
-		INSERT INTO MEMBER
+		INSERT INTO MEMBER(M_NO, M_ID, PWD, NAME, PHONE, M_SORT, M_STATUS, ENROLLDATE)
 		VALUES
 			<foreach item="item" index="index" collection="list">
 			(
 				'M' || SEQ_MNO.NEXTVAL,
-				#{item.mId},
-				#{item.pwd},
-				#{item.mName},
-				#{item.phone},
-				#{item.mSort},
-				#{item.mStatus},
-				#{item.enrollDate}
+				"${item.mId}",
+				"${item.pwd}",
+				"${item.mName}",
+				"${item.phone}",
+				"${item.mSort}",
+				"${item.mStatus}",
+				"${item.enrollDate}"
 			)
 			</foreach>
 	</insert>

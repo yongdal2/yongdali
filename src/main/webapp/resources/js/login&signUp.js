@@ -17,8 +17,8 @@ $(document).ready(function(){
     $('#loginForm').submit(function(){
     	var result = false;
     	result = loginValidate();
-        
-        return true;
+    	
+        return result;
     })
 
     // 이메일 유효성 검사
