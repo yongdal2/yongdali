@@ -213,6 +213,22 @@
 		    <version>5.2.2.RELEASE</version>
 		</dependency>
 		
+		<!-- 몽고DB -->
+		<!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
+		<dependency>
+    		<groupId>org.mongodb</groupId>
+    		<artifactId>mongo-java-driver</artifactId>
+    		<version>3.11.0</version>
+		</dependency>
+		
+		<!--웹 소켓  -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		
+		
 	</dependencies>
     <build>
         <plugins>

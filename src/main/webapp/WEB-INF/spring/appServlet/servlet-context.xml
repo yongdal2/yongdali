@@ -28,4 +28,5 @@
 			<beans:bean id="reservationInterceptor" class="com.kh.yongdali.common.interceptor.ReservationInterceptor"/>
 		</interceptor>
 	</interceptors>
+	
 </beans:beans>
