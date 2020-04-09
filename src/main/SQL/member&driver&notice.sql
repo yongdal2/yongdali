@@ -13,7 +13,7 @@ DROP SEQUENCE SEQ_NNO;
 CREATE TABLE MEMBER(
     M_NO VARCHAR2(50) /* 회원번호 */,       
     M_ID VARCHAR2(50) /* 회원 ID(이메일) */,                 
-    PWD VARCHAR2(100) /* 비밀번호 */,
+    PWD CHAR(60) /* 비밀번호 */,
     NAME VARCHAR2(50) /* 이름 */,
     PHONE VARCHAR2(14) /* 휴대폰번호 */,
     M_SORT VARCHAR2(9)/* 회원구분(관리자, 일반, 사업자) */,
