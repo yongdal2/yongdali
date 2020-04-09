@@ -1,5 +1,7 @@
 package com.kh.yongdali.member.model.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,5 +18,9 @@ public class MemberServiceImpl implements MemberService {
 	public Member loginMember(Member m) {
 		return mDao.loginMember(m);
 	}
-	
+
+	@Override
+	public int insertSampleMembers(ArrayList<Member> mList) {
+		return mDao.insertSampleMembers(mList);
+	}
 }

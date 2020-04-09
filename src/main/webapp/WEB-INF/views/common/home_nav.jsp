@@ -45,9 +45,6 @@
 			<div class="col-lg-4">
 				<ul class="nav navbar-nav float-lg-right navbar-right">
 					<c:if test="${empty sessionScope.loginUser}">
-						  
-
-						  
 						<li class="nav-item">
 							<button class="btn btn-default navbar-btn loginView" style="background: rgb(87,187,138); color: white;">로그인</button>
 						</li>
@@ -58,10 +55,7 @@
 					<c:if test="${!empty sessionScope.loginUser}">
 						<c:if test='${loginUser.mSort eq ("관리자")}'>
 							<li class="nav-item">
-								<button class="btn btn-default navbar-btn" style="background: rgb(87,187,138); color: white;">샘플데이터</button>
-							</li>
-							<li class="nav-item">
-								<button class="btn btn-default navbar-btn" style="background: rgb(87,187,138); color: white;">관리자페이지</button>
+								<button class="btn btn-default navbar-btn adminPage" style="background: rgb(87,187,138); color: white;">관리자페이지</button>
 							</li>
 						</c:if>
 						<c:if test='${loginUser.mSort ne ("관리자")}'>
@@ -69,7 +63,6 @@
 								<button class="btn btn-default navbar-btn myPage" style="background: rgb(87,187,138); color: white;">마이페이지</button>
 							</li>
 						</c:if>
-						
 						<li class="nav-item">
 							<button class="btn btn-outline-default navbar-btn logout" style="background: white;" >로그아웃</button>
 						</li>

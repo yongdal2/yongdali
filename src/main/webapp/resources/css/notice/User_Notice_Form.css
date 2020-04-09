@@ -114,6 +114,12 @@ a{
     height:250px;
 }
 
+.filespan>button{
+	border:none;
+	background:none;
+	vertical-align: bottom;
+}
+
 input[type=file]{
 	display:inline-block !important;
 }

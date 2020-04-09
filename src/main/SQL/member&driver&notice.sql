@@ -13,7 +13,7 @@ DROP SEQUENCE SEQ_NNO;
 CREATE TABLE MEMBER(
     M_NO VARCHAR2(50) /* 회원번호 */,       
     M_ID VARCHAR2(50) /* 회원 ID(이메일) */,                 
-    PWD VARCHAR2(100) /* 비밀번호 */,
+    PWD CHAR(60) /* 비밀번호 */,
     NAME VARCHAR2(50) /* 이름 */,
     PHONE VARCHAR2(14) /* 휴대폰번호 */,
     M_SORT VARCHAR2(9)/* 회원구분(관리자, 일반, 사업자) */,
@@ -138,10 +138,10 @@ INCREMENT BY 1
 NOCYCLE
 NOCACHE;
 
-
+/*
 ------------------------------- Insert -------------------------------------
 -- MEMBER
-INSERT INTO MEMBER VALUES('M' || SEQ_MNO.NEXTVAL, 'admin@naver.com', 'admin', '유승제', '010-1111-1111', '관리자', '정상', '2020-03-10'); 
+ INSERT INTO MEMBER VALUES('M' || SEQ_MNO.NEXTVAL, 'admin@naver.com', 'admin', '유승제', '010-1111-1111', '관리자', '정상', '2020-03-10'); 
 INSERT INTO MEMBER VALUES('M' || SEQ_MNO.NEXTVAL, 'mem01@naver.com', 'mem01', '홍멤버', '010-2222-2222', '일반', '정상', '2020-03-18'); 
 INSERT INTO MEMBER VALUES('M' || SEQ_MNO.NEXTVAL, 'biz01@naver.com', 'biz01', '김거상', '010-3333-3333', '사업자', '정상', '2020-03-18'); 
 INSERT INTO MEMBER VALUES('M' || SEQ_MNO.NEXTVAL, 'biz02@naver.com', 'biz01', '최거상', '010-4444-4444', '사업자', '정상', '2020-03-19'); 
@@ -169,6 +169,7 @@ INSERT INTO NOTICE VALUES('N' || SEQ_NNO.NEXTVAL,
                         NULL, NULL,
                         '사업자', 
                         DEFAULT,DEFAULT,DEFAULT);
+*/                        
                   
 COMMIT;                        
 --SELECT * FROM MEMBER;

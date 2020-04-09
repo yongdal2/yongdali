@@ -39,8 +39,8 @@
             <div class="col-lg-8 col-lg-offset-3">
                 <form action="dNupdate.no" method="post" id="notice" enctype="multipart/form-data" onsubmit="return validate();">
                     <input type="hidden" name="nNo" value="${n.nNo }">
-                    <input type="hidden" name="nImgOrigin" value="${n.nImgOrigin }">
-                    <input type="hidden" name="nImgRename" value="${n.nImgRename }">
+                    <%-- <input type="hidden" name="nImgOrigin" value="${n.nImgOrigin }">
+                    <input type="hidden" name="nImgRename" value="${n.nImgRename }"> --%>
                     <div class="form_area_wrap">
                         <table class="form_table">
                             <colgroup>
