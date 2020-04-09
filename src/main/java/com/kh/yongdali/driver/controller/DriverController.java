@@ -34,6 +34,10 @@ public class DriverController {
 	public String driver2YongView() {
 		return "/driver/2yong";
 	}
+	@RequestMapping("test.do")
+	public String test2() {
+		return "/driver/test";
+	}
 	
 	@RequestMapping("mibaechar.do")
 	public void mibaechar(HttpServletResponse response,int dId) throws JsonIOException, IOException {
