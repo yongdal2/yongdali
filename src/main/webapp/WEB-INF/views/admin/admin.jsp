@@ -1,847 +1,376 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>용달이 | 관리자 페이지</title>
+        
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="${contextPath}/resources/css/notice/User_Faq.css">
     
-    <!-- CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"/>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
-    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reservation.css"/>
-    <!-- map API 
-    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=03ea077d7ecc6636dffede985cc5c57d&libraries=services"></script> -->
-    <!-- font -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"/>
-    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"/>
-    <link type="text/css" rel="stylesheet" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"/>
+
 </head>
+
 <body>
-	<!-- header -->
-	<c:import url="../common/home_nav.jsp"/>
+   <!-- Navigation -->
+
+	<%@ include file="../common/nav.jsp"%>
 	
-	<!-- body -->
-	<form action="rev.do" method="post">
-	    <div id="body-div" class="container">
-	        <div>
-	            <h2 style="font-family: 'yg-jalnan';">관리자 페이지</h2>
-	            <hr style="border-color: black;">
-	        </div>
-	        <div style="display: flex;">
-	            <div>
-	                <div id="line1">
-	                    <div class="edge11">
-	                        <div class="title11">
-	                            <!-- <label id="carGuide1">
-	                                <img src="${pageContext.request.contextPath}/resources/images/reservation/question-mark.svg" alt="안내">
-	                                <span id="carGuide-ment">차량 안내가 필요하신가요?</span>
-	                            </label> -->
-	                           	 회원님 정보
-	                        </div>
-	                        <!-- <div id="carOption-div" class="content22">
-	                            <select name="capacity" id="sl1" onchange="cl1();" required>
-	                                <option class="opt1" value="" disabled selected>톤수 선택</option>
-	                                <option class="opt2" value="1톤">1톤</option>
-	                                <option class="opt2" value="1.4톤">1.4톤</option>
-	                                <option class="opt2" value="2.5톤">2.5톤</option>
-	                                <option class="opt2" value="3.5톤">3.5톤</option>
-	                                <option class="opt2" value="5톤">5톤</option>
-	                            </select>
+	<!-- main -->
+    <div class="content container">
+        <div class="row">
+            <h2 class="jal">관리자 페이지</h3>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 sidebar">
+                <a href="uNoticeMain.no"><span class="sidebar_span">회원님 목록</span></a><br>
+                <a href="uFaqView.fa"><span class="sidebar_span">사업주님 목록</span></a><br>
+                <a href="User_Chat.html"><span class="sidebar_span">예약내역</span></a>
+                <a href="User_Chat.html"><span class="sidebar_span">정산내역</span></a>
+                <a href="User_Chat.html"><span class="sidebar_span">환불내역</span></a>
+                <a href="User_Chat.html"><span class="sidebar_span">채팅내역</span></a>
+            </div>
+            <div class="col-lg-8 col-lg-offset-1">
+                <h2 class="jal">자주 묻는 질문</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-3">
+                <div class="faq_index">
+                    <ul class="faq_index_ul">
+                        <li id="resFaq" class="faq_index_li">예약</a></li>
+                        <li id="delivFaq" class="faq_index_li">배송</a></li>
+                        <li id="payFaq" class="faq_index_li">결제</a></li>
+                        <li id="sDelFaq" class="faq_index_li">소형이사</a></li>
+                        <li id="etcFaq" class="faq_index_li">기타문의</a></li>                         
+                    </ul>
+                </div>
+                
+<!-- 예약 -->
+                <div id="resFaqDetail" class="form_area_wrap" style="display: block;">
+                    <div class="accordion"><img src="${contextPath}/resources/images/notice/question.png">
+                        <p>용달이 운영 시간은 어떻게 되나요?</p>
+                    </div>
+                    <div class="ydl_panel"><img src="${contextPath}/resources/images/notice/answer.png">
+                        <p>용달이 플랫폼은 완전 자동화로 365일 24시간 이용이 가능합니다.<br>
+                            기사만 있다면 365일 24시간 가능합니다.<br>
+                            콜센터(고객서비스팀)와 카카오채널의 운영시간은 아래와 같습니다.<br>
+                            - 평일 08시~20시<br>
+                            - 주말, 공휴일 09시~18시<br>
+                            콜센터 운영시간 이외시간에 트럭배송이 필요하시면 미리 예약해주세요.<br>
+                        </p>
+                    </div>
+                    <div class="accordion"><img src="${contextPath}/resources/images/notice/question.png">
+                        <p>[기사정보]기사님 위치나 연락서츨 알 수 있나요?</p>
+                    </div>
+                    <div class="ydl_panel"><img src="${contextPath}/resources/images/notice/answer.png">
+                        <p>화물 운송의 경우 기사님의 실시간 위치와 연락처는 시스템에서 제공하고 있지 않습니다.<br>
+							통상 기사배차가 확정되면 기사님이 출발지에 확인차 연락드리고 있습니다.<br>
+							기타 기사 정보는 용달이 서비스운영팀에 문의 해주세요.<br>
+                        </p>
+                    </div>
+                    <div class="accordion"><img src="${contextPath}/resources/images/notice/question.png">
+                        <p>야간상차 및 익일하차도 가능한가요?</p>
+                    </div>
+                    <div class="ydl_panel"><img src="${contextPath}/resources/images/notice/answer.png">
+                        <p>
+                        	원하시는 상차시간과 하차시간을 입력해주시면 그 시간에 가능한 기사를 배차하여 보내드립니다.<br>
+							야간 상차의 경우 시간요금이 일부 추가될 수 있고,<br>
+							익일(익익일) 하차의 경우도 짐을 트럭에 보관하는 개념으로 추가요금이 발생합니다.<br>
+							추가요금에 대해서는 차종, 옵션별로 상이하여 홈페이지의 예약하기 화면를 참고해주세요.<br>
+                        </p>
+                    </div>
+                    <div class="accordion"><img src="${contextPath}/resources/images/notice/question.png">
+                        <p>기사배차가 안 될 수도 있나요?</p>
+                    </div>
+                    <div class="ydl_panel"><img src="${contextPath}/resources/images/notice/answer.png">
+                        <p>	트럭 배차는 트럭수요와 기사공급의 원칙에 따라 이루어지게 됩니다.<br>
+							용달이은 평균적인 상황에서 고객님과 기사님 사이의 최적 운임을 제시하고 있지만,<br>
+							심야, 악천후, 교통상황 등에 따라 제시된 운임으로 배차가 안되는 경우가 일부 발생합니다.<br>
+							배차가 원활하지 않은 경우 용달이 서비스팀에서 따로 연락을 드려 대안을 말씀드리도록 하겠습니다.<br>
+                        </p>
+                    </div>
+                </div>
+
+<!-- 배송 -->
+                <div id="delivFaqDetail" class="form_area_wrap" style="display: none;">
+                    <div class="accordion"><img src="${contextPath}/resources/images/notice/question.png">
+                        <p>배송시간은 어떻게 되나요?</p>
+                    </div>
+                    <div class="ydl_panel"><img src="${contextPath}/resources/images/notice/answer.png">
+                        <p>	배송은 크게 상차시간, 운행시간, 하차시간으로 나눌 수 있습니다.<br>
+							상차와 하차시간은 물건의 양과 처리방법(수작업, 지게차 등)에 따라 상이하며,<br>
+							운행시간은 주행거리 및 도로사정에 따라 상이합니다.<br>
+							시간이 중요한 경우, 용달이 서비스팀에 문의해주시면 최대한 처리하겠습니다.<br>
+                        </p>
+                    </div>
+                    <div class="accordion"><img src="${contextPath}/resources/images/notice/question.png">
+                        <p>상하차 도움은 무슨 뜻인가요?</p>
+                    </div>
+                    <div class="ydl_panel"><img src="${contextPath}/resources/images/notice/answer.png">
+                        <p>기사는 차량(트럭) 위에서 적재와 화물의 결박, 운행에 대한 것을 책임집니다.<br>
+							상하차 도움은 사무실이나 창고 안에서 물건을 트럭까지 옮기는 경우 등<br>
+							물건을 싣고(상차) 내리는(하차) 과정에서 기사의 도움이 필요한 경우를 말합니다.<br>
+							기본적인 상하차 도움에 대한 금액은 용달이 시스템에서 제공하고 있으나,<br>
+							물건의 양과무게, 난이도(계단이동)에 따라 상하차 요금은 달라질 수 있습니다.<br>
+                        </p>
+                    </div>
+                    <div class="accordion"><img src="${contextPath}/resources/images/notice/question.png">
+                        <p>물건이 파손되었어요</p>
+                    </div>
+                    <div class="ydl_panel"><img src="${contextPath}/resources/images/notice/answer.png">
+                        <p>용달이은 적재물 파손 및 분실에 대해 DB손해보험의 적재물배상책임보험(최대 1억원)에 가입되어 있습니다.<br>
+							그러나 무엇보다 사고를 미연에 방지할 수 있도록 최선의 노력을 다 하겠습니다.<br>
+                        </p>
+                    </div>
+                </div>
+
+<!-- 결제 -->
+                <div id="payFaqDetail" class="form_area_wrap" style="display: none;">
+                    <div class="accordion"><img src="${contextPath}/resources/images/notice/question.png">
+                        <p>배송운임은 어떻게 결정되나요?</p>
+                    </div>
+                    <div class="ydl_panel"><img src="${contextPath}/resources/images/notice/answer.png">
+                        <p>차종별로 배송운임은 크게 세가지로 구성되어 있습니다.<br><br>
+							- 거리요금: 택시요금과 유사하게 기본요금과 거리에 따른 운임으로 책정됩니다.<br>
+							- 시간추가: 야간이나 주말 상하차의 경우, 상차와 하차일이 다른 경우 등 상하차 시간과 관련된 추가요금입니다.<br>
+							- 상하차추가: 기사가 상하차 시 기본책임 이외의 배송물품의 운반에 대한 추가비용입니다.<br><br>
+							용달이은 고객님과 트럭기사를 가장 효율적으로 매칭해줄 수 있는 최적요금을 제시하고 있습니다.<br>
+							운임 및 배송에 대한 데이터를 다양한 기법으로 분석하여 주기적으로 운임을 조정하고 있습니다.<br>
+                        </p>
+                    </div>
+                    <div class="accordion"><img src="${contextPath}/resources/images/notice/question.png">
+                        <p>용달이 결제 방식은?</p>
+                    </div>
+                    <div class="ydl_panel"><img src="${contextPath}/resources/images/notice/answer.png">
+                        <p>카드결제 : 카드 결제를 선택하시고 예약을 완료하시면 결제링크를 보내드립니다.<br>
+                        	**카드결제의 경우, 결제가 확인된 이후 예약이 접수됩니다.<br>
+                        </p>
+                    </div>
+                    <div class="accordion"><img src="${contextPath}/resources/images/notice/question.png">
+                        <p>미리 결제했는데 취소를 해야해요</p>
+                    </div>
+                    <div class="ydl_panel"><img src="${contextPath}/resources/images/notice/answer.png">
+                        <p>기사가 배정되기 전에는 언제라도 추가적인 비용없이 취소가 가능합니다.<br>
+							하지만, 기사배정 이후나 기사가 출발지에 도착한 이후 취소가 된다면 부득이 일부 취소수수료가 부과됩니다.<br>
+							(예약시간 1시간전 취소 : 5천원, 예약시간 30분전 취소 : 1만원, 상차지 도착 후 취소: 50%)<br>
+							결제가 이루어진 후 취소해야할 경우에는<br>
+							콜센터에서 취소비를 제외한 금액에 대해  승인취소를 해드립니다.<br>
+                        </p>
+                    </div>
+                </div>
+
+<!-- 소형이사 -->
+                <div id="sDelFaqDetail" class="form_area_wrap" style="display: none;">
+                    <div class="accordion"><img src="${contextPath}/resources/images/notice/question.png">
+                        <p>소형 이사가 무엇인가요?</p>
+                    </div>
+                    <div class="ydl_panel"><img src="${contextPath}/resources/images/notice/answer.png">
+                        <p>소형이사는 원룸, 고시원, 자취/하숙방 등 차량 1대로 이동이 가능한 수준의 이사를 말합니다.<br>
+							소형이사에 제공되는 차량은 다마스, 라보, 1톤, 1.4톤, 총 4종류가 있으며<br>
+							고객과 기사님이 함께 이사짐을 운반하는 기준으로 금액이 책정되어있습니다.<br>
+							최대한 저렴하게 제공하는 만큼 포장과 정리/배치는 고객님이 직접 하셔야 합니다.<br>
+                        </p>
+                    </div>
+                    <div class="accordion"><img src="${contextPath}/resources/images/notice/question.png">
+                        <p>이삿짐 수량에 대한 안내</p>
+                    </div>
+                    <div class="ydl_panel"><img src="${contextPath}/resources/images/notice/answer.png">
+                        <p>현장에서 가장 많이 발생하는 갈등이 예약시 기입했던 이사짐보다 더 많은 경우입니다.<br>
+							이 경우 부득이 추가금이 발생합니다.<br>
+							또한 예약한 차량에 다 실리지 않을 경우엔 더 큰 비용이 들기 때문에 가능한 정확하고 자세하게 선택/기입해주시기를 요청드립니다.<br>
+							이사짐 선택 창에 없는 물건들은 요청사항에 추가적으로 기입해주세요.<br>
+                        </p>
+                    </div>
+                    <div class="accordion"><img src="${contextPath}/resources/images/notice/question.png">
+                        <p>이사차량에 같이 타고 이동할 수 있나요?</p>
+                    </div>
+                    <div class="ydl_panel"><img src="${contextPath}/resources/images/notice/answer.png">
+                        <p>용달이 소형이사는 기본적으로 차량에 1인 동승을 제공합니다.<br>
+							(다마스와 라보는 1인 동승만 가능, 1톤차량은 2인 가능하나 차량마다 다름)<br>
+							2인 이상 동승 시에는 기사의 확인이 필요하니 서비스운영팀에 문의해주세요.<br>
+                        </p>
+                    </div>
+                </div>
+
+
+<!-- 기타 문의 -->
+                <div id="etcFaqDetail" class="form_area_wrap" style="display: none;">
+                    <div class="accordion"><img src="${contextPath}/resources/images/notice/question.png">
+                        <p>현장에서 기사가 추가요금을 요구해요</p>
+                    </div>
+                    <div class="ydl_panel"><img src="${contextPath}/resources/images/notice/answer.png">
+                        <p>기본적으로 용달이은 기사님의 요구에 의해 추가금이 발생하지 않도록 노력하고 있습니다.<br>
+							하지만, 용달이 예약시 요청 내용과 다른 점이 있다면 부득이 추가금이 발생할 수 있습니다.<br>
+							예를 들어, 배송물품 추가, 예약되지 않은 동승, 20분이상 대기, 주차비 등이 추가금 발생의 주된 이유입니다.<br>
+							추가금 요구를 포함한 모든 배송간 분쟁은 원칙적으로 용달이 서비스팀을 통해서 협의해주시면 됩니다.<br>
+                        </p>
+                    </div>
+                    <div class="accordion"><img src="${contextPath}/resources/images/notice/question.png">
+                        <p>용달이 관리자가 누구인가여</p>
+                    </div>
+                    <div class="ydl_panel"><img src="${contextPath}/resources/images/notice/answer.png">
+                        <p>비밀입니다.<br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+    <br>
+    <br>
+    <br>
+
+	<!-- Footer -->
+	<%@ include file="../common/footer.jsp"%>
 	
-	                            <select name="type" id="sl2" onchange="cl2();" required>
-	                                <option class="opt1" value="" disabled selected>차종 선택</option>
-	                                <option class="opt2" value="카고">카고</option>
-	                                <option class="opt2" value="호루">호루</option>
-	                                <option class="opt2" value="탑차">탑차</option>
-	                                <option class="opt2" value="윙바디">윙바디</option>
-	                                <option class="opt2" value="리프트">리프트</option>
-	                            </select>
-	                        </div> -->
-	                        <!-- Modal1 : 차량 정보 -->
-	                       <!--  <div id="myModal1" class="modal11" style="padding-top: 65px;"> -->
-								<div class="modal-content11" style="width: 704px;">
-		                            <span id="modal-close1" class="close11" style="width: 30px;">&times;</span>
-		                            <div id="carInfo-div">
-	                                	<div id="carInfo-title-div" align="center">
-	                                        <span id="carInfo-title">차량 안내</span>
-	                                    </div>
-								        <div id="modal1-content">
-								            <div style="display: flex;">
-								                <div id="type1" class="car-content-title" style="background: white;">
-								                                    차량 형태 
-								                </div>
-								                <div id="size1" class="car-content-title">
-								                                    적재 크기
-								                </div>
-								            </div>
-								            <div id="guide-content1">
-								                <div class="car-content-div">
-								                    <div>
-								                        <img src="${pageContext.request.contextPath}/resources/images/truck/cargo-image.png" alt="" class="car-content-img">
-								                    </div>
-								                    <div class="car-content-type">
-								                        <div class="car-content-type-font">카고</div>
-								                    </div>
-								                    <div class="car-each-content">
-								                        <div class="car-each-content-font1">
-								                            - 흔히 알고 있는 일반 것인 형태의 트럭<br>
-								                            - 적재함이 오픈되어 있어 적재물 파악이 쉬움<br>
-								                            - 비나 눈 등 날씨의 영향으로부터 적재물을 보호하기 어려움
-								                        </div>
-								                    </div>
-								                </div>
-								                <div class="car-content-div">
-								                    <div>
-								                        <img src="${pageContext.request.contextPath}/resources/images/truck/horu-image.png" alt="" class="car-content-img">
-								                    </div>
-								                    <div class="car-content-type">
-								                        <div class="car-content-type-font">호루</div>
-								                    </div>
-								                    <div class="car-each-content">
-								                        <div class="car-each-content-font2">
-								                            - 가죽이나 비닐 등의 덮개가 씌워져 있는 트럭<br>
-								                            - 비나 눈 등 날씨의 영향으로부터 적재물을 보호할 수 있음
-								                        </div>
-								                    </div>
-								                </div>
-								                <div class="car-content-div">
-								                    <div>
-								                        <img src="${pageContext.request.contextPath}/resources/images/truck/top-image.png" alt="" class="car-content-img">
-								                    </div>
-								                    <div class="car-content-type">
-								                        <div class="car-content-type-font">탑차</div>
-								                    </div>
-								                    <div class="car-each-content">
-								                        <div class="car-each-content-font1">
-								                            - 적재함이 사각 형태로 막혀 있고, 잠금장치가 있는 트럭<br>
-								                            - 날씨, 도난, 파손 등 외부의 영향으로부터 보호할 수 있음<br>
-								                            - 식자재, 택배 물품 등의 운반에 주로 쓰임
-								                        </div>
-								                    </div>
-								                </div>
-								                <div class="car-content-div">
-								                    <div>
-								                        <img src="${pageContext.request.contextPath}/resources/images/truck/wingbody-image.png" alt="" class="car-content-img">
-								                    </div>
-								                    <div class="car-content-type">
-								                        <div class="car-content-type-font">윙바디</div>
-								                    </div>
-								                    <div class="car-each-content">
-								                        <div class="car-each-content-font1">
-								                            - 적재함을 날개처럼 양쪽으로 개폐할 수 있는 트럭<br>
-								                            - 날씨, 도난, 파손 등 외부의 영향으로부터 보호할 수 있음<br>
-								                            - 또한 지게차를 이용한 상하차가 용이함
-								                        </div>
-								                    </div>
-								                </div>
-								                <div class="car-content-div">
-								                    <div>
-								                        <img src="${pageContext.request.contextPath}/resources/images/truck/lift-image.png" alt="" class="car-content-img">
-								                    </div>
-								                    <div class="car-content-type">
-								                        <div class="car-content-type-font">리프트</div>
-								                    </div>
-								                    <div class="car-each-content">
-								                        <div class="car-each-content-font2">
-								                            - 무거운 제품의 상하차를 위해 리프팅 장비를 탑재한 트럭<br>
-								                            - 대형 가전제품과 가구, 오토바이 등의 상하차에 주로 쓰임
-								                        </div>
-								                    </div>
-								                </div>
-								            </div>
-								            <div id="guide-content2" style="display: none;">
-								                <div align="center" style="margin-top: 70px;">
-								                    <img id="standard-img" src="${pageContext.request.contextPath}/resources/images/truck/carrying-capacity-image.png" alt="">
-								                </div>
-								                <div align="center">
-								                    <table id="standard-table">
-								                        <thead>
-								                            <tr style="text-align:center; background:rgb(105, 113, 120); color: white;">
-								                                <th class="thd th11">톤수</th>
-								                                <th class="thd th11">가로</th>
-								                                <th class="thd th11">세로</th>
-								                                <th class="thd th11">높이</th>
-								                            </tr>
-								                        </thead>
-								                        <tbody id="truck-standard" style="text-align: center;">
-								                            <tr>
-								                                <td class="thd ton1">1톤</td>
-								                                <td class="thd">160 cm</td>
-								                                <td class="thd">280 cm</td>
-								                                <td class="thd bd1">180 cm</td>
-								                            </tr>
-								                            <tr>
-								                                <td class="thd ton1">1.4톤</td>
-								                                <td class="thd">170 cm</td>
-								                                <td class="thd">310 cm</td>
-								                                <td class="thd bd1">180 cm</td>
-								                            </tr>
-								                            <tr>
-								                                <td class="thd ton1">2.5톤</td>
-								                                <td class="thd">170 cm</td>
-								                                <td class="thd">310 cm</td>
-								                                <td class="thd bd1">180 cm</td>
-								                            </tr>
-								                            <tr>
-								                                <td class="thd ton1">3.5톤</td>
-								                                <td class="thd">170 cm</td>
-								                                <td class="thd">310 cm</td>
-								                                <td class="thd bd1">180 cm</td>
-								                            </tr>
-								                            <tr>
-								                                <td class="thd ton1">5톤</td>
-								                                <td class="thd">170 cm</td>
-								                                <td class="thd">310 cm</td>
-								                                <td class="thd bd1">180 cm</td>
-								                            </tr>
-								                        </tbody>
-								                    </table>
-								                </div>
-								            </div>
-								        </div>
-	                                </div>
-	                            </div>
-	                        </div>
-	                    </div>
-	                    <div class="edge11">
-	                        <div class="title11">
-	                            <label id="selectLoad-btn">
-	                                <img src="${pageContext.request.contextPath}/resources/images/reservation/round-add.svg" alt="안내">
-	                                <span id="load-title">이삿짐 선택</span>
-	                            </label>
-	                           	 사업주님 정보
-	                        </div>
-	                        <div id="load-content-div" class="content22">
-	                            <textarea name="luggage" id="load-content-area" cols="64" rows="3" placeholder="파손이나 분실시 확인할 수 있도록&#13;&#10;이삿짐 품목을 선택해주세요." readonly required></textarea>
-	                        </div>
-	                        <!-- Modal2 : 이삿짐 선택 -->
-	                        <div id="myModal2" class="modal11">
-	                            <!-- Modal content -->
-	                            <div class="modal-content11">
-	                                <span id="modal-close2" class="close11" style="width: 30px;">&times;</span>
-	                                <div id="selectLoad-div">
-	                                    <div id="selectLoad-title-div">
-	                                        <span id="selectLoad-title">이삿짐 선택</span>
-	                                    </div>
-	                                    <div id="selectLoad-topic">
-	                                        <div>
-	                                            <button type="button" id="funiture11" class="move-topic1">가구</button>
-	                                        </div>
-	                                        <div>
-	                                            <button type="button" id="appliance11" class="move-topic1">가전</button>
-	                                        </div>
-	                                        <div>
-	                                            <button type="button" id="etc11" class="move-topic1">기타</button>
-	                                        </div>
-	                                    </div>
-	                                    <!-- 가구 -->
-	                                    <div id="funiture22" class="move-topic11" style="display: block;">
-	                                        <div class="move-topic22">
-	                                            <div class="move-content11">
-	                                                <div class="move-content111">
-	                                                    <div class="move-content1111 minus11"><img src="${pageContext.request.contextPath}/resources/images/reservation/iconfinder_minus_172505.png" alt="" class="move-minus-img"></div>
-	                                                    <span class="move-content1112">0</span>
-	                                                    <div class="move-content1111 plus11" ><img src="${pageContext.request.contextPath}/resources/images/reservation/add_plus-512.png" alt="" class="move-plus-img"></div>
-	                                                </div>
-	                                                <div class="move-content112">침대(매트리스만)</div>
-	                                            </div>
-	                                            <div class="move-content11">
-	                                                <div class="move-content111">
-	                                                    <div class="move-content1111 minus11"><img src="${pageContext.request.contextPath}/resources/images/reservation/iconfinder_minus_172505.png" alt="" class="move-minus-img"></div>
-	                                                    <span class="move-content1112">0</span>
-	                                                    <div class="move-content1111 plus11" ><img src="${pageContext.request.contextPath}/resources/images/reservation/add_plus-512.png" alt="" class="move-plus-img"></div>
-	                                                </div>
-	                                                <div class="move-content112">침대(매트리스만+프레임)</div>
-	                                            </div>
-	                                            <div class="move-content11">
-	                                                <div class="move-content111">
-	                                                    <div class="move-content1111 minus11"><img src="${pageContext.request.contextPath}/resources/images/reservation/iconfinder_minus_172505.png" alt="" class="move-minus-img"></div>
-	                                                    <span class="move-content1112">0</span>
-	                                                    <div class="move-content1111 plus11" ><img src="${pageContext.request.contextPath}/resources/images/reservation/add_plus-512.png" alt="" class="move-plus-img"></div>
-	                                                </div>
-	                                                <div class="move-content112">수납장</div>
-	                                            </div>
-	                                            <div class="move-content11">
-	                                                <div class="move-content111">
-	                                                    <div class="move-content1111 minus11"><img src="${pageContext.request.contextPath}/resources/images/reservation/iconfinder_minus_172505.png" alt="" class="move-minus-img"></div>
-	                                                    <span class="move-content1112">0</span>
-	                                                    <div class="move-content1111 plus11" ><img src="${pageContext.request.contextPath}/resources/images/reservation/add_plus-512.png" alt="" class="move-plus-img"></div>
-	                                                </div>
-	                                                <div class="move-content112">신발장</div>
-	                                            </div>
-	                                            <div class="move-content11">
-	                                                <div class="move-content111">
-	                                                    <div class="move-content1111 minus11"><img src="${pageContext.request.contextPath}/resources/images/reservation/iconfinder_minus_172505.png" alt="" class="move-minus-img"></div>
-	                                                    <span class="move-content1112">0</span>
-	                                                    <div class="move-content1111 plus11" ><img src="${pageContext.request.contextPath}/resources/images/reservation/add_plus-512.png" alt="" class="move-plus-img"></div>
-	                                                </div>
-	                                                <div class="move-content112">화장대</div>
-	                                            </div>
-	                                            <div class="move-content11">
-	                                                <div class="move-content111">
-	                                                    <div class="move-content1111 minus11"><img src="${pageContext.request.contextPath}/resources/images/reservation/iconfinder_minus_172505.png" alt="" class="move-minus-img"></div>
-	                                                    <span class="move-content1112">0</span>
-	                                                    <div class="move-content1111 plus11" ><img src="${pageContext.request.contextPath}/resources/images/reservation/add_plus-512.png" alt="" class="move-plus-img"></div>
-	                                                </div>
-	                                                <div class="move-content112">책상</div>
-	                                            </div>
-	                                            <div class="move-content11">
-	                                                <div class="move-content111">
-	                                                    <div class="move-content1111 minus11"><img src="${pageContext.request.contextPath}/resources/images/reservation/iconfinder_minus_172505.png" alt="" class="move-minus-img"></div>
-	                                                    <span class="move-content1112">0</span>
-	                                                    <div class="move-content1111 plus11" ><img src="${pageContext.request.contextPath}/resources/images/reservation/add_plus-512.png" alt="" class="move-plus-img"></div>
-	                                                </div>
-	                                                <div class="move-content112">의자</div>
-	                                            </div>
-	                                            <div class="move-content11">
-	                                                <div class="move-content111">
-	                                                    <div class="move-content1111 minus11"><img src="${pageContext.request.contextPath}/resources/images/reservation/iconfinder_minus_172505.png" alt="" class="move-minus-img"></div>
-	                                                    <span class="move-content1112">0</span>
-	                                                    <div class="move-content1111 plus11" ><img src="${pageContext.request.contextPath}/resources/images/reservation/add_plus-512.png" alt="" class="move-plus-img"></div>
-	                                                </div>
-	                                                <div class="move-content112">소파</div>
-	                                            </div>
-	                                            <div class="move-content11">
-	                                                <div class="move-content111">
-	                                                    <div class="move-content1111 minus11"><img src="${pageContext.request.contextPath}/resources/images/reservation/iconfinder_minus_172505.png" alt="" class="move-minus-img"></div>
-	                                                    <span class="move-content1112">0</span>
-	                                                    <div class="move-content1111 plus11" ><img src="${pageContext.request.contextPath}/resources/images/reservation/add_plus-512.png" alt="" class="move-plus-img"></div>
-	                                                </div>
-	                                                <div class="move-content112">식탁</div>
-	                                            </div>
-	                                            <div class="move-content11">
-	                                                <div class="move-content111">
-	                                                    <div class="move-content1111 minus11"><img src="${pageContext.request.contextPath}/resources/images/reservation/iconfinder_minus_172505.png" alt="" class="move-minus-img"></div>
-	                                                    <span class="move-content1112">0</span>
-	                                                    <div class="move-content1111 plus11" ><img src="${pageContext.request.contextPath}/resources/images/reservation/add_plus-512.png" alt="" class="move-plus-img"></div>
-	                                                </div>
-	                                                <div class="move-content112">옷장</div>
-	                                            </div>
-	                                            <div class="move-content11">
-	                                                <div class="move-content111">
-	                                                    <div class="move-content1111 minus11"><img src="${pageContext.request.contextPath}/resources/images/reservation/iconfinder_minus_172505.png" alt="" class="move-minus-img"></div>
-	                                                    <span class="move-content1112">0</span>
-	                                                    <div class="move-content1111 plus11" ><img src="${pageContext.request.contextPath}/resources/images/reservation/add_plus-512.png" alt="" class="move-plus-img"></div>
-	                                                </div>
-	                                                <div class="move-content112">싱크대</div>
-	                                            </div>
-	                                        </div>
-	                                    </div>
-	                                    <!-- 가전 -->
-	                                    <div id="appliance22" class="move-topic11">
-	                                        <div class="move-topic22">
-	                                            <div class="move-content11">
-	                                                <div class="move-content111">
-	                                                    <div class="move-content1111 minus11"><img src="${pageContext.request.contextPath}/resources/images/reservation/iconfinder_minus_172505.png" alt="" class="move-minus-img"></div>
-	                                                    <span class="move-content1112">0</span>
-	                                                    <div class="move-content1111 plus11" ><img src="${pageContext.request.contextPath}/resources/images/reservation/add_plus-512.png" alt="" class="move-plus-img"></div>
-	                                                </div>
-	                                                <div class="move-content112">컴퓨터/노트북</div>
-	                                            </div>
-	                                            <div class="move-content11">
-	                                                <div class="move-content111">
-	                                                    <div class="move-content1111 minus11"><img src="${pageContext.request.contextPath}/resources/images/reservation/iconfinder_minus_172505.png" alt="" class="move-minus-img"></div>
-	                                                    <span class="move-content1112">0</span>
-	                                                    <div class="move-content1111 plus11" ><img src="${pageContext.request.contextPath}/resources/images/reservation/add_plus-512.png" alt="" class="move-plus-img"></div>
-	                                                </div>
-	                                                <div class="move-content112">모니터</div>
-	                                            </div>
-	                                            <div class="move-content11">
-	                                                <div class="move-content111">
-	                                                    <div class="move-content1111 minus11"><img src="${pageContext.request.contextPath}/resources/images/reservation/iconfinder_minus_172505.png" alt="" class="move-minus-img"></div>
-	                                                    <span class="move-content1112">0</span>
-	                                                    <div class="move-content1111 plus11" ><img src="${pageContext.request.contextPath}/resources/images/reservation/add_plus-512.png" alt="" class="move-plus-img"></div>
-	                                                </div>
-	                                                <div class="move-content112">프린터</div>
-	                                            </div>
-	                                            <div class="move-content11">
-	                                                <div class="move-content111">
-	                                                    <div class="move-content1111 minus11"><img src="${pageContext.request.contextPath}/resources/images/reservation/iconfinder_minus_172505.png" alt="" class="move-minus-img"></div>
-	                                                    <span class="move-content1112">0</span>
-	                                                    <div class="move-content1111 plus11" ><img src="${pageContext.request.contextPath}/resources/images/reservation/add_plus-512.png" alt="" class="move-plus-img"></div>
-	                                                </div>
-	                                                <div class="move-content112">에어컨</div>
-	                                            </div>
-	                                            <div class="move-content11">
-	                                                <div class="move-content111">
-	                                                    <div class="move-content1111 minus11"><img src="${pageContext.request.contextPath}/resources/images/reservation/iconfinder_minus_172505.png" alt="" class="move-minus-img"></div>
-	                                                    <span class="move-content1112">0</span>
-	                                                    <div class="move-content1111 plus11" ><img src="${pageContext.request.contextPath}/resources/images/reservation/add_plus-512.png" alt="" class="move-plus-img"></div>
-	                                                </div>
-	                                                <div class="move-content112">냉장고</div>
-	                                            </div>
-	                                            <div class="move-content11">
-	                                                <div class="move-content111">
-	                                                    <div class="move-content1111 minus11"><img src="${pageContext.request.contextPath}/resources/images/reservation/iconfinder_minus_172505.png" alt="" class="move-minus-img"></div>
-	                                                    <span class="move-content1112">0</span>
-	                                                    <div class="move-content1111 plus11" ><img src="${pageContext.request.contextPath}/resources/images/reservation/add_plus-512.png" alt="" class="move-plus-img"></div>
-	                                                </div>
-	                                                <div class="move-content112">TV</div>
-	                                            </div>
-	                                            <div class="move-content11">
-	                                                <div class="move-content111">
-	                                                    <div class="move-content1111 minus11"><img src="${pageContext.request.contextPath}/resources/images/reservation/iconfinder_minus_172505.png" alt="" class="move-minus-img"></div>
-	                                                    <span class="move-content1112">0</span>
-	                                                    <div class="move-content1111 plus11" ><img src="${pageContext.request.contextPath}/resources/images/reservation/add_plus-512.png" alt="" class="move-plus-img"></div>
-	                                                </div>
-	                                                <div class="move-content112">세탁기</div>
-	                                            </div>
-	                                            <div class="move-content11">
-	                                                <div class="move-content111">
-	                                                    <div class="move-content1111 minus11"><img src="${pageContext.request.contextPath}/resources/images/reservation/iconfinder_minus_172505.png" alt="" class="move-minus-img"></div>
-	                                                    <span class="move-content1112">0</span>
-	                                                    <div class="move-content1111 plus11" ><img src="${pageContext.request.contextPath}/resources/images/reservation/add_plus-512.png" alt="" class="move-plus-img"></div>
-	                                                </div>
-	                                                <div class="move-content112">공기청정기</div>
-	                                            </div>
-	                                            <div class="move-content11">
-	                                                <div class="move-content111">
-	                                                    <div class="move-content1111 minus11"><img src="${pageContext.request.contextPath}/resources/images/reservation/iconfinder_minus_172505.png" alt="" class="move-minus-img"></div>
-	                                                    <span class="move-content1112">0</span>
-	                                                    <div class="move-content1111 plus11" ><img src="${pageContext.request.contextPath}/resources/images/reservation/add_plus-512.png" alt="" class="move-plus-img"></div>
-	                                                </div>
-	                                                <div class="move-content112">청소기</div>
-	                                            </div>
-	                                            <div class="move-content11">
-	                                                <div class="move-content111">
-	                                                    <div class="move-content1111 minus11"><img src="${pageContext.request.contextPath}/resources/images/reservation/iconfinder_minus_172505.png" alt="" class="move-minus-img"></div>
-	                                                    <span class="move-content1112">0</span>
-	                                                    <div class="move-content1111 plus11" ><img src="${pageContext.request.contextPath}/resources/images/reservation/add_plus-512.png" alt="" class="move-plus-img"></div>
-	                                                </div>
-	                                                <div class="move-content112">오븐/전자레인지</div>
-	                                            </div>
-	                                            <div class="move-content11">
-	                                                <div class="move-content111">
-	                                                    <div class="move-content1111 minus11"><img src="${pageContext.request.contextPath}/resources/images/reservation/iconfinder_minus_172505.png" alt="" class="move-minus-img"></div>
-	                                                    <span class="move-content1112">0</span>
-	                                                    <div class="move-content1111 plus11" ><img src="${pageContext.request.contextPath}/resources/images/reservation/add_plus-512.png" alt="" class="move-plus-img"></div>
-	                                                </div>
-	                                                <div class="move-content112">밥솥</div>
-	                                            </div>
-	                                        </div>
-	                                    </div>
-	                                    <!-- 기타 -->
-	                                    <div id="etc22" class="move-topic11">
-	                                        <div id="div11" class="move-topic22">
-	                                            <div style="height: 50px;" align="center">
-	                                                <div id="addList-btn">항목 추가</div>
-	                                            </div>
-	                                            <div class="move-content11">
-	                                                <div id="capacity-div" class="move-content111">
-	                                                    <div class="move-content1111 minus11">
-	                                                        <img class="move-minus-img" src="${pageContext.request.contextPath}/resources/images/reservation/iconfinder_minus_172505.png" alt="">
-	                                                    </div>
-	                                                    <span class="move-content1113">0</span>
-	                                                    <div class="move-content1111 plus11">
-	                                                        <img class="move-plus-img" src="${pageContext.request.contextPath}/resources/images/reservation/add_plus-512.png" alt="">
-	                                                    </div>
-	                                                    &nbsp;&nbsp;&nbsp;<div id="xmark-div" class="item1"><img id="xmark-img" src="${pageContext.request.contextPath}/resources/images/reservation/x-mark.png" alt="" style="margin-bottom: 3px;"></div>
-	                                                </div>
-	                                                <div style="height: 35px;"><input id="writeLoad" class="move-content113" type="text"></div>
-	                                            </div>
-	                                    
-	                                        </div>
-	                                    </div>
-	                                    <div align="center">
-	                                        <button type="button" id="loadBtn">선택하기</button>
-	                                    </div>
-	                                </div>
-	                            </div>
-	                        </div>
-	                        <!-- Modal5 : 상하차 방법 -->
-	                        <div id="myModal5" class="modal11" style="padding-top: 15%;">
-								<div id="modal5" class="modal-content11">
-		                            <span id="modal-close3" class="close11" style="width: 30px;">&times;</span>
-	                                <div class="modal-help-div">
-	                                	<div class="help-title-div">
-	                                        <span class="help-title">상하차 방법</span>
-	                                    </div>
-									    <div class="help-content-div1" style="border-bottom: 1px solid black;">
-									        <div class="help-content-div11" style="border-bottom: 1px solid rgb(105, 113, 120)">
-									            <div class="help-content-div111">
-									                <div class="addCharge">추가 요금</div>
-									                <div class="check-title1">상하차 방법</div>
-									            </div>
-									            <div  class="help-content-div112">
-									                <label class="checkbox-wrap2 checkHelp">
-									                    <input id="checkHelp1" type="checkbox" name="checkHelp1" value="">
-									                    <i class="check-icon2"></i>
-									                    <div class="check-title11">상차만</div>
-									                </label>
-									                <div id="helpCharge1" class="checkCharge">+0원</div>
-									            </div>
-									            <div class="help-content-div112">
-									                <label class="checkbox-wrap2 checkHelp">
-									                    <input id="checkHelp2" type="checkbox" name="checkHelp1" value="">
-									                    <i class="check-icon2"></i>
-									                    <div class="check-title11">하차만</div>
-									                </label>
-									                <div id="helpCharge2" class="checkCharge">+0원</div>
-									            </div>
-									        </div>
-									        <div class="help-content-div12">
-									            <button type="button" id="checkHelp-btn">선택하기</button>
-									        </div>
-									    </div>
-	                                </div>
-	                            </div>
-	                            <!-- Modal5-1 : 상차 선택 모달  -->
-	                            <div id="modal51" class="modal-content11" style="display:none;">
-		                            <span id="modal-close4" class="close11" style="width: 30px;">&times;</span>
-	                                <div class="modal-help-div">
-	                                	<div class="help-title-div">
-	                                        <span class="help-title">상차 방법</span>
-	                                    </div>
-									    <div class="help-content-div1" style="border-bottom: 1px solid black;">
-									        <div class="help-content-div11" style="border-bottom: 1px solid rgb(105, 113, 120)">
-									            <div class="help-content-div111">
-									                <div class="addCharge">추가 요금</div>
-									                <div class="check-title1">상차 방법</div>
-									            </div>
-									            <div class="help-content-div112">
-									                <label class="checkbox-wrap2 checkHelp">
-									                    <input id="checkHelp3" type="checkbox" name="checkHelp11" value="">
-									                    <i class="check-icon2"></i>
-									                    <div class="check-title11" style="font-size: 12pt;">기사님과 함께</div>
-									                </label>
-									                <div class="checkCharge" style="width: 152px;">+10,000원</div>
-									            </div>
-									            <div class="help-content-div112">
-									                <label class="checkbox-wrap2 checkHelp">
-									                    <input id="checkHelp4" type="checkbox" name="checkHelp12" value="">
-									                    <i class="check-icon2"></i>
-									                    <div class="check-title11" style="font-size: 12pt;">기사님 단독</div>
-									                </label>
-									                <div class="checkCharge" style="width: 168px;">+20,000원</div>
-									            </div>
-									        </div>
-									    </div>
-	                                </div>
-	                            </div>
-	                            <!-- Modal5-2 : 하차 선택 모달  -->
-	                            <div id="modal52" class="modal-content11" style="display:none;">
-		                            <span id="modal-close5" class="close11" style="width: 30px;">&times;</span>
-	                                <div class="modal-help-div">
-	                                	<div class="help-title-div">
-	                                        <span class="help-title">하차 방법</span>
-	                                    </div>
-									    <div class="help-content-div1" style="border-bottom: 1px solid black;">
-									        <div class="help-content-div11" style="border-bottom: 1px solid rgb(105, 113, 120)">
-									            <div class="help-content-div111">
-									                <div class="addCharge">추가 요금</div>
-									                <div class="check-title1">하차 방법</div>
-									            </div>
-									            <div class="help-content-div112">
-									                <label class="checkbox-wrap2 checkHelp">
-									                    <input id="checkHelp5" type="checkbox" name="checkHelp11" value="">
-									                    <i class="check-icon2"></i>
-									                    <div class="check-title11" style="font-size: 12pt;">기사님과 함께</div>
-									                </label>
-									                <div class="checkCharge" style="width: 152px;">+10,000원</div>
-									            </div>
-									            <div class="help-content-div112">
-									                <label class="checkbox-wrap2 checkHelp">
-									                    <input id="checkHelp6" type="checkbox" name="checkHelp12" value="">
-									                    <i class="check-icon2"></i>
-									                    <div class="check-title11" style="font-size: 12pt;">기사님 단독</div>
-									                </label>
-									                <div class="checkCharge" style="width: 168px;">+20,000원</div>
-									            </div>
-									        </div>
-									    </div>
-	                                </div>
-	                            </div>
-	                        </div>
-	                    </div>
-	                </div>
-	                <div id="line2">
-	                    <div class="edge11">
-	                        <div class="title11">예약 내역</div>
-	                        <div id="startAddr-div" class="content22">
-	                            <div id="searchAddr-div1">
-	                                <div id="searchAddr-div11">
-	                                    <input id="startAddr" type="text" placeholder="주소 검색 (주소, 건물명)" onclick="searchStartAddr();" readonly required>
-	                                    <img src="${pageContext.request.contextPath}/resources/images/reservation/magnifying-glass-black.svg" alt="검색" onclick="searchStartAddr();" style="cursor: pointer;">
-	                                </div>
-	                                <input id="startDetailAddr" type="text" placeholder="상세 주소">
-	                                
-	                            </div>
-	                            <div>
-	                                <input id="startPhone" name="phone1" type="text" placeholder="연락처" onKeyup="inputPhoneNumber(this);" maxlength="13" required>
-	                            </div>
-	                            <div align="left">
-	                                <label id="start-check" class="checkbox-wrap">
-	                                    <input id="checkLoad1" type="checkbox" name="rightLoad" value="바로 상차">
-	                                    <i class="check-icon" style="margin-top: 2px;"></i>
-	                                    <div style="font-size: 16px;">&nbsp;&nbsp;바로 상차</div>
-	                                </label>
-	                            </div>
-	                            <div style="display: flex;">
-	                                <div id="start-date-div" class="input-group date">
-	                                    <input id="datepicker1" name="startDate1" type="text" placeholder="날짜 선택">
-	                                    <div id="dt1" class="input-group-addon">
-	                                      <span class="glyphicon glyphicon-th" style="color: white;"></span>
-	                                    </div>
-	                                </div>
-	                                <div>
-	                                    <select name="startDate2" id="sl3" onchange="cl3();" required>
-	                                        <option class="opt3" value="" disabled selected>시간 선택</option>
-	                                        <option class="opt4" value="00:00">00시 00분</option>
-	                                        <option class="opt4" value="00:30">00시 30분</option>
-	                                        <option class="opt4" value="01:00">01시 00분</option>
-	                                        <option class="opt4" value="01:30">01시 30분</option>
-	                                        <option class="opt4" value="02:00">02시 00분</option>
-	                                        <option class="opt4" value="02:30">02시 30분</option>
-	                                        <option class="opt4" value="03:00">03시 00분</option>
-	                                        <option class="opt4" value="03:30">03시 30분</option>
-	                                        <option class="opt4" value="04:00">04시 00분</option>
-	                                        <option class="opt4" value="04:30">04시 30분</option>
-	                                        <option class="opt4" value="05:00">05시 00분</option>
-	                                        <option class="opt4" value="05:30">05시 30분</option>
-	                                        <option class="opt4" value="06:00">06시 00분</option>
-	                                        <option class="opt4" value="06:30">06시 30분</option>
-	                                        <option class="opt4" value="07:00">07시 00분</option>
-	                                        <option class="opt4" value="07:30">07시 30분</option>
-	                                        <option class="opt4" value="08:00">08시 00분</option>
-	                                        <option class="opt4" value="08:30">08시 30분</option>
-	                                        <option class="opt4" value="09:00">09시 00분</option>
-	                                        <option class="opt4" value="09:30">09시 30분</option>
-	                                        <option class="opt4" value="10:00">10시 00분</option>
-	                                        <option class="opt4" value="10:30">10시 30분</option>
-	                                        <option class="opt4" value="11:00">11시 00분</option>
-	                                        <option class="opt4" value="11:30">11시 30분</option>
-	                                        <option class="opt4" value="12:00">12시 00분</option>
-	                                        <option class="opt4" value="12:30">12시 30분</option>
-	                                        <option class="opt4" value="13:00">13시 00분</option>
-	                                        <option class="opt4" value="13:30">13시 30분</option>
-	                                        <option class="opt4" value="14:00">14시 00분</option>
-	                                        <option class="opt4" value="14:30">14시 30분</option>
-	                                        <option class="opt4" value="15:00">15시 00분</option>
-	                                        <option class="opt4" value="15:30">15시 30분</option>
-	                                        <option class="opt4" value="16:00">16시 00분</option>
-	                                        <option class="opt4" value="16:30">16시 30분</option>
-	                                        <option class="opt4" value="17:00">17시 00분</option>
-	                                        <option class="opt4" value="17:30">17시 30분</option>
-	                                        <option class="opt4" value="18:00">18시 00분</option>
-	                                        <option class="opt4" value="18:30">18시 30분</option>
-	                                        <option class="opt4" value="19:00">19시 00분</option>
-	                                        <option class="opt4" value="19:30">19시 30분</option>
-	                                        <option class="opt4" value="20:00">20시 00분</option>
-	                                        <option class="opt4" value="20:30">20시 30분</option>
-	                                        <option class="opt4" value="21:00">21시 00분</option>
-	                                        <option class="opt4" value="21:30">21시 30분</option>
-	                                        <option class="opt4" value="22:00">22시 00분</option>
-	                                        <option class="opt4" value="22:30">22시 30분</option>
-	                                        <option class="opt4" value="23:00">23시 00분</option>
-	                                        <option class="opt4" value="23:30">23시 30분</option>
-	                                    </select>
-	                                </div>
-	                            </div>
-	                        </div>
-	                    </div>
-	                    <div class="edge11">
-	                        <div class="title11">채팅 내역</div>
-	                        <div id="endAddr-div" class="content22">
-	                            <div id="searchAddr-div2">
-	                                <div id="searchAddr-div22">
-	                                    <input id="endAddr" name="edAddr" type="text" placeholder="주소 검색 (주소, 건물명)" onclick="searchEndAddr();" readonly required>
-	                                    <img src="${pageContext.request.contextPath}/resources/images/reservation/magnifying-glass-black.svg" alt="검색" onclick="searchEndAddr();" style="cursor: pointer;">
-	                                </div>
-	                                <input id="endDetailAddr" name="edDetailAddr" type="text" placeholder="상세 주소">
-	                               
-	                            </div>
-	                            <div>
-	                                <input id="endPhone" name="phone2" type="text" placeholder="연락처" onKeyup="inputPhoneNumber(this);" required>
-	                            </div>
-	                            <div align="left">
-	                                <label id="end-check" class="checkbox-wrap">
-	                                    <input id="checkLoad2" name="rightUnload" type="checkbox" value="">
-	                                    <i class="check-icon" style="margin-top: 2px;"></i>
-	                                    <div style="font-size: 16px;">&nbsp;&nbsp;바로 하차</div>
-	                                </label>
-	                            </div>
-	                            <div style="display: flex;">
-	                                <div id="end-date-div" class="input-group date">
-	                                    <input id="datepicker2" name="endDate1"  type="text" placeholder="날짜 선택" onchange="setEndDate();">
-	                                    <div id="dt2" class="input-group-addon">
-	                                      <span class="glyphicon glyphicon-th" style="color: white;"></span>
-	                                    </div>
-	                                </div>
-	                                <div>
-	                                    <select name="endDate2" id="sl4" onchange="cl4();" required>
-	                                        <option class="opt3" value="" disabled selected>시간 선택</option>
-	                                        <option class="opt4" value="00:00">00시 00분</option>
-	                                        <option class="opt4" value="00:30">00시 30분</option>
-	                                        <option class="opt4" value="01:00">01시 00분</option>
-	                                        <option class="opt4" value="01:30">01시 30분</option>
-	                                        <option class="opt4" value="02:00">02시 00분</option>
-	                                        <option class="opt4" value="02:30">02시 30분</option>
-	                                        <option class="opt4" value="03:00">03시 00분</option>
-	                                        <option class="opt4" value="03:30">03시 30분</option>
-	                                        <option class="opt4" value="04:00">04시 00분</option>
-	                                        <option class="opt4" value="04:30">04시 30분</option>
-	                                        <option class="opt4" value="05:00">05시 00분</option>
-	                                        <option class="opt4" value="05:30">05시 30분</option>
-	                                        <option class="opt4" value="06:00">06시 00분</option>
-	                                        <option class="opt4" value="06:30">06시 30분</option>
-	                                        <option class="opt4" value="07:00">07시 00분</option>
-	                                        <option class="opt4" value="07:30">07시 30분</option>
-	                                        <option class="opt4" value="08:00">08시 00분</option>
-	                                        <option class="opt4" value="08:30">08시 30분</option>
-	                                        <option class="opt4" value="09:00">09시 00분</option>
-	                                        <option class="opt4" value="09:30">09시 30분</option>
-	                                        <option class="opt4" value="10:00">10시 00분</option>
-	                                        <option class="opt4" value="10:30">10시 30분</option>
-	                                        <option class="opt4" value="11:00">11시 00분</option>
-	                                        <option class="opt4" value="11:30">11시 30분</option>
-	                                        <option class="opt4" value="12:00">12시 00분</option>
-	                                        <option class="opt4" value="12:30">12시 30분</option>
-	                                        <option class="opt4" value="13:00">13시 00분</option>
-	                                        <option class="opt4" value="13:30">13시 30분</option>
-	                                        <option class="opt4" value="14:00">14시 00분</option>
-	                                        <option class="opt4" value="14:30">14시 30분</option>
-	                                        <option class="opt4" value="15:00">15시 00분</option>
-	                                        <option class="opt4" value="15:30">15시 30분</option>
-	                                        <option class="opt4" value="16:00">16시 00분</option>
-	                                        <option class="opt4" value="16:30">16시 30분</option>
-	                                        <option class="opt4" value="17:00">17시 00분</option>
-	                                        <option class="opt4" value="17:30">17시 30분</option>
-	                                        <option class="opt4" value="18:00">18시 00분</option>
-	                                        <option class="opt4" value="18:30">18시 30분</option>
-	                                        <option class="opt4" value="19:00">19시 00분</option>
-	                                        <option class="opt4" value="19:30">19시 30분</option>
-	                                        <option class="opt4" value="20:00">20시 00분</option>
-	                                        <option class="opt4" value="20:30">20시 30분</option>
-	                                        <option class="opt4" value="21:00">21시 00분</option>
-	                                        <option class="opt4" value="21:30">21시 30분</option>
-	                                        <option class="opt4" value="22:00">22시 00분</option>
-	                                        <option class="opt4" value="22:30">22시 30분</option>
-	                                        <option class="opt4" value="23:00">23시 00분</option>
-	                                        <option class="opt4" value="23:30">23시 30분</option>
-	                                    </select>
-	                                </div>
-	                            </div>
-	                        </div>
-	                    </div>
-	                </div>
-	                <div id="line3">
-	                    <div class="edge11">
-	                        <div class="title11">정산 내역</div>
-	                        <div id="help-div" class="content22">
-								<label class="rad">
-									<input id="helpUnload-ch" type="radio" name="helpLoad" value="a" required>
-									<i></i>&nbsp;&nbsp;도움 필요하지 않아요
-								</label>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<label class="rad">
-									<input id="helpLoad-ch" type="radio" name="helpLoad" value="b">
-									<i></i>&nbsp;&nbsp;도움 필요해요
-								</label>
-	                        </div>
-	                    </div>
-	                    <div class="edge11">
-	                        <div class="title11">환불 내역</div>
-	                        <div id="delivery-div" class="content22">
-	                            <textarea id="delivery-area" name="msg" cols="64" rows="2" placeholder="기사님에게 전달되는 내용입니다.&#13;&#10;(물품 종류와 크기, 경유지 정보 등)"></textarea>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	            <div>
-	                <div class="edge22">
-	                    <div class="title11">
-	                        <span id="amount">0원</span>
-	                                                      최종 결제 금액
-	                    </div>
-	                    <div id="charge-content" class="content22">
-	                        <div class="charge-line">
-	                            <div class="charge-content-div">
-	                                <span id="carInfo" class="charge-content"></span>
-	                            </div>
-	                            <div align="left">
-	                                <span class="charge-title">차량 정보</span>
-	                            </div>
-	                        </div>
-	                        <div class="charge-line">
-	                            <div class="charge-content-div">
-	                                <span id="distance" class="charge-content"></span>
-	                            </div>
-	                            <div align="left">
-	                                <span class="charge-title">거리</span>
-	                            </div>
-	                        </div>
-	                        <div class="charge-line">
-	                            <div class="charge-content-div">
-	                                <span id="helpLoad" class="charge-content"></span>
-	                            </div>
-	                            <div align="left">
-	                                <span class="charge-title">상차 옵션</span>
-	                            </div>
-	                        </div>
-	                        <div class="charge-line">
-	                            <div class="charge-content-div">
-	                                <span id="helpUnload" class="charge-content"></span>
-	                            </div>
-	                            <div align="left">
-	                                <span class="charge-title">하차 옵션</span>
-	                            </div>
-	                        </div>
-	                        <div class="charge-line">
-	                            <div class="charge-content-div">
-	                                <span id="book-YN" class="charge-content"></span>
-	                            </div>
-	                            <div align="left">
-	                                <span class="charge-title">하차 예약</span>
-	                            </div>
-	                        </div>
-	                        <div class="charge-line">
-	                            <div class="charge-content-div">
-	                                <span id="btwDay" class="charge-content"></span>
-	                            </div>
-	                            <div align="left">
-	                                <span class="charge-title">보관 기간</span>
-	                            </div>
-	                        </div>
-	                        
-	                    </div>
-	                </div>
-	                <div id="booking-div">
-	                    <br>
-	                    <button id="booking-btn" type="submit">예약하기</button>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	    
-	    <!-- Modal34 : 주소 API -->
-	    <div id="myModal34">
-			<div id="layer">
-				<img id="searchAddr" src="https://t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" onclick="closeDaumPostcode()" alt="닫기 버튼">
-			</div>
-	    </div>	    
-	</form>
-	
-	<!-- hidden 값들 -->
-	<input type="hidden" id="addStAddr" name="startAddr">
-	<input type="hidden" id="addEdAddr" name="endAddr">
-	<input type="hidden" id="amountVal" name="amount">
-	<input type="hidden" id="distanceVal" name="distance">
-	<input type="hidden" id="helpLoadVal" name="helpLoad">
-	<input type="hidden" id="helpUnloadVal" name="helpUnload">
-	<input type="hidden" id="days" name="days" value="0">
-	
-	
-    <!-- javascript files -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/reservation.js"></script>
-    <!-- footer -->
-	<c:import url="../common/footer.jsp"></c:import>
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
+
+        $('#resFaq').click(function(){
+            $(this).css({
+                'background': 'rgb(87, 187, 138)',
+                'color':'white'
+            });
+            $('.faq_index_ul li:not(:contains("예약"))').css({
+                'background':'rgb(231, 230, 230)',
+                'color':'black'
+            });
+            $('#resFaqDetail').css({
+                'display':'block'
+            })
+            $('#delivFaqDetail').css({
+                'display':'none'
+            })
+            $('#payFaqDetail').css({
+                'display':'none'
+            })
+            $('#sDelFaqDetail').css({
+                'display':'none'
+            })
+            $('#etcFaqDetail').css({
+                'display':'none'
+            })
+        });
+        $('#delivFaq').click(function(){
+            $(this).css({
+                'background': 'rgb(87, 187, 138)',
+                'color':'white',
+            });
+            $('.faq_index_ul li:not(:contains("배송"))').css({
+                'background':'rgb(231, 230, 230)',
+                'color':'black'
+            });
+            $('#resFaqDetail').css({
+                'display':'none'
+            })
+            $('#delivFaqDetail').css({
+                'display':'block'
+            })
+            $('#payFaqDetail').css({
+                'display':'none'
+            })
+            $('#sDelFaqDetail').css({
+                'display':'none'
+            })
+            $('#etcFaqDetail').css({
+                'display':'none'
+            })
+        });
+        $('#payFaq').click(function(){
+            $(this).css({
+                'background': 'rgb(87, 187, 138)',
+                'color':'white',
+            });
+            $('.faq_index_ul li:not(:contains("결제"))').css({
+                'background':'rgb(231, 230, 230)',
+                'color':'black'
+            });
+            $('#resFaqDetail').css({
+                'display':'none'
+            })
+            $('#delivFaqDetail').css({
+                'display':'none'
+            })
+            $('#payFaqDetail').css({
+                'display':'block'
+            })
+            $('#sDelFaqDetail').css({
+                'display':'none'
+            })
+            $('#etcFaqDetail').css({
+                'display':'none'
+            })
+        });
+        $('#sDelFaq').click(function(){
+            $(this).css({
+                'background': 'rgb(87, 187, 138)',
+                'color':'white',
+            });
+            $('.faq_index_ul li:not(:contains("소형이사"))').css({
+                'background':'rgb(231, 230, 230)',
+                'color':'black'
+            });
+            $('#resFaqDetail').css({
+                'display':'none'
+            })
+            $('#delivFaqDetail').css({
+                'display':'none'
+            })
+            $('#payFaqDetail').css({
+                'display':'none'
+            })
+            $('#sDelFaqDetail').css({
+                'display':'block'
+            })
+            $('#etcFaqDetail').css({
+                'display':'none'
+            })
+        });
+        $('#etcFaq').click(function(){
+            $(this).css({
+                'background': 'rgb(87, 187, 138)',
+                'color':'white',
+            });
+            $('.faq_index_ul li:not(:contains("기타"))').css({
+                'background':'rgb(231, 230, 230)',
+                'color':'black'
+            });
+            $('#resFaqDetail').css({
+                'display':'none'
+            })
+            $('#delivFaqDetail').css({
+                'display':'none'
+            })
+            $('#payFaqDetail').css({
+                'display':'none'
+            })
+            $('#sDelFaqDetail').css({
+                'display':'none'
+            })
+            $('#etcFaqDetail').css({
+                'display':'block'
+            })
+        });
+    </script>
 </body>
+
 </html>

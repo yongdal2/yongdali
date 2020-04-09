@@ -17,6 +17,7 @@
  	<mappers>
 		<mapper resource="mappers/member-mapper.xml"/>
 		<mapper resource="mappers/notice-mapper.xml"/>
+		<mapper resource="mappers/reservation-mapper_njh.xml"/>
 		<mapper resource="mappers/reservation-mapper.xml"/>
 	</mappers>
 	

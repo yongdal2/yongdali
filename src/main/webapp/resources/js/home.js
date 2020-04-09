@@ -71,7 +71,7 @@ function searchStartAddr() {
             
             /* 서울 지역 조건 */
             if(!addr.includes("서울")){
-				alert("죄송합니다. 서울지역 한해서만 운영 가능합니다. 다시 입력해주세요.");
+				alert("죄송합니다.\n서울지역 한해서만 운영 가능합니다.\n다시 입력해주세요.");
 				modal.style.display = "none";
 			} else {
 				// 주소로 상세 정보를 검색
@@ -135,7 +135,7 @@ function searchEndAddr() {
 			
 			/* 서울 지역 조건 */
 			if(!addr.includes("서울")){
-				alert("죄송합니다. 서울지역 한해서만 운영 가능합니다. 다시 입력해주세요.");
+				alert("죄송합니다.\n서울지역 한해서만 운영 가능합니다.\n다시 입력해주세요.");
 				modal.style.display = "none";
 			} else {
 				// 주소로 상세 정보를 검색
