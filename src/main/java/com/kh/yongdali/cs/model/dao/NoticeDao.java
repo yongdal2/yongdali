@@ -189,4 +189,9 @@ public class NoticeDao {
 		return (ArrayList)sqlSession.selectList("noticeMapper.driverSearchSelectList",keyword,rowBounds);
 	}
 
+	public int deleteFile(String nNo) {
+		
+		return sqlSession.update("noticeMapper.deleteFile",nNo);
+	}
+
 }

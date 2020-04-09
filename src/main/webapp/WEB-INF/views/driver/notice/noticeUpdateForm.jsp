@@ -125,9 +125,11 @@
 	    	
 	    	$.ajax({
 	    		url:"fileDelete.no",
-	    		data:{fileName :'${n.nImgRename}'},
+	    		data:{fileName :'${n.nImgRename}',
+	    				nNo : '${n.nNo}'},
 	    		type:"post",
 	    		success:function(data){
+	    			
 	    			console.log(data);
 	    			console.log("삭제완료");
 	    		},error:function(){

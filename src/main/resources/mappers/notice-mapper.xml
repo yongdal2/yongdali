@@ -190,6 +190,12 @@
 		                                    OR N_WRITER LIKE '%' || #{keyword} || '%')
 		ORDER BY TO_NUMBER(SUBSTR(N_NO,2)) DESC		                                    
 	</select>
+	
+	<update id="deleteFile">
+		UPDATE NOTICE
+		SET N_IMG_ORIGIN=NULL, N_IMG_RENAME=NULL
+		WHERE N_NO=#{nNo}
+	</update>
 
 
 </mapper>
