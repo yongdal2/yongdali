@@ -21,31 +21,33 @@
 	<!-- main -->
     <div class="content container">
         <div class="row">
-            <h2 class="jal">관리자 페이지</h3>
-            <hr>
-        </div>
+            <h2 class="jal">관리자 페이지</h2>
+            
         <div class="row">
             <div class="col-lg-3 sidebar">
-                <a href="uNoticeMain.no"><span class="sidebar_span">회원님 목록</span></a><br>
-                <a href="uFaqView.fa"><span class="sidebar_span">사업주님 목록</span></a><br>
-                <a href="User_Chat.html"><span class="sidebar_span">예약내역</span></a>
-                <a href="User_Chat.html"><span class="sidebar_span">정산내역</span></a>
-                <a href="User_Chat.html"><span class="sidebar_span">환불내역</span></a>
-                <a href="User_Chat.html"><span class="sidebar_span">채팅내역</span></a>
+                <a href="uNoticeMain.no"><span class="sidebar_span">회원 확인</span></a><br>
+                <a href="uFaqView.fa"><span class="sidebar_span">내역 확인</span></a><br>
+                <!-- <a href="User_Chat.html"><span class="sidebar_span">예약 내역</span></a>
+                <a href="User_Chat.html"><span class="sidebar_span">정산 내역</span></a>
+                <a href="User_Chat.html"><span class="sidebar_span">환불 내역</span></a>
+                <a href="User_Chat.html"><span class="sidebar_span">채팅 내역</span></a> -->
             </div>
-            <div class="col-lg-8 col-lg-offset-1">
-                <h2 class="jal">자주 묻는 질문</h3>
-            </div>
+            <!-- <div class="col-lg-8 col-lg-offset-1">
+                <h2 class="jal">회원 확인</h3>
+            </div> -->
+        </div>
+            
+            <hr>
         </div>
         <div class="row">
             <div class="col-lg-8 col-lg-offset-3">
                 <div class="faq_index">
                     <ul class="faq_index_ul">
-                        <li id="resFaq" class="faq_index_li">예약</a></li>
-                        <li id="delivFaq" class="faq_index_li">배송</a></li>
-                        <li id="payFaq" class="faq_index_li">결제</a></li>
-                        <li id="sDelFaq" class="faq_index_li">소형이사</a></li>
-                        <li id="etcFaq" class="faq_index_li">기타문의</a></li>                         
+                        <li id="resFaq" class="faq_index_li">회원님 목록</a></li>
+                        <li id="delivFaq" class="faq_index_li">사업자님 목록</a></li>
+                      <!--   <li id="payFaq" class="faq_index_li">환불 내역</a></li>
+                        <li id="sDelFaq" class="faq_index_li">채팅 내역</a></li>
+                        <li id="etcFaq" class="faq_index_li">기타문의</a></li> -->                         
                     </ul>
                 </div>
                 
