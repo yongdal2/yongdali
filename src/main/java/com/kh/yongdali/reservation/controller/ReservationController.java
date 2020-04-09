@@ -11,4 +11,10 @@ public class ReservationController {
 		
 		return null;
 	}
+	
+	@RequestMapping("reservation.go")
+	public String goReservation() {
+		
+		return "user/reservation";
+	}
 }

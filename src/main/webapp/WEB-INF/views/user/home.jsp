@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false" %>
 <html>
 <head>
@@ -87,7 +87,7 @@
 								</div>
 								<br>
 								<div class="form-btn">
-									<button class="submit-btn jal" style="font-size: 16pt;">예약하러 가기</button>
+									<a href="reservation.go" id="submit-btn" class="submit-btn jal" style="font-size: 16pt;">예약하러 가기</a>
 								</div>
 							</form>
 						</div>
