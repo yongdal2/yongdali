@@ -1,0 +1,158 @@
+@charset "UTF-8";
+/* 잘난체 폰트 적용 */
+@font-face {
+    font-family: 'yg-jalnan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 나눔 폰트 적용 */
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800');
+
+body{
+    padding-top: 120px;
+    padding-bottom: 100px;
+    overflow-y: hidden; 
+    overflow-x: hidden;
+}
+
+.container-fluid{
+    padding:0;
+}
+
+.userInfo{
+    width:100%;
+    height:110px;
+    padding:30px 30px 30px 40px;
+    text-align: center;
+    background-color: #a4f9b3;
+    box-shadow: -4px -4px 13px 6px rgb(165, 165, 165);
+    
+}
+.userInfo > *{
+    display:inline-block;
+    vertical-align:top;
+}
+.userInfo img:first-child{
+    border-radius:50%;
+    width:50px;
+    height: 50px;
+    border: 3px solid greenyellow;
+    box-shadow: 2px 2px 7px 1px darkgrey;
+}
+.userInfo img:last-child{
+    width:24px;
+    margin-top:8px;
+}
+.userInfo div{
+    margin-left:10px;
+}
+.userInfo h2{
+    font-size:18px;
+    margin-bottom:5px;
+    margin-top:7px;
+    font-family: 'yg-jalnan', Arial, Helvetica, sans-serif;
+}
+.userInfo h3{
+    font-size:15px;
+    font-weight:normal;
+    color:#7e818a;
+    margin:0;
+    font-family : 'Nanum Gothic';
+}
+
+.contentArea{
+    padding-bottom: 130px;
+    overflow-y:scroll;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    height: 83vh;
+    position:relative;
+    background-color: #f2f1f4;
+}
+#chat{
+    padding-left:0;
+    margin:0;
+    list-style-type:none;
+}
+#chat li{
+    padding:10px 30px;
+}
+#chat h2,#chat h3{
+    display:inline-block;
+    font-size:13px;
+    font-weight:normal;
+}
+#chat h3{
+    color:#bbb;
+}
+#chat .entete{
+    margin-bottom:5px;
+}
+#chat .message{
+    padding:20px;
+    color:#fff;
+    line-height:25px;
+    max-width:90%;
+    display:inline-block;
+    text-align:left;
+    border-radius:5px;
+}
+#chat .me{
+    text-align:right;
+}
+#chat .you .message{
+    background-color:rgb(87, 187, 138);
+    border-radius: 0px 15px 15px 15px;
+}
+#chat .me .message{
+    background-color:#6fbced;
+    border-radius: 15px 0 15px 15px;
+}
+
+.footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width:100%;
+    height: 50px;
+    background: white;
+    padding-left: 32px;
+}
+
+textarea{
+    resize:none;
+    border:none;
+    display:block;
+    width:100%;
+    height:30px;
+    border-radius:3px;
+    font-size:13px;
+    margin-top: 10px;
+}
+
+textarea::placeholder{
+    color:#ddd;
+}
+
+.sendBtn{
+    background: #6fbced;
+    border: none;
+    width: 56px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.sendBtn img{
+    width: 30px;
+    height: 30px;
+}
+
+/* 전체화면 1200px부터 */
+@media (min-width: 501px){
+    .sendBtn{
+        width:100%;
+    }
+    
+}
