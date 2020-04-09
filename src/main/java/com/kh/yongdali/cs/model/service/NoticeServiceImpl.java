@@ -105,4 +105,9 @@ public class NoticeServiceImpl implements NoticeService{
 		
 		return nDao.driverSearchSelectList(pi,keyword);
 	}
+	@Override
+	public int deleteFile(String nNo) {
+		
+		return nDao.deleteFile(nNo);
+	}
 }

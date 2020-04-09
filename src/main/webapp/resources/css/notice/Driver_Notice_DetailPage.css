@@ -140,7 +140,7 @@ a{
 /* 첨부파일 부분 */
 
 .file_area ul{
-    border-bottom: solid 1px #b8b6aa;
+    /* border-bottom: solid 1px #b8b6aa; */
     list-style: none;
 }
 
@@ -168,6 +168,7 @@ a{
 /* 이전글/ 다음글 */
 
 .pagemove_area_wrap ul{
+	border-top: solid 1px #b8b6aa;
     border-bottom: solid 1px #b8b6aa;
     list-style: none;
 }

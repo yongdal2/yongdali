@@ -84,7 +84,8 @@
 								<div class="modal-content">
 									<div class="modal-header">
 										<h4 id="evetitle">배차신청</h4>
-										<button type="button" class="close" data-dismiss="modal"aria-label="CLose">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="CLose">
 											<span aria-hidden="true">X</span>
 										</button>
 									</div>
@@ -147,21 +148,24 @@
 									</div>
 									<div class="ContaineraddEvent" id="savecar">
 										<div class="modal-footer">
-											<button type="submit" class="btn btn-default">배차신청</button>S
+											<button type="submit" class="btn btn-default">배차신청</button>
+											S
 											<button type="button" class="btn btn-default"
 												data-dismiss="modal">닫기</button>
 										</div>
 									</div>
+								</div>
+							</div>
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	</div>
-	</div>
+
+
+
 	<br>
-	<hr>
 
 	<!-- Footer -->
 	<%@ include file="../common/footer.jsp"%>

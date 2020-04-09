@@ -31,4 +31,10 @@ public class ReservationController {
 			return "common/errorPage";
 		}
 	}
+	
+	@RequestMapping("reservation.go")
+	public String goReservation() {
+		
+		return "user/reservation";
+	}
 }

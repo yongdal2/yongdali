@@ -1,5 +1,10 @@
 package com.kh.yongdali.member.controller;
 
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,6 +84,29 @@ public class MemberController {
 		status.setComplete();
 		
 		return "redirect:home.do";
+	}
+	
+	@RequestMapping("insertSample.me")
+	public String insertSample() {
+		String sDate1 = "2020-03-10";
+		
+		long milliesDate1 = 0;
+		
+		try {
+			Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(sDate1);
+			milliesDate1 = date1.getTime();
+						
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Member m1 = new Member("admin@naver.com", "admin", "유승제", "010-1111-1111", "관리자", "정상", new java.sql.Date(milliesDate1));		
+		
+		
+		
+		
+		return null;
 	}
 	
 }

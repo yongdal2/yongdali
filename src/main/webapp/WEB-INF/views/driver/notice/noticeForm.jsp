@@ -34,7 +34,7 @@
         </div>
         <div class="row">
             <div class="col-lg-8 col-lg-offset-3">
-                <form action="dNinsert.no" method="post" id="notice" enctype="multipart/form-data">
+                <form action="dNinsert.no" method="post" id="notice" enctype="multipart/form-data" onsubmit="return validate();">
                     <div class="form_area_wrap">
                         <table class="form_table">
                             <colgroup>

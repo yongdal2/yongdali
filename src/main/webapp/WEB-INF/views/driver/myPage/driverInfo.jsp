@@ -61,7 +61,7 @@
 						style="background-image: url('https://img1.daumcdn.net/thumb/R750x0/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fcafeattach%2F1Xh2D%2Fe9efdcce7223d088ee2e401a429f62f86cdff6cb');">
 						<div class="editP sub text-center" data-toggle="modal"
 							data-target="#changePhoto">
-							<div class="glyphicon glyphicon-pencil" id="ddd"></div>
+							<div class="glyphicon glyphicon-pencil"></div>
 						</div>
 					</div>
 				</div>
@@ -72,7 +72,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-md-12 h3">
-				<a href="driverInfo.myp"><span class="semibar_span">차량정보</span></a>
+				<a href="truckInfo.myp"><span class="semibar_span">차량정보</span></a>
 				<a href="driverSettle.myp"><span class="semibar_span">정산</span></a>
 			</div>
 		</div>
