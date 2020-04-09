@@ -116,6 +116,16 @@ a{
     height:250px;
 }
 
+.filespan>button{
+	border:none;
+	background:none;
+	vertical-align: bottom;
+}
+
+input[type=file]{
+	display:inline-block !important;
+}
+
 /* 등록하기 */
 .register{
     margin-top: 20px;

@@ -39,8 +39,8 @@
             <div class="col-lg-8 col-lg-offset-3">
                 <form action="uNupdate.no" method="post" id="notice" enctype="multipart/form-data" onsubmit="return validate();">
                     <input type="hidden" name="nNo" value="${n.nNo }">
-                    <input type="hidden" name="nImgOrigin" value="${n.nImgOrigin }">
-                    <input type="hidden" name="nImgRename" value="${n.nImgRename }">
+                    <%-- <input type="hidden" name="nImgOrigin" value="${n.nImgOrigin }">
+                    <input type="hidden" name="nImgRename" value="${n.nImgRename }"> --%>
                     <div class="form_area_wrap">
                         <table class="form_table">
                             <colgroup>
@@ -76,7 +76,13 @@
                                 <td>첨부파일</td>
                                 <td>
                                 <c:if test="${!empty n.nImgOrigin }">
-                                	<a href="${contextPath }/resources/nuploadFiles/${n.nImgRename}" download="${n.nImgOrigin }">${n.nImgOrigin}</a>
+                                	<span class="filespan">
+	                                	<a href="${contextPath }/resources/nuploadFiles/${n.nImgRename}" download="${n.nImgOrigin }">${n.nImgOrigin}</a>
+	                                	<button onclick="filedelete();"><svg class="bi bi-x" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										  <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z" clip-rule="evenodd"/>
+										  <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z" clip-rule="evenodd"/>
+										</svg></button>
+									</span>
                                 </c:if>
                                 <input type="file" name="reloadFile">
                                 </td>
@@ -113,6 +119,24 @@
 				return false;
 			}
 		}
+	    
+	    function filedelete(){
+	    	$('.filespan').remove();
+	    	
+	    	$.ajax({
+	    		url:"fileDelete.no",
+	    		data:{fileName :'${n.nImgRename}',
+	    				nNo : '${n.nNo}'},
+	    		type:"post",
+	    		success:function(data){
+	    			
+	    			console.log(data);
+	    			console.log("삭제완료");
+	    		},error:function(){
+	    			console.log("전송실패");
+	    		}
+	    	});
+	    }
 	    
     	$(function(){
     		CKEDITOR.replace( 'editor1');
