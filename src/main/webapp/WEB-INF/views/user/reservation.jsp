@@ -17,7 +17,6 @@
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=03ea077d7ecc6636dffede985cc5c57d&libraries=services"></script>
     <!-- font -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"/>
     <link type="text/css" rel="stylesheet" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"/>
 </head>
@@ -560,7 +559,13 @@
 	                </div>
 	                <div id="line2">
 	                    <div class="edge11">
-	                        <div class="title11">출발지 정보</div>
+	                        <div class="title11">
+	                            <button id="stAddrList" type="button" class="addrList">
+	                                	<img src="${pageContext.request.contextPath}/resources/images/reservation/magnifying-glass-black.svg" alt="검색" style="width: 17px; height: 17px;">
+	                                	주소록
+	                            </button>
+	                           	 출발지 정보
+	                        </div>
 	                        <div id="startAddr-div" class="content22">
 	                            <div id="searchAddr-div1">
 	                                <div id="searchAddr-div11">
@@ -644,7 +649,13 @@
 	                        </div>
 	                    </div>
 	                    <div class="edge11">
-	                        <div class="title11">도착지 정보</div>
+	                        <div class="title11">
+	                        	<button id="edAddrList" type="button" class="addrList">
+	                                	<img src="${pageContext.request.contextPath}/resources/images/reservation/magnifying-glass-black.svg" alt="검색" style="width: 17px; height: 17px;">
+	                                	<div>주소록</div>
+	                            </button>
+	                        	도착지 정보
+	                        </div>
 	                        <div id="endAddr-div" class="content22">
 	                            <div id="searchAddr-div2">
 	                                <div id="searchAddr-div22">
@@ -816,7 +827,92 @@
 	            </div>
 	        </div>
 	    </div>
-	    
+	    <!-- Modal6 : 출발지 주소록 -->
+        <div id="myModal6" class="modal11" style="padding-top: 10%;">
+			<div class="modal-content11" style="width: 600px">
+            	<span id="modal-close6" class="close11" style="width: 30px;">&times;</span>
+                <div class="modal-addr-div">
+                	<div class="addr-title-div">
+                        <span class="addr-title">나의 주소록(출발지)</span>
+                    </div>
+                    <br>
+                    <div class="col-xs-12 col-md-12 text-center noto">
+			            <div class="col-xs-12 col-md-12">
+			                <div class="row fw6" style="border-bottom: 1px solid black;">
+			                    <div class="col-xs-2 col-md-2">선택</div>
+			                    <div class="col-xs-2 col-md-2">배송지</div>
+			                    <div class="col-xs-5 col-md-5">주소</div>
+			                    <div class="col-xs-3 col-md-3">연락처</div>
+			                </div>
+			                <div class="row small aL-row">
+			                    <div class="col-xs-2 col-md-2"  style="margin-top: 5px;">
+			                        <input type="radio" style="cursor: pointer;">
+			                    </div>
+			                    <div class="col-xs-2 col-md-2">
+			                        <span>회사</span>
+			                        <br><span>도로리</span>
+			                    </div>
+			                    <div class="col-xs-5 col-md-5">
+			                        <span>강남구 대치동 123-556로 24번지</span>
+			                        <br>
+			                        <span>123층 12호</span>
+			                    </div>
+			                    <div class="col-xs-3 col-md-3" style="padding-top: 9px;">
+			                        <span>010-2711-1111</span>
+			                    </div>
+			                </div>
+			            </div>
+			        </div>
+                </div>
+                <div align="center">
+                    <button type="button" id="stALBtn">선택하기</button>
+                </div>
+                <br>
+            </div>
+        </div>
+	    <!-- Modal7 : 도착지 주소록 -->
+        <div id="myModal7" class="modal11" style="padding-top: 10%;">
+			<div class="modal-content11" style="width: 600px">
+            	<span id="modal-close7" class="close11" style="width: 30px;">&times;</span>
+                <div class="modal-addr-div">
+                	<div class="addr-title-div">
+                        <span class="addr-title">나의 주소록(도착지)</span>
+                    </div>
+                    <br>
+                    <div class="col-xs-12 col-md-12 text-center noto">
+			            <div class="col-xs-12 col-md-12">
+			                <div class="row fw6" style="border-bottom: 1px solid black;">
+			                    <div class="col-xs-2 col-md-2">선택</div>
+			                    <div class="col-xs-2 col-md-2">배송지</div>
+			                    <div class="col-xs-5 col-md-5">주소</div>
+			                    <div class="col-xs-3 col-md-3">연락처</div>
+			                </div>
+			                <div class="row small aL-row">
+			                    <div class="col-xs-2 col-md-2"  style="margin-top: 5px;">
+			                        <input type="radio" style="cursor: pointer;">
+			                    </div>
+			                    <div class="col-xs-2 col-md-2">
+			                        <span>회사</span>
+			                        <br><span>도로리</span>
+			                    </div>
+			                    <div class="col-xs-5 col-md-5">
+			                        <span>강남구 대치동 123-556로 24번지</span>
+			                        <br>
+			                        <span>123층 12호</span>
+			                    </div>
+			                    <div class="col-xs-3 col-md-3" style="padding-top: 9px;">
+			                        <span>010-2711-1111</span>
+			                    </div>
+			                </div>
+			            </div>
+			        </div>
+                </div>
+                <div align="center">
+                    <button type="button" id="edALBtn">선택하기</button>
+                </div>
+                <br>
+            </div>
+        </div>
 	    <!-- Modal34 : 주소 API -->
 	    <div id="myModal34">
 			<div id="layer">

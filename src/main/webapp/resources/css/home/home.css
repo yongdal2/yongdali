@@ -360,3 +360,11 @@
 #preCondition{
 	margin-top:20px;
 }
+
+#submit-btn{
+	padding-top: 12px;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+	font-size: 16pt;
+}
