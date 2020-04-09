@@ -377,9 +377,28 @@ public class NoticeController {
 	
 	@RequestMapping("fileDelete.no")
 	@ResponseBody
-	public String deleteReNameFile(@RequestParam("fileName") String fileName, HttpServletRequest request) {
+	public String deleteReNameFile(@RequestParam("fileName") String fileName, @RequestParam("nNo") String nNo, Notice n, HttpServletRequest request) {
 		System.out.println(fileName);
-		return "";
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\nuploadFiles";
+		
+		File f = new File(savePath + "\\" + fileName);
+		
+		if(f.exists()) {
+			f.delete();
+		}
+		
+		
+		int result = nService.deleteFile(nNo);
+		
+		System.out.println(n.getnImgOrigin());
+		System.out.println(n.getnImgRename());
+		
+		if(result > 0) {
+			return "ok";
+		}else {
+			return "fail";
+		}
 	}
 	
 	/**
