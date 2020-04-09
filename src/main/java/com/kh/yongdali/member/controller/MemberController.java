@@ -69,11 +69,12 @@ public class MemberController {
 		Member loginUser = mService.loginMember(m); 
 		System.out.println(loginUser);
 		
-		if(loginUser != null) {
+		if(loginUser != null && bcryptPasswordEncoder.matches(m.getPwd(), loginUser.getPwd())) {
 			model.addAttribute("loginUser", loginUser);
+			logger.debug(loginUser.getmId());
+			
 			return "redirect:home.do";
 //			return "redirect:index.jsp";
-
 		}else {
 			model.addAttribute("msg","로그인 실패!");
 			return "common/errorPage";
@@ -92,17 +93,17 @@ public class MemberController {
 	}
 	
 	@RequestMapping("insertSample.me")
-	public String insertSample(Model model) {
+	public String insertSampleMembers(Model model) {
 		ArrayList<Member> mList = new ArrayList<Member>();
 		String[] sDate = new String[4];
 		long[] milliesDate = new long[4];
 		Date[] date = new Date[4];
 		String[] encPwdArr = new String[4];
 		
-		mList.add(new Member("admin@naver.com", "admin", "유승제", "010-1111-1111", "관리자", "정상")); 
-		mList.add(new Member("mem01@naver.com", "mem01", "홍멤버", "010-2222-2222", "일반", "정상"));
-		mList.add(new Member("biz01@naver.com", "biz01", "김거상", "010-3333-3333", "사업자", "정상"));
-		mList.add(new Member("biz02@naver.com", "biz01", "최거상", "010-4444-4444", "사업자", "정상"));
+		mList.add(new Member("admin@naver.com", "Admin!234", "유승제", "010-1111-1111", "관리자", "정상")); 
+		mList.add(new Member("mem01@naver.com", "Mem!234", "홍멤버", "010-2222-2222", "일반", "정상"));
+		mList.add(new Member("biz01@naver.com", "Biz!234", "김거상", "010-3333-3333", "사업자", "정상"));
+		mList.add(new Member("biz02@naver.com", "Biz!234", "최거상", "010-4444-4444", "사업자", "정상"));
 		
 		sDate[0] = "2020-03-10";
 		sDate[1] = "2020-03-18";
