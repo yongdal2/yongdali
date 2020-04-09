@@ -19,6 +19,13 @@
         <div OnClick="location.href ='dNoticeMain.no'" style="width: 100px; height: 100px; background: lightpink; cursor: pointer; border-radius: 10px; margin-right: 20px;">
               고객센터 드라이버 메인페이지(공지사항)
         </div>
+        <div OnClick="location.href ='uChatView.ch'" style="width: 100px; height: 100px; background: lightgreen; cursor: pointer; border-radius: 10px; margin-right: 20px;">
+              사용자 채팅창
+        </div>
+        <div OnClick="location.href ='aChatView.ch'" style="width: 100px; height: 100px; background: lightgray; cursor: pointer; border-radius: 10px; margin-right: 20px;">
+              관리자 채팅창
+        </div>
+        
     </div>
     
 </body>

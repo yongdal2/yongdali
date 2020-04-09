@@ -73,8 +73,8 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-md-12 h3">
-				<a href="truckInfo.myp"><span class="semibar_span">주소록</span></a>
-				<a href="driverSettle.myp"><span class="semibar_span">예약내역</span></a>
+				<a href="addrBook.myp"><span class="semibar_span">주소록</span></a>
+				<a href="myRSV.myp"><span class="semibar_span">예약내역</span></a>
 			</div>
 		</div>
 	</div>

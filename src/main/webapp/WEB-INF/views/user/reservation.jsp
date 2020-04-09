@@ -919,16 +919,16 @@
 				<img id="searchAddr" src="https://t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" onclick="closeDaumPostcode()" alt="닫기 버튼">
 			</div>
 	    </div>	    
+		<!-- hidden 값들 -->
+		<input type="hidden" id="addStAddr" name="startAddr">
+		<input type="hidden" id="addEdAddr" name="endAddr">
+		<input type="hidden" id="amountVal" name="amount">
+		<input type="hidden" id="distanceVal" name="distance">
+		<input type="hidden" id="helpLoadVal" name="helpLoad">
+		<input type="hidden" id="helpUnloadVal" name="helpUnload">
+		<input type="hidden" id="days" name="days" value="0">
 	</form>
 	
-	<!-- hidden 값들 -->
-	<input type="hidden" id="addStAddr" name="startAddr">
-	<input type="hidden" id="addEdAddr" name="endAddr">
-	<input type="hidden" id="amountVal" name="amount">
-	<input type="hidden" id="distanceVal" name="distance">
-	<input type="hidden" id="helpLoadVal" name="helpLoad">
-	<input type="hidden" id="helpUnloadVal" name="helpUnload">
-	<input type="hidden" id="days" name="days" value="0">
 	
 	
     <!-- javascript files -->
