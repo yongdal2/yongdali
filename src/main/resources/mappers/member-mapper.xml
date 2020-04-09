@@ -20,20 +20,67 @@
 		  AND M_STATUS = '정상'
 	</select>
 	
+<!-- 	<insert id="insertSampleMembers" parameterType="java.util.List">
+		<foreach item="item" index="index" collection="list" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL" >
+			INTO MEMBER(M_NO, M_ID, PWD, NAME, PHONE, M_SORT, M_STATUS, ENROLLDATE)
+			VALUES
+				(
+					'M' || SEQ_MNO.NEXTVAL,
+					"${item.mId}",
+					"${item.pwd}",
+					"${item.mName}",
+					"${item.phone}",
+					"${item.mSort}",
+					"${item.mStatus}",
+					"${item.enrollDate}"
+				)
+		</foreach>
+	</insert> -->
+<!-- 	<insert id="insertSampleMembers" parameterType="java.util.List">
+		<selectKey keyProperty="id" resultType="String" order="BEFORE">
+			select SEQ_MNO.NEXTVAL
+			from dual
+		</selectKey>
+		<foreach item="item" index="index" collection="list" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL" >
+			INTO MEMBER(M_NO, M_ID, PWD, NAME, PHONE, M_SORT, M_STATUS, ENROLLDATE)
+			VALUES
+				(
+					'M' || SEQ_MNO.NEXTVAL,
+					#{item.mId},
+					#{item.pwd},
+					#{item.mName},
+					#{item.phone},
+					#{item.mSort},
+					#{item.mStatus},
+					#{item.enrollDate}
+				)
+		</foreach>
+	</insert> -->
 	<insert id="insertSampleMembers" parameterType="java.util.List">
 		INSERT INTO MEMBER(M_NO, M_ID, PWD, NAME, PHONE, M_SORT, M_STATUS, ENROLLDATE)
-		VALUES
-			<foreach item="item" index="index" collection="list">
-			(
-				'M' || SEQ_MNO.NEXTVAL,
-				"${item.mId}",
-				"${item.pwd}",
-				"${item.mName}",
-				"${item.phone}",
-				"${item.mSort}",
-				"${item.mStatus}",
-				"${item.enrollDate}"
-			)
-			</foreach>
+		SELECT 'M' || SEQ_MNO.NEXTVAL, A.*
+		FROM(
+		<foreach item="item" index="index" collection="list" separator="UNION ALL">
+			SELECT #{item.mId},
+					#{item.pwd},
+					#{item.mName},
+					#{item.phone},
+					#{item.mSort},
+					#{item.mStatus},
+					#{item.enrollDate}
+			FROM DUAL
+		</foreach>
+		) A
 	</insert>
-</mapper>    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>     
