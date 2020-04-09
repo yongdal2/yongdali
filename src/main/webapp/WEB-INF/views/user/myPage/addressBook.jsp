@@ -29,6 +29,12 @@
 
 <body>
     <c:import url="../../common/nav.jsp" />
+    <c:import url="../../user/myPage/userInfo.jsp" />
+    
+    
+    
+    
+    
     <div class="container">
         <div class="row">
             <div class="h2 jal">마이페이지(주소록)</div>

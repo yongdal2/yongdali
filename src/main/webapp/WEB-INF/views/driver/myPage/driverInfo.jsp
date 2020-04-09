@@ -193,7 +193,7 @@
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 				<div class="modal-body">
-					<form action="driverInfo.myp?dd">
+					<form action="driverInfo.myp">
 						<div class="row noto center-block text-left"
 							style="border: 1px solid #dedede; border-radius: 16px; padding: 15px; background: #fff; width: 100%; max-width: 560px;">
 							<div class="col-md-12 fw6"
