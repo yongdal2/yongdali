@@ -131,6 +131,7 @@ public class MemberController {
 		}
 		
 		int result = mService.insertSampleMembers(mList);
+		logger.debug(String.valueOf(result));
 		
 		if(result > 3) {
 			return "redirect:home.do";
