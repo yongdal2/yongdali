@@ -37,7 +37,7 @@
 			<div class="col-xs-12 col-md-12 na">
 				<div class="row na" style="margin-bottom: 30px">
 					<div class="col-xs-9 col-md-10 h4">배송지 목록</div>
-					<div class="col-xs-3 col-md-2 text-right">
+					<div class="col-xs-3 col-md-2 text-center">
 						<button class="btn btn_ydl_l" data-toggle="modal"
 							data-target="#addAddr">배송지 추가</button>
 					</div>
