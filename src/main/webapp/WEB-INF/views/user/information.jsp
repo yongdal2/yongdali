@@ -6,30 +6,15 @@
 <html>
 
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description"
-	content="AOS - Animate On Scroll library using CSS3">
-<meta name="keywords"
-	content="AOS, animate on scroll, css3 scroll animations, simple scroll animations">
-<link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-<link
-	href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"
-	rel="stylesheet" type="text/css">
-<link
-	href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<link href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mainInfo.css" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<title>용달이 | 이용 안내 / 차량 안내</title>
 </head>
 <body>
 	<c:import url="../common/nav.jsp"/>
@@ -42,8 +27,9 @@
 		<!-- 이용안내 -->
 		<div class="row" id="use_info">
 			<div class="h2 jal">
-				<a href="#use" class="inf" id="use">이용 안내 </a> / <a href="#car" class="a">차량
-					안내</a> / <a href="#size" class="a">적재 크기 안내</a>
+				<a href="#use" id="use"><span class="semibar_span">이용 안내</span></a>
+				<a href="#car"><span class="semibar_span">차량 안내</span></a>				
+				<a href="#size"><span class="semibar_span">적재 크기 안내</span></a>				
 				<hr>
 			</div>
 			<br>
