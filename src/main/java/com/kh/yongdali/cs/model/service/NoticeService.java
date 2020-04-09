@@ -121,4 +121,6 @@ public interface NoticeService {
 	 * @return
 	 */
 	ArrayList<Notice> driverSearchSelectList(PageInfo pi, String keyword);
+
+	int deleteFile(String nNo);
 }

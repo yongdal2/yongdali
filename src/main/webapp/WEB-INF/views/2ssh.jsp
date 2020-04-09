@@ -22,9 +22,9 @@
 		<div OnClick="location.href ='myInfo.myp'"
 			style="width: 100px; height: 100px; background: lightpink; cursor: pointer; border-radius: 10px; margin-right: 20px;">
 			계정정보</div>
-		<div OnClick="location.href ='driverInfo.myp'"
+		<div OnClick="location.href ='truckInfo.myp'"
 			style="width: 100px; height: 100px; background: green; cursor: pointer; border-radius: 10px; margin-right: 20px; color: white;">
-			운전자정보</div>
+			차량정보</div>
 		<div OnClick="location.href ='driverSettle.myp'"
 			style="width: 100px; height: 100px; background: lightslategrey; cursor: pointer; border-radius: 10px; margin-right: 20px; color: white;">
 			운전자정산</div>

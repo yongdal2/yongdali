@@ -649,6 +649,9 @@ function noBefore(date){
 		return [false];
 	return [true];
 }
+
+
+// 상차 예약 클릭시 달력 표시 - 상차 선택에 따라 하차 가능일 조건 삽입
 $('#datepicker1').datepicker({
 	dateFormat:'yy년 mm월 dd일',
 	changeMonth: true,
@@ -678,6 +681,7 @@ $('#datepicker1').datepicker({
 	beforeShowDay: noBefore
 });
 
+//하차 예약 클릭시 달력 표시
 $('#datepicker2').datepicker({
 	dateFormat:'yy년 mm월 dd일',
 	changeMonth: true,
@@ -854,5 +858,31 @@ span5.onclick = function() {
 	$('#modal5').css('display','block');
 	$('#checkHelp2').prop('checked',false);
 }
+
+
+// 출발지 주소록
+$('#stAddrList').click(function(){
+	$('#myModal6').css('display','block');
+});
+var span6 = document.getElementById("modal-close6");
+
+// 출발지 주소록 모달 닫기
+span6.onclick = function() {
+	$('#myModal6').css('display','none');
+}
+
+
+// 도착지 주소록
+$('#edAddrList').click(function(){
+	$('#myModal7').css('display','block');
+});
+var span7 = document.getElementById("modal-close7");
+
+// 도착지 주소록 모달 닫기
+span7.onclick = function() {
+	$('#myModal7').css('display','none');
+}
+
+
 
 

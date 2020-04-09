@@ -162,3 +162,54 @@ a {
 	color: rgb(241,95,95);
 }
 
+/* 차량정보 */
+
+.truckInfo {
+	border: 1px solid #dedede;
+	padding-top: 30px;
+	padding-left: 30px !important;
+	padding-right: 30px !important;
+	padding-bottom: 15px;
+	background: #fff;
+}
+
+.truckInfo1 {
+	border: 1px solid #dedede;
+	padding: 30px;
+	padding-left: 30px !important;
+	padding-right: 30px !important;
+	background: #fff;
+}
+
+.carInf {
+	margin: 0px !important;
+	box-sizing: border-box;
+}
+
+
+.bdbt1 {
+	border-bottom: 1px solid #dedede;
+    padding-bottom: 5px;
+}
+
+.hvbs {
+	color: black;
+	cursor: pointer;
+}
+
+.hvbs:hover {
+	color: rgb(241,95,95);
+}
+
+.mgt30 {
+	
+	margin-top: 30px !important;
+}
+.zoom-in {
+	cursor: zoom-in;
+}
+
+
+.filBg {
+	background-color: #f3f5f7!important
+}
