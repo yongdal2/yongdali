@@ -72,9 +72,17 @@
                      	<a>&laquo;</a>
                      </c:if>
                      <c:if test="${pi.currentPage ne 1 }">
-                     	<c:url var="before" value="uNoticeMain.no">
-                     		<c:param name="currentPage" value="${pi.currentPage - 1 }"/>
-                     	</c:url>
+                     	<c:if test="${!empty list }">
+	                     	<c:url var="before" value="uNsearch.no">
+	                     		<c:param name="currentPage" value="${pi.currentPage -1 }"/>
+								<c:param name="keyword" value="${keyword }"/>
+	                     	</c:url>
+                     	</c:if>
+                     	<c:if test="${empty list }">
+	                     	<c:url var="before" value="uNoticeMain.no">
+	                     		<c:param name="currentPage" value="${pi.currentPage - 1 }"/>
+	                     	</c:url>
+                     	</c:if>
                      	<a href="${ before }">&laquo;</a>
                      </c:if>
                      
@@ -84,9 +92,17 @@
                      		<a class="active">${p}</a>
                      	</c:if>
                      	<c:if test="${p ne pi.currentPage }">
-                     		<c:url var="pagination" value="uNoticeMain.no">
-                     			<c:param name="currentPage" value="${p }"/>
-                     		</c:url>
+                     		<c:if test="${!empty list }">
+                     			<c:url var="pagination" value="uNsearch.no">
+                     				<c:param name="currentPage" value="${p }"/>
+									<c:param name="keyword" value="${keyword }"/>
+                     			</c:url>
+                     		</c:if>
+                     		<c:if test="${empty list }">
+	                     		<c:url var="pagination" value="uNoticeMain.no">
+	                     			<c:param name="currentPage" value="${p }"/>
+	                     		</c:url>
+                     		</c:if>
                      		<a href="${pagination }">${ p }</a>
                      	</c:if>
                      
@@ -97,9 +113,17 @@
                      	<a>&raquo;</a>
                      </c:if>
                      <c:if test="${pi.currentPage ne pi.maxPage}">
-                     	<c:url var="after" value="uNoticeMain.no">
-                     		<c:param name="currentPage" value="${pi.currentPage + 1 }"/>
-                     	</c:url>
+                     	<c:if test="${!empty list }">
+                     		<c:url var="after" value="uNsearch.no">
+                     			<c:param name="currentPage" value="${pi.currentPage + 1 }"/>
+								<c:param name="keyword" value="${keyword }"/>
+                     		</c:url>
+                     	</c:if>
+                     	<c:if test="${empty list }">
+	                     	<c:url var="after" value="uNoticeMain.no">
+	                     		<c:param name="currentPage" value="${pi.currentPage + 1 }"/>
+	                     	</c:url>
+                     	</c:if>
                      	<a href="${after }">&raquo;</a>
                      </c:if>
                     </span>

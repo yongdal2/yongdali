@@ -113,7 +113,7 @@
 	                        <c:url var="nlist" value="dNoticeMain.no">
 								<c:param name="currentPage" value="${ currentPage}"/>
 							</c:url>
-                            <button id="listbtn" onclick="location.href='${nlist}' ">목록</button>
+                            <button id="listbtn" onclick="location.href='javascript:history.go(-1);' ">목록</button>
                         </div>
                     </div>
                 </div> 
