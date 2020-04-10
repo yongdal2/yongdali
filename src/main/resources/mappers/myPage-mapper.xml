@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="myPageMapper">
+	<!-- resultMap -->
+	<resultMap id="addressResultSet" type="Address">
+		<id property="aNo" column="A_NO"/>
+		<result property="aMno" column="A_M_NO"/>
+		<result property="aPlace" column="PLACE"/>
+		<result property="aName" column="NAME"/>
+		<result property="aAddress" column="ADDRESS"/>
+		<result property="aPhone" column="PHONE"/>
+		<result property="aRecentDate" column="RECENTDATE"/>
+	</resultMap>
+	
+	<!-- 주소로갯수 -->
+	<select id="getAddrListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM ADDRESS
+		WHERE A_M_NO=#{aMno}
+	</select>
+</mapper>

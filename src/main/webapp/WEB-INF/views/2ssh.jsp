@@ -42,6 +42,9 @@
 		<div OnClick="location.href ='driverSettle.myp'"
 			style="width: 100px; height: 100px; background: lightslategrey; cursor: pointer; border-radius: 10px; margin-right: 20px; color: white;">
 			운전자정산</div>
+			<div OnClick="location.href ='addrBook1.myp'"
+			style="width: 100px; height: 100px; background: lightcoral; cursor: pointer; border-radius: 10px; margin-right: 20px;">
+			주소록1</div>
 	</div>
 	
 	
