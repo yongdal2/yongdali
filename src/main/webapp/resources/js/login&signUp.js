@@ -9,7 +9,8 @@ $(document).ready(function(){
 	})
 	
 	$(".logout").click(function(){
-		location.href="logout.me"
+		location.href="logout.me";
+		history.go();
 	})
 	
 	$(".driverPage").click(function(){
@@ -24,8 +25,6 @@ $(document).ready(function(){
 		location.href="#"
 	})
 	
-	
-	
 	/*-- 로그인페이지 ----------------------------------------------*/
     // 엔터시 로그인 클릭
 	$('#pwd, #mId').keypress(function(event){
@@ -34,7 +33,6 @@ $(document).ready(function(){
         	$(".submitBtn").trigger("click");
         }
     }); 
-	
 	
     $(".submitBtn").click(function(){
     	var mId = $("input[type=email]").val();
@@ -63,29 +61,86 @@ $(document).ready(function(){
     		})
     	}
     })
-
-    // 이메일 유효성 검사
-    function loginValidate(){ 
-        let emailVal = $("input[type=email]").val();  
-        let idDup = 0;
-
-        // 이메일 미입력
-        if ($("input[type=email]").val() == "" ){
-            displayErrorMsg($("#emailMsg"), '이메일을 입력하세요.');
-            return false;
+    
+    /*-- 약관 동의 ----------------------------------------------*/
+    // 약관동의    
+        	var checked = '/yongdali/resources/images/login&signUp/checked-circle.png';
+    	var unchecked = '/yongdali/resources/images/login&signUp/unchecked-circle.png';
+    $('#chkAll').on("click",function(){
+        if($(this).attr('src') == unchecked) {	        	
+        	$('.chkPolicy').attr('src',checked).attr('checked',true);
+        } else{
+        	$('.chkPolicy').attr('src',unchecked).attr('checked',false);	            
         }
-        else{
-            $("#emailMsg").css("display","none");
-            return true;
+    });
+   
+    $('.chkPolicy:eq(1)').click(function(){
+        if($(this).attr('src') == unchecked) {
+            $(this).attr('src',checked).attr('checked',true);
+        } else{
+            $(this).attr('src',unchecked).attr('checked',false);
+        }
+    });
+
+    $('.chkPolicy:eq(2)').click(function(){
+        if($(this).attr('src') == unchecked) {
+            $(this).attr('src',checked).attr('checked',true);
+        } else{
+            $(this).attr('src',unchecked).attr('checked',false);
+        }
+    });
+
+    $('.chkPolicy:eq(3)').click(function(){
+        if($(this).attr('src') == unchecked) {
+            $(this).attr('src',checked).attr('checked',true);
+        } else{
+            $(this).attr('src',unchecked).attr('checked',false);
+        }
+    });
+    // 용달이 회원가입
+    $('#yongdaliSignUp').click(function(){
+    	if($('.chkPolicy:eq(1)').attr('checked') == "checked" && $('.chkPolicy:eq(2)').attr('checked') == "checked"){
+    		if($('.chkPolicy:eq(3)').attr('checked') == "checked"){
+    			// TODO 히든값 주고, 그 key 값을 호출하는 방식으로 해볼 것 
+    			location.href= "";
+    		}else{
+    			location.href= "";
+    		}
+    		
+    			
+    	}else {
+    		alert("필수 약관에 동의해야합니다.")
+    	}
+    	
+    })
+
+    // 약관 모달
+    $('#viewYondaliPolicy').click(function(){
+        $('#yongdaliPolicy').css("display","block");
+    })
+
+    $('#viewPersonalInfoPolicy').click(function(){
+        $('#personalInfoPolicy').css("display","block");
+    })
+
+    $('.modalClose:eq(0)').click(function(){
+        $('#yongdaliPolicy').css("display","none");
+    })
+
+    $('.modalClose:eq(1)').click(function(){
+        $('#personalInfoPolicy').css("display","none");
+    })
+
+    var modal = document.getElementById("carInfo");
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
         }
     }
-
-	$("input[type=email]").focusout(function(){
-		
-
-	})
-	
-
+    
+    
+    
+    
     /*-- 회원가입 ----------------------------------------------*/
     // focus legend
     var $inputItem = $(".js-inputWrapper");
@@ -312,6 +367,7 @@ $(document).ready(function(){
         if (!(event.keyCode >=37 && event.keyCode<=40)) {
             var inputVal = $(this).val();
             $(this).val(inputVal.replace(/[^a-zA-Z0-9#?!@$%^&*]/gi,''));
+//            displayErrorMsg($('#pwdMsg'), "8~16자 영문 대 소문자, 숫자, 특수문자(#?!@$%^&*)를 사용하세요.");
         }
     });
 
@@ -412,65 +468,6 @@ $(document).ready(function(){
         $('.ezDdUH').css('display','none');
         $('.fGXWzu').css('display','block');
     })
-
-    /*-- 약관 ----------------------------------------------*/
-    // 약관동의
-    $('#chkAll').click(function(){
-        if($(this).attr('src') == 'resources/images/login&signUp/unchecked-circle.png') {
-            $('.chkPolicy').attr('src','resources/images/login&signUp/checked-circle.png');
-        } else{
-            $('.chkPolicy').attr('src','resources/images/login&signUp/unchecked-circle.png');
-        }
-    });
-
-    $('.chkPolicy:eq(1)').click(function(){
-        if($(this).attr('src') == 'resources/images/login&signUp/unchecked-circle.png') {
-            $(this).attr('src','resources/images/login&signUp/checked-circle.png');
-        } else{
-            $(this).attr('src','resources/images/login&signUp/unchecked-circle.png');
-        }
-    });
-
-    $('.chkPolicy:eq(2)').click(function(){
-        if($(this).attr('src') == 'resources/images/login&signUp/unchecked-circle.png') {
-            $(this).attr('src','resources/images/login&signUp/checked-circle.png');
-        } else{
-            $(this).attr('src','resources/images/login&signUp/unchecked-circle.png');
-        }
-    });
-
-    $('.chkPolicy:eq(3)').click(function(){
-        if($(this).attr('src') == 'resources/images/login&signUp/unchecked-circle.png') {
-            $(this).attr('src','resources/images/login&signUp/checked-circle.png');
-        } else{
-            $(this).attr('src','resources/images/login&signUp/unchecked-circle.png');
-        }
-    });
-
-    // 약관 모달
-    $('#viewYondaliPolicy').click(function(){
-        $('#yongdaliPolicy').css("display","block");
-    })
-
-    $('#viewPersonalInfoPolicy').click(function(){
-        $('#personalInfoPolicy').css("display","block");
-    })
-
-    $('.modalClose:eq(0)').click(function(){
-        $('#yongdaliPolicy').css("display","none");
-    })
-
-    $('.modalClose:eq(1)').click(function(){
-        $('#personalInfoPolicy').css("display","none");
-    })
-
-    var modal = document.getElementById("carInfo");
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-
 });
 
 

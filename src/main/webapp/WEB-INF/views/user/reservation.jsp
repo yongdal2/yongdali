@@ -826,6 +826,12 @@
 	            </div>
 	        </div>
 	    </div>
+	    <!-- Modal34 : 주소 API -->
+	    <div id="myModal34">
+			<div id="layer">
+				<img id="searchAddr" src="https://t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" onclick="closeDaumPostcode()" alt="닫기 버튼">
+			</div>
+	    </div>
 	    <!-- Modal6 : 출발지 주소록 -->
         <div id="myModal6" class="modal11" style="padding-top: 10%;">
 			<div class="modal-content11" style="width: 600px">
@@ -912,12 +918,13 @@
                 <br>
             </div>
         </div>
-	    <!-- Modal34 : 주소 API -->
-	    <div id="myModal34">
-			<div id="layer">
-				<img id="searchAddr" src="https://t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" onclick="closeDaumPostcode()" alt="닫기 버튼">
-			</div>
-	    </div>
+        <!-- Modal8 : 결제 -->
+        <div id="myModal8" class="modal11" style="padding-top: 10%;">
+			<div class="modal-content11" style="width: 600px">
+            	<span id="modal-close8" class="close11" style="width: 30px;">&times;</span>
+            </div>
+        </div>
+	    
 		<!-- hidden 값들 -->
 		<input type="hidden" id="addStAddr" name="startAddr">
 		<input type="hidden" id="addEdAddr" name="endAddr">

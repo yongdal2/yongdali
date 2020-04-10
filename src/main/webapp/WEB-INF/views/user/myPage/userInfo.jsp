@@ -35,18 +35,18 @@
 			<div class="row">
 				<div class="col-xs-9 col-md-9">
 					<div class="h2 jal">
-						어서오세요 정해인님!
+						어서오세요 ${loginUser.mName}님!
 					</div>
 					<br>
 					<div class="row">
 						<div class="col-xs-6 col-md-6">
 							<div class="h4 na">E-mail</div>
-							<div class="h3 jal lg mgt">sols@gmail.com</div>
+							<div class="h3 jal lg mgt">${loginUser.mName}</div>
 						</div>
 						<div class="col-xs-6 col-md-6">
 							<div class="h4 na">연락처</div>
 							<div class="h3 jal lg mgt">
-								010-2712-6866
+								${loginUser.phone}
 								<div class="glyphicon glyphicon-pencil hvDr" data-toggle="modal"
 									data-target="#changePhone"></div>
 							</div>
