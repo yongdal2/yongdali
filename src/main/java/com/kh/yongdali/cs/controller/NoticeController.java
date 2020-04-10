@@ -474,6 +474,7 @@ public class NoticeController {
 		
 		mv.addObject("list",list);
 		mv.addObject("pi",pi);
+		mv.addObject("keyword",keyword);
 		mv.setViewName("user/notice/notice");
 		return mv;
 	}
@@ -498,10 +499,12 @@ public class NoticeController {
 		int boardLimit = 5;
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,pageLimit,boardLimit );
 		
+		
 		ArrayList<Notice> list = nService.driverSearchSelectList(pi,keyword);
 		
 		mv.addObject("list",list);
 		mv.addObject("pi",pi);
+		mv.addObject("keyword",keyword);
 		mv.setViewName("driver/notice/notice");
 		return mv;
 	}
