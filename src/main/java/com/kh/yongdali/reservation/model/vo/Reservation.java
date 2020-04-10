@@ -10,7 +10,7 @@ public class Reservation {
 	private String type;		// 차량 옵션
 	private String startAddr;	// 출발지
 	private String endAddr;		// 도착지
-	private String distance;		// 거리
+	private String distance;	// 거리
 	private String phone1;		// 상차 연락처
 	private String phone2;		// 하차 연락처
 	private String rightLoad;	// 바로 상차
@@ -23,50 +23,17 @@ public class Reservation {
 	private String helpUnload;	// 하차 도움
 	private String luggage;		// 이삿집
 	private String msg;			// 전달 사항
-	private String amount;			// 총 결제 금액
+	private String amount;		// 총 결제 금액
 	private String payYN;		// 결제 유무
 	private String dealYN;		// 거래 성사 유무
 	private Date dealDate;		// 거래 성사 날짜
+	private String calcYN;		// 정산 유무
+	private Date calcDate;		// 정산 날짜
 	private Date enrollDate;	// 예약 등록 날짜
 	
 	public Reservation() {}
 
-	public Reservation(String rNo, String rMNo, String rDNo, String capacity, String type, String startAddr,
-			String endAddr, String distance, String phone1, String phone2, String rightLoad, String rightUnload,
-			Date startDate, String startTime, Date endDate, String endTime, String helpLoad, String helpUnload,
-			String luggage, String msg, String amount, String payYN, String dealYN, Date dealDate, Date enrollDate) {
-		super();
-		this.rNo = rNo;
-		this.rMNo = rMNo;
-		this.rDNo = rDNo;
-		this.capacity = capacity;
-		this.type = type;
-		this.startAddr = startAddr;
-		this.endAddr = endAddr;
-		this.distance = distance;
-		this.phone1 = phone1;
-		this.phone2 = phone2;
-		this.rightLoad = rightLoad;
-		this.rightUnload = rightUnload;
-		this.startDate = startDate;
-		this.startTime = startTime;
-		this.endDate = endDate;
-		this.endTime = endTime;
-		this.helpLoad = helpLoad;
-		this.helpUnload = helpUnload;
-		this.luggage = luggage;
-		this.msg = msg;
-		this.amount = amount;
-		this.payYN = payYN;
-		this.dealYN = dealYN;
-		this.dealDate = dealDate;
-		this.enrollDate = enrollDate;
-	}
-
-
-
-
-
+	
 	public String getrNo() {
 		return rNo;
 	}
@@ -257,6 +224,22 @@ public class Reservation {
 
 	public void setDealDate(Date dealDate) {
 		this.dealDate = dealDate;
+	}
+	
+	public String getCalcYN() {
+		return calcYN;
+	}
+
+	public void setCalcYN(String calcYN) {
+		this.calcYN = calcYN;
+	}
+
+	public Date getCalcDate() {
+		return calcDate;
+	}
+
+	public void setCalcDate(Date calcDate) {
+		this.calcDate = calcDate;
 	}
 
 	public Date getEnrollDate() {
