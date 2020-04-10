@@ -26,7 +26,13 @@ public class ReservationController {
 	public String goReservation() {
 		return "user/reservation";
 	}
-
+	
+	@RequestMapping("paying.do")
+	public String goPaying() {
+		return "user/paying";
+	}
+	
+	
 	@RequestMapping("rev.do")
 	public String InsertReservation(@ModelAttribute Reservation r, Model model,
 									@RequestParam(value="startDate1", required=false) String stDate1,
@@ -57,8 +63,8 @@ public class ReservationController {
 		
 		System.out.println(r);
 		
-		int result = rService.insertReservation(r);
-		if(result > 0) {
+		String result = rService.insertReservation(r);
+		if(result.length() > 0) {
 			System.out.println("성공했습니다.");
 			return "common/errorPage";
 		}else {

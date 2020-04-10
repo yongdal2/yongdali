@@ -60,7 +60,7 @@
 										12호</span>
 								</div>
 								<div class="col-xs-2 col-md-2">
-									<span>02-222-2222</span> <br> <span>010-2711-1111</span>
+									<span>010-2711-1111</span>
 								</div>
 								<div class="col-xs-3 col-md-3">
 									<button class="btn btn-sm btn_ydl" data-toggle="modal"

@@ -1,10 +1,14 @@
 package com.kh.yongdali.cs.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.common.Pagination;
 import com.kh.yongdali.cs.model.service.NoticeService;
@@ -31,28 +38,55 @@ public class NoticeController {
 	 * @param mv
 	 * @param currentPage
 	 * @return
+	 * @throws IOException 
+	 * @throws JsonIOException 
 	 */
-	@RequestMapping("uNoticeMain.no")
-	public ModelAndView userNoticeMain(ModelAndView mv, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage ) {
-		
-		System.out.println(currentPage);
-		
+//	@RequestMapping("uNoticeMain.no")
+//	public ModelAndView userNoticeMain(ModelAndView mv, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage ) {
+//		
+//		System.out.println(currentPage);
+//		
+//		int listCount = nService.userGetListCount();
+//		
+//		System.out.println(listCount);
+//		
+//		int pageLimit = 5;
+//		int boardLimit = 5;
+//		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,pageLimit,boardLimit );
+//		
+//		ArrayList<Notice> list = nService.userSelectList(pi);
+//		
+//		mv.addObject("list",list);
+//		mv.addObject("pi",pi);
+//		mv.setViewName("user/notice/notice");
+//		return mv;
+//	}
+	
+	@RequestMapping(value="uNoticeMain.no")
+	public String userNoticeMainView() {
+		return "user/notice/notice";
+	}
+	
+	@RequestMapping(value="uNoticeList.no")
+	public void userNoticeMain(HttpServletResponse response) throws JsonIOException, IOException {
 		int listCount = nService.userGetListCount();
-		
-		System.out.println(listCount);
 		
 		int pageLimit = 5;
 		int boardLimit = 5;
+		int currentPage = 1;
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,pageLimit,boardLimit );
-		
 		ArrayList<Notice> list = nService.userSelectList(pi);
 		
-		mv.addObject("list",list);
-		mv.addObject("pi",pi);
-		mv.setViewName("user/notice/notice");
-		return mv;
+		response.setContentType("application/json; charset=utf-8");
+		
+		Map notice = new HashMap();
+		notice.put("list",list);
+		notice.put("pi",pi);
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(notice,response.getWriter());
+		
 	}
-	
 	/**
 	 * (기사) 공지사항 목록 보기
 	 * @param mv
@@ -474,6 +508,7 @@ public class NoticeController {
 		
 		mv.addObject("list",list);
 		mv.addObject("pi",pi);
+		mv.addObject("keyword",keyword);
 		mv.setViewName("user/notice/notice");
 		return mv;
 	}
@@ -498,10 +533,12 @@ public class NoticeController {
 		int boardLimit = 5;
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,pageLimit,boardLimit );
 		
+		
 		ArrayList<Notice> list = nService.driverSearchSelectList(pi,keyword);
 		
 		mv.addObject("list",list);
 		mv.addObject("pi",pi);
+		mv.addObject("keyword",keyword);
 		mv.setViewName("driver/notice/notice");
 		return mv;
 	}

@@ -36,7 +36,7 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-3">
                 <div class="tbl_wrap div">
-                    <table class="tbl">
+                    <table class="tbl" id="tbl">
                         <colgroup>
                             <col width="70%">
                             <col width="15%">    
@@ -50,7 +50,13 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach var="n" items="${ list }">                        
+                        <c:forEach var="n" items="${ list }">
+                        	<c:url var="ndetail" value="uNdetail.no">
+                            		<c:param name="nNo" value="${n.nNo }"/>
+                            		<c:param name="currentPage" value="${pi.currentPage }"/>
+                            </c:url>
+                        </c:forEach>
+                        <%-- <c:forEach var="n" items="${ list }">                        
                         <tr>
                             <td>
                             	<c:url var="ndetail" value="uNdetail.no">
@@ -62,7 +68,8 @@
                             <td>${ n.nCreateDate }</td>
                             <td>${ n.nWriter }</td>
                         </tr>
-                        </c:forEach>                                        
+                        </c:forEach>    --%>    
+                        </tbody>                                 
                     </table>
                 </div>
                 <div class="pagination">
@@ -72,10 +79,18 @@
                      	<a>&laquo;</a>
                      </c:if>
                      <c:if test="${pi.currentPage ne 1 }">
-                     	<c:url var="before" value="uNoticeMain.no">
-                     		<c:param name="currentPage" value="${pi.currentPage - 1 }"/>
-                     	</c:url>
-                     	<a href="${ before }">&laquo;</a>
+                     	<c:if test="${!empty list }">
+	                     	<c:url var="before" value="uNsearch.no">
+	                     		<c:param name="currentPage" value="${pi.currentPage -1 }"/>
+								<c:param name="keyword" value="${keyword }"/>
+	                     	</c:url>
+                     	</c:if>
+                     	<c:if test="${empty list }">
+	                     	<c:url var="before" value="uNoticeMain.no">
+	                     		<c:param name="currentPage" value="${pi.currentPage - 1 }"/>
+	                     	</c:url>
+                     	</c:if>
+                     	<a href="${ before }" >&laquo;</a>
                      </c:if>
                      
                      <!-- 페이지 -->
@@ -84,9 +99,17 @@
                      		<a class="active">${p}</a>
                      	</c:if>
                      	<c:if test="${p ne pi.currentPage }">
-                     		<c:url var="pagination" value="uNoticeMain.no">
-                     			<c:param name="currentPage" value="${p }"/>
-                     		</c:url>
+                     		<c:if test="${!empty list }">
+                     			<c:url var="pagination" value="uNsearch.no">
+                     				<c:param name="currentPage" value="${p }"/>
+									<c:param name="keyword" value="${keyword }"/>
+                     			</c:url>
+                     		</c:if>
+                     		<c:if test="${empty list }">
+	                     		<c:url var="pagination" value="uNoticeMain.no">
+	                     			<c:param name="currentPage" value="${p }"/>
+	                     		</c:url>
+                     		</c:if>
                      		<a href="${pagination }">${ p }</a>
                      	</c:if>
                      
@@ -97,9 +120,17 @@
                      	<a>&raquo;</a>
                      </c:if>
                      <c:if test="${pi.currentPage ne pi.maxPage}">
-                     	<c:url var="after" value="uNoticeMain.no">
-                     		<c:param name="currentPage" value="${pi.currentPage + 1 }"/>
-                     	</c:url>
+                     	<c:if test="${!empty list }">
+                     		<c:url var="after" value="uNsearch.no">
+                     			<c:param name="currentPage" value="${pi.currentPage + 1 }"/>
+								<c:param name="keyword" value="${keyword }"/>
+                     		</c:url>
+                     	</c:if>
+                     	<c:if test="${empty list }">
+	                     	<c:url var="after" value="uNoticeMain.no">
+	                     		<c:param name="currentPage" value="${pi.currentPage + 1 }"/>
+	                     	</c:url>
+                     	</c:if>
                      	<a href="${after }">&raquo;</a>
                      </c:if>
                     </span>
@@ -123,7 +154,50 @@
 	<%@ include file="../../common/footer.jsp"%>
 
     <script>
-        
-    </script>
+       	$(function(){
+       		noticeList();
+       	});
+       	
+       	function noticeList(){
+       		$.ajax({
+       			url:"uNoticeList.no",
+       			dataType:"json",
+       			success:function(data){
+       				console.log(data);
+       				
+       				$tableBody = $("#tbl tbody");
+       				$tableBody.html("");
+       				
+       				var list = data["list"];
+       				
+       				for(var i in list){
+       					var $tr = $("<tr>");
+       					var $nTitle = $("<td>").text(list[i].nTitle);
+       					var $nCreateDate = $("<td>").text(list[i].nCreateDate);
+       					var $nWriter = $("<td>").text(list[i].nWriter);
+       					
+       					$tr.append($nTitle);
+       					$tr.append($nCreateDate);
+       					$tr.append($nWriter);
+       					
+       					$tableBody.append($tr);
+       				}
+       				
+       				$('.pagination').empty();
+       				
+       				var pi = data["pi"];
+       				var currentPage = data["currentPage"];
+       				var listCount = data["listCount"];
+       				var pageLimit = data["pageLimit"];
+       				var maxPage = data["maxPage"];
+       				var startPage = data["startPage"];
+       				var endPage = data["endPage"];
+       				var boardLimit = data["boardLimit"];
+       				
+       				
+       			}
+       		})
+       	};
+     </script>
 </body>
 </html>
