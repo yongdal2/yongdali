@@ -61,7 +61,7 @@
                             <tr>
                                 <td>작성자</td>
                                 <!-- TODO value에 관리자 이름 갖고오기 ${loginUser.mName }-->
-                                <td><input type="text" readonly name="nWriter" value="관리자"></td>
+                                <td><input type="text" readonly name="nWriter" value="${loginUser.mName }"></td>
                             </tr>
                             <tr>
                                 <td>내용</td>
@@ -87,24 +87,7 @@
     <br>
 	<!-- Footer -->
 	<%@ include file="../../common/footer.jsp"%>
-    <script>
-	    function validate(){
-			var title = document.getElementById("title");
-			
-			var content = document.getElementById("editor1");
-			
-			if ((title.value) == ""){
-	            alert("제목을 입력해주세요!");
-	            title.focus();
-	            return false;
-	        }
-			
-			if((content.value) == ""){
-				alert("내용을 입력해주세요!");
-				return false;
-			}
-		}
-	    
+    <script>	    
     	$(function(){
     		CKEDITOR.replace( 'editor1');
 
@@ -138,6 +121,20 @@
         
         
     })
+    function validate(){
+			var title = document.getElementById("title");
+			
+			if ((title.value) == ""){
+	            alert("제목을 입력해주세요!");
+	            title.focus();
+	            return false;
+	        }
+			
+			if (CKEDITOR.instances.editor1.getData() == '') {
+				alert("내용을 입력하세요!");
+		        return false;
+		    }
+		}
     
     
     </script>

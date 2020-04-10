@@ -104,10 +104,10 @@
                         	<c:url var="uNdelete" value="uNdelete.no">
                         		<c:param name="nNo" value="${n.nNo }"/>
                         	</c:url>
-                        	<%-- <c:if test="${loginUser.mName eq n.nWriter }"> --%>
+                        	<c:if test="${loginUser.mName eq n.nWriter }">
                             <button id="editBtn" onclick="location.href='${uNupview}' ">수정</button>
                             <button id="deleteBtn" onclick="deleteNotice();">삭제</button>
-                            <%-- </c:if> --%>
+                            </c:if>
                         </div>
                         <div class="list">
 	                        <c:url var="nlist" value="uNoticeMain.no">
