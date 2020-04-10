@@ -39,7 +39,7 @@
 				<ul class="nav navbar-nav navbar-center" style="margin-left:50px;">
 					<li class="nav-item"><a class="nav-link" href="#" style="color: black; font-weight: bold">요금조회</a></li>
 					<li class="nav-item"><a class="nav-link" href="#" style="color: black; font-weight: bold">차량안내</a></li>
-					<li class="nav-item"><a class="nav-link" href="#" style="color: black; font-weight: bold">고객센터</a></li>
+					<li class="nav-item"><a class="nav-link" href="uNoticeMain.no" style="color: black; font-weight: bold">고객센터</a></li>
 				</ul>
 			</div>
 			<div class="col-lg-4">
@@ -55,7 +55,10 @@
 					<c:if test="${!empty sessionScope.loginUser}">
 						<c:if test='${loginUser.mSort eq ("관리자")}'>
 							<li class="nav-item">
-								<button class="btn btn-default navbar-btn adminPage" style="background: rgb(87,187,138); color: white;">관리자페이지</button>
+								<button class="btn btn-default navbar-btn adminPage" style="background: rgb(87,187,138); color: white;">관리자 페이지</button>
+							</li>
+							<li class="nav-item">
+								<button class="btn btn-default navbar-btn driverPage" style="background: rgb(87,187,138); color: white;">기사 페이지</button>
 							</li>
 						</c:if>
 						<c:if test='${loginUser.mSort ne ("관리자")}'>

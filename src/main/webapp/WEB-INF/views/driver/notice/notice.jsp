@@ -110,11 +110,11 @@
                         <button id="search-button" type="submit">검색</button>
                     </form>
                     <!-- 관리자일 경우 뜨는 곳 -->
-                    <%-- <c:if test="${loginUser.mId eq 'admin@naver.com'}"> --%>
+                    <c:if test="${loginUser.mId eq 'admin@naver.com'}">
                     <div class="admin_write">
                         <button id="admin_write_btn" onclick="location.href='dNinsertView.no';">작성하기</button>
                     </div>
-                    <%-- </c:if> --%>
+                    </c:if>
                 </div>
             </div>
         </div>

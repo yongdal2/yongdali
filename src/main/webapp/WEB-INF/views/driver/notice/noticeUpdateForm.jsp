@@ -106,18 +106,16 @@
 	    function validate(){
 			var title = document.getElementById("title");
 			
-			var content = document.getElementById("editor1");
-			
 			if ((title.value) == ""){
 	            alert("제목을 입력해주세요!");
 	            title.focus();
 	            return false;
 	        }
 			
-			if((content.value) == ""){
-				alert("내용을 입력해주세요!");
-				return false;
-			}
+			if (CKEDITOR.instances.editor1.getData() == '') {
+				alert("내용을 입력하세요!");
+		        return false;
+		    }
 		}
 	    
 	    function filedelete(){

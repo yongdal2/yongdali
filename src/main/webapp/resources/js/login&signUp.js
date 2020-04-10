@@ -12,8 +12,21 @@ $(document).ready(function(){
 		location.href="logout.me"
 	})
 	
+	$(".driverPage").click(function(){
+		location.href="driverMain.ydl"
+	})
 	
-	/*-- 로그인 ----------------------------------------------*/
+	$(".userPage").click(function(){
+		location.href="home.do"
+	})
+	
+	$(".adminPage").click(function(){
+		location.href="#"
+	})
+	
+	
+	
+	/*-- 로그인페이지 ----------------------------------------------*/
     // 엔터시 로그인 클릭
 	$('#pwd, #mId').keypress(function(event){
         var keycode = (event.keyCode ? event.keyCode : event.which);
