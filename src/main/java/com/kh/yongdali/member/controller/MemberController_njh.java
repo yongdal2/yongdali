@@ -15,7 +15,6 @@ public class MemberController_njh {
 	public String home(Model model) {
 		Member mem = (Member)model.getAttribute("loginUser");
 		if(mem != null) {
-			
 			if(mem.getmSort().equals("사업자") ) {
 				return "driver/driverMain";
 			}else {

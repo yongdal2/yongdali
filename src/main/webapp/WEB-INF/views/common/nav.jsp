@@ -56,7 +56,10 @@
 					<c:if test="${!empty sessionScope.loginUser}">
 						<c:if test='${loginUser.mSort eq ("관리자")}'>
 							<li class="nav-item">
-								<button class="btn btn-default navbar-btn adminPage" style="background: rgb(87,187,138); color: white;">관리자페이지</button>
+								<button class="btn btn-default navbar-btn adminPage" style="background: rgb(87,187,138); color: white;">관리자 페이지</button>
+							</li>
+							<li class="nav-item">
+								<button class="btn btn-default navbar-btn driverPage" style="background: rgb(87,187,138); color: white;">기사 페이지</button>
 							</li>
 						</c:if>
 						<c:if test='${loginUser.mSort ne ("관리자")}'>
