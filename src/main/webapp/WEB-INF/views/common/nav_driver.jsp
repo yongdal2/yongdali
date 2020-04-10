@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
 	type="text/javascript"></script>
 <script src="${contextPath}/resources/js/login&signUp.js"></script>	
@@ -57,14 +57,35 @@
 				</div>
 				<div class="col-lg-3">
 					<ul class="nav navbar-nav float-lg-right navbar-right">
-						<li class="nav-item">
+						<!-- <li class="nav-item">
 							<button class="btn btn-default navbar-btn loginView"
 								style="background: #F15F5F; color: white">로그인</button>
 						</li>
 						<li class="nav-item">
 							<button class="btn btn-outline-default navbar-btn signUpView"
 								style="background: white">회원가입</button>
-						</li>
+						</li> -->
+						<c:if test="${empty sessionScope.loginUser}">
+							<jsp:forward page="/WEB-INF/views/user/home.jsp"/>
+						</c:if>
+						<c:if test="${!empty sessionScope.loginUser}">
+							<c:if test='${loginUser.mSort eq ("관리자")}'>
+								<li class="nav-item">
+									<button class="btn btn-default navbar-btn adminPage" style="background: #F15F5F; color: white;">관리자 페이지</button>
+								</li> 
+								<li class="nav-item">
+									<button class="btn btn-default navbar-btn userPage" style="background: #F15F5F; color: white;">사용자 페이지</button>
+								</li>
+							</c:if>
+							<c:if test='${loginUser.mSort ne ("관리자")}'>
+								<li class="nav-item">
+									<button class="btn btn-default navbar-btn myPage" style="background: #F15F5F; color: white;">마이페이지</button>
+								</li>
+							</c:if>
+							<li class="nav-item">
+								<button class="btn btn-outline-default navbar-btn logout" style="background: white;" >로그아웃</button>
+							</li>
+						</c:if>	
 					</ul>
 
 				</div>
