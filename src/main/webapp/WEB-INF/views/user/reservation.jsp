@@ -42,7 +42,7 @@
 	                           	 차량 정보
 	                        </div>
 	                        <div id="carOption-div" class="content22">
-	                            <select name="capacity" id="sl1" onchange="cl1();" required>
+	                            <select name="capacity" id="sl1" onchange="cl1();" >
 	                                <option class="opt1" value="" disabled selected>톤수 선택</option>
 	                                <option class="opt2" value="1톤">1톤</option>
 	                                <option class="opt2" value="1.4톤">1.4톤</option>
@@ -51,7 +51,7 @@
 	                                <option class="opt2" value="5톤">5톤</option>
 	                            </select>
 	
-	                            <select name="type" id="sl2" onchange="cl2();" required>
+	                            <select name="type" id="sl2" onchange="cl2();" >
 	                                <option class="opt1" value="" disabled selected>차종 선택</option>
 	                                <option class="opt2" value="카고">카고</option>
 	                                <option class="opt2" value="호루">호루</option>
@@ -215,7 +215,7 @@
 	                           	 이삿짐
 	                        </div>
 	                        <div id="load-content-div" class="content22">
-	                            <textarea name="luggage" id="load-content-area" cols="64" rows="3" placeholder="파손이나 분실시 확인할 수 있도록&#13;&#10;이삿짐 품목을 선택해주세요." readonly required></textarea>
+	                            <textarea name="luggage" id="load-content-area" cols="64" rows="3" placeholder="파손이나 분실시 확인할 수 있도록&#13;&#10;이삿짐 품목을 선택해주세요." readonly ></textarea>
 	                        </div>
 	                        <!-- Modal2 : 이삿짐 선택 -->
 	                        <div id="myModal2" class="modal11">
@@ -569,14 +569,14 @@
 	                        <div id="startAddr-div" class="content22">
 	                            <div id="searchAddr-div1">
 	                                <div id="searchAddr-div11">
-	                                    <input id="startAddr" type="text" placeholder="주소 검색 (주소, 건물명)" onclick="searchStartAddr();" readonly required>
+	                                    <input id="startAddr" type="text" placeholder="주소 검색 (주소, 건물명)" onclick="searchStartAddr();" readonly >
 	                                    <img src="${pageContext.request.contextPath}/resources/images/reservation/magnifying-glass-black.svg" alt="검색" onclick="searchStartAddr();" style="cursor: pointer;">
 	                                </div>
 	                                <input id="startDetailAddr" type="text" placeholder="상세 주소">
 	                                
 	                            </div>
 	                            <div>
-	                                <input id="startPhone" name="phone1" type="text" placeholder="연락처" onKeyup="inputPhoneNumber(this);" maxlength="13" required>
+	                                <input id="startPhone" name="phone1" type="text" placeholder="연락처" onKeyup="inputPhoneNumber(this);" maxlength="13" >
 	                            </div>
 	                            <div align="left">
 	                                <label id="start-check" class="checkbox-wrap">
@@ -593,7 +593,7 @@
 	                                    </div>
 	                                </div>
 	                                <div>
-	                                    <select name="startDate2" id="sl3" onchange="cl3();" required>
+	                                    <select name="startTime" id="sl3" onchange="cl3();" >
 	                                        <option class="opt3" value="" disabled selected>시간 선택</option>
 	                                        <option class="opt4" value="00:00">00시 00분</option>
 	                                        <option class="opt4" value="00:30">00시 30분</option>
@@ -659,18 +659,18 @@
 	                        <div id="endAddr-div" class="content22">
 	                            <div id="searchAddr-div2">
 	                                <div id="searchAddr-div22">
-	                                    <input id="endAddr" name="edAddr" type="text" placeholder="주소 검색 (주소, 건물명)" onclick="searchEndAddr();" readonly required>
+	                                    <input id="endAddr" name="edAddr" type="text" placeholder="주소 검색 (주소, 건물명)" onclick="searchEndAddr();" readonly >
 	                                    <img src="${pageContext.request.contextPath}/resources/images/reservation/magnifying-glass-black.svg" alt="검색" onclick="searchEndAddr();" style="cursor: pointer;">
 	                                </div>
 	                                <input id="endDetailAddr" name="edDetailAddr" type="text" placeholder="상세 주소">
 	                               
 	                            </div>
 	                            <div>
-	                                <input id="endPhone" name="phone2" type="text" placeholder="연락처" onKeyup="inputPhoneNumber(this);" required>
+	                                <input id="endPhone" name="phone2" type="text" placeholder="연락처" onKeyup="inputPhoneNumber(this);" maxlength="13">
 	                            </div>
 	                            <div align="left">
 	                                <label id="end-check" class="checkbox-wrap">
-	                                    <input id="checkLoad2" name="rightUnload" type="checkbox" value="">
+	                                    <input id="checkLoad2" name="rightUnload" type="checkbox" value="바로 하차">
 	                                    <i class="check-icon" style="margin-top: 2px;"></i>
 	                                    <div style="font-size: 16px;">&nbsp;&nbsp;바로 하차</div>
 	                                </label>
@@ -683,7 +683,7 @@
 	                                    </div>
 	                                </div>
 	                                <div>
-	                                    <select name="endDate2" id="sl4" onchange="cl4();" required>
+	                                    <select name="endTime" id="sl4" onchange="cl4();" >
 	                                        <option class="opt3" value="" disabled selected>시간 선택</option>
 	                                        <option class="opt4" value="00:00">00시 00분</option>
 	                                        <option class="opt4" value="00:30">00시 30분</option>
@@ -744,12 +744,12 @@
 	                        <div class="title11">상하차 방법</div>
 	                        <div id="help-div" class="content22">
 								<label class="rad">
-									<input id="helpUnload-ch" type="radio" name="helpLoad" value="a" required>
+									<input id="helpUnload-ch" type="radio" name="helpLoad1" >
 									<i></i>&nbsp;&nbsp;도움 필요하지 않아요
 								</label>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<label class="rad">
-									<input id="helpLoad-ch" type="radio" name="helpLoad" value="b">
+									<input id="helpLoad-ch" type="radio" name="helpLoad1">
 									<i></i>&nbsp;&nbsp;도움 필요해요
 								</label>
 	                        </div>
@@ -817,7 +817,6 @@
 	                                <span class="charge-title">보관 기간</span>
 	                            </div>
 	                        </div>
-	                        
 	                    </div>
 	                </div>
 	                <div id="booking-div">
@@ -918,7 +917,7 @@
 			<div id="layer">
 				<img id="searchAddr" src="https://t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" onclick="closeDaumPostcode()" alt="닫기 버튼">
 			</div>
-	    </div>	    
+	    </div>
 		<!-- hidden 값들 -->
 		<input type="hidden" id="addStAddr" name="startAddr">
 		<input type="hidden" id="addEdAddr" name="endAddr">
@@ -926,7 +925,6 @@
 		<input type="hidden" id="distanceVal" name="distance">
 		<input type="hidden" id="helpLoadVal" name="helpLoad">
 		<input type="hidden" id="helpUnloadVal" name="helpUnload">
-		<input type="hidden" id="days" name="days" value="0">
 	</form>
 	
 	

@@ -522,7 +522,7 @@ function preChargeFunc(){
 		var distance = document.getElementById("distance");
 		
 		distance.innerHTML = d + " km";
-		$("distanceVal").val(d);
+		$("#distanceVal").val(d);
 		console.log("거리에 따른 비용 : " + charge_dis);
 		calc();
 	}
@@ -592,10 +592,8 @@ $('#checkLoad1').click(function(){
 				console.log(days+"*60,000원 = " + charge_days);
 				$('#btwDay').html(days+"일");
 				$('#book-YN').html("O");
-				$('#days').val(days);
-				console.log("히든에 들어갈 일수 : "+$('#days').val());
 			}
-			calc();	
+			calc();
 		}
 	}
 });
@@ -609,10 +607,10 @@ function addAddr(){
 	var stAddr2 = $('#startDetailAddr').val();
 	var edAddr1 = $('#endAddr').val();
 	var edAddr2 = $('#endDetailAddr').val();
-	$('#addStAddr').val(stAddr1+","+stAddr2);
-	$('#addEdAddr').val(edAddr1+","+edAddr2);
-	console.log(stAddr1+","+stAddr2);
-	console.log(edAddr1+","+edAddr2);
+	$('#addStAddr').val(stAddr1+"-"+stAddr2);
+	$('#addEdAddr').val(edAddr1+"-"+edAddr2);
+	console.log(stAddr1+"-"+stAddr2);
+	console.log(edAddr1+"-"+edAddr2);
 }
 
 
@@ -802,22 +800,32 @@ $('#checkHelp6').click(function(){
 
 // 상하차 선택하기 혹은 닫기
 $('#checkHelp-btn').click(function(){
+	
+	// 상차 하차 선택하면
 	if(!$('#checkHelp1').val()=="" || !$('#checkHelp2').val()==""){
 		
+		// 상차 하차 값이 모두 들어있을 경우
 		if(!$('#checkHelp1').val()=="" && !$('#checkHelp2').val()==""){
 			$('#myModal5').css('display','none');
 			$('#helpLoad').html($('#checkHelp1').val());
 			$('#helpUnload').html($('#checkHelp2').val());
+			$('#helpLoadVal').val($('#checkHelp1').val());
+			$('#helpUnloadVal').val($('#checkHelp2').val());
 			calc();
+		
+		// 상하차 값중 하나만 들어있을 경우
 		} else {
+			
+			// 상차 값이 있을경우
 			if(!$('#checkHelp1').val()==""){
 				$('#myModal5').css('display','none');
 				$('#helpLoad').html($('#checkHelp1').val());
 				$('#helpUnload').html("고객님이 직접 하차");
-
 				$('#helpLoadVal').val($('#checkHelp1').val());
 				$('#helpUnloadVal').val("고객님이 직접 하차");
 				calc();
+				
+			// 하차 값이 있을 경우
 			} else {				
 				$('#myModal5').css('display','none');
 				$('#helpLoad').html("고객님이 직접 상차");
@@ -827,10 +835,13 @@ $('#checkHelp-btn').click(function(){
 				calc();
 			}
 		}
+		
+	// 상하차 선택하지 않으면
 	} else {
 		alert("상차 혹은 하차 둘중 하나를 필히 선택해주세요.");
 	}
 });
+
 var span3 = document.getElementById("modal-close3");
 span3.onclick = function() {
 	console.log($('#checkHelp1').val());

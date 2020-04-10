@@ -13,7 +13,7 @@ public class ReservationDao {
 	private SqlSessionTemplate sqlSession;
 	
 	public int insertReservation(Reservation r) {
-		return sqlSession.insert("reservationMapper.insertReservation",r);
+		return sqlSession.insert("reservationMapper_njh.insertReservation",r);
 	}
 	
 }
