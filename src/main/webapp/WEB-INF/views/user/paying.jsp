@@ -7,47 +7,58 @@
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>용달이 | 예약하기</title>
-    <!-- CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"/>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
-    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/paying.css"/>
-    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
-<body style="background: rgb(87,187,138); font-family: 'yg-jalnan';">
-	<div class="spinner11">
-	    <div class="double-bounce11 bounce11"><span class="bounce-span">뜰까?</span></div>
-	    <div class="double-bounce22 bounce11"><span class="bounce-span">뜬다!</span></div>
-	</div>
+<body style=" background: rgb(87,187,138);">
+
+<form id="payForm" action="pay.do" method="post">
+	<input name="capacity" type="hidden" value="${r.capacity}">
+	<input name="startAddr" type="hidden" value="${r.startAddr}">
+	<input name="endAddr" type="hidden" value="${r.endAddr}">
+	<input name="distance" type="hidden" value="${r.distance}">
+	<input name="phone1" type="hidden" value="${r.phone1}">
+	<input name="phone2" type="hidden" value="${r.phone2}">
+	<input name="rightLoad" type="hidden" value="${r.rightLoad}">
+	<input name="rightUnload" type="hidden" value="${r.rightUnload}">
+	<input name="startDate1" type="hidden" value="${stDate}">
+	<input name="startTime" type="hidden" value="${r.startTime}">
+	<input name="endDate1" type="hidden" value="${edDate}">
+	<input name="endTime" type="hidden" value="${r.endTime}">
+	<input name="helpLoad" type="hidden" value="${r.helpLoad}">
+	<input name="helpUnload" type="hidden" value="${r.helpUnload}">
+	<input name="luggage" type="hidden" value="${r.luggage}">
+	<input name="msg" type="hidden" value="${r.msg}">
+	<input id="amt" name="amount" type="hidden" value="${r.amount}">
+	<input id="payYN" name="payYN" type="hidden">
+	
+</form>
 	
 	<script>
-<%--     $(function(){
+     $(function(){
         var IMP = window.IMP; // 생략가능
         IMP.init('imp43236861'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
         var msg;
-        var payYN = "N";
-        
+        var payYN="N";
+        var amount = parseInt($('#amt').val());
         IMP.request_pay({
             pg : 'kakaopay',
             pay_method : 'card',
             merchant_uid : 'merchant_' + new Date().getTime(),
-            name : '<%=title%>',
-            amount : <%=totalPrice%>,
-            buyer_email : '<%=email%>',
-            buyer_name : '<%=name%>',
-            buyer_tel : '<%=phone%>'
-            //m_redirect_url : 'http://www.naver.com'
+            name : '예약페이지',
+            amount : amount
         }, function(rsp) {
             if ( rsp.success ) {
                 var msg = '결제가 완료되었습니다.';
-                payYN = "Y";
+                payYN="Y";
             } else {
                 var msg = '결제에 실패하였습니다.';
             }
+            $('#payYN').val(payYN);
             alert(msg);
-            location.href='/zzzzzzzzzzz/paySuccess?payYN='+payYN;
+            $('#payForm').submit();
         });
-    }); --%>
+    });
 	</script>
 </body>
 </html>
