@@ -54,8 +54,20 @@ public class MemberController {
 	/** 회원가입 페이지
 	 * @return
 	 */
+//	@RequestMapping("signUpView.me")
+//	public String signUpForm() {
+//		return "login&signUp/signUpForm";
+//	}
 	@RequestMapping("signUpView.me")
-	public String signUpForm() {
+	public String signUpForm(@ModelAttribute Member m, Model model) {
+//		logger.debug("로그인을 시도한 회원 아이디 : " + m.getPushEnabled());
+//		
+//		Member singUpMem = new Member();
+//		singUpMem.setPushEnabled('Y');
+//		logger.debug(singUpMem.toString());
+//		
+//		model.addAttribute("singUpMem", singUpMem);
+		
 		return "login&signUp/signUpForm";
 	}
 	
@@ -113,10 +125,10 @@ public class MemberController {
 		Date[] date = new Date[4];
 		String[] encPwdArr = new String[4];
 		
-		mList.add(new Member("admin@naver.com", "Admin!234", "관리자", "010-1111-1111", "관리자", "정상")); 
-		mList.add(new Member("mem01@naver.com", "Mem!234", "홍멤버", "010-2222-2222", "일반", "정상"));
-		mList.add(new Member("biz01@naver.com", "Biz!234", "김거상", "010-3333-3333", "사업자", "정상"));
-		mList.add(new Member("biz02@naver.com", "Biz!234", "최거상", "010-4444-4444", "사업자", "정상"));
+		mList.add(new Member("admin@naver.com", "Admin!234", "관리자", "010-1111-1111", "관리자", "정상", 'N')); 
+		mList.add(new Member("mem01@naver.com", "Mem!234", "홍멤버", "010-2222-2222", "일반", "정상", 'Y'));
+		mList.add(new Member("biz01@naver.com", "Biz!234", "김거상", "010-3333-3333", "사업자", "정상", 'N'));
+		mList.add(new Member("biz02@naver.com", "Biz!234", "최거상", "010-4444-4444", "사업자", "정상", 'N'));
 		
 		sDate[0] = "2020-03-10";
 		sDate[1] = "2020-03-18";
