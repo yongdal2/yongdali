@@ -23,7 +23,7 @@ public class MemberDao {
 	}
 
 	public int emailChk(String mId) {
-		return sqlSession.selectOne("memberMapper.emailChk", mId);
+		return sqlSession.selectOne("mamberMapper.emailChk", mId);
 	}
 	
 }

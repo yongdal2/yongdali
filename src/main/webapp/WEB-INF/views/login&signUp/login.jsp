@@ -15,6 +15,16 @@
 </head>
 
 <body>
+	<script>
+		// interceptor용 (메인페이지 예약하러가기 클릭 시) 
+		$(function(){
+			var msg = "<%= request.getAttribute("msg")%>";
+			if(msg != "null"){
+				alert(msg)
+			}
+		})
+	</script>	
+
     <!-- logo header -->
     <div class="header">
         <a href="home.do">

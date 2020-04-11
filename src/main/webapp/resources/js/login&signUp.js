@@ -59,7 +59,7 @@ $(document).ready(function(){
     $("input[type=password], input[type=email]").keyup(function(event){ 
         if (!(event.keyCode >=37 && event.keyCode<=40)) {
             var inputVal = $(this).val();
-            $(this).val(inputVal.replace(/[^a-zA-Z0-9#?!@$%^&*]/gi,''));
+            $(this).val(inputVal.replace(/[^a-zA-Z0-9#?!@$%^&*.]/gi,''));
 //            displayErrorMsg($('#pwdMsg'), "8~16자 영문 대 소문자, 숫자, 특수문자(#?!@$%^&*)를 사용하세요.");
         }
     });
@@ -125,8 +125,11 @@ $(document).ready(function(){
     					displayErrorMsg($("#pwdMsg"), '비밀번호가 틀렸습니다.');
     					$("#emailMsg").css("display","none");
     				}
-    			}, error : function(){
-    				location.href=""
+    			}
+    			, error : function(){
+	        		var msg = "로그인 중 에러 발생!";
+	        		location.href="error.ydl?msg="+msg;
+
     			}
     		})
     	}
@@ -198,7 +201,7 @@ $(document).ready(function(){
         }
     }
     
-    // 용달이 회원가입
+    // 용달이 회원가입 버튼
     $('#yongdaliSignUp').click(function(){
     	$('#pushEnabledForm').attr('action','signUpView.me');
     	if($('.chkPolicy:eq(1)').attr('checked') == "checked" && $('.chkPolicy:eq(2)').attr('checked') == "checked"){
@@ -258,7 +261,8 @@ $(document).ready(function(){
         		}
         	}
         	, error : function(){
-        		alert("이메일 중복검사중 에러 발생");
+        		var msg = "이메일 중복검사중 에러 발생"
+        		location.href="error.ydl?msg="+msg;
         	}
         })
     }

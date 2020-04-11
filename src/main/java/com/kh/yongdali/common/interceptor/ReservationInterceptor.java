@@ -19,7 +19,8 @@ public class ReservationInterceptor extends HandlerInterceptorAdapter {
 		
 		if(loginUser == null) {
 			request.setAttribute("msg", "로그인 후 예약 가능합니다.");
-			request.getRequestDispatcher("/loginView.me");
+			request.getRequestDispatcher("/WEB-INF/views/login&signUp/login.jsp").forward(request, response);
+			return false;
 		}
 		
 		return super.preHandle(request, response, handler);
