@@ -1,4 +1,70 @@
 $(document).ready(function(){
+	/*-- 공통  ----------------------------------------------*/
+    // focus legend
+    var $inputItem = $(".js-inputWrapper");
+    $inputItem.length && $inputItem.each(function () {
+        var $this = $(this),
+            $input = $this.find(".formRow--input"),
+            placeholderTxt = $input.attr("placeholder"),
+            $placeholder;
+
+        $input.after('<span class="placeholder">' + placeholderTxt + "</span>"),
+            $input.attr("placeholder", ""),
+            $placeholder = $this.find(".placeholder"),
+
+            $input.val().length ? $this.addClass("active") : $this.removeClass("active"),
+
+            $input.on("focusout", function () {
+                $input.val().length ? $this.addClass("active") : $this.removeClass("active");
+            }).on("focus", function () {
+                $this.addClass("active");
+            });
+    });
+	
+    // 정규표현식
+    function chk(re, val, selector, msg){
+        if(!re.test(val)){                
+            selector.css("display","block").html('<i class="fa fa-warning"></i>  ' + msg);
+            return false;
+        }
+        return true;
+    }
+
+    // 유효성검사 에러메시지 
+    function displayErrorMsg(selector, msg){
+        selector.css("display","block").html('<i class="fa fa-warning"></i>  ' + msg);
+    }
+    
+    // 비밀번호 Caps Lock
+    $(":password").keypress(function(e){
+        var keyCode = 0;
+        var shirftKey = false;
+        keyCode = e.keyCode;
+        shiftKey = e.shiftKey;
+        if(((keyCode >= 65 && keyCode <90) && !shiftKey) || ((keyCode >= 97 && keyCode <= 112) && shiftKey)){
+            displayErrorMsg($('#pwdMsg'), "Caps Lock이 켜져있습니다.")
+            displayErrorMsg($('#loginPwdMsg'), "Caps Lock이 켜져있습니다.")
+        }else{
+            $("#pwdMsg").css("display","none");
+            $("#loginPwdMsg").css("display","none");
+        }
+    })
+
+    // 비밀번호 CapslockMsg 제거 
+    $("input[type=password]").focusout(function(){
+        $("#pwdMsg").css("display","none");
+    })
+
+    // 비밀번호 영문만 입력
+    $("input[type=password]").keyup(function(event){ 
+        if (!(event.keyCode >=37 && event.keyCode<=40)) {
+            var inputVal = $(this).val();
+            $(this).val(inputVal.replace(/[^a-zA-Z0-9#?!@$%^&*]/gi,''));
+//            displayErrorMsg($('#pwdMsg'), "8~16자 영문 대 소문자, 숫자, 특수문자(#?!@$%^&*)를 사용하세요.");
+        }
+    });
+
+	
 	/*-- Navigation  ----------------------------------------------*/
 	$(".signUpView").click(function(){
 		location.href="policyView.me"
@@ -25,6 +91,8 @@ $(document).ready(function(){
 		location.href="#"
 	})
 	
+	
+	
 	/*-- 로그인페이지 ----------------------------------------------*/
     // 엔터시 로그인 클릭
 	$('#pwd, #mId').keypress(function(event){
@@ -34,14 +102,14 @@ $(document).ready(function(){
         }
     }); 
 	
-    $(".submitBtn").click(function(){
+    $("#loginBtn").click(function(){
     	var mId = $("input[type=email]").val();
     	var pwd = $("#pwd").val();
     	if(mId == "" ){
     		displayErrorMsg($("#emailMsg"), '이메일을 입력하세요.');
     	}else{
     		$.ajax({
-    			url : "login.do",
+    			url : "login.me",
     			data : {
     					 mId : mId,
     					 pwd : pwd
@@ -57,20 +125,25 @@ $(document).ready(function(){
     					displayErrorMsg($("#pwdMsg"), '비밀번호가 틀렸습니다.');
     					$("#emailMsg").css("display","none");
     				}
+    			}, error : function(){
+    				location.href=""
     			}
     		})
     	}
     })
     
-    /*-- 약관 동의 ----------------------------------------------*/
-    // 약관동의    
-        	var checked = '/yongdali/resources/images/login&signUp/checked-circle.png';
-    	var unchecked = '/yongdali/resources/images/login&signUp/unchecked-circle.png';
+    /*-- 약관 ----------------------------------------------*/
+    // 동의 체크    
+    var checked = '/yongdali/resources/images/login&signUp/checked-circle.png';
+    var unchecked = '/yongdali/resources/images/login&signUp/unchecked-circle.png';
+    
     $('#chkAll').on("click",function(){
         if($(this).attr('src') == unchecked) {	        	
         	$('.chkPolicy').attr('src',checked).attr('checked',true);
+        	$('input[name=pushEnabled]').val('Y') ;
         } else{
-        	$('.chkPolicy').attr('src',unchecked).attr('checked',false);	            
+        	$('.chkPolicy').attr('src',unchecked).attr('checked',false);	
+        	$('input[name=pushEnabled]').val('N');
         }
     });
    
@@ -93,27 +166,14 @@ $(document).ready(function(){
     $('.chkPolicy:eq(3)').click(function(){
         if($(this).attr('src') == unchecked) {
             $(this).attr('src',checked).attr('checked',true);
+            $('input[name=pushEnabled]').val('Y') ;
+            
         } else{
             $(this).attr('src',unchecked).attr('checked',false);
+            $('input[name=pushEnabled]').val('N');
         }
     });
-    // 용달이 회원가입
-    $('#yongdaliSignUp').click(function(){
-    	if($('.chkPolicy:eq(1)').attr('checked') == "checked" && $('.chkPolicy:eq(2)').attr('checked') == "checked"){
-    		if($('.chkPolicy:eq(3)').attr('checked') == "checked"){
-    			// TODO 히든값 주고, 그 key 값을 호출하는 방식으로 해볼 것 
-    			location.href= "";
-    		}else{
-    			location.href= "";
-    		}
-    		
-    			
-    	}else {
-    		alert("필수 약관에 동의해야합니다.")
-    	}
-    	
-    })
-
+    
     // 약관 모달
     $('#viewYondaliPolicy').click(function(){
         $('#yongdaliPolicy').css("display","block");
@@ -138,106 +198,103 @@ $(document).ready(function(){
         }
     }
     
+    // 용달이 회원가입
+    $('#yongdaliSignUp').click(function(){
+    	$('#pushEnabledForm').attr('action','signUpView.me');
+    	if($('.chkPolicy:eq(1)').attr('checked') == "checked" && $('.chkPolicy:eq(2)').attr('checked') == "checked"){
+    		$('#pushEnabledForm').trigger('submit');
+    	}else {
+    		alert("필수 약관에 동의해야합니다.")
+    	}
+    })
     
-    
-    
+
     /*-- 회원가입 ----------------------------------------------*/
-    // focus legend
-    var $inputItem = $(".js-inputWrapper");
-    $inputItem.length && $inputItem.each(function () {
-        var $this = $(this),
-            $input = $this.find(".formRow--input"),
-            placeholderTxt = $input.attr("placeholder"),
-            $placeholder;
-
-        $input.after('<span class="placeholder">' + placeholderTxt + "</span>"),
-            $input.attr("placeholder", ""),
-            $placeholder = $this.find(".placeholder"),
-
-            $input.val().length ? $this.addClass("active") : $this.removeClass("active"),
-
-            $input.on("focusout", function () {
-                $input.val().length ? $this.addClass("active") : $this.removeClass("active");
-            }).on("focus", function () {
-                $this.addClass("active");
-            });
-    });
-
     // 엔터 클릭 시 submit 막기
     $('form input').keydown(function(e) {
         if (e.keyCode == 13) {
             return false;
         }
     });
-
-    // 정규표현식
-    function chk(re, val, selector, msg){
-        if(!re.test(val)){                
-            selector.css("display","block").html('<i class="fa fa-warning"></i>  ' + msg);
-            return false;
-        }
-        return true;
-    }
-
-    // 유효성검사 에러메시지 
-    function displayErrorMsg(selector, msg){
-        selector.css("display","block").html('<i class="fa fa-warning"></i>  ' + msg);
-    }
-
-    // onsubmit 전체 유효성 검사
-    $("#sigInForm").submit(function(){
-        emailValidate();
-        verifyValidate();
-        pwdValidate();
-        nameValidate();
-        phoneValidate();
-
-        if($('.bizForm').css('display') == 'block'){
-            bizFormValidate();
-        }
-        
-        return false;
+    
+    // 이메일 체크(중복 및 유효성 검사)
+    $("#email").focusout(function(){
+    	if(emailValidate() == true){
+    		emailDupChk();
+    	}
     })
-
+    
     // 이메일 유효성 검사
     function emailValidate(){ 
-        let emailVal = $("input[name=email]").val();  
-        let idDup = 0;
-
-        // 이메일 중복 체크용 ajax
-        /* $.ajax({
-            url : "/final/idDup.me",
-            type : "get",
-            data : {
-                email : $("input[name=email]").val()
-            },
-            success : function(result){
-                console.log(result);
-                idDup = result;
-            },
-            error : function(){
-                alert("아이디 중복 체크 실패!");
-            }
-        }) */
-
+        let emailVal = $("#email").val();  
+        console.log(emailVal);
         // 이메일 미입력
         if (emailVal == "" ){
             displayErrorMsg($("#emailMsg"), '이메일을 입력하세요.');
-            // return false;
+             return false;
         }
         // 이메일 정규표현식
         else if(!chk(/^[\a-z0-9_-]{5,20}@[\a-zA-Z]+(\.[\a-zA-Z]+){1,2}$/, emailVal, $("#emailMsg"), "5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.")){
-            // return false;
-        }
-        // TODO 이메일 중복 체크
-        else if(idDup > 0){
-            displayErrorMsg($("#emailMsg"), '이미 사용중이거나 탈퇴한 아이디입니다.');
-            // return false;    
-        }else{
+             return false;
+        } 
+        else{
             $("#emailMsg").css("display","none");
+            return true;
         }
-
     }
+    
+    // 이메일 중복 검사
+    function emailDupChk(){
+    	$.ajax({
+        	url : "emailDup.me",
+        	type : "get",
+        	data : { mId : $('#email').val() },
+        	success : function(result){
+        		if(result == "exist" ){
+        			displayErrorMsg($("#emailMsg"), '이미 사용중이거나 탈퇴한 아이디입니다.');
+        		}else{
+        			$("#emailMsg").css("display","none");
+        			return true;
+        		}
+        	}
+        	, error : function(){
+        		alert("이메일 중복검사중 에러 발생");
+        	}
+        })
+    }
+
+
+    
+    // '가입하기' 버튼 클릭 시 '전체 유효성 검사' 후 submit
+    $('#signUpBtn').click(function(){
+    	if(emailValidate() == true && emailDupChk() == true){
+    		$('#sigInForm').trigger('submit');
+    	};
+    });
+    
+
+    
+    
+    
+    
+    
+    /*-- 회원가입 ----------------------------------------------*/
+    // onsubmit 전체 유효성 검사
+//    $("#sigInForm").submit(function(){
+//        emailValidate();
+//        verifyValidate();
+//        pwdValidate();
+//        nameValidate();
+//        phoneValidate();
+//
+//        if($('.bizForm').css('display') == 'block'){
+//            bizFormValidate();
+//        }
+//        
+//        return false;
+//    })
+    
+
 
     // 인증번호 유효성 검사
     function verifyValidate(){
@@ -342,35 +399,6 @@ $(document).ready(function(){
         }
     }
 
-    // 비밀번호 Caps Lock
-    $(":password").keypress(function(e){
-        var keyCode = 0;
-        var shirftKey = false;
-        keyCode = e.keyCode;
-        shiftKey = e.shiftKey;
-        if(((keyCode >= 65 && keyCode <90) && !shiftKey) || ((keyCode >= 97 && keyCode <= 112) && shiftKey)){
-            displayErrorMsg($('#pwdMsg'), "Caps Lock이 켜져있습니다.")
-            displayErrorMsg($('#loginPwdMsg'), "Caps Lock이 켜져있습니다.")
-        }else{
-            $("#pwdMsg").css("display","none");
-            $("#loginPwdMsg").css("display","none");
-        }
-    })
-
-    // 비밀번호 CapslockMsg 제거 
-    $("input[type=password]").focusout(function(){
-        $("#pwdMsg").css("display","none");
-    })
-
-    // 비밀번호 영문만 입력
-    $("input[type=password]").keyup(function(event){ 
-        if (!(event.keyCode >=37 && event.keyCode<=40)) {
-            var inputVal = $(this).val();
-            $(this).val(inputVal.replace(/[^a-zA-Z0-9#?!@$%^&*]/gi,''));
-//            displayErrorMsg($('#pwdMsg'), "8~16자 영문 대 소문자, 숫자, 특수문자(#?!@$%^&*)를 사용하세요.");
-        }
-    });
-
     // 비밀번호 확인
     $('.pwdWrap i').on('click',function(){
         $('.pwdWrap input').toggleClass('showPwd');
@@ -422,6 +450,7 @@ $(document).ready(function(){
         $("input[name=phone]").val(phone);
     });
 
+    /*-- 사업자 ----------------------------------------------*/
     // 사업자 또는 일반회원으로 가입하기
     $('#slecBiz').click(function(){
         if($('#slecBiz img').attr('alt') == '더하기'){

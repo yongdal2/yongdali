@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -55,18 +56,23 @@ public class MemberController {
 	 * @return
 	 */
 //	@RequestMapping("signUpView.me")
-//	public String signUpForm() {
-//		return "login&signUp/signUpForm";
-//	}
-	@RequestMapping("signUpView.me")
-	public String signUpForm(@ModelAttribute Member m, Model model) {
-//		logger.debug("로그인을 시도한 회원 아이디 : " + m.getPushEnabled());
+//	public String signUpForm(@ModelAttribute Member m, Model model) {
+//		logger.debug("푸시 알림 동의 : " + m.getPushEnabled());
 //		
 //		Member singUpMem = new Member();
 //		singUpMem.setPushEnabled('Y');
 //		logger.debug(singUpMem.toString());
 //		
 //		model.addAttribute("singUpMem", singUpMem);
+//		
+//		return "login&signUp/signUpForm";
+//	}
+	
+	@RequestMapping("signUpView.me")
+	public String signUpForm(@RequestParam("pushEnabled") char pushEnabled, Model model) {
+		logger.debug("푸시 알림 동의 : " + pushEnabled);
+		
+		model.addAttribute("pushEnabled", pushEnabled);
 		
 		return "login&signUp/signUpForm";
 	}
@@ -77,7 +83,7 @@ public class MemberController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="login.do", method=RequestMethod.POST)
+	@RequestMapping(value="login.me", method=RequestMethod.POST)
 	public String memberLogin(@ModelAttribute Member m, Model model) {
 		logger.debug("로그인을 시도한 회원 아이디 : " + m.getmId());
 		Member loginUser = mService.loginMember(m); 
@@ -111,6 +117,26 @@ public class MemberController {
 		status.setComplete();
 		
 		return "redirect:home.do";
+	}
+	
+	@RequestMapping("insert.me")
+	public String insertMember(@ModelAttribute Member m) {
+		logger.debug(m.toString());
+		
+		return "login&signUp/login";
+	}
+	
+	@ResponseBody
+	@RequestMapping("emailDup.me")
+	public String emailDupChk(@RequestParam("mId") String mId) {
+		logger.debug("가입 요청 email" + mId);
+		
+		int result = mService.emailChk(mId);
+		if(result > 0) {
+			return "exist";
+		}else {
+			return "available";
+		}
 	}
 	
 	/** 샘플데이터

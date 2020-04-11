@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><!-- warning icon -->
     <link rel="stylesheet" href="${contextPath}/resources/css/login&signUp.css">    
     <script src='https://kit.fontawesome.com/a076d05399.js'></script><!-- eye icon -->
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
     <script src="${contextPath}/resources/js/login&signUp.js"></script>
     
 </head>
@@ -30,7 +30,7 @@
                     <!-- 이메일 -->
                     <div class="emailWrap">
                         <div class="formRow--input-wrapper js-inputWrapper">
-                            <input type="email" class="formRow--input js-input eng" name="email"placeholder="이메일" maxlength="50">
+                            <input type="email" id="email" class="formRow--input js-input eng" name="mId" placeholder="이메일" maxlength="50">
                         </div>
                         <div id="emailMsg" class="msgBox"></div>
                         <div class="formRow--input-wrapper js-inputWrapper" id="verifyWrap">
@@ -73,6 +73,10 @@
                         </div>
                     </div>
                     <div id="phoneMsg" class="msgBox" ></div>
+                    <!-- Push 알림 설정 -->
+                    <input type="hidden" name="pushEnabled" value="${ pushEnabled }">
+                    
+                    <!-- (사업자)기사 정보 -->
                     <hr>
                     <div class="bizRow" id="slecBiz">
                         <img src="${contextPath}/resources/images/login&signUp/round-add.svg" alt="더하기">
@@ -126,7 +130,7 @@
                 </div>
             </div>
             <div class="btnArea">
-                <button type="submit" class="submitBtn">가입하기</button>
+                <button type="button" class="submitBtn" id="signUpBtn">가입하기</button>
             </div>
         </form>
     </div>

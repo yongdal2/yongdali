@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="btnArea">
-                <button type="button" class="submitBtn">로그인</button>
+                <button type="button" class="submitBtn" id="loginBtn">로그인</button>
             </div>
         <!-- </form> -->
         <div class="forgotSignIn">
