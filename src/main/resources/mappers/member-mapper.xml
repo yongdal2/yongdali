@@ -14,14 +14,6 @@
 		<result property="enrollDate" column="ENROLLDATE"/>
 	</resultMap>
 	
-	<!-- 로그인 -->
-	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
-		SELECT *
-		FROM MEMBER
-		WHERE M_ID = #{mId}
-		  AND M_STATUS = '정상'
-	</select>
-
 	<!-- 샘플 데이터 -->
 	<insert id="insertSampleMembers" parameterType="java.util.List">
 		INSERT INTO MEMBER(M_NO, M_ID, PWD, NAME, PHONE, M_SORT, M_STATUS, PUSH_ENABLED, ENROLLDATE)
@@ -39,5 +31,21 @@
 			FROM DUAL
 		</foreach>
 		) A
-	</insert>
+	</insert>	
+	
+	<!-- 로그인 -->
+	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
+		SELECT *
+		FROM MEMBER
+		WHERE M_ID = #{mId}
+		  AND M_STATUS = '정상'
+	</select>
+
+	<!-- 이메일 중복검사 -->
+	<select id="emailChk" resultType="_int">
+		SELECT COUNT(*) 
+		FROM MEMBER
+		WHERE M_ID = #{mId}
+	</select>
+	
 </mapper>     

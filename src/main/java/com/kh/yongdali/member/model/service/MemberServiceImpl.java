@@ -26,6 +26,6 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int emailChk(String mId) {
-		return 1;
+		return mDao.emailChk(mId);
 	}
 }

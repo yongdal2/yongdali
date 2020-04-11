@@ -56,7 +56,7 @@ $(document).ready(function(){
     })
 
     // 비밀번호 영문만 입력
-    $("input[type=password]").keyup(function(event){ 
+    $("input[type=password], input[type=email]").keyup(function(event){ 
         if (!(event.keyCode >=37 && event.keyCode<=40)) {
             var inputVal = $(this).val();
             $(this).val(inputVal.replace(/[^a-zA-Z0-9#?!@$%^&*]/gi,''));
