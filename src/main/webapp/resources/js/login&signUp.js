@@ -213,6 +213,7 @@ $(document).ready(function(){
     
 
     /*-- 회원가입 ----------------------------------------------*/
+    /*-- 유효성 검사 이벤트 선언 -------------------*/
     // 엔터 클릭 시 submit 막기
     $('form input').keydown(function(e) {
         if (e.keyCode == 13) {
@@ -227,10 +228,49 @@ $(document).ready(function(){
     	}
     })
     
+    // 비밀번호 입력 시 유효성 검사
+    $('#signUpPwd').focusout(function(){
+    	pwdValidate();
+    })
+    
+    $('#signUpPwdChk').focusout(function(){
+    	pwdChkValidate();
+    })
+    
+    $('input[name=name]').focusout(function(){
+    	nameValidate();
+    })
+    
+    $('input[name=phone]').focusout(function(){
+    	phoneValidate();
+    })
+    
+    // '가입하기' 버튼 클릭 시 '전체 유효성 검사' 후 submit
+    $('#signUpBtn').click(function(){
+    	// 에러메시지 노출용
+    	if(emailValidate() == true){
+    		emailDupChk();
+    	};
+    	
+    	if(pwdValidate() == true){
+    		pwdChkValidate();
+    	};
+    	
+    	nameValidate();
+    	phoneValidate();
+    	
+    	// 전체 유효성 검사 후 제출용
+    	if(emailValidate() == true && emailDupChk() == true 
+    		&& pwdValidate() == true && pwdChkValidate() == true 
+    		&& nameValidate() == true && phoneValidate() == true){
+    		$('#sigInForm').trigger('submit');
+    	};
+    });
+    
+    /*-- 함수 선언 -------------------*/
     // 이메일 유효성 검사
     function emailValidate(){ 
         let emailVal = $("#email").val();  
-        console.log(emailVal);
         // 이메일 미입력
         if (emailVal == "" ){
             displayErrorMsg($("#emailMsg"), '이메일을 입력하세요.');
@@ -255,6 +295,7 @@ $(document).ready(function(){
         	success : function(result){
         		if(result == "exist" ){
         			displayErrorMsg($("#emailMsg"), '이미 사용중이거나 탈퇴한 아이디입니다.');
+        			return false;
         		}else{
         			$("#emailMsg").css("display","none");
         			return true;
@@ -266,41 +307,8 @@ $(document).ready(function(){
         	}
         })
     }
-
-
     
-    // '가입하기' 버튼 클릭 시 '전체 유효성 검사' 후 submit
-    $('#signUpBtn').click(function(){
-    	if(emailValidate() == true && emailDupChk() == true){
-    		$('#sigInForm').trigger('submit');
-    	};
-    });
-    
-
-    
-    
-    
-    
-    
-    /*-- 회원가입 ----------------------------------------------*/
-    // onsubmit 전체 유효성 검사
-//    $("#sigInForm").submit(function(){
-//        emailValidate();
-//        verifyValidate();
-//        pwdValidate();
-//        nameValidate();
-//        phoneValidate();
-//
-//        if($('.bizForm').css('display') == 'block'){
-//            bizFormValidate();
-//        }
-//        
-//        return false;
-//    })
-    
-
-
-    // 인증번호 유효성 검사
+    // TODO 인증번호 유효성 검사
     function verifyValidate(){
         let veriNo = $("input[name=verify]").val();  
 
@@ -317,57 +325,70 @@ $(document).ready(function(){
 
         // }
         // return true;
-
-    }
-
+    }    
+    
     // 비밀번호 유효성 검사
     function pwdValidate(){
-        let pwdVal = $("input[name=pwd]").val();
-        let pwdChkVal = $("input[name=pwdChk]").val()
-
+        let pwdVal = $("#signUpPwd").val();
+        
         // 비밀번호 미입력
         if(pwdVal == ""){
             displayErrorMsg($('#pwdMsg'), "비밀번호를 입력하세요.")
-            // return false;
+             return false;
         }
 
         // 비밀번호 정규표현식 
         else if(!chk(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*]).{8,16}$/, pwdVal, $("#pwdMsg"), "8~16자 영문 대 소문자, 숫자, 특수문자(#?!@$%^&*)를 사용하세요.")){
             // (?=            -->  positive lookahed(전방 탐색) : Matches a group after 'the main expression' without including it in the result
-            //                          TODO what is the main expression? 
             // .*?            -->  non-greedy : will search for a match using as few characters as possible
             // (?=.*?[A-Z])   -->  A-Z 중 하나 이상
             // .              -->  wildcard : Matches any character cept line breaks
             // {8,20}         -->  8자 이상 20자 이하
-        }    
-
+        	return false;
+        } else{
+            $("#pwdMsg").css("display","none");
+            return true;
+        }   
+    }
+    
+    // 비밀번호 확인 유효성 검사
+    function pwdChkValidate(){
+    	let pwdVal = $("#signUpPwd").val();
+    	let pwdChkVal = $("#signUpPwdChk").val();
+    	
         // 비밀번호 확인 미입력
-        else if(pwdChkVal == ""){
+        if(pwdChkVal == ""){
             displayErrorMsg($('#pwdMsg'), "비밀번호를 확인하세요.")
-            // return false;
+             return false;
         }
-
         // 비밀번호 불일치 
         else if(pwdVal != pwdChkVal){
             displayErrorMsg($('#pwdMsg'), "비밀번호가 일치하지 않습니다.")
-            // return false;
+             return false;
+        }        
+        // 비밀번호 정규표현식 
+        else if(!chk(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*]).{8,16}$/, pwdChkVal, $("#pwdMsg"), "8~16자 영문 대 소문자, 숫자, 특수문자(#?!@$%^&*)를 사용하세요.")){
+        	return false;
         }else{
             $("#pwdMsg").css("display","none");
+            return true;
         }
-        // return true;
+    	
     }
-
+    
     // 이름 유효성 검사
     function nameValidate(){
         // 이름 미입력
         if($('input[name=name]').val() == ""){
-            displayErrorMsg($('#nameMsg'), "이름을 입력하세요.(한글 두자 이상)")
+            displayErrorMsg($('#nameMsg'), "이름을 입력하세요.(한글 두자 이상)");
+            return false;
         }
         // 이름 정규표현식
         else if(!chk(/[가-힣]{2,}/, $('input[name=name]').val(), $('#nameMsg'), "한글 두자 이상 입력하세요.")){
-
+        	return false;
         }else{
             $('#nameMsg').css('display','none');
+            return true;
         }
     }
 
@@ -376,34 +397,16 @@ $(document).ready(function(){
         // 폰번호 미입력
         if($('input[name=phone]').val() == ""){
             displayErrorMsg($('#phoneMsg'), "휴대폰 번호를 입력하세요.")
+            return false;
         }else{
             $('#phoneMsg').css('display','none');
+            return true;
         }
     }
-
-    // 사업자 정보 유효성 검사
-    function bizFormValidate(){
-        // 톤수 미입력
-        if($('select[name=carCapcity]').val() == ""){
-            displayErrorMsg($('#bizFormMsg1'), "톤수를 선택하세요.");
-        }
-        // 차종 미입력
-        else if($('select[name=carType]').val() == ""){
-            displayErrorMsg($('#bizFormMsg1'), "차종을 선택하세요.");
-        }
-        // 차량번호 미입력
-        else if($('input[name=carNo]').val() == ""){
-            displayErrorMsg($('#bizFormMsg1'), "차량번호를 입력하세요.");
-        }
-        // 차량번호 정규표현식
-        else if(!chk(/[가-힣0-9]{7,}/, $('input[name=carNo]').val(), $('#bizFormMsg1'), "차량번호를 정확히 입력하세요.")){
-        }
-        else{
-            $('#bizFormMsg1').css('display','none');
-        }
-    }
-
-    // 비밀번호 확인
+    
+    
+    /*-- 기타 기능 이벤트 선언 -------------------*/
+    // 비밀번호 보기
     $('.pwdWrap i').on('click',function(){
         $('.pwdWrap input').toggleClass('showPwd');
         if($('.pwdWrap input').hasClass('showPwd')){
@@ -452,7 +455,10 @@ $(document).ready(function(){
             phone += number.substr(7);
         }
         $("input[name=phone]").val(phone);
-    });
+    });   
+
+    
+    
 
     /*-- 사업자 ----------------------------------------------*/
     // 사업자 또는 일반회원으로 가입하기
@@ -501,6 +507,28 @@ $(document).ready(function(){
         $('.ezDdUH').css('display','none');
         $('.fGXWzu').css('display','block');
     })
+    
+    // 사업자 정보 유효성 검사
+    function bizFormValidate(){
+        // 톤수 미입력
+        if($('select[name=carCapcity]').val() == ""){
+            displayErrorMsg($('#bizFormMsg1'), "톤수를 선택하세요.");
+        }
+        // 차종 미입력
+        else if($('select[name=carType]').val() == ""){
+            displayErrorMsg($('#bizFormMsg1'), "차종을 선택하세요.");
+        }
+        // 차량번호 미입력
+        else if($('input[name=carNo]').val() == ""){
+            displayErrorMsg($('#bizFormMsg1'), "차량번호를 입력하세요.");
+        }
+        // 차량번호 정규표현식
+        else if(!chk(/[가-힣0-9]{7,}/, $('input[name=carNo]').val(), $('#bizFormMsg1'), "차량번호를 정확히 입력하세요.")){
+        }
+        else{
+            $('#bizFormMsg1').css('display','none');
+        }
+    }
 });
 
 

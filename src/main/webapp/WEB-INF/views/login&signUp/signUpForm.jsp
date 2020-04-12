@@ -42,11 +42,11 @@
                     <!-- 비밀번호 -->
                     <div class="pwdWrap" >
                         <div class="formRow--input-wrapper js-inputWrapper pwd">
-                            <input type="password" class="formRow--input js-input" name="pwd" 
+                            <input type="password" class="formRow--input js-input" id="signUpPwd" name="pwd" 
                                     placeholder="비밀번호" maxlength="16">
                         </div>
                         <div class="formRow--input-wrapper js-inputWrapper pwd">
-                            <input type="password" class="formRow--input js-input" name="pwdChk" 
+                            <input type="password" class="formRow--input js-input" id="signUpPwdChk" name="pwdChk" 
                                     placeholder="비밀번호 확인" maxlength="16">
                         </div>                        
                         <i class='far fa-eye-slash' id="showPwd"></i>

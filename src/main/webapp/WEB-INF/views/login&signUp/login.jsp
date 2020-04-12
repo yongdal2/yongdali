@@ -15,8 +15,8 @@
 </head>
 
 <body>
+	<!-- interceptor용 (메인페이지 예약하러가기 클릭 시) -->
 	<script>
-		// interceptor용 (메인페이지 예약하러가기 클릭 시) 
 		$(function(){
 			var msg = "<%= request.getAttribute("msg")%>";
 			if(msg != "null"){
