@@ -51,7 +51,7 @@ COMMENT ON COLUMN MEMBER.ENROLLDATE IS '가입일';
 CREATE TABLE DRIVER(
     D_NO VARCHAR2(50) /* 기사(사업자) 번호 */,
     D_M_NO VARCHAR2(50) /* 회원번호(FK) */,
-    CAPACITY NUMBER(10) /* 차량 톤수 */,
+    CAPACITY NUMBER(2,1) /* 차량 톤수 */,
     TYPE VARCHAR2(17) /* 차종 */ ,
     CAR_NO VARCHAR2(17) /* 차량번호 */,
     ID_IMG_ORIGIN VARCHAR2(300) /* 증명사진 원명*/,
@@ -99,7 +99,7 @@ INCREMENT BY 1
 NOCYCLE
 NOCACHE;
 
-/*
+
 ------------------------------- Insert -------------------------------------
 -- MEMBER
 INSERT INTO MEMBER VALUES('M' || SEQ_MNO.NEXTVAL, 'admin@naver.com', 'admin', '유승제', '010-1111-1111', '관리자', '정상', 'N', '2020-03-10'); 
@@ -107,12 +107,13 @@ INSERT INTO MEMBER VALUES('M' || SEQ_MNO.NEXTVAL, 'mem01@naver.com', 'mem01', '�
 INSERT INTO MEMBER VALUES('M' || SEQ_MNO.NEXTVAL, 'biz01@naver.com', 'biz01', '김거상', '010-3333-3333', '사업자', '정상', 'N', '2020-03-18'); 
 INSERT INTO MEMBER VALUES('M' || SEQ_MNO.NEXTVAL, 'biz02@naver.com', 'biz01', '최거상', '010-4444-4444', '사업자', '정상', 'N','2020-03-19'); 
 
+
 -- DRIVER
 INSERT INTO DRIVER VALUES('D' || SEQ_DNO.NEXTVAL, 'M3', 1, '카고', '01가1111', 'idImg1.png','yongdali_20200401_174203821','carImg1.png','yongdali_20200401_174203842');
 INSERT INTO DRIVER VALUES('D' || SEQ_DNO.NEXTVAL, 'M4', 1.4, '호루', '02가2222', 'idImg2.png', 'yongdali_20200402_174203821','carImg2.png', 'yongdali_20200402_174203842');
 
-*/                        
+                    
                   
-COMMIT;                        
+--COMMIT;                        
 --SELECT * FROM MEMBER;
 --SELECT * FROM DRIVER;
