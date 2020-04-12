@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class Member {
 
+	private String mNo;
 	private String mId;
 	private String pwd;
 	private String mName;
@@ -43,6 +44,14 @@ public class Member {
 		this.pushEnabled = pushEnabled;
 	}
 
+	public String getmNo() {
+		return mNo;
+	}
+
+	public void setmNo(String mNo) {
+		this.mNo = mNo;
+	}	
+	
 	public String getmId() {
 		return mId;
 	}
@@ -109,7 +118,8 @@ public class Member {
 
 	@Override
 	public String toString() {
-		return "Member [mId=" + mId + ", pwd=" + pwd + ", mName=" + mName + ", phone=" + phone + ", mSort=" + mSort
-				+ ", mStatus=" + mStatus + ", pushEnabled=" + pushEnabled + ", enrollDate=" + enrollDate + "]";
-	}	
+		return "Member [mNo=" + mNo + ", mId=" + mId + ", pwd=" + pwd + ", mName=" + mName + ", phone=" + phone
+				+ ", mSort=" + mSort + ", mStatus=" + mStatus + ", pushEnabled=" + pushEnabled + ", enrollDate="
+				+ enrollDate + "]";
+	}
 }

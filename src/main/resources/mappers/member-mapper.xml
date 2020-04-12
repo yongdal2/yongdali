@@ -4,7 +4,9 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="memberMapper">
 	<resultMap type="Member" id="memberResultSet">
-		<id property="mId" column="M_ID"/>
+		<id property="mNo" column="M_NO"/>
+		<result property="mId" column="M_ID"/>
+		<!-- <id property="mId" column="M_ID"/> -->
 		<result property="pwd" column="PWD"/>
 		<result property="mName" column="NAME"/>
 		<result property="phone" column="PHONE"/>
