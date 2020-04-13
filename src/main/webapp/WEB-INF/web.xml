@@ -33,6 +33,9 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
+	<!-- 웹소켓용 추가 -->
+  	<async-supported>true</async-supported>
+  	
 	<!-- 한글 깨짐 방지 인코팅 -->
 	<!-- 직접 필터를 만들어서 등록해도 되지만, 스프링에서 인코딩용 필터를 제공하고 있기 때문에 web.xml에 등록 후 사용 -->
 	<filter>
