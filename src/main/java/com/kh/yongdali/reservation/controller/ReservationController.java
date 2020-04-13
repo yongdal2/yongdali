@@ -62,7 +62,7 @@ public class ReservationController {
 									  @RequestParam("startDate1") String stDate,
 									  @RequestParam("endDate1") String edDate) throws ParseException {
 		// 차량크기, 거리, 결제금액 int로 변환하기
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		if(stDate != "") {
 			Date startDate = sdf.parse(stDate);
 			System.out.println(startDate);
