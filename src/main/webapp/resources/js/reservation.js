@@ -310,10 +310,6 @@ $(function(){
 
 
 
-
-
-
-
 /* 출발지,도착지 주소 검색 후 위경도 변환 */
 
 //모달 배경화면 생성
@@ -529,7 +525,6 @@ function preChargeFunc(){
 }
 
 
-
 /* 연락처 자릿수 자동 설정 */
 function inputPhoneNumber(obj) {
     var number = obj.value.replace(/[^0-9]/g, "");
@@ -599,21 +594,6 @@ $('#checkLoad1').click(function(){
 });
 
 
-
-
-// 출발지와 도착지 각각의 주소 붙여 input hidden에다가 담기
-function addAddr(){
-	var stAddr1 = $('#startAddr').val();
-	var stAddr2 = $('#startDetailAddr').val();
-	var edAddr1 = $('#endAddr').val();
-	var edAddr2 = $('#endDetailAddr').val();
-	$('#addStAddr').val(stAddr1+"-"+stAddr2);
-	$('#addEdAddr').val(edAddr1+"-"+edAddr2);
-	console.log(stAddr1+"-"+stAddr2);
-	console.log(edAddr1+"-"+edAddr2);
-}
-
-
 // 하차 예약시 날짜 선택시 변수에 담기
 function setEndDate(){
 	console.log($('#datepicker1').val());
@@ -634,8 +614,6 @@ function setEndDate(){
 		$('#book-YN').html("O");
 		$('#days').val(days);
 		console.log("히든에 들어갈 일수 : "+$('#days').val());
-		
-		addAddr();
 		calc();
 	}
 }
@@ -713,7 +691,6 @@ $("#checkLoad2").click(function(){
 		$('#book-YN').html("X");
 		$('#btwDay').html("X");
 		$('#days').val("0");
-		addAddr();
 	} else if($(this).prop("checked") == false) {    	  
 		$("#datepicker2").attr('disabled',false).css('background','white');
 		$("#sl4").attr('disabled',false).css('background','white');
@@ -894,8 +871,23 @@ span7.onclick = function() {
 	$('#myModal7').css('display','none');
 }
 
-$('#revform').submit(function(){
+
+
+//출발지와 도착지 각각의 주소 붙여 input hidden에다가 담기
+function addAddr(){
+	var stAddr1 = $('#startAddr').val();
+	var stAddr2 = $('#startDetailAddr').val();
+	var edAddr1 = $('#endAddr').val();
+	var edAddr2 = $('#endDetailAddr').val();
+	$('#addStAddr').val(stAddr1+","+stAddr2);
+	$('#addEdAddr').val(edAddr1+","+edAddr2);
+}
+
+
+// 예약하기 버튼
+$('#revForm').submit(function(){
 	if(confirm("결제 진행하시겠습니까?")){
+		addAddr();
 		return;
 	} else {
 		return false;

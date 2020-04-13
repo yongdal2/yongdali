@@ -50,6 +50,7 @@ public class ReservationController {
 			System.out.println(edDate);
 //			r.setEndDate(endDate);
 		}
+		System.out.println("차 옵션 : "+r.getType());
 		mv.addObject("stDate", stDate);
 		mv.addObject("edDate", edDate);
 		mv.addObject("r", r);
@@ -74,7 +75,7 @@ public class ReservationController {
 			System.out.println(endDate);
 			r.setEndDate(endDate);
 		}
-		
+		System.out.println("차 옵션2 : "+r.getType());
 		int result = rService.insertReservation(r);
 		
 		mv.setViewName("user/paySuccess");
