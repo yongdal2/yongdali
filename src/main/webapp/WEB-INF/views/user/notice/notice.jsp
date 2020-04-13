@@ -49,13 +49,7 @@
                             <th>작성자</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <c:forEach var="n" items="${ list }">
-                        	<c:url var="ndetail" value="uNdetail.no">
-                            		<c:param name="nNo" value="${n.nNo }"/>
-                            		<c:param name="currentPage" value="${pi.currentPage }"/>
-                            </c:url>
-                        </c:forEach>
+                        <tbody id="listBody">              
                         <%-- <c:forEach var="n" items="${ list }">                        
                         <tr>
                             <td>
@@ -68,14 +62,14 @@
                             <td>${ n.nCreateDate }</td>
                             <td>${ n.nWriter }</td>
                         </tr>
-                        </c:forEach>    --%>    
+                        </c:forEach>   --%> 
                         </tbody>                                 
                     </table>
                 </div>
                 <div class="pagination">
                     <span class="inner_paging"> 
                      <!-- 이전 -->
-                     <c:if test="${pi.currentPage eq 1 }">
+                     <%-- <c:if test="${pi.currentPage eq 1 }">
                      	<a>&laquo;</a>
                      </c:if>
                      <c:if test="${pi.currentPage ne 1 }">
@@ -132,14 +126,14 @@
 	                     	</c:url>
                      	</c:if>
                      	<a href="${after }">&raquo;</a>
-                     </c:if>
+                     </c:if> --%>
                     </span>
                 </div>
                 <div class="search_write" align="center">
-                    <form id="search-box" action="uNsearch.no">
+                    <div id="search-box" >
                         <input id="search-form" name="keyword" type="text" placeholder="Search">
-                        <button id="search-button" type="submit">검색</button>
-                    </form>
+                        <button id="search-button">검색</button>
+                    </div>
                     <!-- 관리자일 경우 뜨는 곳 -->
                     <c:if test="${loginUser.mId eq 'admin@naver.com'}">
 	                    <div class="admin_write">
@@ -155,13 +149,40 @@
 
     <script>
        	$(function(){
-       		noticeList();
+       		noticeList(1);
+       		
+       		$("#listBody").mouseenter(function(){
+       			$('.ndetail').click(function(){
+       				var nNo = $(this).parent().siblings(":eq(0)").val();
+       				var currentPage = $(".active").text();
+       				
+       				location.href="${contextPath}/uNdetail.no?nNo="+nNo+"&currentPage="+currentPage;
+       			})
+       		})
+       		
+       		$('#search-form').keypress(function(event){
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if(keycode == '13'){
+                	$('#search-button').trigger("click");
+                }
+            }); 
+       		
+       		$('#search-button').click(function(){
+       			searchList(1);
+        	});
+       		
+       		
+       		
        	});
        	
-       	function noticeList(){
+       	
+       	function noticeList(page){
        		$.ajax({
        			url:"uNoticeList.no",
        			dataType:"json",
+       			data:{
+       				currentPage:page
+       				},
        			success:function(data){
        				console.log(data);
        				
@@ -172,32 +193,159 @@
        				
        				for(var i in list){
        					var $tr = $("<tr>");
-       					var $nTitle = $("<td>").text(list[i].nTitle);
-       					var $nCreateDate = $("<td>").text(list[i].nCreateDate);
-       					var $nWriter = $("<td>").text(list[i].nWriter);
+       					var $td1 = $("<td>");
+       					var $td2 = $("<td>");
+       					var $td3 = $("<td>");
+       					var $nNo = list[i].nNo;
        					
-       					$tr.append($nTitle);
-       					$tr.append($nCreateDate);
-       					$tr.append($nWriter);
+       					var $a = $("<a class='ndetail'>").text(list[i].nTitle);
+       					var $hidden = $("<input type='hidden'>");
+       					
+       					$hidden.attr("value",$nNo);
+       					
+       					$td1.append($a);
+       					$td2.text(list[i].nCreateDate);
+       					$td3.text(list[i].nWriter);
+       					
+       					$tr.append($hidden);
+       					$tr.append($td1);
+       					$tr.append($td2);
+       					$tr.append($td3);
        					
        					$tableBody.append($tr);
        				}
        				
-       				$('.pagination').empty();
+       				$('.inner_paging').empty();
        				
        				var pi = data["pi"];
-       				var currentPage = data["currentPage"];
-       				var listCount = data["listCount"];
-       				var pageLimit = data["pageLimit"];
-       				var maxPage = data["maxPage"];
-       				var startPage = data["startPage"];
-       				var endPage = data["endPage"];
-       				var boardLimit = data["boardLimit"];
+       				var currentPage = pi["currentPage"];
+       				var listCount = pi["listCount"];
+       				var pageLimit = pi["pageLimit"];
+       				var maxPage = pi["maxPage"];
+       				var startPage = pi["startPage"];
+       				var endPage = pi["endPage"];
+       				var boardLimit = pi["boardLimit"];
        				
+       				console.log(startPage);
+       				console.log(endPage);
+       				console.log(currentPage);
+       				       
+       				/* 이전 */
+       				if(currentPage > 1){
+       					var $backPage = $("<a onclick='noticeList("+(currentPage -1)+");'>").html('&laquo;');
+       				}else{
+       					var $backPage = $("<a>").html('&laquo;');
+       				}
+       				$('.inner_paging').append($backPage);
        				
+       				/* 페이지 */
+       				for(var p =startPage; p<= endPage; p++){
+       					if(p==currentPage){
+       						var $pPage = $("<a class='active'>").text(p);
+       					}else{
+       						var $pPage = $("<a onclick='noticeList("+p+");'>").text(p);
+       					}
+       					$('.inner_paging').append($pPage);
+       				}
+       				
+       				/* 다음 */
+       				if(currentPage != maxPage){
+       					var $nextPage = $("<a onclick='noticeList("+(currentPage + 1)+");'>").html('&raquo;');       					
+       				}else{
+       					var $nextPage = $("<a>").html('&raquo;');
+       				}
+       			
+       				$('.inner_paging').append($nextPage);
        			}
        		})
        	};
+       	
+       	function searchList(page){
+       		$.ajax({
+       			url:"uNsearch.no",
+       			dataType:"json",
+       			data:{
+       				currentPage: page,
+       				keyword:$('#search-form').val()
+       			},
+       			success:function(data){
+       				console.log(data);
+       				
+       				$tableBody = $("#tbl tbody");
+       				$tableBody.html("");
+       				
+       				var list = data["list"];
+       				
+       				for(var i in list){
+       					var $tr = $("<tr>");
+       					var $td1 = $("<td>");
+       					var $td2 = $("<td>");
+       					var $td3 = $("<td>");
+       					var $nNo = list[i].nNo;
+       					
+       					var $a = $("<a class='ndetail'>").text(list[i].nTitle);
+       					var $hidden = $("<input type='hidden'>");
+       					
+       					$hidden.attr("value",$nNo);
+       					
+       					$td1.append($a);
+       					$td2.text(list[i].nCreateDate);
+       					$td3.text(list[i].nWriter);
+       					
+       					$tr.append($hidden);
+       					$tr.append($td1);
+       					$tr.append($td2);
+       					$tr.append($td3);
+       					
+       					$tableBody.append($tr);
+       				}
+       				
+       				$('.inner_paging').empty();
+       				
+       				var pi = data["pi"];
+       				var currentPage = pi["currentPage"];
+       				var listCount = pi["listCount"];
+       				var pageLimit = pi["pageLimit"];
+       				var maxPage = pi["maxPage"];
+       				var startPage = pi["startPage"];
+       				var endPage = pi["endPage"];
+       				var boardLimit = pi["boardLimit"];
+       				
+       				console.log(startPage);
+       				console.log(endPage);
+       				console.log(currentPage);
+       				       
+       				/* 이전 */
+       				if(currentPage > 1){
+       					var $backPage = $("<a onclick='searchList("+(currentPage -1)+");'>").html('&laquo;');
+       				}else{
+       					var $backPage = $("<a>").html('&laquo;');
+       				}
+       				$('.inner_paging').append($backPage);
+       				
+       				/* 페이지 */
+       				for(var p =startPage; p<= endPage; p++){
+       					if(p==currentPage){
+       						var $pPage = $("<a class='active'>").text(p);
+       					}else{
+       						var $pPage = $("<a onclick='searchList("+p+");'>").text(p);
+       					}
+       					$('.inner_paging').append($pPage);
+       				}
+       				
+       				/* 다음 */
+       				if(currentPage != maxPage){
+       					var $nextPage = $("<a onclick='searchList("+(currentPage + 1)+");'>").html('&raquo;');       					
+       				}else{
+       					var $nextPage = $("<a>").html('&raquo;');
+       				}
+       			
+       				$('.inner_paging').append($nextPage);
+       			}
+       		})
+       	};
+		
+       	
      </script>
 </body>
 </html>
