@@ -64,16 +64,24 @@ public class NoticeController {
 	
 	@RequestMapping(value="uNoticeMain.no")
 	public String userNoticeMainView() {
+//		int listCount = nService.userGetListCount();
+//		
+//		int pageLimit = 5;
+//		int boardLimit = 5;
+//		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,pageLimit,boardLimit );
+//		
+//		mv.addObject("pi",pi);
+//		mv.setViewName("user/notice/notice");
+		
 		return "user/notice/notice";
 	}
 	
 	@RequestMapping(value="uNoticeList.no")
-	public void userNoticeMain(HttpServletResponse response) throws JsonIOException, IOException {
+	public void userNoticeMain(HttpServletResponse response, int currentPage) throws JsonIOException, IOException {
 		int listCount = nService.userGetListCount();
 		
 		int pageLimit = 5;
 		int boardLimit = 5;
-		int currentPage = 1;
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,pageLimit,boardLimit );
 		ArrayList<Notice> list = nService.userSelectList(pi);
 		
@@ -490,27 +498,48 @@ public class NoticeController {
 	 * @param keyword
 	 * @param currentPage
 	 * @return
+	 * @throws IOException 
+	 * @throws JsonIOException 
 	 */
-	@RequestMapping("uNsearch.no")
-	public ModelAndView userNoticeSearch(ModelAndView mv, @RequestParam(value="keyword", required=false) String keyword, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage ) {
-		
-		System.out.println(currentPage);
-		
+//	@RequestMapping("uNsearch.no")
+//	public ModelAndView userNoticeSearch(ModelAndView mv, @RequestParam(value="keyword", required=false) String keyword, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage ) {
+//		
+//		System.out.println(currentPage);
+//		
+//		int listCount = nService.userSearchGetListCount(keyword);
+//		
+//		System.out.println(listCount);
+//		
+//		int pageLimit = 5;
+//		int boardLimit = 5;
+//		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,pageLimit,boardLimit );
+//		
+//		ArrayList<Notice> list = nService.userSearchSelectList(pi,keyword);
+//		
+//		mv.addObject("list",list);
+//		mv.addObject("pi",pi);
+//		mv.addObject("keyword",keyword);
+//		mv.setViewName("user/notice/notice");
+//		return mv;
+//	}
+	
+	@RequestMapping(value="uNsearch.no")
+	public void userNoticeSearch(HttpServletResponse response, int currentPage, String keyword) throws JsonIOException, IOException {
 		int listCount = nService.userSearchGetListCount(keyword);
-		
-		System.out.println(listCount);
 		
 		int pageLimit = 5;
 		int boardLimit = 5;
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,pageLimit,boardLimit );
-		
 		ArrayList<Notice> list = nService.userSearchSelectList(pi,keyword);
 		
-		mv.addObject("list",list);
-		mv.addObject("pi",pi);
-		mv.addObject("keyword",keyword);
-		mv.setViewName("user/notice/notice");
-		return mv;
+		response.setContentType("application/json; charset=utf-8");
+		
+		Map notice = new HashMap();
+		notice.put("list",list);
+		notice.put("pi",pi);
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(notice,response.getWriter());
 	}
 	
 	/**

@@ -373,7 +373,6 @@ $(document).ready(function(){
             $("#pwdMsg").css("display","none");
             return true;
         }
-    	
     }
     
     // 이름 유효성 검사
@@ -398,12 +397,17 @@ $(document).ready(function(){
         if($('input[name=phone]').val() == ""){
             displayErrorMsg($('#phoneMsg'), "휴대폰 번호를 입력하세요.")
             return false;
-        }else{
+        }
+        else if($('input[name=phone]').val().length < 12){
+            displayErrorMsg($('#phoneMsg'), "휴대폰 번호를 확인하세요.")
+            return false;
+        }
+        
+        else{
             $('#phoneMsg').css('display','none');
             return true;
         }
     }
-    
     
     /*-- 기타 기능 이벤트 선언 -------------------*/
     // 비밀번호 보기
@@ -432,22 +436,25 @@ $(document).ready(function(){
             var inputVal = $(this).val();
             $(this).val(inputVal.replace(/[^0-9]/gi,''));                
         } 
-
+        
         var number = $("input[name=phone]").val();
         var phone = "";
         if($("input[name=phone]").val().length < 4){
             return number;
-        } else if($("input[name=phone]").val().length < 7){
+        } 
+        else if($("input[name=phone]").val().length < 7){
             phone += number.substr(0, 3);
             phone += "-";
             phone += number.substr(3);
-        } else if($("input[name=phone]").val().length < 7){
+        } 
+        else if($("input[name=phone]").val().length < 7){
             phone += number.substr(0, 3);
             phone += "-";
             phone += number.substr(3, 3);
             phone += "-";
-            phone += number.substr(6);
-        } else{
+            phone += number.substr(7);
+        }      
+        else{
             phone += number.substr(0, 3);
             phone += "-";
             phone += number.substr(3, 4);
@@ -457,9 +464,6 @@ $(document).ready(function(){
         $("input[name=phone]").val(phone);
     });   
 
-    
-    
-
     /*-- 사업자 ----------------------------------------------*/
     // 사업자 또는 일반회원으로 가입하기
     $('#slecBiz').click(function(){
@@ -467,11 +471,13 @@ $(document).ready(function(){
             $('#slecBiz img').attr('src', 'resources/images/login&signUp/round-substract.svg').attr('alt','빼기');            
             $('#slecBiz div').text('일반회원으로 가입하기');
             $('.bizForm').show();
+            $('input[name=mSort]').val('사업자');
         }else{
             $('#slecBiz img').attr('src', 'resources/images/login&signUp/round-add.svg').attr('alt','더하기');
             $('#slecBiz div').text('사업자(기사)로 가입하기');
             $('.bizForm').hide();
             $('#bizFormMsg1').css("display","none");
+            $('input[name=mSort]').val('일반');
         }
     });
 
