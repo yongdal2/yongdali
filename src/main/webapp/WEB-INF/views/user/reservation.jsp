@@ -24,7 +24,7 @@
 	<c:import url="../common/home_nav.jsp"/>
 	
 	<!-- body -->
-	<form id="revform" action="rev.do" method="post">
+	<form id="revForm" action="rev.do" method="post">
 	    <div id="body-div" class="container">
 	        <div>
 	            <h2 style="font-family: 'yg-jalnan';">용달이 예약이요~</h2><hr style="border-color: black;">

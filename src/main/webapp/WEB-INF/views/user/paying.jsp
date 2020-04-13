@@ -14,6 +14,7 @@
 
 <form id="payForm" action="pay.do" method="post">
 	<input name="capacity" type="hidden" value="${r.capacity}">
+	<input name="type" type="hidden" value="${r.type}">
 	<input name="startAddr" type="hidden" value="${r.startAddr}">
 	<input name="endAddr" type="hidden" value="${r.endAddr}">
 	<input name="distance" type="hidden" value="${r.distance}">
