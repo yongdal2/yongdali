@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!DOCTYPE html>
 
@@ -50,24 +50,28 @@
 								<div class="col-xs-2 col-md-2">연락처</div>
 								<div class="col-xs-3 col-md-3">수정 · 삭제</div>
 							</div>
+							<c:forEach var="a" items="${ aList }">
 							<div class="row small"
 								style="border-bottom: 1px solid #dedede; padding: 10px;">
 								<div class="col-xs-2 col-md-2">
-									<span>회사</span> <br> <span>도로리</span>
+									<span>${ a.aPlace }</span> <br> <span>${ a.aName }</span>
 								</div>
 								<div class="col-xs-5 col-md-5">
-									<span>강남구 대치동 123-556로 24번지</span> <br> <span>123층
-										12호</span>
+									<c:forEach var="addr" items="${fn:split(a.aAddress, ',')}" varStatus="status">
+									<span>${ addr }</span>
+									<br>
+									</c:forEach>
 								</div>
 								<div class="col-xs-2 col-md-2">
-									<span>010-2711-1111</span>
+									<span>${ a.aPhone } </span>
 								</div>
 								<div class="col-xs-3 col-md-3">
 									<button class="btn btn-sm btn_ydl" data-toggle="modal"
-										data-target="#editAddr">수정</button>
+										data-target="#editAddr" onclick="">수정</button>
 									<button class="btn btn-sm">삭제</button>
 								</div>
 							</div>
+							</c:forEach>
 						</div>
 					</div>
 				</div>
@@ -223,8 +227,6 @@
                             <button type="submit" class="btn btn_ydl" data-dismiss="modal" style="margin: 20px 10px 0px 10px;">배송지 추가</button>
                         </div>
                         <div class="col-xs-12 col-md-12 text-center">
-                            <button type="button" class="btn" data-dismiss="modal" style="margin: 20px 10px 0px 10px; color: gray;">취소</button>
-                            <button type="submit" class="btn btn_ydl" data-dismiss="modal" style="margin: 20px 10px 0px 10px;">배송지 추가</button>
                         </div>
                     </div>
                 </div>
