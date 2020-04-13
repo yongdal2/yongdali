@@ -71,9 +71,6 @@
 							<script>
 							$(function(){
 								$("button[id^='editAddrBtn']").on("click",function(){
-									var aNo = $(this).val();
-									console.log(aNo);
-									
 									$.ajax({
 										url:"getEditAddr.myp",
 										data:{aNo:$(this).val()},
@@ -85,7 +82,6 @@
 											$("#edAdr_address").val(decodeURIComponent(data.aAddr1).replace(/\+/g, " "));
 											$("#edAdr_detail").val(decodeURIComponent(data.aAddr2).replace(/\+/g, " "));
 											$("#edPhone").val(decodeURIComponent(data.aPhone));
-											
 										},error:function(){
 											console.log("aj실패")
 										}
