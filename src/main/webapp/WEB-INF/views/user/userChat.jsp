@@ -105,13 +105,49 @@
         <div class="container">
             <div class="footer row">
                 <div class="col-xs-10 col-lg-11">
-                    <textarea placeholder="궁금하신 점이 무엇인가요?"></textarea>
+                    <textarea placeholder="궁금하신 점이 무엇인가요?" id="msgArea"></textarea>
                 </div>
                 <div class="col-xs-2 col-lg-1">
-                    <button class="sendBtn" type="submit"><img src="${contextPath }/resources/images/chat/send.png"></button>
+                    <button class="sendBtn" onclick="sendMessage"><img src="${contextPath }/resources/images/chat/send.png"></button>
+                	<button onclick="disconnect();">종료</button>
                 </div>
             </div>
         </div>
     </form>
+    <script>
+    	var ws = new WebSocket("ws://localhost:8888/yongdali/kh.do");
+    	var meMsg = $('.me>.message');
+    	var youMsg = $('.you>.message');
+    	
+    	
+    	ws.onopen = function(message){
+    		youMsg.value += "용달이에 오신걸 환영합니다.";
+    	};
+    	
+    	ws.onclose = function(message){
+    		youMsg.value += "용달이 채팅 종료";
+    	};
+    	
+    	ws.onerror = function(message){
+    		youMsg.value += "에러 발생";
+    	};
+    	
+    	ws.onmessage = function(message){
+    		youMsg.value += message.data
+    	};
+    	
+    	function sendMessage(){
+    		var message = document.getElementById("msgArea");
+    		
+    		meMsg.value += message.value;
+    		
+    		ws.send(message.value);
+    		
+    		message.value = "";
+    	}
+    	
+    	
+    	
+    </script>
 </body>
 </html>

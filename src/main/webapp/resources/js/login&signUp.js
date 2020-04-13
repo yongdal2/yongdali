@@ -228,6 +228,48 @@ $(document).ready(function(){
     	}
     })
     
+    // '인증번호 받기' 클릭시 TODO
+    $('#btn_sendVeriCode').click(function(){
+    	let emailVal = $("#email").val();  
+    	
+    	if(!chk(/^[\a-z0-9_-]{5,20}@[\a-zA-Z]+(\.[\a-zA-Z]+){1,2}$/, emailVal, $("#emailMsg"), "5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.")){
+//            return false;
+            
+    	} else{
+    		$.ajax({
+    			url : "emailVerify.me",
+    			type : "get",
+    			data : {email : emailVal},
+    			success : function(result){
+    				alert("입력하신 이메일로 인증번호를 전송하였습니다.")
+    		    	$(this).hide();
+    		    	$('.verifyBtn:eq(1), .verifyBtn:eq(2)').show();
+    				
+    			}, 
+    			error : function(){
+            		var msg = "이메일 인증 절차 진행 중 오류 발생";
+                	location.href="error.ydl?msg="+msg;
+            	}
+    		})
+    		
+    		
+
+    	}
+    	
+    	
+
+    })
+    
+    // 인증번호 '재전송' 
+    $('#btn_resend').click(function(){
+    	alert("입력하신 이메일로 인증번호를 재전송하였습니다.")
+    })
+    
+    // 인증번호 '확인' 
+    $('#btn_verify').click(function(){
+    	
+    })
+    
     // 비밀번호 입력 시 유효성 검사
     $('#signUpPwd').focusout(function(){
     	pwdValidate();
@@ -247,7 +289,7 @@ $(document).ready(function(){
     
     // '가입하기' 버튼 클릭 시 '전체 유효성 검사' 후 submit
     $('#signUpBtn').click(function(){
-    	// 에러메시지 노출용
+    	// 기본 정보 에러메시지 노출용
     	if(emailValidate() == true){
     		emailDupChk();
     	};
@@ -259,12 +301,27 @@ $(document).ready(function(){
     	nameValidate();
     	phoneValidate();
     	
-    	// 전체 유효성 검사 후 제출용
-    	if(emailValidate() == true && emailDupChk() == true 
-    		&& pwdValidate() == true && pwdChkValidate() == true 
-    		&& nameValidate() == true && phoneValidate() == true){
-    		$('#sigInForm').trigger('submit');
-    	};
+    	if($('input[name=mSort]').val() == '일반'){
+        	// 기본 정보 전체 유효성 검사 후 제출용
+        	if(emailValidate() == true && emailDupChk() == true 
+        		&& pwdValidate() == true && pwdChkValidate() == true 
+        		&& nameValidate() == true && phoneValidate() == true){
+        		$('#sigInForm').trigger('submit');
+        	};
+    	}else{
+        	// 사업자 정보 에러메시지 노출용
+    		carInfoValidate();
+    		
+    		
+    		// 사업자 정보 포함 전체 유효성 검사 후 제출용
+        	if(emailValidate() == true && emailDupChk() == true 
+        		&& pwdValidate() == true && pwdChkValidate() == true 
+        		&& nameValidate() == true && phoneValidate() == true
+        		&& bizFormValidate() == true){
+        		$('#sigInForm').trigger('submit');
+        	};
+    	}
+
     });
     
     /*-- 함수 선언 -------------------*/
@@ -302,7 +359,7 @@ $(document).ready(function(){
         		}
         	}
         	, error : function(){
-        		var msg = "이메일 중복검사중 에러 발생"
+        		var msg = "이메일 중복검사중 에러 발생";
         		location.href="error.ydl?msg="+msg;
         	}
         })
@@ -315,14 +372,14 @@ $(document).ready(function(){
         // 인증번호 미입력
         if(veriNo == ""){
             displayErrorMsg($('#veriMsg'), "인증번호를 입력하세요.")
-            // return false
+            return false
         }else{
             $("#veriMsg").css("display","none");
         }
 
         // TODO 인증번호 확인
         // else if{
-
+        	
         // }
         // return true;
     }    
@@ -515,25 +572,35 @@ $(document).ready(function(){
     })
     
     // 사업자 정보 유효성 검사
-    function bizFormValidate(){
+    function carInfoValidate(){
         // 톤수 미입력
         if($('select[name=carCapcity]').val() == ""){
             displayErrorMsg($('#bizFormMsg1'), "톤수를 선택하세요.");
+            return false;
         }
         // 차종 미입력
         else if($('select[name=carType]').val() == ""){
             displayErrorMsg($('#bizFormMsg1'), "차종을 선택하세요.");
+            return false;
         }
         // 차량번호 미입력
         else if($('input[name=carNo]').val() == ""){
             displayErrorMsg($('#bizFormMsg1'), "차량번호를 입력하세요.");
+            return false;
         }
         // 차량번호 정규표현식
         else if(!chk(/[가-힣0-9]{7,}/, $('input[name=carNo]').val(), $('#bizFormMsg1'), "차량번호를 정확히 입력하세요.")){
+        	return false;
         }
         else{
             $('#bizFormMsg1').css('display','none');
+            return true;
         }
+    }
+    
+    
+    function bizImgValidate(){
+    	
     }
 });
 

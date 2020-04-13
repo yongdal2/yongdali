@@ -43,6 +43,20 @@ public class Member {
 		this.mStatus = mStatus;
 		this.pushEnabled = pushEnabled;
 	}
+	
+	public Member(String mNo, String mId, String pwd, String mName, String phone, String mSort, String mStatus,
+			char pushEnabled, Date enrollDate) {
+		super();
+		this.mNo = mNo;
+		this.mId = mId;
+		this.pwd = pwd;
+		this.mName = mName;
+		this.phone = phone;
+		this.mSort = mSort;
+		this.mStatus = mStatus;
+		this.pushEnabled = pushEnabled;
+		this.enrollDate = enrollDate;
+	}
 
 	public String getmNo() {
 		return mNo;

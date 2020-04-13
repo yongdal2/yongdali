@@ -119,6 +119,19 @@ public class MemberController {
 		return "redirect:home.do";
 	}
 	
+	/** 회원가입_이메일 인증 TODO
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("emailVerify.me")
+	public String emailVerify() {
+		return "good";
+	}
+	
+	/** 회원가입
+	 * @param m
+	 * @return
+	 */
 	@RequestMapping("insert.me")
 	public String insertMember(@ModelAttribute Member m) {
 		logger.debug(m.toString());

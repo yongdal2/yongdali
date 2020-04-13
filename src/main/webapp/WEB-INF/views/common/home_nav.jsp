@@ -38,7 +38,7 @@
 			<div class="col-lg-4">
 				<ul class="nav navbar-nav navbar-center" style="margin-left:50px;">
 					<li class="nav-item"><a class="nav-link" href="#" style="color: black; font-weight: bold">요금조회</a></li>
-					<li class="nav-item"><a class="nav-link" href="#" style="color: black; font-weight: bold">차량안내</a></li>
+					<li class="nav-item"><a class="nav-link" href="information.ydl" style="color: black; font-weight: bold">차량안내</a></li>
 					<li class="nav-item"><a class="nav-link" href="uNoticeMain.no" style="color: black; font-weight: bold">고객센터</a></li>
 				</ul>
 			</div>
@@ -63,7 +63,7 @@
 						</c:if>
 						<c:if test='${loginUser.mSort ne ("관리자")}'>
 							<li class="nav-item">
-								<button class="btn btn-default navbar-btn myPage" style="background: rgb(87,187,138); color: white;">마이페이지</button>
+								<button class="btn btn-default navbar-btn myPage" style="background: rgb(87,187,138); color: white;" onclick="location.href='addrBook.myp'">마이페이지</button>
 							</li>
 						</c:if>
 						<li class="nav-item">
