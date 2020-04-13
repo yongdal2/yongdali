@@ -14,27 +14,36 @@
 </head>
 
 <body>
+
    <!-- Navigation -->
 	<%@ include file="../common/nav_admin.jsp"%>
-	
+	<div style="width: 100%; height: 100%; background:rgb(233, 246, 240); padding-top: 30px;" >
 	<!-- main -->
+	
     <div class="container">
         <div class="row">
+	            <h2><div class="jal">관리자 페이지</div></h2>    
+	            <hr>
+           </div>
+       <div class="row">
             <div class="col-lg-3 sidebar">
-                <h2 class="jal">관리자 페이지</h2>
-                <p>관리자 페이지에 대시보드 1, 회원 리스트 2개, 예약내역, 정산내역, 환불내역, 채팅내역 4장 총 7장</p>
+<!--                 <a href="Driver_Notice.html"><span class="sidebar_span">회원 확인</span></a> -->
+                <a href="#"><span class="sidebar_span1">회원님 목록</span></a><br>
+                <a href="#"><span class="sidebar_span1">기사님 목록</span></a><br>
+
+<!-- 				<a href="Driver_Faq.html"><span class="sidebar_span">내역 확인</span></a><br> -->
+                <a href="#"><span class="sidebar_span1">예약 내역</span></a><br>
+                <a href="#"><span class="sidebar_span1">정산 내역</span></a><br>
+                <a href="#"><span class="sidebar_span1">채팅 내역</span></a><br>
+                <a href="#"><span class="sidebar_span1">환불 내역</span></a>
             </div>
-                <a href="Driver_Notice.html"><span class="sidebar_span">회원 확인</span></a>
-                <a href="Driver_Faq.html"><span class="sidebar_span">내역 확인</span></a><br>
-                <a href="#"><span class="sidebar_span1">회원님 목록</span></a>
-                <a href="#"><span class="sidebar_span1">기사님 목록</span></a>
         </div>
-   	    <hr>
+   	    
 	<!-- list -->
-    <div class="row" style="margin: 20px;">
+    <!-- <div class="row" style="margin: 20px;">
         <div class="col-xs-12 col-md-12" id="table">
-            <Br>
-            <table class="table table-striped table-hover text-center">
+            <br>
+	          <table class="table table-striped table-hover text-center">
                 <thead id="thead">
                     <tr>
                         <td>예약 번호</td>
@@ -90,13 +99,13 @@
                         <li><a href="#">>></a></li>
                     </ul>
                 </div>
-    </div>
+    </div> -->
     </div>
 
-	<br>
+<!-- 	<br>
     <br>
-    <br>
-
+    <br> -->
+</div>
 	<!-- Footer -->
 	<%@ include file="../common/footer.jsp"%>
 	

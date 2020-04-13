@@ -33,7 +33,7 @@
 			<div class="row">
 			<div class="navbar-header col-lg-4">
 				<a class="navbar-brand" href="home.do" style="font-size: 30px; color: rgb(90,140,255); padding-top: 0px;">
-					<img alt="용달이로고(gr)"src="${pageContext.request.contextPath}/resources/images/ydl_logo/ydl_lg_gr(150x50).png" class="d-inline-block align-top" style="height: 48px">
+					<img alt="용달이로고(gr)"src="${pageContext.request.contextPath}/resources/images/ydl_logo/ydl_lg_bl(150x50).png" class="d-inline-block align-top" style="height: 48px">
 				</a>
 			</div>
 			<div class="col-lg-4">
@@ -76,7 +76,9 @@
 		</div>
 		</div>
 	</nav>
-	<div class="jumbotron" style="background: rgb(90,140,255); text-align: center;">
+	
+	
+	 <div class="jumbotron" style="margin-bottom:0px; background: rgb(90,140,255); text-align: center;">
 		<p style="color: white">용달이에는 다양한 차종이 준비되어 있습니다.</p>
 		<h2 style="color: white" >고객님의 용도에 맞는 트럭을 찾아보세요</h2>
 	</div>

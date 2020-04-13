@@ -11,6 +11,10 @@
         <div OnClick="location.href ='adminHome.ydl'" style="width: 100px; height: 100px; background: lightcoral; cursor: pointer; border-radius: 10px; margin-right: 20px;">
               관리자 페이지
         </div>
+        <div OnClick="location.href ='admin_Mem.ydl'" style="width: 100px; height: 100px; background: lightgreen; cursor: pointer; border-radius: 10px; margin-right: 20px;">
+           	회원정보 페이지
+        </div>
+
     </div>
  
 </body>
