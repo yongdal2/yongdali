@@ -34,7 +34,9 @@
                         <div id="emailMsg" class="msgBox"></div>
                         <div class="formRow--input-wrapper js-inputWrapper" id="verifyWrap">
                             <input type="text" class="formRow--input js-input" name="verify" placeholder="인증번호 입력">
-                            <button type="button" id="btn_verify">인증번호 받기</button>
+                            <button type="button" class="verifyBtn" id="btn_sendVeriCode">인증번호 받기</button>
+                            <button type="button" class="verifyBtn" id="btn_verify">확인</button>
+                            <button type="button" class="verifyBtn" id="btn_resend">재전송</button>
                         </div>
                         <div id="veriMsg" class="msgBox" ></div>
                     </div>       
