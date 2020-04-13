@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.reservation.model.service.ReservationService;
 import com.kh.yongdali.reservation.model.vo.Reservation;
 
-@SessionAttributes("loginUser")
 @Controller
 public class ReservationController {
 	
@@ -31,6 +33,8 @@ public class ReservationController {
 	public ModelAndView InsertReservation1(@ModelAttribute Reservation r, ModelAndView mv,
 									@RequestParam(value="startDate1", required=false) String stDate1,
 									@RequestParam(value="endDate1", required=false) String edDate1) throws ParseException {
+		
+		
 		String stDate = "";
 		String edDate = "";
 		// 상하차일 타입 Date로 변환하기
@@ -59,7 +63,7 @@ public class ReservationController {
 	}
 	
 	@RequestMapping("pay.do")
-	public ModelAndView InsertReservation2(ModelAndView mv, Reservation r,
+	public ModelAndView InsertReservation2(ModelAndView mv, Reservation r, HttpSession session,
 									  @RequestParam("startDate1") String stDate,
 									  @RequestParam("endDate1") String edDate) throws ParseException {
 		// 차량크기, 거리, 결제금액 int로 변환하기
@@ -75,10 +79,15 @@ public class ReservationController {
 			System.out.println(endDate);
 			r.setEndDate(endDate);
 		}
-		System.out.println("차 옵션2 : "+r.getType());
+		
+		// 세션에 저장되어있는 loginUser의 mId 불러오기
+		r.setrMNo(((Member)session.getAttribute("loginUser")).getmNo());
+		System.out.println(r.getrMNo());
 		int result = rService.insertReservation(r);
 		
+		
 		mv.setViewName("user/paySuccess");
+
 		return mv;
 	}
 
