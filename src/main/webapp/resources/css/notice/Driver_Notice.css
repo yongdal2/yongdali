@@ -167,6 +167,7 @@ table.tbl:hover tbody tr:hover td, .tbl td a:hover {
     transition: background-color .3s;
     font-family : 'Nanum Gothic';
     font-size:13px;
+    cursor:pointer;
 }
 
 /* 페이징 현재 페이지 클릭 시 active */

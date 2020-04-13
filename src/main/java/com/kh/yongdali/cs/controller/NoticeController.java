@@ -101,25 +101,59 @@ public class NoticeController {
 	 * @param currentPage
 	 * @return
 	 */
-	@RequestMapping("dNoticeMain.no")
-	public ModelAndView driverNoticeMain(ModelAndView mv, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage ) {
+//	@RequestMapping("dNoticeMain.no")
+//	public ModelAndView driverNoticeMain(ModelAndView mv, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage ) {
+//		
+//		System.out.println(currentPage);
+//		
+//		int listCount = nService.driverGetListCount();
+//		
+//		System.out.println(listCount);
+//		
+//		int pageLimit = 5;
+//		int boardLimit = 5;
+//		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,pageLimit,boardLimit );
+//		
+//		ArrayList<Notice> list = nService.driverSelectList(pi);
+//		
+//		mv.addObject("list",list);
+//		mv.addObject("pi",pi);
+//		mv.setViewName("driver/notice/notice");
+//		return mv;
+//	}
+	
+	@RequestMapping(value="dNoticeMain.no")
+	public String driverNoticeMainView() {
+//		int listCount = nService.userGetListCount();
+//		
+//		int pageLimit = 5;
+//		int boardLimit = 5;
+//		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,pageLimit,boardLimit );
+//		
+//		mv.addObject("pi",pi);
+//		mv.setViewName("user/notice/notice");
 		
-		System.out.println(currentPage);
-		
+		return "driver/notice/notice";
+	}
+	
+	@RequestMapping(value="dNoticeList.no")
+	public void driverNoticeMain(HttpServletResponse response, int currentPage) throws JsonIOException, IOException {
 		int listCount = nService.driverGetListCount();
-		
-		System.out.println(listCount);
 		
 		int pageLimit = 5;
 		int boardLimit = 5;
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,pageLimit,boardLimit );
-		
 		ArrayList<Notice> list = nService.driverSelectList(pi);
 		
-		mv.addObject("list",list);
-		mv.addObject("pi",pi);
-		mv.setViewName("driver/notice/notice");
-		return mv;
+		response.setContentType("application/json; charset=utf-8");
+		
+		Map notice = new HashMap();
+		notice.put("list",list);
+		notice.put("pi",pi);
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(notice,response.getWriter());
+		
 	}
 	
 	/**
@@ -549,27 +583,46 @@ public class NoticeController {
 	 * @param currentPage
 	 * @return
 	 */
-	@RequestMapping("dNsearch.no")
-	public ModelAndView driverNoticeSearch(ModelAndView mv, @RequestParam(value="keyword", required=false) String keyword, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage ) {
-		
-		System.out.println(currentPage);
-		
+//	@RequestMapping("dNsearch.no")
+//	public ModelAndView driverNoticeSearch(ModelAndView mv, @RequestParam(value="keyword", required=false) String keyword, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage ) {
+//		
+//		System.out.println(currentPage);
+//		
+//		int listCount = nService.driverSearchGetListCount(keyword);
+//		
+//		System.out.println(listCount);
+//		
+//		int pageLimit = 5;
+//		int boardLimit = 5;
+//		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,pageLimit,boardLimit );
+//		
+//		
+//		ArrayList<Notice> list = nService.driverSearchSelectList(pi,keyword);
+//		
+//		mv.addObject("list",list);
+//		mv.addObject("pi",pi);
+//		mv.addObject("keyword",keyword);
+//		mv.setViewName("driver/notice/notice");
+//		return mv;
+//	}
+	
+	@RequestMapping(value="dNsearch.no")
+	public void driverNoticeSearch(HttpServletResponse response, int currentPage, String keyword) throws JsonIOException, IOException {
 		int listCount = nService.driverSearchGetListCount(keyword);
-		
-		System.out.println(listCount);
 		
 		int pageLimit = 5;
 		int boardLimit = 5;
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,pageLimit,boardLimit );
-		
-		
 		ArrayList<Notice> list = nService.driverSearchSelectList(pi,keyword);
 		
-		mv.addObject("list",list);
-		mv.addObject("pi",pi);
-		mv.addObject("keyword",keyword);
-		mv.setViewName("driver/notice/notice");
-		return mv;
+		response.setContentType("application/json; charset=utf-8");
+		
+		Map notice = new HashMap();
+		notice.put("list",list);
+		notice.put("pi",pi);
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(notice,response.getWriter());
 	}
 	
 	
