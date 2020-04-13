@@ -41,7 +41,7 @@
 					<div class="row">
 						<div class="col-xs-6 col-md-6">
 							<div class="h4 na">E-mail</div>
-							<div class="h3 jal lg mgt">${loginUser.mName}</div>
+							<div class="h3 jal lg mgt">${loginUser.mId}</div>
 						</div>
 						<div class="col-xs-6 col-md-6">
 							<div class="h4 na">연락처</div>
@@ -173,7 +173,7 @@
 							새 비밀번호</div>
 						<div class="col-md-12"
 							style="padding: 0; margin-top: 5px; font-size: 14px; color: #525252; line-height: 20px;">
-							8~16자 이내의 영문, 숫자, 기호를 포함한 문자열</div>
+							8~16자 영문 대 소문자, 숫자, 특수문자(#?!@$%^&*)를 사용하세요.</div>
 						<div class="col-md-12" style="padding: 0; margin-top: 10px;">
 							<label for="newPassword" style="display: none;"></label> <input
 								type="password" class="form-control noto" id="newPassword"

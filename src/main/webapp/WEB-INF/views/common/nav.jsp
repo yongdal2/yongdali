@@ -64,7 +64,7 @@
 						</c:if>
 						<c:if test='${loginUser.mSort ne ("관리자")}'>
 							<li class="nav-item">
-								<button class="btn btn-default navbar-btn myPage" style="background: rgb(87,187,138); color: white;">마이페이지</button>
+								<button class="btn btn-default navbar-btn myPage" style="background: rgb(87,187,138); color: white;" onclick="location.href='addrBook.myp'">마이페이지</button>
 							</li>
 						</c:if>
 						<li class="nav-item">
