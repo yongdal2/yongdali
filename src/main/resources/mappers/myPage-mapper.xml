@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="myPageMapper">
 	<!-- resultMap -->
 	<resultMap id="addressResultSet" type="Address">
@@ -14,10 +12,21 @@
 		<result property="aRecentDate" column="RECENTDATE"/>
 	</resultMap>
 	
-	<!-- 주소로갯수 -->
+	<!-- 주소록갯수 -->
 	<select id="getAddrListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM ADDRESS
-		WHERE A_M_NO=#{aMno}
+		WHERE A_M_NO=#{mNO}
 	</select>
+	<!-- 주소록 리스트 -->
+	<select id="selectAddrList" resultMap="addressResultSet">
+		SELECT *
+		FROM ADDRESS
+		WHERE A_M_NO=#{mNO}
+		ORDER BY RECENTDATE
+	</select>
+	
+	
+	
+	
 </mapper>

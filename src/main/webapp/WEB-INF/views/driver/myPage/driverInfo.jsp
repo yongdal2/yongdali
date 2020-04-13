@@ -34,18 +34,18 @@
 			<div class="row">
 				<div class="col-xs-9 col-md-9">
 					<div class="h2 jal">
-						어서오세요 정해인님!
+						어서오세요  ${loginUser.mName}님!
 					</div>
 					<br>
 					<div class="row">
 						<div class="col-xs-6 col-md-6">
 							<div class="h4 na">E-mail</div>
-							<div class="h3 jal lg mgt">sols@gmail.com</div>
+							<div class="h3 jal lg mgt">${loginUser.mId}</div>
 						</div>
 						<div class="col-xs-6 col-md-6">
 							<div class="h4 na">연락처</div>
 							<div class="h3 jal lg mgt">
-								010-2712-6866
+								${loginUser.phone}
 								<div class="glyphicon glyphicon-pencil hvDr" data-toggle="modal"
 									data-target="#changePhone"></div>
 							</div>
@@ -77,85 +77,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- <div class="container">
-		<div class="row">
-			<div class="col-xs-12 col-md-12 h2 jal">
-				계정 관리
-				<hr>
-			</div>
-			<div class="row na">
-                <div class="col-xs-1 col-md-3"></div>
-				<div class="col-xs-10 col-md-6"
-					style="margin: 0; border: 1px solid #dedede; border-radius: 16px; padding: 23px; background: #fff;">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<div class="panel-title" style="padding-left: 10px;">
-								<div class="h2" style="color: gray;">
-									<span class="glyphicon glyphicon-user text-right"
-										></span> &nbsp;회원 정보 <a href="#">
-									</a>
-								</div>
-							</div>
-						</div>
- 						<div class="panel-body" style="padding-left: 30px; padding-right: 30px;"> 
-							<div class="row">
-								<div class="col-xs-8 col-md-8">
-									<p class="h4">
-										E-mail : &nbsp;<span class="h2">solg@gma.com</span>
-									</p>
-									<hr>
-									<p class="h4">
-										이름:&nbsp;&nbsp;<span class="h2">도로리</span>
-									</p>
-									<hr>
-									<p class="h4">
-										연락처: &nbsp;&nbsp;<span class="h2">01011111111
-											<button class="btn glyphicon glyphicon-pencil bgNo"
-											data-toggle="modal" data-target="#changePhone"></button>
-										</span>
-									</p>
-									<hr>
-									<div class="row text-center" style="padding-left: -30px;">
-										<button type="button" class="btn btn-lg btn-default"
-											data-toggle="modal" data-target="#changePwd">비밀번호 변경</button>
-									</div>
-								</div>
-								<div class="col-xs-4 col-md-4 text-center">
-								</div>
-							</div>
-
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<div class="panel-title" style="padding-left: 10px;">
-								<div class="h2" style="color: gray;">
-									<span class="glyphicon glyphicon-road"
-										style="text-align: right;"></span> &nbsp;차량 정보 <a href="#">
-									</a>
-								</div>
-							</div>
-						</div>
-						<div class="panel-body" style="padding-left: 30px;">
-							<p class="h4">
-								차량번호 : &nbsp;<span class="h2">12가1234</span>
-							</p>
-							<hr>
-							<p class="h4">
-								차종:&nbsp;&nbsp;<span class="h2">리프트 3t</span>
-							</p>
-							<hr>
-							<p class="h4">
-								차량등록증: &nbsp;&nbsp;<span class="h2">상세보기
-									<button class="btn glyphicon glyphicon-zoom-in bgNo"
-										data-toggle="modal" data-target="#car_deta"></button>
-								</span>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div> -->
 		<!-- 사진 변경 -->
 	<div class="modal fade" id="changePhoto" role="dialog">
 		<div class="modal-dialog">
@@ -250,7 +171,7 @@
 							새 비밀번호</div>
 						<div class="col-md-12"
 							style="padding: 0; margin-top: 5px; font-size: 14px; color: #525252; line-height: 20px;">
-							8~16자 이내의 영문, 숫자, 기호를 포함한 문자열</div>
+							8~16자 영문 대 소문자, 숫자, 특수문자(#?!@$%^&*)를 사용하세요.</div>
 						<div class="col-md-12" style="padding: 0; margin-top: 10px;">
 							<label for="newPassword" style="display: none;"></label> <input
 								type="password" class="form-control noto" id="newPassword"
