@@ -104,7 +104,7 @@
                         	<c:url var="dNdelete" value="dNdelete.no">
                         		<c:param name="nNo" value="${n.nNo }"/>
                         	</c:url>
-                        	<c:if test="${loginUser.mName eq n.nWriter }">
+                        	<c:if test="${loginUser.mId eq 'admin@naver.com'}">
                             <button id="editBtn" onclick="location.href='${dNupview}' ">수정</button>
                             <button id="deleteBtn" onclick="deleteNotice(); ">삭제</button>
                             </c:if>
