@@ -19,4 +19,11 @@ public interface MyPageService {
 	 */
 	ArrayList<Address> selectAddrList(String mNo);
 
+	/**
+	 * 수정할 주소 조회
+	 * @param aNo
+	 * @return
+	 */
+	Address getEditAddr(String aNo);
+
 }

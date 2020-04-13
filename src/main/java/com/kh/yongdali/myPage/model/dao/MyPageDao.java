@@ -23,4 +23,8 @@ public class MyPageDao {
 		return (ArrayList)sqlSession.selectList("myPageMapper.selectAddrList",mNo);
 	}
 
+	public Address getEditAddr(String aNo) {
+		return sqlSession.selectOne("myPageMapper.getEditAddr", aNo);
+	}
+
 }
