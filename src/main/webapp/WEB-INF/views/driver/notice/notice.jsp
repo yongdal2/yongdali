@@ -36,7 +36,7 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-3">
                 <div class="tbl_wrap div">
-                    <table class="tbl">
+                    <table class="tbl" id="tbl">
                         <colgroup>
                             <col width="70%">
                             <col width="15%">    
