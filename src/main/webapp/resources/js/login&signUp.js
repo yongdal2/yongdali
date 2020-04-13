@@ -228,11 +228,36 @@ $(document).ready(function(){
     	}
     })
     
-    // '인증번호 받기' 클릭시 
+    // '인증번호 받기' 클릭시 TODO
     $('#btn_sendVeriCode').click(function(){
-    	alert("입력하신 이메일로 인증번호를 전송하였습니다.")
-    	$(this).hide();
-    	$('.verifyBtn:eq(1), .verifyBtn:eq(2)').show();
+    	let emailVal = $("#email").val();  
+    	
+    	if(!chk(/^[\a-z0-9_-]{5,20}@[\a-zA-Z]+(\.[\a-zA-Z]+){1,2}$/, emailVal, $("#emailMsg"), "5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.")){
+//            return false;
+            
+    	} else{
+    		$.ajax({
+    			url : "emailVerify.me",
+    			type : "get",
+    			data : {email : emailVal},
+    			success : function(result){
+    				alert("입력하신 이메일로 인증번호를 전송하였습니다.")
+    		    	$(this).hide();
+    		    	$('.verifyBtn:eq(1), .verifyBtn:eq(2)').show();
+    				
+    			}, 
+    			error : function(){
+            		var msg = "이메일 인증 절차 진행 중 오류 발생";
+                	location.href="error.ydl?msg="+msg;
+            	}
+    		})
+    		
+    		
+
+    	}
+    	
+    	
+
     })
     
     // 인증번호 '재전송' 
@@ -334,7 +359,7 @@ $(document).ready(function(){
         		}
         	}
         	, error : function(){
-        		var msg = "이메일 중복검사중 에러 발생"
+        		var msg = "이메일 중복검사중 에러 발생";
         		location.href="error.ydl?msg="+msg;
         	}
         })
