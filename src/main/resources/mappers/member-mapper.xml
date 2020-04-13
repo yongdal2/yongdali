@@ -4,60 +4,21 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="memberMapper">
 	<resultMap type="Member" id="memberResultSet">
-		<id property="mId" column="M_ID"/>
+		<id property="mNo" column="M_NO"/>
+		<result property="mId" column="M_ID"/>
+		<!-- <id property="mId" column="M_ID"/> -->
 		<result property="pwd" column="PWD"/>
 		<result property="mName" column="NAME"/>
 		<result property="phone" column="PHONE"/>
 		<result property="mSort" column="M_SORT"/>
 		<result property="mStatus" column="M_STATUS"/>
+		<result property="pushEnabled" column="PUSH_ENABLED"/>
 		<result property="enrollDate" column="ENROLLDATE"/>
 	</resultMap>
 	
-	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
-		SELECT *
-		FROM MEMBER
-		WHERE M_ID = #{mId}
-		  AND M_STATUS = '정상'
-	</select>
-	
-<!-- 	<insert id="insertSampleMembers" parameterType="java.util.List">
-		<foreach item="item" index="index" collection="list" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL" >
-			INTO MEMBER(M_NO, M_ID, PWD, NAME, PHONE, M_SORT, M_STATUS, ENROLLDATE)
-			VALUES
-				(
-					'M' || SEQ_MNO.NEXTVAL,
-					"${item.mId}",
-					"${item.pwd}",
-					"${item.mName}",
-					"${item.phone}",
-					"${item.mSort}",
-					"${item.mStatus}",
-					"${item.enrollDate}"
-				)
-		</foreach>
-	</insert> -->
-<!-- 	<insert id="insertSampleMembers" parameterType="java.util.List">
-		<selectKey keyProperty="id" resultType="String" order="BEFORE">
-			select SEQ_MNO.NEXTVAL
-			from dual
-		</selectKey>
-		<foreach item="item" index="index" collection="list" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL" >
-			INTO MEMBER(M_NO, M_ID, PWD, NAME, PHONE, M_SORT, M_STATUS, ENROLLDATE)
-			VALUES
-				(
-					'M' || SEQ_MNO.NEXTVAL,
-					#{item.mId},
-					#{item.pwd},
-					#{item.mName},
-					#{item.phone},
-					#{item.mSort},
-					#{item.mStatus},
-					#{item.enrollDate}
-				)
-		</foreach>
-	</insert> -->
+	<!-- 샘플 데이터 -->
 	<insert id="insertSampleMembers" parameterType="java.util.List">
-		INSERT INTO MEMBER(M_NO, M_ID, PWD, NAME, PHONE, M_SORT, M_STATUS, ENROLLDATE)
+		INSERT INTO MEMBER(M_NO, M_ID, PWD, NAME, PHONE, M_SORT, M_STATUS, PUSH_ENABLED, ENROLLDATE)
 		SELECT 'M' || SEQ_MNO.NEXTVAL, A.*
 		FROM(
 		<foreach item="item" index="index" collection="list" separator="UNION ALL">
@@ -67,20 +28,26 @@
 					#{item.phone},
 					#{item.mSort},
 					#{item.mStatus},
+					#{item.pushEnabled},
 					#{item.enrollDate}
 			FROM DUAL
 		</foreach>
 		) A
-	</insert>
+	</insert>	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	<!-- 로그인 -->
+	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
+		SELECT *
+		FROM MEMBER
+		WHERE M_ID = #{mId}
+		  AND M_STATUS = '정상'
+	</select>
+
+	<!-- 이메일 중복검사 -->
+	<select id="emailChk" resultType="_int">
+		SELECT COUNT(*) 
+		FROM MEMBER
+		WHERE M_ID = #{mId}
+	</select>
 	
 </mapper>     

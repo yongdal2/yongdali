@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%-- <jsp:forward page="/WEB-INF/views/login&signUp/login.jsp"/> --%>
-	<jsp:forward page="/WEB-INF/views/login&signUp/signUpForm.jsp"/>
+	<div style="width: 500px; height: 500px; background: green; font-size: 20pt; font-weight: bold;">결제가 완료되었습니다.</div>
 </body>
 </html>

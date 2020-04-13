@@ -10,7 +10,7 @@
 		#{distance},#{phone1},#{phone2},#{rightLoad},
 		#{rightUnload},#{startDate},#{startTime},#{endDate},#{endTime},
 		#{helpLoad},#{helpUnload},#{luggage},#{msg},#{amount},
-		DEFAULT,DEFAULT,DEFAULT,DEFAULT)
+		#{payYN},DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT)
 	</insert>
 </mapper>
     

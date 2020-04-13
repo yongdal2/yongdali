@@ -23,4 +23,9 @@ public class MemberServiceImpl implements MemberService {
 	public int insertSampleMembers(ArrayList<Member> mList) {
 		return mDao.insertSampleMembers(mList);
 	}
+
+	@Override
+	public int emailChk(String mId) {
+		return mDao.emailChk(mId);
+	}
 }

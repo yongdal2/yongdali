@@ -18,14 +18,13 @@
 	<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=03ea077d7ecc6636dffede985cc5c57d&libraries=services"></script>
     <!-- font -->
     <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"/>
-    <link type="text/css" rel="stylesheet" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"/>
 </head>
 <body>
 	<!-- header -->
 	<c:import url="../common/home_nav.jsp"/>
 	
 	<!-- body -->
-	<form action="rev.do" method="post">
+	<form id="revform" action="rev.do" method="post">
 	    <div id="body-div" class="container">
 	        <div>
 	            <h2 style="font-family: 'yg-jalnan';">용달이 예약이요~</h2><hr style="border-color: black;">
@@ -928,7 +927,7 @@
 		<!-- hidden 값들 -->
 		<input type="hidden" id="addStAddr" name="startAddr">
 		<input type="hidden" id="addEdAddr" name="endAddr">
-		<input type="hidden" id="amountVal" name="amount">
+		<input type="hidden" id="amountVal" name="amount" value="0">
 		<input type="hidden" id="distanceVal" name="distance">
 		<input type="hidden" id="helpLoadVal" name="helpLoad">
 		<input type="hidden" id="helpUnloadVal" name="helpUnload">

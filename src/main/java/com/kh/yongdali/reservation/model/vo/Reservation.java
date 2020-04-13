@@ -16,9 +16,9 @@ public class Reservation {
 	private String rightLoad;	// 바로 상차
 	private String rightUnload;	// 바로 하차
 	private Date startDate;		// 상차 날짜
-	private String startTime;	// 상차 시간
+	private String startTime;	// 상차 시각
 	private Date endDate;		// 하차 날짜
-	private String endTime;		// 하차 시간
+	private String endTime;	// 상차 시각
 	private String helpLoad;	// 상차 도움
 	private String helpUnload;	// 하차 도움
 	private String luggage;		// 이삿집
@@ -94,22 +94,6 @@ public class Reservation {
 		return distance;
 	}
 
-	public String getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(String startTime) {
-		this.startTime = startTime;
-	}
-
-	public String getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(String endTime) {
-		this.endTime = endTime;
-	}
-
 	public void setDistance(String distance) {
 		this.distance = distance;
 	}
@@ -153,6 +137,23 @@ public class Reservation {
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
+
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+
 
 	public Date getEndDate() {
 		return endDate;
@@ -250,21 +251,21 @@ public class Reservation {
 		this.enrollDate = enrollDate;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Reservation [rNo=" + rNo + ", rMNo=" + rMNo + ", rDNo=" + rDNo + ", capacity=" + capacity + ", type="
 				+ type + ", startAddr=" + startAddr + ", endAddr=" + endAddr + ", distance=" + distance + ", phone1="
 				+ phone1 + ", phone2=" + phone2 + ", rightLoad=" + rightLoad + ", rightUnload=" + rightUnload
-				+ ", startDate=" + startDate + ", endDate=" + endDate + ", helpLoad=" + helpLoad + ", helpUnload="
-				+ helpUnload + ", luggage=" + luggage + ", msg=" + msg + ", amount=" + amount + ", payYN=" + payYN
-				+ ", dealYN=" + dealYN + ", dealDate=" + dealDate + ", enrollDate=" + enrollDate + "]";
+				+ ", startDate=" + startDate + ", startTime=" + startTime + ", endDate=" + endDate + ", endTime="
+				+ endTime + ", helpLoad=" + helpLoad + ", helpUnload=" + helpUnload + ", luggage=" + luggage + ", msg="
+				+ msg + ", amount=" + amount + ", payYN=" + payYN + ", dealYN=" + dealYN + ", dealDate=" + dealDate
+				+ ", calcYN=" + calcYN + ", calcDate=" + calcDate + ", enrollDate=" + enrollDate + "]";
 	}
 
 
-	
-	
-	
-	
+
+
 	
 }
 

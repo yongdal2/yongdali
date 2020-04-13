@@ -74,7 +74,7 @@
 									<button class="btn btn-default navbar-btn adminPage" style="background: #F15F5F; color: white;">관리자 페이지</button>
 								</li> 
 								<li class="nav-item">
-									<button class="btn btn-default navbar-btn userPage" style="background: #F15F5F; color: white;">사용자 페이지</button>
+									<button class="btn btn-default navbar-btn userPage" style="background: #F15F5F; color: white;">일반 페이지</button>
 								</li>
 							</c:if>
 							<c:if test='${loginUser.mSort ne ("관리자")}'>

@@ -68,6 +68,7 @@
                             <input type="checkbox" name="" value="">
                             <i class="check-icon"></i>
                         </label> -->
+                        <form id="pushEnabledForm" method="get"><input type="hidden" name="pushEnabled" value="N"></form>
                         <img src="${contextPath}/resources/images/login&signUp/unchecked-circle.png" alt="동의" class="chkPolicy">
                         <div>SMS, 이메일을 통한 서비스 및 광고성 이벤트 정보 수신 동의 (선택)</div>
                     </div>
@@ -77,7 +78,8 @@
         <div class="easyEccess chooseSignIn">
             <div class="yongdalLogo"> 
                 <h2 class="easyEccessTitle">용달이 회원가입</h2>
-                <a href="${contextPath}/signUpView.me"><img src="${contextPath}/resources/images/ydl_logo/ydl_ic_gr(70X70).png" alt="용달이"></a>
+                <%-- <a href="${contextPath}/signUpView.me"><img src="${contextPath}/resources/images/ydl_logo/ydl_ic_gr(70X70).png" alt="용달이"></a> --%>
+           		<img src="${contextPath}/resources/images/ydl_logo/ydl_ic_gr(70X70).png" alt="용달이" id="yongdaliSignUp">
             </div>
             <div class="easyEccessLogo">
                 <h2 class="easyEccessTitle">간편 회원가입</h2>

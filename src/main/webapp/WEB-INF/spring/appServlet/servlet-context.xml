@@ -27,7 +27,7 @@
 
 	<interceptors>
 		<interceptor>
-			<mapping path="/reservation.do"/>
+			<mapping path="/reservation.go"/>
 			<beans:bean id="reservationInterceptor" class="com.kh.yongdali.common.interceptor.ReservationInterceptor"/>
 		</interceptor>
 	</interceptors>

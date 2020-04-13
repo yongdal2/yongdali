@@ -1,16 +1,17 @@
 package com.kh.yongdali.member.model.vo;
 
-import java.io.Serializable;
 import java.sql.Date;
 
 public class Member {
 
+	private String mNo;
 	private String mId;
 	private String pwd;
 	private String mName;
 	private String phone;
 	private String mSort;
 	private String mStatus;
+	private char pushEnabled;
 	private Date enrollDate;
 	
 	public Member() {
@@ -18,7 +19,8 @@ public class Member {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Member(String mId, String pwd, String mName, String phone, String mSort, String mStatus, Date enrollDate) {
+	public Member(String mId, String pwd, String mName, String phone, String mSort, String mStatus, char pushEnabled,
+			Date enrollDate) {
 		super();
 		this.mId = mId;
 		this.pwd = pwd;
@@ -26,10 +28,12 @@ public class Member {
 		this.phone = phone;
 		this.mSort = mSort;
 		this.mStatus = mStatus;
+		this.pushEnabled = pushEnabled;
 		this.enrollDate = enrollDate;
 	}
 
-	public Member(String mId, String pwd, String mName, String phone, String mSort, String mStatus) {
+	public Member(String mId, String pwd, String mName, String phone, String mSort, String mStatus,
+			char pushEnabled) {
 		super();
 		this.mId = mId;
 		this.pwd = pwd;
@@ -37,8 +41,17 @@ public class Member {
 		this.phone = phone;
 		this.mSort = mSort;
 		this.mStatus = mStatus;
+		this.pushEnabled = pushEnabled;
 	}
 
+	public String getmNo() {
+		return mNo;
+	}
+
+	public void setmNo(String mNo) {
+		this.mNo = mNo;
+	}	
+	
 	public String getmId() {
 		return mId;
 	}
@@ -87,6 +100,14 @@ public class Member {
 		this.mStatus = mStatus;
 	}
 
+	public char getPushEnabled() {
+		return pushEnabled;
+	}
+
+	public void setPushEnabled(char pushEnabled) {
+		this.pushEnabled = pushEnabled;
+	}
+
 	public Date getEnrollDate() {
 		return enrollDate;
 	}
@@ -97,10 +118,8 @@ public class Member {
 
 	@Override
 	public String toString() {
-		return "Member [mId=" + mId + ", pwd=" + pwd + ", mName=" + mName + ", phone=" + phone + ", mSort=" + mSort
-				+ ", mStatus=" + mStatus + ", enrollDate=" + enrollDate + "]";
+		return "Member [mNo=" + mNo + ", mId=" + mId + ", pwd=" + pwd + ", mName=" + mName + ", phone=" + phone
+				+ ", mSort=" + mSort + ", mStatus=" + mStatus + ", pushEnabled=" + pushEnabled + ", enrollDate="
+				+ enrollDate + "]";
 	}
-	
-	
-	
 }
