@@ -189,7 +189,8 @@ body{
     border: none;
 }
 
-#btn_verify {
+/* 인증번호*/
+.verifyBtn {
     width: 30%;
     margin-left: 20px;
     border-radius: 4px;
@@ -200,6 +201,10 @@ body{
     text-align: center;
     cursor: pointer;
 }
+
+.verifyBtn:nth-of-type(2){display : none}
+.verifyBtn:nth-of-type(3){display : none}
+
 
 .pwdWrap, .bizWrap, .phoneWrap, #verifyWrap{
     display: flex ;
@@ -484,13 +489,6 @@ select::-ms-expand {
     margin-right: 12px;
     cursor: pointer; */
 }
-
-
-
-
-
-
-
 
 
 
@@ -827,5 +825,6 @@ select::-ms-expand {
     border-style: ridge;
     height: 90%;
     width: 11rem;
-
 }
+
+
