@@ -25,6 +25,4 @@ public class ReservationInterceptor extends HandlerInterceptorAdapter {
 		
 		return super.preHandle(request, response, handler);
 	}
-	
-	
 }

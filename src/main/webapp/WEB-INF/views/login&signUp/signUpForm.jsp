@@ -12,7 +12,6 @@
     <script src='https://kit.fontawesome.com/a076d05399.js'></script><!-- eye icon -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
     <script src="${contextPath}/resources/js/login&signUp.js"></script>
-    
 </head>
 <body>
     <!-- logo header -->
@@ -78,6 +77,7 @@
                     
                     <!-- (사업자)기사 정보 -->
                     <hr>
+                   	<input type="hidden" name="mSort" value="일반">
                     <div class="bizRow" id="slecBiz">
                         <img src="${contextPath}/resources/images/login&signUp/round-add.svg" alt="더하기">
                         <div>사업자(기사)로 가입하기</div>                            
