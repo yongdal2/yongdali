@@ -894,6 +894,12 @@ span7.onclick = function() {
 	$('#myModal7').css('display','none');
 }
 
-
+$('#revform').submit(function(){
+	if(confirm("결제 진행하시겠습니까?")){
+		return;
+	} else {
+		return false;
+	}
+});
 
 

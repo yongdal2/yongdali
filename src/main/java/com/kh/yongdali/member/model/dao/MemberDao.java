@@ -21,5 +21,9 @@ public class MemberDao {
 	public int insertSampleMembers(ArrayList<Member> mList) {
 		return sqlSession.insert("memberMapper.insertSampleMembers", mList);
 	}
+
+	public int emailChk(String mId) {
+		return sqlSession.selectOne("memberMapper.emailChk", mId);
+	}
 	
 }

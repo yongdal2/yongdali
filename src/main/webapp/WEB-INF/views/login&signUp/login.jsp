@@ -15,6 +15,16 @@
 </head>
 
 <body>
+	<!-- interceptor용 (메인페이지 예약하러가기 클릭 시) -->
+	<script>
+		$(function(){
+			var msg = "<%= request.getAttribute("msg")%>";
+			if(msg != "null"){
+				alert(msg)
+			}
+		})
+	</script>	
+
     <!-- logo header -->
     <div class="header">
         <a href="home.do">
@@ -45,7 +55,7 @@
                 </div>
             </div>
             <div class="btnArea">
-                <button type="button" class="submitBtn">로그인</button>
+                <button type="button" class="submitBtn" id="loginBtn">로그인</button>
             </div>
         <!-- </form> -->
         <div class="forgotSignIn">

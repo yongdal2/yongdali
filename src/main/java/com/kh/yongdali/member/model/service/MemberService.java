@@ -10,7 +10,7 @@ import com.kh.yongdali.member.model.vo.Member;
 public interface MemberService {
 
 	/**
-	 * 샘플데이터 삽
+	 * 샘플데이터 삽입
 	 * @param mList
 	 * @return
 	 */
@@ -22,6 +22,12 @@ public interface MemberService {
 	 * @return
 	 */
 	Member loginMember(Member m);
+
+	/**
+	 * 이메일 중복검사
+	 * @return
+	 */
+	int emailChk(String mId);
 
 
 	
