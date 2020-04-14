@@ -26,16 +26,16 @@ public class ReservationController {
 	private ReservationService rService;
 
 	/**
-	 * 1. 예약페이지로 가기
+	 * 1. 예약페이지로 가기(가기전 주소록 list 불러오기)
 	 * @return
 	 */
 	@RequestMapping("reservation.go")
-	public String goReservation(HttpSession session) {
+	public ModelAndView goReservation(ModelAndView mv, HttpSession session) {
 		String mno = ((Member)session.getAttribute("loginUser")).getmNo();	
 		ArrayList<Address> list = rService.getAddressList(mno);
-		System.out.println(list.toString());
 		
-		return "user/reservation";
+		mv.setViewName("user/reservation");
+		return mv;
 	}
 
 	/**
