@@ -228,20 +228,22 @@ $(document).ready(function(){
     	}
     })
     
-    // '인증번호 받기' 클릭시 TODO
-    $('#btn_sendVeriCode').click(function(){
+    // 인증번호 전송 & 재전송
+    $('#btn_sendVeriCode, #btn_resend').click(function(){
     	let emailVal = $("#email").val();  
     	
     	if(emailValidate() == true){
     		if(emailDupChk() == true){
     			$.ajax({
-        			url : "emailVerify.me",
-        			type : "get",
+        			url : "sendVeriCode.me",
+        			type : "post",
         			data : {email : emailVal},
         			success : function(result){
         				alert("입력하신 이메일로 인증번호를 전송하였습니다.")
         		    	$('#btn_sendVeriCode').hide();
         		    	$('#btn_verify, #btn_resend').show();
+        		    	// result로 ranNum 받아와서 <input hidden> 에다가 넣고
+        		    	// 그 hidden 값을 chkVeriCode.me 호출 시 전달해서 비교하자!!
         			}, 
         			error : function(){
                 		var msg = "이메일 인증 절차 진행 중 오류 발생";
@@ -250,34 +252,53 @@ $(document).ready(function(){
         		});
     		}
     	} 
-    	
-    	
-
     })
     
-    // 인증번호 '재전송' 
-    $('#btn_resend').click(function(){
-    	alert("입력하신 이메일로 인증번호를 재전송하였습니다.")
-    })
+
+
     
     // 인증번호 '확인' 
     $('#btn_verify').click(function(){
+    	let inputNum = $('input[name=veriCode]').val();
+    	
+    	$.ajax({
+    		url : "chkVeriCode.me",
+    		type : "get",
+    		data : {inputNum : inputNum},
+    		success : function(result){
+    			if(result == 'success'){
+    				$('input[name=isVerified]').val('Y');
+    				$('#verifyWrap, #veriMsg').hide();
+    				$('.successMsgBox').show();
+    			}else {
+    				displayErrorMsg($("#veriMsg"), '인증번호를 확인하세요.');
+    			}
+    		}, error : function(){
+        		var msg = "인증번호 확인 중 에러 발생!";
+        		location.href="error.ydl?msg="+msg;
+        	}
+    	})
     	
     })
+    
+    
     
     // 비밀번호 입력 시 유효성 검사
     $('#signUpPwd').focusout(function(){
     	pwdValidate();
     })
     
+    // 비밀번호 확인 시 유효성 검사
     $('#signUpPwdChk').focusout(function(){
     	pwdChkValidate();
     })
     
+    // 이름 유효성검사
     $('input[name=name]').focusout(function(){
     	nameValidate();
     })
     
+    // 휴대폰 번호 유효성검사
     $('input[name=phone]').focusout(function(){
     	phoneValidate();
     })
@@ -293,12 +314,16 @@ $(document).ready(function(){
     		pwdChkValidate();
     	};
     	
+    	if($('input[name=isVerified]').val() == 'N'){
+    		displayErrorMsg($("#veriMsg"), '이메일을 인증하세요.');
+    	}
+    	
     	nameValidate();
     	phoneValidate();
     	
     	if($('input[name=mSort]').val() == '일반'){
         	// 기본 정보 전체 유효성 검사 후 제출용
-        	if(emailValidate() == true && emailDupChk() == true 
+        	if(emailValidate() == true && emailDupChk() == true && $('input[name=isVerified]').val() == 'Y'
         		&& pwdValidate() == true && pwdChkValidate() == true 
         		&& nameValidate() == true && phoneValidate() == true){
         		$('#sigInForm').trigger('submit');
@@ -309,7 +334,7 @@ $(document).ready(function(){
     		
     		
     		// 사업자 정보 포함 전체 유효성 검사 후 제출용
-        	if(emailValidate() == true && emailDupChk() == true 
+        	if(emailValidate() == true && emailDupChk() == true && $('input[name=isVerified]').val() == 'Y'
         		&& pwdValidate() == true && pwdChkValidate() == true 
         		&& nameValidate() == true && phoneValidate() == true
         		&& bizFormValidate() == true){
@@ -361,25 +386,26 @@ $(document).ready(function(){
         	}
         })
     	return result;
-    }
+    }   
     
     // TODO 인증번호 유효성 검사
-    function verifyValidate(){
-        let veriNo = $("input[name=verify]").val();  
+    function veriCodeValidate(){
+        let veriNo = $("input[name=veriCode]").val();  
 
         // 인증번호 미입력
         if(veriNo == ""){
             displayErrorMsg($('#veriMsg'), "인증번호를 입력하세요.")
             return false
-        }else{
+        } 
+        
+        else if (!(event.keyCode >=37 && event.keyCode<=40)) {
+            var inputVal = $(this).val();
+            $(this).val(inputVal.replace(/[^0-9]/gi,''));                
+        } 
+        
+        else{
             $("#veriMsg").css("display","none");
         }
-
-        // TODO 인증번호 확인
-        // else if{
-        	
-        // }
-        // return true;
     }    
     
     // 비밀번호 유효성 검사
@@ -482,6 +508,14 @@ $(document).ready(function(){
         if (!(event.keyCode >=37 && event.keyCode<=40)) {
             var inputVal = $(this).val();
             $(this).val(inputVal.replace(/[^ㄱ-힣]/gi,''));                
+        } 
+    });
+    
+    // 인증번호 숫자만 입력
+    $("input[name=veriCode]").keyup(function(event){ 
+        if (!(event.keyCode >=37 && event.keyCode<=40)) {
+            var inputVal = $(this).val();
+            $(this).val(inputVal.replace(/[^0-9]/gi,''));                
         } 
     });
 
@@ -594,11 +628,6 @@ $(document).ready(function(){
             $('#bizFormMsg1').css('display','none');
             return true;
         }
-    }
-    
-    
-    function bizImgValidate(){
-    	
     }
 });
 
