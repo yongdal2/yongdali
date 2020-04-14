@@ -28,19 +28,22 @@
 </style>
 
 <header id="header1">
-	<nav class="navbar navbar-expand navbar-dark mai-top-header" style="margin-bottom: 18px; padding-top: 23px; font-size: 18px;">
+	<nav class="navbar navbar-expand navbar-dark mai-top-header" 
+		style="margin-bottom: 18px; padding-top: 23px; font-size: 18px;">
 		<div class="container">
 			<div class="row">
 			<div class="navbar-header col-lg-4">
-				<a class="navbar-brand" href="home.do" style="font-size: 30px; color: rgb(90,140,255); padding-top: 0px;">
-					<img alt="용달이로고(gr)"src="${pageContext.request.contextPath}/resources/images/ydl_logo/ydl_lg_bl(150x50).png" class="d-inline-block align-top" style="height: 48px">
+				<a class="navbar-brand" href="home.do" 
+				style="font-size: 20px; color: #F15F5F; padding-top: 0px;"> <img alt="용달이로고(gr)"
+				src="${pageContext.request.contextPath}/resources/images/ydl_logo/ydl_lg_bl(150x50).png" 
+				class="d-inline-block align-top" style="height: 48px">
 				</a>
 			</div>
 			<div class="col-lg-4">
 				<ul class="nav navbar-nav navbar-center" style="margin-left:50px;">
-					<li class="nav-item"><a class="nav-link" href="#" style="color: rgb(90,140,255);; font-weight: bold;">요금조회</a></li>
-					<li class="nav-item"><a class="nav-link" href="information.ydl" style="color: rgb(90,140,255); font-weight: bold;">차량안내</a></li>
-					<li class="nav-item"><a class="nav-link" href="uNoticeMain.no" style="color: rgb(90,140,255); font-weight: bold;">고객센터</a></li>
+					<li class="nav-item"><a class="nav-link" href="#" style="color: black; font-weight: bold;">요금조회</a></li>
+					<li class="nav-item"><a class="nav-link" href="information.ydl" style="color: black; font-weight: bold;">차량안내</a></li>
+					<li class="nav-item"><a class="nav-link" href="uNoticeMain.no" style="color: black; font-weight: bold;">고객센터</a></li>
 				</ul>
 			</div>
 			<div class="col-lg-4">

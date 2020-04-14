@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
     margin: 0;
     padding: 0;
@@ -33,36 +34,49 @@ a{
 
 /* 전체화면 1199px까지 */
 @media (max-width: 1199px){
-    .sidebar_li{
-        float: left;
-    }
-
-    .sidebar{
-        display:flex;
-        border-bottom: 1px solid #eee;
-    }
-    
+	/* .sidebar_li{
+	    float: left;
+	} */
+	
+	.sidebar{
+	    display:flex;
+	    border-bottom: 1px solid #eee;
+	}
+	    
+	.content{
+		padding-bottom: 145px !important;
+	}
 }
 
 /* 전체화면 1200px부터 */
 @media (min-width: 1200px){
-    .sidebar{
-        width:15% !important;
-        border-right: 1px solid gray;
-    }
-    
-        .content{
-    	padding-bottom: 145px !important;
-    }
-    
-}
+	.sidebar{
+	    width:16% !important;
+	    border-right: 1px solid gray;
+	    height: 202px;
+	}
+	
+	.content{
+		padding-bottom: 145px !important;
+	}
+}    
 
-/* list */
-#content1{
+#content{
 	display: flex;
 }
 
-.row1{
+/* list */
+#rowList{
+	margin: 20px;
+	margin-bottom:0px;
+	margin-top:0px;
+	padding-left: 15px;
+	padding-right: 0px;
+	width: 1200px;
+	/* height: 400px; */
+}
+
+/* .row{
 	margin: 20px;
 	margin-bottom:0px;
 	margin-top:0px;
@@ -70,7 +84,7 @@ a{
 	padding-right: 0px;
 	width: 1200px;
 	height: 400px;
-}
+} */
 
 /* 사이드바 span태그 */
 /* .sidebar_span{
@@ -103,24 +117,19 @@ a{
       transform-origin:  0% 50%; 
 } */
 
-/* 목록 */
+
 /* 사이드바 span태그 */
-.sidebar_span1{
+.sidebar_span{
     display: inline-block;
-    /* margin-top: 20px; */
-    margin-right: 0px;
+    margin-right: 15px;
     margin-bottom: 10px;
-    margin-left: 0px;
-    /* padding-top: 10px; */
-    padding-left: 10px;
-    font-size: 16px;
+    font-size: 17px;
     font-family: 'yg-jalnan', Arial, Helvetica, sans-serif;
     text-decoration: none;
     color: rgb(43, 43, 43);
-    
 }
 
-.sidebar_span1:after {
+.sidebar_span:after {
     display:block;
     content: '';
     border-bottom: solid 2px rgb(90,140,255);
@@ -128,11 +137,11 @@ a{
     transition: all .3s ease-in-out 0s;
 }
 
-.sidebar_span1:hover:after { 
+.sidebar_span:hover:after { 
     transform: scaleX(1); 
 }
 
-.sidebar_span1:after{
+.sidebar_span:after{
       transform-origin:  0% 50%; 
 }
 
@@ -149,14 +158,12 @@ a{
 
 #thead{
     font-family: 'NanumSquare', Arial, Helvetica, sans-serif;
-    /* font-family: 'Noto Sans KR', Arial, Helvetica, sans-serif; */
     font-size: 18px;
     font-weight: bolder;
 }
 
 #tbody{
     font-family: 'NanumSquare', Arial, Helvetica, sans-serif;
-    /* font-family: 'Noto Sans KR', Arial, Helvetica, sans-serif; */
     font-size: 14px;
 }
 

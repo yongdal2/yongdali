@@ -22,7 +22,7 @@
         <div class="row">
             <div class="col-lg-3 sidebar">
                 <h2 class="jal">관리자 페이지</h2>
-                <p>삭제 예정 페이지/ 참고용</p>
+                <p>삭제 예정 페이지/ 참고용/admin_null.jsp</p>
             </div>
                 <a href="Driver_Notice.html"><span class="sidebar_span">회원 확인</span></a>
                 <a href="Driver_Faq.html"><span class="sidebar_span">내역 확인</span></a><br>
