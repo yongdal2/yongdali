@@ -42,7 +42,7 @@ public class DriverController {
 	@RequestMapping("mibaechar.do")
 	public void mibaechar(HttpServletResponse response,String mNO) throws JsonIOException, IOException {
 		ArrayList<Reservation> list = dService.mibaechar(mNO);
-		
+		System.out.println(list);
 		response.setContentType("application/json; charset=utf-8");
 		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();

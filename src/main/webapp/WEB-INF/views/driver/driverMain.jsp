@@ -155,6 +155,7 @@
 												data-dismiss="modal">닫기</button>
 										</div>
 									</div>
+									<div style="visibility: false"><p id="mNo">${loginUser.mNo}</p></div>
 								</div>
 							</div>
 						</form>
@@ -178,29 +179,48 @@
 				$("#savecar").show();
 			})
 		});
+		
 		$(function(){
-			
-		})
-		function rView(){
+			console.log('sibal');
 			var $mibaechar = $('#mibaechar tbody');
 			$mibaechar.html("");
 			
+			
+			
+			console.log('sibal2');
 			$.ajax({
 				url : "mibaechar.do",
-				data : { mNO : ${loginUser.mNo}},
+				data : { mNO : $('#mNo').text()},
 				type : "post",
 				dataType : "json",
 				success : function(data){
+					console.log(data);
 					$.each(data,function(index,value){
-						var $tr = ("<tr>");
-						var $
+						var $tr = $("<tr>");
+						var $rno = $("<td>").text(value.rno);
+						var $help = $("<td>").text(value.helpLoad+"/"+value.helpUnload);
+						var $startAddr = $("<td colspan='3'>").text(value.startAddr);
+						var $endAddr = $("<td colspan='3'>").text(value.endAddr);
+						var $start_date = $("<td>").text(value.startDate);
+						var $end_date = $("<td>").text(value.endDate);
+						var $deal_btn = $("<td>");
+						
+						$tr.append($rno);
+						$tr.append($help);
+						$tr.append($startAddr);
+						$tr.append($endAddr);
+						$tr.append($start_date);
+						$tr.append($end_date);
+						$tr.append($deal_btn);
+						
+						$mibaechar.append($tr);
 					})
 				},error : function(){
 					console.log("error");
 				}
 				
 			});
-		}
+		})
 		<%-- function mView(){
 		 var $baechar = $('#baechar tbody');
 		 $baechar.html("");

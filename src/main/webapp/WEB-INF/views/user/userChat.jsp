@@ -39,14 +39,14 @@
                 <ul id="chat">
                     <li class="you">
                         <div class="entete">
-                            <span class="status green"></span>
+                            <!-- <span class="status green"></span> -->
                             <h2>용달이</h2>
                             <h3>10:12AM, Today</h3>
                         </div>
                         <div class="message" id="youMsg">
                         </div>
                     </li>
-                    <li class="me">
+                    <!-- <li class="me">
                         <div class="entete">
                             <h3>10:12AM, Today</h3>
                             <h2>유승제</h2>
@@ -54,7 +54,7 @@
                         </div>
                         <div class="message" id="meMsg">
                         </div>
-                    </li>
+                    </li> -->
                     <!-- <li class="you">
                         <div class="entete">
                             <span class="status green"></span>
@@ -114,37 +114,103 @@
         </div>
     </form>
     <script>
-    	var ws = new WebSocket("ws://localhost:8888/yongdali/kh.do");
+    
+    	$(function(){
+    		openSocket();
+    	});
+    	var ws;
     	var meMsg = document.getElementById("meMsg");
     	var youMsg = document.getElementById("youMsg");
     	
+    	function openSocket(){
+    		if(ws!==undefined && ws.readyState!==WebSocket.CLOSED){
+                
+                return;
+            }
     	
-    	ws.onopen = function(message){
-    		console.log("확인");
-    		youMsg.innerHTML += "용달이에 오신걸 환영합니다.";
-    	};
+    		ws = new WebSocket("ws://192.168.110.45:8888/yongdali/kh.do");
+	    	
+    		ws.onopen = function(message){
+	    		console.log("확인");
+	    		youMsg.innerHTML += "용달이에 오신걸 환영합니다.";
+	    	};
+	    	
+	    	ws.onmessage = function(message){
+	    		var data = message.data;
+	    		var sessionid = null;
+	    		var message = null;
+	    		
+	    		var strArray = data.split('|');
+	    		
+	    		for(var i = 0; i<strArray.length; i++){
+	    			console.log('str['+i+']: ' + strArray[i]);
+	    		}
+	    		
+	    		var currentuser_session = $('#sender').val();
+	    		console.log('current session id : ' + currentuser_session);
+	    		
+	    		message = strArray[0];
+	    		
+	    		var today = new Date();
+	    		
+	    		var hours = today.getHours();
+	    		var minutes = today.getMinutes();
+	    		
+	    		if(sessionid == currentuser_session){
+	    			var printHTML = "<li class='you'>";
+	    			printHTML += "<div class='entete'>";
+	    			printHTML += "<h2>"+currentuser_session+"</h2>";
+	    			printHTML += "<h3>"+hours+":"+minutes+"<h3>";
+	    			printHTML += "<div class='message' id='youMsg'>"+message+"</div>";
+	    			printHTML += "</div>";
+	    			printHTML += "</li>";
+	    			
+	    			$("#chat").append(printHTML);
+	    		}else{
+	    			var printHTML = "<li class='me'>";
+	    			printHTML += "<div class='entete'>";
+	    			printHTML += "<h3>"+hours+":"+minutes+"<h3>";
+	    			printHTML += "<h2>"+currentuser_session+"</h2>";
+	    			printHTML += "</div>";
+	    			printHTML += "<div class='message' id='meMsg'>"+message+"</div>";
+	    			printHTML += "</li>";
+	    			
+	    			$("#chat").append(printHTML);
+	    			
+	    		}
+	    		/* youMsg.innerHTML += message.data */
+	    	};
+	    	
+	    	ws.onclose = function(message){
+	    		youMsg.innerHTML += "용달이 채팅 종료";
+	    	};
+    	}
     	
-    	ws.onclose = function(message){
-    		youMsg.innerHTML += "용달이 채팅 종료";
-    	};
     	
-    	ws.onerror = function(message){
+    	
+    	
+    	/* ws.onerror = function(message){
     		youMsg.innerHTML += "에러 발생";
-    	};
+    	}; */
     	
-    	ws.onmessage = function(message){
-    		youMsg.innerHTML += message.data
-    	};
+    	
     	
     	function sendMessage(){
-    		var message = document.getElementById("msgArea");
+    		/* var message = document.getElementById("msgArea");
     		
     		meMsg.innerHTML += message.value;
     		
     		ws.send(message.value);
     		
-    		message.value = "";
+    		message.value = ""; */
+    		var message = $("#msgArea").val();
+    		ws.send(message);
+    		message.html("");
     	}
+    	
+    	function disconnect(){
+            ws.close();
+        }
     	
     	
     	
