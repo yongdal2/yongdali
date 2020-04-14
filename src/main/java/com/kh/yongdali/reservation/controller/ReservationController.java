@@ -34,6 +34,7 @@ public class ReservationController {
 		String mno = ((Member)session.getAttribute("loginUser")).getmNo();	
 		ArrayList<Address> list = rService.getAddressList(mno);
 		
+		mv.addObject("list",list);
 		mv.setViewName("user/reservation");
 		return mv;
 	}
