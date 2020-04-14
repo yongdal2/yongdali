@@ -267,6 +267,6 @@ COMMIT;
 --SELECT * FROM RESERVATION;
 --SELECT * FROM ADDRESS;
 
-— 수정자 : 이탐희
-— 수정일시 : 200413_16:06
-— reservation/member/driver 수정 / address 추가
+-- 수정자 : 이탐희
+-- 수정일시 : 200413_16:06
+-- reservation/member/driver 수정 / address 추가
