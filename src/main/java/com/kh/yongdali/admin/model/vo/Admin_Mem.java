@@ -1,30 +1,34 @@
-package com.kh.yongdali.member.model.vo;
+//member.vo.Member.java로 대체 
+
+package com.kh.yongdali.admin.model.vo;
 
 import java.sql.Date;
 
-public class Member {
-
+public class Admin_Mem {
+	
 	private String mNo;
 	private String mId;
 	private String pwd;
-	private String mName;
+	private String name;
 	private String phone;
 	private String mSort;
 	private String mStatus;
-	private char pushEnabled;
+	private String pushEnabled;
 	private Date enrollDate;
 	
-	public Member() {
-		super();
+	
+	public Admin_Mem() {
+		
 	}
 
-	//-String mNo
-	public Member(String mId, String pwd, String mName, String phone, String mSort, String mStatus, char pushEnabled,
-			Date enrollDate) {
+//전제
+	public Admin_Mem(String mNo, String mId, String pwd, String name, String phone, String mSort, String mStatus,
+			String pushEnabled, Date enrollDate) {
 		super();
+		this.mNo = mNo;
 		this.mId = mId;
 		this.pwd = pwd;
-		this.mName = mName;
+		this.name = name;
 		this.phone = phone;
 		this.mSort = mSort;
 		this.mStatus = mStatus;
@@ -32,26 +36,13 @@ public class Member {
 		this.enrollDate = enrollDate;
 	}
 
-	//-String mNo, Date enrollDate
-	public Member(String mId, String pwd, String mName, String phone, String mSort, String mStatus,
-			char pushEnabled) {
-		super();
-		this.mId = mId;
-		this.pwd = pwd;
-		this.mName = mName;
-		this.phone = phone;
-		this.mSort = mSort;
-		this.mStatus = mStatus;
-		this.pushEnabled = pushEnabled;
-	}
-	
-	public Member(String mNo, String mId, String pwd, String mName, String phone, String mSort, String mStatus,
-			char pushEnabled, Date enrollDate) {
+//-pwd	
+	public Admin_Mem(String mNo, String mId, String name, String phone, String mSort, String mStatus,
+			String pushEnabled, Date enrollDate) {
 		super();
 		this.mNo = mNo;
 		this.mId = mId;
-		this.pwd = pwd;
-		this.mName = mName;
+		this.name = name;
 		this.phone = phone;
 		this.mSort = mSort;
 		this.mStatus = mStatus;
@@ -65,8 +56,8 @@ public class Member {
 
 	public void setmNo(String mNo) {
 		this.mNo = mNo;
-	}	
-	
+	}
+
 	public String getmId() {
 		return mId;
 	}
@@ -83,12 +74,12 @@ public class Member {
 		this.pwd = pwd;
 	}
 
-	public String getmName() {
-		return mName;
+	public String getName() {
+		return name;
 	}
 
-	public void setmName(String mName) {
-		this.mName = mName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getPhone() {
@@ -115,11 +106,11 @@ public class Member {
 		this.mStatus = mStatus;
 	}
 
-	public char getPushEnabled() {
+	public String getPushEnabled() {
 		return pushEnabled;
 	}
 
-	public void setPushEnabled(char pushEnabled) {
+	public void setPushEnabled(String pushEnabled) {
 		this.pushEnabled = pushEnabled;
 	}
 
@@ -133,8 +124,13 @@ public class Member {
 
 	@Override
 	public String toString() {
-		return "Member [mNo=" + mNo + ", mId=" + mId + ", pwd=" + pwd + ", mName=" + mName + ", phone=" + phone
+		return "Admin_Mem [mNo=" + mNo + ", mId=" + mId + ", pwd=" + pwd + ", name=" + name + ", phone=" + phone
 				+ ", mSort=" + mSort + ", mStatus=" + mStatus + ", pushEnabled=" + pushEnabled + ", enrollDate="
 				+ enrollDate + "]";
 	}
+
+	
+	
+	
+	
 }

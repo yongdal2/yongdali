@@ -64,7 +64,7 @@
 									<div class="col-xs-3 col-md-3">
 										<button class="btn btn-sm btn_ydl" id="editAddrBtn${vs.index}" data-toggle="modal"
 											data-target="#editAddr" value="${ a.aNo }">수정</button>
-										<button class="btn btn-sm">삭제</button>
+										<button class="btn btn-sm" id="deleteAddrBtn${vs.index}" value="${a.aNo }">삭제</button>
 									</div>
 								</div>
 							</c:forEach>
@@ -72,11 +72,12 @@
 							$(function(){
 								$("button[id^='editAddrBtn']").on("click",function(){
 									$.ajax({
-										url:"getEditAddr.myp",
+										url:"getUpAddr.myp",
 										data:{aNo:$(this).val()},
 										dataType:"json",
 										success:function(data){
 											console.log(data);
+											$("#edAno").val(data.aNo);
 											$("#edPlace").val(decodeURIComponent(data.aPlace).replace(/\+/g, " "));
 											$("#edName").val(decodeURIComponent(data.aName));
 											$("#edAdr_address").val(decodeURIComponent(data.aAddr1).replace(/\+/g, " "));
@@ -87,6 +88,19 @@
 										}
 									});
 								});
+							});
+							
+							$(function(){
+								$("button[id^='deleteAddrBtn']").on("click",function(){
+									var aNo = $(this).val();
+									var delA = confirm( "삭제하시겠습니까?");
+									
+									if(delA==true){
+										document.location.href ="delte";
+									}else{
+										alert("윽");
+									}
+									
 							});
 							</script>
 						</div>
@@ -104,7 +118,7 @@
             <div class="modal-content center-block mdC">
                 <br>
                 <div class="modal-body noto mb_pd pt0">
-                <form action="">
+                <form id="inAddrForm" method="post">
                     <div class="row  text-left center-block modalBaseAd">
                         <div class="row">
                             <div class="col-xs-12 col-md-12 fw6 pr23 fw6 ft18">
@@ -118,7 +132,7 @@
 								배송지명<span class="red"> *</span>
                             </div>
                             <div class="col-xs-5 col-md-5 p0mt10">
-                                <input type="text" class="form-control noto addrIp" id="#3">
+                                <input type="text" class="form-control noto addrIp" id="adPlace" name="adPlace">
                             </div>
                         </div>
 
@@ -127,7 +141,7 @@
 								수령인<span class="red"> *</span>
                             </div>
                             <div class="col-xs-5 col-md-5 p0mt10">
-                                <input type="text" class="form-control noto" id="#4">
+                                <input type="text" class="form-control noto" id="adName" name="adName">
                             </div>
                         </div>
                         <div class="row text-left pl23 pb5">
@@ -135,7 +149,7 @@
                                 	주소<span class="red"> *</span>
                             </div>
                             <div class="col-xs-6 col-md-6 p0mt10">
-                                <input type="text" class="form-control noto addrIp" id="adAdr_address">
+                                <input type="text" class="form-control noto addrIp" id="adAdr_address" name="adAdr_address">
                             </div>
                             <div class="col-xs-2 col-md-2 btn btn_ydl_l searchAddrBtn" id="searchAddr1btn" data-toggle="modal" data-target="#adSearchAddr" onclick="adSearchAddr()">
 								주소 검색
@@ -146,7 +160,7 @@
                                 <span class="red"> </span>
                             </div>
                             <div class="col-xs-8 col-md-8 p0mt10">
-                                <input type="text" class="form-control noto addrIp" id="adAdr_detail" placeholder="상세주소를 입력해 주세요.">
+                                <input type="text" class="form-control noto addrIp" id="adAdr_detail" name="adAdr_detail" placeholder="상세주소를 입력해 주세요.">
                             </div>
                         </div>
                         <div class="row text-left pl23 pb5">
@@ -154,13 +168,13 @@
 								연락처<span class="red"> *</span>
                             </div>
                             <div class="col-xs-5 col-md-5 p0mt10">
-                                <input type="text" class="form-control noto addrIp" id="#dd" name="aPhone">
+                                <input type="text" class="form-control noto addrIp" id="adPhone" name="adPhone">
                             </div>
                         </div>
                         <div class="col-xs-12 col-md-12 p0mt10" id="pwCheckText"></div>
                         <div class="col-xs-12 col-md-12 text-center">
                             <button type="button" class="btn mdbtn lg" data-dismiss="modal">취소</button>
-                            <button type="submit" class="btn btn_ydl mdbtn" data-dismiss="modal">배송지 추가</button>
+                            <button type="submit" id="btnInAddr" class="btn btn_ydl mdbtn" data-dismiss="modal">배송지 추가</button>
                         </div>
                     </div>
                 </form>
@@ -175,6 +189,7 @@
             <div class="modal-content center-block mdC">
                 <br>
                 <div class="modal-body noto mb_pd">
+                	<form id="upAddrForm" method="post">
                     <div class="row  text-left center-block modalBaseAd">
                         <div class="row">
                             <div class="col-xs-12 col-md-12 fw6 pr23 ft18">
@@ -189,7 +204,7 @@
 								배송지명<span class="red"> *</span>
                             </div>
                             <div class="col-xs-5 col-md-5 p0mt10">
-                                <input type="text" class="form-control noto addrIp" id="edPlace" name="aPlace">
+                                <input type="text" class="form-control noto addrIp" id="edPlace" name="edPlace">
                             </div>
                         </div>
 
@@ -198,7 +213,7 @@
 								수령인<span class="red"> *</span>
                             </div>
                             <div class="col-xs-5 col-md-5 p0mt10">
-                                <input type="text" class="form-control noto addrIp" id="edName" name="aName">
+                                <input type="text" class="form-control noto addrIp" id="edName" name="edName">
                             </div>
                         </div>
                         <div class="row text-left pl23 pb5">
@@ -206,7 +221,7 @@
                                 	주소<span class="red"> *</span>
                             </div>
                             <div class="col-xs-6 col-md-6 p0mt10">
-                                <input type="text" class="form-control noto addrIp" id="edAdr_address">
+                                <input type="text" class="form-control noto addrIp" id="edAdr_address" name="edAdr_address">
                             </div>
                             <div class="col-xs-2 col-md-2 btn btn_ydl_l searchAddrBtn" onclick="edSearchAddr()">
 								주소 검색
@@ -217,7 +232,7 @@
                                 <span class="red"> </span>
                             </div>
                             <div class="col-xs-8 col-md-8 p0mt10">
-                                <input type="text" class="form-control noto addrIp" id="edAdr_detail" placeholder="상세주소를 입력해 주세요.">
+                                <input type="text" class="form-control noto addrIp" id="edAdr_detail" name="edAdr_detail" placeholder="상세주소를 입력해 주세요.">
                             </div>
                         </div>
                         <div class="row text-left pl23 pb5">
@@ -225,20 +240,30 @@
 								연락처<span class="red"> *</span>
                             </div>
                             <div class="col-xs-5 col-md-5 p0mt10">
-                                <input type="text" class="form-control noto addrIp" id="edPhone">
+                                <input type="text" class="form-control noto addrIp" id="edPhone" name="edPhone">
                             </div>
+                            	<input type="hidden" id="edAno" name="edAno">
                         </div>
                         <div class="col-xs-12 col-md-12 text-center">
                             <button type="button" class="btn mdbtn lg" data-dismiss="modal">취소</button>
-                            <button type="submit" class="btn btn_ydl mdbtn" data-dismiss="modal">배송지 수정</button>
+                            <button type="submit" id="btnUpAddr" class="btn btn_ydl mdbtn" data-dismiss="modal">배송지 수정</button>
                         </div>
                         <div class="col-xs-12 col-md-12 text-center">
                         </div>
                     </div>
+                	</form>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+    	$("#btnUpAddr").on("click",function(){
+    		$("#upAddrForm").attr("action","uAddr.myp").submit();
+    	});
+    	$("#btnInAddr").on("click",function(){
+    		$("#inAddrForm").attr("action","iAddr.myp").submit();
+    	});
+    </script>
     <!-- 배송지 주소 추가 주소 검색 모달 -->
 	<div id=modalAd class="modalAddr">
 		<div id="layerAd">

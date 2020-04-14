@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -48,51 +49,35 @@
 					<table class="table table-striped table-hover text-center">
 						<thead id="thead">
 							<tr>
-								<td>회원번호</td>
-								<td>회원ID(이메일)</td>
-								<!-- <td>비밀번호</td> -->
-								<td>이름</td>
-								<td>휴대폰번호</td>
-								<td>회원구분</td>
-								<td>회원상태</td>
-								<td>푸시알림설정</td>
-								<td>가입일</td>
+								<th align="center">회원번호</th>
+								<th align="center">회원ID(이메일)</th>
+								<th align="center">이름</th>
+								<th align="center">휴대폰번호</th>
+								<th align="center">회원구분</th>
+								<th align="center">회원상태</th>
+								<th align="center">알림설정</th>
+								<th align="center">가입일</th>
 							</tr>
 						</thead>
+						
+						<c:forEach var="a" items="${ list }">
 						<tbody id="tbody">
 							<tr>
-								<td>M2</td>
-								<td>mem01@naver.com</td>
-								<td>홍멤버</td>
-								<td>01022222222</td>
-								<td>일반</td>
-								<td>정상</td>
-								<td>Y</td>
-								<td>200318</td>
-							</tr>
-							<tr>
-								<td>M3</td>
-								<td>biz01@naver.com</td>
-								<td>김거상</td>
-								<td>01033333333</td>
-								<td>사업자</td>
-								<td>정상</td>
-								<td>N</td>
-								<td>200318</td>
-							</tr>
-							<tr>
-								<td>M4</td>
-								<td>biz02@naver.com</td>
-								<td>최거상</td>
-								<td>01044444444</td>
-								<td>사업자</td>
-								<td>정상</td>
-								<td>N</td>
-								<td>200318</td>
+								<td>${ a.mNo }</td>
+								<td>${ a.mId }</td>
+								<td>${ a.mName }</td>
+								<td>${ a.phone }</td>
+								<td>${ a.mSort }</td>
+								<td>${ a.mStatus }</td>
+								<td>${ a.pushEnabled }</td>
+								<td>${ a.enrollDate }</td>
 							</tr>
 						</tbody>
+						</c:forEach>
 					</table>
 				</div>
+				
+				<!-- 페이징 처리 -->
 				<div class="row text-center" style="height: 400px">
 					<ul class="pagination ft_gr">
 						<li><a href="#"><<</a></li>

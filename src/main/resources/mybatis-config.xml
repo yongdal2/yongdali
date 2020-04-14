@@ -22,6 +22,7 @@
 		<mapper resource="mappers/address-mapper_njh.xml"/>
 		<mapper resource="mappers/reservation-mapper.xml"/>
 		<mapper resource="mappers/myPage-mapper.xml"/>
+		<mapper resource="mappers/admin-mapper.xml"/>
 	</mappers>
 	
 </configuration>  
