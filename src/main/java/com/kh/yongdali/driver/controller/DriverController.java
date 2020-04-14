@@ -67,8 +67,6 @@ public class DriverController {
 		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		gson.toJson(list,response.getWriter());
-		
-		
 	}
 	
 	/*

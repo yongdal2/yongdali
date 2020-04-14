@@ -8,10 +8,10 @@ public class Reservation {
 	private String rDNo;		// 기사 외래키
 	private float capacity;	// 차량 정보(톤)
 	private String type;		// 차량 옵션
-	private String start_name;	// 상차할 이름
-	private String end_name;	// 하차받을 이름
-	private String start_phone;	// 상차 연락처
-	private String end_phone;	// 하차 연락처
+	private String startName;	// 상차할 이름
+	private String endName;	// 하차받을 이름
+	private String startPhone;	// 상차 연락처
+	private String endPhone;	// 하차 연락처
 	private String startAddr;	// 출발지
 	private String endAddr;		// 도착지
 	private String distance;	// 거리
@@ -99,44 +99,44 @@ public class Reservation {
 	public void setDistance(String distance) {
 		this.distance = distance;
 	}
-
-	public String getStart_name() {
-		return start_name;
+	
+	public String getStartName() {
+		return startName;
 	}
 
 
-	public void setStart_name(String start_name) {
-		this.start_name = start_name;
+	public void setStartName(String startName) {
+		this.startName = startName;
 	}
 
 
-	public String getEnd_name() {
-		return end_name;
+	public String getEndName() {
+		return endName;
 	}
 
 
-	public void setEnd_name(String end_name) {
-		this.end_name = end_name;
+	public void setEndName(String endName) {
+		this.endName = endName;
 	}
 
 
-	public String getStart_phone() {
-		return start_phone;
+	public String getStartPhone() {
+		return startPhone;
 	}
 
 
-	public void setStart_phone(String start_phone) {
-		this.start_phone = start_phone;
+	public void setStartPhone(String startPhone) {
+		this.startPhone = startPhone;
 	}
 
 
-	public String getEnd_phone() {
-		return end_phone;
+	public String getEndPhone() {
+		return endPhone;
 	}
 
 
-	public void setEnd_phone(String end_phone) {
-		this.end_phone = end_phone;
+	public void setEndPhone(String endPhone) {
+		this.endPhone = endPhone;
 	}
 
 
@@ -275,6 +275,19 @@ public class Reservation {
 
 	public void setEnrollDate(Date enrollDate) {
 		this.enrollDate = enrollDate;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Reservation [rNo=" + rNo + ", rMNo=" + rMNo + ", rDNo=" + rDNo + ", capacity=" + capacity + ", type="
+				+ type + ", startName=" + startName + ", endName=" + endName + ", startPhone=" + startPhone
+				+ ", endPhone=" + endPhone + ", startAddr=" + startAddr + ", endAddr=" + endAddr + ", distance="
+				+ distance + ", rightLoad=" + rightLoad + ", rightUnload=" + rightUnload + ", startDate=" + startDate
+				+ ", startTime=" + startTime + ", endDate=" + endDate + ", endTime=" + endTime + ", helpLoad="
+				+ helpLoad + ", helpUnload=" + helpUnload + ", luggage=" + luggage + ", msg=" + msg + ", amount="
+				+ amount + ", payYN=" + payYN + ", dealYN=" + dealYN + ", dealDate=" + dealDate + ", calcYN=" + calcYN
+				+ ", calcDate=" + calcDate + ", enrollDate=" + enrollDate + "]";
 	}
 
 	
