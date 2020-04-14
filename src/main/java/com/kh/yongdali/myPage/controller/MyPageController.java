@@ -1,9 +1,15 @@
 package com.kh.yongdali.myPage.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.myPage.model.service.MyPageService;
 import com.kh.yongdali.myPage.model.vo.Address;
+import com.sun.org.apache.xml.internal.serialize.Printer;
 
 @SessionAttributes("loginUser")
 @Controller
@@ -56,24 +63,7 @@ public class MyPageController {
 		return "driver/myPage/driverSettle";
 	}
 
-	//마이페이지 주소록
-	@RequestMapping("addrBook.myp")
-	public ModelAndView addrList(ModelAndView mv, @SessionAttribute Member loginUser) {
-
-		String mNo = loginUser.getmNo();
-		System.out.println(mNo);
-		
-		int listCount = mpService.getAddrListCount(mNo);
-		System.out.println(listCount);
-		
-		ArrayList<Address> aList = mpService.selectAddrList(mNo);
-		
-		mv.addObject("aList", aList);
-		mv.addObject("listCount", listCount);
-		mv.setViewName("user/myPage/addressBook");
-
-		return mv;
-	}
+	
 	//유저 폰번호 업데이트
 //	@RequestMapping("phoneUpdate.myp")
 //	public String userPhoneUpdate(Member m, Model model,
@@ -91,5 +81,45 @@ public class MyPageController {
 //			return "common/errorPage";
 //		}
 //	}	
+	
+	//마이페이지 주소록
+		@RequestMapping("addrBook.myp")
+		public ModelAndView addrList(ModelAndView mv, @SessionAttribute Member loginUser) {
 
+			String mNo = loginUser.getmNo();
+			System.out.println(mNo);
+			
+			int listCount = mpService.getAddrListCount(mNo);
+			System.out.println(listCount);
+			
+			ArrayList<Address> aList = mpService.selectAddrList(mNo);
+			
+			mv.addObject("aList", aList);
+			mv.addObject("listCount", listCount);
+			mv.setViewName("user/myPage/addressBook");
+
+			return mv;
+		}
+		
+	//수정할 주소록
+		@RequestMapping("getEditAddr.myp")
+		public void getEditAddr(HttpServletResponse rs, String aNo) throws IOException {
+			Address a = mpService.getEditAddr(aNo);
+			System.out.println(a);
+			
+			rs.setContentType("application/json; charset=utf-8");
+			
+			JSONObject adJob = new JSONObject();
+			adJob.put("aNo",a.getaNo());
+			adJob.put("aPlace",URLEncoder.encode(a.getaPlace(), "UTF-8"));
+			adJob.put("aName",URLEncoder.encode(a.getaName(), "UTF-8"));
+			adJob.put("aAddr1",URLEncoder.encode(a.getaAddress().split(",")[0], "UTF-8"));
+			adJob.put("aAddr2",URLEncoder.encode(a.getaAddress().split(",")[1], "UTF-8"));
+			adJob.put("aPhone", a.getaPhone());
+			
+			PrintWriter out = rs.getWriter();
+			out.print(adJob);
+			out.flush();
+			out.close();
+		}
 }

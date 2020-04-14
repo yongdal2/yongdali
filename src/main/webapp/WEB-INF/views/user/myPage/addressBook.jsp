@@ -17,11 +17,9 @@
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
 	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 	<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.js"></script>
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <title>용달이 | 예약 내역</title>
@@ -35,43 +33,62 @@
 		<div class="row">
 			<div class="col-xs-12 col-md-12 h2 jal">주소록</div>
 			<div class="col-xs-12 col-md-12 na">
-				<div class="row na" style="margin-bottom: 30px">
-					<div class="col-xs-9 col-md-10 h4">배송지 목록</div>
+				<div class="row na mb30">
+					<div class="col-xs-9 col-md-10 h4">배송지 목록(${ listCount })</div>
 					<div class="col-xs-3 col-md-2 text-center">
 						<button class="btn btn_ydl_l" data-toggle="modal"
 							data-target="#addAddr">배송지 추가</button>
 					</div>
 					<div class="col-xs-12 col-md-12 text-center noto">
 						<div class="col-xs-12 col-md-12">
-							<div class="row fw6"
-								style="border-top: black solid 1px; border-bottom: 1px solid #dedede; padding: 10px;">
+							<div class="row fw6 addrHbt">
 								<div class="col-xs-2 col-md-2">배송지</div>
 								<div class="col-xs-5 col-md-5">주소</div>
 								<div class="col-xs-2 col-md-2">연락처</div>
 								<div class="col-xs-3 col-md-3">수정 · 삭제</div>
 							</div>
-							<c:forEach var="a" items="${ aList }">
-							<div class="row small"
-								style="border-bottom: 1px solid #dedede; padding: 10px;">
-								<div class="col-xs-2 col-md-2">
-									<span>${ a.aPlace }</span> <br> <span>${ a.aName }</span>
+							<c:forEach var="a" items="${ aList }" varStatus="vs">
+								<div class="row small addrBbt">
+									<div class="col-xs-2 col-md-2">
+										<span>${ a.aPlace }</span> <br> <span>${ a.aName }</span>
+									</div>
+									<div class="col-xs-5 col-md-5">
+										<c:forEach var="addr" items="${fn:split(a.aAddress, ',')}">
+											<span>${ addr }</span>
+											<br>
+										</c:forEach>
+									</div>
+									<div class="col-xs-2 col-md-2">
+										<span>${ a.aPhone } </span>
+									</div>
+									<div class="col-xs-3 col-md-3">
+										<button class="btn btn-sm btn_ydl" id="editAddrBtn${vs.index}" data-toggle="modal"
+											data-target="#editAddr" value="${ a.aNo }">수정</button>
+										<button class="btn btn-sm">삭제</button>
+									</div>
 								</div>
-								<div class="col-xs-5 col-md-5">
-									<c:forEach var="addr" items="${fn:split(a.aAddress, ',')}" varStatus="status">
-									<span>${ addr }</span>
-									<br>
-									</c:forEach>
-								</div>
-								<div class="col-xs-2 col-md-2">
-									<span>${ a.aPhone } </span>
-								</div>
-								<div class="col-xs-3 col-md-3">
-									<button class="btn btn-sm btn_ydl" data-toggle="modal"
-										data-target="#editAddr" onclick="">수정</button>
-									<button class="btn btn-sm">삭제</button>
-								</div>
-							</div>
 							</c:forEach>
+							<script>
+							$(function(){
+								$("button[id^='editAddrBtn']").on("click",function(){
+									$.ajax({
+										url:"getEditAddr.myp",
+										data:{aNo:$(this).val()},
+										dataType:"json",
+										success:function(data){
+											console.log(data);
+											$("#edPlace").val(decodeURIComponent(data.aPlace).replace(/\+/g, " "));
+											$("#edName").val(decodeURIComponent(data.aName));
+											$("#edAdr_address").val(decodeURIComponent(data.aAddr1).replace(/\+/g, " "));
+											$("#edAdr_detail").val(decodeURIComponent(data.aAddr2).replace(/\+/g, " "));
+											$("#edPhone").val(decodeURIComponent(data.aPhone));
+										},error:function(){
+											console.log("aj실패")
+										}
+									});
+								});
+							});
+							</script>
 						</div>
 					</div>
 				</div>
@@ -79,78 +96,74 @@
 			</div>
 		</div>
 	</div>
+
     <!-- 주소 추가 -->
     <div class="modal fade" id="addAddr" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
-            <div class="modal-content center-block" style="max-width: 440px;">
+            <div class="modal-content center-block mdC">
                 <br>
-                <div class="modal-body noto mb_pd" style="padding-top: 0px">
-                    <div class="row  text-left center-block" style="border: 1px solid #dedede; border-radius: 16px; padding: 23px; background: #fff; width: 100%; max-width: 420px;">
+                <div class="modal-body noto mb_pd pt0">
+                <form action="">
+                    <div class="row  text-left center-block modalBaseAd">
                         <div class="row">
-                            <div class="col-xs-12 col-md-12 fw6" style="padding-right: 23px; font-size: 18px; font-weight: 600;">
+                            <div class="col-xs-12 col-md-12 fw6 pr23 fw6 ft18">
 								배송지 정보 상세
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                         </div>
-                        <hr style="">
-                        <div class="row text-left" style="padding-left: 23px; padding-bottom: 5px;">
-                            <div class="col-xs-3 col-md-3" style="padding: 0; margin-top: 16px; font-size: 14px; line-height: 24px;">
+                        <hr>
+                        <div class="row text-left pl23">
+                            <div class="col-xs-3 col-md-3 addrLa">
 								배송지명<span class="red"> *</span>
                             </div>
-                            <div class="col-xs-5 col-md-5" style="padding: 0; margin-top: 10px;">
-                                <input type="text" class="form-control noto" id="#3" style="width: 100%; height: 35px;">
+                            <div class="col-xs-5 col-md-5 p0mt10">
+                                <input type="text" class="form-control noto addrIp" id="#3">
                             </div>
                         </div>
 
-                        <div class="row text-left" style="padding-left: 23px; padding-bottom: 5px;">
-                            <div class="col-xs-3 col-md-3" style="padding: 0; margin-top: 16px; font-size: 14px; line-height: 24px;">
+                        <div class="row text-left pl23 pb5">
+                            <div class="col-xs-3 col-md-3 addrLa">
 								수령인<span class="red"> *</span>
                             </div>
-                            <div class="col-xs-5 col-md-5" style="padding: 0; margin-top: 10px;">
-                                <input type="text" class="form-control noto" id="#4" style="width: 100%; height: 35px;" >
+                            <div class="col-xs-5 col-md-5 p0mt10">
+                                <input type="text" class="form-control noto" id="#4">
                             </div>
                         </div>
-                        <div class="row text-left" style="padding-left: 23px; padding-bottom: 5px;">
-                            <div class="col-xs-3 col-md-3" style="padding: 0; margin-top: 16px; font-size: 14px; line-height: 24px;">
+                        <div class="row text-left pl23 pb5">
+                            <div class="col-xs-3 col-md-3 addrLa">
                                 	주소<span class="red"> *</span>
                             </div>
-                            <div class="col-xs-6 col-md-6" style="padding: 0; margin-top: 10px;">
-                                <input type="text" class="form-control noto" id="adAdr_address" style="width: 100%; height: 35px;" placeholder="주소1">
+                            <div class="col-xs-6 col-md-6 p0mt10">
+                                <input type="text" class="form-control noto addrIp" id="adAdr_address">
                             </div>
-                            <div class="col-xs-2 col-md-2 btn btn_ydl_l" id="searchAddr1btn" style="padding: 0; margin-top: 10px; height: 35px; line-height: 35px;" data-toggle="modal" data-target="#adSearchAddr" onclick="adSearchAddr()">
+                            <div class="col-xs-2 col-md-2 btn btn_ydl_l searchAddrBtn" id="searchAddr1btn" data-toggle="modal" data-target="#adSearchAddr" onclick="adSearchAddr()">
 								주소 검색
                             </div>
                         </div>
-                        <div class="row text-left" style="padding-left: 23px; padding-bottom: 5px;">
-                            <div class="col-xs-3 col-md-3" style="padding: 0; margin-top: 16px; font-size: 14px; line-height: 24px;">
+                        <div class="row text-left pl23 pb5">
+                            <div class="col-xs-3 col-md-3 addrLa">
                                 <span class="red"> </span>
                             </div>
-                            <div class="col-xs-8 col-md-8" style="padding: 0; margin-top: 10px;">
-                                <input type="text" class="form-control noto" id="adAdr_detail" style="width: 100%; height: 35px;" placeholder="상세주소를 입력해 주세요.">
+                            <div class="col-xs-8 col-md-8 p0mt10">
+                                <input type="text" class="form-control noto addrIp" id="adAdr_detail" placeholder="상세주소를 입력해 주세요.">
                             </div>
                         </div>
-                        <div class="row text-left" style="padding-left: 23px; padding-bottom: 5px;">
-                            <div class="col-xs-3 col-md-3" style="padding: 0; margin-top: 16px; font-size: 14px; line-height: 24px;">
+                        <div class="row text-left pl23 pb5">
+                            <div class="col-xs-3 col-md-3 addrLa">
 								연락처<span class="red"> *</span>
                             </div>
-                            <div class="col-xs-5 col-md-5" style="padding: 0; margin-top: 10px;">
-                                <input type="text" class="form-control noto" id="#8" style="width: 100%; height: 35px;">
+                            <div class="col-xs-5 col-md-5 p0mt10">
+                                <input type="text" class="form-control noto addrIp" id="#dd" name="aPhone">
                             </div>
                         </div>
-                        <div class="row text-left" style="padding-left: 23px; padding-bottom: 5px;">
-                            <div class="col-xs-3 col-md-3" style="padding: 0; margin-top: 16px; font-size: 14px; line-height: 24px;">
-								연락처2</div>
-                            <div class="col-xs-5 col-md-5" style="padding: 0; margin-top: 10px;">
-                                <input type="text" class="form-control noto" id="#9" style="width: 100%; height: 35px;">
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-md-12" id="pwCheckText" style="padding: 0; margin-top: 5px; display: none;"></div>
+                        <div class="col-xs-12 col-md-12 p0mt10" id="pwCheckText"></div>
                         <div class="col-xs-12 col-md-12 text-center">
-                            <button type="button" class="btn" data-dismiss="modal" style="margin: 20px 10px 0px 10px; color: gray;">취소</button>
-                            <button type="submit" class="btn btn_ydl" data-dismiss="modal" style="margin: 20px 10px 0px 10px;">배송지 추가</button>
+                            <button type="button" class="btn mdbtn lg" data-dismiss="modal">취소</button>
+                            <button type="submit" class="btn btn_ydl mdbtn" data-dismiss="modal">배송지 추가</button>
                         </div>
                     </div>
+                </form>
                 </div>
             </div>
         </div>
@@ -159,72 +172,65 @@
     <div class="modal fade" id="editAddr" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
-            <div class="modal-content center-block" style="max-width: 440px;">
+            <div class="modal-content center-block mdC">
                 <br>
-                <div class="modal-body noto mb_pd" style="padding-top: 0px">
-                    <div class="row  text-left center-block" style="border: 1px solid #dedede; border-radius: 16px; padding: 23px; background: #fff; width: 100%; max-width: 420px;">
+                <div class="modal-body noto mb_pd">
+                    <div class="row  text-left center-block modalBaseAd">
                         <div class="row">
-                            <div class="col-xs-12 col-md-12 fw6" style="padding-right: 23px; font-size: 18px; font-weight: 600;">
+                            <div class="col-xs-12 col-md-12 fw6 pr23 ft18">
 								배송지 정보 상세
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                         </div>
-                        <hr style="">
+                        <hr>
 
-                        <div class="row text-left" style="padding-left: 23px; padding-bottom: 5px;">
-                            <div class="col-xs-3 col-md-3" style="padding: 0; margin-top: 16px; font-size: 14px; line-height: 24px;">
+                        <div class="row text-left pl23 pb5">
+                            <div class="col-xs-3 col-md-3 addrLa">
 								배송지명<span class="red"> *</span>
                             </div>
-                            <div class="col-xs-5 col-md-5" style="padding: 0; margin-top: 10px;">
-                                <input type="text" class="form-control noto" id="#13" style="width: 100%; height: 35px;">
+                            <div class="col-xs-5 col-md-5 p0mt10">
+                                <input type="text" class="form-control noto addrIp" id="edPlace" name="aPlace">
                             </div>
                         </div>
 
-                        <div class="row text-left" style="padding-left: 23px; padding-bottom: 5px;">
-                            <div class="col-xs-3 col-md-3" style="padding: 0; margin-top: 16px; font-size: 14px; line-height: 24px;">
+                        <div class="row text-left pl23 pb5">
+                            <div class="col-xs-3 col-md-3 addrLa">
 								수령인<span class="red"> *</span>
                             </div>
-                            <div class="col-xs-5 col-md-5" style="padding: 0; margin-top: 10px;">
-                                <input type="text" class="form-control noto" id="#14" style="width: 100%; height: 35px;" >
+                            <div class="col-xs-5 col-md-5 p0mt10">
+                                <input type="text" class="form-control noto addrIp" id="edName" name="aName">
                             </div>
                         </div>
-                        <div class="row text-left" style="padding-left: 23px; padding-bottom: 5px;">
-                            <div class="col-xs-3 col-md-3" style="padding: 0; margin-top: 16px; font-size: 14px; line-height: 24px;">
+                        <div class="row text-left pl23 pb5">
+                            <div class="col-xs-3 col-md-3 addrLa">
                                 	주소<span class="red"> *</span>
                             </div>
-                            <div class="col-xs-6 col-md-6" style="padding: 0; margin-top: 10px;">
-                                <input type="text" class="form-control noto" id="edAdr_address" style="width: 100%; height: 35px;" placeholder="주소1">
+                            <div class="col-xs-6 col-md-6 p0mt10">
+                                <input type="text" class="form-control noto addrIp" id="edAdr_address">
                             </div>
-                            <div class="col-xs-2 col-md-2 btn btn_ydl_l" style="padding: 0; margin-top: 10px; height: 35px; line-height: 35px;" onclick="edSearchAddr()">
+                            <div class="col-xs-2 col-md-2 btn btn_ydl_l searchAddrBtn" onclick="edSearchAddr()">
 								주소 검색
                             </div>
                         </div>
-                        <div class="row text-left" style="padding-left: 23px; padding-bottom: 5px;">
-                            <div class="col-xs-3 col-md-3" style="padding: 0; margin-top: 16px; font-size: 14px; line-height: 24px;">
+                        <div class="row text-left pl23 pb5">
+                            <div class="col-xs-3 col-md-3 addrLa">
                                 <span class="red"> </span>
                             </div>
-                            <div class="col-xs-8 col-md-8" style="padding: 0; margin-top: 10px;">
-                                <input type="text" class="form-control noto" id="edAdr_detail" style="width: 100%; height: 35px;" placeholder="상세주소를 입력해 주세요.">
+                            <div class="col-xs-8 col-md-8 p0mt10">
+                                <input type="text" class="form-control noto addrIp" id="edAdr_detail" placeholder="상세주소를 입력해 주세요.">
                             </div>
                         </div>
-                        <div class="row text-left" style="padding-left: 23px; padding-bottom: 5px;">
-                            <div class="col-xs-3 col-md-3" style="padding: 0; margin-top: 16px; font-size: 14px; line-height: 24px;">
+                        <div class="row text-left pl23 pb5">
+                            <div class="col-xs-3 col-md-3 addrLa">
 								연락처<span class="red"> *</span>
                             </div>
-                            <div class="col-xs-5 col-md-5" style="padding: 0; margin-top: 10px;">
-                                <input type="text" class="form-control noto" id="#18" style="width: 100%; height: 35px;">
-                            </div>
-                        </div>
-                        <div class="row text-left" style="padding-left: 23px; padding-bottom: 5px;">
-                            <div class="col-xs-3 col-md-3" style="padding: 0; margin-top: 16px; font-size: 14px; line-height: 24px;">
-								연락처2</div>
-                            <div class="col-xs-5 col-md-5" style="padding: 0; margin-top: 10px;">
-                                <input type="text" class="form-control noto" id="#19" style="width: 100%; height: 35px;">
+                            <div class="col-xs-5 col-md-5 p0mt10">
+                                <input type="text" class="form-control noto addrIp" id="edPhone">
                             </div>
                         </div>
                         <div class="col-xs-12 col-md-12 text-center">
-                            <button type="button" class="btn" data-dismiss="modal" style="margin: 20px 10px 0px 10px; color: gray;">취소</button>
-                            <button type="submit" class="btn btn_ydl" data-dismiss="modal" style="margin: 20px 10px 0px 10px;">배송지 추가</button>
+                            <button type="button" class="btn mdbtn lg" data-dismiss="modal">취소</button>
+                            <button type="submit" class="btn btn_ydl mdbtn" data-dismiss="modal">배송지 수정</button>
                         </div>
                         <div class="col-xs-12 col-md-12 text-center">
                         </div>

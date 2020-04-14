@@ -1,106 +1,121 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
-    <meta charset="UTF-8">
-    <title>용달이 | 관리자 페이지</title>
-        
-    <!-- Custom Css -->
-    <link rel="stylesheet" href="${contextPath}/resources/css/admin/admin.css">
-    
+<meta charset="UTF-8">
+<title>용달이 | 관리자 페이지</title>
+
+<!-- Custom Css -->
+<link rel="stylesheet"
+	href="${contextPath}/resources/css/admin/admin.css">
+
 
 </head>
 
 <body>
-   <!-- Navigation -->
+	<!-- Navigation -->
 	<%@ include file="../common/nav_admin.jsp"%>
-	
-	<!-- main -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 sidebar">
-                <h2 class="jal">관리자 페이지</h2>
-                <p>관리자 페이지에 대시보드 1, 회원 리스트 2개, 예약내역, 정산내역, 환불내역, 채팅내역 4장 총 7장</p>
-            </div>
-                <a href="Driver_Notice.html"><span class="sidebar_span">회원 확인</span></a>
-                <a href="Driver_Faq.html"><span class="sidebar_span">내역 확인</span></a><br>
-                <a href="#"><span class="sidebar_span1">회원님 목록</span></a>
-                <a href="#"><span class="sidebar_span1">기사님 목록</span></a>
-        </div>
-   	    <hr>
-	<!-- list -->
-    <div class="row" style="margin: 20px;">
-        <div class="col-xs-12 col-md-12" id="table">
-            <Br>
-            <table class="table table-striped table-hover text-center">
-                <thead id="thead">
-                    <tr>
-                        <td>예약 번호</td>
-                        <td>진행 상태</td>
-                        <td>예약 일자</td>
-                        <td>출발지</td>
-                        <td>도착지</td>
-                        <td>결제 금액</td>
-                        <td>차종</td>
-                    </tr>
-                </thead>
-                <tbody id="tbody">
-                    <tr>
-                        <td>089</td>
-                        <td>하차 완료</td>
-                        <td>2020.01.12</td>
-                        <td>부산시123</td>
-                        <td>제주시 1234</td>
-                        <td>123,000,34</td>
-                        <td>라보99ton</td>
-                    </tr>
-                    <tr>
-                        <td>089</td>
-                        <td>하차 완료</td>
-                        <td>2020.01.12</td>
-                        <td>부산시123</td>
-                        <td>제주시 1234</td>
-                        <td>123,000,34</td>
-                        <td>라보99ton</td>
-                    </tr>
-                    <tr>
-                        <td>089</td>
-                        <td>하차 완료</td>
-                        <td>2020.01.12</td>
-                        <td>부산시123</td>
-                        <td>제주시 1234</td>
-                        <td>123,000,34</td>
-                        <td>라보99ton</td>
-                    </tr>
-                </tbody>    
-            </table>
-        </div>
-                <div class="row text-center">
-                    <ul class="pagination ft_gr">
-                        <li><a href="#"><<</a></li>
-                        <li><a href="#"><</a></li>
-                        <li><a href="#">1</a></li>
-                        <li class="active"><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">></a></li>
-                        <li><a href="#">>></a></li>
-                    </ul>
-                </div>
-    </div>
-    </div>
+	<!-- 배경색 -->
+<!-- <div style="width: 100%; height: 100%; background: rgb(233, 246, 240); padding-top: 30px; padding-top: 30px;"> -->
+	<div style="width: 100%; height: 100%; padding-top: 30px; padding-top: 30px;">
 
-	<br>
-    <br>
-    <br>
+		<!-- main -->
+		<!-- <div class="container"> -->
+		<div class="content container">
+			<div class="row">
+				<h2 class="jal">관리자 페이지</h2>
+				<p>환불 목록 / admin_Refund.jsp / 컬럼명 선정</p>
+				<hr>
+			</div>
+			
+			<div class="row" id="content">
+			<!-- <div id="content"> -->
+				<div class="col-lg-3 sidebar">
+					<a href="#"><span class="sidebar_span">회원님 목록</span></a><br>
+					<a href="#"><span class="sidebar_span">기사님 목록</span></a><br>
+					<a href="#"><span class="sidebar_span">예약 내역</span></a><br>
+					<a href="#"><span class="sidebar_span">정산 내역</span></a><br> 
+					<a href="#"><span class="sidebar_span">환불 내역</span></a><br> 
+					<a href="#"><span class="sidebar_span">채팅 내역</span></a>
+				</div>
+
+			<!-- list -->
+			<div class="row" id="rowList">
+				<div class="col-xs-12 col-md-12" id="table">
+					<br>
+					<table class="table table-striped table-hover text-center">
+						<thead id="thead">
+							<tr>
+								<td>회원번호</td>
+								<td>회원ID(이메일)</td>
+								<!-- <td>비밀번호</td> -->
+								<td>이름</td>
+								<td>휴대폰번호</td>
+								<td>회원구분</td>
+								<td>회원상태</td>
+								<td>푸시알림설정</td>
+								<td>가입일</td>
+							</tr>
+						</thead>
+						<tbody id="tbody">
+							<tr>
+								<td>M2</td>
+								<td>mem01@naver.com</td>
+								<td>홍멤버</td>
+								<td>01022222222</td>
+								<td>일반</td>
+								<td>정상</td>
+								<td>Y</td>
+								<td>200318</td>
+							</tr>
+							<tr>
+								<td>M3</td>
+								<td>biz01@naver.com</td>
+								<td>김거상</td>
+								<td>01033333333</td>
+								<td>사업자</td>
+								<td>정상</td>
+								<td>N</td>
+								<td>200318</td>
+							</tr>
+							<tr>
+								<td>M4</td>
+								<td>biz02@naver.com</td>
+								<td>최거상</td>
+								<td>01044444444</td>
+								<td>사업자</td>
+								<td>정상</td>
+								<td>N</td>
+								<td>200318</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="row text-center" style="height: 400px">
+					<ul class="pagination ft_gr">
+						<li><a href="#"><<</a></li>
+						<li><a href="#"><</a></li>
+						<li><a href="#">1</a></li>
+						<li class="active"><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li><a href="#">5</a></li>
+						<li><a href="#">></a></li>
+						<li><a href="#">>></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 	<!-- Footer -->
 	<%@ include file="../common/footer.jsp"%>
-	
-    <script>
+
+
+	<script>
         var acc = document.getElementsByClassName("accordion");
         var i;
 
