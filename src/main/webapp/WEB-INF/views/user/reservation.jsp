@@ -41,13 +41,13 @@
 	                           	 차량 정보
 	                        </div>
 	                        <div id="carOption-div" class="content22">
-	                            <select name="capacity" id="sl1" onchange="cl1();" required>
+	                            <select name="capacity1" id="sl1" onchange="cl1();" required>
 	                                <option class="opt1" value="" disabled selected>톤수 선택</option>
-	                                <option class="opt2" value="1톤">1톤</option>
-	                                <option class="opt2" value="1.4톤">1.4톤</option>
-	                                <option class="opt2" value="2.5톤">2.5톤</option>
-	                                <option class="opt2" value="3.5톤">3.5톤</option>
-	                                <option class="opt2" value="5톤">5톤</option>
+	                                <option class="opt2" value="1">1톤</option>
+	                                <option class="opt2" value="1.4">1.4톤</option>
+	                                <option class="opt2" value="2.5">2.5톤</option>
+	                                <option class="opt2" value="3.5">3.5톤</option>
+	                                <option class="opt2" value="5">5톤</option>
 	                            </select>
 	
 	                            <select name="type" id="sl2" onchange="cl2();" required>
@@ -567,8 +567,8 @@
 	                        </div>
 	                        <div id="startAddr-div" class="content22">
 	                            <div style="display: flex;">
-	                                <input id="startName" name="name1" type="text" placeholder="이름" required>
-	                                <input id="startPhone" name="phone1" type="text" placeholder="연락처" onKeyup="inputPhoneNumber(this);" maxlength="13" required>
+	                                <input id="startName" name="startName" type="text" placeholder="이름" required>
+	                                <input id="startPhone" name="startPhone" type="text" placeholder="연락처" onKeyup="inputPhoneNumber(this);" maxlength="13" required>
 	                            </div>
 	                            <div id="searchAddr-div1">
 	                                <div id="searchAddr-div11">
@@ -657,8 +657,8 @@
 	                        </div>
 	                        <div id="endAddr-div" class="content22">
 	                            <div style="display: flex;">
-	                                <input id="endName" name="name2" type="text" placeholder="이름" required>
-	                                <input id="endPhone" name="phone2" type="text" placeholder="연락처" onKeyup="inputPhoneNumber(this);" maxlength="13" required>
+	                                <input id="endName" name="endName" type="text" placeholder="이름" required>
+	                                <input id="endPhone" name="endPhone" type="text" placeholder="연락처" onKeyup="inputPhoneNumber(this);" maxlength="13" required>
 	                            </div>
 	                            <div id="searchAddr-div2">
 	                                <div id="searchAddr-div22">
