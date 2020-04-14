@@ -72,13 +72,13 @@ function cl4(){
 //차량옵션에 정보 입력
 var carInfo = document.getElementById('carInfo');
 function addCarInfo1(){
-	if(sl1.value=="1톤"){
+	if(sl1.value=="1"){
 		charge_opt1 = 0;
-	} else if(sl1.value=="1.4톤"){
+	} else if(sl1.value=="1.4"){
 		charge_opt1 = 1;
-	} else if(sl1.value=="2.5톤"){
+	} else if(sl1.value=="2.5"){
 		charge_opt1 = 5;
-	} else if(sl1.value=="3.5톤"){
+	} else if(sl1.value=="3.5"){
 		charge_opt1 = 6;
 	} else {
 		charge_opt1 = 8;
@@ -88,7 +88,7 @@ function addCarInfo1(){
 	if(charge_opt2==0 && charge_dis==0){
 		carInfo.innerHTML = sl1.value;
 	} else {
-		carInfo.innerHTML = sl1.value+" / "+sl2.value;
+		carInfo.innerHTML = sl1.value+"톤 / "+sl2.value;
 		calc();
 	}
 }
@@ -101,9 +101,9 @@ function addCarInfo2(){
 	
 	// 값들 서로 연관 시킴
 	if(charge_dis==0){		
-		carInfo.innerHTML = sl1.value+" / "+sl2.value;	
+		carInfo.innerHTML = sl1.value+"톤 / "+sl2.value;	
 	} else {
-		carInfo.innerHTML = sl1.value+" / "+sl2.value;		
+		carInfo.innerHTML = sl1.value+"톤 / "+sl2.value;		
 		console.log("옵션1(+) : " + charge_opt1);
 		console.log("옵션2(+) : " + charge_opt2);
 	}

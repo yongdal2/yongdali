@@ -41,13 +41,13 @@
 	                           	 차량 정보
 	                        </div>
 	                        <div id="carOption-div" class="content22">
-	                            <select name="capacity" id="sl1" onchange="cl1();" required>
+	                            <select name="capacity1" id="sl1" onchange="cl1();" required>
 	                                <option class="opt1" value="" disabled selected>톤수 선택</option>
-	                                <option class="opt2" value="1톤">1톤</option>
-	                                <option class="opt2" value="1.4톤">1.4톤</option>
-	                                <option class="opt2" value="2.5톤">2.5톤</option>
-	                                <option class="opt2" value="3.5톤">3.5톤</option>
-	                                <option class="opt2" value="5톤">5톤</option>
+	                                <option class="opt2" value="1">1톤</option>
+	                                <option class="opt2" value="1.4">1.4톤</option>
+	                                <option class="opt2" value="2.5">2.5톤</option>
+	                                <option class="opt2" value="3.5">3.5톤</option>
+	                                <option class="opt2" value="5">5톤</option>
 	                            </select>
 	
 	                            <select name="type" id="sl2" onchange="cl2();" required>
@@ -566,16 +566,16 @@
 	                           	 출발지 정보
 	                        </div>
 	                        <div id="startAddr-div" class="content22">
+	                            <div style="display: flex;">
+	                                <input id="startName" name="startName" type="text" placeholder="이름" required>
+	                                <input id="startPhone" name="startPhone" type="text" placeholder="연락처" onKeyup="inputPhoneNumber(this);" maxlength="13" required>
+	                            </div>
 	                            <div id="searchAddr-div1">
 	                                <div id="searchAddr-div11">
 	                                    <input id="startAddr" type="text" placeholder="주소 검색 (주소, 건물명)" onclick="searchStartAddr();" readonly required>
 	                                    <img src="${pageContext.request.contextPath}/resources/images/reservation/magnifying-glass-black.svg" alt="검색" onclick="searchStartAddr();" style="cursor: pointer;">
 	                                </div>
 	                                <input id="startDetailAddr" type="text" placeholder="상세 주소" required>
-	                                
-	                            </div>
-	                            <div>
-	                                <input id="startPhone" name="phone1" type="text" placeholder="연락처" onKeyup="inputPhoneNumber(this);" maxlength="13" required>
 	                            </div>
 	                            <div align="left">
 	                                <label id="start-check" class="checkbox-wrap">
@@ -656,16 +656,16 @@
 	                        	도착지 정보
 	                        </div>
 	                        <div id="endAddr-div" class="content22">
+	                            <div style="display: flex;">
+	                                <input id="endName" name="endName" type="text" placeholder="이름" required>
+	                                <input id="endPhone" name="endPhone" type="text" placeholder="연락처" onKeyup="inputPhoneNumber(this);" maxlength="13" required>
+	                            </div>
 	                            <div id="searchAddr-div2">
 	                                <div id="searchAddr-div22">
 	                                    <input id="endAddr" name="edAddr" type="text" placeholder="주소 검색 (주소, 건물명)" onclick="searchEndAddr();" readonly required>
 	                                    <img src="${pageContext.request.contextPath}/resources/images/reservation/magnifying-glass-black.svg" alt="검색" onclick="searchEndAddr();" style="cursor: pointer;">
 	                                </div>
 	                                <input id="endDetailAddr" name="edDetailAddr" type="text" placeholder="상세 주소" required>
-	                               
-	                            </div>
-	                            <div>
-	                                <input id="endPhone" name="phone2" type="text" placeholder="연락처" onKeyup="inputPhoneNumber(this);" maxlength="13" required>
 	                            </div>
 	                            <div align="left">
 	                                <label id="end-check" class="checkbox-wrap">
