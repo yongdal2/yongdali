@@ -11,5 +11,9 @@ public interface DriverService {
 	ArrayList<Reservation> myBaechar(int dId);
 
 	ArrayList<Reservation> driverCal(int dId);
+
+	ArrayList<Reservation> driverModal(String rNo);
+
+	int Deal(Reservation aa);
 	
 }
