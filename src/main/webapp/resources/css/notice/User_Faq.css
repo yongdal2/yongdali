@@ -28,6 +28,7 @@ a{
     color: black;
     font-style: none;
     text-decoration: none;
+    cursor:pointer;
 }
 
 /* 전체화면 1199px까지 */
