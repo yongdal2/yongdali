@@ -99,7 +99,6 @@ var calendar = $('#calendar').fullCalendar({
 		}
 	},
 
-	
 	/* ****************
 	 *  일정 받아옴 
 	 * ************** */
