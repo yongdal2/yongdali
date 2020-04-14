@@ -13,9 +13,9 @@ public class DriverDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public ArrayList<Reservation> mibaechar(int dId) {
+	public ArrayList<Reservation> mibaechar(String mNo) {
 		
-		return (ArrayList)sqlSession.selectList("reservationMapper.mibaechar",dId);
+		return (ArrayList)sqlSession.selectList("reservationMapper.mibaechar",mNo);
 	}
 
 	public ArrayList<Reservation> myBaechar(int dId) {

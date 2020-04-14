@@ -2,26 +2,43 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="reservationMapper">
 	<resultMap type="Reservation" id="reservationResultSet">
-		<id property="rId" column="RID"/>
-		<result property="rStatus" column="R_STATUS"/>
+		<id property="rno" column="R_NO"/>	<!-- 예약번호 -->
+		<result property="mno" column="R_MNO"/> <!-- 회원번호 -->
+		<result property="dno" column="R_DNO"/> <!-- 운전자번호 -->
+		<result property="capacity" column="CAPACITY"/> <!-- 톤수 -->
+		<result property="startAddr" column="START_ADDR"/>	<!-- 출발지 -->
+		<result property="endAddr" column="END_ADDR"/>	<!-- 도착지 -->
+		<result property="start_date" column="STARTDATE"/>	<!-- 상차일 -->
+		<result property="end_date" column="ENDDATE"/>	<!-- 하차일 -->
+		<result property="help1" column="HELP_LOAD"/>	<!-- 상차도움 -->
+		<result property="help2" column="HELP_UNLOAD"/>	<!-- 하차도움 -->
+		<result property="luggage" column="LUGGAGE"/>	<!-- 짐 -->
+		<result property="msg" column="MSG"/>			<!-- 메시지 -->
+		<result property="deal_yn" column="DEAL_YN"/>	<!-- 배차여부 -->
+		<result property="deal_date" column="DEALDATE"/>	<!-- 배차일 -->
+		<result property="enroll_date" column="ENROLLDATE"/><!-- 등록일 -->
 	</resultMap>
 	
 	<select id="mibaechar">
 		SELECT *
 		FROM RESERVATION
-		WHERE R_STATUS='N'
+		WHERE DEAL_YN !='Y'
+		AND CAPACITY = (SELECT CAPACITY
+						FROM DRIVER
+						WHERE D_M_NO  = #{mNo})
+		ORDER BY ENROLLDATE DESC
 	</select>
 	
 	<select id="myBaechar">
 		SELECT *
 		FROM RESERVATION
-		WHERE R_DID= ${dId}
+		WHERE R_DID= #{dId}
 	</select>
 	
 	<select id="driverCal">
 		SELECT *
 		FROM RESERVATION
-		WHERE R_DID = ${dId}
+		WHERE R_DID = #{dId}
 	</select>
 	
 	

@@ -2,7 +2,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -178,7 +178,7 @@
 				$("#savecar").show();
 			})
 		});
-		<%-- $(function(){
+		$(function(){
 			
 		})
 		function rView(){
@@ -187,7 +187,7 @@
 			
 			$.ajax({
 				url : "mibaechar.do",
-				data : "<%= session.getAttribute("loginUser").getUserId()%>";
+				data : { mNO : ${loginUser.mNo}},
 				type : "post",
 				dataType : "json",
 				success : function(data){
@@ -200,7 +200,7 @@
 				}
 				
 			});
-		} --%>
+		}
 		<%-- function mView(){
 		 var $baechar = $('#baechar tbody');
 		 $baechar.html("");
