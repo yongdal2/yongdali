@@ -16,17 +16,20 @@
 	<select id="getAddrListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM ADDRESS
-		WHERE A_M_NO=#{mNO}
+		WHERE A_M_NO=#{mNo}
 	</select>
 	<!-- 주소록 리스트 -->
 	<select id="selectAddrList" resultMap="addressResultSet">
 		SELECT *
 		FROM ADDRESS
-		WHERE A_M_NO=#{mNO}
+		WHERE A_M_NO=#{mNo}
 		ORDER BY RECENTDATE
 	</select>
-	
-	
-	
+	<!-- 수정 주소록 상세 불러오기 -->	
+	<select id="getEditAddr" resultMap="addressResultSet">
+		SELECT *
+		FROM ADDRESS
+		WHERE A_NO=#{aNo}
+	</select>
 	
 </mapper>

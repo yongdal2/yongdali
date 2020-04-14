@@ -54,7 +54,7 @@ a {
 }
 
 .fw6 {
-	font-weight: 600;
+	font-weight: 600 !important;
 }
 
 .red {
@@ -84,6 +84,81 @@ a {
 
 .semibar_span:hover:after { 
     transform: scaleX(1); 
+}
+
+/* 프로필 사진 */
+#pro_img{
+    background-position-x: 50% !important;
+    background-position-y: 50% !important;
+    background-size: cover !important;
+    display: block !important;
+	height: 13em !important;
+	width: 13em !important;
+    text-size-adjust: 100% !important;
+	z-index: 2 !important;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	}
+	
+.editP {
+	position: absolute;
+	right: 5px;
+	bottom: 0px;
+	cursor: pointer !important;
+	z-index: 3 !important;
+	color: white !important;
+	background-color: rgb(87, 187, 138) !important;
+	border: white 3px solid;
+	border-radius: 50%;
+	height: 2em;
+	width: 2em;
+	line-height: 2em;
+	margin: inherit;
+	font-size: 1.8em;
+}
+
+.lg {
+	color: gray !important;
+}
+
+.mgt {
+	margin-top: 10px !important;
+}
+
+.hvDr {
+	background: none;
+	font-size: 0.8em !important;
+	padding: 0 !important;
+	cursor: pointer;
+}
+
+.hvDr:hover {
+	background: none;
+	font-size: 0.8em !important;
+	padding: 0 !important;
+	cursor: pointer;
+	color: rgb(87, 187, 138);
+}
+
+
+
+.hvbs {
+	color: black;
+	cursor: pointer;
+}
+
+.hvbs:hover {
+	color: rgb(87, 187, 138);
+}
+
+.mgt30 {
+	
+	margin-top: 30px !important;
+}
+/* 마우스커서 줌인 */
+.zoom-in {
+	cursor: zoom-in;
 }
 
 /* 기본 박스 */
@@ -183,82 +258,74 @@ a {
 	color: white;
 }
 
-/* 프로필 사진 */
-#pro_img{
-    background-position-x: 50% !important;
-    background-position-y: 50% !important;
-    background-size: cover !important;
-    display: block !important;
-	height: 13em !important;
-	width: 13em !important;
-    text-size-adjust: 100% !important;
-	z-index: 2 !important;
-	margin-left: auto;
-	margin-right: auto;
-	position: relative;
-	}
-	
-.editP {
-	position: absolute;
-	right: 5px;
-	bottom: 0px;
-	cursor: pointer !important;
-	z-index: 3 !important;
-	color: white !important;
-	background-color: rgb(87, 187, 138) !important;
-	border: white 3px solid;
-	border-radius: 50%;
-	height: 2em;
-	width: 2em;
-	line-height: 2em;
-	margin: inherit;
-	font-size: 1.8em;
+
+.mdC{
+	max-width: 440px !important;
 }
-
-.lg {
-	color: gray !important;
+.modalBaseAd {
+	padding: 23px !important;
+	border: 1px solid #dedede !important;
+	border-radius: 16px !important;
+	width: 100%;
+	max-width: 420px !important;
 }
-
-.mgt {
-	margin-top: 10px !important;
-}
-
-.hvDr {
-	background: none;
-	font-size: 0.8em !important;
-	padding: 0 !important;
-	cursor: pointer;
-}
-
-.hvDr:hover {
-	background: none;
-	font-size: 0.8em !important;
-	padding: 0 !important;
-	cursor: pointer;
-	color: rgb(87, 187, 138);
-}
-
-
-
-.hvbs {
-	color: black;
-	cursor: pointer;
-}
-
-.hvbs:hover {
-	color: rgb(87, 187, 138);
-}
-
-.mgt30 {
-	
-	margin-top: 30px !important;
-}
-.zoom-in {
-	cursor: zoom-in;
-}
-
-
 .filBg {
 	background-color: #f3f5f7!important
 }
 
+.pd23 {
+	padding: 23px !important;
+}
+.pl23 {
+	padding-left: 23px !important;
+}
+.pr23 {
+	padding-right: 23px!important;
+}
+.pb5 {
+	padding-bottom: 5px !important;
+}
+
+.ft18 {
+	font-size: 18px !important;
+}
+
+.addrLa {
+	padding: 0 !important;
+	margin-top: 16px !important; 
+	font-size: 14px !important;
+	line-height: 24px !important;
+}
+
+.p0mt10 {
+	padding: 0px !important;
+	margin-top: 10px !important;
+}
+
+.mdbtn{
+	margin: 20px 10px 0px 10px !important;
+}
+
+.searchAddrBtn {
+	padding: 0 !important;
+	margin-top: 10px !important;
+	height: 35px !important;
+	line-height: 35px !important;
+}
+.addrIp{
+	width: 100% !important;
+	height: 35px !important;
+}
+.mb30 {
+	margin-bottom: 30px !important;	
+}
+
+.addrHbt {
+	border-top: black solid 1px !important;
+	border-bottom: 1px solid #dedede !important;
+	padding: 10px !important
+}
+.addrBbt {
+	border-bottom: 1px solid #dedede !important;
+	padding: 10px !important;
+}

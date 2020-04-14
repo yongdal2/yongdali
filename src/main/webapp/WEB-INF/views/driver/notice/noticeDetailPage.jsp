@@ -27,7 +27,7 @@
             <div class="col-lg-3 sidebar">
                 <a href="dNoticeMain.no"><span class="sidebar_span">공지사항</span></a><br>
                 <a href="dFaqView.fa"><span class="sidebar_span">자주 묻는 질문</span></a><br>
-                <a href=""><span class="sidebar_span"> 채팅</span></a>
+                <a onclick="chat();"><span class="sidebar_span"> 채팅</span></a>
             </div>
             <div class="col-lg-8 col-lg-offset-1">
                 <h2 class="jal">공지사항</h3>
@@ -133,6 +133,10 @@
 	    	if(result){
 	    		location.href="${dNdelete}";
 	    	}
+	    }
+	    
+	    function chat(){
+	    	window.open('chat.ch','tistory','width=500px, height=700px, scrollbars=no, resizable=no, toolbars=no, menubar=no')
 	    }
     </script>
 </body>

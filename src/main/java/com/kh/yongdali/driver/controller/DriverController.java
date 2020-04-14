@@ -40,8 +40,8 @@ public class DriverController {
 	}
 	
 	@RequestMapping("mibaechar.do")
-	public void mibaechar(HttpServletResponse response,int dId) throws JsonIOException, IOException {
-		ArrayList<Reservation> list = dService.mibaechar(dId);
+	public void mibaechar(HttpServletResponse response,String mNO) throws JsonIOException, IOException {
+		ArrayList<Reservation> list = dService.mibaechar(mNO);
 		
 		response.setContentType("application/json; charset=utf-8");
 		

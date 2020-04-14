@@ -28,7 +28,7 @@
             <div class="col-lg-3 sidebar">
                 <a href="uNoticeMain.no"><span class="sidebar_span">공지사항</span></a><br>
                 <a href="uFaqView.fa"><span class="sidebar_span">자주 묻는 질문</span></a><br>
-                <a href="User_Chat.html"><span class="sidebar_span"> 채팅</span></a>
+                <a onclick="chat();"><span class="sidebar_span"> 채팅</span></a>
             </div>
             <div class="col-lg-8 col-lg-offset-1">
                 <h2 class="jal">자주 묻는 질문</h3>
@@ -367,6 +367,10 @@
                 'display':'block'
             })
         });
+        
+        function chat(){
+	    	window.open('chat.ch','tistory','width=500px, height=700px, scrollbars=no, resizable=no, toolbars=no, menubar=no')
+	    }
     </script>
 </body>
 
