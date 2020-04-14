@@ -16,17 +16,54 @@
 	<select id="getAddrListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM ADDRESS
-		WHERE A_M_NO=#{mNO}
+		WHERE A_M_NO=#{mNo}
 	</select>
 	<!-- 주소록 리스트 -->
 	<select id="selectAddrList" resultMap="addressResultSet">
 		SELECT *
 		FROM ADDRESS
-		WHERE A_M_NO=#{mNO}
-		ORDER BY RECENTDATE
+		WHERE A_M_NO=#{mNo}
+		ORDER BY RECENTDATE DESC
+	</select>
+	<!-- 수정 주소록 상세 불러오기 -->	
+	<select id="getUpAddr" resultMap="addressResultSet">
+		SELECT *
+		FROM ADDRESS
+		WHERE A_NO=#{aNo}
 	</select>
 	
-	
-	
-	
+	<!--  주소록 수정 -->
+	<update id="updateAddr" parameterType="Address">
+		UPDATE ADDRESS SET 
+		<choose>
+			<when test="aPlace != null and aPlace !=''">
+				PLACE=#{aPlace},
+			</when>
+			<otherwise>
+				PLACE=NULL,	
+			</otherwise>		 
+		</choose>
+		NAME=#{aName},
+		ADDRESS=#{aAddress},
+		PHONE=#{aPhone},
+		RECENTDATE=SYSDATE
+		WHERE A_NO=#{aNo}
+	</update>
+	<!-- 주소록 추가  -->
+	<insert id="insertAddr" parameterType="Address">
+		INSERT INTO ADDRESS VALUES
+		<choose>
+			<when test="aPlace != null and aPlace !=''">
+				('A' || SEQ_ANO.NEXTVAL,#{aMno},#{aPlace},#{aName},#{aAddress},#{aPhone},SYSDATE)	
+			</when>
+			<otherwise>
+				('A' || SEQ_ANO.NEXTVAL,#{aMno},NULL,#{aName},#{aAddress},#{aPhone},SYSDATE)	
+			</otherwise>
+		</choose>
+	</insert>
+	<!--  주소록 삭제 -->
+	<delete id="deleteAddr" parameterType="_int">
+		DELETE FROM ADDRESS
+		WHERE A_NO={aNo}
+	</delete>
 </mapper>

@@ -574,8 +574,20 @@ select, textarea, input, button{
 	letter-spacing: 1px;
 }
 
+#startName{
+	width: 100px;
+	height: 40px;
+	font-size: 10pt;
+	border: 1px solid rgb(169, 169, 169);
+	border-radius: 7px;
+	padding-left: 10px;
+	margin-bottom: 20px;
+	margin-right: 10px;
+	letter-spacing: 2px;
+}
+
 #startPhone{
-	width: 336px;
+	width: 230px;
 	height: 40px;
 	font-size: 10pt;
 	border: 1px solid rgb(169, 169, 169);
@@ -668,8 +680,20 @@ select, textarea, input, button{
 	letter-spacing: 1px;
 }
 
+#endName{
+	width: 100px;
+	height: 40px;
+	font-size: 10pt;
+	border: 1px solid rgb(169, 169, 169);
+	border-radius: 7px;
+	padding-left: 10px;
+	margin-bottom: 15px;
+	margin-right: 10px;
+	letter-spacing: 2px;
+}
+
 #endPhone{
-	width: 336px;
+	width: 230px;
 	height: 40px;
 	font-size: 10pt;
 	border: 1px solid rgb(169, 169, 169);
