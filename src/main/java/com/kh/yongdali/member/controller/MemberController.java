@@ -5,10 +5,17 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
+
+import javax.mail.Message.RecipientType;
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,125 +41,12 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
+	// org.springframework.mail.javamail.JavaMailSender
+	@Autowired
+	private JavaMailSender mailSender;
+	
 	private Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
-	/** 로그인 페이지
-	 * @return
-	 */
-	@RequestMapping("loginView.me") 
-	public String loginView() {
-		return "login&signUp/login";
-	}
-
-	/** 약관동의 페이지
-	 * @return
-	 */
-	@RequestMapping("policyView.me")
-	public String policyChk() {
-		return "login&signUp/policyChk";
-	}
-
-	/** 회원가입 페이지
-	 * @return
-	 */
-//	@RequestMapping("signUpView.me")
-//	public String signUpForm(@ModelAttribute Member m, Model model) {
-//		logger.debug("푸시 알림 동의 : " + m.getPushEnabled());
-//		
-//		Member singUpMem = new Member();
-//		singUpMem.setPushEnabled('Y');
-//		logger.debug(singUpMem.toString());
-//		
-//		model.addAttribute("singUpMem", singUpMem);
-//		
-//		return "login&signUp/signUpForm";
-//	}
-	
-	@RequestMapping("signUpView.me")
-	public String signUpForm(@RequestParam("pushEnabled") char pushEnabled, Model model) {
-		logger.debug("푸시 알림 동의 : " + pushEnabled);
-		
-		model.addAttribute("pushEnabled", pushEnabled);
-		
-		return "login&signUp/signUpForm";
-	}
-	
-	/** 로그인
-	 * @param m
-	 * @param model
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping(value="login.me", method=RequestMethod.POST)
-	public String memberLogin(@ModelAttribute Member m, Model model) {
-		logger.debug("로그인을 시도한 회원 아이디 : " + m.getmId());
-		Member loginUser = mService.loginMember(m); 
-		System.out.println(loginUser);
-		
-		// 로그인 성공 
-		if(loginUser != null && bcryptPasswordEncoder.matches(m.getPwd(), loginUser.getPwd())) {
-			model.addAttribute("loginUser", loginUser);
-			logger.debug(loginUser.getmId());
-			return "loginSuccess"; 
-		}
-		
-		// 이메일 없음
-		else if(loginUser == null){
-			return "nonExistentId";
-		}
-		
-		// 비밀번호 틀림
-		else {
-			return "wrongPwd";
-			
-		}	
-	}
-	
-	/** 로그아웃
-	 * @param status
-	 * @return
-	 */
-	@RequestMapping("logout.me")
-	public String memberLogout(SessionStatus status) {
-		status.setComplete();
-		
-		return "redirect:home.do";
-	}
-	
-	/** 회원가입_이메일 인증 TODO
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping("emailVerify.me")
-	public String emailVerify() {
-		return "good";
-	}
-	
-	/** 회원가입
-	 * @param m
-	 * @return
-	 */
-	@RequestMapping("insert.me")
-	public String insertMember(@ModelAttribute Member m) {
-		logger.debug(m.toString());
-		
-		return "login&signUp/login";
-	}
-	
-	@ResponseBody
-	@RequestMapping("emailDup.me")
-	public String emailDupChk(@RequestParam("mId") String mId) {
-		logger.debug("가입 요청 email : " + mId);
-		
-		int result = mService.emailChk(mId);
-		logger.debug("중복검사 결과값 : " + result);
-		
-		if(result > 0) {
-			return "exist";
-		}else {
-			return "available";
-		}
-	}
 	
 	/** 샘플데이터
 	 * @param model
@@ -202,5 +96,141 @@ public class MemberController {
 			return "common/errorPage";
 		}
 	}
+			
+	/** 로그인 페이지
+	 * @return
+	 */
+	@RequestMapping("loginView.me") 
+	public String loginView() {
+		return "login&signUp/login";
+	}
+
+	/** 로그인
+	 * @param m
+	 * @param model
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="login.me", method=RequestMethod.POST)
+	public String memberLogin(@ModelAttribute Member m, Model model) {
+		logger.debug("로그인을 시도한 회원 아이디 : " + m.getmId());
+		Member loginUser = mService.loginMember(m); 
+		System.out.println(loginUser);
+		
+		// 로그인 성공 
+		if(loginUser != null && bcryptPasswordEncoder.matches(m.getPwd(), loginUser.getPwd())) {
+			model.addAttribute("loginUser", loginUser);
+			logger.debug(loginUser.getmId());
+			return "loginSuccess"; 
+		}
+		
+		// 이메일 없음
+		else if(loginUser == null){
+			return "nonExistentId";
+		}
+		
+		// 비밀번호 틀림
+		else {
+			return "wrongPwd";
+			
+		}	
+	}
 	
+	/** 로그아웃
+	 * @param status
+	 * @return
+	 */
+	@RequestMapping("logout.me")
+	public String memberLogout(SessionStatus status) {
+		status.setComplete();
+		
+		return "redirect:home.do";
+	}
+		
+	/** 약관동의 페이지
+	 * @return
+	 */
+	@RequestMapping("policyView.me")
+	public String policyChk() {
+		return "login&signUp/policyChk";
+	}
+	
+	/** 회원가입_약관 동의 페이지
+	 * @param pushEnabled
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("signUpView.me")
+	public String signUpForm(@RequestParam("pushEnabled") char pushEnabled, Model model) {
+		logger.debug("푸시 알림 동의 : " + pushEnabled);
+		
+		model.addAttribute("pushEnabled", pushEnabled);
+		
+		return "login&signUp/signUpForm";
+	}
+
+	/** 회원가입_이메일 중복검사
+	 * @param mId
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("emailDup.me")
+	public String emailDupChk(@RequestParam("mId") String mId) {
+		logger.debug("가입 요청 email : " + mId);
+		
+		int result = mService.emailChk(mId);
+		logger.debug("중복검사 결과값 : " + result);
+		
+		if(result > 0) {
+			return "exist";
+		}else {
+			return "available";
+		}
+	}
+	
+	/** 회원가입_이메일 인증번호 전송
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("emailVerify.me")
+	public void emailVerify(@RequestParam("email") String email) {
+		// 인증번호(난수) 생성
+		int ranNum = new Random().nextInt(900000) + 100000;		
+		
+		// MimeMessage 객체 생성
+		MimeMessage message = mailSender.createMimeMessage();
+		
+		// 메일 본문 변수에 담기
+		String content = "귀하의 인증코드는 " + ranNum + " 입니다. \n"
+				 + "(혹시 잘못 전달되었다면 이 이메일을 무시하셔도 됩니다)";
+		
+		try {
+			// MimeMessage 객체에 입력정보 삽입
+			message.setSubject("[용달이] 이메일 계정을 인증해주세요");
+			message.setText(content);
+			message.addRecipient(RecipientType.TO, new InternetAddress(email)); // TODO TO가 무얼 의미하는지 모르겠
+			
+			// 메일 전송
+			mailSender.send(message);
+		} catch (MessagingException e) {
+			
+			e.printStackTrace();
+		}		
+
+		
+
+		
+	}
+	
+	/** 회원가입_양식 제출
+	 * @param m
+	 * @return
+	 */
+	@RequestMapping("insert.me")
+	public String insertMember(@ModelAttribute Member m) {
+		logger.debug(m.toString());
+		
+		return "login&signUp/login";
+	}
+
 }

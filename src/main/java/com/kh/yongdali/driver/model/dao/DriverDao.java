@@ -13,9 +13,9 @@ public class DriverDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public ArrayList<Reservation> mibaechar(int dId) {
+	public ArrayList<Reservation> mibaechar(String mNo) {
 		
-		return (ArrayList)sqlSession.selectList("reservationMapper.mibaechar",dId);
+		return (ArrayList)sqlSession.selectList("reservationMapper.mibaechar",mNo);
 	}
 
 	public ArrayList<Reservation> myBaechar(int dId) {
@@ -25,6 +25,15 @@ public class DriverDao {
 	public ArrayList<Reservation> driverCal(int dId) {
 
 		return (ArrayList)sqlSession.selectList("reservationMapper.driverCal",dId);
+	}
+
+	public ArrayList<Reservation> driverModal(String rNo) {
+		
+		return (ArrayList)sqlSession.selectList("reservationMapper.driverModal",rNo);
+	}
+
+	public int Deal(Reservation aa) {
+		return sqlSession.update("reservationMapper.deal",aa);
 	}
 
 }

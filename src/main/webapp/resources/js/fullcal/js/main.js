@@ -53,12 +53,10 @@ var calendar = $('#calendar').fullCalendar({
 			}),
 			content: $('<div />', {
 				class: 'popoverInfoCalendar'
-			}).append('<p><strong>신청자:</strong> ' + event.number + '</p>')
-			.append('<p><strong>신청자:</strong> ' + event.username + '</p>')
+			}).append('<p><strong>예약번호:</strong> ' + event.rno + '</p>')
 			.append('<p><strong>출발지:</strong> ' + event.start + '</p>')
 			.append('<p><strong>도착지:</strong> ' + event.end + '</p>')
-			.append('<p><strong>시간:</strong> ' + getDisplayEventDate(event) + '</p>')
-			.append('<div class="popoverDescCalendar"><strong>요청사항:</strong> ' + event.description + '</div>'),
+			.append('<div class="popoverDescCalendar"><strong>요청사항:</strong> ' + event.msg + '</div>'),
 			delay: {
 				show: "800",
 				hide: "50"
@@ -101,7 +99,6 @@ var calendar = $('#calendar').fullCalendar({
 		}
 	},
 
-	
 	/* ****************
 	 *  일정 받아옴 
 	 * ************** */
@@ -114,16 +111,12 @@ var calendar = $('#calendar').fullCalendar({
 				var events = [];
 				for (var i = 0; i < response.length; i++) {
 					var evt = {
-							_id: response[i].id,
-							title: response[i].title,
-							description : response[i].description,
+							rno: response[i].rno,
+							capacity: response[i].capacity,
 							start : response[i].start,
 							end : response[i].end,
-							type : response[i].type,
-							username : response[i].username,
-							backgroundColor : response[i].backgroundColor,
-							textColor : response[i].textColor,
-							allDay : response[i].allDay
+							date : response[i].endDate,
+							msg : response[i].msg 
 					};
 					events.push(evt);
 				}

@@ -13,13 +13,15 @@
 <body style=" background: rgb(87,187,138);">
 
 <form id="payForm" action="pay.do" method="post">
-	<input name="capacity" type="hidden" value="${r.capacity}">
+	<input name="capacity1" type="hidden" value="${capacity1}">
 	<input name="type" type="hidden" value="${r.type}">
 	<input name="startAddr" type="hidden" value="${r.startAddr}">
 	<input name="endAddr" type="hidden" value="${r.endAddr}">
 	<input name="distance" type="hidden" value="${r.distance}">
-	<input name="phone1" type="hidden" value="${r.phone1}">
-	<input name="phone2" type="hidden" value="${r.phone2}">
+	<input name="startName" type="hidden" value="${r.startName}">
+	<input name="endName" type="hidden" value="${r.endName}">
+	<input name="startPhone" type="hidden" value="${r.startPhone}">
+	<input name="endPhone" type="hidden" value="${r.endPhone}">
 	<input name="rightLoad" type="hidden" value="${r.rightLoad}">
 	<input name="rightUnload" type="hidden" value="${r.rightUnload}">
 	<input name="startDate1" type="hidden" value="${stDate}">
@@ -32,7 +34,6 @@
 	<input name="msg" type="hidden" value="${r.msg}">
 	<input id="amt" name="amount" type="hidden" value="${r.amount}">
 	<input id="payYN" name="payYN" type="hidden">
-	
 </form>
 	
 	<script>

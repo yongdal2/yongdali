@@ -6,10 +6,14 @@ import com.kh.yongdali.reservation.model.vo.Reservation;
 
 public interface DriverService {
 
-	ArrayList<Reservation> mibaechar(int dId);
+	ArrayList<Reservation> mibaechar(String mNO);
 
 	ArrayList<Reservation> myBaechar(int dId);
 
 	ArrayList<Reservation> driverCal(int dId);
+
+	ArrayList<Reservation> driverModal(String rNo);
+
+	int Deal(Reservation aa);
 	
 }

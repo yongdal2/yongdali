@@ -9,11 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.kh.yongdali.driver.model.service.DriverService;
+import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.reservation.model.vo.Reservation;
 
 @Controller
@@ -40,9 +42,9 @@ public class DriverController {
 	}
 	
 	@RequestMapping("mibaechar.do")
-	public void mibaechar(HttpServletResponse response,int dId) throws JsonIOException, IOException {
-		ArrayList<Reservation> list = dService.mibaechar(dId);
-		
+	public void mibaechar(HttpServletResponse response,String mNO) throws JsonIOException, IOException {
+		ArrayList<Reservation> list = dService.mibaechar(mNO);
+		System.out.println(list);
 		response.setContentType("application/json; charset=utf-8");
 		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
@@ -67,8 +69,39 @@ public class DriverController {
 		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		gson.toJson(list,response.getWriter());
+	}
+	
+	@RequestMapping("dModal.do")
+	public void driverModal(HttpServletResponse response,String rNo) throws JsonIOException, IOException {
+		ArrayList<Reservation> list = dService.driverModal(rNo);
+		
+		response.setContentType("application/json; charset=utf-8");
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(list,response.getWriter());
+	}
+	
+	@RequestMapping("Deal.do")
+	public String mainDeal(HttpServletRequest request) {
+		String mNo =request.getParameter("mNo");
+		String rNo = request.getParameter("rNo");
+		
+		int result = Deal(mNo,rNo);
+		
+		if(result>0) {
+			return "redirect:driverMain.ydl";
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	public int Deal(String mNo, String rNo) {
+		Reservation aa = new Reservation(rNo,mNo);
+		
+		int result = dService.Deal(aa);
 		
 		
+		return result;
 	}
 	
 	/*

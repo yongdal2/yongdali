@@ -2,17 +2,27 @@ package com.kh.yongdali.reservation.model.vo;
 
 import java.util.Date;
 
+/**
+ * @author user2
+ *
+ */
+/**
+ * @author user2
+ *
+ */
 public class Reservation {
 	private String rNo;			// 예약&결제 기본키
 	private String rMNo;		// 멤버 외래키
 	private String rDNo;		// 기사 외래키
-	private String capacity;	// 차량 정보(톤)
+	private float capacity;	// 차량 정보(톤)
 	private String type;		// 차량 옵션
+	private String startName;	// 상차할 이름
+	private String endName;	// 하차받을 이름
+	private String startPhone;	// 상차 연락처
+	private String endPhone;	// 하차 연락처
 	private String startAddr;	// 출발지
 	private String endAddr;		// 도착지
 	private String distance;	// 거리
-	private String phone1;		// 상차 연락처
-	private String phone2;		// 하차 연락처
 	private String rightLoad;	// 바로 상차
 	private String rightUnload;	// 바로 하차
 	private Date startDate;		// 상차 날짜
@@ -34,6 +44,81 @@ public class Reservation {
 	public Reservation() {}
 
 	
+		
+	public Reservation(String rNo, String rDNo) {
+		super();
+		this.rDNo = rDNo;
+		this.rNo = rNo;
+		
+	}
+
+
+
+	public Reservation(String rNo, String rMNo, String rDNo, float capacity, String type, String startAddr,
+			String endAddr, Date startDate, Date endDate, String helpLoad, String helpUnload, String luggage,
+			String msg, String payYN, String dealYN, Date dealDate, Date enrollDate) {
+		super();
+		this.rNo = rNo;
+		this.rMNo = rMNo;
+		this.rDNo = rDNo;
+		this.capacity = capacity;
+		this.type = type;
+		this.startAddr = startAddr;
+		this.endAddr = endAddr;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.helpLoad = helpLoad;
+		this.helpUnload = helpUnload;
+		this.luggage = luggage;
+		this.msg = msg;
+		this.payYN = payYN;
+		this.dealYN = dealYN;
+		this.dealDate = dealDate;
+		this.enrollDate = enrollDate;
+	}
+	
+	
+
+
+	public Reservation(String rNo, String rMNo, String rDNo, float capacity, String type, String startName,
+			String endName, String startPhone, String endPhone, String startAddr, String endAddr, String distance,
+			String rightLoad, String rightUnload, Date startDate, String startTime, Date endDate, String endTime,
+			String helpLoad, String helpUnload, String luggage, String msg, String amount, String payYN, String dealYN,
+			Date dealDate, String calcYN, Date calcDate, Date enrollDate) {
+		super();
+		this.rNo = rNo;
+		this.rMNo = rMNo;
+		this.rDNo = rDNo;
+		this.capacity = capacity;
+		this.type = type;
+		this.startName = startName;
+		this.endName = endName;
+		this.startPhone = startPhone;
+		this.endPhone = endPhone;
+		this.startAddr = startAddr;
+		this.endAddr = endAddr;
+		this.distance = distance;
+		this.rightLoad = rightLoad;
+		this.rightUnload = rightUnload;
+		this.startDate = startDate;
+		this.startTime = startTime;
+		this.endDate = endDate;
+		this.endTime = endTime;
+		this.helpLoad = helpLoad;
+		this.helpUnload = helpUnload;
+		this.luggage = luggage;
+		this.msg = msg;
+		this.amount = amount;
+		this.payYN = payYN;
+		this.dealYN = dealYN;
+		this.dealDate = dealDate;
+		this.calcYN = calcYN;
+		this.calcDate = calcDate;
+		this.enrollDate = enrollDate;
+	}
+
+
+
 	public String getrNo() {
 		return rNo;
 	}
@@ -58,11 +143,11 @@ public class Reservation {
 		this.rDNo = rDNo;
 	}
 
-	public String getCapacity() {
+	public float getCapacity() {
 		return capacity;
 	}
 
-	public void setCapacity(String capacity) {
+	public void setCapacity(float capacity) {
 		this.capacity = capacity;
 	}
 
@@ -97,22 +182,46 @@ public class Reservation {
 	public void setDistance(String distance) {
 		this.distance = distance;
 	}
-
-	public String getPhone1() {
-		return phone1;
+	
+	public String getStartName() {
+		return startName;
 	}
 
-	public void setPhone1(String phone1) {
-		this.phone1 = phone1;
+
+	public void setStartName(String startName) {
+		this.startName = startName;
 	}
 
-	public String getPhone2() {
-		return phone2;
+
+	public String getEndName() {
+		return endName;
 	}
 
-	public void setPhone2(String phone2) {
-		this.phone2 = phone2;
+
+	public void setEndName(String endName) {
+		this.endName = endName;
 	}
+
+
+	public String getStartPhone() {
+		return startPhone;
+	}
+
+
+	public void setStartPhone(String startPhone) {
+		this.startPhone = startPhone;
+	}
+
+
+	public String getEndPhone() {
+		return endPhone;
+	}
+
+
+	public void setEndPhone(String endPhone) {
+		this.endPhone = endPhone;
+	}
+
 
 	public String getRightLoad() {
 		return rightLoad;
@@ -255,17 +364,16 @@ public class Reservation {
 	@Override
 	public String toString() {
 		return "Reservation [rNo=" + rNo + ", rMNo=" + rMNo + ", rDNo=" + rDNo + ", capacity=" + capacity + ", type="
-				+ type + ", startAddr=" + startAddr + ", endAddr=" + endAddr + ", distance=" + distance + ", phone1="
-				+ phone1 + ", phone2=" + phone2 + ", rightLoad=" + rightLoad + ", rightUnload=" + rightUnload
-				+ ", startDate=" + startDate + ", startTime=" + startTime + ", endDate=" + endDate + ", endTime="
-				+ endTime + ", helpLoad=" + helpLoad + ", helpUnload=" + helpUnload + ", luggage=" + luggage + ", msg="
-				+ msg + ", amount=" + amount + ", payYN=" + payYN + ", dealYN=" + dealYN + ", dealDate=" + dealDate
-				+ ", calcYN=" + calcYN + ", calcDate=" + calcDate + ", enrollDate=" + enrollDate + "]";
+				+ type + ", startName=" + startName + ", endName=" + endName + ", startPhone=" + startPhone
+				+ ", endPhone=" + endPhone + ", startAddr=" + startAddr + ", endAddr=" + endAddr + ", distance="
+				+ distance + ", rightLoad=" + rightLoad + ", rightUnload=" + rightUnload + ", startDate=" + startDate
+				+ ", startTime=" + startTime + ", endDate=" + endDate + ", endTime=" + endTime + ", helpLoad="
+				+ helpLoad + ", helpUnload=" + helpUnload + ", luggage=" + luggage + ", msg=" + msg + ", amount="
+				+ amount + ", payYN=" + payYN + ", dealYN=" + dealYN + ", dealDate=" + dealDate + ", calcYN=" + calcYN
+				+ ", calcDate=" + calcDate + ", enrollDate=" + enrollDate + "]";
 	}
 
-
-
-
+	
 	
 }
 
