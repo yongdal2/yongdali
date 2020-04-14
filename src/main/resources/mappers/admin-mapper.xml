@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminMapper">
+		
+	<resultMap type="Member" id="AdminMemresultSet">
+		<id property="mNo" column="M_NO"/>
+		<result property="mId" column="M_ID"/>
+		<result property="pwd" column="PWD"/>
+		<result property="mName" column="NAME"/>
+		<result property="phone" column="PHONE"/>
+		<result property="mSort" column="M_SORT"/>
+		<result property="mStatus" column="M_STATUS"/>
+		<result property="pushEnabled" column="PUSH_ENABLED"/>
+		<result property="enrollDate" column="ENROLLDATE"/>
+	</resultMap>
+	
+	
+	
+	<!-- 회원님 목록 리스트 -->
+	<select id="selectMemList" resultMap="AdminMemresultSet">
+		SELECT *
+		FROM MEMBER
+		ORDER BY M_ID DESC
+	</select>
+	
+	<select id="getMemListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+	</select>
+	
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
