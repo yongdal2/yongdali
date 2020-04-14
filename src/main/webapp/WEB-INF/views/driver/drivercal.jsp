@@ -1,4 +1,3 @@
-
 <%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -58,6 +57,7 @@
 		</div>
 		<hr>
 	</div>
+	<div style="visibility: hidden; height: 2px"><input id="mNo" name="mNo" value="${loginUser.mNo}"></div>
 	<br>
 	
 

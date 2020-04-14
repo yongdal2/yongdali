@@ -43,10 +43,12 @@
 		WHERE R_DID= #{dId}
 	</select>
 	
-	<select id="driverCal">
+	<select id="driverCal" resultMap="reservationResultSet">
 		SELECT *
 		FROM RESERVATION
-		WHERE R_DID = #{dId}
+		WHERE R_D_NO = (SELECT D_NO
+						FROM DRIVER
+						WHERE D_M_NO = #{mNo})
 	</select>
 	<select id="driverModal" resultMap="reservationResultSet">
 		SELECT * FROM RESERVATION
@@ -57,7 +59,7 @@
 		UPDATE RESERVATION
 		SET R_D_NO = (SELECT D_NO
 						FROM DRIVER
-						WHERE D_M_NO = #{mNo}),
+						WHERE D_M_NO = #{rMNo}),
 			DEALDATE = SYSDATE,
 			DEAL_YN = 'Y'
 		WHERE R_NO = #{rNo}

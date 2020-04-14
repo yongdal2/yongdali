@@ -10,7 +10,7 @@ public interface DriverService {
 
 	ArrayList<Reservation> myBaechar(int dId);
 
-	ArrayList<Reservation> driverCal(int dId);
+	ArrayList<Reservation> driverCal(String mNo);
 
 	ArrayList<Reservation> driverModal(String rNo);
 

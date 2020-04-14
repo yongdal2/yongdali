@@ -62,9 +62,9 @@ public class DriverController {
 	}
 	
 	@RequestMapping("dCal.do")
-	public void driverCal(HttpServletResponse response,int dId) throws JsonIOException, IOException {
-		ArrayList<Reservation> list = dService.driverCal(dId);
-		
+	public void driverCal(HttpServletResponse response,String mNo) throws JsonIOException, IOException {
+		ArrayList<Reservation> list = dService.driverCal(mNo);
+		System.out.println(list);
 		response.setContentType("application/json; charset=utf-8");
 		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
