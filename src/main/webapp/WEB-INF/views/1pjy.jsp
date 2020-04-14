@@ -8,12 +8,29 @@
 </head>
 <body>
     <div style="display: flex; margin-left: 400px; margin-top:300px">
-        <div OnClick="location.href ='adminHome.ydl'" style="width: 100px; height: 100px; background: lightcoral; cursor: pointer; border-radius: 10px; margin-right: 20px;">
-              관리자 페이지
+        <div OnClick="location.href ='adminHome.ydl'" style="width: 100px; height: 100px; background: #a766f2; cursor: pointer; border-radius: 10px; margin-right: 20px;">
+              관리자 페이지 대쉬보드
         </div>
-        <div OnClick="location.href ='admin_Mem.ydl'" style="width: 100px; height: 100px; background: lightgreen; cursor: pointer; border-radius: 10px; margin-right: 20px;">
-           	회원정보 페이지
+        
+        <div OnClick="location.href ='admin_Mem.ydl'" style="width: 100px; height: 100px; background: #fcf7fc; cursor: pointer; border-radius: 10px; margin-right: 20px;">
+              회원님 목록 페이지
         </div>
+        <div OnClick="location.href ='admin_Driver.ydl'" style="width: 100px; height: 100px; background: #6afcda; cursor: pointer; border-radius: 10px; margin-right: 20px;">
+             기사님 목록 페이지	
+        </div>
+        
+        <div OnClick="location.href ='admin_Reser.ydl'" style="width: 100px; height: 100px; background: #404ced; cursor: pointer; border-radius: 10px; margin-right: 20px;">
+             예약 내역 페이지	
+        </div>
+        <div OnClick="location.href ='admin_Cal.ydl'" style="width: 100px; height: 100px; background: #fffc3b; cursor: pointer; border-radius: 10px; margin-right: 20px;">
+            정산 내역 페이지	
+        </div>
+        <div OnClick="location.href ='admin_Refund.ydl'" style="width: 100px; height: 100px; background: #f78a4f; cursor: pointer; border-radius: 10px; margin-right: 20px;">
+            환불 내역 페이지	
+        </div>
+        <div OnClick="location.href ='admin_ChatLog.ydl'" style="width: 100px; height: 100px; background: #b4e83a; cursor: pointer; border-radius: 10px; margin-right: 20px;">
+             채팅 내역 페이지	
+        </div>                       
 
     </div>
  

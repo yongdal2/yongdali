@@ -24,4 +24,9 @@ public class MyPageServiceImpl implements MyPageService {
 		return mpDao.selectAddrList(mNo);
 	}
 
+	@Override
+	public Address getEditAddr(String aNo) {
+		return mpDao.getEditAddr(aNo);
+	}
+
 }

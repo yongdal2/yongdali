@@ -18,32 +18,32 @@
 	<!-- Navigation -->
 	<%@ include file="../common/nav_admin.jsp"%>
 	<!-- 배경색 -->
-	<div style="width: 100%; height: 100%; background: rgb(233, 246, 240); padding-top: 30px; padding-top: 30px;">
+<!-- <div style="width: 100%; height: 100%; background: rgb(233, 246, 240); padding-top: 30px; padding-top: 30px;"> -->
+	<div style="width: 100%; height: 100%; padding-top: 30px; padding-top: 30px;">
 
 		<!-- main -->
-		<div class="container">
+		<!-- <div class="container"> -->
+		<div class="content container">
 			<div class="row">
 				<h2 class="jal">관리자 페이지</h2>
+				<p>회원님 목록 / admin_Mem.jsp</p>
 				<hr>
 			</div>
-			<div class="row" id="content1">
+			
+			<div class="row" id="content">
+			<!-- <div id="content"> -->
 				<div class="col-lg-3 sidebar">
-					<!--                 <a href="Driver_Notice.html"><span class="sidebar_span">회원 확인</span></a> -->
-					<a href="#"><span class="sidebar_span1">회원님 목록</span></a><br>
-					<a href="#"><span class="sidebar_span1">기사님 목록</span></a><br>
-
-					<!-- 				<a href="Driver_Faq.html"><span class="sidebar_span">내역 확인</span></a><br> -->
-					<a href="#"><span class="sidebar_span1">예약 내역</span></a><br>
-					<a href="#"><span class="sidebar_span1">정산 내역</span></a><br> 
-					<a href="#"><span class="sidebar_span1">환불 내역</span></a><br> 
-					<a href="#"><span class="sidebar_span1">채팅 내역</span></a>
+					<a href="#"><span class="sidebar_span">회원님 목록</span></a><br>
+					<a href="#"><span class="sidebar_span">기사님 목록</span></a><br>
+					<a href="#"><span class="sidebar_span">예약 내역</span></a><br>
+					<a href="#"><span class="sidebar_span">정산 내역</span></a><br> 
+					<a href="#"><span class="sidebar_span">환불 내역</span></a><br> 
+					<a href="#"><span class="sidebar_span">채팅 내역</span></a>
 				</div>
-		<!-- </div> -->
 
 			<!-- list -->
-			<div class="row1">
+			<div class="row" id="rowList">
 				<div class="col-xs-12 col-md-12" id="table">
-					
 					<br>
 					<table class="table table-striped table-hover text-center">
 						<thead id="thead">
@@ -93,7 +93,7 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="row text-center">
+				<div class="row text-center" style="height: 400px">
 					<ul class="pagination ft_gr">
 						<li><a href="#"><<</a></li>
 						<li><a href="#"><</a></li>
@@ -113,6 +113,7 @@
 
 	<!-- Footer -->
 	<%@ include file="../common/footer.jsp"%>
+
 
 	<script>
         var acc = document.getElementsByClassName("accordion");

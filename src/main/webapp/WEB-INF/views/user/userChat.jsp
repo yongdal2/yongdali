@@ -43,8 +43,7 @@
                             <h2>용달이</h2>
                             <h3>10:12AM, Today</h3>
                         </div>
-                        <div class="message">
-                            안녕하세요 용달이입니다. 무엇을 도와드릴까요?
+                        <div class="message" id="youMsg">
                         </div>
                     </li>
                     <li class="me">
@@ -53,11 +52,10 @@
                             <h2>유승제</h2>
                             <span class="status blue"></span>
                         </div>
-                        <div class="message">
-                            예약 어떻게 하나요?
+                        <div class="message" id="meMsg">
                         </div>
                     </li>
-                    <li class="you">
+                    <!-- <li class="you">
                         <div class="entete">
                             <span class="status green"></span>
                             <h2>용달이</h2>
@@ -96,7 +94,7 @@
                         <div class="message">
                             ㅂㅂ
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>
@@ -105,41 +103,43 @@
         <div class="container">
             <div class="footer row">
                 <div class="col-xs-10 col-lg-11">
+                	<input type="text" id="sender" value="${sessionScope.loginUser.mName }" style="display: none;">
                     <textarea placeholder="궁금하신 점이 무엇인가요?" id="msgArea"></textarea>
                 </div>
                 <div class="col-xs-2 col-lg-1">
-                    <button class="sendBtn" onclick="sendMessage"><img src="${contextPath }/resources/images/chat/send.png"></button>
-                	<button onclick="disconnect();">종료</button>
+                    <button type="button" class="sendBtn" onclick="sendMessage();"><img src="${contextPath }/resources/images/chat/send.png"></button>
+                	<button type="button" onclick="disconnect();">종료</button>
                 </div>
             </div>
         </div>
     </form>
     <script>
     	var ws = new WebSocket("ws://localhost:8888/yongdali/kh.do");
-    	var meMsg = $('.me>.message');
-    	var youMsg = $('.you>.message');
+    	var meMsg = document.getElementById("meMsg");
+    	var youMsg = document.getElementById("youMsg");
     	
     	
     	ws.onopen = function(message){
-    		youMsg.value += "용달이에 오신걸 환영합니다.";
+    		console.log("확인");
+    		youMsg.innerHTML += "용달이에 오신걸 환영합니다.";
     	};
     	
     	ws.onclose = function(message){
-    		youMsg.value += "용달이 채팅 종료";
+    		youMsg.innerHTML += "용달이 채팅 종료";
     	};
     	
     	ws.onerror = function(message){
-    		youMsg.value += "에러 발생";
+    		youMsg.innerHTML += "에러 발생";
     	};
     	
     	ws.onmessage = function(message){
-    		youMsg.value += message.data
+    		youMsg.innerHTML += message.data
     	};
     	
     	function sendMessage(){
     		var message = document.getElementById("msgArea");
     		
-    		meMsg.value += message.value;
+    		meMsg.innerHTML += message.value;
     		
     		ws.send(message.value);
     		
