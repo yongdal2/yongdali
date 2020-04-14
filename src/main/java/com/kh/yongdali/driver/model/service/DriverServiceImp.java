@@ -26,9 +26,22 @@ public class DriverServiceImp implements DriverService{
 	}
 
 	@Override
-	public ArrayList<Reservation> driverCal(int dId) {
+	public ArrayList<Reservation> driverCal(String mNo) {
 		
-		return dDao.driverCal(dId);
+		return dDao.driverCal(mNo);
 	}
+
+	@Override
+	public ArrayList<Reservation> driverModal(String rNo) {
+		
+		return dDao.driverModal(rNo);
+	}
+
+	@Override
+	public int Deal(Reservation aa) {
+		return dDao.Deal(aa);
+	}
+
+
 
 }

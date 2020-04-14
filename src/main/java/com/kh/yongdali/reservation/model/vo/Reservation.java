@@ -45,6 +45,15 @@ public class Reservation {
 
 	
 		
+	public Reservation(String rNo, String rMNo) {
+		super();
+		this.rMNo = rMNo;
+		this.rNo = rNo;
+		
+	}
+
+
+
 	public Reservation(String rNo, String rMNo, String rDNo, float capacity, String type, String startAddr,
 			String endAddr, Date startDate, Date endDate, String helpLoad, String helpUnload, String luggage,
 			String msg, String payYN, String dealYN, Date dealDate, Date enrollDate) {
@@ -65,6 +74,46 @@ public class Reservation {
 		this.payYN = payYN;
 		this.dealYN = dealYN;
 		this.dealDate = dealDate;
+		this.enrollDate = enrollDate;
+	}
+	
+	
+
+
+	public Reservation(String rNo, String rMNo, String rDNo, float capacity, String type, String startName,
+			String endName, String startPhone, String endPhone, String startAddr, String endAddr, String distance,
+			String rightLoad, String rightUnload, Date startDate, String startTime, Date endDate, String endTime,
+			String helpLoad, String helpUnload, String luggage, String msg, String amount, String payYN, String dealYN,
+			Date dealDate, String calcYN, Date calcDate, Date enrollDate) {
+		super();
+		this.rNo = rNo;
+		this.rMNo = rMNo;
+		this.rDNo = rDNo;
+		this.capacity = capacity;
+		this.type = type;
+		this.startName = startName;
+		this.endName = endName;
+		this.startPhone = startPhone;
+		this.endPhone = endPhone;
+		this.startAddr = startAddr;
+		this.endAddr = endAddr;
+		this.distance = distance;
+		this.rightLoad = rightLoad;
+		this.rightUnload = rightUnload;
+		this.startDate = startDate;
+		this.startTime = startTime;
+		this.endDate = endDate;
+		this.endTime = endTime;
+		this.helpLoad = helpLoad;
+		this.helpUnload = helpUnload;
+		this.luggage = luggage;
+		this.msg = msg;
+		this.amount = amount;
+		this.payYN = payYN;
+		this.dealYN = dealYN;
+		this.dealDate = dealDate;
+		this.calcYN = calcYN;
+		this.calcDate = calcDate;
 		this.enrollDate = enrollDate;
 	}
 

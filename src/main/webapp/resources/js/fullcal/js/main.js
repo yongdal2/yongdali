@@ -16,6 +16,27 @@ function getDisplayEventDate(event) {
 	return displayEventDate;
 }
 
+function filtering(event) {
+	var show_username = true;
+	var show_type = true;
+
+	var username = $('input:checkbox.filter:checked').map(function () {
+		return $(this).val();
+	}).get();
+	var types = $('#type_filter').val();
+
+	show_username = username.indexOf(event.username) >= 0;
+
+	if (types && types.length > 0) {
+		if (types[0] == "all") {
+			show_type = true;
+		} else {
+			show_type = types.indexOf(event.type) >= 0;
+		}
+	}
+
+	return show_username && show_type;
+}
 
 function calDateWhenResize(event) {
 
@@ -53,10 +74,10 @@ var calendar = $('#calendar').fullCalendar({
 			}),
 			content: $('<div />', {
 				class: 'popoverInfoCalendar'
-			}).append('<p><strong>예약번호:</strong> ' + event.rno + '</p>')
-			.append('<p><strong>출발지:</strong> ' + event.start + '</p>')
-			.append('<p><strong>도착지:</strong> ' + event.end + '</p>')
-			.append('<div class="popoverDescCalendar"><strong>요청사항:</strong> ' + event.msg + '</div>'),
+			}).append('<p><strong>예약번호:</strong> ' + event._id + '</p>')
+			.append('<p><strong>상차일:</strong> ' + event.start + '</p>')
+			.append('<p><strong>하차일:</strong> ' + event.end + '</p>')
+			.append('<div class="popoverDescCalendar"><strong>정산금액:</strong> ' + event.description + '</div>'),
 			delay: {
 				show: "800",
 				hide: "50"
@@ -99,7 +120,6 @@ var calendar = $('#calendar').fullCalendar({
 		}
 	},
 
-	
 	/* ****************
 	 *  일정 받아옴 
 	 * ************** */
@@ -107,17 +127,17 @@ var calendar = $('#calendar').fullCalendar({
 		$.ajax({
 			type: "get",
 			url: "dCal.do",
-			data : "<%=session.getAttribute('loginUser').getUserId();%>",
+			data : {mNo : $('#mNo').val()},
 			success: function (response) {
 				var events = [];
 				for (var i = 0; i < response.length; i++) {
 					var evt = {
-							rno: response[i].rno,
-							capacity: response[i].capacity,
-							start : response[i].start,
-							end : response[i].end,
-							date : response[i].endDate,
-							msg : response[i].msg
+							_id : response[i].rno,
+							title: response[i].capacity,
+							start : response[i].startDate,
+							end : response[i].endDate,
+							description : response[i].amount,
+							username : response[i].rMNo
 					};
 					events.push(evt);
 				}

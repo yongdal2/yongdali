@@ -30,6 +30,10 @@
 			<mapping path="/reservation.go"/>
 			<beans:bean id="reservationInterceptor" class="com.kh.yongdali.common.interceptor.ReservationInterceptor"/>
 		</interceptor>
+		<interceptor>
+			<mapping path="/chat.ch"/>
+			<beans:bean id="chatInterceptor" class="com.kh.yongdali.common.interceptor.ChatInterceptor"/>
+		</interceptor>
 	</interceptors>
 	
 	<beans:bean id="echoHandler" class="com.kh.yongdali.chat.config.EchoHandler" />
