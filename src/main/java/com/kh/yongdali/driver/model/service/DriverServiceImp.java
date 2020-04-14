@@ -14,9 +14,9 @@ public class DriverServiceImp implements DriverService{
 	DriverDao dDao = new DriverDao();
 	
 	@Override
-	public ArrayList<Reservation> mibaechar(int dId) {
+	public ArrayList<Reservation> mibaechar(String mNo) {
 		
-		return dDao.mibaechar(dId);
+		return dDao.mibaechar(mNo);
 	}
 
 	@Override

@@ -232,29 +232,24 @@ $(document).ready(function(){
     $('#btn_sendVeriCode').click(function(){
     	let emailVal = $("#email").val();  
     	
-    	if(!chk(/^[\a-z0-9_-]{5,20}@[\a-zA-Z]+(\.[\a-zA-Z]+){1,2}$/, emailVal, $("#emailMsg"), "5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.")){
-//            return false;
-            
-    	} else{
-    		$.ajax({
-    			url : "emailVerify.me",
-    			type : "get",
-    			data : {email : emailVal},
-    			success : function(result){
-    				alert("입력하신 이메일로 인증번호를 전송하였습니다.")
-    		    	$(this).hide();
-    		    	$('.verifyBtn:eq(1), .verifyBtn:eq(2)').show();
-    				
-    			}, 
-    			error : function(){
-            		var msg = "이메일 인증 절차 진행 중 오류 발생";
-                	location.href="error.ydl?msg="+msg;
-            	}
-    		})
-    		
-    		
-
-    	}
+    	if(emailValidate() == true){
+    		if(emailDupChk() == true){
+    			$.ajax({
+        			url : "emailVerify.me",
+        			type : "get",
+        			data : {email : emailVal},
+        			success : function(result){
+        				alert("입력하신 이메일로 인증번호를 전송하였습니다.")
+        		    	$('#btn_sendVeriCode').hide();
+        		    	$('#btn_verify, #btn_resend').show();
+        			}, 
+        			error : function(){
+                		var msg = "이메일 인증 절차 진행 중 오류 발생";
+                    	location.href="error.ydl?msg="+msg;
+                	}
+        		});
+    		}
+    	} 
     	
     	
 
@@ -345,17 +340,19 @@ $(document).ready(function(){
     
     // 이메일 중복 검사
     function emailDupChk(){
+    	var result = false;
     	$.ajax({
         	url : "emailDup.me",
         	type : "get",
         	data : { mId : $('#email').val() },
-        	success : function(result){
-        		if(result == "exist" ){
+        	async : false,
+        	success : function(value){
+        		if(value == "exist" ){
         			displayErrorMsg($("#emailMsg"), '이미 사용중이거나 탈퇴한 아이디입니다.');
-        			return false;
+        			result = false; 
         		}else{
         			$("#emailMsg").css("display","none");
-        			return true;
+        			result = true;
         		}
         	}
         	, error : function(){
@@ -363,6 +360,7 @@ $(document).ready(function(){
         		location.href="error.ydl?msg="+msg;
         	}
         })
+    	return result;
     }
     
     // TODO 인증번호 유효성 검사
