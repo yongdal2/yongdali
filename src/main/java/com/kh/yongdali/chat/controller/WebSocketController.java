@@ -1,4 +1,4 @@
-/*package com.kh.yongdali.chat.controller;
+package com.kh.yongdali.chat.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -162,4 +162,3 @@ public class WebSocketController{
 	 
 	 
 }
-*/
