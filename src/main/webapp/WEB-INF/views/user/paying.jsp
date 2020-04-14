@@ -34,7 +34,6 @@
 	<input name="msg" type="hidden" value="${r.msg}">
 	<input id="amt" name="amount" type="hidden" value="${r.amount}">
 	<input id="payYN" name="payYN" type="hidden">
-	
 </form>
 	
 	<script>

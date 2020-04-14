@@ -99,7 +99,6 @@ var calendar = $('#calendar').fullCalendar({
 		}
 	},
 
-	
 	/* ****************
 	 *  일정 받아옴 
 	 * ************** */
@@ -117,7 +116,7 @@ var calendar = $('#calendar').fullCalendar({
 							start : response[i].start,
 							end : response[i].end,
 							date : response[i].endDate,
-							msg : response[i].msg
+							msg : response[i].msg 
 					};
 					events.push(evt);
 				}

@@ -11,7 +11,29 @@
 <meta charset="utf-8">
 
 <title>용달이</title>
-
+<style>
+ button{
+ 	background: #F15F5F;
+ }
+textarea:disabled{
+	background: white;
+}
+ input[type="text"]:disabled {
+ 	background:  white; 
+ }
+ .modal-body {
+ 	background : lightgrey;
+  }
+ .modal-header {
+ 	background :lightgrey;	
+  }
+ .modal-footer {
+ 	background : lightgrey;
+  }
+  div > label{
+  	color : black;
+  }
+</style>
 </head>
 
 <body>
@@ -80,91 +102,108 @@
 						</table>
 					</div>
 					<div class="modal" tabindex="-1" role="dialog" id="eventModal">
-						<form action="getB.do">
-							<div class="modal-dialog" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h4 id="evetitle">배차신청</h4>
-										<button type="button" class="close" data-dismiss="modal"
+						<form action="Deal.do">
+							<div class="modal-dialog" role="document" >
+								<div class="modal-content" style="border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px; border: 2px solid white">
+									<div class="modal-header" style="border-radius: 20px 20px 0px 0px / 20px 20px 0px 0px">
+									<button type="button" class="close" data-dismiss="modal"
 											aria-label="CLose">
 											<span aria-hidden="true">X</span>
 										</button>
+										<h2 id="evetitle" style="color: white"><b>배차신청</b></h2>
 									</div>
 									<div class="modal-body">
 
 										<div class="form-group">
 											<div class="col-xs-99">
 												<label class="col-xs-98" for="edit-title">예약번호</label> <input
-													class="form-control" type="text" name="edit-title"
-													id="edit-title" required="required" disabled="disabled" />
+													class="form-control" type="text" name="rNo"
+													id="rNo" required="required" disabled="disabled" />
 											</div>
 										</div>
 										<div class="form-group">
 											<div class="col-xs-99">
 												<label class="col-xs-98" for="edit-start">예약일</label> <input
-													class="form-control" type="text" name="edit-start"
-													id="edit-start" />
+													class="form-control" type="text" name="enrollDate"
+													id="enrollDate" disabled="disabled"/>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-xs-99">
+												<label class="col-xs-98" for="edit-start">상차일</label> <input
+													class="form-control" type="text" 
+													id="sangDate" disabled="disabled"/>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="col-xs-99">
+												<label class="col-xs-98" for="edit-start">하차일</label> <input
+													class="form-control" type="text" 
+													id="haDate" disabled="disabled"/>
 											</div>
 										</div>
 										<div class="form-group">
 											<div class="col-xs-99">
 												<label class="col-xs-98" for="edit-end">출발지</label> <input
-													class="form-control" type="text" name="edit-end"
-													id="edit-end" />
+													class="form-control" type="text" 
+													id="start" disabled="disabled"/>
 											</div>
 										</div>
 										<div class="form-group">
 											<div class="col-xs-99">
 												<label class="col-xs-98" for="edit-type">도착지</label> <input
-													class="form-control" type="text" name="edit-type"
-													id="edit-type">
+													class="form-control" type="text" 
+													id="end" disabled="disabled"/>
 											</div>
 										</div>
 										<div class="form-group">
 											<div class="col-xs-99">
-												<label class="col-xs-98" for="edit-start">이삿짐</label> <input
-													class="form-control" type="text" name="edit-start"
-													id="edit-start" />
+												<label class="col-xs-98" for="edit-color">차량종류</label>
+												 <input
+													class="form-control" type="text" 
+													id="type" disabled="disabled"/>
 											</div>
 										</div>
 										<div class="form-group">
 											<div class="col-xs-99">
-												<label class="col-xs-98" for="edit-color">차량종류</label> <select
-													class="form-control" name="color" id="edit-color">
-													<option value="damas" style="color: #D25565;">다마스</option>
-													<option value="starex" style="color: #ffa94d;">스타렉스</option>
-													<option value="bongo" style="color: #74c0fc;">봉고</option>
-													<option value="1truck" style="color: #f06595;">1.5t</option>
-													<option value="3truck" style="color: #63e6be;">3.5t</option>
-												</select>
+												<label class="col-xs-98" for="edit-start">이삿짐</label>
+												<textarea rows="3" class="form-control"
+													name="luggage" id="luggage" disabled="disabled"></textarea>
 											</div>
 										</div>
 										<div class="form-group">
 											<div class="col-xs-99">
-												<label class="col-xs-98" for="edit-desc">설명</label>
-												<textarea rows="4" cols="50" class="form-control"
-													name="edit-desc" id="edit-desc"></textarea>
+												<label class="col-xs-98" for="edit-desc">요청사항</label>
+												<textarea rows="3" class="form-control"
+													name="msg" id="msg" disabled="disabled"></textarea>
 											</div>
 										</div>
 									</div>
+									<div style="visibility: hidden; height: 2px"><input id="mNo" name="mNo" value="${loginUser.mNo}"></div>
 									<div class="ContaineraddEvent" id="savecar">
-										<div class="modal-footer">
-											<button type="submit" class="btn btn-default">배차신청</button>
-											S
-											<button type="button" class="btn btn-default"
+										<div class="modal-footer" style="border-radius: 0px 0px 20px 20px / 0px 0px 20px 20px" >
+											<button id="submit" class="btn" style="background: white; color: grey">배차신청</button>
+											<button type="button" class="btn " style="background: white; color: grey"
+												data-dismiss="modal" >닫기</button>
+										</div>
+									</div>
+									<div class="ContaineraddEvent" id="deletecar">
+										<div class="modal-footer" style="border-radius: 0px 0px 20px 20px / 0px 0px 20px 20px" >
+											<button id="cancelBtn" class="btn" style="background: white; color: grey" onclick="cancel();">배차취소</button>
+											<button type="button" class="btn " style="background: white; color: grey"
 												data-dismiss="modal">닫기</button>
 										</div>
 									</div>
-									<div style="visibility: false"><p id="mNo">${loginUser.mNo}</p></div>
+									
 								</div>
 							</div>
-						</form>
+							</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
+	
 
 
 	<br>
@@ -190,21 +229,24 @@
 			console.log('sibal2');
 			$.ajax({
 				url : "mibaechar.do",
-				data : { mNO : $('#mNo').text()},
+				data : { mNO : $('#mNo').val()},
 				type : "post",
 				dataType : "json",
 				success : function(data){
 					console.log(data);
 					$.each(data,function(index,value){
+						var $deal_btn = $("<button class='dealB btn' style='color:white;' onclick='Deal(this.value)'>").val(value.rNo).text('배차신청');
+						
 						var $tr = $("<tr>");
-						var $rno = $("<td>").text(value.rno);
+						var $rno = $("<td>").text(value.rNo);
 						var $help = $("<td>").text(value.helpLoad+"/"+value.helpUnload);
 						var $startAddr = $("<td colspan='3'>").text(value.startAddr);
 						var $endAddr = $("<td colspan='3'>").text(value.endAddr);
 						var $start_date = $("<td>").text(value.startDate);
 						var $end_date = $("<td>").text(value.endDate);
-						var $deal_btn = $("<td>");
+						var $deal = $("<td>");
 						
+						$deal.append($deal_btn);
 						$tr.append($rno);
 						$tr.append($help);
 						$tr.append($startAddr);
@@ -221,6 +263,33 @@
 				
 			});
 		})
+		function Deal(aa){
+				console.log(aa);
+				$("#eventModal").modal();
+				$("#deletecar").hide();
+				$("#savecar").show();
+				
+				
+				$('#rNo').val(aa);
+				
+				$.ajax({
+					url : "dModal.do",
+					data : {rNo : aa},
+					dataType : 'json',
+					success : function(data){
+						console.log(data);
+						$("#enrollDate").val(data[0].enrollDate);
+						$("#sangDate").val(data[0].startDate);
+						$("#haDate").val(data[0].endDate);
+						$("#start").val(data[0].startAddr);
+						$("#end").val(data[0].endAddr);
+						$("#luggage").val(data[0].luggage);
+						$("#type").val(data[0].type);
+						$("#msg").val(data[0].msg);
+					}
+				})
+				
+		}
 		<%-- function mView(){
 		 var $baechar = $('#baechar tbody');
 		 $baechar.html("");

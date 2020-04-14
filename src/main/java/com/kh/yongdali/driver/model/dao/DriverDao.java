@@ -27,4 +27,13 @@ public class DriverDao {
 		return (ArrayList)sqlSession.selectList("reservationMapper.driverCal",dId);
 	}
 
+	public ArrayList<Reservation> driverModal(String rNo) {
+		
+		return (ArrayList)sqlSession.selectList("reservationMapper.driverModal",rNo);
+	}
+
+	public int Deal(Reservation aa) {
+		return sqlSession.update("reservationMapper.deal",aa);
+	}
+
 }

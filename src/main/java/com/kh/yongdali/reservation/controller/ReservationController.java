@@ -2,6 +2,7 @@ package com.kh.yongdali.reservation.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpSession;
@@ -11,10 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.yongdali.member.model.vo.Member;
+import com.kh.yongdali.myPage.model.vo.Address;
 import com.kh.yongdali.reservation.model.service.ReservationService;
 import com.kh.yongdali.reservation.model.vo.Reservation;
 
@@ -24,11 +25,30 @@ public class ReservationController {
 	@Autowired
 	private ReservationService rService;
 
+	/**
+	 * 1. 예약페이지로 가기(가기전 주소록 list 불러오기)
+	 * @return
+	 */
 	@RequestMapping("reservation.go")
-	public String goReservation() {
-		return "user/reservation";
+	public ModelAndView goReservation(ModelAndView mv, HttpSession session) {
+		String mno = ((Member)session.getAttribute("loginUser")).getmNo();	
+		ArrayList<Address> list = rService.getAddressList(mno);
+		
+		mv.addObject("list",list);
+		mv.setViewName("user/reservation");
+		return mv;
 	}
 
+	/**
+	 * 2. 예약페이지 > 결제페이지
+	 * @param r
+	 * @param mv
+	 * @param stDate1
+	 * @param edDate1
+	 * @param capacity1
+	 * @return
+	 * @throws ParseException
+	 */
 	@RequestMapping("rev.do")
 	public ModelAndView InsertReservation1(@ModelAttribute Reservation r, ModelAndView mv,
 			@RequestParam(value = "startDate1", required = false) String stDate1,
@@ -65,10 +85,22 @@ public class ReservationController {
 		return mv;
 	}
 
+	/**
+	 * 3.결제페이지 > DB
+	 * @param mv
+	 * @param r
+	 * @param session
+	 * @param stDate
+	 * @param edDate
+	 * @param capacity1
+	 * @return
+	 * @throws ParseException
+	 */
 	@RequestMapping("pay.do")
 	public ModelAndView InsertReservation2(ModelAndView mv, Reservation r, HttpSession session,
 			@RequestParam("startDate1") String stDate, @RequestParam("endDate1") String edDate,
 			@RequestParam("capacity1") String capacity1) throws ParseException {
+		
 		// 차량크기, 거리, 결제금액 int로 변환하기
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		if (stDate != "") {
@@ -88,14 +120,17 @@ public class ReservationController {
 		
 		System.out.println("차사이즈2 : " + capacity);
 
+		// 세션에 저장되어있는 loginUser의 mId 불러오기
+		r.setrMNo(((Member)session.getAttribute("loginUser")).getmNo());
+		System.out.println(r.getrMNo());
+		int result = rService.insertReservation(r);
 		
-		 // 세션에 저장되어있는 loginUser의 mId 불러오기
-		 r.setrMNo(((Member)session.getAttribute("loginUser")).getmNo());
-		 System.out.println(r.getrMNo()); int result = rService.insertReservation(r);
-		 
-
-		mv.setViewName("user/paySuccess");
-
+		if(result > 0) {
+			mv.setViewName("user/paySuccess");			
+		} else {
+			mv.setViewName("common/error");
+		}
+		
 		return mv;
 	}
 
