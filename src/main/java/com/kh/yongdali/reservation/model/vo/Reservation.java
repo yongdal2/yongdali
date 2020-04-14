@@ -2,6 +2,14 @@ package com.kh.yongdali.reservation.model.vo;
 
 import java.util.Date;
 
+/**
+ * @author user2
+ *
+ */
+/**
+ * @author user2
+ *
+ */
 public class Reservation {
 	private String rNo;			// 예약&결제 기본키
 	private String rMNo;		// 멤버 외래키
@@ -36,6 +44,32 @@ public class Reservation {
 	public Reservation() {}
 
 	
+		
+	public Reservation(String rNo, String rMNo, String rDNo, float capacity, String type, String startAddr,
+			String endAddr, Date startDate, Date endDate, String helpLoad, String helpUnload, String luggage,
+			String msg, String payYN, String dealYN, Date dealDate, Date enrollDate) {
+		super();
+		this.rNo = rNo;
+		this.rMNo = rMNo;
+		this.rDNo = rDNo;
+		this.capacity = capacity;
+		this.type = type;
+		this.startAddr = startAddr;
+		this.endAddr = endAddr;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.helpLoad = helpLoad;
+		this.helpUnload = helpUnload;
+		this.luggage = luggage;
+		this.msg = msg;
+		this.payYN = payYN;
+		this.dealYN = dealYN;
+		this.dealDate = dealDate;
+		this.enrollDate = enrollDate;
+	}
+
+
+
 	public String getrNo() {
 		return rNo;
 	}
