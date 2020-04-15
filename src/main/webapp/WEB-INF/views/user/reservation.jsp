@@ -308,7 +308,7 @@
 									<span id="btwDay" class="charge-content"></span>
 								</div>
 								<div align="left">
-									<span class="charge-title">보관 기간</span>
+									<span class="charge-title">보관 기간&nbsp;<small>(60,000원/일)</small></span>
 								</div>
 							</div>
 						</div>

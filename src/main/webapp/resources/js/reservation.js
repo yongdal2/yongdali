@@ -86,7 +86,7 @@ function addCarInfo1(){
 	
 	// 값들 서로 연관 시킴
 	if(charge_opt2==0 && charge_dis==0){
-		carInfo.innerHTML = sl1.value;
+		carInfo.innerHTML = sl1.value+"톤";
 	} else {
 		carInfo.innerHTML = sl1.value+"톤 / "+sl2.value;
 		calc();
@@ -571,11 +571,11 @@ $('#checkLoad1').click(function(){
 		var startYear = new Date().getFullYear();
 		var startMonth = new Date().getMonth()+1;
 		var startDay = new Date().getDate();
-		var addStartDay = startDay+2;
+		var addStartDay = startDay+1;
 		startDateStr = startYear+"-"+startMonth+"-"+startDay;
 		stDate = new Date(startDateStr);
 		addDate = startYear+"년 "+startMonth+"월 "+addStartDay+"일";
-		console.log("바로 상차 선택날짜로부터 2일후 하차예약 가능날짜 : "+addDate);
+		console.log("바로 상차 선택날짜로부터 1일후 하차예약 가능날짜 : "+addDate);
 		$('#datepicker2').datepicker('option','minDate',addDate);
 		$(this).val("바로 상차");
 		if($('#datepicker2').val()!=""){
