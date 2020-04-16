@@ -104,7 +104,7 @@ public class DriverController {
 	public String mainDeal(HttpServletRequest request) {
 		String mNo =request.getParameter("mNo");
 		String rNo = request.getParameter("rNo");
-		
+		System.out.println(mNo+' '+rNo);
 		int result = Deal(mNo,rNo);
 		
 		if(result>0) {

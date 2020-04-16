@@ -296,7 +296,7 @@ textarea:disabled{
 		
 		$(function(){
 			var $baechar = $('#baechar tbody');
-			$baechar	.html("");
+			$baechar.html("");
 			
 			
 			
