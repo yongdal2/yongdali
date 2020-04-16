@@ -84,7 +84,7 @@ textarea:disabled{
 						<tbody>
 						</tbody>
 					</table>
-					<a href="baedetail.do" class="pull-right">+ 상세보기</a>
+					<a href="baeDetail.do" class="pull-right">+ 상세보기</a>
 				</div>
 
 				<hr>
@@ -94,7 +94,7 @@ textarea:disabled{
 						style="font-size: 25px; text-align: center; color: #000; font-family: Montserrat; height: 50px; " class="jal">
 						나의 배차
 					</h1>
-
+		
 
 					<div class="row" style="text-align-last: center;">
 						<table class="table" style="font-size: 12px;" id="baechar">
@@ -112,10 +112,10 @@ textarea:disabled{
 							<tbody>
 							</tbody>
 						</table>
-						<a href="mydetail.do" class="pull-right">+ 상세보기</a>
+						<a href="baeDetail.do?mNo=${loginUser.mNo}" class="pull-right">+ 상세보기</a>
 					</div>
 					<div class="modal" tabindex="-1" role="dialog" id="eventModal">
-						<form action="Deal.do">
+						<form action="Deal.do" method="post">
 							<div class="modal-dialog" role="document" >
 								<div class="modal-content" style="border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px; border: 2px solid white">
 									<div class="modal-header" style="border-radius: 20px 20px 0px 0px / 20px 20px 0px 0px">
@@ -129,9 +129,10 @@ textarea:disabled{
 
 										<div class="form-group">
 											<div class="col-xs-99">
-												<label class="col-xs-98" for="edit-title">예약번호</label> <input
+												<label class="col-xs-98" for="edit-title">예약번호</label> 
+												<input
 													class="form-control" type="text" name="rNo"
-													id="rNo" required="required" disabled="disabled" />
+													id="rNo" required="required" readonly />
 											</div>
 										</div>
 										<div class="form-group">
@@ -202,7 +203,7 @@ textarea:disabled{
 									</div>
 									<div class="ContaineraddEvent" id="deletecar">
 										<div class="modal-footer" style="border-radius: 0px 0px 20px 20px / 0px 0px 20px 20px" >
-											<button id="cancelBtn" class="btn" style="background: white; color: grey" onclick="myCancel();">배차취소</button>
+											<button id="cancelBtn" type="button" class="btn" style="background: white; color: grey" onclick="myCancel();">배차취소</button>
 											<button type="button" class="btn " style="background: white; color: grey"
 												data-dismiss="modal">닫기</button>
 										</div>
