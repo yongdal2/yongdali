@@ -121,7 +121,7 @@ body{
     padding-left: 32px;
 }
 
-textarea{
+#msgArea{
     resize:none;
     border:none;
     display:block;
@@ -132,7 +132,7 @@ textarea{
     margin-top: 10px;
 }
 
-textarea::placeholder{
+#msgArea::placeholder{
     color:#ddd;
 }
 
