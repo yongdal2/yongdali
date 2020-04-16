@@ -192,8 +192,8 @@ public class MemberController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping("emailVerify.me")
-	public void emailVerify(@RequestParam("email") String email) {
+	@RequestMapping("sendVeriCode.me")
+	public void sendVeriCode(@RequestParam("email") String email) {
 		// 인증번호(난수) 생성
 		int ranNum = new Random().nextInt(900000) + 100000;		
 		
@@ -208,18 +208,24 @@ public class MemberController {
 			// MimeMessage 객체에 입력정보 삽입
 			message.setSubject("[용달이] 이메일 계정을 인증해주세요");
 			message.setText(content);
-			message.addRecipient(RecipientType.TO, new InternetAddress(email)); // TODO TO가 무얼 의미하는지 모르겠
+			message.addRecipient(RecipientType.TO, new InternetAddress(email)); 
 			
 			// 메일 전송
 			mailSender.send(message);
 		} catch (MessagingException e) {
-			
 			e.printStackTrace();
 		}		
+	}
 
-		
-
-		
+	@ResponseBody
+	@RequestMapping(value="chkVeriCode.me", method=RequestMethod.GET)
+	public String chkVeriCode(@RequestParam("inputNum") int inputNum) {
+		int ranNum = 0;
+		if(inputNum == ranNum) {
+			return "success";
+		} else {
+			return "fail";
+		}
 	}
 	
 	/** 회원가입_양식 제출
