@@ -101,9 +101,10 @@ body{
 .placeholder {
     position: absolute;
     top: 50%;
-    left: 10px;
+    left: 14px;
     display: block;
-    padding-left: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
     color: #95989a;
     white-space: nowrap;
     letter-spacing: .2px;
@@ -170,7 +171,10 @@ body{
 
 
 .carInfo {
-    display: inline-flex;        
+    display: inline-flex;  
+    
+    /* 지훈 조정 사항  */ 
+    padding-left: 14px;      
 }
 
 .carInfo select {
@@ -528,7 +532,9 @@ select::-ms-expand {
     justify-content: space-between;
     padding: 2rem;
     border-bottom: 1px solid rgb(217, 225, 232);
-    padding: 10px;
+    padding: 0px !important;
+    padding-left: 20px !important;
+    
 }
 
 .kiqceJ h1 {
@@ -839,3 +845,12 @@ select::-ms-expand {
 }
 
 
+/* 지훈 조정 사항 */
+#showPwd{
+	padding-top: 19px;
+    padding-left: 5px;
+}
+
+.carNo{
+height: 51px;
+}

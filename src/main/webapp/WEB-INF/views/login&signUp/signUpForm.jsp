@@ -112,7 +112,7 @@
                                 </select>
                             </div>
                             <div class="formRow--input-wrapper js-inputWrapper">
-                                <input type="text" class="formRow--input js-input" name="carNo" placeholder="차량번호" maxlength="8">
+                                <input type="text" class="formRow--input js-input carNo" name="carNo" placeholder="차량번호" maxlength="8">
                             </div>
                         </div>
                         <div id="bizFormMsg1" class="msgBox"></div>
@@ -144,7 +144,7 @@
             <!-- Modal content -->
             <div class="VeSAx"></div>
             <div width="44rem" class="ewJflR modal-content">
-                <div class="kiqceJ" style="padding: 0px; padding-left: 20px;">
+                <div class="kiqceJ" >
                     <h1>차량 안내</h1>
                     <span class="modalClose">&times;</span>
                 </div>
