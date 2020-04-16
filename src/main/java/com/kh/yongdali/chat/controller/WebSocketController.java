@@ -117,7 +117,8 @@ public class WebSocketController{
 	            	System.out.println("getId : " + session.getId());
 	            	System.out.println("selfid : " + self.getId());
 	                if(!self.getId().equals(session.getId())) {
-	                    session.getBasicRemote().sendText(message.split("|")[1]+" : "+message);
+	                   // session.getBasicRemote().sendText(message.split("|")[1]+" : "+message);
+	                    session.getBasicRemote().sendText(message.split("|")[1]+message);
 	                	
 	                }
 	            }
