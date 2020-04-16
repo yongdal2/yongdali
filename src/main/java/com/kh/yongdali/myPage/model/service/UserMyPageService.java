@@ -2,6 +2,7 @@ package com.kh.yongdali.myPage.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.myPage.model.vo.Address;
 
 /**
@@ -10,6 +11,16 @@ import com.kh.yongdali.myPage.model.vo.Address;
  */
 public interface UserMyPageService {
 
+	/**
+	 * 유저 폰번호 수정
+	 * @param m
+	 * @return
+	 */
+	int updatePhone(Member m);
+	
+	
+	
+	
 	/**
 	 * 나의 주소록 갯수 조회
 	 * @param mId 
@@ -49,5 +60,7 @@ public interface UserMyPageService {
 	 * @param aNo
 	 * @return
 	 */
-	int deleteAddr(String aNo); 
+	int deleteAddr(String aNo);
+
+
 }
