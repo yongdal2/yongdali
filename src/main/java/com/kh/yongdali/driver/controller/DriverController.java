@@ -36,15 +36,14 @@ public class DriverController {
 	public String driver2YongView() {
 		return "/driver/2yong";
 	}
-	@RequestMapping("test.do")
+	@RequestMapping("baedetail.do")
 	public String test2() {
-		return "/driver/test";
+		return "/driver/driverDetail";
 	}
 	
 	@RequestMapping("mibaechar.do")
 	public void mibaechar(HttpServletResponse response,String mNO) throws JsonIOException, IOException {
 		ArrayList<Reservation> list = dService.mibaechar(mNO);
-		System.out.println(list);
 		response.setContentType("application/json; charset=utf-8");
 		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();

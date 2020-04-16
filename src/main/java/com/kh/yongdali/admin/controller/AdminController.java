@@ -20,6 +20,12 @@ public class AdminController {
 	@Autowired
 	private AdminService aService;
 	
+	/**
+	 * Member List
+	 * @param mv
+	 * @param currentPage
+	 * @return
+	 */
 	@RequestMapping("aMem.ad")
 	public ModelAndView adminList(ModelAndView mv,
 								@RequestParam(value="currentPage", required = false, defaultValue="1")

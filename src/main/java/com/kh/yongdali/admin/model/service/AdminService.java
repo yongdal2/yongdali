@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.common.PageInfo;
+import com.kh.yongdali.driver.model.vo.Driver;
 
 
 public interface AdminService {
@@ -18,6 +19,8 @@ public interface AdminService {
 	int getMemListCount();
 
 	
+	
+	ArrayList<Driver> selectList(PageInfo pi);
 	
 
 }
