@@ -37,7 +37,7 @@
 			</div>
 			<div class="col-lg-4">
 				<ul class="nav navbar-nav navbar-center" style="margin-left:50px;">
-					<li class="nav-item"><a class="nav-link" href="#" style="color: black; font-weight: bold">요금조회</a></li>
+					<li class="nav-item"><a class="nav-link" href="reservation.go" style="color: black; font-weight: bold">예약하기</a></li>
 					<li class="nav-item"><a class="nav-link" href="information.ydl" style="color: black; font-weight: bold">차량안내</a></li>
 					<li class="nav-item"><a class="nav-link" href="uNoticeMain.no" style="color: black; font-weight: bold">고객센터</a></li>
 				</ul>
