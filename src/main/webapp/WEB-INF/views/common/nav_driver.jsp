@@ -29,6 +29,7 @@
 #header1 {
 	font-family: 'nanumsquare', Arial, Helvetica, sans-serif !important;
 }
+
 </style>
 
 <header id="header1">
@@ -94,6 +95,6 @@
 	</nav>
 	<div class="jumbotron" style="background: #F15F5F; text-align: center;">
 		<p style="color: white">용달이에는 다양한 차종이 준비되어 있습니다.</p>
-		<h2 style="color: white">고객님의 용도에 맞는 트럭을 찾아보세요</h2>
+		<h2 style="color: white"><b>고객님의 용도에 맞는 트럭을 찾아보세요</b></h2>
 	</div>
 </header>
