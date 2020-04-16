@@ -55,4 +55,16 @@ public class DriverDao {
 		return sqlSession.update("reservationMapper.cancel",aa);
 	}
 
+	public int getMyCount(String mNo) {
+		
+		return sqlSession.selectOne("reservationMapper.getMyCount",mNo);
+	}
+
+	public ArrayList<Reservation> myDetail(String mNo, PageInfo pi) {
+		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("reservationMapper.myDetail", mNo, rowBounds);
+	}
+
 }

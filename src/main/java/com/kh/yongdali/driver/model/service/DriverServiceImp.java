@@ -81,6 +81,16 @@ public class DriverServiceImp implements DriverService{
 		return dDao.cancel(aa);
 	}
 
+	@Override
+	public int getMyCount(String mNo) {
+		return dDao.getMyCount(mNo);
+	}
+
+	@Override
+	public ArrayList<Reservation> myDetail(String mNo, PageInfo pi) {
+		return dDao.myDetail(mNo,pi);
+	}
+
 
 
 }

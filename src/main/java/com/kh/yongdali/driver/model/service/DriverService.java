@@ -22,5 +22,9 @@ public interface DriverService {
 	ArrayList<Reservation> selectList(String mNo,PageInfo pi);
 
 	int cancel(Reservation aa);
+
+	int getMyCount(String mNo);
+
+	ArrayList<Reservation> myDetail(String mNo, PageInfo pi);
 	
 }

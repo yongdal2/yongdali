@@ -61,6 +61,29 @@ public class DriverController {
 		
 		return mv;
 	}
+	@RequestMapping(value="myDetail.do")
+	public ModelAndView myDetail(ModelAndView mv,String mNo
+			, @RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage) {
+		
+		int pageLimit = 15;
+		int boardLimit = 5;
+		System.out.println(mNo);
+		int listCount = dService.getMyCount(mNo);
+		
+		System.out.println("listCount : " + listCount);
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage,listCount,pageLimit,boardLimit);
+		
+		ArrayList<Reservation> list = dService.myDetail(mNo,pi);
+		
+		System.out.println(list);
+		
+		mv.addObject("list",list);
+		mv.addObject("pi",pi);
+		mv.setViewName("/driver/myDetail");
+		
+		return mv;
+	}
 	
 	
 	@RequestMapping("mibaechar.do")
