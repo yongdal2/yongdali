@@ -45,7 +45,7 @@
 				</div>
 				<div class="col-lg-5">
 					<ul class="nav navbar-nav navbar-center">
-						<li class="nav-item"><a class="nav-link" href="${contextPath}/baedetail.do"
+						<li class="nav-item"><a class="nav-link" href="${contextPath}/baedetail.do?mNo=${loginUser.mNo}"
 							style="color: black; font-weight: bold;">실시간예약</a></li>
 						<li class="nav-item"><a class="nav-link" href="${contextPath}/drivercal.ydl"
 							style="color: black; font-weight: bold"">배차일정</a></li>
