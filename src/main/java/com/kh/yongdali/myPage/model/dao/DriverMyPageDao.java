@@ -15,6 +15,10 @@ public class DriverMyPageDao {
 	public int updateProfileImg(Driver d) {
 		return sqlSession.update("myPageMapper.updateProfileImg",d);
 	}
+
+	public Driver truckInfoView(String mNo) {
+		return sqlSession.selectOne("myPageMapper.truckInfoView",mNo);
+	}
 	
 	
 
