@@ -109,8 +109,9 @@ NOCACHE;
 --
 --
 ---- DRIVER
---INSERT INTO DRIVER VALUES('D' || SEQ_DNO.NEXTVAL, 'M3', 1, '카고', '01가1111', 'idImg1.png','yongdali_20200401_174203821','carImg1.png','yongdali_20200401_174203842');
---INSERT INTO DRIVER VALUES('D' || SEQ_DNO.NEXTVAL, 'M4', 1.4, '호루', '02가2222', 'idImg2.png', 'yongdali_20200402_174203821','carImg2.png', 'yongdali_20200402_174203842');
+
+-- INSERT INTO DRIVER VALUES('D' || SEQ_DNO.NEXTVAL, 'M3', 1, '카고', '01가1111', 'idImg1.png','yongdali_id_20200401_174203821','carImg1.png','yongdali_regCard_20200401_174203842');
+-- INSERT INTO DRIVER VALUES('D' || SEQ_DNO.NEXTVAL, 'M4', 1.4, '호루', '02가2222', 'idImg2.png', 'yongdali_id_20200402_174203821','carImg2.png', 'yongdali_regCard_20200402_174203842');
 
                     
                   
