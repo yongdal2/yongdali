@@ -46,17 +46,17 @@
 			<div class="row" id="rowList">
 				<div class="col-xs-12 col-md-12" id="table">
 					<br>
-					<table class="table table-striped table-hover text-center">
+					<table style="text-align: center" class="table table-striped table-hover text-center">
 						<thead id="thead">
 							<tr>
-								<th align="center">회원번호</th>
-								<th align="center">회원ID(이메일)</th>
-								<th align="center">이름</th>
-								<th align="center">휴대폰번호</th>
-								<th align="center">회원구분</th>
-								<th align="center">회원상태</th>
-								<th align="center">알림설정</th>
-								<th align="center">가입일</th>
+								<th>회원번호</th>
+								<th>회원ID(이메일)</th>
+								<th>이름</th>
+								<th>휴대폰번호</th>
+								<th>회원구분</th>
+								<th>회원상태</th>
+								<th>알림설정</th>
+								<th>가입일</th>
 							</tr>
 						</thead>
 						

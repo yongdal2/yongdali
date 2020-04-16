@@ -42,5 +42,12 @@ public interface UserMyPageService {
 	 * @param a
 	 * @return
 	 */
-	int insertAddr(Address a); 
+	int insertAddr(Address a);
+
+	/**
+	 * 주소록 삭제
+	 * @param aNo
+	 * @return
+	 */
+	int deleteAddr(String aNo); 
 }

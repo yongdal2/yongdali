@@ -20,20 +20,6 @@ function filtering(event) {
 	var show_username = true;
 	var show_type = true;
 
-	var username = $('input:checkbox.filter:checked').map(function () {
-		return $(this).val();
-	}).get();
-	var types = $('#type_filter').val();
-
-	show_username = username.indexOf(event.username) >= 0;
-
-	if (types && types.length > 0) {
-		if (types[0] == "all") {
-			show_type = true;
-		} else {
-			show_type = types.indexOf(event.type) >= 0;
-		}
-	}
 
 	return show_username && show_type;
 }
@@ -62,22 +48,36 @@ function calDateWhenResize(event) {
 var calendar = $('#calendar').fullCalendar({
 	//일정 렌더링
 	eventRender: function (event, element, view) {
-
+		var date1 = new Date();
+		var date2 = new Date();
+		var aa =function(date){
+			var date3 = new Date(date);
+		    var year = date3.getFullYear();              //yyyy
+		    var month = (1 + date3.getMonth());          //M
+		    month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
+		    var day = date3.getDate();                   //d
+		    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
+		    return  year + '-' + month + '-' + day;
+		}
+		
+		date1 = aa(event.start);
+		date2 = aa(event.end);
 		//일정에 hover시 요약
 		element.popover({
 			title: $('<div />', {
 				class: 'popoverTitleCalendar',
-				text: event.title
+				text: '예약번호 : '+event._id
 			}).css({
 				'background': event.backgroundColor,
 				'color': event.textColor
 			}),
 			content: $('<div />', {
 				class: 'popoverInfoCalendar'
-			}).append('<p><strong>예약번호:</strong> ' + event._id + '</p>')
-			.append('<p><strong>상차일:</strong> ' + event.start + '</p>')
-			.append('<p><strong>하차일:</strong> ' + event.end + '</p>')
-			.append('<div class="popoverDescCalendar"><strong>정산금액:</strong> ' + event.description + '</div>'),
+			}).append('<p><strong>출발지:</strong> ' + event.title + '</p>')
+			.append('<p><strong>하차지:</strong> ' + event.username + '</p>')
+			.append('<p><strong>상차일:</strong> ' + date1 + '</p>')
+			.append('<p><strong>하차일:</strong> ' + date2 + '</p>')
+			.append('<div class="popoverDescCalendar"><strong>정산금액:</strong> ' + (event.description*0.7) + '원 </div>'),
 			delay: {
 				show: "800",
 				hide: "50"
@@ -133,12 +133,14 @@ var calendar = $('#calendar').fullCalendar({
 				for (var i = 0; i < response.length; i++) {
 					var evt = {
 							_id : response[i].rno,
-							title: response[i].capacity,
+							title: response[i].startAddr,
 							start : response[i].startDate,
 							end : response[i].endDate,
 							description : response[i].amount,
-							username : response[i].rMNo
+							username : response[i].endAddr
+							
 					};
+					console.log(evt.start);
 					events.push(evt);
 				}
 				callback(events);
@@ -171,7 +173,7 @@ var calendar = $('#calendar').fullCalendar({
 	firstDay: 0, //월요일이 먼저 오게 하려면 1
 	weekNumbers: false, //요일 숫자로 표시
 	selectable: true, //선택가능
-	weekNumberCalculation: "ISO",
+	weekNumberCalculation: "UTF-8",
 	eventLimit: true, 
 	views: {
 		month: {
@@ -189,7 +191,7 @@ var calendar = $('#calendar').fullCalendar({
 	slotLabelFormat: 'HH:mm',
 	weekends: true,
 	nowIndicator: true,
-	dayPopoverFormat: 'MM/DD dddd',
+	dayPopoverFormat: 'yyyy MM/dd',
 	longPressDelay: 0,
 	eventLongPressDelay: 0,
 	selectLongPressDelay: 0

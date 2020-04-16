@@ -35,4 +35,8 @@ public class UserMyPageDao {
 		return sqlSession.insert("myPageMapper.insertAddr",a);
 	}
 
+	public int deleteAddr(String aNo) {
+		return sqlSession.delete("myPageMapper.deleteAddr", aNo);
+	}
+
 }
