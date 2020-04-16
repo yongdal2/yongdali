@@ -39,4 +39,9 @@ public class UserMyPageServiceImpl implements UserMyPageService {
 		return umpDao.insertAddr(a);
 	}
 
+	@Override
+	public int deleteAddr(String aNo) {
+		return umpDao.deleteAddr(aNo);
+	}
+
 }

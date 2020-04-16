@@ -1,7 +1,9 @@
 package com.kh.yongdali.chat.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
@@ -90,22 +92,6 @@ public class WebSocketController{
 //		 System.out.println("client is now disconnected...");
 //	 }
 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
 	 @OnOpen // 클라이언트가 웹소켓에 들어오고 서버에 아무런 문제없이 들어왔을 떄 실행하는 메소드
 	    public void onOpen(Session session) {
 	        //logger.info("Open session id:"+session.getId());
@@ -125,11 +111,15 @@ public class WebSocketController{
 	     * @param message
 	     */
 	    private void sendAllSessionToMessage(Session self,String message) {
-	    	System.out.println(message);
+	    	System.out.println("message : " + message);
 	        try {
 	            for(Session session : WebSocketController.sessionList) {
+	            	System.out.println("getId : " + session.getId());
+	            	System.out.println("selfid : " + self.getId());
 	                if(!self.getId().equals(session.getId())) {
-	                    session.getBasicRemote().sendText(message.split(",")[1]+" : "+message);
+	                   // session.getBasicRemote().sendText(message.split("|")[1]+" : "+message);
+	                    session.getBasicRemote().sendText(message.split("|")[1]+message);
+	                	
 	                }
 	            }
 	        }catch (Exception e) {

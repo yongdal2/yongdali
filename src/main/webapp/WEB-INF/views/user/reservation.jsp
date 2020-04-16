@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -877,7 +879,7 @@
 		</div>
 		<!-- Modal6 : 출발지 주소록 -->
 		<div id="myModal6" class="modal11" style="padding-top: 10%;">
-			<div class="modal-content11" style="width: 600px">
+			<div class="modal-content11" style="width: 702px">
 				<span id="modal-close6" class="close11" style="width: 30px;">&times;</span>
 				<div class="modal-addr-div">
 					<div class="addr-title-div">
@@ -892,20 +894,28 @@
 								<div class="col-xs-5 col-md-5">주소</div>
 								<div class="col-xs-3 col-md-3">연락처</div>
 							</div>
+							<c:forEach var="a" items="${ list }">
 							<div class="row small aL-row">
 								<div class="col-xs-2 col-md-2" style="margin-top: 5px;">
-									<input type="radio" style="cursor: pointer;">
+									<input type="radio" name="startAddrList" style="cursor: pointer;">
 								</div>
 								<div class="col-xs-2 col-md-2">
-									<span>회사</span> <br> <span>도로리</span>
+									<span>${ a.aPlace }</span>
+									<br>
+									<span>${ a.aName }</span>
 								</div>
 								<div class="col-xs-5 col-md-5">
-									<span>강남구 대치동 123-556로 24번지</span> <br> <span>123층 12호</span>
+									<c:forEach var="addr" items="${fn:split(a.aAddress, ',')}">
+										<span>${ addr }</span>
+										<br>
+									</c:forEach>
 								</div>
 								<div class="col-xs-3 col-md-3" style="padding-top: 9px;">
-									<span>010-2711-1111</span>
+									<span>${ a.aPhone }</span>
 								</div>
+								<input type="hidden" value="${ a.aNo }">
 							</div>
+							</c:forEach>
 						</div>
 					</div>
 				</div>
@@ -917,7 +927,7 @@
 		</div>
 		<!-- Modal7 : 도착지 주소록 -->
 		<div id="myModal7" class="modal11" style="padding-top: 10%;">
-			<div class="modal-content11" style="width: 600px">
+			<div class="modal-content11" style="width: 702px;">
 				<span id="modal-close7" class="close11" style="width: 30px;">&times;</span>
 				<div class="modal-addr-div">
 					<div class="addr-title-div">
@@ -932,20 +942,28 @@
 								<div class="col-xs-5 col-md-5">주소</div>
 								<div class="col-xs-3 col-md-3">연락처</div>
 							</div>
+							<c:forEach var="a" items="${ list }">
 							<div class="row small aL-row">
 								<div class="col-xs-2 col-md-2" style="margin-top: 5px;">
-									<input type="radio" style="cursor: pointer;">
+									<input type="radio" name="endAddrList" style="cursor: pointer;">
 								</div>
 								<div class="col-xs-2 col-md-2">
-									<span>회사</span> <br> <span>도로리</span>
+									<span>${ a.aPlace }</span>
+									<br>
+									<span>${ a.aName }</span>
 								</div>
 								<div class="col-xs-5 col-md-5">
-									<span>강남구 대치동 123-556로 24번지</span> <br> <span>123층 12호</span>
+									<c:forEach var="addr" items="${fn:split(a.aAddress, ',')}">
+										<span>${ addr }</span>
+										<br>
+									</c:forEach>
 								</div>
 								<div class="col-xs-3 col-md-3" style="padding-top: 9px;">
-									<span>010-2711-1111</span>
+									<span>${ a.aPhone }</span>
 								</div>
+								<input type="hidden" value="${ a.aNo }">
 							</div>
+							</c:forEach>
 						</div>
 					</div>
 				</div>
@@ -963,7 +981,12 @@
 		</div>
 
 		<!-- hidden 값들 -->
-		<input type="hidden" id="addStAddr" name="startAddr"> <input type="hidden" id="addEdAddr" name="endAddr"> <input type="hidden" id="amountVal" name="amount" value="0"> <input type="hidden" id="distanceVal" name="distance"> <input type="hidden" id="helpLoadVal" name="helpLoad"> <input type="hidden" id="helpUnloadVal" name="helpUnload">
+		<input type="hidden" id="addStAddr" name="startAddr">
+		<input type="hidden" id="addEdAddr" name="endAddr">
+		<input type="hidden" id="amountVal" name="amount" value="0">
+		<input type="hidden" id="distanceVal" name="distance">
+		<input type="hidden" id="helpLoadVal" name="helpLoad">
+		<input type="hidden" id="helpUnloadVal" name="helpUnload">
 	</form>
 
 	<!-- javascript files -->

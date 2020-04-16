@@ -93,14 +93,16 @@
 							$(function(){
 								$("button[id^='deleteAddrBtn']").on("click",function(){
 									var aNo = $(this).val();
+									console.log(aNo);
 									var delA = confirm( "삭제하시겠습니까?");
-									
-									if(delA==true){
-										document.location.href ="delte";
+									if(delA){
+										
+										document.location.href ="dAddr.myp";
 									}else{
 										alert("윽");
 									}
 									
+							});
 							});
 							</script>
 						</div>

@@ -489,8 +489,8 @@ select, textarea, input, button{
 }
 
 .modal-addr-div{
-	width: 598px;
-	height: 400px;
+	width: 700px;
+	height: 362px;
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -511,7 +511,6 @@ select, textarea, input, button{
 	width: 200px;
 	height: 50px;
 	border: none;
-	margin-top: 13px;
 	background-color: rgb(87,187,138);
 	color: white;
 	font-family: 'yg-jalnan';
@@ -523,7 +522,6 @@ select, textarea, input, button{
 	width: 200px;
 	height: 50px;
 	border: none;
-	margin-top: 13px;
 	background-color: rgb(87,187,138);
 	color: white;
 	font-family: 'yg-jalnan';

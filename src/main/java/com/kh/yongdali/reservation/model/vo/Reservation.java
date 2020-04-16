@@ -45,9 +45,9 @@ public class Reservation {
 
 	
 		
-	public Reservation(String rNo, String rDNo) {
+	public Reservation(String rNo, String rMNo) {
 		super();
-		this.rDNo = rDNo;
+		this.rMNo = rMNo;
 		this.rNo = rNo;
 		
 	}

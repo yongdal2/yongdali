@@ -32,9 +32,10 @@
                             <input type="email" id="email" class="formRow--input js-input eng" name="mId" placeholder="이메일" maxlength="50">
                         </div>
                         <div id="emailMsg" class="msgBox"></div>
+                       	<div class="successMsgBox"><input type="hidden" name="isVerified" value="N">* 이메일 인증 완료</div>
                         <div class="formRow--input-wrapper js-inputWrapper" id="verifyWrap">
-                            <input type="text" class="formRow--input js-input" name="verify" placeholder="인증번호 입력">
-                            <button type="button" class="verifyBtn" id="btn_sendVeriCode" style="margin-bottom: 2px;">인증번호 받기</button>
+                            <input type="text" class="formRow--input js-input" name="veriCode" placeholder="인증번호 입력" maxlength="6">
+                            <button type="button" class="verifyBtn" id="btn_sendVeriCode">인증번호 받기</button>
                             <button type="button" class="verifyBtn" id="btn_verify">확인</button>
                             <button type="button" class="verifyBtn" id="btn_resend">재전송</button>
                         </div>
@@ -50,7 +51,7 @@
                             <input type="password" class="formRow--input js-input" id="signUpPwdChk" name="pwdChk" 
                                     placeholder="비밀번호 확인" maxlength="16">
                         </div>                        
-                        <i class='far fa-eye-slash' id="showPwd" style="padding-top: 19px; padding-left: 5px;"></i>
+                        <i class='far fa-eye-slash' id="showPwd"></i>
                     </div>
                     <div id="pwdMsg" class="msgBox"></div>
                     <!-- 이름 -->
@@ -111,20 +112,20 @@
                                 </select>
                             </div>
                             <div class="formRow--input-wrapper js-inputWrapper">
-                                <input type="text" class="formRow--input js-input" name="carNo" placeholder="차량번호" maxlength="8" style="height: 51px;">
+                                <input type="text" class="formRow--input js-input" name="carNo" placeholder="차량번호" maxlength="8">
                             </div>
                         </div>
                         <div id="bizFormMsg1" class="msgBox"></div>
                         <div class="bizWrap2">
-                            <div class="formRow--input-wrapper js-inputWrapper carInfo" style="padding-left: 14px;">
+                            <div class="formRow--input-wrapper js-inputWrapper carInfo">
                                 <div class="formRow--input js-input signInImgWrap" name="idImg" placeholder="">
                                     <div class="signInImg"></div>
-                                    <p style="width: 182px;">증명사진</p>
+                                    <p>증명사진</p>
                                     
                                 </div>         
-                                <div class="formRow--input js-input signInImgWrap" name="regCard" placeholder="" style="">
+                                <div class="formRow--input js-input signInImgWrap" name="regCard" placeholder="">
                                     <div class="signInImg"></div>
-                                    <p style="width: 182px;">차량등록증</p>
+                                    <p>차량등록증</p>
                                 </div>
                             </div>
                         </div>

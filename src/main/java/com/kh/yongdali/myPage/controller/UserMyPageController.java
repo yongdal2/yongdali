@@ -136,7 +136,7 @@ public class UserMyPageController {
 				return "common/errorPage";
 			}
 		}
-		
+		//주소록 추가
 		@RequestMapping("iAddr.myp")
 		public String insertAddr(Address a, Model md,
 				@SessionAttribute Member loginUser,
@@ -163,8 +163,21 @@ public class UserMyPageController {
 				return "common/errorPage";
 			}
 		}
+		//주소록 삭제
+		@RequestMapping("dAddr.myp")
+		public String deleteAddr(Model md, 
+				@RequestParam("aNo") String aNo){
+
+			int result = umpService.deleteAddr(aNo);
+
+			if (result > 0) {
+				return "redirect:addrBook.myp";
+			}else {
+				md.addAttribute("msg", "주소록 수정 실패!!");
+				return "common/errorPage";
+			}
+		}
 		
-//		@RequestMapping("dAddr.myp")
-//		public String deleteAddr()
+		//
 		
 }

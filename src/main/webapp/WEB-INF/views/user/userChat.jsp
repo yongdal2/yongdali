@@ -123,22 +123,28 @@
     	var youMsg = document.getElementById("youMsg");
     	
     	function openSocket(){
-    		if(ws!==undefined && ws.readyState!==WebSocket.CLOSED){
+			if(ws!==undefined && ws.readyState!==WebSocket.CLOSED){
                 
                 return;
             }
-    	
-    		ws = new WebSocket("ws://192.168.110.45:8888/yongdali/kh.do");
+			
+			ws = new WebSocket("ws://192.168.25.20:8888/yongdali/kh.do");
 	    	
     		ws.onopen = function(message){
 	    		console.log("확인");
 	    		youMsg.innerHTML += "용달이에 오신걸 환영합니다.";
 	    	};
+    	
+
+    		
 	    	
-	    	ws.onmessage = function(message){
-	    		var data = message.data;
-	    		var sessionid = null;
+	    	ws.onmessage = function(event){
+	    		var data = event.data;
+	    		var sessionid = '${sessionScope.loginUser.mName}';
+
 	    		var message = null;
+	    		
+	    		console.log(data);
 	    		
 	    		var strArray = data.split('|');
 	    		
@@ -146,26 +152,31 @@
 	    			console.log('str['+i+']: ' + strArray[i]);
 	    		}
 	    		
-	    		var currentuser_session = $('#sender').val();
+	    		var currentuser_session = strArray[1];
 	    		console.log('current session id : ' + currentuser_session);
 	    		
 	    		message = strArray[0];
+	    		
+	    		console.log("message : " + message);
+	    		console.log("sessionid : " + sessionid);
 	    		
 	    		var today = new Date();
 	    		
 	    		var hours = today.getHours();
 	    		var minutes = today.getMinutes();
 	    		
-	    		if(sessionid == currentuser_session){
+	    		console.log(sessionid);
+	    		console.log(currentuser_session);
+	    		if(sessionid != currentuser_session){
 	    			var printHTML = "<li class='you'>";
 	    			printHTML += "<div class='entete'>";
 	    			printHTML += "<h2>"+currentuser_session+"</h2>";
 	    			printHTML += "<h3>"+hours+":"+minutes+"<h3>";
-	    			printHTML += "<div class='message' id='youMsg'>"+message+"</div>";
 	    			printHTML += "</div>";
+	    			printHTML += "<div class='message'id='youMsg'>"+message+"</div>";	    			
 	    			printHTML += "</li>";
 	    			
-	    			$("#chat").append(printHTML);
+	    			//$("#chat").append(printHTML);
 	    		}else{
 	    			var printHTML = "<li class='me'>";
 	    			printHTML += "<div class='entete'>";
@@ -175,9 +186,13 @@
 	    			printHTML += "<div class='message' id='meMsg'>"+message+"</div>";
 	    			printHTML += "</li>";
 	    			
-	    			$("#chat").append(printHTML);
+	    			//$("#chat").append(printHTML);
 	    			
-	    		}
+	    		} 
+	    		
+	    		
+    			
+    			writeResponse(printHTML);
 	    		/* youMsg.innerHTML += message.data */
 	    	};
 	    	
@@ -187,7 +202,9 @@
     	}
     	
     	
-    	
+    	 function writeResponse(text){
+    		$("#chat").append(text);
+         }
     	
     	/* ws.onerror = function(message){
     		youMsg.innerHTML += "에러 발생";
@@ -203,9 +220,10 @@
     		ws.send(message.value);
     		
     		message.value = ""; */
-    		var message = $("#msgArea").val();
+    		var message = $("#msgArea").val()+"|"+$("#sender").val();
     		ws.send(message);
-    		message.html("");
+    		$("#msgArea").val("");
+
     	}
     	
     	function disconnect(){
