@@ -14,6 +14,17 @@
  button{
  	background: #F15F5F;
  }
+@font-face {
+	font-family: 'yg-jalnan';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+.jal {
+	font-family: 'yg-jalnan', Arial, Helvetica, sans-serif !important;
+}
 </style>
 
 
@@ -34,7 +45,7 @@
 			<div class="col-md-2"></div>
 
 			<div class="col-md-6" style="text-align: left; margin-bottom: 10px">
-				<h2 style="color: grey; font-family: Montserrat;">
+				<h2 style="color: grey; font-family: Montserrat;" cla>
 					<b style="font-weight: 5000; letter-spacing: 3px;">▷ 사이트 이용안내</b>
 				</h2>
 			</div>
