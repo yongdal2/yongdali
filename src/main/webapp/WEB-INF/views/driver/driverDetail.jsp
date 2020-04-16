@@ -52,7 +52,7 @@ tfoot {
 				<h1
 					style="font-size: 25px; text-align: center; color: #000; font-family: Montserrat; height: 50px"
 					class="jal">
-					<b style="font-weight: 500; letter-spacing: 5px;">모든 미배차 현황</b>
+					<b style="font-weight: 500; letter-spacing: 5px;">신청가능한 예약</b>
 				</h1>
 				<br>
 			</div>
@@ -136,7 +136,7 @@ tfoot {
 									aria-label="CLose">
 									<span aria-hidden="true">X</span>
 								</button>
-								<h2 id="evetitle" style="color: white">
+								<h2 id="evetitle" style="">
 									<b>배차정보</b>
 								</h2>
 							</div>
@@ -211,22 +211,11 @@ tfoot {
 							<div class="ContaineraddEvent" id="savecar">
 								<div class="modal-footer"
 									style="border-radius: 0px 0px 20px 20px/0px 0px 20px 20px">
-									<button id="submit" class="btn"
-										style="background: white; color: grey">배차신청</button>
+									<button id="submit" class="btn" style="color: white">배차신청</button>
 									<button type="button" class="btn "
 										style="background: white; color: grey" data-dismiss="modal">닫기</button>
 								</div>
 							</div>
-							<div class="ContaineraddEvent" id="deletecar">
-								<div class="modal-footer"
-									style="border-radius: 0px 0px 20px 20px/0px 0px 20px 20px">
-									<button id="cancelBtn" type="button" class="btn"
-										style="background: white; color: grey" onclick="myCancel();">배차취소</button>
-									<button type="button" class="btn "
-										style="background: white; color: grey" data-dismiss="modal">닫기</button>
-								</div>
-							</div>
-
 						</div>
 					</div>
 				</form>

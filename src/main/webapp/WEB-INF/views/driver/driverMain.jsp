@@ -64,7 +64,7 @@ textarea:disabled{
 				<div class="row">
 					<h1
 						style="font-size: 25px; text-align: center; color: #000; height: 50px" class="jal">
-						<b style="font-weight: 500; letter-spacing: 5px;">실시간 예약 현황</b>
+						<b style="font-weight: 500; letter-spacing: 5px;">미배차 확인</b>
 					</h1>
 				</div>
 				<hr>
@@ -84,7 +84,7 @@ textarea:disabled{
 						<tbody>
 						</tbody>
 					</table>
-					<a href="baeDetail.do" class="pull-right">+ 상세보기</a>
+					<a href="baeDetail.do?mNo=${loginUser.mNo }" class="pull-right">+ 상세보기</a>
 				</div>
 
 				<hr>
@@ -112,7 +112,7 @@ textarea:disabled{
 							<tbody>
 							</tbody>
 						</table>
-						<a href="baeDetail.do?mNo=${loginUser.mNo}" class="pull-right">+ 상세보기</a>
+						<a href="cancelDetail.do?mNo=${loginUser.mNo }" class="pull-right">+ 상세보기</a>
 					</div>
 					<div class="modal" tabindex="-1" role="dialog" id="eventModal">
 						<form action="Deal.do" method="post">
