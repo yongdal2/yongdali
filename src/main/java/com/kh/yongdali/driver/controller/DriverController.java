@@ -10,12 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
+import com.kh.yongdali.common.PageInfo;
+import com.kh.yongdali.common.Pagination;
 import com.kh.yongdali.driver.model.service.DriverService;
-import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.reservation.model.vo.Reservation;
 
 @Controller
@@ -36,10 +38,53 @@ public class DriverController {
 	public String driver2YongView() {
 		return "/driver/2yong";
 	}
-	@RequestMapping("baedetail.do")
-	public String test2() {
-		return "/driver/driverDetail";
+	
+	@RequestMapping(value="baeDetail.do")
+	public ModelAndView boardList(ModelAndView mv,String mNo
+			, @RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage) {
+		
+		int pageLimit = 15;
+		int boardLimit = 5;
+		System.out.println(mNo);
+		int listCount = dService.getListCount(mNo);
+		
+		System.out.println("listCount : " + listCount);
+	
+		PageInfo pi = Pagination.getPageInfo(currentPage,listCount,pageLimit,boardLimit);
+		
+		ArrayList<Reservation> list = dService.selectList(mNo,pi);
+		
+		
+		mv.addObject("list",list);
+		mv.addObject("pi",pi);
+		mv.setViewName("/driver/driverDetail");
+		
+		return mv;
 	}
+	@RequestMapping(value="myDetail.do")
+	public ModelAndView myDetail(ModelAndView mv,String mNo
+			, @RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage) {
+		
+		int pageLimit = 15;
+		int boardLimit = 5;
+		System.out.println(mNo);
+		int listCount = dService.getMyCount(mNo);
+		
+		System.out.println("listCount : " + listCount);
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage,listCount,pageLimit,boardLimit);
+		
+		ArrayList<Reservation> list = dService.myDetail(mNo,pi);
+		
+		System.out.println(list);
+		
+		mv.addObject("list",list);
+		mv.addObject("pi",pi);
+		mv.setViewName("/driver/myDetail");
+		
+		return mv;
+	}
+	
 	
 	@RequestMapping("mibaechar.do")
 	public void mibaechar(HttpServletResponse response,String mNO) throws JsonIOException, IOException {
@@ -50,12 +95,11 @@ public class DriverController {
 		gson.toJson(list,response.getWriter());
 	}
 	
-	@RequestMapping("baechar.do")
-	public void myBaechar(HttpServletResponse response,int dId) throws JsonIOException, IOException {
-		ArrayList<Reservation> list = dService.myBaechar(dId);
+	@RequestMapping("mybaechar.do")
+	public void myBaechar(HttpServletResponse response,String mNo) throws JsonIOException, IOException {
+		ArrayList<Reservation> list = dService.myBaechar(mNo);
 		
 		response.setContentType("application/json; charset=utf-8");
-		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		gson.toJson(list,response.getWriter());
 	}
@@ -63,7 +107,7 @@ public class DriverController {
 	@RequestMapping("dCal.do")
 	public void driverCal(HttpServletResponse response,String mNo) throws JsonIOException, IOException {
 		ArrayList<Reservation> list = dService.driverCal(mNo);
-		System.out.println(list);
+		
 		response.setContentType("application/json; charset=utf-8");
 		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
@@ -81,13 +125,14 @@ public class DriverController {
 	}
 	
 	@RequestMapping("Deal.do")
-	public String mainDeal(HttpServletRequest request) {
-		String mNo =request.getParameter("mNo");
-		String rNo = request.getParameter("rNo");
+	public String mainDeal(HttpServletRequest request,String mNo,@RequestParam("rNo")String rNo) {
+
 		
+		System.out.println(mNo+' '+rNo);
 		int result = Deal(mNo,rNo);
 		
 		if(result>0) {
+			//나의 예약페이지로 이동
 			return "redirect:driverMain.ydl";
 		}else {
 			return "common/errorPage";
@@ -103,15 +148,29 @@ public class DriverController {
 		return result;
 	}
 	
-	/*
-	 * @RequestMapping("getB.do") public String getBaechar(Reservation
-	 * re,HttpServletRequest request) { int dId =
-	 * request.getAttribute("loginUser").getUserId(); int result =
-	 * dService.getBaechar(dId);
-	 * 
-	 * if(result>0) { return "redirect:driverMain.ydl"; }else { return
-	 * "common/errorPage"; } }
-	 */
+	@RequestMapping("cancel.do")
+	public String cancel (HttpServletRequest request) {
+		String mNo =request.getParameter("mNo");
+		String rNo = request.getParameter("rNo");
+		
+		int result = Cancel(mNo,rNo);
+		
+		if(result>0) {
+			return "redirect:driverMain.ydl";
+		}else {
+			return "common/errorPage";
+		}
+	}
+	
+	
+	public int Cancel(String mNo, String rNo) {
+		Reservation aa = new Reservation(rNo,mNo);
+		
+		int result = dService.cancel(aa);
+		
+		
+		return result;
+	}
 	
 	 
 }

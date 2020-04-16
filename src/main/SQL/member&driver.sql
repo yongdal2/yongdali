@@ -56,8 +56,8 @@ CREATE TABLE DRIVER(
     CAR_NO VARCHAR2(17) /* 차량번호 */,
     ID_IMG_ORIGIN VARCHAR2(300) /* 증명사진 원명*/,
     ID_IMG_RENAME VARCHAR2(300) /* 증명사진 가명*/,
-    CAR_IMG_ORIGIN VARCHAR2(300) /* 차량사진 원명*/,
-    CAR_IMG_RENAME VARCHAR2(300) /* 차량사진 가명*/
+    CAR_IMG_ORIGIN VARCHAR2(300) /* 차량등록증 원명*/,
+    CAR_IMG_RENAME VARCHAR2(300) /* 차량등록증 가명*/
 );
 
 ALTER TABLE DRIVER ADD CONSTRAINT D_PK_NO PRIMARY KEY (D_NO);
@@ -80,8 +80,8 @@ COMMENT ON COLUMN DRIVER.TYPE IS '차종';
 COMMENT ON COLUMN DRIVER.CAR_NO IS '차량번호';
 COMMENT ON COLUMN DRIVER.ID_IMG_ORIGIN IS '증명사진 원명';
 COMMENT ON COLUMN DRIVER.ID_IMG_RENAME IS '증명사진 가명';
-COMMENT ON COLUMN DRIVER.CAR_IMG_ORIGIN IS '차량사진 원명';
-COMMENT ON COLUMN DRIVER.CAR_IMG_RENAME IS '차량사진 가명';
+COMMENT ON COLUMN DRIVER.CAR_IMG_ORIGIN IS '차량등록증 원명';
+COMMENT ON COLUMN DRIVER.CAR_IMG_RENAME IS '차량등록증 가명';
 
 
 ------------------------------- 시퀀스 생성 -------------------------------------
@@ -109,8 +109,9 @@ NOCACHE;
 --
 --
 ---- DRIVER
---INSERT INTO DRIVER VALUES('D' || SEQ_DNO.NEXTVAL, 'M3', 1, '카고', '01가1111', 'idImg1.png','yongdali_20200401_174203821','carImg1.png','yongdali_20200401_174203842');
---INSERT INTO DRIVER VALUES('D' || SEQ_DNO.NEXTVAL, 'M4', 1.4, '호루', '02가2222', 'idImg2.png', 'yongdali_20200402_174203821','carImg2.png', 'yongdali_20200402_174203842');
+
+-- INSERT INTO DRIVER VALUES('D' || SEQ_DNO.NEXTVAL, 'M3', 1, '카고', '01가1111', 'idImg1.png','yongdali_id_20200401_174203821','carImg1.png','yongdali_regCard_20200401_174203842');
+-- INSERT INTO DRIVER VALUES('D' || SEQ_DNO.NEXTVAL, 'M4', 1.4, '호루', '02가2222', 'idImg2.png', 'yongdali_id_20200402_174203821','carImg2.png', 'yongdali_regCard_20200402_174203842');
 
                     
                   

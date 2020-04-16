@@ -74,16 +74,16 @@ tfoot {
 						<c:forEach var="r" items="${ list }">
 							<tr>
 								<td align="center">${r.rNo }</td>
-								<td align="center">${r.helpLoad}/ ${r.helpUnload}</td>
+								<td align="center">${r.helpLoad}/${r.helpUnload}</td>
 								<td align="center" colspan="3">${r.startAddr }</td>
 								<td align="center" colspan="3">${r.endAddr }</td>
 								<td align="center"><fmt:formatDate value="${r.startDate }"
 										type="date" pattern="yyyy-MM-dd" /></td>
 								<td align="center"><fmt:formatDate value="${r.endDate }"
 										type="date" pattern="yyyy-MM-dd" /></td>
-								<td align="center"><button class="dealB btn"
-										style="color: white;" onclick="Deal(this.value)"
-										value="${r.rNo}">배차신청</button></td>
+								<td align="center"><button class='dealB btn'
+										style='color: white;' onclick='edit(this.value)'
+										value="${r.rNo }">배차취소</button></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -92,7 +92,7 @@ tfoot {
 							<td colspan="12">
 								<!-- [이전] --> <c:if test="${ pi.currentPage eq 1 }">&lt;&lt; &nbsp;</c:if>
 								<c:if test="${ pi.currentPage ne 1 }">
-									<c:url var="before" value="baeDetail.do">
+									<c:url var="before" value="myDetail.do">
 										<c:param name="currentPage" value="${ pi.currentPage - 1 }" />
 										<c:param name="mNo" value="${loginUser.mNo}" />
 									</c:url>
@@ -104,7 +104,7 @@ tfoot {
 									</c:if>
 
 									<c:if test="${ p ne pi.currentPage }">
-										<c:url var="pagination" value="baeDetail.do">
+										<c:url var="pagination" value="myDetail.do">
 											<c:param name="currentPage" value="${ p }" />
 											<c:param name="mNo" value="${loginUser.mNo}" />
 										</c:url>
@@ -112,7 +112,7 @@ tfoot {
 									</c:if>
 								</c:forEach> <!-- [다음] --> <c:if test="${ pi.currentPage eq pi.maxPage }">&gt;&gt;</c:if>
 								<c:if test="${ pi.currentPage ne pi.maxPage }">
-									<c:url var="after" value="baeDetail.do">
+									<c:url var="after" value="myDetail.do">
 										<c:param name="currentPage" value="${ pi.currentPage + 1 }" />
 										<c:param name="mNo" value="${loginUser.mNo}" />
 									</c:url>
@@ -126,99 +126,97 @@ tfoot {
 			<hr>
 			<!-- 테스트 필요! -->
 			<div class="modal" tabindex="-1" role="dialog" id="eventModal">
-				<form action="Deal.do" method="post">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content"
-							style="border-radius: 20px 20px 20px 20px/20px 20px 20px 20px; border: 2px solid white">
-							<div class="modal-header"
-								style="border-radius: 20px 20px 0px 0px/20px 20px 0px 0px">
-								<button type="button" class="close" data-dismiss="modal"
-									aria-label="CLose">
-									<span aria-hidden="true">X</span>
-								</button>
-								<h2 id="evetitle" style="">
-									<b>배차정보</b>
-								</h2>
-							</div>
-							<div class="modal-body">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content"
+						style="border-radius: 20px 20px 20px 20px/20px 20px 20px 20px; border: 2px solid white">
+						<div class="modal-header"
+							style="border-radius: 20px 20px 0px 0px/20px 20px 0px 0px">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="CLose">
+								<span aria-hidden="true">X</span>
+							</button>
+							<h2 id="evetitle" style="">
+								<b>배차정보</b>
+							</h2>
+						</div>
+						<div class="modal-body">
 
-								<div class="form-group">
-									<div class="col-xs-99">
-										<label class="col-xs-98" for="edit-title">예약번호</label> <input
-											class="form-control" type="text" name="rNo" id="rNo"
-											required="required" readonly />
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-xs-99">
-										<label class="col-xs-98" for="edit-start">예약일</label> <input
-											class="form-control" type="text" name="enrollDate"
-											id="enrollDate" disabled="disabled" />
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-xs-99">
-										<label class="col-xs-98" for="edit-start">상차일</label> <input
-											class="form-control" type="text" id="sangDate"
-											disabled="disabled" />
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-xs-99">
-										<label class="col-xs-98" for="edit-start">하차일</label> <input
-											class="form-control" type="text" id="haDate"
-											disabled="disabled" />
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-xs-99">
-										<label class="col-xs-98" for="edit-end">출발지</label> <input
-											class="form-control" type="text" id="start"
-											disabled="disabled" />
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-xs-99">
-										<label class="col-xs-98" for="edit-type">도착지</label> <input
-											class="form-control" type="text" id="end" disabled="disabled" />
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-xs-99">
-										<label class="col-xs-98" for="edit-color">차량종류</label> <input
-											class="form-control" type="text" id="type"
-											disabled="disabled" />
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-xs-99">
-										<label class="col-xs-98" for="edit-start">이삿짐</label>
-										<textarea rows="3" class="form-control" name="luggage"
-											id="luggage" disabled="disabled"></textarea>
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-xs-99">
-										<label class="col-xs-98" for="edit-desc">요청사항</label>
-										<textarea rows="3" class="form-control" name="msg" id="msg"
-											disabled="disabled"></textarea>
-									</div>
+							<div class="form-group">
+								<div class="col-xs-99">
+									<label class="col-xs-98" for="edit-title">예약번호</label> <input
+										class="form-control" type="text" name="rNo" id="rNo"
+										required="required" readonly />
 								</div>
 							</div>
-							<div style="visibility: hidden; height: 2px">
-								<input id="mNo" name="mNo" value="${loginUser.mNo}">
+							<div class="form-group">
+								<div class="col-xs-99">
+									<label class="col-xs-98" for="edit-start">예약일</label> <input
+										class="form-control" type="text" name="enrollDate"
+										id="enrollDate" disabled="disabled" />
+								</div>
 							</div>
-							<div class="ContaineraddEvent" id="savecar">
-								<div class="modal-footer"
-									style="border-radius: 0px 0px 20px 20px/0px 0px 20px 20px">
-									<button id="submit" class="btn" style="color: white">배차신청</button>
-									<button type="button" class="btn "
-										style="background: white; color: grey" data-dismiss="modal">닫기</button>
+							<div class="form-group">
+								<div class="col-xs-99">
+									<label class="col-xs-98" for="edit-start">상차일</label> <input
+										class="form-control" type="text" id="sangDate"
+										disabled="disabled" />
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-xs-99">
+									<label class="col-xs-98" for="edit-start">하차일</label> <input
+										class="form-control" type="text" id="haDate"
+										disabled="disabled" />
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-xs-99">
+									<label class="col-xs-98" for="edit-end">출발지</label> <input
+										class="form-control" type="text" id="start"
+										disabled="disabled" />
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-xs-99">
+									<label class="col-xs-98" for="edit-type">도착지</label> <input
+										class="form-control" type="text" id="end" disabled="disabled" />
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-xs-99">
+									<label class="col-xs-98" for="edit-color">차량종류</label> <input
+										class="form-control" type="text" id="type" disabled="disabled" />
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-xs-99">
+									<label class="col-xs-98" for="edit-start">이삿짐</label>
+									<textarea rows="3" class="form-control" name="luggage"
+										id="luggage" disabled="disabled"></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-xs-99">
+									<label class="col-xs-98" for="edit-desc">요청사항</label>
+									<textarea rows="3" class="form-control" name="msg" id="msg"
+										disabled="disabled"></textarea>
 								</div>
 							</div>
 						</div>
+						<div style="visibility: hidden; height: 2px">
+							<input id="mNo" name="mNo" value="${loginUser.mNo}">
+						</div>
+						<div class="ContaineraddEvent" id="deletecar">
+							<div class="modal-footer"
+								style="border-radius: 0px 0px 20px 20px/0px 0px 20px 20px">
+								<button id="cancelBtn" type="button" class="btn"
+									style=" color: white" onclick="myCancel();">배차취소</button>
+								<button type="button" class="btn "
+									style="background: white; color: grey" data-dismiss="modal">닫기</button>
+							</div>
+						</div>
 					</div>
-				</form>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -230,16 +228,18 @@ tfoot {
 	<!-- Footer -->
 	<%@ include file="../common/footer.jsp"%>
 	<script type="text/javascript">
-		function Deal(aa) {
+		function edit(aa){
 			$("#eventModal").modal();
-
+			
+			
 			$('#rNo').val(aa);
-
+			
 			$.ajax({
 				url : "dModal.do",
-				data : {rNo : aa},
+				data : {rNo : aa,
+					mNO : $('#mNo').val()},
 				dataType : 'json',
-				success : function(data) {
+				success : function(data){
 					console.log(data);
 					$("#enrollDate").val(data[0].enrollDate);
 					$("#sangDate").val(data[0].startDate);
@@ -251,7 +251,14 @@ tfoot {
 					$("#msg").val(data[0].msg);
 				}
 			})
-
+			
+	}
+		function myCancel(){
+			var aa = $('#mNo').val()
+			var bb = $('#rNo').val();
+			
+			location.href = "cancel.do?mNo="+aa+"&rNo="+bb;
+			
 		}
 	</script>
 </body>

@@ -32,7 +32,7 @@
                 </c:if>
                 <c:if test="${loginUser.mId ne 'admin@naver.com' }">
                 	<a onclick="chat();"><span class="sidebar_span"> 채팅</span></a>
-                </c:if>span class="sidebar_span"> 채팅</span></a>
+                </c:if>
             </div>
             <div class="col-lg-8 col-lg-offset-1">
                 <h2 class="jal">공지사항</h3>

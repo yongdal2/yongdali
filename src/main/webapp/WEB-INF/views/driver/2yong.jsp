@@ -14,6 +14,17 @@
  button{
  	background: #F15F5F;
  }
+@font-face {
+	font-family: 'yg-jalnan';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+.jal {
+	font-family: 'yg-jalnan', Arial, Helvetica, sans-serif !important;
+}
 </style>
 
 
@@ -34,7 +45,7 @@
 			<div class="col-md-2"></div>
 
 			<div class="col-md-6" style="text-align: left; margin-bottom: 10px">
-				<h2 style="color: grey; font-family: Montserrat;">
+				<h2 style="color: grey; font-family: Montserrat;" cla>
 					<b style="font-weight: 5000; letter-spacing: 3px;">▷ 사이트 이용안내</b>
 				</h2>
 			</div>
@@ -108,7 +119,7 @@
 				<b>▶배차신청 안 된 예약 확인하기</b><br><br>
 				실시간 예약 페이지에서 미배차 된 예약 현황들을 볼 수 있습니다.<br><br><br>
 				<b>▶배차 신청하기</b><br><br>
-				아직 배차신청이 완료되지 않은 예약 중 마음에 드는 조건을 골라 우측의 배차 신청을 누르면 나오는 형식을 채우면 배차 신청을 할 수 있을껄요?
+				아직 배차신청이 완료되지 않은 예약 중 마음에 드는 조건을 골라 우측의 배차 신청을 누르면 나오는 형식을 채우면 배차 신청을 할 수 있습니다.
 				
 				 <br>
 				</blockquote>
