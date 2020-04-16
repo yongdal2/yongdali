@@ -20,7 +20,7 @@ public interface AdminService {
 
 	
 	
-	ArrayList<Driver> selectList(PageInfo pi);
+	/* ArrayList<Driver> selectList(PageInfo pi); */
 	
 
 }

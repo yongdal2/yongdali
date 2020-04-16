@@ -27,7 +27,7 @@
 		<div class="content container">
 			<div class="row">
 				<h2 class="jal">관리자 페이지</h2>
-				<p>회원님 목록 / admin_Mem.jsp</p>
+				<p>회원님 목록 / admin_Mem.jsp / 정렬기준 선정</p>
 				<hr>
 			</div>
 			
@@ -46,7 +46,8 @@
 			<div class="row" id="rowList">
 				<div class="col-xs-12 col-md-12" id="table">
 					<br>
-					<table style="text-align: center" class="table table-striped table-hover text-center">
+				<!-- <table style="text-align: center" class="table table-striped table-hover text-center"> -->
+					<table class="table table-striped table-hover text-center">
 						<thead id="thead">
 							<tr>
 								<th>회원번호</th>
@@ -80,15 +81,58 @@
 				<!-- 페이징 처리 -->
 				<div class="row text-center" style="height: 400px">
 					<ul class="pagination ft_gr">
-						<li><a href="#"><<</a></li>
-						<li><a href="#"><</a></li>
-						<li><a href="#">1</a></li>
-						<li class="active"><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">5</a></li>
-						<li><a href="#">></a></li>
-						<li><a href="#">>></a></li>
+					
+						<!-- << 이전  -->
+						<li><a href="<c:if test="${ pi.currentPage eq 1 }">">&lt;&lt;# &nbsp;</c:if></a></li>
+						
+						<!-- < -->
+						<li>
+						<a href="
+						<c:if test="${ pi.currentPage ne 1 }">
+							<c:url var="before" value="aMem.ad">
+								<c:param name="currentPage" value="${ pi.currnentPage -1 }"/>
+							</c:url>
+						</c:if>
+						${ before }">&lt;&lt; &nbsp;
+						</a>
+						</li>
+						
+								
+						<!-- 페이지 -->
+						<li>
+						<a href="
+						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+							<c:if test="${ p eq pi.currentPage }">
+						">${ p }
+							</c:if>
+	<!-- 					</a>
+						</li>						 -->	
+							<a href="
+							<c:if test="${ p ne pi.currentPage }">
+								<c:url var="pagination" value="aMem.ad">	
+									<c:param name="currentPage" value="${ p }"/>
+								</c:url>
+								${ pagination }
+								">${ p }두번째&nbsp;
+							</c:if>
+						</c:forEach>
+							</a>
+							</li>
+										
+						<!-- 다음 >> -->	
+						<li><a href="<c:if test="${ pi.currentPage eq pi.maxPage }">">&gt;&gt;＆ &nbsp;</c:if></a></li>
+						
+						<li>
+						<a href="
+						<c:if test="${ pi.currentPage ne pi.maxPage }">
+							<c:url var="after" value="aMem.ad">
+								<c:param name="currentPage" value="${ pi.currentPage +1 }"/>
+							</c:url>
+						${ after }">&gt;&gt; &nbsp;
+						</c:if>
+						</a>
+						</li>
+
 					</ul>
 				</div>
 			</div>
