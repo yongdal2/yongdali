@@ -10,9 +10,11 @@
 	
  	<typeAliases>
 		<typeAlias type="com.kh.yongdali.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.kh.yongdali.driver.model.vo.Driver" alias="Driver"/>
 		<typeAlias type="com.kh.yongdali.cs.model.vo.Notice" alias="Notice"/>
 		<typeAlias type="com.kh.yongdali.reservation.model.vo.Reservation" alias="Reservation"/>
 		<typeAlias type="com.kh.yongdali.myPage.model.vo.Address" alias="Address"/>
+		
 	</typeAliases>
 	
  	<mappers>
