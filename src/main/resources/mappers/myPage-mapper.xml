@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="myPageMapper">
-	<!-- resultMap -->
+	<!-- resultMap Address-->
 	<resultMap id="addressResultSet" type="Address">
 		<id property="aNo" column="A_NO"/>
 		<result property="aMno" column="A_M_NO"/>
@@ -11,6 +11,40 @@
 		<result property="aPhone" column="PHONE"/>
 		<result property="aRecentDate" column="RECENTDATE"/>
 	</resultMap>
+	<!-- resultMap Member-->
+	<resultMap id="memberResultSet" type="Member">
+		<id property="mNo" column="M_NO"/>
+		<result property="mId" column="M_ID"/>
+		<result property="pwd" column="PWD"/>
+		<result property="mName" column="NAME"/>
+		<result property="phone" column="PHONE"/>
+		<result property="mSort" column="M_SORT"/>
+		<result property="mStatus" column="M_STATUS"/>
+		<result property="pushEnabled" column="PUSH_ENABLED"/>
+		<result property="enrollDate" column="ENROLLDATE"/>
+	</resultMap>
+	<!-- resultMap Driver-->
+	<resultMap id="driverResultSet" type="Driver">
+		<id property="dNo" column="D_NO"/>
+		<result property="dmNo" column="D_M_NO"/>
+		<result property="capacity" column="CAPACITY"/>
+		<result property="type" column="TYPE"/>
+		<result property="carNo" column="CAR_NO"/>
+		<result property="idImgOrigin" column="ID_IMG_ORIGIN"/>
+		<result property="idImgRename" column="ID_IMG_RENAME"/>
+		<result property="carImgOrigin" column="CAR_IMG_ORIGIN"/>
+		<result property="carImgRename" column="CAR_IMG_RENAME"/>
+	</resultMap>
+	
+	<!-- 폰번호 업데이트 -->
+	<update id="updatePhone" parameterType="Member">
+		UPDATE MEMBER
+		SET PHONE = #{phone}
+		WHERE M_NO = #{mNo}
+	</update>
+	<!-- 비밀번호 업데이트 -->
+	
+	<!-- 프로필사진 업데이트 -->
 	
 	<!-- 주소록갯수 -->
 	<select id="getAddrListCount" resultType="_int">
@@ -66,4 +100,6 @@
 		DELETE FROM ADDRESS
 		WHERE A_NO={aNo}
 	</delete>
+	
+	
 </mapper>

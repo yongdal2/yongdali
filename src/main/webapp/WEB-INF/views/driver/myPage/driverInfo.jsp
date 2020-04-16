@@ -82,6 +82,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-body">
+				<form id="updateImg" method="post" enctype="multipart/form-data">
 					<div class="row noto center-block"
 						style="text-align: left; border: 1px solid #dedede; border-radius: 16px; padding: 15px; background: #fff; width: 100%; max-width: 560px;">
 						<div class="col-md-12 fw6"
@@ -93,18 +94,18 @@
 							style="padding: 0; margin-top: 16px; font-size: 13px; line-height: 24px;">
 							변경할 이미지파일을 첨부해 주세요</div>
 						<div class="col-md-12" style="padding: 0; margin-top: 10px;">
-							<label for="nowPassword" style="display: none;"></label> <input
-								type="file" class="form-control" id="newImg"
-								style="width: 100%; height: 46px;"">
-						</div>
+								<input type="file" class="form-control" id="newImg"
+									name="newImg" style="width: 100%; height: 46px;">
+							</div>
 						<div class="col-md-12 text-center" style="margin-top: 23px;">
-							<button type="button" class="btn btn-sm" style="color: gray;"
+							<button type="reset" class="btn btn-sm" style="color: gray;"
 								data-dismiss="modal">취소</button>
 							&nbsp; &nbsp;
 							<button type="submit" class="btn btn-sm btn_ydl_r"
-								data-dismiss="modal">수정하기</button>
+								data-dismiss="modal" id="nPhotoBtn">수정하기</button>
 						</div>
 					</div>
+				</form>
 				</div>
 			</div>
 		</div>
@@ -114,7 +115,7 @@
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 				<div class="modal-body">
-					<form action="driverInfo.myp">
+					<form id="updatePhone">
 						<div class="row noto center-block text-left"
 							style="border: 1px solid #dedede; border-radius: 16px; padding: 15px; background: #fff; width: 100%; max-width: 560px;">
 							<div class="col-md-12 fw6"
@@ -124,19 +125,19 @@
 							</div>
 							<div class="col-md-12"
 								style="padding: 0; margin-top: 16px; font-size: 13px; line-height: 24px;">
-								'-' 를 포함한 번호를 입력해주세요.</div>
+								새로운 번호를 입력해주세요.</div>
 							<div class="col-md-12" style="padding: 0; margin-top: 10px;">
 								<label for="nowPassword" style="display: none;"></label> <input
 									type="text" class="form-control" id="newPhoneNum"
-									style="width: 100%; height: 46px;" maxlength="11"
-									placeholder="010-1234-5678">
+									style="width: 100%; height: 46px;" maxlength="13"
+									placeholder="${ loginUser.phone }" onkeyup="inputPhoneNumber(this);">
 							</div>
 							<div class="col-md-12 text-center" style="margin-top: 23px;">
 								<button type="button" class="btn btn-sm" style="color: gray;"
 									data-dismiss="modal">취소</button>
 								&nbsp; &nbsp;
 								<button type="submit" class="btn btn-sm btn_ydl_r"
-									data-dismiss="modal">수정하기</button>
+									data-dismiss="modal" id="nPhoneBtn">수정하기</button>
 							</div>
 						</div>
 					</form>
@@ -144,6 +145,41 @@
 			</div>
 		</div>
 	</div>
+
+	<script type="text/javascript">
+	/* 연락처 자릿수 자동 설정 */
+	function inputPhoneNumber(obj) {
+	    var number = obj.value.replace(/[^0-9]/g, "");
+	    var phone = "";
+
+	    if(number.length < 4) {
+	        return number;
+	    } else if(number.length < 7) {
+	        phone += number.substr(0, 3);
+	        phone += "-";
+	        phone += number.substr(3);
+	    } else if(number.length < 11) {
+	        phone += number.substr(0, 3);
+	        phone += "-";
+	        phone += number.substr(3, 3);
+	        phone += "-";
+	        phone += number.substr(6);
+	    } else {
+	        phone += number.substr(0, 3);
+	        phone += "-";
+	        phone += number.substr(3, 4);
+	        phone += "-";
+	        phone += number.substr(7);
+	    }
+	    obj.value = phone;
+	}
+	$("#nPhoneBtn").on("click",function(){
+		$("#updatePhone").attr("action","uPhone.myp").submit();
+	});
+	$("#nPhotoBtn").on("click",function(){
+		$("#updateImg").attr("action","uImg.myp").submit();
+	});
+	</script>
 	<!-- 비밀번호 변경 모달 -->
 	<div class="modal fade" id="changePwd" role="dialog">
 		<div class="modal-dialog">
@@ -188,7 +224,7 @@
 						<div class="col-sm-12" id="pwCheckText"
 							style="padding: 0; margin-top: 5px; display: none;"></div>
 						<div class="col-md-12 text-right">
-							<button type="button" button type="button" class="btn btn-lg"
+							<button type="button" class="btn btn-lg"
 								data-dismiss="modal"
 								style="margin: 20px 10px 0px 10px; color: gray;">취소</button>
 							<button type="submit" class="btn btn-lg btn_ydl_r"
