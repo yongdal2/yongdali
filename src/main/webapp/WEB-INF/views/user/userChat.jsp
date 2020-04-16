@@ -128,7 +128,7 @@
                 return;
             }
 			
-			ws = new WebSocket("ws://192.168.110.45:8888/yongdali/kh.do");
+			ws = new WebSocket("ws://192.168.25.20:8888/yongdali/kh.do");
 	    	
     		ws.onopen = function(message){
 	    		console.log("확인");
@@ -141,6 +141,7 @@
 	    	ws.onmessage = function(event){
 	    		var data = event.data;
 	    		var sessionid = '${sessionScope.loginUser.mName}';
+
 	    		var message = null;
 	    		
 	    		console.log(data);
@@ -156,7 +157,8 @@
 	    		
 	    		message = strArray[0];
 	    		
-	    		console.log("message1 : " + message);
+	    		console.log("message : " + message);
+	    		console.log("sessionid : " + sessionid);
 	    		
 	    		var today = new Date();
 	    		
@@ -170,8 +172,8 @@
 	    			printHTML += "<div class='entete'>";
 	    			printHTML += "<h2>"+currentuser_session+"</h2>";
 	    			printHTML += "<h3>"+hours+":"+minutes+"<h3>";
-	    			printHTML += "<div class='message'id='youMsg'>"+message+"</div>";
 	    			printHTML += "</div>";
+	    			printHTML += "<div class='message'id='youMsg'>"+message+"</div>";	    			
 	    			printHTML += "</li>";
 	    			
 	    			//$("#chat").append(printHTML);
