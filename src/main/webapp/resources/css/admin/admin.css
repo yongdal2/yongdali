@@ -160,6 +160,7 @@ a{
     font-family: 'NanumSquare', Arial, Helvetica, sans-serif;
     font-size: 18px;
     font-weight: bolder;
+    text-align: center;
 }
 
 #tbody{
@@ -167,7 +168,9 @@ a{
     font-size: 14px;
 }
 
-
+th {
+    text-align: center !important;
+}
 
 
 

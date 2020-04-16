@@ -1,6 +1,6 @@
 package com.kh.yongdali.reservation.model.vo;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * @author user2

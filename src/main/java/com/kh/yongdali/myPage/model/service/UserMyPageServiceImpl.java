@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.myPage.model.dao.UserMyPageDao;
 import com.kh.yongdali.myPage.model.vo.Address;
 
@@ -14,6 +15,11 @@ public class UserMyPageServiceImpl implements UserMyPageService {
 	@Autowired
 	private UserMyPageDao umpDao;
 
+	@Override
+	public int updatePhone(Member m) {
+		return umpDao.updatePhone(m);
+	}
+	
 	@Override
 	public int getAddrListCount(String mNo) {
 		return umpDao.getAddrListCount(mNo);
@@ -43,5 +49,6 @@ public class UserMyPageServiceImpl implements UserMyPageService {
 	public int deleteAddr(String aNo) {
 		return umpDao.deleteAddr(aNo);
 	}
+
 
 }

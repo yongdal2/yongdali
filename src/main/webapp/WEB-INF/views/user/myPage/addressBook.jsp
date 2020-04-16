@@ -68,43 +68,6 @@
 									</div>
 								</div>
 							</c:forEach>
-							<script>
-							$(function(){
-								$("button[id^='editAddrBtn']").on("click",function(){
-									$.ajax({
-										url:"getUpAddr.myp",
-										data:{aNo:$(this).val()},
-										dataType:"json",
-										success:function(data){
-											console.log(data);
-											$("#edAno").val(data.aNo);
-											$("#edPlace").val(decodeURIComponent(data.aPlace).replace(/\+/g, " "));
-											$("#edName").val(decodeURIComponent(data.aName));
-											$("#edAdr_address").val(decodeURIComponent(data.aAddr1).replace(/\+/g, " "));
-											$("#edAdr_detail").val(decodeURIComponent(data.aAddr2).replace(/\+/g, " "));
-											$("#edPhone").val(decodeURIComponent(data.aPhone));
-										},error:function(){
-											console.log("aj실패")
-										}
-									});
-								});
-							});
-							
-							$(function(){
-								$("button[id^='deleteAddrBtn']").on("click",function(){
-									var aNo = $(this).val();
-									console.log(aNo);
-									var delA = confirm( "삭제하시겠습니까?");
-									if(delA){
-										
-										document.location.href ="dAddr.myp";
-									}else{
-										alert("윽");
-									}
-									
-							});
-							});
-							</script>
 						</div>
 					</div>
 				</div>
@@ -266,6 +229,43 @@
     		$("#inAddrForm").attr("action","iAddr.myp").submit();
     	});
     </script>
+    <script>
+		$(function(){
+			$("button[id^='editAddrBtn']").on("click",function(){
+				$.ajax({
+					url:"getUpAddr.myp",
+					data:{aNo:$(this).val()},
+					dataType:"json",
+					success:function(data){
+						console.log(data);
+						$("#edAno").val(data.aNo);
+						$("#edPlace").val(decodeURIComponent(data.aPlace).replace(/\+/g, " "));
+						$("#edName").val(decodeURIComponent(data.aName));
+						$("#edAdr_address").val(decodeURIComponent(data.aAddr1).replace(/\+/g, " "));
+						$("#edAdr_detail").val(decodeURIComponent(data.aAddr2).replace(/\+/g, " "));
+						$("#edPhone").val(decodeURIComponent(data.aPhone));
+					},error:function(){
+						console.log("aj실패")
+					}
+				});
+			});
+		});
+		
+		$(function(){
+			$("button[id^='deleteAddrBtn']").on("click",function(){
+				var aNo = $(this).val();
+				console.log(aNo);
+				var delA = confirm( "삭제하시겠습니까?");
+				if(delA){
+					
+					document.location.href ="dAddr.myp";
+				}else{
+					alert("윽");
+				}
+				
+		});
+		});
+	</script>
     <!-- 배송지 주소 추가 주소 검색 모달 -->
 	<div id=modalAd class="modalAddr">
 		<div id="layerAd">
