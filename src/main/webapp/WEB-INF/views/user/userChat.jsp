@@ -37,15 +37,15 @@
         <div class="row">
             <div class="chat col-xs-12">
                 <ul id="chat">
-                    <li class="you">
+                    <!-- <li class="you">
                         <div class="entete">
-                            <!-- <span class="status green"></span> -->
+                            <span class="status green"></span>
                             <h2>용달이</h2>
                             <h3>10:12AM, Today</h3>
                         </div>
                         <div class="message" id="youMsg">
                         </div>
-                    </li>
+                    </li> -->
                     <!-- <li class="me">
                         <div class="entete">
                             <h3>10:12AM, Today</h3>
@@ -104,7 +104,8 @@
             <div class="footer row">
                 <div class="col-xs-10 col-lg-11">
                 	<input type="text" id="sender" value="${sessionScope.loginUser.mName }" style="display: none;">
-                    <textarea placeholder="궁금하신 점이 무엇인가요?" id="msgArea"></textarea>
+                	<input type="text" class="write-message" id="msgArea" placeholder="Type your message here"></input>
+                    <!-- <textarea placeholder="궁금하신 점이 무엇인가요?" id="msgArea"></textarea> -->
                 </div>
                 <div class="col-xs-2 col-lg-1">
                     <button type="button" class="sendBtn" onclick="sendMessage();"><img src="${contextPath }/resources/images/chat/send.png"></button>
@@ -134,12 +135,17 @@
 	    	
     		ws.onopen = function(message){
 	    		console.log("확인");
-	    		youMsg.innerHTML += "용달이에 오신걸 환영합니다.";
+	    		var printHTML = "<li class='you'>";
+    			printHTML += "<div class='entete'>";
+    			printHTML += "<h2>"+'관리자'+"</h2>";
+    			printHTML += "<h3>"+hours+":"+minutes+"<h3>";
+    			printHTML += "</div>";
+    			printHTML += "<div class='message'id='youMsg'>"+'용달이에 오신걸 환영합니다.'+"</div>";	    			
+    			printHTML += "</li>";
+    			
+    			writeResponse(printHTML);
 	    	};
-    	
-
-    		
-	    	
+  
 	    	ws.onmessage = function(event){
 	    		var data = event.data;
 	    		
@@ -174,8 +180,6 @@
 	    			printHTML += "</div>";
 	    			printHTML += "<div class='message'id='youMsg'>"+message+"</div>";	    			
 	    			printHTML += "</li>";
-	    			
-	    			//$("#chat").append(printHTML);
 	    		}else{
 	    			var printHTML = "<li class='me'>";
 	    			printHTML += "<div class='entete'>";
@@ -184,19 +188,12 @@
 	    			printHTML += "</div>";
 	    			printHTML += "<div class='message' id='meMsg'>"+message+"</div>";
 	    			printHTML += "</li>";
-	    			
-	    			//$("#chat").append(printHTML);
-	    			
 	    		} 
-	    		
-	    		
-    			
     			writeResponse(printHTML);
-	    		/* youMsg.innerHTML += message.data */
 	    	};
 	    	
 	    	ws.onclose = function(message){
-	    		youMsg.innerHTML += "용달이 채팅 종료";
+	    		alert('채팅을 종료합니다!');
 	    	};
     	}
     	
