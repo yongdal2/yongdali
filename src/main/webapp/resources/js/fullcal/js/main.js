@@ -62,6 +62,7 @@ var calendar = $('#calendar').fullCalendar({
 		
 		date1 = aa(event.start);
 		date2 = aa(event.end);
+		
 		//일정에 hover시 요약
 		element.popover({
 			title: $('<div />', {

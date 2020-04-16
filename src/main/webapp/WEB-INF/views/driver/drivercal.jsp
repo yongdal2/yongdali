@@ -17,11 +17,22 @@
 <link rel="stylesheet" href="${contextPath}/resources/js/fullcal/css/main.css">
 <title>용달이</title>
 <style>
+
  button{
  	background: #F15F5F;
  }
+@font-face {
+	font-family: 'yg-jalnan';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+.jal {
+	font-family: 'yg-jalnan', Arial, Helvetica, sans-serif !important;
+}
 </style>
-
 </head>
 
 <body>
@@ -39,7 +50,7 @@
 			<div class="col-md-3"></div>
 
 			<div class="col-md-6" style="text-align: left; margin-bottom: 10px">
-				<h2 style="color: grey; font-family: Montserrat;">
+				<h2 style="color: grey;" class="jal">
 					<b style="font-weight: 5000; letter-spacing: 3px;">▷ 예약 일정</b>
 				</h2>
 			</div>
