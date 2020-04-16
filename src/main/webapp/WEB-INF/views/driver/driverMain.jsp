@@ -12,6 +12,14 @@
 
 <title>용달이</title>
 <style>
+@font-face {
+	font-family: 'yg-jalnan';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
  button{
  	background: #F15F5F;
  }
@@ -33,6 +41,10 @@ textarea:disabled{
   div > label{
   	color : black;
   }
+  .jal {
+	font-family: 'yg-jalnan', Arial, Helvetica, sans-serif !important;
+}
+
 </style>
 </head>
 
@@ -50,10 +62,9 @@ textarea:disabled{
 		<div class="row">
 			<div class="col-lg-12 col-md-10 mx-auto">
 				<div class="row">
-				<a href="test.do">테스트 버튼</a>
 					<h1
-						style="font-size: 25px; text-align: center; color: #000; font-family: Montserrat; height: 50px">
-						<b style="font-weight: 500; letter-spacing: 5px;">실시간 예약 현황</b>
+						style="font-size: 25px; text-align: center; color: #000; height: 50px" class="jal">
+						<b style="font-weight: 500; letter-spacing: 5px;">미배차 확인</b>
 					</h1>
 				</div>
 				<hr>
@@ -73,16 +84,17 @@ textarea:disabled{
 						<tbody>
 						</tbody>
 					</table>
+					<a href="baeDetail.do?mNo=${loginUser.mNo }" class="pull-right">+ 상세보기</a>
 				</div>
 
 				<hr>
 				<!-- 테스트 필요! -->
 				<div class="btn_h1" style="margin-top: 60px;">
 					<h1
-						style="font-size: 25px; text-align: center; color: #000; font-family: Montserrat; height: 50px">
-						<b style="font-weight: 500; letter-spacing: 5px;">나의 배차</b>
+						style="font-size: 25px; text-align: center; color: #000; font-family: Montserrat; height: 50px; " class="jal">
+						나의 배차
 					</h1>
-
+		
 
 					<div class="row" style="text-align-last: center;">
 						<table class="table" style="font-size: 12px;" id="baechar">
@@ -100,9 +112,10 @@ textarea:disabled{
 							<tbody>
 							</tbody>
 						</table>
+						<a href="myDetail.do?mNo=${loginUser.mNo }" class="pull-right">+ 상세보기</a>
 					</div>
 					<div class="modal" tabindex="-1" role="dialog" id="eventModal">
-						<form action="Deal.do">
+						<form action="Deal.do" method="post">
 							<div class="modal-dialog" role="document" >
 								<div class="modal-content" style="border-radius: 20px 20px 20px 20px / 20px 20px 20px 20px; border: 2px solid white">
 									<div class="modal-header" style="border-radius: 20px 20px 0px 0px / 20px 20px 0px 0px">
@@ -110,15 +123,16 @@ textarea:disabled{
 											aria-label="CLose">
 											<span aria-hidden="true">X</span>
 										</button>
-										<h2 id="evetitle" style="color: white"><b>배차신청</b></h2>
+										<h2 id="evetitle" style="color: white"><b>배차정보</b></h2>
 									</div>
 									<div class="modal-body">
 
 										<div class="form-group">
 											<div class="col-xs-99">
-												<label class="col-xs-98" for="edit-title">예약번호</label> <input
+												<label class="col-xs-98" for="edit-title">예약번호</label> 
+												<input
 													class="form-control" type="text" name="rNo"
-													id="rNo" required="required" disabled="disabled" />
+													id="rNo" required="required" readonly />
 											</div>
 										</div>
 										<div class="form-group">
@@ -189,7 +203,7 @@ textarea:disabled{
 									</div>
 									<div class="ContaineraddEvent" id="deletecar">
 										<div class="modal-footer" style="border-radius: 0px 0px 20px 20px / 0px 0px 20px 20px" >
-											<button id="cancelBtn" class="btn" style="background: white; color: grey" onclick="cancel();">배차취소</button>
+											<button id="cancelBtn" type="button" class="btn" style="background: white; color: grey" onclick="myCancel();">배차취소</button>
 											<button type="button" class="btn " style="background: white; color: grey"
 												data-dismiss="modal">닫기</button>
 										</div>
@@ -210,23 +224,13 @@ textarea:disabled{
 
 	<!-- Footer -->
 	<%@ include file="../common/footer.jsp"%>
-	<script type="text/javascript">
+	<script type="text/javascript">	
 		$(function(){
-			$("#baechar").on('click',function(){
-				$("#eventModal").modal();
-				$("#deletecar").hide();
-				$("#savecar").show();
-			})
-		});
-		
-		$(function(){
-			console.log('sibal');
 			var $mibaechar = $('#mibaechar tbody');
 			$mibaechar.html("");
 			
 			
 			
-			console.log('sibal2');
 			$.ajax({
 				url : "mibaechar.do",
 				data : { mNO : $('#mNo').val()},
@@ -263,8 +267,8 @@ textarea:disabled{
 				
 			});
 		})
+		/* 모달에 선택한 예약 값 띄우기*/
 		function Deal(aa){
-				console.log(aa);
 				$("#eventModal").modal();
 				$("#deletecar").hide();
 				$("#savecar").show();
@@ -290,28 +294,84 @@ textarea:disabled{
 				})
 				
 		}
-		<%-- function mView(){
-		 var $baechar = $('#baechar tbody');
-		 $baechar.html("");
-		 
-		 $.ajax({
-			 url : "baechar.do",
-			 data : "<%= session.getAttribute("loginUser").getUserId()%>",
-			 type : "post",
-			 dataType : "json",
-			 success : function(data){
-				 $.each(data,function(index,value){
-					 var $tr = ("<tr>");
-					 var $start = ("<td>").text(value.start);
-					 
-					 $tr.append($start);
-					 
-					 $baechar.append($tr);
-					 
-				 }); 
-			 }
-		 });	 
-		} --%>
+		
+		$(function(){
+			var $baechar = $('#baechar tbody');
+			$baechar.html("");
+			
+			
+			
+			$.ajax({
+				url : "mybaechar.do",
+				data : { mNo : $('#mNo').val()},
+				type : "post",
+				dataType : "json",
+				success : function(data){
+					console.log(data);
+					$.each(data,function(index,value){
+						var $deal_btn = $("<button class='dealB btn' style='color:white;' onclick='edit(this.value)'>").val(value.rNo).text('배차취소');
+						
+						var $tr = $("<tr>");
+						var $rno = $("<td>").text(value.rNo);
+						var $help = $("<td>").text(value.helpLoad+"/"+value.helpUnload);
+						var $startAddr = $("<td colspan='3'>").text(value.startAddr);
+						var $endAddr = $("<td colspan='3'>").text(value.endAddr);
+						var $start_date = $("<td>").text(value.startDate);
+						var $end_date = $("<td>").text(value.endDate);
+						var $deal = $("<td>");
+						
+						$deal.append($deal_btn);
+						$tr.append($rno);
+						$tr.append($help);
+						$tr.append($startAddr);
+						$tr.append($endAddr);
+						$tr.append($start_date);
+						$tr.append($end_date);
+						$tr.append($deal_btn);
+						
+						$baechar.append($tr);
+					})
+				},error : function(){
+					console.log("error");
+				}
+				
+			});
+		})
+		
+		function edit(aa){
+				$("#eventModal").modal();
+				$("#savecar").hide();
+				$("#deletecar").show();
+				
+				
+				$('#rNo').val(aa);
+				
+				$.ajax({
+					url : "dModal.do",
+					data : {rNo : aa,
+						mNO : $('#mNo').val()},
+					dataType : 'json',
+					success : function(data){
+						console.log(data);
+						$("#enrollDate").val(data[0].enrollDate);
+						$("#sangDate").val(data[0].startDate);
+						$("#haDate").val(data[0].endDate);
+						$("#start").val(data[0].startAddr);
+						$("#end").val(data[0].endAddr);
+						$("#luggage").val(data[0].luggage);
+						$("#type").val(data[0].type);
+						$("#msg").val(data[0].msg);
+					}
+				})
+				
+		}
+		function myCancel(){
+			var aa = $('#mNo').val()
+			var bb = $('#rNo').val();
+			
+			location.href = "cancel.do?mNo="+aa+"&rNo="+bb;
+			
+		}
 		
 		
 	</script>

@@ -44,24 +44,37 @@ public class UserMyPageController {
 		return "user/myPage/myPageRSV";
 	}
 	
+	//==========================유저 정보 ========================================
 	
 	//유저 폰번호 업데이트
-//	@RequestMapping("phoneUpdate.myp")
-//	public String userPhoneUpdate(Member m, Model model,
-//			@RequestParam("phone") String phone) {
-//
-//		int result = mpService.userPhoneUpdate(m);
-//
-//		// m은 기존의 회원 값을 갖고 있기 때문에 새로 저장된 값을 불러오기 위해 다시한번 m을 저장해준다
-//
-//		if(result > 0) {
-//			model.addAttribute("loginUser",m);
-//			return "redirect:index.jsp";
-//		}else {
-//			model.addAttribute("msg", "회원정보 수정 실패!!");
-//			return "common/errorPage";
-//		}
-//	}	
+	@RequestMapping("uPhone.myp")
+	public String userPhoneUpdate(Model md, @SessionAttribute Member loginUser,
+			@RequestParam("uPhone") String phone) {
+
+		loginUser.setPhone(phone);
+		
+		System.out.println("수정할ID"+loginUser);
+		
+		int result = umpService.updatePhone(loginUser);
+
+		// m은 기존의 회원 값을 갖고 있기 때문에 새로 저장된 값을 불러오기 위해 다시한번 m을 저장해준다
+
+		if(result > 0) {
+			md.addAttribute("loginUser",loginUser);
+			
+			if(loginUser.getmSort().equals("일반")) {
+				return "redirect:addrBook.myp";
+			}else if(loginUser.getmSort().equals("사업자")) {
+				return "redirect:truckInfo.myp";
+			}else {
+				return "common/errorPage";
+			}
+		}else {
+			md.addAttribute("msg", "회원정보 수정 실패!!");
+			return "common/errorPage";
+		}
+	}
+		
 	
 	
 	
@@ -136,7 +149,7 @@ public class UserMyPageController {
 				return "common/errorPage";
 			}
 		}
-		
+		//주소록 추가
 		@RequestMapping("iAddr.myp")
 		public String insertAddr(Address a, Model md,
 				@SessionAttribute Member loginUser,
@@ -163,8 +176,22 @@ public class UserMyPageController {
 				return "common/errorPage";
 			}
 		}
+		//주소록 삭제
+		@RequestMapping("dAddr.myp")
+		public String deleteAddr(Model md, 
+				@RequestParam("aNo") String aNo){
+
+			int result = umpService.deleteAddr(aNo);
+			System.out.println("수정사항:"+aNo);
+
+			if (result > 0) {
+				return "redirect:addrBook.myp";
+			}else {
+				md.addAttribute("msg", "주소록 수정 실패!!");
+				return "common/errorPage";
+			}
+		}
 		
-//		@RequestMapping("dAddr.myp")
-//		public String deleteAddr()
+		//
 		
 }

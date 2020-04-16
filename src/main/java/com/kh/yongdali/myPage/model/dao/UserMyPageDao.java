@@ -5,6 +5,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.myPage.model.vo.Address;
 
 
@@ -14,8 +15,14 @@ public class UserMyPageDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
+	public int updatePhone(Member m) {
+		return sqlSession.update("myPageMapper.updatePhone",m);
+	}
+	
+	
+	
+	
 	public int getAddrListCount(String mNo) {
-		
 		return sqlSession.selectOne("myPageMapper.getAddrListCount",mNo);
 	}
 
@@ -34,5 +41,11 @@ public class UserMyPageDao {
 	public int insertAddr(Address a) {
 		return sqlSession.insert("myPageMapper.insertAddr",a);
 	}
+
+	public int deleteAddr(String aNo) {
+		return sqlSession.delete("myPageMapper.deleteAddr", aNo);
+	}
+
+	
 
 }

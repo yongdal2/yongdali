@@ -37,15 +37,15 @@
         <div class="row">
             <div class="chat col-xs-12">
                 <ul id="chat">
-                    <li class="you">
+                    <!-- <li class="you">
                         <div class="entete">
-                            <!-- <span class="status green"></span> -->
+                            <span class="status green"></span>
                             <h2>용달이</h2>
                             <h3>10:12AM, Today</h3>
                         </div>
                         <div class="message" id="youMsg">
                         </div>
-                    </li>
+                    </li> -->
                     <!-- <li class="me">
                         <div class="entete">
                             <h3>10:12AM, Today</h3>
@@ -104,7 +104,8 @@
             <div class="footer row">
                 <div class="col-xs-10 col-lg-11">
                 	<input type="text" id="sender" value="${sessionScope.loginUser.mName }" style="display: none;">
-                    <textarea placeholder="궁금하신 점이 무엇인가요?" id="msgArea"></textarea>
+                	<input type="text" class="write-message" id="msgArea" placeholder="Type your message here"></input>
+                    <!-- <textarea placeholder="궁금하신 점이 무엇인가요?" id="msgArea"></textarea> -->
                 </div>
                 <div class="col-xs-2 col-lg-1">
                     <button type="button" class="sendBtn" onclick="sendMessage();"><img src="${contextPath }/resources/images/chat/send.png"></button>
@@ -119,8 +120,10 @@
     		openSocket();
     	});
     	var ws;
-    	var meMsg = document.getElementById("meMsg");
     	var youMsg = document.getElementById("youMsg");
+    	var today = new Date();
+    	var hours = today.getHours();
+		var minutes = today.getMinutes();
     	
     	function openSocket(){
 			if(ws!==undefined && ws.readyState!==WebSocket.CLOSED){
@@ -132,15 +135,25 @@
 	    	
     		ws.onopen = function(message){
 	    		console.log("확인");
-	    		youMsg.innerHTML += "용달이에 오신걸 환영합니다.";
+	    		var printHTML = "<li class='you'>";
+    			printHTML += "<div class='entete'>";
+    			printHTML += "<h2>"+'관리자'+"</h2>";
+    			printHTML += "<h3>"+hours+":"+minutes+"<h3>";
+    			printHTML += "</div>";
+    			printHTML += "<div class='message'id='youMsg'>"+'용달이에 오신걸 환영합니다.'+"</div>";	    			
+    			printHTML += "</li>";
+    			
+    			writeResponse(printHTML);
 	    	};
-    	
-
-    		
-	    	
+  
 	    	ws.onmessage = function(event){
 	    		var data = event.data;
+	    		
+	    		/* 페이지 접속한 session id */
 	    		var sessionid = '${sessionScope.loginUser.mName}';
+	    		
+	    		/* 메시지 보낸 아이디 */
+	    		var currentuser_session = null;
 	    		var message = null;
 	    		
 	    		console.log(data);
@@ -151,30 +164,22 @@
 	    			console.log('str['+i+']: ' + strArray[i]);
 	    		}
 	    		
-	    		var currentuser_session = strArray[1];
-	    		console.log('current session id : ' + currentuser_session);
 	    		
 	    		message = strArray[0];
+	    		currentuser_session = strArray[1];
 	    		
-	    		console.log("message1 : " + message);
+	    		console.log("message : " + message);
+	    		console.log("sessionid : " + sessionid);
+	    		console.log('current session id : ' + currentuser_session);
 	    		
-	    		var today = new Date();
-	    		
-	    		var hours = today.getHours();
-	    		var minutes = today.getMinutes();
-	    		
-	    		console.log(sessionid);
-	    		console.log(currentuser_session);
 	    		if(sessionid != currentuser_session){
 	    			var printHTML = "<li class='you'>";
 	    			printHTML += "<div class='entete'>";
 	    			printHTML += "<h2>"+currentuser_session+"</h2>";
 	    			printHTML += "<h3>"+hours+":"+minutes+"<h3>";
-	    			printHTML += "<div class='message'id='youMsg'>"+message+"</div>";
 	    			printHTML += "</div>";
+	    			printHTML += "<div class='message'id='youMsg'>"+message+"</div>";	    			
 	    			printHTML += "</li>";
-	    			
-	    			//$("#chat").append(printHTML);
 	    		}else{
 	    			var printHTML = "<li class='me'>";
 	    			printHTML += "<div class='entete'>";
@@ -183,19 +188,12 @@
 	    			printHTML += "</div>";
 	    			printHTML += "<div class='message' id='meMsg'>"+message+"</div>";
 	    			printHTML += "</li>";
-	    			
-	    			//$("#chat").append(printHTML);
-	    			
 	    		} 
-	    		
-	    		
-    			
     			writeResponse(printHTML);
-	    		/* youMsg.innerHTML += message.data */
 	    	};
 	    	
 	    	ws.onclose = function(message){
-	    		youMsg.innerHTML += "용달이 채팅 종료";
+	    		alert('채팅을 종료합니다!');
 	    	};
     	}
     	

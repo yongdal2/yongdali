@@ -27,7 +27,12 @@
             <div class="col-lg-3 sidebar">
                 <a href="dNoticeMain.no"><span class="sidebar_span">공지사항</span></a><br>
                 <a href="dFaqView.fa"><span class="sidebar_span">자주 묻는 질문</span></a><br>
-                <a onclick="chat();"><span class="sidebar_span"> 채팅</span></a>
+                <c:if test="${loginUser.mId eq 'admin@naver.com'}">
+                	<a onclick="adminChat();"><span class="sidebar_span">채팅</span></a>
+                </c:if>
+                <c:if test="${loginUser.mId ne 'admin@naver.com' }">
+                	<a onclick="chat();"><span class="sidebar_span"> 채팅</span></a>
+                </c:if>
             </div>
             <div class="col-lg-8 col-lg-offset-1">
                 <h2 class="jal">공지사항</h3>
@@ -352,6 +357,10 @@
    	function chat(){
     	window.open('chat.ch','tistory','width=500px, height=700px, scrollbars=no, resizable=no, toolbars=no, menubar=no')
     }
+   	
+   	function adminChat(){
+   		location.href="${contextPath}/adminChat.ch";
+   	}
     </script>
 </body>
 </html>

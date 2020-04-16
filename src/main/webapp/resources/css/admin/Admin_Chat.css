@@ -57,7 +57,7 @@ body {
     .discussions {
     width: 35%;
     height: 700px;
-    overflow: hidden;
+    overflow-y: scroll;
     background-color: #87a3ec;
     display: inline-block;
     }
@@ -124,12 +124,12 @@ body {
         display: block;
         width: 45px;
         height: 45px;
-        background: #E6E7ED;
         -moz-border-radius: 50px;
         -webkit-border-radius: 50px;
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
+        background-image: url("/yongdali/resources/images/ydl_logo/ydl_ic_gr(70X70).png");
     }
 
     .online {
@@ -209,10 +209,10 @@ body {
     .chat .messages-chat {
     padding: 25px 35px;
     height: 540px;
+    overflow-y: scroll;
     }
 
     .chat .messages-chat .message {
-    display:flex;
     align-items: center;
     margin-bottom: 8px;
     }
@@ -228,28 +228,43 @@ body {
         background-size: cover;
         background-repeat: no-repeat;
     }
+    
+    .chat .messages-chat .message h2{
+    	font-size: 13px;
+    	font-weight: normal;
+    }
 
     .chat .messages-chat .text {
-    margin: 0 35px;
+    margin: 0 9px;
     background-color: #f6f6f6;
     padding: 15px;
     border-radius: 12px;
     }
+    
+    .messageArea{
+    	display:flex;
+    }
 
     .text-only {
     margin-left: 45px;
+    display:flex;
+    }
+    
+    .name{
+    	margin-left: 10px;
     }
 
     .time {
     font-size: 10px;
     color:lightgrey;
     margin-bottom:10px;
-    margin-left: 85px;
+        margin-top: 20px;
     }
 
     .response-time {
     float: right;
     margin-right: 40px !important;
+    display:contents;
     }
 
     .response {
@@ -296,6 +311,17 @@ body {
       padding: 9px 12px 9px 12px;
       margin-left: 10px;
         
+    }
+    
+    .closeBtn{
+      background: #6fbced;
+      border: none;
+      width: 84px;
+      border-radius: 5px;
+      padding: 9px 12px 9px 12px;
+      margin-left: 10px;
+      color:white;
+      font-weight: 400;
     }
 
     .chat .footer-chat .name {

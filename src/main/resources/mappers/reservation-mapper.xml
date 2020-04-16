@@ -26,7 +26,7 @@
 			FROM (SELECT *
 				FROM RESERVATION
 				ORDER BY ENROLLDATE DESC)
-			WHERE DEAL_YN IS NULL
+			WHERE DEAL_YN = 'N'
 			AND CAPACITY = (SELECT CAPACITY
 							FROM DRIVER
 							WHERE D_M_NO  = #{mNo})
@@ -37,10 +37,15 @@
 		]]>
 	</select>
 	
-	<select id="myBaechar">
-		SELECT *
-		FROM RESERVATION
-		WHERE R_DID= #{dId}
+	<select id="myBaechar" resultMap="reservationResultSet">
+		<![CDATA[
+			SELECT *
+			FROM RESERVATION
+			WHERE R_D_NO = (SELECT D_NO
+							FROM DRIVER
+							WHERE D_M_NO = #{mNo})
+			AND ROWNUM <= 10
+		]]>
 	</select>
 	
 	<select id="driverCal" resultMap="reservationResultSet">
@@ -65,7 +70,58 @@
 		WHERE R_NO = #{rNo}
 	</update>
 	
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*)
+			FROM (SELECT *
+				FROM RESERVATION
+				ORDER BY ENROLLDATE DESC)
+			WHERE DEAL_YN = 'N'
+			AND CAPACITY = (SELECT CAPACITY
+							FROM DRIVER
+							WHERE D_M_NO  = #{mNo})
+            AND TYPE = (SELECT TYPE
+							FROM DRIVER
+							WHERE D_M_NO  = #{mNo})
+	</select>
 	
+	<select id="baeList" resultMap="reservationResultSet">
+		SELECT *
+		FROM RESERVATION
+		WHERE DEAL_YN = 'N'
+			AND CAPACITY = (SELECT CAPACITY
+							FROM DRIVER
+							WHERE D_M_NO  = #{mNo})
+            AND TYPE = (SELECT TYPE
+							FROM DRIVER
+							WHERE D_M_NO  = #{mNo})
+		ORDER BY ENROLLDATE DESC
+	</select>
+	
+	
+	<update id="cancel">
+		UPDATE RESERVATION
+		SET R_D_NO = NULL,
+			DEALDATE = NULL,
+			DEAL_YN = 'N'
+		WHERE R_NO = #{rNo}
+	</update>
+	
+	<select id="getMyCount" resultType="_int">
+			SELECT COUNT(*)
+			FROM RESERVATION
+			WHERE R_D_NO = (SELECT D_NO
+							FROM DRIVER
+							WHERE D_M_NO = #{mNo})
+	</select>
+	
+	<select id="myDetail" resultMap="reservationResultSet">
+		SELECT *
+		FROM RESERVATION
+		WHERE R_D_NO = (SELECT D_NO
+							FROM DRIVER
+							WHERE D_M_NO = #{mNo})
+		ORDER BY DEALDATE DESC
+	</select>
 </mapper>
 
 

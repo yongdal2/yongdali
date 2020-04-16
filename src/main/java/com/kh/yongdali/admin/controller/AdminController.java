@@ -20,6 +20,12 @@ public class AdminController {
 	@Autowired
 	private AdminService aService;
 	
+	/**
+	 * Member List
+	 * @param mv
+	 * @param currentPage
+	 * @return
+	 */
 	@RequestMapping("aMem.ad")
 	public ModelAndView adminList(ModelAndView mv,
 								@RequestParam(value="currentPage", required = false, defaultValue="1")
@@ -33,7 +39,7 @@ public class AdminController {
 		
 		
 		int pageLimit =5;
-		int boardLimit= 10;
+		int boardLimit=7;
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, pageLimit, boardLimit);
 		

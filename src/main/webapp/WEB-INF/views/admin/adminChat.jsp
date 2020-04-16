@@ -45,7 +45,7 @@
             </div>
           </div>
           <div class="discussion message-active">
-            <div class="photo" style="background-image: url(https://image.noelshack.com/fichiers/2017/38/2/1505775062-1505606859-portrait-1961529-960-720.jpg);">
+            <div class="photo">
               <div class="online"></div>
             </div>
             <div class="desc-contact">
@@ -56,7 +56,7 @@
           </div>
   
           <div class="discussion">
-            <div class="photo" style="background-image: url(http://e0.365dm.com/16/08/16-9/20/theirry-henry-sky-sports-pundit_3766131.jpg?20161212144602);">
+            <div class="photo">
               <div class="online"></div>
             </div>
             <div class="desc-contact">
@@ -66,7 +66,7 @@
           </div>
   
           <div class="discussion">
-            <div class="photo" style="background-image: url(https://tinyclipart.com/resource/man/man-5.jpg);">
+            <div class="photo">
             </div>
             <div class="desc-contact">
                 <p class="name">유승제</p>
@@ -75,7 +75,7 @@
           </div>
   
           <div class="discussion">
-            <div class="photo" style="background-image: url(http://thomasdaubenton.xyz/portfolio/images/photo.jpg);">
+            <div class="photo">
               <div class="online"></div>
             </div>
             <div class="desc-contact">
@@ -85,7 +85,7 @@
           </div>
   
           <div class="discussion">
-            <div class="photo" style="background-image: url(http://www.boutique-uns.com/uns/185-home_01grid/polo-femme.jpg);">
+            <div class="photo">
             </div>
             <div class="desc-contact">
                 <p class="name">유승제</p>
@@ -94,7 +94,7 @@
           </div>
   
           <div class="discussion">
-            <div class="photo" style="background-image: url(https://images.pexels.com/photos/979602/pexels-photo-979602.jpeg?auto=compress&cs=tinysrgb&h=350);">
+            <div class="photo">
             </div>
             <div class="desc-contact">
                 <p class="name">유승제</p>
@@ -103,7 +103,7 @@
           </div>
   
           <div class="discussion">
-            <div class="photo" style="background-image: url(http://static.jbcgroup.com/news/pictures/cc70ae498569ecc11eaeff09224d4ba5.jpg);">
+            <div class="photo">
               <div class="online"></div>
             </div>
             <div class="desc-contact">
@@ -117,32 +117,25 @@
           <div class="header-chat">
             <img src="${contextPath }/resources/images/ydl_logo/ydl_ic_gr(70X70).png" style="width:50px; height:50px;">
             <p class="name">유승제</p>
+            <button class="closeBtn" onclick="disconnect();">대화종료</button>
           </div>
-          <div class="messages-chat">
-            <div class="message">
-              <div class="photo" style="background-image: url(https://image.noelshack.com/fichiers/2017/38/2/1505775062-1505606859-portrait-1961529-960-720.jpg);">
-                <div class="online"></div>
-              </div>
-              <p class="text"> 안녕하세요 </p>
-            </div>
-            <p class="time"> 14:58PM Today</p>
-            <div class="message text-only">
-              <div class="response">
-                <p class="text"> 용달이입니다.</p>
+          <div class="messages-chat">            
+            <!-- <div class="message text-only">
+              <div class="response" id="meMsg">
+                <p class="text"></p>
               </div>
             </div>
-            <p class="response-time time"> 15:04PM Today</p>
-            <div class="message">
-              <div class="photo" style="background-image: url(https://image.noelshack.com/fichiers/2017/38/2/1505775062-1505606859-portrait-1961529-960-720.jpg);">
-                <div class="online"></div>
-              </div>
+            <p class="response-time time"></p> -->
+            
+            <!-- <div class="message" id="youMsg">
               <p class="text"> 마지막 메시지</p>
             </div>
-            <p class="time"> 15:09PM Today</p>
+            <p class="time"> 15:09PM Today</p> -->
           </div>
           <div class="footer-chat">
-            <input type="text" class="write-message" placeholder="Type your message here"></input>
-            <button class="sendBtn" type="submit">
+          	<input type="text" id="sender" value="${sessionScope.loginUser.mName }" style="display: none;">
+            <input type="text" class="write-message" id="msgArea" placeholder="Type your message here"></input>
+            <button class="sendBtn" onclick="sendMessage();">
               <svg class="bi bi-cursor" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M14.082 2.182a.5.5 0 01.103.557L8.528 15.467a.5.5 0 01-.917-.007L5.57 10.694.803 8.652a.5.5 0 01-.006-.916l12.728-5.657a.5.5 0 01.556.103zM2.25 8.184l3.897 1.67a.5.5 0 01.262.263l1.67 3.897L12.743 3.52 2.25 8.184z" clip-rule="evenodd"/>
               </svg>
@@ -152,5 +145,127 @@
         </section>
       </div>
     </div>
+    
+    <script>
+		    $(function(){
+				openSocket();
+			});
+			var ws;
+			
+			var today = new Date();
+			var hours = today.getHours();
+			var minutes = today.getMinutes();
+			
+			function openSocket(){
+				if(ws!==undefined && ws.readyState!==WebSocket.CLOSED){
+		            return;
+		        }
+				
+				ws = new WebSocket("ws://192.168.110.45:8888/yongdali/kh.do");
+		    	
+				ws.onopen = function(message){
+		    		console.log("확인");
+		
+		    		var printHTML = "<div class='message text-only'>";
+	    			printHTML += "<div class='response' id='meMsg'>";
+	    			printHTML += "<p class='text'>"+'용달이에 오신걸 환영합니다.'+"</p>";
+	    			printHTML += "</div>";
+	    			printHTML += "<p class='response-time time'>"+hours+":"+minutes+"</p>";
+	    			printHTML += "</div>";
+	    			
+	    			writeResponse(printHTML);		    		
+		    	};
+		    	
+		    	ws.onmessage = function(event){
+		    		var data = event.data;
+		    		
+		    		/* 페이지 접속한 session id */
+		    		var sessionid = '${sessionScope.loginUser.mName}';
+		    		
+		    		/* 메시지 보낸 아이디 */
+		    		var currentuser_session = null;
+		    		var message = null;
+		    		
+		    		console.log(data);
+		    		
+		    		var strArray = data.split('|');
+		    		
+		    		for(var i = 0; i<strArray.length; i++){
+		    			console.log('str['+i+']: ' + strArray[i]);
+		    		}
+		    		
+		    		
+		    		message = strArray[0];
+		    		currentuser_session = strArray[1];
+		    		
+		    		console.log("message : " + message);
+		    		console.log("sessionid : " + sessionid);
+		    		console.log('current session id : ' + currentuser_session);
+		    		
+		    		if(sessionid != currentuser_session){		              
+		              	var printHTML = "<div class='message' id='youMsg'>";
+		              	printHTML += "<div class='name'>";
+		              	printHTML += "<h2>"+currentuser_session+"</h2>";
+		              	printHTML += "</div>";
+		              	printHTML += "<div class='messageArea'>";
+		    			printHTML += "<p class='text'>"+message+"</p>";
+		    			printHTML += "<p class='time'>"+hours+":"+minutes+"</p>";
+		    			printHTML += "</div>";
+		    			printHTML += "</div>";
+
+		    		}else{
+		    			var printHTML = "<div class='message text-only'>";
+		    			printHTML += "<div class='response' id='meMsg'>";
+		    			printHTML += "<p class='text'>"+message+"</p>";
+		    			printHTML += "</div>";
+		    			printHTML += "<p class='response-time time'>"+hours+":"+minutes+"</p>";
+		    			printHTML += "</div>";
+		    					    			
+		    		} 
+					writeResponse(printHTML);
+		    	};
+		    	
+		    	ws.onclose = function(message){
+		    		var printHTML = "<div class='message text-only'>";
+	    			printHTML += "<div class='response' id='meMsg'>";
+	    			printHTML += "<p class='text'>"+'채팅을 종료합니다!'+"</p>";
+	    			printHTML += "</div>";
+	    			printHTML += "<p class='response-time time'>"+hours+":"+minutes+"</p>";
+	    			printHTML += "</div>";
+	    			
+	    			writeResponse(printHTML);
+		    	};
+			}
+			
+			
+			 function writeResponse(text){
+				$('.messages-chat').append(text);
+		     }
+			
+			/* ws.onerror = function(message){
+				youMsg.innerHTML += "에러 발생";
+			}; */
+			
+			
+			
+			function sendMessage(){
+				/* var message = document.getElementById("msgArea");
+				
+				meMsg.innerHTML += message.value;
+				
+				ws.send(message.value);
+				
+				message.value = ""; */
+				var message = $("#msgArea").val()+"|"+$("#sender").val();
+				ws.send(message);
+				$("#msgArea").val("");
+		
+			}
+			
+			function disconnect(){
+		        ws.close();
+		    }
+    
+    </script>
   </body>
 </html>
