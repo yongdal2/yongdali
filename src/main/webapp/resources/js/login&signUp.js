@@ -536,12 +536,12 @@ $(document).ready(function(){
             phone += "-";
             phone += number.substr(3);
         } 
-        else if($("input[name=phone]").val().length < 7){
+        else if($("input[name=phone]").val().length < 11){
             phone += number.substr(0, 3);
             phone += "-";
             phone += number.substr(3, 3);
             phone += "-";
-            phone += number.substr(7);
+            phone += number.substr(6);
         }      
         else{
             phone += number.substr(0, 3);
