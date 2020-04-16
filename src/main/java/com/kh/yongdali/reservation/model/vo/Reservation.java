@@ -6,10 +6,6 @@ import java.util.Date;
  * @author user2
  *
  */
-/**
- * @author user2
- *
- */
 public class Reservation {
 	private String rNo;			// 예약&결제 기본키
 	private String rMNo;		// 멤버 외래키
