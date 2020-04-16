@@ -3,7 +3,7 @@ package com.kh.yongdali.reservation.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -104,13 +104,13 @@ public class ReservationController {
 		// 차량크기, 거리, 결제금액 int로 변환하기
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		if (stDate != "") {
-			Date startDate = sdf.parse(stDate);
+			Date startDate = (Date) sdf.parse(stDate);
 			System.out.println(startDate);
 			r.setStartDate(startDate);
 		}
 
 		if (edDate != "") {
-			Date endDate = sdf.parse(edDate);
+			Date endDate = (Date) sdf.parse(edDate);
 			System.out.println(endDate);
 			r.setEndDate(endDate);
 		}
