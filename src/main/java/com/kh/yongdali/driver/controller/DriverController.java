@@ -39,13 +39,13 @@ public class DriverController {
 		return "/driver/2yong";
 	}
 	
-	@RequestMapping("baedetail.do")
+	@RequestMapping(value="baeDetail.do")
 	public ModelAndView boardList(ModelAndView mv,String mNo
 			, @RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage) {
 		
 		int pageLimit = 15;
 		int boardLimit = 5;
-		
+		System.out.println(mNo);
 		int listCount = dService.getListCount(mNo);
 		
 		System.out.println("listCount : " + listCount);
@@ -53,6 +53,7 @@ public class DriverController {
 		PageInfo pi = Pagination.getPageInfo(currentPage,listCount,pageLimit,boardLimit);
 		
 		ArrayList<Reservation> list = dService.selectList(mNo,pi);
+		
 		
 		mv.addObject("list",list);
 		mv.addObject("pi",pi);
@@ -101,9 +102,9 @@ public class DriverController {
 	}
 	
 	@RequestMapping("Deal.do")
-	public String mainDeal(HttpServletRequest request) {
-		String mNo =request.getParameter("mNo");
-		String rNo = request.getParameter("rNo");
+	public String mainDeal(HttpServletRequest request,String mNo,@RequestParam("rNo")String rNo) {
+
+		
 		System.out.println(mNo+' '+rNo);
 		int result = Deal(mNo,rNo);
 		

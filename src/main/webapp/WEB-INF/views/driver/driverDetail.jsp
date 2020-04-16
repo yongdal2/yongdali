@@ -1,7 +1,8 @@
 
 <%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 
 <!DOCTYPE html>
@@ -26,7 +27,8 @@ button {
 .jal {
 	font-family: 'yg-jalnan', Arial, Helvetica, sans-serif !important;
 }
-tfoot{
+
+tfoot {
 	font-family: 'yg-jalnan', Arial, Helvetica, sans-serif !important;
 }
 </style>
@@ -52,6 +54,7 @@ tfoot{
 					class="jal">
 					<b style="font-weight: 500; letter-spacing: 5px;">모든 미배차 현황</b>
 				</h1>
+				<br>
 			</div>
 			<hr>
 			<div class="row" style="text-align-last: center;">
@@ -71,49 +74,47 @@ tfoot{
 						<c:forEach var="r" items="${ list }">
 							<tr>
 								<td align="center">${r.rNo }</td>
-								<td align="center">${r.helpLoad} / ${r.helpUnload}</td>
+								<td align="center">${r.helpLoad}/ ${r.helpUnload}</td>
 								<td align="center" colspan="3">${r.startAddr }</td>
 								<td align="center" colspan="3">${r.endAddr }</td>
-								<td align="center">${r.startDate }</td>
-								<td align="center">${r.endDate }</td>
-								<td align="center"><button class="dealB btn" style="color: white;" onclick="Deal(this.value)" value="${r.rNo}">배차신청</button></td>
+								<td align="center"><fmt:formatDate value="${r.startDate }"
+										type="date" pattern="yyyy-MM-dd" /></td>
+								<td align="center"><fmt:formatDate value="${r.endDate }"
+										type="date" pattern="yyyy-MM-dd" /></td>
+								<td align="center"><button class="dealB btn"
+										style="color: white;" onclick="Deal(this.value)"
+										value="${r.rNo}">배차신청</button></td>
 							</tr>
 						</c:forEach>
 					</tbody>
 					<tfoot>
-						<tr align="center" height="20" >
+						<tr align="center" height="20">
 							<td colspan="12">
-								<!-- [이전] --> 
-								<c:if test="${ pi.currentPage eq 1 }">&lt;&lt; &nbsp;</c:if>
+								<!-- [이전] --> <c:if test="${ pi.currentPage eq 1 }">&lt;&lt; &nbsp;</c:if>
 								<c:if test="${ pi.currentPage ne 1 }">
-									<c:url var="before" value="baedetail.do">
+									<c:url var="before" value="baeDetail.do">
 										<c:param name="currentPage" value="${ pi.currentPage - 1 }" />
-										<c:param name="mNo" value="${loginUser.mNo}"/>
+										<c:param name="mNo" value="${loginUser.mNo}" />
 									</c:url>
 									<a href="${ before }" style="font: 20px;">&lt;&lt;</a> &nbsp;
-								</c:if>
-								
-								<!-- 페이지 -->
-								<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+								</c:if> <!-- 페이지 --> <c:forEach var="p" begin="${ pi.startPage }"
+									end="${ pi.endPage }">
 									<c:if test="${ p eq pi.currentPage }">
 										<font color="#F15F5F" size="4"><b>[${ p }]</b></font>
 									</c:if>
 
 									<c:if test="${ p ne pi.currentPage }">
-										<c:url var="pagination" value="baedetail.do">
+										<c:url var="pagination" value="baeDetail.do">
 											<c:param name="currentPage" value="${ p }" />
-											<c:param name="mNo" value="${loginUser.mNo}"/>
+											<c:param name="mNo" value="${loginUser.mNo}" />
 										</c:url>
 										<a href="${ pagination }">${ p }</a> &nbsp;
 									</c:if>
-								</c:forEach>
-								
-								<!-- [다음] -->
-								<c:if test="${ pi.currentPage eq pi.maxPage }">&gt;&gt;</c:if>
+								</c:forEach> <!-- [다음] --> <c:if test="${ pi.currentPage eq pi.maxPage }">&gt;&gt;</c:if>
 								<c:if test="${ pi.currentPage ne pi.maxPage }">
-									<c:url var="after" value="baedetail.do">
+									<c:url var="after" value="baeDetail.do">
 										<c:param name="currentPage" value="${ pi.currentPage + 1 }" />
-										<c:param name="mNo" value="${loginUser.mNo}"/>
+										<c:param name="mNo" value="${loginUser.mNo}" />
 									</c:url>
 									<a href="${ after }">&gt;&gt;</a>
 								</c:if>
@@ -124,91 +125,115 @@ tfoot{
 			</div>
 			<hr>
 			<!-- 테스트 필요! -->
-			<div class="btn_h1" style="margin-top: 60px;">
+			<div class="modal" tabindex="-1" role="dialog" id="eventModal">
+				<form action="Deal.do" method="post">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content"
+							style="border-radius: 20px 20px 20px 20px/20px 20px 20px 20px; border: 2px solid white">
+							<div class="modal-header"
+								style="border-radius: 20px 20px 0px 0px/20px 20px 0px 0px">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="CLose">
+									<span aria-hidden="true">X</span>
+								</button>
+								<h2 id="evetitle" style="color: white">
+									<b>배차정보</b>
+								</h2>
+							</div>
+							<div class="modal-body">
 
-				<div class="modal" tabindex="-1" role="dialog" id="eventModal">
-					<form action="cancel.do">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h4 id="evetitle">배차신청</h4>
-									<button type="button" class="close" data-dismiss="modal"
-										aria-label="CLose">
-										<span aria-hidden="true">X</span>
-									</button>
-								</div>
-								<div class="modal-body">
-
-									<div class="form-group">
-										<div class="col-xs-99">
-											<label class="col-xs-98" for="edit-title">예약번호</label> <input
-												class="form-control" type="text" name="edit-title"
-												id="edit-title" required="required" disabled="disabled" />
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-xs-99">
-											<label class="col-xs-98" for="edit-start">예약일</label> <input
-												class="form-control" type="text" name="edit-start"
-												id="edit-start" />
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-xs-99">
-											<label class="col-xs-98" for="edit-end">출발지</label> <input
-												class="form-control" type="text" name="edit-end"
-												id="edit-end" />
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-xs-99">
-											<label class="col-xs-98" for="edit-type">도착지</label> <input
-												class="form-control" type="text" name="edit-type"
-												id="edit-type">
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-xs-99">
-											<label class="col-xs-98" for="edit-start">이삿짐</label> <input
-												class="form-control" type="text" name="edit-start"
-												id="edit-start" />
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-xs-99">
-											<label class="col-xs-98" for="edit-color">차량종류</label> <select
-												class="form-control" name="color" id="edit-color">
-												<option value="damas" style="color: #D25565;">다마스</option>
-												<option value="starex" style="color: #ffa94d;">스타렉스</option>
-												<option value="bongo" style="color: #74c0fc;">봉고</option>
-												<option value="1truck" style="color: #f06595;">1.5t</option>
-												<option value="3truck" style="color: #63e6be;">3.5t</option>
-											</select>
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-xs-99">
-											<label class="col-xs-98" for="edit-desc">설명</label>
-											<textarea rows="4" cols="50" class="form-control"
-												name="edit-desc" id="edit-desc"></textarea>
-										</div>
+								<div class="form-group">
+									<div class="col-xs-99">
+										<label class="col-xs-98" for="edit-title">예약번호</label> <input
+											class="form-control" type="text" name="rNo" id="rNo"
+											required="required" readonly />
 									</div>
 								</div>
-								<div class="ContaineraddEvent" id="savecar">
-									<div class="modal-footer">
-										<button type="submit" class="btn btn-default">배차신청</button>
-										S
-										<button type="button" class="btn btn-default"
-											data-dismiss="modal">닫기</button>
+								<div class="form-group">
+									<div class="col-xs-99">
+										<label class="col-xs-98" for="edit-start">예약일</label> <input
+											class="form-control" type="text" name="enrollDate"
+											id="enrollDate" disabled="disabled" />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-xs-99">
+										<label class="col-xs-98" for="edit-start">상차일</label> <input
+											class="form-control" type="text" id="sangDate"
+											disabled="disabled" />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-xs-99">
+										<label class="col-xs-98" for="edit-start">하차일</label> <input
+											class="form-control" type="text" id="haDate"
+											disabled="disabled" />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-xs-99">
+										<label class="col-xs-98" for="edit-end">출발지</label> <input
+											class="form-control" type="text" id="start"
+											disabled="disabled" />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-xs-99">
+										<label class="col-xs-98" for="edit-type">도착지</label> <input
+											class="form-control" type="text" id="end" disabled="disabled" />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-xs-99">
+										<label class="col-xs-98" for="edit-color">차량종류</label> <input
+											class="form-control" type="text" id="type"
+											disabled="disabled" />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-xs-99">
+										<label class="col-xs-98" for="edit-start">이삿짐</label>
+										<textarea rows="3" class="form-control" name="luggage"
+											id="luggage" disabled="disabled"></textarea>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-xs-99">
+										<label class="col-xs-98" for="edit-desc">요청사항</label>
+										<textarea rows="3" class="form-control" name="msg" id="msg"
+											disabled="disabled"></textarea>
 									</div>
 								</div>
 							</div>
+							<div style="visibility: hidden; height: 2px">
+								<input id="mNo" name="mNo" value="${loginUser.mNo}">
+							</div>
+							<div class="ContaineraddEvent" id="savecar">
+								<div class="modal-footer"
+									style="border-radius: 0px 0px 20px 20px/0px 0px 20px 20px">
+									<button id="submit" class="btn"
+										style="background: white; color: grey">배차신청</button>
+									<button type="button" class="btn "
+										style="background: white; color: grey" data-dismiss="modal">닫기</button>
+								</div>
+							</div>
+							<div class="ContaineraddEvent" id="deletecar">
+								<div class="modal-footer"
+									style="border-radius: 0px 0px 20px 20px/0px 0px 20px 20px">
+									<button id="cancelBtn" type="button" class="btn"
+										style="background: white; color: grey" onclick="myCancel();">배차취소</button>
+									<button type="button" class="btn "
+										style="background: white; color: grey" data-dismiss="modal">닫기</button>
+								</div>
+							</div>
+
 						</div>
-					</form>
-				</div>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
+
 
 	<br>
 	<hr>
@@ -216,87 +241,14 @@ tfoot{
 	<!-- Footer -->
 	<%@ include file="../common/footer.jsp"%>
 	<script type="text/javascript">
-		$(function() {
-			$("#baechar").on('click', function() {
-				$("#eventModal").modal();
-				$("#deletecar").hide();
-				$("#savecar").show();
-			})
-		});
-
-		$(function() {
-			var $mibaechar = $('#mibaechar tbody');
-			$mibaechar.html("");
-
-			$
-					.ajax({
-						url : "baeDetail.do",
-						data : {
-							mNO : $('#mNo').val()
-						},
-						type : "post",
-						dataType : "json",
-						success : function(data) {
-							console.log(data);
-							$
-									.each(
-											data,
-											function(index, value) {
-												var $deal_btn = $(
-														"<button class='dealB btn' style='color:white;' onclick='Deal(this.value)'>")
-														.val(value.rNo).text(
-																'배차신청');
-
-												var $tr = $("<tr>");
-												var $rno = $("<td>").text(
-														value.rNo);
-												var $help = $("<td>")
-														.text(
-																value.helpLoad
-																		+ "/"
-																		+ value.helpUnload);
-												var $startAddr = $(
-														"<td colspan='3'>")
-														.text(value.startAddr);
-												var $endAddr = $(
-														"<td colspan='3'>")
-														.text(value.endAddr);
-												var $start_date = $("<td>")
-														.text(value.startDate);
-												var $end_date = $("<td>").text(
-														value.endDate);
-												var $deal = $("<td>");
-
-												$deal.append($deal_btn);
-												$tr.append($rno);
-												$tr.append($help);
-												$tr.append($startAddr);
-												$tr.append($endAddr);
-												$tr.append($start_date);
-												$tr.append($end_date);
-												$tr.append($deal_btn);
-
-												$mibaechar.append($tr);
-											})
-						},
-						error : function() {
-							console.log("error");
-						}
-
-					});
-		})
 		function Deal(aa) {
 			$("#eventModal").modal();
-			$("#deletecar").hide();
-			$("#savecar").show();
 
 			$('#rNo').val(aa);
 
 			$.ajax({
 				url : "dModal.do",
-				data : {
-					rNo : aa
-				},
+				data : {rNo : aa},
 				dataType : 'json',
 				success : function(data) {
 					console.log(data);
