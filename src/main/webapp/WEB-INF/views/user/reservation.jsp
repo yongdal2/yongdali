@@ -895,26 +895,26 @@
 								<div class="col-xs-3 col-md-3">연락처</div>
 							</div>
 							<c:forEach var="a" items="${ list }">
-							<div class="row small aL-row">
-								<div class="col-xs-2 col-md-2" style="margin-top: 5px;">
-									<input type="radio" name="startAddrList" style="cursor: pointer;">
-								</div>
-								<div class="col-xs-2 col-md-2">
-									<span>${ a.aPlace }</span>
-									<br>
-									<span>${ a.aName }</span>
-								</div>
-								<div class="col-xs-5 col-md-5">
-									<c:forEach var="addr" items="${fn:split(a.aAddress, ',')}">
-										<span>${ addr }</span>
+								<div class="row small aL-row">
+									<div class="col-xs-2 col-md-2" style="margin-top: 5px;">
+										<input type="radio" name="startAddrList" style="cursor: pointer;">
+									</div>
+									<div class="col-xs-2 col-md-2">
+										<span>${ a.aPlace }</span>
 										<br>
-									</c:forEach>
+										<span>${ a.aName }</span>
+									</div>
+									<div class="col-xs-5 col-md-5">
+										<c:forEach var="addr" items="${fn:split(a.aAddress, ',')}">
+											<span>${ addr }</span>
+											<br>
+										</c:forEach>
+									</div>
+									<div class="col-xs-3 col-md-3" style="padding-top: 9px;">
+										<span>${ a.aPhone }</span>
+									</div>
+									<input type="hidden" value="${ a.aNo }">
 								</div>
-								<div class="col-xs-3 col-md-3" style="padding-top: 9px;">
-									<span>${ a.aPhone }</span>
-								</div>
-								<input type="hidden" value="${ a.aNo }">
-							</div>
 							</c:forEach>
 						</div>
 					</div>
@@ -943,26 +943,26 @@
 								<div class="col-xs-3 col-md-3">연락처</div>
 							</div>
 							<c:forEach var="a" items="${ list }">
-							<div class="row small aL-row">
-								<div class="col-xs-2 col-md-2" style="margin-top: 5px;">
-									<input type="radio" name="endAddrList" style="cursor: pointer;">
-								</div>
-								<div class="col-xs-2 col-md-2">
-									<span>${ a.aPlace }</span>
-									<br>
-									<span>${ a.aName }</span>
-								</div>
-								<div class="col-xs-5 col-md-5">
-									<c:forEach var="addr" items="${fn:split(a.aAddress, ',')}">
-										<span>${ addr }</span>
+								<div class="row small aL-row">
+									<div class="col-xs-2 col-md-2" style="margin-top: 5px;">
+										<input type="radio" name="endAddrList" style="cursor: pointer;">
+									</div>
+									<div class="col-xs-2 col-md-2">
+										<span>${ a.aPlace }</span>
 										<br>
-									</c:forEach>
+										<span>${ a.aName }</span>
+									</div>
+									<div class="col-xs-5 col-md-5">
+										<c:forEach var="addr" items="${fn:split(a.aAddress, ',')}">
+											<span>${ addr }</span>
+											<br>
+										</c:forEach>
+									</div>
+									<div class="col-xs-3 col-md-3" style="padding-top: 9px;">
+										<span>${ a.aPhone }</span>
+									</div>
+									<input type="hidden" value="${ a.aNo }">
 								</div>
-								<div class="col-xs-3 col-md-3" style="padding-top: 9px;">
-									<span>${ a.aPhone }</span>
-								</div>
-								<input type="hidden" value="${ a.aNo }">
-							</div>
 							</c:forEach>
 						</div>
 					</div>
