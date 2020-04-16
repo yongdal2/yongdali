@@ -183,7 +183,7 @@ var calendar = $('#calendar').fullCalendar({
 	},
 	eventLimitClick: 'week', //popover
 	navLinks: true,
-	defaultDate: moment('2020-04'), // 달력 기본 날짜
+	defaultDate: moment('2020-05'), // 달력 기본 날짜
 	timeFormat: 'HH:mm',
 	defaultTimedEventDuration: '01:00:00',
 	editable: true,

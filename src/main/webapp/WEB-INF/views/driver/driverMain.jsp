@@ -112,7 +112,7 @@ textarea:disabled{
 							<tbody>
 							</tbody>
 						</table>
-						<a href="cancelDetail.do?mNo=${loginUser.mNo }" class="pull-right">+ 상세보기</a>
+						<a href="myDetail.do?mNo=${loginUser.mNo }" class="pull-right">+ 상세보기</a>
 					</div>
 					<div class="modal" tabindex="-1" role="dialog" id="eventModal">
 						<form action="Deal.do" method="post">

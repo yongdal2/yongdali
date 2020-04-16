@@ -97,6 +97,7 @@
 		ORDER BY ENROLLDATE DESC
 	</select>
 	
+	
 	<update id="cancel">
 		UPDATE RESERVATION
 		SET R_D_NO = NULL,
@@ -104,6 +105,23 @@
 			DEAL_YN = 'N'
 		WHERE R_NO = #{rNo}
 	</update>
+	
+	<select id="getMyCount" resultType="_int">
+			SELECT COUNT(*)
+			FROM RESERVATION
+			WHERE R_D_NO = (SELECT D_NO
+							FROM DRIVER
+							WHERE D_M_NO = #{mNo})
+	</select>
+	
+	<select id="myDetail" resultMap="reservationResultSet">
+		SELECT *
+		FROM RESERVATION
+		WHERE R_D_NO = (SELECT D_NO
+							FROM DRIVER
+							WHERE D_M_NO = #{mNo})
+		ORDER BY DEALDATE DESC
+	</select>
 </mapper>
 
 
