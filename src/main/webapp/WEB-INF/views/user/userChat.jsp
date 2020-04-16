@@ -119,8 +119,10 @@
     		openSocket();
     	});
     	var ws;
-    	var meMsg = document.getElementById("meMsg");
     	var youMsg = document.getElementById("youMsg");
+    	var today = new Date();
+    	var hours = today.getHours();
+		var minutes = today.getMinutes();
     	
     	function openSocket(){
 			if(ws!==undefined && ws.readyState!==WebSocket.CLOSED){
@@ -128,7 +130,7 @@
                 return;
             }
 			
-			ws = new WebSocket("ws://192.168.25.20:8888/yongdali/kh.do");
+			ws = new WebSocket("ws://192.168.110.45:8888/yongdali/kh.do");
 	    	
     		ws.onopen = function(message){
 	    		console.log("확인");
@@ -140,8 +142,12 @@
 	    	
 	    	ws.onmessage = function(event){
 	    		var data = event.data;
+	    		
+	    		/* 페이지 접속한 session id */
 	    		var sessionid = '${sessionScope.loginUser.mName}';
-
+	    		
+	    		/* 메시지 보낸 아이디 */
+	    		var currentuser_session = null;
 	    		var message = null;
 	    		
 	    		console.log(data);
@@ -152,21 +158,14 @@
 	    			console.log('str['+i+']: ' + strArray[i]);
 	    		}
 	    		
-	    		var currentuser_session = strArray[1];
-	    		console.log('current session id : ' + currentuser_session);
 	    		
 	    		message = strArray[0];
+	    		currentuser_session = strArray[1];
 	    		
 	    		console.log("message : " + message);
 	    		console.log("sessionid : " + sessionid);
+	    		console.log('current session id : ' + currentuser_session);
 	    		
-	    		var today = new Date();
-	    		
-	    		var hours = today.getHours();
-	    		var minutes = today.getMinutes();
-	    		
-	    		console.log(sessionid);
-	    		console.log(currentuser_session);
 	    		if(sessionid != currentuser_session){
 	    			var printHTML = "<li class='you'>";
 	    			printHTML += "<div class='entete'>";
