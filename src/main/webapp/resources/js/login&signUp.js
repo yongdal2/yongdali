@@ -238,50 +238,33 @@ $(document).ready(function(){
         			url : "sendVeriCode.me",
         			type : "post",
         			data : {email : emailVal},
-        			success : function(result){
+        			success : function(ranNum){
+//    					console.log(result);
         				alert("입력하신 이메일로 인증번호를 전송하였습니다.")
         		    	$('#btn_sendVeriCode').hide();
         		    	$('#btn_verify, #btn_resend').show();
-        		    	// result로 ranNum 받아와서 <input hidden> 에다가 넣고
-        		    	// 그 hidden 값을 chkVeriCode.me 호출 시 전달해서 비교하자!!
+        		    	
+        		        // 인증번호 '확인' 
+        		        $('#btn_verify').click(function(){
+        		        	let inputVeriCode = $('input[name=inputVeriCode]').val();
+        		        	
+        		        	if(ranNum == inputVeriCode){
+        		        		$('input[name=isVerified]').val('Y');
+        		    			$('#verifyWrap, #veriMsg').hide();
+        		    			$('.successMsgBox').show();
+        		        	}else{
+        		        		displayErrorMsg($("#veriMsg"), '인증번호를 확인하세요.');
+        		        	}	
+        		        })
         			}, 
         			error : function(){
-                		var msg = "이메일 인증 절차 진행 중 오류 발생";
+                		var msg = "인증번호 전송 중 오류 발생";
                     	location.href="error.ydl?msg="+msg;
                 	}
         		});
     		}
     	} 
     })
-    
-
-
-    
-    // 인증번호 '확인' 
-    $('#btn_verify').click(function(){
-    	let inputNum = $('input[name=veriCode]').val();
-    	
-    	$.ajax({
-    		url : "chkVeriCode.me",
-    		type : "get",
-    		data : {inputNum : inputNum},
-    		success : function(result){
-    			if(result == 'success'){
-    				$('input[name=isVerified]').val('Y');
-    				$('#verifyWrap, #veriMsg').hide();
-    				$('.successMsgBox').show();
-    			}else {
-    				displayErrorMsg($("#veriMsg"), '인증번호를 확인하세요.');
-    			}
-    		}, error : function(){
-        		var msg = "인증번호 확인 중 에러 발생!";
-        		location.href="error.ydl?msg="+msg;
-        	}
-    	})
-    	
-    })
-    
-    
     
     // 비밀번호 입력 시 유효성 검사
     $('#signUpPwd').focusout(function(){
@@ -390,7 +373,7 @@ $(document).ready(function(){
     
     // TODO 인증번호 유효성 검사
     function veriCodeValidate(){
-        let veriNo = $("input[name=veriCode]").val();  
+        let veriNo = $("input[name=inputVeriCode]").val();  
 
         // 인증번호 미입력
         if(veriNo == ""){
@@ -512,7 +495,7 @@ $(document).ready(function(){
     });
     
     // 인증번호 숫자만 입력
-    $("input[name=veriCode]").keyup(function(event){ 
+    $("input[name=inputVeriCode]").keyup(function(event){ 
         if (!(event.keyCode >=37 && event.keyCode<=40)) {
             var inputVal = $(this).val();
             $(this).val(inputVal.replace(/[^0-9]/gi,''));                

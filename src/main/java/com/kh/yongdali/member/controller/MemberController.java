@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.yongdali.member.model.service.MemberService;
 import com.kh.yongdali.member.model.vo.Member;
@@ -192,10 +193,10 @@ public class MemberController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping("sendVeriCode.me")
-	public void sendVeriCode(@RequestParam("email") String email) {
+	@RequestMapping(value="sendVeriCode.me", method=RequestMethod.POST)
+	public String sendVeriCode(@RequestParam("email") String email) {
 		// 인증번호(난수) 생성
-		int ranNum = new Random().nextInt(900000) + 100000;		
+		String ranNum = String.valueOf(new Random().nextInt(900000) + 100000);
 		
 		// MimeMessage 객체 생성
 		MimeMessage message = mailSender.createMimeMessage();
@@ -214,19 +215,10 @@ public class MemberController {
 			mailSender.send(message);
 		} catch (MessagingException e) {
 			e.printStackTrace();
-		}		
+		}
+		return ranNum;	
 	}
 
-	@ResponseBody
-	@RequestMapping(value="chkVeriCode.me", method=RequestMethod.GET)
-	public String chkVeriCode(@RequestParam("inputNum") int inputNum) {
-		int ranNum = 0;
-		if(inputNum == ranNum) {
-			return "success";
-		} else {
-			return "fail";
-		}
-	}
 	
 	/** 회원가입_양식 제출
 	 * @param m

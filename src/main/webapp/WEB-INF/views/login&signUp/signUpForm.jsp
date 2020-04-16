@@ -34,8 +34,7 @@
                         <div id="emailMsg" class="msgBox"></div>
                        	<div class="successMsgBox"><input type="hidden" name="isVerified" value="N">* 이메일 인증 완료</div>
                         <div class="formRow--input-wrapper js-inputWrapper" id="verifyWrap">
-                            <input type="text" class="formRow--input js-input" name="veriCode" placeholder="인증번호 입력" maxlength="6">
-                            <input type="hidden" name="createdVeriCode">
+                            <input type="text" class="formRow--input js-input" name="inputVeriCode" placeholder="인증번호 입력" maxlength="6">
                             <button type="button" class="verifyBtn" id="btn_sendVeriCode">인증번호 받기</button>
                             <button type="button" class="verifyBtn" id="btn_verify">확인</button>
                             <button type="button" class="verifyBtn" id="btn_resend">재전송</button>
