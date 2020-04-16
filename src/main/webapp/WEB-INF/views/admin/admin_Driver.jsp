@@ -59,6 +59,8 @@
 								<td>차량사진 가명</td>
 							</tr>
 						</thead>
+						
+						<%-- <c:forEach var="a" items="${ list }"> --%>
 						<tbody id="tbody">
 							<tr>
 								<td>M2</td>

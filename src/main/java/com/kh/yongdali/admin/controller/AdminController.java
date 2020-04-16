@@ -38,8 +38,8 @@ public class AdminController {
 		System.out.println("listCount : " + listCount);
 		
 		
-		int pageLimit =1;
-		int boardLimit= 2;
+		int pageLimit =5;
+		int boardLimit=7;
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, pageLimit, boardLimit);
 		

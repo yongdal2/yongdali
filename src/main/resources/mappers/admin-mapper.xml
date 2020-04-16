@@ -19,10 +19,11 @@
 	<!-- 회원님 목록 리스트 -->
 	<select id="selectMemList" resultMap="AdminMemresultSet">
 		SELECT *
-		FROM MEMBER
-		ORDER BY M_ID DESC
+		FROM MEMBER	
+		ORDER BY TO_NUMBER(SUBSTR(M_NO, 2)) DESC
 	</select>
 	
+	<!-- 표현안함 -->
 	<select id="getMemListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM MEMBER

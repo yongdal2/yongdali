@@ -83,55 +83,51 @@
 					<ul class="pagination ft_gr">
 					
 						<!-- << 이전  -->
-						<li><a href="<c:if test="${ pi.currentPage eq 1 }">">&lt;&lt;# &nbsp;</c:if></a></li>
+						<li>
+						<c:if test="${ pi.currentPage eq 1 }"><a>&lt;&lt; &nbsp;</a></c:if>
+						<c:if test="${ pi.currentPage ne 1 }"><a href="aMem.ad?currentPage=1">&lt;&lt; &nbsp;</a></c:if>
+						</li>
 						
 						<!-- < -->
 						<li>
-						<a href="
 						<c:if test="${ pi.currentPage ne 1 }">
 							<c:url var="before" value="aMem.ad">
-								<c:param name="currentPage" value="${ pi.currnentPage -1 }"/>
+								<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
 							</c:url>
+							<a href="${ before }">&lt; &nbsp;</a>
 						</c:if>
-						${ before }">&lt;&lt; &nbsp;
-						</a>
+						<c:if test="${ pi.currentPage eq 1 }"><a> &lt; &nbsp;</a>
+						</c:if>
 						</li>
-						
 								
 						<!-- 페이지 -->
-						<li>
-						<a href="
 						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-							<c:if test="${ p eq pi.currentPage }">
-						">${ p }
-							</c:if>
-	<!-- 					</a>
-						</li>						 -->	
-							<a href="
-							<c:if test="${ p ne pi.currentPage }">
-								<c:url var="pagination" value="aMem.ad">	
+						<li>
+						<c:if test="${ p eq pi.currentPage }">
+						<a><b><font color="#5a8cff">${ p }</font></b></a>
+						</c:if>							
+						<c:if test="${ p ne pi.currentPage }">
+						<a href="<c:url var="pagination" value="aMem.ad">	
 									<c:param name="currentPage" value="${ p }"/>
 								</c:url>
-								${ pagination }
-								">${ p }두번째&nbsp;
-							</c:if>
+						${ pagination }">${ p }</a>
+						</c:if>
+						</li>
 						</c:forEach>
-							</a>
-							</li>
-										
+							
+																
 						<!-- 다음 >> -->	
-						<li><a href="<c:if test="${ pi.currentPage eq pi.maxPage }">">&gt;&gt;＆ &nbsp;</c:if></a></li>
-						
 						<li>
 						<a href="
 						<c:if test="${ pi.currentPage ne pi.maxPage }">
 							<c:url var="after" value="aMem.ad">
 								<c:param name="currentPage" value="${ pi.currentPage +1 }"/>
 							</c:url>
-						${ after }">&gt;&gt; &nbsp;
 						</c:if>
-						</a>
+						${ after }">&gt; &nbsp;</a>
 						</li>
+						<li><a href="<c:if test="${ pi.currentPage eq pi.maxPage }"></c:if>${ maxPage }">&gt;&gt; &nbsp;</a></li>
+
 
 					</ul>
 				</div>
