@@ -11,7 +11,7 @@ public class Member {
 	private String phone;
 	private String mSort;
 	private String mStatus;
-	private char pushEnabled;
+	private String pushEnabled;
 	private Date enrollDate;
 	
 	public Member() {
@@ -19,7 +19,7 @@ public class Member {
 	}
 
 	//-String mNo
-	public Member(String mId, String pwd, String mName, String phone, String mSort, String mStatus, char pushEnabled,
+	public Member(String mId, String pwd, String mName, String phone, String mSort, String mStatus, String pushEnabled,
 			Date enrollDate) {
 		super();
 		this.mId = mId;
@@ -34,7 +34,7 @@ public class Member {
 
 	//-String mNo, Date enrollDate
 	public Member(String mId, String pwd, String mName, String phone, String mSort, String mStatus,
-			char pushEnabled) {
+			String pushEnabled) {
 		super();
 		this.mId = mId;
 		this.pwd = pwd;
@@ -46,7 +46,7 @@ public class Member {
 	}
 	
 	public Member(String mNo, String mId, String pwd, String mName, String phone, String mSort, String mStatus,
-			char pushEnabled, Date enrollDate) {
+			String pushEnabled, Date enrollDate) {
 		super();
 		this.mNo = mNo;
 		this.mId = mId;
@@ -115,11 +115,11 @@ public class Member {
 		this.mStatus = mStatus;
 	}
 
-	public char getPushEnabled() {
+	public String getPushEnabled() {
 		return pushEnabled;
 	}
 
-	public void setPushEnabled(char pushEnabled) {
+	public void setPushEnabled(String pushEnabled) {
 		this.pushEnabled = pushEnabled;
 	}
 
