@@ -1,6 +1,6 @@
 <%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   <footer class="navbar-bottom" style="margin-top: 20px">
+   <footer class="navbar-bottom" style="border-top: 1px solid #eee; padding-top: 20px;">
 		
      <!--  <div class="row" style="margin-bottom: 10px">
 		
@@ -8,7 +8,6 @@
 			<div class="col-md-8" style="height: 2px; background: lightgray"></div>
 			<div class="col-md-2"></div>
 		</div> -->
-	<hr>
       <div class="container">
          <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto"  style="text-align: center; float:none; margin:0 auto">
