@@ -81,7 +81,7 @@ tfoot {
 										type="date" pattern="yyyy-MM-dd" /></td>
 								<td align="center"><fmt:formatDate value="${r.endDate }"
 										type="date" pattern="yyyy-MM-dd" /></td>
-								<td align="center"><button class='dealB btn'
+								<td align="center"><button class='dealB btn btn-sm'
 										style='color: white;' onclick='edit(this.value)'
 										value="${r.rNo }">배차취소</button></td>
 							</tr>

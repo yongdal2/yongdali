@@ -239,7 +239,7 @@ textarea:disabled{
 				success : function(data){
 					console.log(data);
 					$.each(data,function(index,value){
-						var $deal_btn = $("<button class='dealB btn' style='color:white;' onclick='Deal(this.value)'>").val(value.rNo).text('배차신청');
+						var $deal_btn = $("<button class='dealB btn btn-sm' style='color:white;' onclick='Deal(this.value)'>").val(value.rNo).text('배차신청');
 						
 						var $tr = $("<tr>");
 						var $rno = $("<td>").text(value.rNo);
@@ -309,7 +309,7 @@ textarea:disabled{
 				success : function(data){
 					console.log(data);
 					$.each(data,function(index,value){
-						var $deal_btn = $("<button class='dealB btn' style='color:white;' onclick='edit(this.value)'>").val(value.rNo).text('배차취소');
+						var $deal_btn = $("<button class='dealB btn btn-sm' style='color:white;' onclick='edit(this.value)'>").val(value.rNo).text('배차취소');
 						
 						var $tr = $("<tr>");
 						var $rno = $("<td>").text(value.rNo);

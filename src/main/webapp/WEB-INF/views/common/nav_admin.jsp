@@ -24,10 +24,11 @@
 <style>
 #header1 {
 		font-family: 'nanumsquare', Arial, Helvetica, sans-serif !important;
+		
 }
 </style>
 
-<header id="header1">
+<header id="header1" style="border-bottom:1px solid #eee;"> <!-- hr 미색 -->
 	<nav class="navbar navbar-expand navbar-dark mai-top-header" 
 		style="margin-bottom: 18px; padding-top: 23px; font-size: 18px;">
 		<div class="container">
@@ -41,9 +42,9 @@
 			</div>
 			<div class="col-lg-4">
 				<ul class="nav navbar-nav navbar-center" style="margin-left:50px;">
-					<li class="nav-item"><a class="nav-link" href="#" style="color: black; font-weight: bold;">요금조회</a></li>
+					<!-- <li class="nav-item"><a class="nav-link" href="#" style="color: black; font-weight: bold;">요금조회</a></li>
 					<li class="nav-item"><a class="nav-link" href="information.ydl" style="color: black; font-weight: bold;">차량안내</a></li>
-					<li class="nav-item"><a class="nav-link" href="uNoticeMain.no" style="color: black; font-weight: bold;">고객센터</a></li>
+					<li class="nav-item"><a class="nav-link" href="uNoticeMain.no" style="color: black; font-weight: bold;">고객센터</a></li> -->
 				</ul>
 			</div>
 			<div class="col-lg-4">
@@ -81,8 +82,8 @@
 	</nav>
 	
 	
-	 <div class="jumbotron" style="margin-bottom:0px; background: rgb(90,140,255); text-align: center;">
+	 <!-- <div class="jumbotron" style="margin-bottom:0px; background: rgb(90,140,255); text-align: center;">
 		<p style="color: white">용달이에는 다양한 차종이 준비되어 있습니다.</p>
 		<h2 style="color: white" >고객님의 용도에 맞는 트럭을 찾아보세요</h2>
-	</div>
+	</div> -->
 </header>

@@ -51,8 +51,15 @@ public class AdminController {
 		mv.addObject("pi", pi);
 		mv.setViewName("admin/admin_Mem"); //.jsp
 		
-		
 		return mv;
+		
+
+		
+		/* public ModelAndView admin */
+		
+		
+	
+		
 	}
 	
 	

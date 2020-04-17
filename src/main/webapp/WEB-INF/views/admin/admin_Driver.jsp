@@ -26,7 +26,7 @@
 		<div class="content container">
 			<div class="row">
 				<h2 class="jal">관리자 페이지</h2>
-				<p>기사님 목록 / admin_Driver.jsp / 기사님 리스트에 맞는 정보인지 (글자크기조정). 사진은 팝업으로 띄우기</p>
+				<p>기사님 목록 / admin_Driver.jsp / 사진은 버튼 누르면 팝업으로 띄우기</p>
 				<hr>
 			</div>
 			
@@ -45,70 +45,104 @@
 			<div class="row" id="rowList">
 				<div class="col-xs-12 col-md-12" id="table">
 					<br>
+				<!-- <table style="text-align: center" class="table table-striped table-hover text-center"> -->
 					<table class="table table-striped table-hover text-center">
 						<thead id="thead">
 							<tr>
-								<td>기사(사업자)번호</td>
-								<td>회원번호(FK)</td>
-								<td>차량 톤수</td>
-								<td>차종</td>
-								<td>차량번호</td>
-								<td>증명사진 원명</td>
-								<td>증명사진 가명</td>
-								<td>차량사진 원명</td>
-								<td>차량사진 가명</td>
+								<th>사업자번호</th>
+								<th>회원번호</th>
+								<th>차량톤수</th>
+								<th>차종</th>
+								<th>차량번호</th>
+								<th>증명사진원명</th>
+								<th>증명사진가명</th>
+								<th>차량사진원명</th>
+								<th>차량사진가명</th>
 							</tr>
 						</thead>
 						
-						<%-- <c:forEach var="a" items="${ list }"> --%>
+						<c:forEach var="a" items="${ list }">
 						<tbody id="tbody">
 							<tr>
-								<td>M2</td>
-								<td>mem01@naver.com</td>
-								<td>홍멤버</td>
-								<td>01022222222</td>
-								<td>일반</td>
-								<td>정상</td>
-								<td>Y</td>
-								<td>200318</td>
-							</tr>
-							<tr>
-								<td>M3</td>
-								<td>biz01@naver.com</td>
-								<td>김거상</td>
-								<td>01033333333</td>
-								<td>사업자</td>
-								<td>정상</td>
-								<td>N</td>
-								<td>200318</td>
-							</tr>
-							<tr>
-								<td>M4</td>
-								<td>biz02@naver.com</td>
-								<td>최거상</td>
-								<td>01044444444</td>
-								<td>사업자</td>
-								<td>정상</td>
-								<td>N</td>
-								<td>200318</td>
+								<td>${ a.dNo }</td>
+								<td>${ a.dmNo }</td>
+								<td>${ a.capacity }</td>
+								<td>${ a.type }</td>
+								<td>${ a.carNo }</td>
+								<td>${ a.idImgOrigin }</td>
+								<td>${ a.idImgRename }</td>
+								<td>${ a.carImgOrigin }</td>
+								<td>${ a.carImgRename }</td>
 							</tr>
 						</tbody>
+						</c:forEach>
 					</table>
 				</div>
+				
+				<!-- 페이징 처리 -->
 				<div class="row text-center" style="height: 400px">
 					<ul class="pagination ft_gr">
-						<li><a href="#"><<</a></li>
-						<li><a href="#"><</a></li>
-						<li><a href="#">1</a></li>
-						<li class="active"><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">5</a></li>
-						<li><a href="#">></a></li>
-						<li><a href="#">>></a></li>
+					
+						<!-- << 처음  -->
+						<li>
+						<c:if test="${ pi.currentPage eq 1 }"><a>&lt;&lt; &nbsp;</a></c:if>
+						<c:if test="${ pi.currentPage ne 1 }"><a href="aMem.ad?currentPage=1">&lt;&lt; &nbsp;</a></c:if>
+						</li>
+						
+						<!-- < -->
+						<li>
+						<c:if test="${ pi.currentPage ne 1 }">
+							<c:url var="before" value="aMem.ad">
+								<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
+							</c:url>
+							<a href="${ before }">&lt; &nbsp;</a>
+						</c:if>
+						<c:if test="${ pi.currentPage eq 1 }"><a> &lt; &nbsp;</a>
+						</c:if>
+						</li>
+								
+						<!-- 페이지 -->
+						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+						<li>
+						<c:if test="${ p eq pi.currentPage }">
+						<a><b><font color="#5a8cff">${ p }</font></b></a>
+						</c:if>							
+						<c:if test="${ p ne pi.currentPage }">
+						<a href="<c:url var="pagination" value="aMem.ad">	
+									<c:param name="currentPage" value="${ p }"/>
+								</c:url>
+						${ pagination }">${ p }</a>
+						</c:if>
+						</li>
+						</c:forEach>
+							
+																
+						<!-- > -->	
+						<li>
+						<a href="
+						<c:if test="${ pi.currentPage ne pi.maxPage }">
+							<c:url var="after" value="aMem.ad">
+								<c:param name="currentPage" value="${ pi.currentPage +1 }"/>
+							</c:url>
+						</c:if>
+						${ after }">&gt; &nbsp;</a>
+						</li>
+
+						<!-- >> 의도: 마지막 페이지에서는 >> 표시 사라짐(현재페이지가 끝 페이지임을 표시)-->						
+						<li>
+						<c:if test="${ pi.currentPage ne pi.maxPage }">
+						<c:url var="lastPage" value="aMem.ad">
+								<c:param name="currentPage" value="${ pi.maxPage }"/>
+							</c:url>
+						<a href="${ lastPage }">&gt;&gt; &nbsp;</a>
+						</c:if>
+						</li>
 					</ul>
 				</div>
 			</div>
+			
+			
+			
 		</div>
 	</div>
 </div>

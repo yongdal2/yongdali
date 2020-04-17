@@ -19,22 +19,24 @@
 	<!-- Navigation -->
 	<%@ include file="../common/nav_admin.jsp"%>
 	<!-- 배경색 -->
-<!-- <div style="width: 100%; height: 100%; background: rgb(233, 246, 240); padding-top: 30px; padding-top: 30px;"> -->
-	<div style="width: 100%; height: 100%; padding-top: 30px; padding-top: 30px;">
+<div style="width: 100%; height: 100%; background: rgba(90,140,255, 0.1); padding-top: 30px; padding-top: 30px;">
+	<!-- <div style="width: 100%; height: 100%; padding-top: 30px; padding-top: 30px;"> -->
 
 		<!-- main -->
 		<!-- <div class="container"> -->
 		<div class="content container">
 			<div class="row">
+			<div id=title>
 				<h2 class="jal">관리자 페이지</h2>
-				<p>회원님 목록 / admin_Mem.jsp / 정렬기준 선정</p>
+			<p>회원님 목록 / admin_Mem.jsp / 회원번호, 회원구분으로 sql</p>
+			</div>
 				<hr>
 			</div>
 			
 			<div class="row" id="content">
 			<!-- <div id="content"> -->
 				<div class="col-lg-3 sidebar">
-					<a href="#"><span class="sidebar_span">회원님 목록</span></a><br>
+					<a href="aMem.ad"><span class="sidebar_span">회원님 목록</span></a><br>
 					<a href="#"><span class="sidebar_span">기사님 목록</span></a><br>
 					<a href="#"><span class="sidebar_span">예약 내역</span></a><br>
 					<a href="#"><span class="sidebar_span">정산 내역</span></a><br> 
@@ -82,7 +84,7 @@
 				<div class="row text-center" style="height: 400px">
 					<ul class="pagination ft_gr">
 					
-						<!-- << 이전  -->
+						<!-- << 처음  -->
 						<li>
 						<c:if test="${ pi.currentPage eq 1 }"><a>&lt;&lt; &nbsp;</a></c:if>
 						<c:if test="${ pi.currentPage ne 1 }"><a href="aMem.ad?currentPage=1">&lt;&lt; &nbsp;</a></c:if>
@@ -116,7 +118,7 @@
 						</c:forEach>
 							
 																
-						<!-- 다음 >> -->	
+						<!-- > -->	
 						<li>
 						<a href="
 						<c:if test="${ pi.currentPage ne pi.maxPage }">
@@ -126,12 +128,21 @@
 						</c:if>
 						${ after }">&gt; &nbsp;</a>
 						</li>
-						<li><a href="<c:if test="${ pi.currentPage eq pi.maxPage }"></c:if>${ maxPage }">&gt;&gt; &nbsp;</a></li>
 
-
+						<!-- >> 의도: 마지막 페이지에서는 >> 표시 사라짐(현재페이지가 끝 페이지임을 표시)-->						
+						<li>
+						<c:if test="${ pi.currentPage ne pi.maxPage }">
+						<c:url var="lastPage" value="aMem.ad">
+								<c:param name="currentPage" value="${ pi.maxPage }"/>
+							</c:url>
+						<a href="${ lastPage }">&gt;&gt; &nbsp;</a>
+						</c:if>
+						</li>
 					</ul>
 				</div>
-			</div>
+			</div>	<!--  -->
+			
+			
 		</div>
 	</div>
 </div>
