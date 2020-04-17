@@ -17,12 +17,41 @@
 @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800');
 
 
-/* h3 */
+/* h2 */
 .jal{
     font-family: 'yg-jalnan', Arial, Helvetica, sans-serif;
     padding-top:10px;
     padding-left: 0px;
 }
+
+.jal:after {
+    display:block;
+    content: '';
+    border-bottom: solid 2px rgb(90,140,255);
+    transform: scaleX(0);  
+    transition: all .3s ease-in-out 0s;
+}
+
+.jal:hover:after { 
+    transform: scaleX(1); 
+}
+
+.jal:after{
+    transform-origin:  0% 50%; 
+}
+
+#title{
+	margin-right: 981px;
+}
+
+
+
+
+
+
+
+
+
 
 
 /* a태그 */
@@ -57,7 +86,7 @@ a{
 	}
 	
 	.content{
-		padding-bottom: 145px !important;
+		padding-bottom: 350px !important;
 	}
 }    
 
