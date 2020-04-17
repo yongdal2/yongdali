@@ -220,6 +220,7 @@ public class MemberController {
 	}
 
 	
+	
 	/** 회원가입_양식 제출
 	 * @param m
 	 * @return

@@ -119,7 +119,7 @@
                         <div class="bizWrap2">
                             <div class="formRow--input-wrapper js-inputWrapper carInfo">
                                 <div class="formRow--input js-input signInImgWrap" name="idImg" placeholder="">
-                                    <div class="signInImg"></div>
+                                    <div class="signInImg"><img src="${contextPath}/resources/images/imgUploadIcon.png"></div>
                                     <p>증명사진</p>
                                     
                                 </div>         

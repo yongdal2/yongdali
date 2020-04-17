@@ -239,7 +239,6 @@ $(document).ready(function(){
         			type : "post",
         			data : {email : emailVal},
         			success : function(ranNum){
-//    					console.log(result);
         				alert("입력하신 이메일로 인증번호를 전송하였습니다.")
         		    	$('#btn_sendVeriCode').hide();
         		    	$('#btn_verify, #btn_resend').show();
@@ -370,26 +369,6 @@ $(document).ready(function(){
         })
     	return result;
     }   
-    
-    // TODO 인증번호 유효성 검사
-    function veriCodeValidate(){
-        let veriNo = $("input[name=inputVeriCode]").val();  
-
-        // 인증번호 미입력
-        if(veriNo == ""){
-            displayErrorMsg($('#veriMsg'), "인증번호를 입력하세요.")
-            return false
-        } 
-        
-        else if (!(event.keyCode >=37 && event.keyCode<=40)) {
-            var inputVal = $(this).val();
-            $(this).val(inputVal.replace(/[^0-9]/gi,''));                
-        } 
-        
-        else{
-            $("#veriMsg").css("display","none");
-        }
-    }    
     
     // 비밀번호 유효성 검사
     function pwdValidate(){
