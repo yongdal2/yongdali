@@ -31,15 +31,15 @@ public class AdminController {
 								@RequestParam(value="currentPage", required = false, defaultValue="1")
 								int currentPage) { //현재 페이지가 필요한데, 없어도 되고, 있으면 기본값 1
 		
-		System.out.println(currentPage);
+		System.out.println("currentPage : " + currentPage);
 		
 		int listCount = aService.getMemListCount();
 		
 		System.out.println("listCount : " + listCount);
 		
 		
-		int pageLimit =1;
-		int boardLimit= 2;
+		int pageLimit =5;
+		int boardLimit=7;
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, pageLimit, boardLimit);
 		

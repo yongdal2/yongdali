@@ -36,21 +36,21 @@
 						<p class="carInf bdbt1">
 							<span class="lg">차량번호</span>
 							<br>
-							<span class="h3 carInf fw6">12가1234</span>
+							<span class="h3 carInf fw6">${ driver.carNo }</span>
 						</p>
 						<br>
 						<br>
 						<p class="carInf bdbt1">
 							<span class="lg">톤수</span>
 							<br>
-							<span class="h3 carInf fw6">3t</span>
+							<span class="h3 carInf fw6">${ driver.capacity }</span>
 						</p>
 						<br>
 						<br>
 						<p class="carInf bdbt1">
 							<span class="lg">차종</span>
 							<br>
-							<span class="h3 carInf fw6">리프트</span>
+							<span class="h3 carInf fw6">${ driver.type }</span>
 						</p>
 						<br>
 						<p class="carInf">
@@ -69,7 +69,7 @@
 							<br>
 						</p>
 						<img
-							src="http://jbntruck.com/car_reg_img/../car_reg_img/jbn9001_20170727145649_reg2.png"
+							src="${contextPath}/resources/images/driver/regCard/${driver.carImgRename}"
 							height="327px" class="zoom-in" data-toggle="modal"
 									data-target="#zoomCRA"> <br>
 					</div>
@@ -84,7 +84,7 @@
 				<div class="modal-body">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<img
-							src="http://jbntruck.com/car_reg_img/../car_reg_img/jbn9001_20170727145649_reg2.png"
+							src="${contextPath}/resources/images/driver/regCard/${driver.carImgRename}"
 							width="600px" >
 				</div>
 			</div>

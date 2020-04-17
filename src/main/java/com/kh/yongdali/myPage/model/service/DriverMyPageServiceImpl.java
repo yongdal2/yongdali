@@ -16,4 +16,9 @@ public class DriverMyPageServiceImpl implements DriverMyPageService {
 		return dmpDao.updateProfileImg(d);
 	}
 
+	@Override
+	public Driver truckInfoView(String mNo) {
+		return dmpDao.truckInfoView(mNo);
+	}
+
 }

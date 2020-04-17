@@ -46,6 +46,12 @@
 	
 	<!-- 프로필사진 업데이트 -->
 	
+	<update id="updateProfileImg" parameterType="Driver">
+		UPDATE DRIVER
+		SET ID_IMG_ORIGIN = #{idImgOrigin},
+			ID_IMG_RENAME = #{idImgRename}
+		WHERE D_M_NO = #{dmNo}
+	</update>
 	<!-- 주소록갯수 -->
 	<select id="getAddrListCount" resultType="_int">
 		SELECT COUNT(*)
@@ -100,6 +106,13 @@
 		DELETE FROM ADDRESS
 		WHERE A_NO={aNo}
 	</delete>
+	
+	<!-- 트럭정보  -->
+	<select id="truckInfoView" resultMap="driverResultSet">
+	SELECT *
+	FROM DRIVER
+	WHERE D_M_NO=#{mNo}
+	</select>
 	
 	
 </mapper>

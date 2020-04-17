@@ -58,7 +58,7 @@
 				</div>
 				<div class="col-xs-3 col-md-3">
 					<div class="img-circle" id="pro_img"
-						style="background-image: url('https://img1.daumcdn.net/thumb/R750x0/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fcafeattach%2F1Xh2D%2Fe9efdcce7223d088ee2e401a429f62f86cdff6cb');">
+						style="background-image: url('${pageContext.request.contextPath}/resources/images/driver/id/${driver.idImgRename}');">
 						<div class="editP sub text-center" data-toggle="modal"
 							data-target="#changePhoto">
 							<div class="glyphicon glyphicon-pencil"></div>
@@ -91,7 +91,7 @@
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 						</div>
 						<div class="col-md-12"
-							style="padding: 0; margin-top: 16px; font-size: 13px; line-height: 24px;">
+							style="text-align:right; padding: 0; margin-top: 16px; font-size: 13px; line-height: 24px;">
 							변경할 이미지파일을 첨부해 주세요</div>
 						<div class="col-md-12" style="padding: 0; margin-top: 10px;">
 								<input type="file" class="form-control" id="newImg"
