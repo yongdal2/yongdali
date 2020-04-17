@@ -591,6 +591,11 @@ $(document).ready(function(){
             return true;
         }
     }
+    
+    // 채팅창 열기용_탐희
+    function adminChat(){
+        window.open('adminChat.ch','_blank');
+     }
 });
 
 
