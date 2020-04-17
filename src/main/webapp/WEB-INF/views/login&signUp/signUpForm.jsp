@@ -34,7 +34,7 @@
                         <div id="emailMsg" class="msgBox"></div>
                        	<div class="successMsgBox"><input type="hidden" name="isVerified" value="N">* 이메일 인증 완료</div>
                         <div class="formRow--input-wrapper js-inputWrapper" id="verifyWrap">
-                            <input type="text" class="formRow--input js-input" name="veriCode" placeholder="인증번호 입력" maxlength="6">
+                            <input type="text" class="formRow--input js-input" name="inputVeriCode" placeholder="인증번호 입력" maxlength="6">
                             <button type="button" class="verifyBtn" id="btn_sendVeriCode">인증번호 받기</button>
                             <button type="button" class="verifyBtn" id="btn_verify">확인</button>
                             <button type="button" class="verifyBtn" id="btn_resend">재전송</button>
@@ -112,14 +112,14 @@
                                 </select>
                             </div>
                             <div class="formRow--input-wrapper js-inputWrapper">
-                                <input type="text" class="formRow--input js-input" name="carNo" placeholder="차량번호" maxlength="8">
+                                <input type="text" class="formRow--input js-input carNo" name="carNo" placeholder="차량번호" maxlength="8">
                             </div>
                         </div>
                         <div id="bizFormMsg1" class="msgBox"></div>
                         <div class="bizWrap2">
                             <div class="formRow--input-wrapper js-inputWrapper carInfo">
                                 <div class="formRow--input js-input signInImgWrap" name="idImg" placeholder="">
-                                    <div class="signInImg"></div>
+                                    <div class="signInImg"><img src="${contextPath}/resources/images/imgUploadIcon.png"></div>
                                     <p>증명사진</p>
                                     
                                 </div>         
@@ -144,7 +144,7 @@
             <!-- Modal content -->
             <div class="VeSAx"></div>
             <div width="44rem" class="ewJflR modal-content">
-                <div class="kiqceJ" style="padding: 0px; padding-left: 20px;">
+                <div class="kiqceJ" >
                     <h1>차량 안내</h1>
                     <span class="modalClose">&times;</span>
                 </div>
