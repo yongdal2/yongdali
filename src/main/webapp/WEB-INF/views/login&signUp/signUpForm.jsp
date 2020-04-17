@@ -23,7 +23,7 @@
 
     <!-- content -->
     <div class="content">
-        <form action="#" method="post" id="sigInForm" novalidate>
+        <form action="insert.me" method="post" id="signUpForm" novalidate>
             <div class="formRow">
                 <div class="formRow--item">
                     <!-- 이메일 -->
@@ -121,7 +121,6 @@
                                 <div class="formRow--input js-input signInImgWrap" name="idImg" placeholder="">
                                     <div class="signInImg"><img src="${contextPath}/resources/images/imgUploadIcon.png"></div>
                                     <p>증명사진</p>
-                                    
                                 </div>         
                                 <div class="formRow--input js-input signInImgWrap" name="regCard" placeholder="">
                                     <div class="signInImg"></div>
@@ -133,7 +132,7 @@
                 </div>
             </div>
             <div class="btnArea">
-                <button type="button" class="submitBtn" id="signUpBtn">가입하기</button>
+                <button type="button" class="submitBtn" id="btn_submit_signUpForm">가입하기</button>
             </div>
         </form>
     </div>
