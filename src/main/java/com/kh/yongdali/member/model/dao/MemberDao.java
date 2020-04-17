@@ -25,4 +25,8 @@ public class MemberDao {
 	public int emailChk(String mId) {
 		return sqlSession.selectOne("memberMapper.emailChk", mId);
 	}
+
+	public int insertMember(Member m) {
+		return sqlSession.insert("memberMapper.insertMember", m);
+	}
 }

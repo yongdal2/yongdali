@@ -28,4 +28,9 @@ public class MemberServiceImpl implements MemberService {
 	public int emailChk(String mId) {
 		return mDao.emailChk(mId);
 	}
+
+	@Override
+	public int insertMember(Member m) {
+		return mDao.insertMember(m);
+	}
 }

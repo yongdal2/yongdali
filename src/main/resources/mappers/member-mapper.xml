@@ -50,4 +50,25 @@
 		WHERE M_ID = #{mId}
 	</select>
 	
+	<!-- 회원가입(일반) -->
+	<insert id="insertMember" parameterType="Member">
+		INSERT INTO MEMBER VALUES('M' || SEQ_MNO.NEXTVAL, 
+									#{mId},
+									#{pwd},
+									#{mName},
+									#{phone},
+									#{mSort},
+									'정상',
+									#{pushEnabled},
+									SYSDATE		
+									)
+	</insert>
 </mapper>     
+
+
+
+
+
+
+
+

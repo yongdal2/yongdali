@@ -29,6 +29,13 @@ public interface MemberService {
 	 */
 	int emailChk(String mId);
 
+	/**
+	 * 회원가입(일반)
+	 * @param m
+	 * @return
+	 */
+	int insertMember(Member m);
+
 
 	
 	
