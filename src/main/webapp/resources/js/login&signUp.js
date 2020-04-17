@@ -276,7 +276,7 @@ $(document).ready(function(){
     })
     
     // 이름 유효성검사
-    $('input[name=name]').focusout(function(){
+    $('input[name=mName]').focusout(function(){
     	nameValidate();
     })
     
@@ -421,12 +421,12 @@ $(document).ready(function(){
     // 이름 유효성 검사
     function nameValidate(){
         // 이름 미입력
-        if($('input[name=name]').val() == ""){
+        if($('input[name=mName]').val() == ""){
             displayErrorMsg($('#nameMsg'), "이름을 입력하세요.(한글 두자 이상)");
             return false;
         }
         // 이름 정규표현식
-        else if(!chk(/[가-힣]{2,}/, $('input[name=name]').val(), $('#nameMsg'), "한글 두자 이상 입력하세요.")){
+        else if(!chk(/[가-힣]{2,}/, $('input[name=mName]').val(), $('#nameMsg'), "한글 두자 이상 입력하세요.")){
         	return false;
         }else{
             $('#nameMsg').css('display','none');
@@ -466,7 +466,7 @@ $(document).ready(function(){
     });
 
     // 이름 한글만 입력
-    $("input[name=name]").keyup(function(event){ 
+    $("input[name=mName]").keyup(function(event){ 
         if (!(event.keyCode >=37 && event.keyCode<=40)) {
             var inputVal = $(this).val();
             $(this).val(inputVal.replace(/[^ㄱ-힣]/gi,''));                

@@ -56,7 +56,7 @@
                     <div id="pwdMsg" class="msgBox"></div>
                     <!-- 이름 -->
                     <div class="formRow--input-wrapper js-inputWrapper">
-                        <input type="text" class="formRow--input js-input" name="name" placeholder="이름">
+                        <input type="text" class="formRow--input js-input" name="mName" placeholder="이름">
                     </div>
                     <div id="nameMsg" class="msgBox" ></div>
                     <!-- 전화번호 -->
