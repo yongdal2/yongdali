@@ -286,7 +286,7 @@ $(document).ready(function(){
     })
     
     // '가입하기' 버튼 클릭 시 '전체 유효성 검사' 후 submit
-    $('#signUpBtn').click(function(){
+    $('#btn_submit_signUpForm').click(function(){
     	// 기본 정보 에러메시지 노출용
     	if(emailValidate() == true){
     		emailDupChk();
@@ -308,7 +308,7 @@ $(document).ready(function(){
         	if(emailValidate() == true && emailDupChk() == true && $('input[name=isVerified]').val() == 'Y'
         		&& pwdValidate() == true && pwdChkValidate() == true 
         		&& nameValidate() == true && phoneValidate() == true){
-        		$('#sigInForm').trigger('submit');
+        		$('#signUpForm').trigger('submit');
         	};
     	}else{
         	// 사업자 정보 에러메시지 노출용
