@@ -845,6 +845,19 @@ select::-ms-expand {
 }
 
 
+.signInImg img {
+	height: 4rem;
+    padding: 30%;
+    cursor: pointer;
+}
+
+/* .signInImg img{
+    height: 4rem;
+    padding: 30%;
+    cursor: pointer;
+} */
+
+
 /* 지훈 조정 사항 */
 #showPwd{
 	padding-top: 19px;
