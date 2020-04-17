@@ -16,7 +16,7 @@ CREATE TABLE MEMBER(
     PHONE VARCHAR2(14) /* 휴대폰번호 */,
     M_SORT VARCHAR2(9)/* 회원구분(관리자, 일반, 사업자) */,
     M_STATUS CHAR(6) /* 회원상태(정상, 휴면, 탈퇴) */,
-    PUSH_ENABLED CHAR(2) /* 푸시 알림 설정(Y, N) */,
+    PUSH_ENABLED CHAR(1) /* 푸시 알림 설정(Y, N) */,
     ENROLLDATE DATE DEFAULT SYSDATE /* 가입일 */
 );
 
