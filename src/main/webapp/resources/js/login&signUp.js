@@ -279,7 +279,7 @@ $(document).ready(function(){
     $('input[name=mName]').focusout(function(){
     	nameValidate();
     })
-    
+
     // 휴대폰 번호 유효성검사
     $('input[name=phone]').focusout(function(){
     	phoneValidate();
@@ -539,6 +539,39 @@ $(document).ready(function(){
             $(this).val(inputVal.replace(/[^ㄱ-힣0-9]/gi,''));                
         } 
     });
+    
+    // 파일 업로드
+    $('#idImgUpload').click(function(){
+    	$('input[name=idImgThumbnail]').trigger('click');
+    })
+    
+    $('#regCardImgUpload').click(function(){
+    	$('input[name=regCardThumbnail]').trigger('click');
+    })
+    
+//    // TODO 내용 정리하기
+//    function loadImg(value, num){
+//    	// 1. value에 파일이 존재하냐? && 0번째 인덱스가 존재하냐?
+//    	if(value.files && value.files[0]){
+//    		console.log(value.files);
+//    		console.log(value.files[0]);
+//    		
+//    		var reader = new FileReader();
+//    		
+//    		// 2. FileReader()가 로드 되면 function을 실행 ?
+//    		// 3. 매개변수 e 는 onchange를 의미 하는 것인가?
+//    		reader.onload = function(e){
+//    			switch(num){
+//    			case 1 : $('#img_id').css({'height': '100%'}, {'width': 'auto'},{'padding':'unset'});
+////    					 $('#img_id').attr('src', e.target.result);
+//    					 break;
+////    			case 2 : $('#img_regCard').attr('src', e.target.result);
+////    					 break;
+//    			}
+//    		}
+//    		reader.readAsDataURL(value.files[0]);
+//    	}
+//    }
 
     // 차량정보 모달
     $('.guide').click(function(){
@@ -593,10 +626,39 @@ $(document).ready(function(){
     }
     
     // 채팅창 열기용_탐희
-    function adminChat(){
+    $(".chatPage").click(function(){
         window.open('adminChat.ch','_blank');
-     }
+     })
 });
+
+
+function loadImg(value, num){
+	// 입력된 파일의 존재유무 확인
+	if(value.files && value.files[0]){
+		console.log(value);
+		
+		// 이미지 파일인지 체크
+		if ( !(/image/i).test(value.files[0].type ) ){
+			alert("이미지 파일을 선택해 주세요!");
+			return false;
+		}
+		
+		var reader = new FileReader();
+		reader.onload = function(e){
+			switch(num){
+			case 1 : $('#img_id').attr('src', e.target.result) 
+								 .css({'height': '100%', 'width': '100%', 'padding':'unset'});
+					 break;
+			case 2 : $('#img_regCard').attr('src', e.target.result)
+									  .css({'height': '100%', 'width': '100%', 'padding':'unset'});
+					 break;
+			}
+		}
+		reader.readAsDataURL(value.files[0]);
+	}else{
+		alert('이미지 미리보기 실패! 브라우저를 업그레이드하세요~');
+	}
+}
 
 
 

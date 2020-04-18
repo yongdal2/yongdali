@@ -118,16 +118,18 @@
                         <div id="bizFormMsg1" class="msgBox"></div>
                         <div class="bizWrap2">
                             <div class="formRow--input-wrapper js-inputWrapper carInfo">
-                                <div class="formRow--input js-input signInImgWrap" name="idImg" placeholder="">
-                                    <div class="signInImg">
-                                   		<img src="${contextPath}/resources/images/imgUploadIcon.png">
+                                <div class="formRow--input js-input div_regImgWrap" placeholder="" >
+                                    <div class="div_regImg" id="idImgUpload">
+                                   		<img id="img_id" src="${contextPath}/resources/images/login&signUp/imgUploadIcon.png" >
                                     </div>
+                                    <input type="file" name="idImgThumbnail" onchange="loadImg(this, 1)">
                                     <p>증명사진</p>
                                 </div>         
-                                <div class="formRow--input js-input signInImgWrap" name="regCard" placeholder="">
-                                    <div class="signInImg">
-                                    	<img src="${contextPath}/resources/images/imgUploadIcon.png">
+                                <div class="formRow--input js-input div_regImgWrap" placeholder="">
+                                    <div class="div_regImg" id="regCardImgUpload">
+                                    	<img id="img_regCard" src="${contextPath}/resources/images/login&signUp/imgUploadIcon.png" >
                                     </div>
+                                    <input type="file" name="regCardThumbnail" onchange="loadImg(this, 2)">
                                     <p>차량등록증</p>
                                 </div>
                             </div>
