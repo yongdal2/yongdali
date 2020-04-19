@@ -945,15 +945,15 @@
 								<div class="col-xs-12 col-md-12" style="min-height: 261px;">
 									<div class="row fw6" style="border-bottom: 1px solid black;">
 										<div class="col-xs-2 col-md-2">선택</div>
-										<div class="col-xs-2 col-md-2">배송지</div>
+										<div class="col-xs-3 col-md-3">배송지</div>
 										<div class="col-xs-4 col-md-4">주소</div>
-										<div class="col-xs-2 col-md-2">연락처</div>
-										<div class="col-xs-2 col-md-2">수정·삭제</div>
+										<div class="col-xs-3 col-md-3">연락처</div>
+										<!-- <div class="col-xs-2 col-md-2">수정·삭제</div> -->
 									</div>
 								<c:forEach var="a" items="${ list }" varStatus="status">
 									<div class="row small aL-row">
 										<input type="radio" class="col-xs-2 col-md-2" name="startAddrList" style="margin-top: 10px; cursor: pointer;">
-										<div class="col-xs-2 col-md-2">
+										<div class="col-xs-3 col-md-3">
 											<span>${ a.aPlace }</span>
 											<br>
 											<span>${ a.aName }</span>
@@ -963,13 +963,13 @@
 											<br>
 											<span>${addrList2[status.index]}</span>
 										</div>
-										<div class="col-xs-2 col-md-2" style="padding-top: 9px;">
+										<div class="col-xs-3 col-md-3" style="padding-top: 9px;">
 											<span>${ a.aPhone }</span>
 										</div>
-										<div class="col-xs-2 col-md-2" style="display: flex; padding-top: 6px;">
+										<!-- <div class="col-xs-2 col-md-2" style="display: flex; padding-top: 6px;">
 											<div><button type="button" class="AddrModBtn1">수정</button></div>
 											<div><button type="button" class="AddrDelBtn1">삭제</button></div>
-										</div>
+										</div> -->
 										<input class="stANo" type="hidden" value="${ a.aNo }">
 										<input class="stAName" type="hidden" value="${ a.aName }">
 										<input class="stAddr1" type="hidden" value="${ addrList1[status.index] }">
@@ -1026,15 +1026,15 @@
 							<div class="col-xs-12 col-md-12" style="min-height: 261px;">
 								<div class="row fw6" style="border-bottom: 1px solid black;">
 									<div class="col-xs-2 col-md-2">선택</div>
-									<div class="col-xs-2 col-md-2">배송지</div>
+									<div class="col-xs-3 col-md-3">배송지</div>
 									<div class="col-xs-4 col-md-4">주소</div>
-									<div class="col-xs-2 col-md-2">연락처</div>
-									<div class="col-xs-2 col-md-2">수정·삭제</div>
+									<div class="col-xs-3 col-md-3">연락처</div>
+									<!-- <div class="col-xs-2 col-md-2">수정·삭제</div> -->
 								</div>
 								<c:forEach var="a" items="${ list }" varStatus="status">
 									<div class="row small aL-row">
 										<input type="radio" class="col-xs-2 col-md-2" name="endAddrList" style="margin-top: 10px; cursor: pointer;">
-										<div class="col-xs-2 col-md-2">
+										<div class="col-xs-3 col-md-3">
 											<span>${ a.aPlace }</span>
 											<br>
 											<span>${ a.aName }</span>
@@ -1044,13 +1044,13 @@
 											<br>
 											<span>${addrList2[status.index]}</span>
 										</div>
-										<div class="col-xs-2 col-md-2" style="padding-top: 9px;">
+										<div class="col-xs-3 col-md-3" style="padding-top: 9px;">
 											<span>${ a.aPhone }</span>
 										</div>
-										<div class="col-xs-2 col-md-2" style="display: flex; padding-top: 6px;">
+										<!-- <div class="col-xs-2 col-md-2" style="display: flex; padding-top: 6px;">
 											<div><button type="button" class="AddrModBtn1">수정</button></div>
 											<div><button type="button" class="AddrDelBtn1">삭제</button></div>
-										</div>
+										</div> -->
 										<input class="edANo" type="hidden" value="${ a.aNo }">
 										<input class="edAName" type="hidden" value="${ a.aName }">
 										<input class="edAddr1" type="hidden" value="${ addrList1[status.index] }">
