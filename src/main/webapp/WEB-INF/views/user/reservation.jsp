@@ -923,7 +923,7 @@
 									<br>
 									<img src="${pageContext.request.contextPath}/resources/images/reservation/unhappy.png" style="width: 150px; height: 150px;"/>
 									<br><br>
-									<span style="font-family: 'NeoDunggeunmo'; font-size: 17px;">주소록이 없어요..</span>
+									<span style="font-family: 'NeoDunggeunmo'; font-size: 17px;">선택하실 주소가 없어요..</span>
 									<br><br>
 									
 									
