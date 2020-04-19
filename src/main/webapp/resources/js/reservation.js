@@ -486,11 +486,6 @@ $("#myModal34").mouseenter(function(){
 });
 
 
-//비용 관련 변수
-var carSize = parseInt($("#sl1").val());
-var carOpt = parseInt($("#sl2").val());
-
-
 /* 출발지에서 도착지까지의 거리 계산 */
 function preChargeFunc(){
 	if(endLat!=0 && startLat!=0){
@@ -954,9 +949,9 @@ span5.onclick = function() {
 $('#stAddrList').click(function(){
 	$('#myModal6').css('display','block');
 });
-var span6 = document.getElementById("modal-close6");
 
 // 출발지 주소록 모달 닫기
+var span6 = document.getElementById("modal-close6");
 span6.onclick = function() {
 	$('#myModal6').css('display','none');
 }
@@ -966,9 +961,9 @@ span6.onclick = function() {
 $('#edAddrList').click(function(){
 	$('#myModal7').css('display','block');
 });
-var span7 = document.getElementById("modal-close7");
 
 // 도착지 주소록 모달 닫기
+var span7 = document.getElementById("modal-close7");
 span7.onclick = function() {
 	$('#myModal7').css('display','none');
 }
@@ -985,23 +980,26 @@ function addAddr(){
 }
 
 
-// 예약하기 버튼
+// 예약하기 버튼 & 상하차 날짜 입력하지 않으면 return false 조건 적용
 $('#revForm').submit(function(){
-	if(confirm("결제 진행하시겠습니까?")){
-		addAddr();
-		return;
-	} else {
+console.log($('#datepicker1').val());
+	// 바로 상차를 입력했거나 상차 날짜 입력되었거나
+	if($('#checkLoad1').is(":checked") || $('#datepicker1').val()!=""){
+		// 바로 상차를 입력했거나 하차 날짜 입력되었거나
+		if($('#checkLoad2').is(":checked") || $('#datepicker2').val()!=""){			
+			if(confirm("결제 진행하시겠습니까?")){
+				addAddr();
+				return;
+			} else {
+				return false;
+			}
+		} else {			
+			alert("하차 날짜를 지정해주세요.");
+			return false;
+		}
+	} else {		
+		alert("상차 날짜를 지정해주세요.");
 		return false;
-	}
-});
-
-//취소 처리
-$(".stAddrBtn2").click(function(){
-	var cno = $(this).closest("tr").find('.hv').val();
-	var cname= $(this).closest("tr").find('.hv2').val();
-	var delYN= confirm("'"+cname+"' 클래스를 정말 취소하시겠습니까?");
-	if(delYN){
-		location.href="/semi/delClass.do?cno="+cno;
 	}
 });
 

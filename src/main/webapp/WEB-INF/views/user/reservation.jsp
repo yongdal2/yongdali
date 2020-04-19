@@ -87,7 +87,8 @@
 									<input id="startDetailAddr" type="text" placeholder="상세 주소" required>
 								</div>
 								<div align="left">
-									<label id="start-check" class="checkbox-wrap"> <input id="checkLoad1" type="checkbox" name="rightLoad" value="바로 상차"> <i class="check-icon" style="margin-top: 2px;"></i>
+									<label id="start-check" class="checkbox-wrap">
+										<input id="checkLoad1" type="checkbox" name="rightLoad" value="바로 상차"> <i class="check-icon" style="margin-top: 2px;"></i>
 										<div style="font-size: 16px;">&nbsp;&nbsp;바로 상차</div>
 									</label>
 								</div>
@@ -173,7 +174,8 @@
 									<input id="endDetailAddr" name="edDetailAddr" type="text" placeholder="상세 주소" required>
 								</div>
 								<div align="left">
-									<label id="end-check" class="checkbox-wrap"> <input id="checkLoad2" name="rightUnload" type="checkbox" value="바로 하차"> <i class="check-icon" style="margin-top: 2px;"></i>
+									<label id="end-check" class="checkbox-wrap">
+										<input id="checkLoad2" name="rightUnload" type="checkbox" value="바로 하차"> <i class="check-icon" style="margin-top: 2px;"></i>
 										<div style="font-size: 16px;">&nbsp;&nbsp;바로 하차</div>
 									</label>
 								</div>
