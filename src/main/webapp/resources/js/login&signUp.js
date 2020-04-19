@@ -239,6 +239,8 @@ $(document).ready(function(){
         			type : "post",
         			data : {email : emailVal},
         			success : function(ranNum){
+        				console.log(ranNum);
+        				console.log('Raejin0!234');
         				alert("입력하신 이메일로 인증번호를 전송하였습니다.")
         		    	$('#btn_sendVeriCode').hide();
         		    	$('#btn_verify, #btn_resend').show();
@@ -310,17 +312,24 @@ $(document).ready(function(){
         		&& nameValidate() == true && phoneValidate() == true){
         		$('#signUpForm').trigger('submit');
         	};
+        	
+        // 사업자(기사) 회원가입	
     	}else{
         	// 사업자 정보 에러메시지 노출용
-    		carInfoValidate();
+    		if(carCapacityValidate() == true){
+    			if(carTypeValidate() == true){
+    				carNoValidate();
+    			}
+    		}
     		
+    		regImgValidate();
     		
     		// 사업자 정보 포함 전체 유효성 검사 후 제출용
         	if(emailValidate() == true && emailDupChk() == true && $('input[name=isVerified]').val() == 'Y'
         		&& pwdValidate() == true && pwdChkValidate() == true 
         		&& nameValidate() == true && phoneValidate() == true
-        		&& bizFormValidate() == true){
-        		$('#sigInForm').trigger('submit');
+        		&& carInfoValidate() == true && regImgValidate() == true){
+        		$('#signUpForm').trigger('submit');
         	};
     	}
 
@@ -527,7 +536,7 @@ $(document).ready(function(){
             $('#slecBiz img').attr('src', 'resources/images/login&signUp/round-add.svg').attr('alt','더하기');
             $('#slecBiz div').text('사업자(기사)로 가입하기');
             $('.bizForm').hide();
-            $('#bizFormMsg1').css("display","none");
+            $('#div_carInfoMsg').css("display","none");
             $('input[name=mSort]').val('일반');
         }
     });
@@ -540,38 +549,30 @@ $(document).ready(function(){
         } 
     });
     
+    // 톤수 유효성(미입력) 검사
+    $('select[name=capcity]').focusout(function(){
+    	carCapacityValidate();
+    })
+    
+    // 차종 유효성(미입력) 검사
+    $('select[name=type]').focusout(function(){    	
+    	carTypeValidate();    	
+    })
+    
+    // 차량번호 유효성검사
+    $('input[name=carNo]').focusout(function(){
+    	carNoValidate();
+    })
+    
+    
     // 파일 업로드
     $('#idImgUpload').click(function(){
-    	$('input[name=idImgThumbnail]').trigger('click');
+    	$('input[name=inputFile_idImg]').trigger('click');
     })
     
     $('#regCardImgUpload').click(function(){
-    	$('input[name=regCardThumbnail]').trigger('click');
+    	$('input[name=inputFile_regCardImg]').trigger('click');
     })
-    
-//    // TODO 내용 정리하기
-//    function loadImg(value, num){
-//    	// 1. value에 파일이 존재하냐? && 0번째 인덱스가 존재하냐?
-//    	if(value.files && value.files[0]){
-//    		console.log(value.files);
-//    		console.log(value.files[0]);
-//    		
-//    		var reader = new FileReader();
-//    		
-//    		// 2. FileReader()가 로드 되면 function을 실행 ?
-//    		// 3. 매개변수 e 는 onchange를 의미 하는 것인가?
-//    		reader.onload = function(e){
-//    			switch(num){
-//    			case 1 : $('#img_id').css({'height': '100%'}, {'width': 'auto'},{'padding':'unset'});
-////    					 $('#img_id').attr('src', e.target.result);
-//    					 break;
-////    			case 2 : $('#img_regCard').attr('src', e.target.result);
-////    					 break;
-//    			}
-//    		}
-//    		reader.readAsDataURL(value.files[0]);
-//    	}
-//    }
 
     // 차량정보 모달
     $('.guide').click(function(){
@@ -600,29 +601,87 @@ $(document).ready(function(){
     
     // 사업자 정보 유효성 검사
     function carInfoValidate(){
-        // 톤수 미입력
-        if($('select[name=carCapcity]').val() == ""){
-            displayErrorMsg($('#bizFormMsg1'), "톤수를 선택하세요.");
+        // 톤수 미선택
+        if($('select[name=capacity]').val() == ""){
+            displayErrorMsg($('#div_carInfoMsg'), "톤수를 선택하세요.");
             return false;
         }
-        // 차종 미입력
-        else if($('select[name=carType]').val() == ""){
-            displayErrorMsg($('#bizFormMsg1'), "차종을 선택하세요.");
+        // 차종 미선택
+        else if($('select[name=type]').val() == ""){
+            displayErrorMsg($('#div_carInfoMsg'), "차종을 선택하세요.");
             return false;
         }
         // 차량번호 미입력
         else if($('input[name=carNo]').val() == ""){
-            displayErrorMsg($('#bizFormMsg1'), "차량번호를 입력하세요.");
+            displayErrorMsg($('#div_carInfoMsg'), "차량번호를 입력하세요.");
             return false;
         }
         // 차량번호 정규표현식
-        else if(!chk(/[가-힣0-9]{7,}/, $('input[name=carNo]').val(), $('#bizFormMsg1'), "차량번호를 정확히 입력하세요.")){
+        else if(!chk(/[가-힣0-9]{7,}/, $('input[name=carNo]').val(), $('#div_carInfoMsg'), "차량번호를 정확히 입력하세요.")){
         	return false;
         }
         else{
-            $('#bizFormMsg1').css('display','none');
+            $('#div_carInfoMsg').css('display','none');
             return true;
         }
+    }
+    
+    // 톤수 미선택
+    function carCapacityValidate(){
+        if($('select[name=capcity]').val() == ""){
+            displayErrorMsg($('#div_carInfoMsg'), "톤수를 선택하세요.");
+            return false;
+        }
+        else{
+            $('#div_carInfoMsg').css('display','none');
+            return true;
+        }
+    }
+    
+    // 차종 미선택
+    function carTypeValidate(){
+    	if($('select[name=type]').val() == ""){
+            displayErrorMsg($('#div_carInfoMsg'), "차종을 선택하세요.");
+            return false;
+        }
+    	else{
+            $('#div_carInfoMsg').css('display','none');
+            return true;
+        }
+    }
+    
+    function carNoValidate(){
+    	// 차량번호 미입력
+    	if($('input[name=carNo]').val() == ""){
+            displayErrorMsg($('#div_carInfoMsg'), "차량번호를 입력하세요.");
+            return false;
+        }
+        // 차량번호 정규표현식
+        else if(!chk(/[가-힣0-9]{7,}/, $('input[name=carNo]').val(), $('#div_carInfoMsg'), "차량번호를 정확히 입력하세요.")){
+        	return false;
+        }
+    	else{
+            $('#div_carInfoMsg').css('display','none');
+            return true;
+        }
+    }
+    
+    function regImgValidate(){
+    	// 증명사진 누락
+    	if($('#img_id').attr('src') == '/yongdali/resources/images/login&signUp/imgUploadIcon.png'){
+    		displayErrorMsg($('#div_regImgMsg'), "증명사진을 삽입하세요.");
+    		return false;
+    	}
+    	// 자동차등록증 누락
+    	else if($('#img_regCard').attr('src') == '/yongdali/resources/images/login&signUp/imgUploadIcon.png'){
+    		displayErrorMsg($('#div_regImgMsg'), "차량등록증 사진을 삽입하세요.");
+    		return false;
+    	}else{
+    		$('#div_regImgMsg').css('display','none');
+    		return true;
+    	}
+    	
+    	
     }
     
     // 채팅창 열기용_탐희
@@ -631,7 +690,6 @@ $(document).ready(function(){
      })
 });
 
-
 function loadImg(value, num){
 	// 입력된 파일의 존재유무 확인
 	if(value.files && value.files[0]){
@@ -639,7 +697,7 @@ function loadImg(value, num){
 		
 		// 이미지 파일인지 체크
 		if ( !(/image/i).test(value.files[0].type ) ){
-			alert("이미지 파일을 선택해 주세요!");
+			alert("이미지 파일을 선택하세요!");
 			return false;
 		}
 		
@@ -648,9 +706,11 @@ function loadImg(value, num){
 			switch(num){
 			case 1 : $('#img_id').attr('src', e.target.result) 
 								 .css({'height': '100%', 'width': '100%', 'padding':'unset'});
+			 	  	 $('#div_regImgMsg').css('display','none');
 					 break;
 			case 2 : $('#img_regCard').attr('src', e.target.result)
 									  .css({'height': '100%', 'width': '100%', 'padding':'unset'});
+					 $('#div_regImgMsg').css('display','none');
 					 break;
 			}
 		}

@@ -23,7 +23,7 @@
 
     <!-- content -->
     <div class="content">
-        <form action="insert.me" method="post" id="signUpForm" novalidate>
+        <form action="insert.me" method="post" id="signUpForm" enctype="multipart/form-data" novalidate>
             <div class="formRow">
                 <div class="formRow--item">
                     <!-- 이메일 -->
@@ -92,7 +92,7 @@
                         </div>
                         <div class="bizWrap">
                             <div class="formRow--input-wrapper js-inputWrapper carInfo">
-                                <select class="formRow--input js-input" name="carCapcity" placeholder="톤수">
+                                <select class="formRow--input js-input" name="capacity" placeholder="톤수">
                                     <option hidden></option>
                                     <option value="1">1</option>
                                     <option value="1.4">1.4</option>
@@ -102,7 +102,7 @@
                                 </select>
                             </div>
                             <div class="formRow--input-wrapper js-inputWrapper carInfo">
-                                <select class="formRow--input js-input" name="carType" placeholder="차종">
+                                <select class="formRow--input js-input" name="type" placeholder="차종">
                                     <option hidden></option>
                                     <option value="카고">카고</option>
                                     <option value="호루">호루</option>
@@ -115,25 +115,26 @@
                                 <input type="text" class="formRow--input js-input carNo" name="carNo" placeholder="차량번호" maxlength="8">
                             </div>
                         </div>
-                        <div id="bizFormMsg1" class="msgBox"></div>
+                        <div id="div_carInfoMsg" class="msgBox"></div>
                         <div class="bizWrap2">
                             <div class="formRow--input-wrapper js-inputWrapper carInfo">
                                 <div class="formRow--input js-input div_regImgWrap" placeholder="" >
                                     <div class="div_regImg" id="idImgUpload">
                                    		<img id="img_id" src="${contextPath}/resources/images/login&signUp/imgUploadIcon.png" >
                                     </div>
-                                    <input type="file" name="idImgThumbnail" onchange="loadImg(this, 1)">
+                                    <input type="file" name="inputFile_idImg" onchange="loadImg(this, 1)">
                                     <p>증명사진</p>
                                 </div>         
                                 <div class="formRow--input js-input div_regImgWrap" placeholder="">
                                     <div class="div_regImg" id="regCardImgUpload">
                                     	<img id="img_regCard" src="${contextPath}/resources/images/login&signUp/imgUploadIcon.png" >
                                     </div>
-                                    <input type="file" name="regCardThumbnail" onchange="loadImg(this, 2)">
+                                    <input type="file" name="inputFile_regCardImg" onchange="loadImg(this, 2)">
                                     <p>차량등록증</p>
                                 </div>
                             </div>
                         </div>
+                        <div id="div_regImgMsg" class="msgBox"></div>
                     </div>
                 </div>
             </div>
