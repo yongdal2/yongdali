@@ -850,7 +850,7 @@ select::-ms-expand {
     cursor: pointer;
 }
 
-input[name="idImgThumbnail"], input[name="regCardThumbnail"]{
+input[name="inputFile_idImg"], input[name="inputFile_regCardImg"]{
 	display: none;
 }
 
