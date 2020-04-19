@@ -36,7 +36,9 @@
 					<div id="line1">
 						<div class="edge11">
 							<div class="title11">
-								<label id="carGuide1"> <img src="${pageContext.request.contextPath}/resources/images/reservation/question-mark.svg" alt="안내"> <span id="carGuide-ment">차량 안내가 필요하신가요?</span>
+								<label id="carGuide1">
+									<img src="${pageContext.request.contextPath}/resources/images/reservation/question-mark.svg" alt="안내">
+									<span id="carGuide-ment">차량 안내가 필요하신가요?</span>
 								</label> 차량 정보
 							</div>
 							<div id="carOption-div" class="content22">
@@ -59,7 +61,8 @@
 						</div>
 						<div class="edge11">
 							<div class="title11">
-								<label id="selectLoad-btn"> <img src="${pageContext.request.contextPath}/resources/images/reservation/round-add.svg" alt="안내"> <span id="load-title">이삿짐 선택</span>
+								<label id="selectLoad-btn"> <img src="${pageContext.request.contextPath}/resources/images/reservation/round-add.svg" alt="안내">
+									<span id="load-title">이삿짐 선택</span>
 								</label> 이삿짐
 							</div>
 							<div id="load-content-div" class="content22">
@@ -82,13 +85,15 @@
 								</div>
 								<div id="searchAddr-div1">
 									<div id="searchAddr-div11">
-										<input id="startAddr" type="text" placeholder="주소 검색 (주소, 건물명)" onclick="searchStartAddr();" readonly required> <img src="${pageContext.request.contextPath}/resources/images/reservation/magnifying-glass-black.svg" alt="검색" onclick="searchStartAddr();" style="cursor: pointer;">
+										<input id="startAddr" type="text" placeholder="주소 검색 (주소, 건물명)" onclick="searchStartAddr();" readonly required>
+										<img src="${pageContext.request.contextPath}/resources/images/reservation/magnifying-glass-black.svg" alt="검색" onclick="searchStartAddr();" style="cursor: pointer;">
 									</div>
 									<input id="startDetailAddr" type="text" placeholder="상세 주소" required>
 								</div>
 								<div align="left">
 									<label id="start-check" class="checkbox-wrap">
-										<input id="checkLoad1" type="checkbox" name="rightLoad" value="바로 상차"> <i class="check-icon" style="margin-top: 2px;"></i>
+										<input id="checkLoad1" type="checkbox" name="rightLoad" value="바로 상차">
+										<i class="check-icon" style="margin-top: 2px;"></i>
 										<div style="font-size: 16px;">&nbsp;&nbsp;바로 상차</div>
 									</label>
 								</div>
@@ -169,13 +174,15 @@
 								</div>
 								<div id="searchAddr-div2">
 									<div id="searchAddr-div22">
-										<input id="endAddr" name="edAddr" type="text" placeholder="주소 검색 (주소, 건물명)" onclick="searchEndAddr();" readonly required> <img src="${pageContext.request.contextPath}/resources/images/reservation/magnifying-glass-black.svg" alt="검색" onclick="searchEndAddr();" style="cursor: pointer;">
+										<input id="endAddr" name="edAddr" type="text" placeholder="주소 검색 (주소, 건물명)" onclick="searchEndAddr();" readonly required>
+										<img src="${pageContext.request.contextPath}/resources/images/reservation/magnifying-glass-black.svg" alt="검색" onclick="searchEndAddr();" style="cursor: pointer;">
 									</div>
 									<input id="endDetailAddr" name="edDetailAddr" type="text" placeholder="상세 주소" required>
 								</div>
 								<div align="left">
 									<label id="end-check" class="checkbox-wrap">
-										<input id="checkLoad2" name="rightUnload" type="checkbox" value="바로 하차"> <i class="check-icon" style="margin-top: 2px;"></i>
+										<input id="checkLoad2" name="rightUnload" type="checkbox" value="바로 하차">
+										<i class="check-icon" style="margin-top: 2px;"></i>
 										<div style="font-size: 16px;">&nbsp;&nbsp;바로 하차</div>
 									</label>
 								</div>
@@ -247,8 +254,13 @@
 						<div class="edge11">
 							<div class="title11">상하차 방법</div>
 							<div id="help-div" class="content22">
-								<label class="rad"> <input id="helpUnload-ch" type="radio" name="helpLoad1" required> <i></i>&nbsp;&nbsp;도움 필요하지 않아요
-								</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label class="rad"> <input id="helpLoad-ch" type="radio" name="helpLoad1"> <i></i>&nbsp;&nbsp;도움 필요해요
+								<label class="rad">
+									<input id="helpUnload-ch" type="radio" name="helpLoad1" required>
+									<i></i>&nbsp;&nbsp;도움 필요하지 않아요
+								</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<label class="rad">
+									<input id="helpLoad-ch" type="radio" name="helpLoad1">
+									<i></i>&nbsp;&nbsp;도움 필요해요
 								</label>
 							</div>
 						</div>
@@ -311,7 +323,10 @@
 									<span id="btwDay" class="charge-content"></span>
 								</div>
 								<div align="left">
-									<span class="charge-title">보관 기간&nbsp;<small>(60,000원/일)</small></span>
+									<span class="charge-title">보관 기간
+										&nbsp;
+										<small>(60,000원/일)</small>
+									</span>
 								</div>
 							</div>
 						</div>
@@ -803,13 +818,17 @@
 								<div class="check-title1">상하차 방법</div>
 							</div>
 							<div class="help-content-div112">
-								<label class="checkbox-wrap2 checkHelp"> <input id="checkHelp1" type="checkbox" name="checkHelp1" value=""> <i class="check-icon2"></i>
+								<label class="checkbox-wrap2 checkHelp">
+									<input id="checkHelp1" type="checkbox" name="checkHelp1" value="">
+									<i class="check-icon2"></i>
 									<div class="check-title11">상차만</div>
 								</label>
 								<div id="helpCharge1" class="checkCharge">+0원</div>
 							</div>
 							<div class="help-content-div112">
-								<label class="checkbox-wrap2 checkHelp"> <input id="checkHelp2" type="checkbox" name="checkHelp1" value=""> <i class="check-icon2"></i>
+								<label class="checkbox-wrap2 checkHelp">
+									<input id="checkHelp2" type="checkbox" name="checkHelp1" value="">
+									<i class="check-icon2"></i>
 									<div class="check-title11">하차만</div>
 								</label>
 								<div id="helpCharge2" class="checkCharge">+0원</div>
@@ -835,13 +854,17 @@
 								<div class="check-title1">상차 방법</div>
 							</div>
 							<div class="help-content-div112">
-								<label class="checkbox-wrap2 checkHelp"> <input id="checkHelp3" type="checkbox" name="checkHelp11" value=""> <i class="check-icon2"></i>
+								<label class="checkbox-wrap2 checkHelp">
+									<input id="checkHelp3" type="checkbox" name="checkHelp11" value="">
+									<i class="check-icon2"></i>
 									<div class="check-title11" style="font-size: 12pt;">기사님과 함께</div>
 								</label>
 								<div class="checkCharge" style="width: 152px;">+10,000원</div>
 							</div>
 							<div class="help-content-div112">
-								<label class="checkbox-wrap2 checkHelp"> <input id="checkHelp4" type="checkbox" name="checkHelp12" value=""> <i class="check-icon2"></i>
+								<label class="checkbox-wrap2 checkHelp">
+									<input id="checkHelp4" type="checkbox" name="checkHelp12" value="">
+									<i class="check-icon2"></i>
 									<div class="check-title11" style="font-size: 12pt;">기사님 단독</div>
 								</label>
 								<div class="checkCharge" style="width: 168px;">+20,000원</div>
@@ -864,13 +887,17 @@
 								<div class="check-title1">하차 방법</div>
 							</div>
 							<div class="help-content-div112">
-								<label class="checkbox-wrap2 checkHelp"> <input id="checkHelp5" type="checkbox" name="checkHelp11" value=""> <i class="check-icon2"></i>
+								<label class="checkbox-wrap2 checkHelp">
+									<input id="checkHelp5" type="checkbox" name="checkHelp11" value="">
+									<i class="check-icon2"></i>
 									<div class="check-title11" style="font-size: 12pt;">기사님과 함께</div>
 								</label>
 								<div class="checkCharge" style="width: 152px;">+10,000원</div>
 							</div>
 							<div class="help-content-div112">
-								<label class="checkbox-wrap2 checkHelp"> <input id="checkHelp6" type="checkbox" name="checkHelp12" value=""> <i class="check-icon2"></i>
+								<label class="checkbox-wrap2 checkHelp">
+									<input id="checkHelp6" type="checkbox" name="checkHelp12" value="">
+									<i class="check-icon2"></i>
 									<div class="check-title11" style="font-size: 12pt;">기사님 단독</div>
 								</label>
 								<div class="checkCharge" style="width: 168px;">+20,000원</div>
