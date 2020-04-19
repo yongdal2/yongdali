@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -881,123 +882,164 @@
 		<div id="myModal6" class="modal11" style="padding-top: 10%;">
 			<div class="modal-content11" style="width: 702px">
 				<span id="modal-close6" class="close11" style="width: 30px;">&times;</span>
-				<div class="modal-addr-div">
-					<div class="addr-title-div">
-						<span class="addr-title">나의 주소록(출발지)</span>
-					</div>
-					<br>
-					<div class="col-xs-12 col-md-12 text-center noto">
-						<div class="col-xs-12 col-md-12">
-							<div class="row fw6" style="border-bottom: 1px solid black;">
-								<div class="col-xs-2 col-md-2">선택</div>
-								<div class="col-xs-2 col-md-2">배송지</div>
-								<div class="col-xs-5 col-md-5">주소</div>
-								<div class="col-xs-3 col-md-3">연락처</div>
+				<c:choose>
+					<c:when test="${fn:length(list) == 0}">
+						<div class="modal-addr-div" style="height: 375px;">
+							<div class="addr-title-div">
+								<span class="addr-title">나의 주소록(출발지)</span>
 							</div>
-							<c:forEach var="a" items="${ list }" varStatus="status">
-								<div class="row small aL-row">
-									<input type="radio" class="col-xs-2 col-md-2" name="startAddrList" style="margin-top: 10px; cursor: pointer;">
-									<div class="col-xs-2 col-md-2">
-										<span>${ a.aPlace }</span>
-										<br>
-										<span>${ a.aName }</span>
-									</div>
-									<div class="col-xs-5 col-md-5">
-										<span>${addrList1[status.index]}</span>
-										<br>
-										<span>${addrList2[status.index]}</span>
-									</div>
-									<div class="col-xs-3 col-md-3" style="padding-top: 9px;">
-										<span>${ a.aPhone }</span>
-									</div>
-									<input class="stANo" type="hidden" value="${ a.aNo }">
-									<input class="stAName" type="hidden" value="${ a.aName }">
-									<input class="stAddr1" type="hidden" value="${ addrList1[status.index] }">
-									<input class="stAddr2" type="hidden" value="${ addrList2[status.index] }">
-									<input class="stAPhone" type="hidden" value="${ a.aPhone }">
+							<br>
+							<div class="col-xs-12 col-md-12 text-center noto">
+								<div class="col-xs-12 col-md-12">
+									<br>
+									<img src="${pageContext.request.contextPath}/resources/images/reservation/unhappy.png" style="width: 150px; height: 150px;"/>
+									<br><br>
+									<span style="font-family: 'NeoDunggeunmo'; font-size: 17px;">주소록이 없어요..</span>
+									<br><br>
+									
+									
+									<!-- 주소록 추가 서블릿 나중에 넣으셈 -->
+									<button type="button" id="stALBtn" onclick="location.href='#'">추 가 하 러 가 기</button>
+									
+									
 								</div>
-							</c:forEach>
+							</div>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="modal-addr-div">
+							<div class="addr-title-div">
+								<span class="addr-title">나의 주소록(출발지)</span>
+							</div>
+							<br>
+							<div class="col-xs-12 col-md-12 text-center noto">
+								<div class="col-xs-12 col-md-12" style="min-height: 261px;">
+									<div class="row fw6" style="border-bottom: 1px solid black;">
+										<div class="col-xs-2 col-md-2">선택</div>
+										<div class="col-xs-2 col-md-2">배송지</div>
+										<div class="col-xs-4 col-md-4">주소</div>
+										<div class="col-xs-2 col-md-2">연락처</div>
+										<div class="col-xs-2 col-md-2">수정·삭제</div>
+									</div>
+								<c:forEach var="a" items="${ list }" varStatus="status">
+									<div class="row small aL-row">
+										<input type="radio" class="col-xs-2 col-md-2" name="startAddrList" style="margin-top: 10px; cursor: pointer;">
+										<div class="col-xs-2 col-md-2">
+											<span>${ a.aPlace }</span>
+											<br>
+											<span>${ a.aName }</span>
+										</div>
+										<div class="col-xs-4 col-md-4">
+											<span>${addrList1[status.index]}</span>
+											<br>
+											<span>${addrList2[status.index]}</span>
+										</div>
+										<div class="col-xs-2 col-md-2" style="padding-top: 9px;">
+											<span>${ a.aPhone }</span>
+										</div>
+										<div class="col-xs-2 col-md-2" style="display: flex; padding-top: 6px;">
+											<div><button type="button" class="AddrModBtn1">수정</button></div>
+											<div><button type="button" class="AddrDelBtn1">삭제</button></div>
+										</div>
+										<input class="stANo" type="hidden" value="${ a.aNo }">
+										<input class="stAName" type="hidden" value="${ a.aName }">
+										<input class="stAddr1" type="hidden" value="${ addrList1[status.index] }">
+										<input class="stAddr2" type="hidden" value="${ addrList2[status.index] }">
+										<input class="stAPhone" type="hidden" value="${ a.aPhone }">
+									</div>
+								</c:forEach>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div align="center">
-					<button type="button" id="stALBtn">선 택 하 기</button>
-				</div>
+					<div align="center">
+						<button type="button" id="stALBtn">선 택 하 기</button>
+					</div>
+					</c:otherwise>
+				</c:choose>
+				
 				<br>
-				<script>
-
-				</script>
 			</div>
 		</div>
 		<!-- Modal7 : 도착지 주소록 -->
 		<div id="myModal7" class="modal11" style="padding-top: 10%;">
 			<div class="modal-content11" style="width: 702px;">
 				<span id="modal-close7" class="close11" style="width: 30px;">&times;</span>
-				<div class="modal-addr-div">
-					<div class="addr-title-div">
-						<span class="addr-title">나의 주소록(도착지)</span>
-					</div>
-					<br>
-					<div class="col-xs-12 col-md-12 text-center noto">
-						<div class="col-xs-12 col-md-12">
-							<div class="row fw6" style="border-bottom: 1px solid black;">
-								<div class="col-xs-2 col-md-2">선택</div>
-								<div class="col-xs-2 col-md-2">배송지</div>
-								<div class="col-xs-5 col-md-5">주소</div>
-								<div class="col-xs-3 col-md-3">연락처</div>
+				<c:choose>
+					<c:when test="${fn:length(list) == 0}">
+						<div class="modal-addr-div" style="height: 375px;">
+							<div class="addr-title-div">
+								<span class="addr-title">나의 주소록(출발지)</span>
 							</div>
-							<c:forEach var="a" items="${ list }" varStatus="status">
-								<div class="row small aL-row">
-									<input type="radio" class="col-xs-2 col-md-2" name="endAddrList" style="cursor: pointer; margin-top: 10px;">
-									<div class="col-xs-2 col-md-2">
-										<span>${ a.aPlace }</span>
-										<br>
-										<span>${ a.aName }</span>
-									</div>
-									<div class="col-xs-5 col-md-5">
-										<span>${addrList1[status.index]}</span>
-										<br>
-										<span>${addrList2[status.index]}</span>
-									</div>
-									<div class="col-xs-3 col-md-3" style="padding-top: 9px;">
-										<span>${ a.aPhone }</span>
-									</div>
-									<input class="edANo" type="hidden" value="${ a.aNo }">
-									<input class="edAName" type="hidden" value="${ a.aName }">
-									<input class="edAddr1" type="hidden" value="${ addrList1[status.index] }">
-									<input class="edAddr2" type="hidden" value="${ addrList2[status.index] }">
-									<input class="edAPhone" type="hidden" value="${ a.aPhone }">
+							<br>
+							<div class="col-xs-12 col-md-12 text-center noto">
+								<div class="col-xs-12 col-md-12">
+									<br>
+									<img src="${pageContext.request.contextPath}/resources/images/reservation/unhappy.png" style="width: 150px; height: 150px;"/>
+									<br><br>
+									<span style="font-family: 'NeoDunggeunmo'; font-size: 17px;">주소록이 없어요..</span>
+									<br><br>
+									
+									<!-- 주소록 추가 서블릿 나중에 넣으셈 -->
+									<button type="button" id="stALBtn" onclick="location.href='#'">추 가 하 러 가 기</button>
+									
 								</div>
-							</c:forEach>
+							</div>
+						</div>
+					</c:when>
+					<c:otherwise>
+					<div class="modal-addr-div">
+						<div class="addr-title-div">
+							<span class="addr-title">나의 주소록(도착지)</span>
+						</div>
+						<br>
+						<div class="col-xs-12 col-md-12 text-center noto" style="min-height: 261px;">
+							<div class="col-xs-12 col-md-12" style="min-height: 261px;">
+								<div class="row fw6" style="border-bottom: 1px solid black;">
+									<div class="col-xs-2 col-md-2">선택</div>
+									<div class="col-xs-2 col-md-2">배송지</div>
+									<div class="col-xs-4 col-md-4">주소</div>
+									<div class="col-xs-2 col-md-2">연락처</div>
+									<div class="col-xs-2 col-md-2">수정·삭제</div>
+								</div>
+								<c:forEach var="a" items="${ list }" varStatus="status">
+									<div class="row small aL-row">
+										<input type="radio" class="col-xs-2 col-md-2" name="endAddrList" style="margin-top: 10px; cursor: pointer;">
+										<div class="col-xs-2 col-md-2">
+											<span>${ a.aPlace }</span>
+											<br>
+											<span>${ a.aName }</span>
+										</div>
+										<div class="col-xs-4 col-md-4">
+											<span>${addrList1[status.index]}</span>
+											<br>
+											<span>${addrList2[status.index]}</span>
+										</div>
+										<div class="col-xs-2 col-md-2" style="padding-top: 9px;">
+											<span>${ a.aPhone }</span>
+										</div>
+										<div class="col-xs-2 col-md-2" style="display: flex; padding-top: 6px;">
+											<div><button type="button" class="AddrModBtn1">수정</button></div>
+											<div><button type="button" class="AddrDelBtn1">삭제</button></div>
+										</div>
+										<input class="edANo" type="hidden" value="${ a.aNo }">
+										<input class="edAName" type="hidden" value="${ a.aName }">
+										<input class="edAddr1" type="hidden" value="${ addrList1[status.index] }">
+										<input class="edAddr2" type="hidden" value="${ addrList2[status.index] }">
+										<input class="edAPhone" type="hidden" value="${ a.aPhone }">
+									</div>
+								</c:forEach>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div align="center">
-					<button type="button" id="edALBtn">선 택 하 기</button>
-				</div>
+					<div align="center">
+						<button type="button" id="edALBtn">선 택 하 기</button>
+					</div>
+					</c:otherwise>
+				</c:choose>
+				
 				<br>
 			</div>
 		</div>
-		<script>
-		var modal6 = document.getElementById("myModal6");
-		$("#myModal6").mouseenter(function(){
-			window.onclick = function(event) {
-				if (event.target == modal6) {
-					$('input[name="startAddrList"]:checked').attr('checked', false);
-					modal6.style.display = "none";
-				}
-			}
-		});
-		var modal7 = document.getElementById("myModal7");
-		$("#myModal7").mouseenter(function(){
-			window.onclick = function(event) {
-				if (event.target == modal7) {
-					$('input[name="endAddrList"]:checked').attr('checked', false);
-					modal7.style.display = "none";
-				}
-			}
-		});
-		</script>
 		<!-- Modal8 : 결제 -->
 		<div id="myModal8" class="modal11" style="padding-top: 10%;">
 			<div class="modal-content11" style="width: 600px">
