@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -77,7 +76,8 @@
 							</div>
 							<div id="startAddr-div" class="content22">
 								<div style="display: flex;">
-									<input id="startName" name="startName" type="text" placeholder="이름" required> <input id="startPhone" name="startPhone" type="text" placeholder="연락처" onKeyup="inputPhoneNumber(this);" maxlength="13" required>
+									<input id="startName" name="startName" type="text" placeholder="이름" required>
+									<input id="startPhone" name="startPhone" type="text" placeholder="연락처" onKeyup="inputPhoneNumber(this);" maxlength="13" required>
 								</div>
 								<div id="searchAddr-div1">
 									<div id="searchAddr-div11">
@@ -894,26 +894,27 @@
 								<div class="col-xs-5 col-md-5">주소</div>
 								<div class="col-xs-3 col-md-3">연락처</div>
 							</div>
-							<c:forEach var="a" items="${ list }">
+							<c:forEach var="a" items="${ list }" varStatus="status">
 								<div class="row small aL-row">
-									<div class="col-xs-2 col-md-2" style="margin-top: 5px;">
-										<input type="radio" name="startAddrList" style="cursor: pointer;">
-									</div>
+									<input type="radio" class="col-xs-2 col-md-2" name="startAddrList" style="margin-top: 10px; cursor: pointer;">
 									<div class="col-xs-2 col-md-2">
 										<span>${ a.aPlace }</span>
 										<br>
 										<span>${ a.aName }</span>
 									</div>
 									<div class="col-xs-5 col-md-5">
-										<c:forEach var="addr" items="${fn:split(a.aAddress, ',')}">
-											<span>${ addr }</span>
-											<br>
-										</c:forEach>
+										<span>${addrList1[status.index]}</span>
+										<br>
+										<span>${addrList2[status.index]}</span>
 									</div>
 									<div class="col-xs-3 col-md-3" style="padding-top: 9px;">
 										<span>${ a.aPhone }</span>
 									</div>
-									<input type="hidden" value="${ a.aNo }">
+									<input class="stANo" type="hidden" value="${ a.aNo }">
+									<input class="stAName" type="hidden" value="${ a.aName }">
+									<input class="stAddr1" type="hidden" value="${ addrList1[status.index] }">
+									<input class="stAddr2" type="hidden" value="${ addrList2[status.index] }">
+									<input class="stAPhone" type="hidden" value="${ a.aPhone }">
 								</div>
 							</c:forEach>
 						</div>
@@ -923,6 +924,9 @@
 					<button type="button" id="stALBtn">선 택 하 기</button>
 				</div>
 				<br>
+				<script>
+
+				</script>
 			</div>
 		</div>
 		<!-- Modal7 : 도착지 주소록 -->
@@ -942,26 +946,27 @@
 								<div class="col-xs-5 col-md-5">주소</div>
 								<div class="col-xs-3 col-md-3">연락처</div>
 							</div>
-							<c:forEach var="a" items="${ list }">
+							<c:forEach var="a" items="${ list }" varStatus="status">
 								<div class="row small aL-row">
-									<div class="col-xs-2 col-md-2" style="margin-top: 5px;">
-										<input type="radio" name="endAddrList" style="cursor: pointer;">
-									</div>
+									<input type="radio" class="col-xs-2 col-md-2" name="endAddrList" style="margin-top: 10px; cursor: pointer;">
 									<div class="col-xs-2 col-md-2">
 										<span>${ a.aPlace }</span>
 										<br>
 										<span>${ a.aName }</span>
 									</div>
 									<div class="col-xs-5 col-md-5">
-										<c:forEach var="addr" items="${fn:split(a.aAddress, ',')}">
-											<span>${ addr }</span>
-											<br>
-										</c:forEach>
+										<span>${addrList1[status.index]}</span>
+										<br>
+										<span>${addrList2[status.index]}</span>
 									</div>
 									<div class="col-xs-3 col-md-3" style="padding-top: 9px;">
 										<span>${ a.aPhone }</span>
 									</div>
-									<input type="hidden" value="${ a.aNo }">
+									<input class="edANo" type="hidden" value="${ a.aNo }">
+									<input class="edAName" type="hidden" value="${ a.aName }">
+									<input class="edAddr1" type="hidden" value="${ addrList1[status.index] }">
+									<input class="edAddr2" type="hidden" value="${ addrList2[status.index] }">
+									<input class="edAPhone" type="hidden" value="${ a.aPhone }">
 								</div>
 							</c:forEach>
 						</div>

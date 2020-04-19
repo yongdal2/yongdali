@@ -309,6 +309,40 @@ $(function(){
 });
 
 
+// 최신 사용한 주소록 알아내기 위한 변수 선언
+var stANo = "";
+var edANo = "";
+
+// 출발지 주소록 중 하나 선택하여 input 태그에 담기
+$("#stALBtn").click(function(){
+	stANo = $('input[name="startAddrList"]:checked').closest("div").find('.stANo').val();
+	var stAName = $('input[name="startAddrList"]:checked').closest("div").find('.stAName').val();
+	var stAddr1 = $('input[name="startAddrList"]:checked').closest("div").find('.stAddr1').val();
+	var stAddr2 = $('input[name="startAddrList"]:checked').closest("div").find('.stAddr2').val();
+	var stAPhone = $('input[name="startAddrList"]:checked').closest("div").find('.stAPhone').val();
+	$('#startName').val(stAName);
+	$('#startPhone').val(stAPhone);
+	$('#startAddr').val(stAddr1);
+	$('#startDetailAddr').val(stAddr2);
+	$('#myModal6').css('display','none');
+});
+
+// 도착지 주소록 중 하나 선택하여 input 태그에 담기
+$("#edALBtn").click(function(){
+	edANo = $('input[name="endAddrList"]:checked').closest("div").find('.edANo').val();
+	var edAName = $('input[name="endAddrList"]:checked').closest("div").find('.edAName').val();
+	var edAddr1 = $('input[name="endAddrList"]:checked').closest("div").find('.edAddr1').val();
+	var edAddr2 = $('input[name="endAddrList"]:checked').closest("div").find('.edAddr2').val();
+	var edAPhone = $('input[name="endAddrList"]:checked').closest("div").find('.edAPhone').val();
+	$('#endName').val(edAName);
+	$('#endPhone').val(edAPhone);
+	$('#endAddr').val(edAddr1);
+	$('#endDetailAddr').val(edAddr2);
+	$('#myModal7').css('display','none');
+});
+
+
+
 
 /* 출발지,도착지 주소 검색 후 위경도 변환 */
 
@@ -471,6 +505,7 @@ function initLayerPosition(){
  element_layer.style.width = width + 'px';
  element_layer.style.height = height + 'px';
  element_layer.style.border = borderWidth + 'px solid';
+ 
  // 실행되는 순간의 화면 너비와 높이 값을 가져와서 중앙에 뜰 수 있도록 위치를 계산한다.
  element_layer.style.left = (((window.innerWidth || document.documentElement.clientWidth) - width)/2 - borderWidth) + 'px';
  element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
@@ -819,6 +854,8 @@ $('#checkHelp-btn').click(function(){
 	}
 });
 
+
+// 상하차 도움 선택 모달 닫고난후 결과값 담기
 var span3 = document.getElementById("modal-close3");
 span3.onclick = function() {
 	console.log($('#checkHelp1').val());
@@ -872,7 +909,6 @@ span7.onclick = function() {
 }
 
 
-
 //출발지와 도착지 각각의 주소 붙여 input hidden에다가 담기
 function addAddr(){
 	var stAddr1 = $('#startAddr').val();
@@ -893,5 +929,35 @@ $('#revForm').submit(function(){
 		return false;
 	}
 });
+
+//취소 처리
+$(".stAddrBtn2").click(function(){
+	var cno = $(this).closest("tr").find('.hv').val();
+	var cname= $(this).closest("tr").find('.hv2').val();
+	var delYN= confirm("'"+cname+"' 클래스를 정말 취소하시겠습니까?");
+	if(delYN){
+		location.href="/semi/delClass.do?cno="+cno;
+	}
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

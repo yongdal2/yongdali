@@ -132,6 +132,7 @@ select, textarea, input, button{
     font-weight: bold;
     border-bottom: 2px solid black
 }
+
 .move-topic11{
     display: none;
     width: 336px;
@@ -152,17 +153,20 @@ select, textarea, input, button{
     height: 35px;
     border-bottom: 1px solid rgb(236, 240, 242);
 }
+
 .move-content111{
     display: flex;
     float: right;
     margin-right: 20px;
     margin-top: 6px;
 }
+
 .move-content112{
     font-size: 9pt;
     margin-left: 20px;
     padding-top: 9px;
 }
+
 .move-content1111{
     width: 20px;
     height: 20px;
@@ -170,6 +174,7 @@ select, textarea, input, button{
     text-align: center;
     cursor: pointer;
 }
+
 .move-content1112{
     width: 30px;
     height: 20px;
@@ -179,6 +184,7 @@ select, textarea, input, button{
     text-align: center;
     font-size: 11pt;
 }
+
 .move-content1113{
     width: 30px;
     height: 20px;
@@ -188,11 +194,13 @@ select, textarea, input, button{
     text-align: center;
     font-size: 11pt;
 }
+
 .move-minus-img{
     padding-bottom: 2px;
     width: 15px;
     height: 20px;
 }
+
 .move-plus-img{
     padding-bottom:2px;
     padding-right: 2px;
