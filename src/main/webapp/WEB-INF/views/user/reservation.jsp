@@ -946,6 +946,8 @@
 										<input class="stAddr1" type="hidden" value="${ addrList1[status.index] }">
 										<input class="stAddr2" type="hidden" value="${ addrList2[status.index] }">
 										<input class="stAPhone" type="hidden" value="${ a.aPhone }">
+										<input class="stLat" type="hidden" value="${ a.aLatitude }">
+										<input class="stLong" type="hidden" value="${ a.aLongitude }">
 									</div>
 								</c:forEach>
 							</div>
@@ -956,7 +958,6 @@
 					</div>
 					</c:otherwise>
 				</c:choose>
-				
 				<br>
 			</div>
 		</div>
@@ -1026,6 +1027,8 @@
 										<input class="edAddr1" type="hidden" value="${ addrList1[status.index] }">
 										<input class="edAddr2" type="hidden" value="${ addrList2[status.index] }">
 										<input class="edAPhone" type="hidden" value="${ a.aPhone }">
+										<input class="edLat" type="hidden" value="${ a.aLatitude }">
+										<input class="edLong" type="hidden" value="${ a.aLongitude }">
 									</div>
 								</c:forEach>
 							</div>
@@ -1036,7 +1039,6 @@
 					</div>
 					</c:otherwise>
 				</c:choose>
-				
 				<br>
 			</div>
 		</div>

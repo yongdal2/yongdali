@@ -309,79 +309,6 @@ $(function(){
 });
 
 
-// 최신 사용한 주소록 알아내기 위한 변수 선언
-var stANo = "";
-var edANo = "";
-function addStAddrList(){
-	stANo = $('input[name="startAddrList"]:checked').closest("div").find('.stANo').val();
-	var stAName = $('input[name="startAddrList"]:checked').closest("div").find('.stAName').val();
-	var stAddr1 = $('input[name="startAddrList"]:checked').closest("div").find('.stAddr1').val();
-	var stAddr2 = $('input[name="startAddrList"]:checked').closest("div").find('.stAddr2').val();
-	var stAPhone = $('input[name="startAddrList"]:checked').closest("div").find('.stAPhone').val();
-	$('#startName').val(stAName);
-	$('#startPhone').val(stAPhone);
-	$('#startAddr').val(stAddr1);
-	$('#startDetailAddr').val(stAddr2);
-	$('#myModal6').css('display','none');	
-}
-
-function addEdAddrList(){
-	edANo = $('input[name="endAddrList"]:checked').closest("div").find('.edANo').val();
-	var edAName = $('input[name="endAddrList"]:checked').closest("div").find('.edAName').val();
-	var edAddr1 = $('input[name="endAddrList"]:checked').closest("div").find('.edAddr1').val();
-	var edAddr2 = $('input[name="endAddrList"]:checked').closest("div").find('.edAddr2').val();
-	var edAPhone = $('input[name="endAddrList"]:checked').closest("div").find('.edAPhone').val();
-	$('#endName').val(edAName);
-	$('#endPhone').val(edAPhone);
-	$('#endAddr').val(edAddr1);
-	$('#endDetailAddr').val(edAddr2);
-	$('#myModal7').css('display','none');
-}
-// 출발지 주소록 중 하나 선택하여 input 태그에 담기
-$("#stALBtn").click(function(){
-	addStAddrList();
-});
-
-// 도착지 주소록 중 하나 선택하여 input 태그에 담기
-$("#edALBtn").click(function(){
-	addEdAddrList();
-});
-
-// 해당 영역 밖에 클릭하면 모달6,7 닫기
-var modal6 = document.getElementById("myModal6");
-$("#myModal6").mouseenter(function(){
-	window.onclick = function(event) {
-		if (event.target == modal6) {
-			// 선택한 주소 지우기
-			$('input[name="startAddrList"]:checked').prop('checked', false);
-			modal6.style.display = "none";
-		}
-	}
-});
-var modal7 = document.getElementById("myModal7");
-$("#myModal7").mouseenter(function(){
-	window.onclick = function(event) {
-		if (event.target == modal7) {
-			// 선택한 주소 지우기
-			$('input[name="endAddrList"]:checked').prop('checked', false);
-			modal7.style.display = "none";
-		}
-	}
-});
-
-// x 버튼 눌렀을때 모달6,7 닫기
-$('#modal-close6').click(function(){
-	$('input[name="startAddrList"]:checked').prop('checked', false);
-	modal7.style.display = "none";
-});
-
-$('#modal-close7').click(function(){
-	$('input[name="endAddrList"]:checked').prop('checked', false);
-	modal7.style.display = "none";
-});
-
-
-
 /* 출발지,도착지 주소 검색 후 위경도 변환 */
 
 //모달 배경화면 생성
@@ -558,9 +485,11 @@ $("#myModal34").mouseenter(function(){
 	}
 });
 
+
 //비용 관련 변수
 var carSize = parseInt($("#sl1").val());
 var carOpt = parseInt($("#sl2").val());
+
 
 /* 출발지에서 도착지까지의 거리 계산 */
 function preChargeFunc(){
@@ -574,7 +503,7 @@ function preChargeFunc(){
 		var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(startLat)) * Math.cos(deg2rad(endLat)) * Math.sin(dLon/2) * Math.sin(dLon/2);
 		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 		var d1 = R * c; // Distance in km
-		var d = d1.toFixed(1);
+		var d = d1.toFixed(2);
 		
 		console.log("계산 거리 : " + d + " km");
 		
@@ -596,6 +525,103 @@ function preChargeFunc(){
 		calc();
 	}
 }
+
+// 최신 사용한 주소록 알아내기 위한 변수 선언
+var stANo = "";
+var edANo = "";
+
+// 출발지 주소록에 선택한 주소값들 해당 input에 담기
+function addStAddrList(){
+	stANo = $('input[name="startAddrList"]:checked').closest("div").find('.stANo').val();
+	var stAName = $('input[name="startAddrList"]:checked').closest("div").find('.stAName').val();
+	var stAddr1 = $('input[name="startAddrList"]:checked').closest("div").find('.stAddr1').val();
+	var stAddr2 = $('input[name="startAddrList"]:checked').closest("div").find('.stAddr2').val();
+	var stAPhone = $('input[name="startAddrList"]:checked').closest("div").find('.stAPhone').val();
+	startLat = $('input[name="startAddrList"]:checked').closest("div").find('.stLat').val();
+	startLong = $('input[name="startAddrList"]:checked').closest("div").find('.stLong').val();
+	
+	console.log(startLat);
+	console.log(startLong);
+	
+	$('#startName').val(stAName);
+	$('#startPhone').val(stAPhone);
+	$('#startAddr').val(stAddr1);
+	$('#startDetailAddr').val(stAddr2);
+	$('#myModal6').css('display','none');
+}
+
+// 도착지 주소록에 선택한 주소값들 해당 input에 담기, 출발지에서 도착지까지 거리 계산 그리고 거리에 따른 견적
+function addEdAddrList(){
+	
+	if(startLat != 0){
+		edANo = $('input[name="endAddrList"]:checked').closest("div").find('.edANo').val();
+		var edAName = $('input[name="endAddrList"]:checked').closest("div").find('.edAName').val();
+		var edAddr1 = $('input[name="endAddrList"]:checked').closest("div").find('.edAddr1').val();
+		var edAddr2 = $('input[name="endAddrList"]:checked').closest("div").find('.edAddr2').val();
+		var edAPhone = $('input[name="endAddrList"]:checked').closest("div").find('.edAPhone').val();
+		endLat = $('input[name="endAddrList"]:checked').closest("div").find('.edLat').val();
+		endLong = $('input[name="endAddrList"]:checked').closest("div").find('.edLong').val();
+		
+		console.log(endLat);
+		console.log(endLong);
+		
+		$('#endName').val(edAName);
+		$('#endPhone').val(edAPhone);
+		$('#endAddr').val(edAddr1);
+		$('#endDetailAddr').val(edAddr2);
+		$('#myModal7').css('display','none');
+		
+		// 출발지에서 도착지까지 거리 계산 그리고 거리에 따른 견적 기능
+		preChargeFunc();
+		
+	} else {
+		alert("출발지 주소를 입력해주세요.");
+		$('#myModal7').css('display','none');
+	}
+}
+
+// 출발지 주소록 버튼 클릭시 주소 추가
+$("#stALBtn").click(function(){
+	addStAddrList();
+});
+
+// 도착지 주소록 버튼 클릭시 주소 추가
+$("#edALBtn").click(function(){
+	addEdAddrList();
+});
+
+// 해당 영역 밖에 클릭하면 출발지&도착지 주소록 닫기
+var modal6 = document.getElementById("myModal6");
+$("#myModal6").mouseenter(function(){
+	window.onclick = function(event) {
+		if (event.target == modal6) {
+			// 선택한 주소 지우기
+			$('input[name="startAddrList"]:checked').prop('checked', false);
+			modal6.style.display = "none";
+		}
+	}
+});
+var modal7 = document.getElementById("myModal7");
+$("#myModal7").mouseenter(function(){
+	window.onclick = function(event) {
+		if (event.target == modal7) {
+			// 선택한 주소 지우기
+			$('input[name="endAddrList"]:checked').prop('checked', false);
+			modal7.style.display = "none";
+		}
+	}
+});
+
+// x 버튼 눌렀을때 모달6,7 닫기
+$('#modal-close6').click(function(){
+	$('input[name="startAddrList"]:checked').prop('checked', false);
+	modal7.style.display = "none";
+});
+
+$('#modal-close7').click(function(){
+	$('input[name="endAddrList"]:checked').prop('checked', false);
+	modal7.style.display = "none";
+});
 
 
 /* 연락처 자릿수 자동 설정 */
@@ -977,25 +1003,6 @@ $(".stAddrBtn2").click(function(){
 		location.href="/semi/delClass.do?cno="+cno;
 	}
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
