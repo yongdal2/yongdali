@@ -312,9 +312,7 @@ $(function(){
 // 최신 사용한 주소록 알아내기 위한 변수 선언
 var stANo = "";
 var edANo = "";
-
-// 출발지 주소록 중 하나 선택하여 input 태그에 담기
-$("#stALBtn").click(function(){
+function addStAddrList(){
 	stANo = $('input[name="startAddrList"]:checked').closest("div").find('.stANo').val();
 	var stAName = $('input[name="startAddrList"]:checked').closest("div").find('.stAName').val();
 	var stAddr1 = $('input[name="startAddrList"]:checked').closest("div").find('.stAddr1').val();
@@ -324,11 +322,10 @@ $("#stALBtn").click(function(){
 	$('#startPhone').val(stAPhone);
 	$('#startAddr').val(stAddr1);
 	$('#startDetailAddr').val(stAddr2);
-	$('#myModal6').css('display','none');
-});
+	$('#myModal6').css('display','none');	
+}
 
-// 도착지 주소록 중 하나 선택하여 input 태그에 담기
-$("#edALBtn").click(function(){
+function addEdAddrList(){
 	edANo = $('input[name="endAddrList"]:checked').closest("div").find('.edANo').val();
 	var edAName = $('input[name="endAddrList"]:checked').closest("div").find('.edAName').val();
 	var edAddr1 = $('input[name="endAddrList"]:checked').closest("div").find('.edAddr1').val();
@@ -339,8 +336,49 @@ $("#edALBtn").click(function(){
 	$('#endAddr').val(edAddr1);
 	$('#endDetailAddr').val(edAddr2);
 	$('#myModal7').css('display','none');
+}
+// 출발지 주소록 중 하나 선택하여 input 태그에 담기
+$("#stALBtn").click(function(){
+	addStAddrList();
 });
 
+// 도착지 주소록 중 하나 선택하여 input 태그에 담기
+$("#edALBtn").click(function(){
+	addEdAddrList();
+});
+
+// 해당 영역 밖에 클릭하면 모달6,7 닫기
+var modal6 = document.getElementById("myModal6");
+$("#myModal6").mouseenter(function(){
+	window.onclick = function(event) {
+		if (event.target == modal6) {
+			// 선택한 주소 지우기
+			$('input[name="startAddrList"]:checked').prop('checked', false);
+			modal6.style.display = "none";
+		}
+	}
+});
+var modal7 = document.getElementById("myModal7");
+$("#myModal7").mouseenter(function(){
+	window.onclick = function(event) {
+		if (event.target == modal7) {
+			// 선택한 주소 지우기
+			$('input[name="endAddrList"]:checked').prop('checked', false);
+			modal7.style.display = "none";
+		}
+	}
+});
+
+// x 버튼 눌렀을때 모달6,7 닫기
+$('#modal-close6').click(function(){
+	$('input[name="startAddrList"]:checked').prop('checked', false);
+	modal7.style.display = "none";
+});
+
+$('#modal-close7').click(function(){
+	$('input[name="endAddrList"]:checked').prop('checked', false);
+	modal7.style.display = "none";
+});
 
 
 

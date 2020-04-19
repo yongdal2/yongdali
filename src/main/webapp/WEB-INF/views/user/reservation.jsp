@@ -948,7 +948,7 @@
 							</div>
 							<c:forEach var="a" items="${ list }" varStatus="status">
 								<div class="row small aL-row">
-									<input type="radio" class="col-xs-2 col-md-2" name="endAddrList" style="margin-top: 10px; cursor: pointer;">
+									<input type="radio" class="col-xs-2 col-md-2" name="endAddrList" style="cursor: pointer; margin-top: 10px;">
 									<div class="col-xs-2 col-md-2">
 										<span>${ a.aPlace }</span>
 										<br>
@@ -978,6 +978,26 @@
 				<br>
 			</div>
 		</div>
+		<script>
+		var modal6 = document.getElementById("myModal6");
+		$("#myModal6").mouseenter(function(){
+			window.onclick = function(event) {
+				if (event.target == modal6) {
+					$('input[name="startAddrList"]:checked').attr('checked', false);
+					modal6.style.display = "none";
+				}
+			}
+		});
+		var modal7 = document.getElementById("myModal7");
+		$("#myModal7").mouseenter(function(){
+			window.onclick = function(event) {
+				if (event.target == modal7) {
+					$('input[name="endAddrList"]:checked').attr('checked', false);
+					modal7.style.display = "none";
+				}
+			}
+		});
+		</script>
 		<!-- Modal8 : 결제 -->
 		<div id="myModal8" class="modal11" style="padding-top: 10%;">
 			<div class="modal-content11" style="width: 600px">
