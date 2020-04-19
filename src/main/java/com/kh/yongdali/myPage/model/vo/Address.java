@@ -9,6 +9,8 @@ public class Address {
 	private String aPlace;
 	private String aName;
 	private String aAddress;
+	private double aLatitude;
+	private double aLongitude;
 	private String aPhone;
 	private Date aRecentDate;
 	
@@ -16,14 +18,16 @@ public class Address {
 		super();
 	}
 
-	public Address(String aNo, String aMno, String aPlace, String aName, String aAddress, String aPhone,
-			Date aRecentDate) {
+	public Address(String aNo, String aMno, String aPlace, String aName, String aAddress, double aLatitude,
+			double aLongitude, String aPhone, Date aRecentDate) {
 		super();
 		this.aNo = aNo;
 		this.aMno = aMno;
 		this.aPlace = aPlace;
 		this.aName = aName;
 		this.aAddress = aAddress;
+		this.aLatitude = aLatitude;
+		this.aLongitude = aLongitude;
 		this.aPhone = aPhone;
 		this.aRecentDate = aRecentDate;
 	}
@@ -68,6 +72,22 @@ public class Address {
 		this.aAddress = aAddress;
 	}
 
+	public double getaLatitude() {
+		return aLatitude;
+	}
+
+	public void setaLatitude(double aLatitude) {
+		this.aLatitude = aLatitude;
+	}
+
+	public double getaLongitude() {
+		return aLongitude;
+	}
+
+	public void setaLongitude(double aLongitude) {
+		this.aLongitude = aLongitude;
+	}
+
 	public String getaPhone() {
 		return aPhone;
 	}
@@ -87,8 +107,10 @@ public class Address {
 	@Override
 	public String toString() {
 		return "Address [aNo=" + aNo + ", aMno=" + aMno + ", aPlace=" + aPlace + ", aName=" + aName + ", aAddress="
-				+ aAddress + ", aPhone=" + aPhone + ", aRecentDate=" + aRecentDate + "]";
+				+ aAddress + ", aLatitude=" + aLatitude + ", aLongitude=" + aLongitude + ", aPhone=" + aPhone
+				+ ", aRecentDate=" + aRecentDate + "]";
 	}
+
 
 
 }
