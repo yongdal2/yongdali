@@ -612,6 +612,7 @@ $("#myModal7").mouseenter(function(){
 	}
 });
 
+
 // x 버튼 눌렀을때 모달6,7 닫기
 $('#modal-close6').click(function(){
 	$('input[name="startAddrList"]:checked').prop('checked', false);
