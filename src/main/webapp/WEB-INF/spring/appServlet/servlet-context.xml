@@ -36,11 +36,11 @@
 		</interceptor>
 	</interceptors>
 	
-	<beans:bean id="echoHandler" class="com.kh.yongdali.chat.config.EchoHandler" />
+	<!-- <beans:bean id="echoHandler" class="com.kh.yongdali.chat.config.EchoHandler" />
 	<websocket:handlers>
 		<websocket:mapping handler="echoHandler" path="/echo" />
 		<websocket:sockjs />
-	</websocket:handlers>
+	</websocket:handlers> -->
 	
 	<!-- 회원가입 메일 인증(메일 보내기) -->
 	<beans:bean id="mailSender"	class="org.springframework.mail.javamail.JavaMailSenderImpl">
