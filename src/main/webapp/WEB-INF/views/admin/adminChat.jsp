@@ -171,12 +171,12 @@
 		
 		function connectionSocket(){
 			connect = true;
-			socket = new WebSocket('ws://192.168.0.80:8888/yongdali/chatting');
+			socket = new WebSocket('ws://192.168.110.45:8888/yongdali/chatting');
 			/* 페이지 접속한 session id */
-			var sessionid = '${sessionScope.loginUser.mId}';
+			var sessionid = $("#senderId").val();
 			
 			socket.onopen = function(e){
-				//socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),"","createroom",$("#receiveId").val())));
+//				socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),"","createroom","")));
 
 			}
 			socket.onmessage = function(e){

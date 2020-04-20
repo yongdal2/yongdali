@@ -69,7 +69,7 @@
 							<br>
 						</p>
 						<img
-							src="${contextPath}/resources/images/driver/regCard/${driver.carImgRename}"
+							src="${contextPath}/resources/images/driver/regCard/${driver.regCardImgRename}"
 							height="327px" class="zoom-in" data-toggle="modal"
 									data-target="#zoomCRA"> <br>
 					</div>
@@ -84,7 +84,7 @@
 				<div class="modal-body">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<img
-							src="${contextPath}/resources/images/driver/regCard/${driver.carImgRename}"
+							src="${contextPath}/resources/images/driver/regCard/${driver.regCardImgRename}"
 							width="600px" >
 				</div>
 			</div>
