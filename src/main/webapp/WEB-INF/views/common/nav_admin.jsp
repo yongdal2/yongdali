@@ -27,8 +27,7 @@
 		
 }
 </style>
-
-<header id="header1" style="border-bottom:1px solid #eee;"> <!-- hr 미색 -->
+<header id="header1" style=" border-bottom: rgb(90,140,255) solid 3px !important;"> <!-- hr 미색 -->
 	<nav class="navbar navbar-expand navbar-dark mai-top-header" 
 		style="margin-bottom: 18px; padding-top: 23px; font-size: 18px;">
 		<div class="container">

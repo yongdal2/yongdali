@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.yongdali.admin.model.dao.AdminDao;
 import com.kh.yongdali.member.model.vo.Member;
+import com.kh.yongdali.driver.model.vo.Driver;
 import com.kh.yongdali.common.PageInfo;
 
 @Service("aService")
@@ -23,8 +24,18 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public ArrayList<Member> selectList(PageInfo pi) {
-		return aDao.selectList(pi);
+	public ArrayList<Member> selectMemList(PageInfo pi) {
+		return aDao.selectMemList(pi);
+	}
+
+	@Override
+	public int getDriListCount() {
+		return aDao.getDriListCount();
+	}
+
+	@Override
+	public ArrayList<Driver> selectDriList(PageInfo pi) {
+		return aDao.selectDriList(pi);
 	}
 
 }
