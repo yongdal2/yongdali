@@ -168,10 +168,7 @@ public class MemberController {
 	 */
 	@RequestMapping("signUpView.me")
 	public String signUpForm(@RequestParam("pushEnabled") char pushEnabled, Model model) {
-		logger.debug("푸시 알림 동의 : " + pushEnabled);
-		
 		model.addAttribute("pushEnabled", pushEnabled);
-		
 		return "login&signUp/signUpForm";
 	}
 
@@ -182,10 +179,7 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping("emailDup.me")
 	public String emailDupChk(@RequestParam("mId") String mId) {
-		logger.debug("가입 요청 email : " + mId);
-		
 		int result = mService.emailChk(mId);
-		logger.debug("중복검사 결과값 : " + result);
 		
 		if(result > 0) {
 			return "exist";
@@ -286,8 +280,6 @@ public class MemberController {
 				}
 			}			
 			result += mService.insertDriver(d);
-			logger.debug("Member 및 Driver insert 결과값 : " + String.valueOf(result));
-			
 		}
 		
 		// TODO 1 이면 일반회원, 2 면 기사회원가입 완료 페이지 띄우기
