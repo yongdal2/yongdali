@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -18,22 +19,27 @@
 	<!-- Navigation -->
 	<%@ include file="../common/nav_admin.jsp"%>
 	<!-- 배경색 -->
-<!-- <div style="width: 100%; height: 100%; background: rgb(233, 246, 240); padding-top: 30px; padding-top: 30px;"> -->
-	<div style="width: 100%; height: 100%; padding-top: 30px; padding-top: 30px;">
+<div id="backg">
+	<!-- <div style="width: 100%; height: 100%; padding-top: 30px; padding-top: 30px;"> -->
 
 		<!-- main -->
 		<!-- <div class="container"> -->
+		<div id="white"> <!-- 하얀 테두리 -->
 		<div class="content container">
 			<div class="row">
+			<div id=title>
 				<h2 class="jal">관리자 페이지</h2>
-				<p>기사님 목록 / admin_Driver.jsp / 사진은 버튼 누르면 팝업으로 띄우기</p>
+			<p>회원님 목록 / admin_Mem.jsp / 회원번호, 회원구분으로 sql</p>
+			</div>
 				<hr>
 			</div>
+			
+			
 			
 			<div class="row" id="content">
 			<!-- <div id="content"> -->
 				<div class="col-lg-3 sidebar">
-					<a href="#"><span class="sidebar_span">회원님 목록</span></a><br>
+					<a href="aMem.ad"><span class="sidebar_span">회원님 목록</span></a><br>
 					<a href="#"><span class="sidebar_span">기사님 목록</span></a><br>
 					<a href="#"><span class="sidebar_span">예약 내역</span></a><br>
 					<a href="#"><span class="sidebar_span">정산 내역</span></a><br> 
@@ -49,30 +55,28 @@
 					<table class="table table-striped table-hover text-center">
 						<thead id="thead">
 							<tr>
-								<th>사업자번호</th>
 								<th>회원번호</th>
-								<th>차량톤수</th>
-								<th>차종</th>
-								<th>차량번호</th>
-								<th>증명사진원명</th>
-								<th>증명사진가명</th>
-								<th>차량사진원명</th>
-								<th>차량사진가명</th>
+								<th>회원ID(이메일)</th>
+								<th>이름</th>
+								<th>휴대폰번호</th>
+								<th>회원구분</th>
+								<th>회원상태</th>
+								<th>알림설정</th>
+								<th>가입일</th>
 							</tr>
 						</thead>
 						
 						<c:forEach var="a" items="${ list }">
 						<tbody id="tbody">
 							<tr>
-								<td>${ a.dNo }</td>
-								<td>${ a.dmNo }</td>
-								<td>${ a.capacity }</td>
-								<td>${ a.type }</td>
-								<td>${ a.carNo }</td>
-								<td>${ a.idImgOrigin }</td>
-								<td>${ a.idImgRename }</td>
-								<td>${ a.carImgOrigin }</td>
-								<td>${ a.carImgRename }</td>
+								<td>${ a.mNo }</td>
+								<td>${ a.mId }</td>
+								<td>${ a.mName }</td>
+								<td>${ a.phone }</td>
+								<td>${ a.mSort }</td>
+								<td>${ a.mStatus }</td>
+								<td>${ a.pushEnabled }</td>
+								<td>${ a.enrollDate }</td>
 							</tr>
 						</tbody>
 						</c:forEach>
@@ -139,11 +143,11 @@
 						</li>
 					</ul>
 				</div>
-			</div>
-			
-			
-			
+			</div>	<!--  -->
 		</div>
+		</div> <!-- 하얀테두리 -->
+		
+		
 	</div>
 </div>
 

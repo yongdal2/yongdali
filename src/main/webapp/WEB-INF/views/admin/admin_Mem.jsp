@@ -19,11 +19,12 @@
 	<!-- Navigation -->
 	<%@ include file="../common/nav_admin.jsp"%>
 	<!-- 배경색 -->
-<div style="width: 100%; height: 100%; background: rgba(90,140,255, 0.1); padding-top: 30px; padding-top: 30px;">
+<div id="backg">
 	<!-- <div style="width: 100%; height: 100%; padding-top: 30px; padding-top: 30px;"> -->
 
 		<!-- main -->
 		<!-- <div class="container"> -->
+		<div id="white"> <!-- 하얀 테두리 -->
 		<div class="content container">
 			<div class="row">
 			<div id=title>
@@ -32,6 +33,8 @@
 			</div>
 				<hr>
 			</div>
+			
+			
 			
 			<div class="row" id="content">
 			<!-- <div id="content"> -->
@@ -140,10 +143,11 @@
 						</li>
 					</ul>
 				</div>
-			</div>	<!--  -->
-			
-			
+			</div>	<!-- list -->
 		</div>
+		</div> <!-- 하얀테두리 -->
+		
+		
 	</div>
 </div>
 

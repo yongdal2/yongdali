@@ -22,6 +22,7 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
    	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=03ea077d7ecc6636dffede985cc5c57d&libraries=services"></script>
+	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
     <title>용달이 | 예약 내역</title>
 </head>
@@ -75,15 +76,15 @@
 							<td>도착지</td>
 							<td>결제 금액</td>
 							<td>차량정보</td>
-							<td>차량정보</td>
 							<td>상세정보</td>
+							<td>메세지</td>
 							
 							
 						</tr>
 					</thead>
-					<c:forEach var="r" items="rList" varStatus="vs">
+					<c:forEach var="r" items="${ rList }" varStatus="vs">
 						<tr>
-							<td>예약 번호</td>
+							<td>${ r.rNo }</td>
 							<td>진행 상태</td>
  							<td>예약 일자</td>
  							<td>상차일</td>
@@ -91,9 +92,9 @@
 							<td>출발지</td>
 							<td>도착지</td>
 							<td>결제 금액</td>
-							<td>차량정보</td>
-							<td>차량정보</td>
-							<td>상세정보</td>
+							<td><span class="fas fa-truck" id="turck${vs.index }"></span></td>
+							<td></td>
+							<td>${r.msg }</td>
 						</tr>
 					</c:forEach>
 				</table>

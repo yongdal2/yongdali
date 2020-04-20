@@ -82,11 +82,9 @@ public class MemberController {
 				date[i] = new SimpleDateFormat("yyyy-MM-dd").parse(sDate[i]);
 				milliesDate[i] = date[i].getTime();
 				mList.get(i).setEnrollDate(new java.sql.Date(milliesDate[i]));
-				logger.debug(mList.get(i).toString());
 				
 				encPwdArr[i] = bcryptPasswordEncoder.encode(mList.get(i).getPwd());
 				mList.get(i).setPwd(encPwdArr[i]);
-				logger.debug(mList.get(i).toString()+"\n");
 			}
 		} catch (ParseException e) {
 			model.addAttribute("msg", e.getMessage());
@@ -94,7 +92,7 @@ public class MemberController {
 		}
 		
 		int result = mService.insertSampleMembers(mList);
-		logger.debug(String.valueOf(result));
+		logger.debug("샘플데이터 " + String.valueOf(result) + "개 입력 완료!");
 		
 		if(result > 3) {
 			return "redirect:home.do";
@@ -147,8 +145,9 @@ public class MemberController {
 	 * @param status
 	 * @return
 	 */
-	@RequestMapping("logout.me")
+	@RequestMapping("logout1.me")
 	public String memberLogout(SessionStatus status) {
+		System.out.println("siab");
 		status.setComplete();
 		
 		return "redirect:home.do";
@@ -269,7 +268,7 @@ public class MemberController {
 			// dmNo 삽입을 위해 기존 select문 활용
 			Member mem = mService.loginMember(m);
 			d.setDmNo(mem.getmNo());
-//			logger.debug(d.toString());	
+
 			if(!idImg.getOriginalFilename().equals("")) {
 				String renameFileName = saveFile.rename(idImg, request, "\\id", "yongdali_id_");
 				
@@ -286,11 +285,12 @@ public class MemberController {
 					d.setRegCardImgRename(renameFileName);
 				}
 			}			
-			result = mService.insertDriver(d);
+			result += mService.insertDriver(d);
+			logger.debug("Member 및 Driver insert 결과값 : " + String.valueOf(result));
+			
 		}
 		
-		
-		
+		// TODO 1 이면 일반회원, 2 면 기사회원가입 완료 페이지 띄우기
 		if(result > 0) {
 			return "login&signUp/login";
 		}else {
@@ -299,7 +299,6 @@ public class MemberController {
 		}
 	}
 	
-//	public String saveFile(MultipartFile)
 
 }
 

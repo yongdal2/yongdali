@@ -75,8 +75,8 @@ $(document).ready(function(){
 	})
 	
 	$(".logout").click(function(){
-		location.href="logout.me";
-		history.go();
+		location.href="logout1.me";
+		
 	})
 	
 	$(".driverPage").click(function(){
