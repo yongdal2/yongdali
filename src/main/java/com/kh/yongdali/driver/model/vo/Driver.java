@@ -4,7 +4,7 @@ public class Driver {
 
 	private String dNo;
 	private String dmNo;
-	private float capacity;
+	private String capacity;
 	private String type;
 	private String carNo;
 	private String idImgOrigin;
@@ -16,7 +16,7 @@ public class Driver {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Driver(String dNo, String dmNo, float capacity, String type, String carNo, String idImgOrigin,
+	public Driver(String dNo, String dmNo, String capacity, String type, String carNo, String idImgOrigin,
 			String idImgRename, String regCardImgOrigin, String regCardImgRename) {
 		super();
 		this.dNo = dNo;
@@ -46,11 +46,11 @@ public class Driver {
 		this.dmNo = dmNo;
 	}
 
-	public float getCapacity() {
+	public String getCapacity() {
 		return capacity;
 	}
 
-	public void setCapacity(float capacity) {
+	public void setCapacity(String capacity) {
 		this.capacity = capacity;
 	}
 
