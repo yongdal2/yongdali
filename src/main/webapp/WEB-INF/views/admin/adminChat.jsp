@@ -34,7 +34,7 @@
           </ul>
         </nav>
   
-        <section class="discussions">
+        <section class="discussions" id="chatList">
           <div class="discussion search">
             <div class="searchbar">
               <svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -44,13 +44,13 @@
               <input type="text" placeholder="Search..."></input>
             </div>
           </div>
-          <div class="discussion message-active">
+          <!-- <div class="discussion message-active" id="">
             <div class="photo">
               <div class="online"></div>
             </div>
             <div class="desc-contact">
               <p class="name">유승제</p>
-              <!-- 마지막 메시지 -->
+              마지막 메시지
               <p class="message">마지막 메시지</p>
             </div>
           </div>
@@ -110,7 +110,7 @@
                 <p class="name">유승제</p>
                 <p class="message">어쩌고 저쩌고 저쩌고</p>
             </div>
-          </div>
+          </div> -->
         </section>
 
         <section class="chat">
@@ -133,7 +133,10 @@
             <p class="time"> 15:09PM Today</p> -->
           </div>
           <div class="footer-chat">
-          	<input type="text" id="sender" value="${sessionScope.loginUser.mName }" style="display: none;">
+          	<input type="text" id="senderId" value="${sessionScope.loginUser.mId }" style="display: none;">
+            <input type="text" id="senderName" value="${sessionScope.loginUser.mName }" style="display: none;">
+            <input type="hidden" id="room"/>
+    		<input type="hidden" id="receiveId"/>
             <input type="text" class="write-message" id="msgArea" placeholder="Type your message here"></input>
             <button class="sendBtn" onclick="sendMessage();">
               <svg class="bi bi-cursor" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -147,124 +150,106 @@
     </div>
     
     <script>
-		    $(function(){
-				openSocket();
-			});
-			var ws;
-			
-			var today = new Date();
-			var hours = today.getHours();
-			var minutes = today.getMinutes();
-			
-			function openSocket(){
-				if(ws!==undefined && ws.readyState!==WebSocket.CLOSED){
-		            return;
-		        }
-				
-				ws = new WebSocket("ws://192.168.110.45:8888/yongdali/kh.do");
-		    	
-				ws.onopen = function(message){
-		    		console.log("확인");
+	    var socket;//socket객체 보관용
+		var connect=false;//연결이 되었는지
+		var today = new Date();
+		var hours = today.getHours();
+		var minutes = today.getMinutes();
+	
+		$(function(){
+			connectionSocket();
+		})
 		
-		    		var printHTML = "<div class='message text-only'>";
-	    			printHTML += "<div class='response' id='meMsg'>";
-	    			printHTML += "<p class='text'>"+'용달이에 오신걸 환영합니다.'+"</p>";
-	    			printHTML += "</div>";
-	    			printHTML += "<p class='response-time time'>"+hours+":"+minutes+"</p>";
-	    			printHTML += "</div>";
-	    			
-	    			writeResponse(printHTML);		    		
-		    	};
-		    	
-		    	ws.onmessage = function(event){
-		    		var data = event.data;
-		    		
-		    		/* 페이지 접속한 session id */
-		    		var sessionid = '${sessionScope.loginUser.mName}';
-		    		
-		    		/* 메시지 보낸 아이디 */
-		    		var currentuser_session = null;
-		    		var message = null;
-		    		
-		    		console.log(data);
-		    		
-		    		var strArray = data.split('|');
-		    		
-		    		for(var i = 0; i<strArray.length; i++){
-		    			console.log('str['+i+']: ' + strArray[i]);
-		    		}
-		    		
-		    		
-		    		message = strArray[0];
-		    		currentuser_session = strArray[1];
-		    		
-		    		console.log("message : " + message);
-		    		console.log("sessionid : " + sessionid);
-		    		console.log('current session id : ' + currentuser_session);
-		    		
-		    		if(sessionid != currentuser_session){		              
-		              	var printHTML = "<div class='message' id='youMsg'>";
-		              	printHTML += "<div class='name'>";
-		              	printHTML += "<h2>"+currentuser_session+"</h2>";
-		              	printHTML += "</div>";
-		              	printHTML += "<div class='messageArea'>";
-		    			printHTML += "<p class='text'>"+message+"</p>";
-		    			printHTML += "<p class='time'>"+hours+":"+minutes+"</p>";
-		    			printHTML += "</div>";
-		    			printHTML += "</div>";
+		//message token구성
+		function MessageFlag(id, room, msg, flag, receiveId){
+			this.id=id;
+			this.room=room;
+			this.msg=msg;
+			this.flag=flag;
+			this.receiveId=receiveId;
+		}
+		
+		function connectionSocket(){
+			connect = true;
+			socket = new WebSocket('ws://192.168.0.80:8888/yongdali/chatting');
+			/* 페이지 접속한 session id */
+			var sessionid = '${sessionScope.loginUser.mId}';
+			
+			socket.onopen = function(e){
+				//socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),"","createroom",$("#receiveId").val())));
 
-		    		}else{
-		    			var printHTML = "<div class='message text-only'>";
+			}
+			socket.onmessage = function(e){
+				console.log(e.data);
+				var data=JSON.parse(e.data);
+				
+				console.log("세션아이디:"+sessionid);
+				console.log("받는아이디:"+data["receiveId"]);
+				
+				
+				if(data["flag"]=="room"){
+					var rooms = data['msg'].split(",");
+					console.log(rooms);
+					var printHTML = "<div class='discussion'>";
+					printHTML += "<div class='photo'></div>";
+					printHTML += "<div class='desc-contact'>";
+					/* printHTML += "<p class='name' id='listName'></p>"; */
+					printHTML += "</div>";
+					printHTML += "</div>";
+					
+					$("#chatList").append(printHTML);
+					 for(var i=0; i<rooms.length; i++){
+						 $(".desc-contact").append($("<p class='name' id='listName'>").html(rooms[i]).click(function(){
+							 $("#room").val($(this).html());
+					 		 checkCurrentRoom(this);
+						 }));
+						/* $('#listName').html(rooms[i]); */
+					}
+				}
+				
+				if(data["flag"]!="room" && data["flag"]!="user"){
+					if(sessionid == data["id"]){
+						var printHTML = "<div class='message text-only'>";
 		    			printHTML += "<div class='response' id='meMsg'>";
-		    			printHTML += "<p class='text'>"+message+"</p>";
+		    			printHTML += "<p class='text'>"+data["msg"]+"</p>";
 		    			printHTML += "</div>";
 		    			printHTML += "<p class='response-time time'>"+hours+":"+minutes+"</p>";
 		    			printHTML += "</div>";
-		    					    			
-		    		} 
+	    			}else{    			
+	    				var printHTML = "<div class='message' id='youMsg'>";
+		              	printHTML += "<div class='name'>";
+		              	printHTML += "<h2>"+data["room"]+"</h2>";
+		              	printHTML += "</div>";
+		              	printHTML += "<div class='messageArea'>";
+		    			printHTML += "<p class='text'>"+data["msg"]+"</p>";
+		    			printHTML += "<p class='time'>"+hours+":"+minutes+"</p>";
+		    			printHTML += "</div>";
+		    			printHTML += "</div>";
+	    			}
 					writeResponse(printHTML);
-		    	};
-		    	
-		    	ws.onclose = function(message){
-		    		var printHTML = "<div class='message text-only'>";
-	    			printHTML += "<div class='response' id='meMsg'>";
-	    			printHTML += "<p class='text'>"+'채팅을 종료합니다!'+"</p>";
-	    			printHTML += "</div>";
-	    			printHTML += "<p class='response-time time'>"+hours+":"+minutes+"</p>";
-	    			printHTML += "</div>";
-	    			
-	    			writeResponse(printHTML);
-		    	};
+				}
+			
 			}
-			
-			
-			 function writeResponse(text){
-				$('.messages-chat').append(text);
-		     }
-			
-			/* ws.onerror = function(message){
-				youMsg.innerHTML += "에러 발생";
-			}; */
-			
-			
-			
-			function sendMessage(){
-				/* var message = document.getElementById("msgArea");
-				
-				meMsg.innerHTML += message.value;
-				
-				ws.send(message.value);
-				
-				message.value = ""; */
-				var message = $("#msgArea").val()+"|"+$("#sender").val();
-				ws.send(message);
-				$("#msgArea").val("");
+		}
+		function checkCurrentRoom(e){
+			$(e).parent().find("p").css({background:"white"});
+        	$(e).css({background:"lightgray"});
+		}
 		
-			}
-			
-			function disconnect(){
-		        ws.close();
-		    }
+		 function writeResponse(text){
+			 $('.messages-chat').append(text);
+	 		$(".messages-chat").scrollTop($(".messages-chat")[0].scrollHeight);
+	    }
+		
+		function sendMessage(){
+			socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),$("#msgArea").val(),"msg",$("#room").val())));
+			$("#msgArea").val("");
+	
+		}
+		
+		function disconnect(){
+			socket.close();
+	    }
     
     </script>
   </body>
