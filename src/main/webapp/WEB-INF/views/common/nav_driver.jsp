@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
 	type="text/javascript"></script>
+<script src="${contextPath}/resources/js/login&signUp.js"></script>		
 
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"

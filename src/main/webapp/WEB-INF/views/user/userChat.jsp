@@ -25,7 +25,7 @@
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="userInfo">
-                <img src="${contextPath }/resources/images/ydl_logo/ydl_ic_gr(70X70).png" alt="">
+                <img src="${contextPath }/resources/images/ydl_logo/ydl_ic_gr(70X70).png" alt="" onclick="createRoom();">
                 <div>
                     <h2>용달이</h2>
                     <h3>Live Chat</h3>
@@ -144,7 +144,8 @@
     		
     		socket.onopen = function(e){
     			//socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),"","createroom",$("#receiveId").val())));
-    			socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),"","createroom","admin@naver.com")));
+    			//											          아이디				     방이름(닉네임)       msg     flag		   메시지 받는 사람
+    			//socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),"","createroom","admin@naver.com")));
     		}
     		socket.onmessage = function(e){
     			console.log(e.data);
@@ -209,9 +210,15 @@
     	
     	function sendMessage(){
     		//socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),$("#msgArea").val(),"msg",$("#receiveId").val())));
+    		//											          아이디				     방이름(닉네임)              msg          flag		   메시지 받는 사람
     		socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),$("#msgArea").val(),"msg","admin@naver.com")));
     		$("#msgArea").val("");
 
+    	}
+    	
+    	function createRoom(){
+												//	          아이디				     방이름(닉네임)       msg     flag		   메시지 받는 사람
+    		socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),"","createroom","admin@naver.com")));
     	}
     	
     	function disconnect(){
