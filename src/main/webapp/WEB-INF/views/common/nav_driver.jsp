@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
 	type="text/javascript"></script>
-<script src="${contextPath}/resources/js/login&signUp.js"></script>	
+
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -103,7 +103,7 @@
 								</li>
 							</c:if>
 							<li class="nav-item">
-								<button class="btn btn-outline-default navbar-btn logout" style="background: white;" >로그아웃</button>
+								<button class="btn btn-outline-default navbar-btn logout" style="background: white;" onclick="location.href='logout1.me'" >로그아웃</button>
 							</li>
 						</c:if>	
 					</ul>
@@ -116,4 +116,5 @@
 		<p style="color: white">용달이에는 다양한 차종이 준비되어 있습니다.</p>
 		<h2 style="color: white"><b>고객님의 용도에 맞는 트럭을 찾아보세요</b></h2>
 	</div>
+	
 </header>

@@ -72,7 +72,7 @@
 							</li>
 						</c:if>
 						<li class="nav-item">
-							<button class="btn btn-outline-default navbar-btn logout" style="background: white;" >로그아웃</button>
+							<button class="btn btn-outline-default navbar-btn logout" style="background: white;" onclick="location.href='logout1.me'" >로그아웃</button>
 						</li>
 					</c:if>	
 				</ul>

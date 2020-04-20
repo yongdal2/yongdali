@@ -17,6 +17,8 @@ public class MemberController_njh {
 		if(mem != null) {
 			if(mem.getmSort().equals("사업자") ) {
 				return "driver/driverMain";
+			}else if(mem.getmSort().equals("관리자")){
+				return "admin/admin";
 			}else {
 				return "user/home";
 			}
@@ -24,6 +26,7 @@ public class MemberController_njh {
 			return "user/home";
 		}
 	}
+	
 	
 	@RequestMapping("reservation.do")
 	public String reservation() {
