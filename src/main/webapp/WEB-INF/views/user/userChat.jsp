@@ -138,9 +138,9 @@
     	
     	function connectionSocket(){
     		connect = true;
-    		socket = new WebSocket('ws://192.168.0.80:8888/yongdali/chatting');
+    		socket = new WebSocket('ws://192.168.110.45:8888/yongdali/chatting');
     		/* 페이지 접속한 session id */
-    		var sessionid = '${sessionScope.loginUser.mId}';
+    		var sessionid = $("#senderId").val();
     		
     		socket.onopen = function(e){
     			//socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),"","createroom",$("#receiveId").val())));
@@ -153,7 +153,7 @@
     			console.log("세션아이디:"+sessionid);
     			console.log("받는아이디:"+data["receiveId"]);
     			
-    			if(data["flag"]!="room" && data["flag"]!="user"){
+    			/* if(data["flag"]!="room" && data["flag"]!="user"){
     				if(sessionid == data["id"]){
 	    				var printHTML = "<li class='me'>";
 	        			printHTML += "<div class='entete'>";
@@ -172,11 +172,30 @@
 		    			printHTML += "</li>";	
 	    			}
     				
-    			}
-	    			
+    			} */
+    			if(data["flag"]!="room" && data["flag"]!="user"){
+    				if(sessionid == data["id"]){
+	    				var printHTML = "<li class='me'>";
+	        			printHTML += "<div class='entete'>";
+	        			printHTML += "<h3>"+hours+":"+minutes+"<h3>";
+	        			printHTML += "<h2>"+data["room"]+"</h2>";
+	        			printHTML += "</div>";
+	        			printHTML += "<div class='message' id='meMsg'>"+data["msg"]+"</div>";
+	        			printHTML += "</li>";
+	    			}else{    
+	    				if(data["id"]=="admin@naver.com"){
+		        			var printHTML = "<li class='you'>";
+			    			printHTML += "<div class='entete'>";
+			    			printHTML += "<h2>"+data["room"]+"</h2>";
+			    			printHTML += "<h3>"+hours+":"+minutes+"<h3>";
+			    			printHTML += "</div>";
+			    			printHTML += "<div class='message'id='youMsg'>"+data["msg"]+"</div>";	    			
+			    			printHTML += "</li>";	
+	    					
+	    				}
+	    			}
     				
-    		
-    			
+    			}
     			writeResponse(printHTML);
     			
     		}
