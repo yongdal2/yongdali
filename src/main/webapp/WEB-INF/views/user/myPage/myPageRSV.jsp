@@ -90,16 +90,27 @@
  							<td>상차일</td>
  							<td>하차일</td>
 							<td>출발지</td>
-							<td>도착지</td>
+							<td>dd</td>
 							<td>결제 금액</td>
-							<td><span class="fas fa-truck" id="turck${vs.index }"></span></td>
+							<td><span class="fas fa-truck" id="turck${vs.index }" ></span></td>
 							<td></td>
-							<td>${r.msg }</td>
+							<td>${ r.msg }</td>
 						</tr>
 					</c:forEach>
 				</table>
 			</div>
 		</div>
+		<button type=”button” class=”btn btn-default” title=”Popover
+			title” data-container=”body” data-toggle=”popover”
+			data-placement=”left” data-content=”Vivamus sagittis lacus vel augue
+			laoreet rutrum faucibus.” data-trigger=”hover”>Popover on
+			left</button>
+			
+			<script type="text/javascript">
+			$("[data-toggle='popover']").popover();
+			$("[data-toggle='popover']").popover({ options });
+			$("[data-toggle='popover']").popover({ delay:{‘show’:500, ‘hide’:1000} });
+			</script>
 		<div class="row text-center">
 			<ul class="pagination ft_gr">
 				<li><a href="#"><<</a></li>
