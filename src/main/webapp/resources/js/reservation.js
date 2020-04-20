@@ -309,7 +309,6 @@ $(function(){
 });
 
 
-
 /* 출발지,도착지 주소 검색 후 위경도 변환 */
 
 //모달 배경화면 생성
@@ -471,6 +470,7 @@ function initLayerPosition(){
  element_layer.style.width = width + 'px';
  element_layer.style.height = height + 'px';
  element_layer.style.border = borderWidth + 'px solid';
+ 
  // 실행되는 순간의 화면 너비와 높이 값을 가져와서 중앙에 뜰 수 있도록 위치를 계산한다.
  element_layer.style.left = (((window.innerWidth || document.documentElement.clientWidth) - width)/2 - borderWidth) + 'px';
  element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
@@ -485,9 +485,6 @@ $("#myModal34").mouseenter(function(){
 	}
 });
 
-//비용 관련 변수
-var carSize = parseInt($("#sl1").val());
-var carOpt = parseInt($("#sl2").val());
 
 /* 출발지에서 도착지까지의 거리 계산 */
 function preChargeFunc(){
@@ -501,7 +498,7 @@ function preChargeFunc(){
 		var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(startLat)) * Math.cos(deg2rad(endLat)) * Math.sin(dLon/2) * Math.sin(dLon/2);
 		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 		var d1 = R * c; // Distance in km
-		var d = d1.toFixed(1);
+		var d = d1.toFixed(2);
 		
 		console.log("계산 거리 : " + d + " km");
 		
@@ -523,6 +520,104 @@ function preChargeFunc(){
 		calc();
 	}
 }
+
+// 최신 사용한 주소록 알아내기 위한 변수 선언
+var stANo = "";
+var edANo = "";
+
+// 출발지 주소록에 선택한 주소값들 해당 input에 담기
+function addStAddrList(){
+	stANo = $('input[name="startAddrList"]:checked').closest("div").find('.stANo').val();
+	var stAName = $('input[name="startAddrList"]:checked').closest("div").find('.stAName').val();
+	var stAddr1 = $('input[name="startAddrList"]:checked').closest("div").find('.stAddr1').val();
+	var stAddr2 = $('input[name="startAddrList"]:checked').closest("div").find('.stAddr2').val();
+	var stAPhone = $('input[name="startAddrList"]:checked').closest("div").find('.stAPhone').val();
+	startLat = $('input[name="startAddrList"]:checked').closest("div").find('.stLat').val();
+	startLong = $('input[name="startAddrList"]:checked').closest("div").find('.stLong').val();
+	
+	console.log(startLat);
+	console.log(startLong);
+	
+	$('#startName').val(stAName);
+	$('#startPhone').val(stAPhone);
+	$('#startAddr').val(stAddr1);
+	$('#startDetailAddr').val(stAddr2);
+	$('#myModal6').css('display','none');
+}
+
+// 도착지 주소록에 선택한 주소값들 해당 input에 담기, 출발지에서 도착지까지 거리 계산 그리고 거리에 따른 견적
+function addEdAddrList(){
+	
+	if(startLat != 0){
+		edANo = $('input[name="endAddrList"]:checked').closest("div").find('.edANo').val();
+		var edAName = $('input[name="endAddrList"]:checked').closest("div").find('.edAName').val();
+		var edAddr1 = $('input[name="endAddrList"]:checked').closest("div").find('.edAddr1').val();
+		var edAddr2 = $('input[name="endAddrList"]:checked').closest("div").find('.edAddr2').val();
+		var edAPhone = $('input[name="endAddrList"]:checked').closest("div").find('.edAPhone').val();
+		endLat = $('input[name="endAddrList"]:checked').closest("div").find('.edLat').val();
+		endLong = $('input[name="endAddrList"]:checked').closest("div").find('.edLong').val();
+		
+		console.log(endLat);
+		console.log(endLong);
+		
+		$('#endName').val(edAName);
+		$('#endPhone').val(edAPhone);
+		$('#endAddr').val(edAddr1);
+		$('#endDetailAddr').val(edAddr2);
+		$('#myModal7').css('display','none');
+		
+		// 출발지에서 도착지까지 거리 계산 그리고 거리에 따른 견적 기능
+		preChargeFunc();
+		
+	} else {
+		alert("출발지 주소를 입력해주세요.");
+		$('#myModal7').css('display','none');
+	}
+}
+
+// 출발지 주소록 버튼 클릭시 주소 추가
+$("#stALBtn").click(function(){
+	addStAddrList();
+});
+
+// 도착지 주소록 버튼 클릭시 주소 추가
+$("#edALBtn").click(function(){
+	addEdAddrList();
+});
+
+// 해당 영역 밖에 클릭하면 출발지&도착지 주소록 닫기
+var modal6 = document.getElementById("myModal6");
+$("#myModal6").mouseenter(function(){
+	window.onclick = function(event) {
+		if (event.target == modal6) {
+			// 선택한 주소 지우기
+			$('input[name="startAddrList"]:checked').prop('checked', false);
+			modal6.style.display = "none";
+		}
+	}
+});
+var modal7 = document.getElementById("myModal7");
+$("#myModal7").mouseenter(function(){
+	window.onclick = function(event) {
+		if (event.target == modal7) {
+			// 선택한 주소 지우기
+			$('input[name="endAddrList"]:checked').prop('checked', false);
+			modal7.style.display = "none";
+		}
+	}
+});
+
+
+// x 버튼 눌렀을때 모달6,7 닫기
+$('#modal-close6').click(function(){
+	$('input[name="startAddrList"]:checked').prop('checked', false);
+	modal7.style.display = "none";
+});
+
+$('#modal-close7').click(function(){
+	$('input[name="endAddrList"]:checked').prop('checked', false);
+	modal7.style.display = "none";
+});
 
 
 /* 연락처 자릿수 자동 설정 */
@@ -819,6 +914,8 @@ $('#checkHelp-btn').click(function(){
 	}
 });
 
+
+// 상하차 도움 선택 모달 닫고난후 결과값 담기
 var span3 = document.getElementById("modal-close3");
 span3.onclick = function() {
 	console.log($('#checkHelp1').val());
@@ -852,9 +949,9 @@ span5.onclick = function() {
 $('#stAddrList').click(function(){
 	$('#myModal6').css('display','block');
 });
-var span6 = document.getElementById("modal-close6");
 
 // 출발지 주소록 모달 닫기
+var span6 = document.getElementById("modal-close6");
 span6.onclick = function() {
 	$('#myModal6').css('display','none');
 }
@@ -864,13 +961,12 @@ span6.onclick = function() {
 $('#edAddrList').click(function(){
 	$('#myModal7').css('display','block');
 });
-var span7 = document.getElementById("modal-close7");
 
 // 도착지 주소록 모달 닫기
+var span7 = document.getElementById("modal-close7");
 span7.onclick = function() {
 	$('#myModal7').css('display','none');
 }
-
 
 
 //출발지와 도착지 각각의 주소 붙여 input hidden에다가 담기
@@ -884,14 +980,28 @@ function addAddr(){
 }
 
 
-// 예약하기 버튼
+// 예약하기 버튼 & 상하차 날짜 입력하지 않으면 return false 조건 적용
 $('#revForm').submit(function(){
-	if(confirm("결제 진행하시겠습니까?")){
-		addAddr();
-		return;
-	} else {
+console.log($('#datepicker1').val());
+	// 바로 상차를 입력했거나 상차 날짜 입력되었거나
+	if($('#checkLoad1').is(":checked") || $('#datepicker1').val()!=""){
+		// 바로 상차를 입력했거나 하차 날짜 입력되었거나
+		if($('#checkLoad2').is(":checked") || $('#datepicker2').val()!=""){			
+			if(confirm("결제 진행하시겠습니까?")){
+				addAddr();
+				return;
+			} else {
+				return false;
+			}
+		} else {			
+			alert("하차 날짜를 지정해주세요.");
+			return false;
+		}
+	} else {		
+		alert("상차 날짜를 지정해주세요.");
 		return false;
 	}
 });
+
 
 

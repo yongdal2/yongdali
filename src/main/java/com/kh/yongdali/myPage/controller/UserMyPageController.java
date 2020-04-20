@@ -20,9 +20,12 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.yongdali.common.PageInfo;
+import com.kh.yongdali.common.Pagination;
 import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.myPage.model.service.UserMyPageService;
 import com.kh.yongdali.myPage.model.vo.Address;
+import com.kh.yongdali.reservation.model.vo.Reservation;
 import com.sun.org.apache.xml.internal.serialize.Printer;
 
 @SessionAttributes("loginUser")
@@ -38,11 +41,7 @@ public class UserMyPageController {
 	}
 
 
-	// 나의 예약내역
-	@RequestMapping("myRSV.myp")
-	public String myRSVView() {
-		return "user/myPage/myPageRSV";
-	}
+	
 	
 	//==========================유저 정보 ========================================
 	
@@ -53,7 +52,6 @@ public class UserMyPageController {
 
 		loginUser.setPhone(phone);
 		
-		System.out.println("수정할ID"+loginUser);
 		
 		int result = umpService.updatePhone(loginUser);
 
@@ -86,10 +84,8 @@ public class UserMyPageController {
 		public ModelAndView addrList(ModelAndView mv, @SessionAttribute Member loginUser) {
 
 			String mNo = loginUser.getmNo();
-			System.out.println(mNo);
 			
 			int listCount = umpService.getAddrListCount(mNo);
-			System.out.println(listCount);
 			
 			ArrayList<Address> aList = umpService.selectAddrList(mNo);
 			
@@ -104,7 +100,6 @@ public class UserMyPageController {
 		@RequestMapping("getUpAddr.myp")
 		public void getUpAddr(HttpServletResponse rs, String aNo) throws IOException {
 			Address a = umpService.getUpAddr(aNo);
-			System.out.println(a);
 			
 			rs.setContentType("application/json; charset=utf-8");
 			
@@ -114,6 +109,8 @@ public class UserMyPageController {
 			adJob.put("aName",URLEncoder.encode(a.getaName(), "UTF-8"));
 			adJob.put("aAddr1",URLEncoder.encode(a.getaAddress().split(",")[0], "UTF-8"));
 			adJob.put("aAddr2",URLEncoder.encode(a.getaAddress().split(",")[1], "UTF-8"));
+			adJob.put("aLat", a.getaLatitude());
+			adJob.put("aLong", a.getaLongitude());
 			adJob.put("aPhone", a.getaPhone());
 			
 			PrintWriter out = rs.getWriter();
@@ -130,18 +127,20 @@ public class UserMyPageController {
 								@RequestParam("edName") String aName,
 								@RequestParam("edAdr_address") String addr1,
 								@RequestParam("edAdr_detail") String addr2,
+								@RequestParam("edLat") double aLat,
+								@RequestParam("edLong") double aLong,
 								@RequestParam("edPhone") String aPhone) {
 			
-			System.out.println(aNo);
 			a.setaNo(aNo);
 			if(aPlace != null) a.setaPlace(aPlace);
 			a.setaName(aName);
 			a.setaAddress(addr1+","+addr2);
+			a.setaLatitude(aLat);
+			a.setaLongitude(aLong);
 			a.setaPhone(aPhone);
 			
-			System.out.println(a);
 			int result = umpService.updateAddr(a);
-			System.out.println(result);
+			
 			if (result > 0) {
 				return "redirect:addrBook.myp";
 			}else {
@@ -157,6 +156,8 @@ public class UserMyPageController {
 				@RequestParam("adName") String aName,
 				@RequestParam("adAdr_address") String addr1,
 				@RequestParam("adAdr_detail") String addr2,
+				@RequestParam("adLat") double aLat,
+				@RequestParam("adLong") double aLong,
 				@RequestParam("adPhone") String aPhone) {
 			
 			
@@ -164,9 +165,10 @@ public class UserMyPageController {
 			if(aPlace != null) a.setaPlace(aPlace);
 			a.setaName(aName);
 			a.setaAddress(addr1+","+addr2);
+			a.setaLatitude(aLat);
+			a.setaLongitude(aLong);
 			a.setaPhone(aPhone);
 			
-			System.out.println(a);
 			int result = umpService.insertAddr(a);
 			
 			if (result > 0) {
@@ -179,12 +181,13 @@ public class UserMyPageController {
 		//주소록 삭제
 		@RequestMapping("dAddr.myp")
 		public String deleteAddr(Model md, 
-				@RequestParam("aNo") String aNo){
-
-			int result = umpService.deleteAddr(aNo);
+				@RequestParam("aNo") String aNo, @SessionAttribute Member loginUser){
 			System.out.println("수정사항:"+aNo);
 
+			int result = umpService.deleteAddr(aNo);
+
 			if (result > 0) {
+				md.addAttribute("loginUser", loginUser);
 				return "redirect:addrBook.myp";
 			}else {
 				md.addAttribute("msg", "주소록 수정 실패!!");
@@ -192,6 +195,24 @@ public class UserMyPageController {
 			}
 		}
 		
-		//
+		//================나의 예약내역 =================================
+		
+		// 나의 예약내역
+		@RequestMapping("myRSV.myp")
+		public ModelAndView myRsvList(@SessionAttribute Member loginUser, ModelAndView mv,
+									@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage) {
+			
+			
+			String mNo = loginUser.getmNo();
+			int rlistCount =umpService.getRsvListCount(mNo);
+			
+			PageInfo pi = Pagination.getPageInfo(currentPage, rlistCount, 5, 10);
+			
+			ArrayList<Reservation> rList = umpService.selectRsvList(pi,mNo);
+			
+			
+			return mv;
+		}
+		
 		
 }

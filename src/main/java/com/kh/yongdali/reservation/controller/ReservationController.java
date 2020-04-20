@@ -31,10 +31,21 @@ public class ReservationController {
 	 */
 	@RequestMapping("reservation.go")
 	public ModelAndView goReservation(ModelAndView mv, HttpSession session) {
-		String mno = ((Member)session.getAttribute("loginUser")).getmNo();	
+		String mno = ((Member)session.getAttribute("loginUser")).getmNo();
+		
 		ArrayList<Address> list = rService.getAddressList(mno);
 		
+		ArrayList<String> addrList1 = new ArrayList<String>();
+		ArrayList<String> addrList2 = new ArrayList<String>();
+		
+		for(int i=0; i<list.size(); i++) {
+			addrList1.add(list.get(i).getaAddress().split(",")[0]);
+			addrList2.add(list.get(i).getaAddress().split(",")[1]);
+		}
+		
 		mv.addObject("list",list);
+		mv.addObject("addrList1",addrList1);
+		mv.addObject("addrList2",addrList2);
 		mv.setViewName("user/reservation");
 		return mv;
 	}

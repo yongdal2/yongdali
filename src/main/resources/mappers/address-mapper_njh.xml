@@ -10,6 +10,8 @@
 		<result property="aName" column="NAME"/>
 		<result property="aAddress" column="ADDRESS"/>
 		<result property="aPhone" column="PHONE"/>
+		<result property="aLatitude" column="LATITUDE"/>
+		<result property="aLongitude" column="LONGITUDE"/>		
 		<result property="aRecentDate" column="RECENTDATE"/>
 	</resultMap>
 	
@@ -17,6 +19,7 @@
 		SELECT * FROM ADDRESS
 		WHERE A_M_NO=#{mno}
 	</select>
+	
 </mapper>
     
     
