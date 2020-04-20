@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
+import com.kh.yongdali.driver.model.vo.Driver;
 import com.kh.yongdali.member.model.vo.Member;
 
 @Service
@@ -28,6 +29,20 @@ public interface MemberService {
 	 * @return
 	 */
 	int emailChk(String mId);
+
+	/**
+	 * 회원가입(일반)
+	 * @param m
+	 * @return
+	 */
+	int insertMember(Member m);
+
+	/**
+	 * 회원가입(사업자/기사)
+	 * @param d
+	 * @return
+	 */
+	int insertDriver(Driver d);
 
 
 	

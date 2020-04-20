@@ -16,6 +16,22 @@
 		<result property="enrollDate" column="ENROLLDATE"/>
 	</resultMap>
 	
+	
+	<resultMap type="Driver" id="driverResultSet">
+		<id property="dNo" column="D_NO"/>
+		<result property="dmNo" column="D_M_NO"/>
+		<result property="capacity" column="CAPACITY"/>
+		<result property="type" column="TYPE"/>
+		<result property="carNo" column="CAR_NO"/>
+		<result property="idImgOrigin" column="ID_IMG_ORIGIN"/>
+		<result property="idImgRename" column="ID_IMG_RENAME"/>
+		
+		<!-- 컬럼명 확인 -->
+		<result property="regCardImgOrigin" column="CAR_IMG_ORIGIN"/>
+		<result property="regCardImgRename" column="CAR_IMG_RENAME"/>
+	</resultMap>
+	
+	
 	<!-- 샘플 데이터 -->
 	<insert id="insertSampleMembers" parameterType="java.util.List">
 		INSERT INTO MEMBER(M_NO, M_ID, PWD, NAME, PHONE, M_SORT, M_STATUS, PUSH_ENABLED, ENROLLDATE)
@@ -50,4 +66,41 @@
 		WHERE M_ID = #{mId}
 	</select>
 	
+	<!-- 회원가입(일반) -->
+	<insert id="insertMember" parameterType="Member">
+		INSERT INTO MEMBER VALUES('M' || SEQ_MNO.NEXTVAL, 
+									#{mId},
+									#{pwd},
+									#{mName},
+									#{phone},
+									#{mSort},
+									'정상',
+									#{pushEnabled},
+									SYSDATE		
+									)
+	</insert>
+	
+	<!-- 회원가입(사업자/기사) -->
+	<insert id="insertDriver" parameterType="Driver">
+		INSERT INTO DRIVER VALUES('D' || SEQ_DNO.NEXTVAL,
+									#{dmNo},
+									#{capacity},
+									#{type},
+									#{carNo},
+									#{idImgOrigin},
+									#{idImgRename},
+									#{regCardImgOrigin},
+									#{regCardImgRename},
+		
+		
+									)
+	</insert>
 </mapper>     
+
+
+
+
+
+
+
+

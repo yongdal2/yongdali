@@ -39,6 +39,8 @@ function closeDaumPostcodeEd() {
 	modalEd.style.display = 'none';
 }
 
+var geocoder = new daum.maps.services.Geocoder();
+
 function adSearchAddr(){
 	//모달 실행
 	modalAd.style.display = "block";
@@ -50,6 +52,9 @@ function adSearchAddr(){
              // 각 주소의 노출 규칙에 따라 주소를 조합한다.
              // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
              var addr = ''; // 주소 변수
+             
+             var lat = 0;
+             var long = 0;
 
              //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
              if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
@@ -63,7 +68,24 @@ function adSearchAddr(){
             	 alert("죄송합니다. 서울지역 한해서만 운영 가능합니다. 다시 입력해주세요.");
             	 modalAd.style.display = "none";
              }else{
-            	 // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            	// 주소로 위경도 검색
+ 				geocoder.addressSearch(addr, function(results, status) {
+ 					// 정상적으로 검색이 완료됐으면
+ 					if (status === daum.maps.services.Status.OK) {
+ 						
+ 						var result = results[0]; //첫번째 결과의 값을 활용
+ 						lat = result.x;
+ 						long = result.y;
+ 						
+ 						console.log(lat);
+ 						console.log(long);
+ 						document.getElementById("adLat").value = lat;
+ 						document.getElementById("adLong").value = long;
+ 						
+ 					}
+ 				});
+            	 
+            	 //주소와 위경도 정보를 해당 필드에 넣는다.
             	 document.getElementById("adAdr_address").value = addr;
             	 
             	// 모달 닫기
@@ -101,6 +123,8 @@ function edSearchAddr(){
 			// 각 주소의 노출 규칙에 따라 주소를 조합한다.
 			// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
 			var addr = ''; // 주소 변수
+			var lat = 0;
+			var long = 0;
 			
 			//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
 			if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
@@ -114,7 +138,24 @@ function edSearchAddr(){
 				alert("죄송합니다. 서울지역 한해서만 운영 가능합니다. 다시 입력해주세요.");
 				modalEd.style.display = "none";
 			}else{
-				// 우편번호와 주소 정보를 해당 필드에 넣는다.
+				
+				
+				// 주소로 위경도 검색
+ 				geocoder.addressSearch(addr, function(results, status) {
+ 					// 정상적으로 검색이 완료됐으면
+ 					if (status === daum.maps.services.Status.OK) {
+ 						
+ 						var result = results[0]; //첫번째 결과의 값을 활용
+ 						lat = result.x;
+ 						long = result.y;
+ 						document.getElementById("edLat").value = lat;
+ 						document.getElementById("edLong").value = long;
+
+ 						console.log(lat);
+ 						console.log(long);
+ 					}
+ 				});
+				// 주소 위경도 정보를 해당 필드에 넣는다.
 				document.getElementById("edAdr_address").value = addr;
 				
 				// 모달 닫기
@@ -175,36 +216,33 @@ function initLayerPositionEd(){
 }
 
 
-//폰번호 숫자만 입력 & 하이픈(-)기호 자동 삽입
-$("input[name=phone]").keyup(function(event){ 
-    if (!(event.keyCode >=37 && event.keyCode<=40)) {
-        var inputVal = $(this).val();
-        $(this).val(inputVal.replace(/[^0-9]/gi,''));                
-    } 
-
-    var number = $("input[name=phone]").val();
+function inputPhoneNumber(obj) {
+    var number = obj.value.replace(/[^0-9]/g, "");
     var phone = "";
-    if($("input[name=phone]").val().length < 4){
+
+    if(number.length < 4) {
         return number;
-    } else if($("input[name=phone]").val().length < 7){
+    } else if(number.length < 7) {
         phone += number.substr(0, 3);
         phone += "-";
         phone += number.substr(3);
-    } else if($("input[name=phone]").val().length < 7){
+    } else if(number.length < 11) {
         phone += number.substr(0, 3);
         phone += "-";
         phone += number.substr(3, 3);
         phone += "-";
         phone += number.substr(6);
-    } else{
+    } else {
         phone += number.substr(0, 3);
         phone += "-";
         phone += number.substr(3, 4);
         phone += "-";
         phone += number.substr(7);
     }
-    $("input[name=phone]").val(phone);
-});
+    obj.value = phone;
+}
+
+
 
 
 

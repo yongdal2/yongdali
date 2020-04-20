@@ -11,6 +11,7 @@ import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,8 +27,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.yongdali.common.SaveFile;
+import com.kh.yongdali.driver.model.vo.Driver;
 import com.kh.yongdali.member.model.service.MemberService;
 import com.kh.yongdali.member.model.vo.Member;
 
@@ -35,6 +38,9 @@ import com.kh.yongdali.member.model.vo.Member;
 
 @Controller
 public class MemberController {
+	@Autowired
+	private SaveFile saveFile;
+	
 	
 	@Autowired
 	private MemberService mService;
@@ -61,10 +67,10 @@ public class MemberController {
 		Date[] date = new Date[4];
 		String[] encPwdArr = new String[4];
 		
-		mList.add(new Member("admin@naver.com", "Admin!234", "관리자", "010-1111-1111", "관리자", "정상", 'N')); 
-		mList.add(new Member("mem01@naver.com", "Mem!234", "홍멤버", "010-2222-2222", "일반", "정상", 'Y'));
-		mList.add(new Member("biz01@naver.com", "Biz!234", "김거상", "010-3333-3333", "사업자", "정상", 'N'));
-		mList.add(new Member("biz02@naver.com", "Biz!234", "최거상", "010-4444-4444", "사업자", "정상", 'N'));
+		mList.add(new Member("admin@naver.com", "Admin!234", "관리자", "010-1111-1111", "관리자", "정상", "N")); 
+		mList.add(new Member("mem01@naver.com", "Mem!234", "홍멤버", "010-2222-2222", "일반", "정상", "Y"));
+		mList.add(new Member("biz01@naver.com", "Biz!234", "김거상", "010-3333-3333", "사업자", "정상", "N"));
+		mList.add(new Member("biz02@naver.com", "Biz!234", "최거상", "010-4444-4444", "사업자", "정상", "N"));
 		
 		sDate[0] = "2020-03-10";
 		sDate[1] = "2020-03-18";
@@ -141,8 +147,9 @@ public class MemberController {
 	 * @param status
 	 * @return
 	 */
-	@RequestMapping("logout.me")
+	@RequestMapping("logout1.me")
 	public String memberLogout(SessionStatus status) {
+		System.out.println("siab");
 		status.setComplete();
 		
 		return "redirect:home.do";
@@ -219,17 +226,95 @@ public class MemberController {
 		return ranNum;	
 	}
 
+//	/** 회원가입_양식 제출(일반 회원만) 
+//	 * @param m
+//	 * @return
+//	 */
+//	@RequestMapping("insert.me")
+//	public String insertMember(@ModelAttribute Member m, Model model) {
+//		logger.debug(m.toString());
+//		
+//		m.setPwd(bcryptPasswordEncoder.encode(m.getPwd()));
+//		logger.debug(m.toString());
+//		
+//		int result = mService.insertMember(m);
+//		logger.debug("회원가입 insert 결과값 : " + String.valueOf(result));
+//		
+//		if(result > 0) {
+//			return "login&signUp/login";
+//		}else {
+//			model.addAttribute("msg", "샘플데이터 입력 실패!");
+//			return "common/errorPage";
+//		}
+//	}
 	
-	
-	/** 회원가입_양식 제출
+	/** 회원가입_양식 제출(일반/사업자 공통) 
 	 * @param m
 	 * @return
 	 */
 	@RequestMapping("insert.me")
-	public String insertMember(@ModelAttribute Member m) {
-		logger.debug(m.toString());
+	public String insertMember(@ModelAttribute Member m, Driver d
+								, Model model, HttpServletRequest request
+								, @RequestParam(name="inputFile_idImg", required=true) MultipartFile idImg
+								, @RequestParam(name="inputFile_regCardImg", required=true) MultipartFile regCardImg) {
+//		logger.debug(m.toString());
+
+		m.setPwd(bcryptPasswordEncoder.encode(m.getPwd()));
 		
-		return "login&signUp/login";
+//		int result = 1;
+		int result = mService.insertMember(m);
+//		logger.debug("회원가입 insert 결과값 : " + String.valueOf(result));
+		
+		
+		if(m.getmSort().equals("사업자") && result == 1) {
+			// dmNo 삽입을 위해 기존 select문 활용
+			Member mem = mService.loginMember(m);
+			d.setDmNo(mem.getmNo());
+//			logger.debug(d.toString());	
+			if(!idImg.getOriginalFilename().equals("")) {
+				String renameFileName = saveFile.rename(idImg, request, "\\id", "yongdali_id_");
+				
+				if(renameFileName != null) {
+					d.setIdImgOrigin(idImg.getOriginalFilename());
+					d.setIdImgRename(renameFileName);
+				}
+			}
+			if(!regCardImg.getOriginalFilename().equals("")) {
+				String renameFileName = saveFile.rename(idImg, request, "\\regCard", "yongdali_regCard_");
+				
+				if(renameFileName != null) {
+					d.setRegCardImgOrigin(regCardImg.getOriginalFilename());
+					d.setRegCardImgRename(renameFileName);
+				}
+			}			
+			result = mService.insertDriver(d);
+		}
+		
+		
+		
+		if(result > 0) {
+			return "login&signUp/login";
+		}else {
+			model.addAttribute("msg", "샘플데이터 입력 실패!");
+			return "common/errorPage";
+		}
 	}
+	
+//	public String saveFile(MultipartFile)
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

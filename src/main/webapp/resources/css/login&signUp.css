@@ -831,19 +831,28 @@ select::-ms-expand {
 }
 
 /* 회원가입 이미지 */
-.signInImgWrap{
+.div_regImgWrap{
     height: 14rem;
     margin: 10px;
     border-style: none;
     text-align: center;
 }
 
-.signInImg{
+.div_regImg{
     border-style: ridge;
     height: 90%;
     width: 11rem;
 }
 
+.div_regImg img {
+	height: 4rem;
+    padding: 30%;
+    cursor: pointer;
+}
+
+input[name="inputFile_idImg"], input[name="inputFile_regCardImg"]{
+	display: none;
+}
 
 /* 지훈 조정 사항 */
 #showPwd{

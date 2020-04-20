@@ -9,6 +9,10 @@
 	font-style: normal;
 }
 
+body {
+	min-width: 768px !important;
+}
+
 .btn_ydl {
 	color: #fff;
 	background-color: rgb(87, 187, 138);
@@ -328,4 +332,67 @@ a {
 .addrBbt {
 	border-bottom: 1px solid #dedede !important;
 	padding: 10px !important;
+}
+/* 예약페이지  */
+
+.bszB{
+	box-sizing: border-box !important;
+	padding-right: 10px !important;
+	padding-left: 0px !important;
+}
+
+.bszB1{
+	box-sizing: border-box !important;
+	padding-right: 10px !important;
+}
+
+.ft54{
+	box-sizing:content-box !important;
+	height: 54px !important;
+	border: none !important;
+	box-shadow: none !important;
+	background-color: #f3f5f7!important;
+	padding: 0px !important;
+}
+
+.sch{
+	width: 54px !important;
+	height: 54px !important;
+	margin: 0px !important;
+}
+
+
+.w30p{
+	width: 30% !important;
+}
+
+.w40p{
+	width: 30% !important;
+}
+
+.w50p{
+	width: 50% !important;
+}
+
+
+input[type=date]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+}
+
+.form-control {
+	font-size: 18px !important;
+	font-family: 'nanumsquare', Arial, Helvetica, sans-serif !important;
+	padding-left: 5px !important;
+}
+
+@media (min-width: 768px) {
+  .tbPdR {
+    padding-right: 17px !important
+  }
+}
+@media (min-width: 992px) {
+  .tbPdR {
+    padding-right: 37px !important
+  }
 }

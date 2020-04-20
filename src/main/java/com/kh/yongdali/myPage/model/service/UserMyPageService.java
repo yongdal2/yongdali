@@ -2,8 +2,10 @@ package com.kh.yongdali.myPage.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.myPage.model.vo.Address;
+import com.kh.yongdali.reservation.model.vo.Reservation;
 
 /**
  * @author SH-Surface
@@ -17,8 +19,6 @@ public interface UserMyPageService {
 	 * @return
 	 */
 	int updatePhone(Member m);
-	
-	
 	
 	
 	/**
@@ -61,6 +61,22 @@ public interface UserMyPageService {
 	 * @return
 	 */
 	int deleteAddr(String aNo);
+
+
+	/**
+	 * 마이페이지 예약목록 카운트
+	 * @param mNo
+	 * @return
+	 */
+	int getRsvListCount(String mNo);
+
+
+	/** 마이페이지 예약내역
+	 * @param pi
+	 * @param mNo
+	 * @return
+	 */
+	ArrayList<Reservation> selectRsvList(PageInfo pi, String mNo);
 
 
 }

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -36,7 +36,9 @@
 					<div id="line1">
 						<div class="edge11">
 							<div class="title11">
-								<label id="carGuide1"> <img src="${pageContext.request.contextPath}/resources/images/reservation/question-mark.svg" alt="안내"> <span id="carGuide-ment">차량 안내가 필요하신가요?</span>
+								<label id="carGuide1">
+									<img src="${pageContext.request.contextPath}/resources/images/reservation/question-mark.svg" alt="안내">
+									<span id="carGuide-ment">차량 안내가 필요하신가요?</span>
 								</label> 차량 정보
 							</div>
 							<div id="carOption-div" class="content22">
@@ -59,7 +61,8 @@
 						</div>
 						<div class="edge11">
 							<div class="title11">
-								<label id="selectLoad-btn"> <img src="${pageContext.request.contextPath}/resources/images/reservation/round-add.svg" alt="안내"> <span id="load-title">이삿짐 선택</span>
+								<label id="selectLoad-btn"> <img src="${pageContext.request.contextPath}/resources/images/reservation/round-add.svg" alt="안내">
+									<span id="load-title">이삿짐 선택</span>
 								</label> 이삿짐
 							</div>
 							<div id="load-content-div" class="content22">
@@ -77,16 +80,20 @@
 							</div>
 							<div id="startAddr-div" class="content22">
 								<div style="display: flex;">
-									<input id="startName" name="startName" type="text" placeholder="이름" required> <input id="startPhone" name="startPhone" type="text" placeholder="연락처" onKeyup="inputPhoneNumber(this);" maxlength="13" required>
+									<input id="startName" name="startName" type="text" placeholder="이름" required>
+									<input id="startPhone" name="startPhone" type="text" placeholder="연락처" onKeyup="inputPhoneNumber(this);" maxlength="13" required>
 								</div>
 								<div id="searchAddr-div1">
 									<div id="searchAddr-div11">
-										<input id="startAddr" type="text" placeholder="주소 검색 (주소, 건물명)" onclick="searchStartAddr();" readonly required> <img src="${pageContext.request.contextPath}/resources/images/reservation/magnifying-glass-black.svg" alt="검색" onclick="searchStartAddr();" style="cursor: pointer;">
+										<input id="startAddr" type="text" placeholder="주소 검색 (주소, 건물명)" onclick="searchStartAddr();" readonly required>
+										<img src="${pageContext.request.contextPath}/resources/images/reservation/magnifying-glass-black.svg" alt="검색" onclick="searchStartAddr();" style="cursor: pointer;">
 									</div>
 									<input id="startDetailAddr" type="text" placeholder="상세 주소" required>
 								</div>
 								<div align="left">
-									<label id="start-check" class="checkbox-wrap"> <input id="checkLoad1" type="checkbox" name="rightLoad" value="바로 상차"> <i class="check-icon" style="margin-top: 2px;"></i>
+									<label id="start-check" class="checkbox-wrap">
+										<input id="checkLoad1" type="checkbox" name="rightLoad" value="바로 상차">
+										<i class="check-icon" style="margin-top: 2px;"></i>
 										<div style="font-size: 16px;">&nbsp;&nbsp;바로 상차</div>
 									</label>
 								</div>
@@ -167,12 +174,15 @@
 								</div>
 								<div id="searchAddr-div2">
 									<div id="searchAddr-div22">
-										<input id="endAddr" name="edAddr" type="text" placeholder="주소 검색 (주소, 건물명)" onclick="searchEndAddr();" readonly required> <img src="${pageContext.request.contextPath}/resources/images/reservation/magnifying-glass-black.svg" alt="검색" onclick="searchEndAddr();" style="cursor: pointer;">
+										<input id="endAddr" name="edAddr" type="text" placeholder="주소 검색 (주소, 건물명)" onclick="searchEndAddr();" readonly required>
+										<img src="${pageContext.request.contextPath}/resources/images/reservation/magnifying-glass-black.svg" alt="검색" onclick="searchEndAddr();" style="cursor: pointer;">
 									</div>
 									<input id="endDetailAddr" name="edDetailAddr" type="text" placeholder="상세 주소" required>
 								</div>
 								<div align="left">
-									<label id="end-check" class="checkbox-wrap"> <input id="checkLoad2" name="rightUnload" type="checkbox" value="바로 하차"> <i class="check-icon" style="margin-top: 2px;"></i>
+									<label id="end-check" class="checkbox-wrap">
+										<input id="checkLoad2" name="rightUnload" type="checkbox" value="바로 하차">
+										<i class="check-icon" style="margin-top: 2px;"></i>
 										<div style="font-size: 16px;">&nbsp;&nbsp;바로 하차</div>
 									</label>
 								</div>
@@ -244,8 +254,13 @@
 						<div class="edge11">
 							<div class="title11">상하차 방법</div>
 							<div id="help-div" class="content22">
-								<label class="rad"> <input id="helpUnload-ch" type="radio" name="helpLoad1" required> <i></i>&nbsp;&nbsp;도움 필요하지 않아요
-								</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label class="rad"> <input id="helpLoad-ch" type="radio" name="helpLoad1"> <i></i>&nbsp;&nbsp;도움 필요해요
+								<label class="rad">
+									<input id="helpUnload-ch" type="radio" name="helpLoad1" required>
+									<i></i>&nbsp;&nbsp;도움 필요하지 않아요
+								</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<label class="rad">
+									<input id="helpLoad-ch" type="radio" name="helpLoad1">
+									<i></i>&nbsp;&nbsp;도움 필요해요
 								</label>
 							</div>
 						</div>
@@ -308,7 +323,10 @@
 									<span id="btwDay" class="charge-content"></span>
 								</div>
 								<div align="left">
-									<span class="charge-title">보관 기간&nbsp;<small>(60,000원/일)</small></span>
+									<span class="charge-title">보관 기간
+										&nbsp;
+										<small>(60,000원/일)</small>
+									</span>
 								</div>
 							</div>
 						</div>
@@ -800,13 +818,17 @@
 								<div class="check-title1">상하차 방법</div>
 							</div>
 							<div class="help-content-div112">
-								<label class="checkbox-wrap2 checkHelp"> <input id="checkHelp1" type="checkbox" name="checkHelp1" value=""> <i class="check-icon2"></i>
+								<label class="checkbox-wrap2 checkHelp">
+									<input id="checkHelp1" type="checkbox" name="checkHelp1" value="">
+									<i class="check-icon2"></i>
 									<div class="check-title11">상차만</div>
 								</label>
 								<div id="helpCharge1" class="checkCharge">+0원</div>
 							</div>
 							<div class="help-content-div112">
-								<label class="checkbox-wrap2 checkHelp"> <input id="checkHelp2" type="checkbox" name="checkHelp1" value=""> <i class="check-icon2"></i>
+								<label class="checkbox-wrap2 checkHelp">
+									<input id="checkHelp2" type="checkbox" name="checkHelp1" value="">
+									<i class="check-icon2"></i>
 									<div class="check-title11">하차만</div>
 								</label>
 								<div id="helpCharge2" class="checkCharge">+0원</div>
@@ -832,13 +854,17 @@
 								<div class="check-title1">상차 방법</div>
 							</div>
 							<div class="help-content-div112">
-								<label class="checkbox-wrap2 checkHelp"> <input id="checkHelp3" type="checkbox" name="checkHelp11" value=""> <i class="check-icon2"></i>
+								<label class="checkbox-wrap2 checkHelp">
+									<input id="checkHelp3" type="checkbox" name="checkHelp11" value="">
+									<i class="check-icon2"></i>
 									<div class="check-title11" style="font-size: 12pt;">기사님과 함께</div>
 								</label>
 								<div class="checkCharge" style="width: 152px;">+10,000원</div>
 							</div>
 							<div class="help-content-div112">
-								<label class="checkbox-wrap2 checkHelp"> <input id="checkHelp4" type="checkbox" name="checkHelp12" value=""> <i class="check-icon2"></i>
+								<label class="checkbox-wrap2 checkHelp">
+									<input id="checkHelp4" type="checkbox" name="checkHelp12" value="">
+									<i class="check-icon2"></i>
 									<div class="check-title11" style="font-size: 12pt;">기사님 단독</div>
 								</label>
 								<div class="checkCharge" style="width: 168px;">+20,000원</div>
@@ -861,13 +887,17 @@
 								<div class="check-title1">하차 방법</div>
 							</div>
 							<div class="help-content-div112">
-								<label class="checkbox-wrap2 checkHelp"> <input id="checkHelp5" type="checkbox" name="checkHelp11" value=""> <i class="check-icon2"></i>
+								<label class="checkbox-wrap2 checkHelp">
+									<input id="checkHelp5" type="checkbox" name="checkHelp11" value="">
+									<i class="check-icon2"></i>
 									<div class="check-title11" style="font-size: 12pt;">기사님과 함께</div>
 								</label>
 								<div class="checkCharge" style="width: 152px;">+10,000원</div>
 							</div>
 							<div class="help-content-div112">
-								<label class="checkbox-wrap2 checkHelp"> <input id="checkHelp6" type="checkbox" name="checkHelp12" value=""> <i class="check-icon2"></i>
+								<label class="checkbox-wrap2 checkHelp">
+									<input id="checkHelp6" type="checkbox" name="checkHelp12" value="">
+									<i class="check-icon2"></i>
 									<div class="check-title11" style="font-size: 12pt;">기사님 단독</div>
 								</label>
 								<div class="checkCharge" style="width: 168px;">+20,000원</div>
@@ -881,47 +911,82 @@
 		<div id="myModal6" class="modal11" style="padding-top: 10%;">
 			<div class="modal-content11" style="width: 702px">
 				<span id="modal-close6" class="close11" style="width: 30px;">&times;</span>
-				<div class="modal-addr-div">
-					<div class="addr-title-div">
-						<span class="addr-title">나의 주소록(출발지)</span>
-					</div>
-					<br>
-					<div class="col-xs-12 col-md-12 text-center noto">
-						<div class="col-xs-12 col-md-12">
-							<div class="row fw6" style="border-bottom: 1px solid black;">
-								<div class="col-xs-2 col-md-2">선택</div>
-								<div class="col-xs-2 col-md-2">배송지</div>
-								<div class="col-xs-5 col-md-5">주소</div>
-								<div class="col-xs-3 col-md-3">연락처</div>
+				<c:choose>
+					<c:when test="${fn:length(list) == 0}">
+						<div class="modal-addr-div" style="height: 375px;">
+							<div class="addr-title-div">
+								<span class="addr-title">나의 주소록(출발지)</span>
 							</div>
-							<c:forEach var="a" items="${ list }">
-								<div class="row small aL-row">
-									<div class="col-xs-2 col-md-2" style="margin-top: 5px;">
-										<input type="radio" name="startAddrList" style="cursor: pointer;">
-									</div>
-									<div class="col-xs-2 col-md-2">
-										<span>${ a.aPlace }</span>
-										<br>
-										<span>${ a.aName }</span>
-									</div>
-									<div class="col-xs-5 col-md-5">
-										<c:forEach var="addr" items="${fn:split(a.aAddress, ',')}">
-											<span>${ addr }</span>
-											<br>
-										</c:forEach>
-									</div>
-									<div class="col-xs-3 col-md-3" style="padding-top: 9px;">
-										<span>${ a.aPhone }</span>
-									</div>
-									<input type="hidden" value="${ a.aNo }">
+							<br>
+							<div class="col-xs-12 col-md-12 text-center noto">
+								<div class="col-xs-12 col-md-12">
+									<br>
+									<img src="${pageContext.request.contextPath}/resources/images/reservation/unhappy.png" style="width: 150px; height: 150px;"/>
+									<br><br>
+									<span style="font-family: 'NeoDunggeunmo'; font-size: 17px;">선택하실 주소가 없어요..</span>
+									<br><br>
+									
+									
+									<!-- 주소록 추가 서블릿 나중에 넣으셈 -->
+									<button type="button" id="stALBtn" onclick="location.href='#'">추 가 하 러 가 기</button>
+									
+									
 								</div>
-							</c:forEach>
+							</div>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="modal-addr-div">
+							<div class="addr-title-div">
+								<span class="addr-title">나의 주소록(출발지)</span>
+							</div>
+							<br>
+							<div class="col-xs-12 col-md-12 text-center noto">
+								<div class="col-xs-12 col-md-12" style="min-height: 261px;">
+									<div class="row fw6" style="border-bottom: 1px solid black;">
+										<div class="col-xs-2 col-md-2">선택</div>
+										<div class="col-xs-3 col-md-3">배송지</div>
+										<div class="col-xs-4 col-md-4">주소</div>
+										<div class="col-xs-3 col-md-3">연락처</div>
+										<!-- <div class="col-xs-2 col-md-2">수정·삭제</div> -->
+									</div>
+								<c:forEach var="a" items="${ list }" varStatus="status">
+									<div class="row small aL-row">
+										<input type="radio" class="col-xs-2 col-md-2" name="startAddrList" style="margin-top: 10px; cursor: pointer;">
+										<div class="col-xs-3 col-md-3">
+											<span>${ a.aPlace }</span>
+											<br>
+											<span>${ a.aName }</span>
+										</div>
+										<div class="col-xs-4 col-md-4">
+											<span>${addrList1[status.index]}</span>
+											<br>
+											<span>${addrList2[status.index]}</span>
+										</div>
+										<div class="col-xs-3 col-md-3" style="padding-top: 9px;">
+											<span>${ a.aPhone }</span>
+										</div>
+										<!-- <div class="col-xs-2 col-md-2" style="display: flex; padding-top: 6px;">
+											<div><button type="button" class="AddrModBtn1">수정</button></div>
+											<div><button type="button" class="AddrDelBtn1">삭제</button></div>
+										</div> -->
+										<input class="stANo" type="hidden" value="${ a.aNo }">
+										<input class="stAName" type="hidden" value="${ a.aName }">
+										<input class="stAddr1" type="hidden" value="${ addrList1[status.index] }">
+										<input class="stAddr2" type="hidden" value="${ addrList2[status.index] }">
+										<input class="stAPhone" type="hidden" value="${ a.aPhone }">
+										<input class="stLat" type="hidden" value="${ a.aLatitude }">
+										<input class="stLong" type="hidden" value="${ a.aLongitude }">
+									</div>
+								</c:forEach>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div align="center">
-					<button type="button" id="stALBtn">선 택 하 기</button>
-				</div>
+					<div align="center">
+						<button type="button" id="stALBtn">선 택 하 기</button>
+					</div>
+					</c:otherwise>
+				</c:choose>
 				<br>
 			</div>
 		</div>
@@ -929,47 +994,80 @@
 		<div id="myModal7" class="modal11" style="padding-top: 10%;">
 			<div class="modal-content11" style="width: 702px;">
 				<span id="modal-close7" class="close11" style="width: 30px;">&times;</span>
-				<div class="modal-addr-div">
-					<div class="addr-title-div">
-						<span class="addr-title">나의 주소록(도착지)</span>
-					</div>
-					<br>
-					<div class="col-xs-12 col-md-12 text-center noto">
-						<div class="col-xs-12 col-md-12">
-							<div class="row fw6" style="border-bottom: 1px solid black;">
-								<div class="col-xs-2 col-md-2">선택</div>
-								<div class="col-xs-2 col-md-2">배송지</div>
-								<div class="col-xs-5 col-md-5">주소</div>
-								<div class="col-xs-3 col-md-3">연락처</div>
+				<c:choose>
+					<c:when test="${fn:length(list) == 0}">
+						<div class="modal-addr-div" style="height: 375px;">
+							<div class="addr-title-div">
+								<span class="addr-title">나의 주소록(출발지)</span>
 							</div>
-							<c:forEach var="a" items="${ list }">
-								<div class="row small aL-row">
-									<div class="col-xs-2 col-md-2" style="margin-top: 5px;">
-										<input type="radio" name="endAddrList" style="cursor: pointer;">
-									</div>
-									<div class="col-xs-2 col-md-2">
-										<span>${ a.aPlace }</span>
-										<br>
-										<span>${ a.aName }</span>
-									</div>
-									<div class="col-xs-5 col-md-5">
-										<c:forEach var="addr" items="${fn:split(a.aAddress, ',')}">
-											<span>${ addr }</span>
-											<br>
-										</c:forEach>
-									</div>
-									<div class="col-xs-3 col-md-3" style="padding-top: 9px;">
-										<span>${ a.aPhone }</span>
-									</div>
-									<input type="hidden" value="${ a.aNo }">
+							<br>
+							<div class="col-xs-12 col-md-12 text-center noto">
+								<div class="col-xs-12 col-md-12">
+									<br>
+									<img src="${pageContext.request.contextPath}/resources/images/reservation/unhappy.png" style="width: 150px; height: 150px;"/>
+									<br><br>
+									<span style="font-family: 'NeoDunggeunmo'; font-size: 17px;">주소록이 없어요..</span>
+									<br><br>
+									
+									<!-- 주소록 추가 서블릿 나중에 넣으셈 -->
+									<button type="button" id="stALBtn" onclick="location.href='#'">추 가 하 러 가 기</button>
+									
 								</div>
-							</c:forEach>
+							</div>
+						</div>
+					</c:when>
+					<c:otherwise>
+					<div class="modal-addr-div">
+						<div class="addr-title-div">
+							<span class="addr-title">나의 주소록(도착지)</span>
+						</div>
+						<br>
+						<div class="col-xs-12 col-md-12 text-center noto" style="min-height: 261px;">
+							<div class="col-xs-12 col-md-12" style="min-height: 261px;">
+								<div class="row fw6" style="border-bottom: 1px solid black;">
+									<div class="col-xs-2 col-md-2">선택</div>
+									<div class="col-xs-3 col-md-3">배송지</div>
+									<div class="col-xs-4 col-md-4">주소</div>
+									<div class="col-xs-3 col-md-3">연락처</div>
+									<!-- <div class="col-xs-2 col-md-2">수정·삭제</div> -->
+								</div>
+								<c:forEach var="a" items="${ list }" varStatus="status">
+									<div class="row small aL-row">
+										<input type="radio" class="col-xs-2 col-md-2" name="endAddrList" style="margin-top: 10px; cursor: pointer;">
+										<div class="col-xs-3 col-md-3">
+											<span>${ a.aPlace }</span>
+											<br>
+											<span>${ a.aName }</span>
+										</div>
+										<div class="col-xs-4 col-md-4">
+											<span>${addrList1[status.index]}</span>
+											<br>
+											<span>${addrList2[status.index]}</span>
+										</div>
+										<div class="col-xs-3 col-md-3" style="padding-top: 9px;">
+											<span>${ a.aPhone }</span>
+										</div>
+										<!-- <div class="col-xs-2 col-md-2" style="display: flex; padding-top: 6px;">
+											<div><button type="button" class="AddrModBtn1">수정</button></div>
+											<div><button type="button" class="AddrDelBtn1">삭제</button></div>
+										</div> -->
+										<input class="edANo" type="hidden" value="${ a.aNo }">
+										<input class="edAName" type="hidden" value="${ a.aName }">
+										<input class="edAddr1" type="hidden" value="${ addrList1[status.index] }">
+										<input class="edAddr2" type="hidden" value="${ addrList2[status.index] }">
+										<input class="edAPhone" type="hidden" value="${ a.aPhone }">
+										<input class="edLat" type="hidden" value="${ a.aLatitude }">
+										<input class="edLong" type="hidden" value="${ a.aLongitude }">
+									</div>
+								</c:forEach>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div align="center">
-					<button type="button" id="edALBtn">선 택 하 기</button>
-				</div>
+					<div align="center">
+						<button type="button" id="edALBtn">선 택 하 기</button>
+					</div>
+					</c:otherwise>
+				</c:choose>
 				<br>
 			</div>
 		</div>
