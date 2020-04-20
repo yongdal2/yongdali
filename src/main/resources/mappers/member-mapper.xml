@@ -25,10 +25,8 @@
 		<result property="carNo" column="CAR_NO"/>
 		<result property="idImgOrigin" column="ID_IMG_ORIGIN"/>
 		<result property="idImgRename" column="ID_IMG_RENAME"/>
-		
-		<!-- 컬럼명 확인 -->
-		<result property="regCardImgOrigin" column="CAR_IMG_ORIGIN"/>
-		<result property="regCardImgRename" column="CAR_IMG_RENAME"/>
+		<result property="regCardImgOrigin" column="REGCARD_IMG_ORIGIN"/>
+		<result property="regCardImgRename" column="REGCARD_IMG_RENAME"/>
 	</resultMap>
 	
 	
@@ -90,9 +88,7 @@
 									#{idImgOrigin},
 									#{idImgRename},
 									#{regCardImgOrigin},
-									#{regCardImgRename},
-		
-		
+									#{regCardImgRename}
 									)
 	</insert>
 </mapper>     
