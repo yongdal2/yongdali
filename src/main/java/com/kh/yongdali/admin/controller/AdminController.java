@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.yongdali.admin.model.service.AdminService;
-import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.common.Pagination;
+import com.kh.yongdali.driver.model.vo.Driver;
+import com.kh.yongdali.member.model.vo.Member;
 
 @Controller
 public class AdminController {
@@ -27,8 +28,8 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping("aMem.ad")
-	public ModelAndView adminList(ModelAndView mv,
-								@RequestParam(value="currentPage", required = false, defaultValue="1")
+	public ModelAndView adminMemList(ModelAndView mv,
+								@RequestParam(value= " currentPage", required = false, defaultValue = "1")
 								int currentPage) { //현재 페이지가 필요한데, 없어도 되고, 있으면 기본값 1
 		
 		System.out.println("currentPage : " + currentPage);
@@ -45,21 +46,44 @@ public class AdminController {
 		
 		//(int currentPage, int listCount, int pageLimit, int boardLimit)
 		
-		ArrayList<Member> list = aService.selectList(pi);
+		ArrayList<Member> list = aService.selectMemList(pi);
 		//---------------------------------------------------
-		mv.addObject("list", list);
+		mv.addObject("list", list); 
 		mv.addObject("pi", pi);
 		mv.setViewName("admin/admin_Mem"); //.jsp
 		
 		return mv;
 		
+		
+	}
 
+	/**
+	 * Driver List
+	 * @param mv
+	 * @return
+	 */
+	@RequestMapping("aDri.ad")
+	public ModelAndView adminDriList(ModelAndView mv,
+									@RequestParam(value = "currentPage", required = false, defaultValue = "1") 
+									int currentPage) {
+		System.out.println("currentPAge : " + currentPage);
 		
-		/* public ModelAndView admin */
+		int listCount = aService.getDriListCount();
 		
+		System.out.println("listCount : " + listCount);
 		
-	
+		int pageLimit =5;
+		int boardLimit=7;
 		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, pageLimit, boardLimit);
+		
+		ArrayList<Driver> list = aService.selectDriList(pi);
+		//---------------------------------------------------
+		mv.addObject("list", list);
+		mv.addObject("pi", pi);
+		mv.setViewName("admin/admin_Driver"); //.jsp
+		
+		return mv;	
 	}
 	
 	

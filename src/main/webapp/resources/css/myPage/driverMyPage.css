@@ -9,11 +9,14 @@
 	font-style: normal;
 }
 
+body {
+	min-width: 768px !important;
+}
+
 .btn_ydl {
 	color: #fff;
 	background-color: rgb(87, 187, 138);
 	border-color: rgb(87, 187, 138);
-	
 }
 
 .btn_ydl_r {
@@ -253,3 +256,27 @@ a {
 .w50p{
 	width: 50% !important;
 }
+
+
+input[type=date]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+}
+
+.form-control {
+	font-size: 18px !important;
+	font-family: 'nanumsquare', Arial, Helvetica, sans-serif !important;
+	padding-left: 5px !important;
+}
+
+@media (min-width: 768px) {
+  .tbPdR {
+    padding-right: 17px !important
+  }
+}
+@media (min-width: 992px) {
+  .tbPdR {
+    padding-right: 37px !important
+  }
+}
+

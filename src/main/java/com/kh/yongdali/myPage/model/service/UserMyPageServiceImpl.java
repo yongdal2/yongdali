@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.myPage.model.dao.UserMyPageDao;
 import com.kh.yongdali.myPage.model.vo.Address;
+import com.kh.yongdali.reservation.model.vo.Reservation;
 
 @Service("umpService")
 public class UserMyPageServiceImpl implements UserMyPageService {
@@ -48,6 +50,16 @@ public class UserMyPageServiceImpl implements UserMyPageService {
 	@Override
 	public int deleteAddr(String aNo) {
 		return umpDao.deleteAddr(aNo);
+	}
+
+	@Override
+	public int getRsvListCount(String mNo) {
+		return umpDao.getRsvListCount(mNo);
+	}
+
+	@Override
+	public ArrayList<Reservation> selectRsvList(PageInfo pi, String mNo) {
+		return umpDao.selectRsvList(pi, mNo);
 	}
 
 

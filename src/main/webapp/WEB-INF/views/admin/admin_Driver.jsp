@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -18,23 +19,27 @@
 	<!-- Navigation -->
 	<%@ include file="../common/nav_admin.jsp"%>
 	<!-- 배경색 -->
-<!-- <div style="width: 100%; height: 100%; background: rgb(233, 246, 240); padding-top: 30px; padding-top: 30px;"> -->
-	<div style="width: 100%; height: 100%; padding-top: 30px; padding-top: 30px;">
+<div id="backg">
+	<!-- <div style="width: 100%; height: 100%; padding-top: 30px; padding-top: 30px;"> -->
 
 		<!-- main -->
 		<!-- <div class="container"> -->
+		<div id="white"> <!-- 하얀 테두리 -->
 		<div class="content container">
 			<div class="row">
+			<div id=title>
 				<h2 class="jal">관리자 페이지</h2>
-				<p>기사님 목록 / admin_Driver.jsp / 사진은 버튼 누르면 팝업으로 띄우기</p>
+				<h4 class="jal">: 기사님 목록</h4>
+			<p>기사님 목록 / admin_Driver.jsp / 사진은 버튼 누르면 팝업으로 띄우기 / 소제목 처리하기</p>
+			</div>
 				<hr>
 			</div>
 			
 			<div class="row" id="content">
 			<!-- <div id="content"> -->
 				<div class="col-lg-3 sidebar">
-					<a href="#"><span class="sidebar_span">회원님 목록</span></a><br>
-					<a href="#"><span class="sidebar_span">기사님 목록</span></a><br>
+					<a href="aMem.ad"><span class="sidebar_span">회원님 목록</span></a><br>
+					<a href="aDri.ad"><span class="sidebar_span">기사님 목록</span></a><br>
 					<a href="#"><span class="sidebar_span">예약 내역</span></a><br>
 					<a href="#"><span class="sidebar_span">정산 내역</span></a><br> 
 					<a href="#"><span class="sidebar_span">환불 내역</span></a><br> 
@@ -49,15 +54,14 @@
 					<table class="table table-striped table-hover text-center">
 						<thead id="thead">
 							<tr>
-								<th>사업자번호</th>
+								<th>기사번호</th>
 								<th>회원번호</th>
-								<th>차량톤수</th>
+								<!-- <th>이름</th> -->
+								<th>차량 톤수</th>
 								<th>차종</th>
 								<th>차량번호</th>
-								<th>증명사진원명</th>
-								<th>증명사진가명</th>
-								<th>차량사진원명</th>
-								<th>차량사진가명</th>
+								<th>증명사진</th>
+								<th>차량사진</th>
 							</tr>
 						</thead>
 						
@@ -69,10 +73,27 @@
 								<td>${ a.capacity }</td>
 								<td>${ a.type }</td>
 								<td>${ a.carNo }</td>
-								<td>${ a.idImgOrigin }</td>
-								<td>${ a.idImgRename }</td>
-								<td>${ a.carImgOrigin }</td>
-								<td>${ a.carImgRename }</td>
+								
+								 
+<%-- 								<td>${ a.mNo }</td>
+								<td>${ a.mId }</td>
+								<td>${ a.mName }</td>
+								<td>${ a.phone }</td>
+								<td>${ a.mSort }</td>
+								<td>${ a.mStatus }</td>
+								<td>${ a.pushEnabled }</td>
+								<td>${ a.enrollDate }</td>  --%>
+								 
+		<%-- <div class="img-circle" id="pro_img"
+		style="background-image: url('${pageContext.request.contextPath}/resources/images/driver/id/${driver.idImgRename}');"> --%>
+	
+	
+            <td>
+            	<div class="imgBtn" id="Origin" style="url('${pageContext.request.contextPath}/resources/images/driver/id/${a.idImgOrigin}');">원명</div>
+            	<div class="imgBtn" id="Rename" style="url('${pageContext.request.contextPath}/resources/images/driver/id/${a.idImgRename}');">가명</div>
+           </td>
+            <td><input type="button" id="Origin" value="원명"  style="float:inline">
+                <input type="button" id="Rename" value="가명"  style="float:inline"></td>
 							</tr>
 						</tbody>
 						</c:forEach>
@@ -86,13 +107,13 @@
 						<!-- << 처음  -->
 						<li>
 						<c:if test="${ pi.currentPage eq 1 }"><a>&lt;&lt; &nbsp;</a></c:if>
-						<c:if test="${ pi.currentPage ne 1 }"><a href="aMem.ad?currentPage=1">&lt;&lt; &nbsp;</a></c:if>
+						<c:if test="${ pi.currentPage ne 1 }"><a href="aDri.ad?currentPage=1">&lt;&lt; &nbsp;</a></c:if>
 						</li>
 						
 						<!-- < -->
 						<li>
 						<c:if test="${ pi.currentPage ne 1 }">
-							<c:url var="before" value="aMem.ad">
+							<c:url var="before" value="aDri.ad">
 								<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
 							</c:url>
 							<a href="${ before }">&lt; &nbsp;</a>
@@ -108,7 +129,7 @@
 						<a><b><font color="#5a8cff">${ p }</font></b></a>
 						</c:if>							
 						<c:if test="${ p ne pi.currentPage }">
-						<a href="<c:url var="pagination" value="aMem.ad">	
+						<a href="<c:url var="pagination" value="aDri.ad">	
 									<c:param name="currentPage" value="${ p }"/>
 								</c:url>
 						${ pagination }">${ p }</a>
@@ -121,7 +142,7 @@
 						<li>
 						<a href="
 						<c:if test="${ pi.currentPage ne pi.maxPage }">
-							<c:url var="after" value="aMem.ad">
+							<c:url var="after" value="aDri.ad">
 								<c:param name="currentPage" value="${ pi.currentPage +1 }"/>
 							</c:url>
 						</c:if>
@@ -131,19 +152,19 @@
 						<!-- >> 의도: 마지막 페이지에서는 >> 표시 사라짐(현재페이지가 끝 페이지임을 표시)-->						
 						<li>
 						<c:if test="${ pi.currentPage ne pi.maxPage }">
-						<c:url var="lastPage" value="aMem.ad">
+						<c:url var="lastPage" value="aDri.ad">
 								<c:param name="currentPage" value="${ pi.maxPage }"/>
 							</c:url>
 						<a href="${ lastPage }">&gt;&gt; &nbsp;</a>
 						</c:if>
 						</li>
 					</ul>
-				</div>
-			</div>
-			
-			
-			
+				</div> <!-- 페이징 처리 -->
+			</div>	<!-- list -->
 		</div>
+		</div> <!-- 하얀테두리 -->
+		
+		
 	</div>
 </div>
 

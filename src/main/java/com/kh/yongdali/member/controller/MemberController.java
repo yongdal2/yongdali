@@ -11,6 +11,7 @@ import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +27,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.yongdali.common.SaveFile;
+import com.kh.yongdali.driver.model.vo.Driver;
 import com.kh.yongdali.member.model.service.MemberService;
 import com.kh.yongdali.member.model.vo.Member;
 
@@ -34,6 +38,9 @@ import com.kh.yongdali.member.model.vo.Member;
 
 @Controller
 public class MemberController {
+	@Autowired
+	private SaveFile saveFile;
+	
 	
 	@Autowired
 	private MemberService mService;
@@ -75,11 +82,9 @@ public class MemberController {
 				date[i] = new SimpleDateFormat("yyyy-MM-dd").parse(sDate[i]);
 				milliesDate[i] = date[i].getTime();
 				mList.get(i).setEnrollDate(new java.sql.Date(milliesDate[i]));
-				logger.debug(mList.get(i).toString());
 				
 				encPwdArr[i] = bcryptPasswordEncoder.encode(mList.get(i).getPwd());
 				mList.get(i).setPwd(encPwdArr[i]);
-				logger.debug(mList.get(i).toString()+"\n");
 			}
 		} catch (ParseException e) {
 			model.addAttribute("msg", e.getMessage());
@@ -87,7 +92,7 @@ public class MemberController {
 		}
 		
 		int result = mService.insertSampleMembers(mList);
-		logger.debug(String.valueOf(result));
+		logger.debug("샘플데이터 " + String.valueOf(result) + "개 입력 완료!");
 		
 		if(result > 3) {
 			return "redirect:home.do";
@@ -140,8 +145,9 @@ public class MemberController {
 	 * @param status
 	 * @return
 	 */
-	@RequestMapping("logout.me")
+	@RequestMapping("logout1.me")
 	public String memberLogout(SessionStatus status) {
+		System.out.println("siab");
 		status.setComplete();
 		
 		return "redirect:home.do";
@@ -162,10 +168,7 @@ public class MemberController {
 	 */
 	@RequestMapping("signUpView.me")
 	public String signUpForm(@RequestParam("pushEnabled") char pushEnabled, Model model) {
-		logger.debug("푸시 알림 동의 : " + pushEnabled);
-		
 		model.addAttribute("pushEnabled", pushEnabled);
-		
 		return "login&signUp/signUpForm";
 	}
 
@@ -176,10 +179,7 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping("emailDup.me")
 	public String emailDupChk(@RequestParam("mId") String mId) {
-		logger.debug("가입 요청 email : " + mId);
-		
 		int result = mService.emailChk(mId);
-		logger.debug("중복검사 결과값 : " + result);
 		
 		if(result > 0) {
 			return "exist";
@@ -218,31 +218,79 @@ public class MemberController {
 		return ranNum;	
 	}
 
+//	/** 회원가입_양식 제출(일반 회원만) 
+//	 * @param m
+//	 * @return
+//	 */
+//	@RequestMapping("insert.me")
+//	public String insertMember(@ModelAttribute Member m, Model model) {
+//		logger.debug(m.toString());
+//		
+//		m.setPwd(bcryptPasswordEncoder.encode(m.getPwd()));
+//		logger.debug(m.toString());
+//		
+//		int result = mService.insertMember(m);
+//		logger.debug("회원가입 insert 결과값 : " + String.valueOf(result));
+//		
+//		if(result > 0) {
+//			return "login&signUp/login";
+//		}else {
+//			model.addAttribute("msg", "샘플데이터 입력 실패!");
+//			return "common/errorPage";
+//		}
+//	}
 	
-	
-	/** 회원가입_양식 제출
+	/** 회원가입_양식 제출(일반/사업자 공통) 
 	 * @param m
 	 * @return
 	 */
 	@RequestMapping("insert.me")
-	public String insertMember(@ModelAttribute Member m, Model model) {
-		logger.debug(m.toString());
-		
+	public String insertMember(@ModelAttribute Member m, Driver d
+								, Model model, HttpServletRequest request
+								, @RequestParam(name="inputFile_idImg", required=true) MultipartFile idImg
+								, @RequestParam(name="inputFile_regCardImg", required=true) MultipartFile regCardImg) {
+//		logger.debug(m.toString());
+
 		m.setPwd(bcryptPasswordEncoder.encode(m.getPwd()));
-		logger.debug(m.toString());
 		
+//		int result = 1;
 		int result = mService.insertMember(m);
-		logger.debug("회원가입 insert 결과값 : " + String.valueOf(result));
+//		logger.debug("회원가입 insert 결과값 : " + String.valueOf(result));
 		
+		
+		if(m.getmSort().equals("사업자") && result == 1) {
+			// dmNo 삽입을 위해 기존 select문 활용
+			Member mem = mService.loginMember(m);
+			d.setDmNo(mem.getmNo());
+
+			if(!idImg.getOriginalFilename().equals("")) {
+				String renameFileName = saveFile.rename(idImg, request, "\\id", "yongdali_id_");
+				
+				if(renameFileName != null) {
+					d.setIdImgOrigin(idImg.getOriginalFilename());
+					d.setIdImgRename(renameFileName);
+				}
+			}
+			if(!regCardImg.getOriginalFilename().equals("")) {
+				String renameFileName = saveFile.rename(idImg, request, "\\regCard", "yongdali_regCard_");
+				
+				if(renameFileName != null) {
+					d.setRegCardImgOrigin(regCardImg.getOriginalFilename());
+					d.setRegCardImgRename(renameFileName);
+				}
+			}			
+			result += mService.insertDriver(d);
+		}
+		
+		// TODO 1 이면 일반회원, 2 면 기사회원가입 완료 페이지 띄우기
 		if(result > 0) {
 			return "login&signUp/login";
 		}else {
 			model.addAttribute("msg", "샘플데이터 입력 실패!");
 			return "common/errorPage";
 		}
-		
-		
 	}
+	
 
 }
 

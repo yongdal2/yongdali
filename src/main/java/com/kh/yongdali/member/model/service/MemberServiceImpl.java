@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.yongdali.driver.model.vo.Driver;
 import com.kh.yongdali.member.model.dao.MemberDao;
 import com.kh.yongdali.member.model.vo.Member;
 
@@ -32,5 +33,10 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int insertMember(Member m) {
 		return mDao.insertMember(m);
+	}
+
+	@Override
+	public int insertDriver(Driver d) {
+		return mDao.insertDriver(d);
 	}
 }

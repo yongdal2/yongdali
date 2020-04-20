@@ -1,12 +1,15 @@
 package com.kh.yongdali.myPage.model.dao;
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.myPage.model.vo.Address;
+import com.kh.yongdali.reservation.model.vo.Reservation;
 
 
 @Repository("umpDao")
@@ -18,8 +21,6 @@ public class UserMyPageDao {
 	public int updatePhone(Member m) {
 		return sqlSession.update("myPageMapper.updatePhone",m);
 	}
-	
-	
 	
 	
 	public int getAddrListCount(String mNo) {
@@ -44,6 +45,19 @@ public class UserMyPageDao {
 
 	public int deleteAddr(String aNo) {
 		return sqlSession.delete("myPageMapper.deleteAddr", aNo);
+	}
+
+
+	public int getRsvListCount(String mNo) {
+		return sqlSession.selectOne("myPageMapper.selectRsvListCount",mNo);
+	}
+
+
+	public ArrayList<Reservation> selectRsvList(PageInfo pi, String mNo) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("myPageMapper.selectRsvList", mNo, rowBounds);
 	}
 
 	

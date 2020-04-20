@@ -4,29 +4,30 @@ public class Driver {
 
 	private String dNo;
 	private String dmNo;
-	private float capacity;
+	private String capacity;
 	private String type;
 	private String carNo;
 	private String idImgOrigin;
 	private String idImgRename;
-	private String carImgOrigin;
-	private String carImgRename;	
+	private String regCardImgOrigin;
+	private String regCardImgRename;	
 	
 	public Driver() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Driver(String dmNo, float capacity, String type, String carNo, String idImgOrigin, String idImgRename,
-			String carImgOrigin, String carImgRename) {
+	public Driver(String dNo, String dmNo, String capacity, String type, String carNo, String idImgOrigin,
+			String idImgRename, String regCardImgOrigin, String regCardImgRename) {
 		super();
+		this.dNo = dNo;
 		this.dmNo = dmNo;
 		this.capacity = capacity;
 		this.type = type;
 		this.carNo = carNo;
 		this.idImgOrigin = idImgOrigin;
 		this.idImgRename = idImgRename;
-		this.carImgOrigin = carImgOrigin;
-		this.carImgRename = carImgRename;
+		this.regCardImgOrigin = regCardImgOrigin;
+		this.regCardImgRename = regCardImgRename;
 	}
 
 	public String getdNo() {
@@ -45,11 +46,11 @@ public class Driver {
 		this.dmNo = dmNo;
 	}
 
-	public float getCapacity() {
+	public String getCapacity() {
 		return capacity;
 	}
 
-	public void setCapacity(float capacity) {
+	public void setCapacity(String capacity) {
 		this.capacity = capacity;
 	}
 
@@ -85,26 +86,28 @@ public class Driver {
 		this.idImgRename = idImgRename;
 	}
 
-	public String getCarImgOrigin() {
-		return carImgOrigin;
+	public String getRegCardImgOrigin() {
+		return regCardImgOrigin;
 	}
 
-	public void setCarImgOrigin(String carImgOrigin) {
-		this.carImgOrigin = carImgOrigin;
+	public void setRegCardImgOrigin(String regCardImgOrigin) {
+		this.regCardImgOrigin = regCardImgOrigin;
 	}
 
-	public String getCarImgRename() {
-		return carImgRename;
+	public String getRegCardImgRename() {
+		return regCardImgRename;
 	}
 
-	public void setCarImgRename(String carImgRename) {
-		this.carImgRename = carImgRename;
+	public void setRegCardImgRename(String regCardImgRename) {
+		this.regCardImgRename = regCardImgRename;
 	}
 
 	@Override
 	public String toString() {
 		return "Driver [dNo=" + dNo + ", dmNo=" + dmNo + ", capacity=" + capacity + ", type=" + type + ", carNo="
-				+ carNo + ", idImgOrigin=" + idImgOrigin + ", idImgRename=" + idImgRename + ", carImgOrigin="
-				+ carImgOrigin + ", carImgRename=" + carImgRename + "]";
+				+ carNo + ", idImgOrigin=" + idImgOrigin + ", idImgRename=" + idImgRename + ", regCardImgOrigin="
+				+ regCardImgOrigin + ", regCardImgRename=" + regCardImgRename + "]";
 	}
+
+	
 }
