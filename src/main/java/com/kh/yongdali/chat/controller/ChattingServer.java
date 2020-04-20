@@ -69,7 +69,7 @@ public class ChattingServer {
 	
 	@OnMessage
 	public void messageObj(Session session, Message msg) {
-		
+		System.out.println("session : " + session);
 		//session으로 socket session관리하기
 		session.getUserProperties().put("msg",msg);
 
@@ -113,11 +113,11 @@ public class ChattingServer {
 						if(msg.getReceiveId().equals("admin@naver.com")) {
 							s.getBasicRemote().sendObject(msg);
 						}else if(!msg.getId().equals(msg.getReceiveId())) {
-//							s.getBasicRemote().sendObject(new Message("admin","",rooms, "room"));//방현황 전송
-//							s.getBasicRemote().sendObject(new Message("admin","",users, "user"));//userg현황전송
 							s.getBasicRemote().sendObject(msg);
 						}
 						else if(m.getRoom().equals(msg.getReceiveId())) {
+							s.getBasicRemote().sendObject(new Message("admin","",rooms, "room"));//방현황 전송
+							s.getBasicRemote().sendObject(new Message("admin","",users, "user"));//userg현황전송
 							s.getBasicRemote().sendObject(msg);
 						}
 						
