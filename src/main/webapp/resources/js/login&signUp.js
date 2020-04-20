@@ -693,7 +693,6 @@ $(document).ready(function(){
 function loadImg(value, num){
 	// 입력된 파일의 존재유무 확인
 	if(value.files && value.files[0]){
-		console.log(value);
 		
 		// 이미지 파일인지 체크
 		if ( !(/image/i).test(value.files[0].type ) ){
