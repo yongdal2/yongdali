@@ -27,10 +27,6 @@ import com.kh.yongdali.chat.msg.MessageEncoder;
 @Controller
 public class ChattingServer {
 	
-//	@RequestMapping("chatting")
-//	public String goChatting() {
-//		return "";
-//	}
 	
 	@RequestMapping(value="chat.ch")
 	 public ModelAndView getChatViewPage(ModelAndView mav) {
@@ -73,7 +69,7 @@ public class ChattingServer {
 	
 	@OnMessage
 	public void messageObj(Session session, Message msg) {
-		
+		System.out.println("session : " + session);
 		//session으로 socket session관리하기
 		session.getUserProperties().put("msg",msg);
 
@@ -101,19 +97,31 @@ public class ChattingServer {
 						System.out.println("msg : " + msg);
 //						System.out.println(m);
 						// 세션 접속 아이디 = 메시지를 받는 사람
-						if(m.getId().equals(msg.getReceiveId())){
+//						if(m.getId().equals(msg.getReceiveId())){
+//							s.getBasicRemote().sendObject(msg);
+//						}
+//						// 메시지를 받는 사람=admin@naver.com && 세션 접속한 방 = 메시지 준 방
+//						else if(msg.getReceiveId().equals("admin@naver.com")&&m.getRoom().equals(msg.getRoom())){
+//							s.getBasicRemote().sendObject(msg);
+//						}
+//						// 메시지를 보낸 아이디 != 메시지를 받는 사람
+//						else if(!msg.getId().equals(msg.getReceiveId())){
+//							s.getBasicRemote().sendObject(new Message("admin","",rooms, "room"));//방현황 전송
+//							s.getBasicRemote().sendObject(new Message("admin","",users, "user"));//userg현황전송
+//							s.getBasicRemote().sendObject(msg);
+//						}
+						if(msg.getReceiveId().equals("admin@naver.com")) {
+							s.getBasicRemote().sendObject(msg);
+						}else if(!msg.getId().equals(msg.getReceiveId())) {
 							s.getBasicRemote().sendObject(msg);
 						}
-						// 메시지를 받는 사람=admin@naver.com && 세션 접속한 방 = 메시지 준 방
-						else if(msg.getReceiveId().equals("admin@naver.com")&&m.getRoom().equals(msg.getRoom())){
-							s.getBasicRemote().sendObject(msg);
-						}
-						// 메시지를 보낸 아이디 != 메시지를 받는 사람
-						else if(!msg.getId().equals(msg.getReceiveId())){
+						else if(m.getRoom().equals(msg.getReceiveId())) {
 							s.getBasicRemote().sendObject(new Message("admin","",rooms, "room"));//방현황 전송
 							s.getBasicRemote().sendObject(new Message("admin","",users, "user"));//userg현황전송
 							s.getBasicRemote().sendObject(msg);
 						}
+						
+						
 					}
 				}
 			}

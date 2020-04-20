@@ -17,3 +17,6 @@ INSERT INTO MEMBER VALUES('M' || SEQ_MNO.NEXTVAL,
                             'Y',
                             SYSDATE);
                             
+SELECT * FROM MEMBER WHERE M_ID = 'raejin0@naver.com';
+DELETE FROM MEMBER WHERE M_ID = 'raejin0@naver.com';
+COMMIT;

@@ -82,11 +82,9 @@ public class MemberController {
 				date[i] = new SimpleDateFormat("yyyy-MM-dd").parse(sDate[i]);
 				milliesDate[i] = date[i].getTime();
 				mList.get(i).setEnrollDate(new java.sql.Date(milliesDate[i]));
-				logger.debug(mList.get(i).toString());
 				
 				encPwdArr[i] = bcryptPasswordEncoder.encode(mList.get(i).getPwd());
 				mList.get(i).setPwd(encPwdArr[i]);
-				logger.debug(mList.get(i).toString()+"\n");
 			}
 		} catch (ParseException e) {
 			model.addAttribute("msg", e.getMessage());
@@ -94,7 +92,7 @@ public class MemberController {
 		}
 		
 		int result = mService.insertSampleMembers(mList);
-		logger.debug(String.valueOf(result));
+		logger.debug("샘플데이터 " + String.valueOf(result) + "개 입력 완료!");
 		
 		if(result > 3) {
 			return "redirect:home.do";
@@ -170,10 +168,7 @@ public class MemberController {
 	 */
 	@RequestMapping("signUpView.me")
 	public String signUpForm(@RequestParam("pushEnabled") char pushEnabled, Model model) {
-		logger.debug("푸시 알림 동의 : " + pushEnabled);
-		
 		model.addAttribute("pushEnabled", pushEnabled);
-		
 		return "login&signUp/signUpForm";
 	}
 
@@ -184,10 +179,7 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping("emailDup.me")
 	public String emailDupChk(@RequestParam("mId") String mId) {
-		logger.debug("가입 요청 email : " + mId);
-		
 		int result = mService.emailChk(mId);
-		logger.debug("중복검사 결과값 : " + result);
 		
 		if(result > 0) {
 			return "exist";
@@ -270,7 +262,7 @@ public class MemberController {
 			// dmNo 삽입을 위해 기존 select문 활용
 			Member mem = mService.loginMember(m);
 			d.setDmNo(mem.getmNo());
-//			logger.debug(d.toString());	
+
 			if(!idImg.getOriginalFilename().equals("")) {
 				String renameFileName = saveFile.rename(idImg, request, "\\id", "yongdali_id_");
 				
@@ -287,11 +279,10 @@ public class MemberController {
 					d.setRegCardImgRename(renameFileName);
 				}
 			}			
-			result = mService.insertDriver(d);
+			result += mService.insertDriver(d);
 		}
 		
-		
-		
+		// TODO 1 이면 일반회원, 2 면 기사회원가입 완료 페이지 띄우기
 		if(result > 0) {
 			return "login&signUp/login";
 		}else {
@@ -300,7 +291,6 @@ public class MemberController {
 		}
 	}
 	
-//	public String saveFile(MultipartFile)
 
 }
 

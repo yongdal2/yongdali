@@ -171,12 +171,12 @@
 		
 		function connectionSocket(){
 			connect = true;
-			socket = new WebSocket('ws://192.168.0.80:8888/yongdali/chatting');
+			socket = new WebSocket('ws://192.168.110.45:8888/yongdali/chatting');
 			/* 페이지 접속한 session id */
-			var sessionid = '${sessionScope.loginUser.mId}';
+			var sessionid = $("#senderId").val();
 			
 			socket.onopen = function(e){
-				//socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),"","createroom",$("#receiveId").val())));
+//				socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),"","createroom","")));
 
 			}
 			socket.onmessage = function(e){
@@ -192,19 +192,20 @@
 					console.log(rooms);
 					var printHTML = "<div class='discussion'>";
 					printHTML += "<div class='photo'></div>";
-					printHTML += "<div class='desc-contact'>";
+					printHTML += "<div class='desc-contact' id='nameArea'>";
 					/* printHTML += "<p class='name' id='listName'></p>"; */
 					printHTML += "</div>";
 					printHTML += "</div>";
 					
 					$("#chatList").append(printHTML);
 					 for(var i=0; i<rooms.length; i++){
-						 $(".desc-contact").append($("<p class='name' id='listName'>").html(rooms[i]).click(function(){
+						  $(".discussion>#nameArea").append($("<p class='name' id='listName'>").html(rooms[i]).click(function(){
 							 $("#room").val($(this).html());
-					 		 checkCurrentRoom(this);
+					 		 checkClick(this);
 						 }));
 						/* $('#listName').html(rooms[i]); */
 					}
+					 checkCurrentRoom(rooms);
 				}
 				
 				if(data["flag"]!="room" && data["flag"]!="user"){
@@ -231,10 +232,20 @@
 			
 			}
 		}
-		function checkCurrentRoom(e){
+		function checkClick(e){
 			$(e).parent().find("p").css({background:"white"});
         	$(e).css({background:"lightgray"});
 		}
+		
+		//현재접속한 방을 확인하여 배경을 설정하는 로직.
+        function checkCurrentRoom(e){
+        	$(".desc-contact>p").css({background:"white"});
+        		$(".desc-contact>p").each(function(i,item){
+       				if($("#room").val()==$(item).html()){					
+       					$(item).css({background:"lightgray"});
+        			}
+        		});
+        }
 		
 		 function writeResponse(text){
 			 $('.messages-chat').append(text);
