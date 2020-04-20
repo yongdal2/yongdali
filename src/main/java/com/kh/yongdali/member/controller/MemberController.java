@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.yongdali.common.SaveFile;
 import com.kh.yongdali.driver.model.vo.Driver;
 import com.kh.yongdali.member.model.service.MemberService;
 import com.kh.yongdali.member.model.vo.Member;
@@ -37,6 +38,9 @@ import com.kh.yongdali.member.model.vo.Member;
 
 @Controller
 public class MemberController {
+	@Autowired
+	private SaveFile saveFile;
+	
 	
 	@Autowired
 	private MemberService mService;
@@ -252,36 +256,40 @@ public class MemberController {
 								, Model model, HttpServletRequest request
 								, @RequestParam(name="inputFile_idImg", required=true) MultipartFile idImg
 								, @RequestParam(name="inputFile_regCardImg", required=true) MultipartFile regCardImg) {
-		logger.debug(m.toString());
-		logger.debug(d.toString());
-//		logger.debug(idImg.toString());
-//		logger.debug(regCardImg.toString());
-//		logger.debug(idImg.getOriginalFilename());
-//		logger.debug(regCardImg.getOriginalFilename());
-		
-		if(!idImg.getOriginalFilename().equals("")) {
-//			logger.debug(idImg.getOriginalFilename());
-//			String idImgRename = saveFile(idImg, request);
-		}
-		
-		if(!regCardImg.getOriginalFilename().equals("")) {
-//			logger.debug(regCardImg.getOriginalFilename());
-//			String idImgRename = saveFile(idImg, request);
-			
-		}
-		
-		
-		
-		
-		
-		
-//		m.setPwd(bcryptPasswordEncoder.encode(m.getPwd()));
 //		logger.debug(m.toString());
-//		
-//		int result = mService.insertMember(m);
+
+		m.setPwd(bcryptPasswordEncoder.encode(m.getPwd()));
+		
+//		int result = 1;
+		int result = mService.insertMember(m);
 //		logger.debug("회원가입 insert 결과값 : " + String.valueOf(result));
 		
-		int result = 1;
+		
+		if(m.getmSort().equals("사업자") && result == 1) {
+			// dmNo 삽입을 위해 기존 select문 활용
+			Member mem = mService.loginMember(m);
+			d.setDmNo(mem.getmNo());
+//			logger.debug(d.toString());	
+			if(!idImg.getOriginalFilename().equals("")) {
+				String renameFileName = saveFile.rename(idImg, request, "\\id", "yongdali_id_");
+				
+				if(renameFileName != null) {
+					d.setIdImgOrigin(idImg.getOriginalFilename());
+					d.setIdImgRename(renameFileName);
+				}
+			}
+			if(!regCardImg.getOriginalFilename().equals("")) {
+				String renameFileName = saveFile.rename(idImg, request, "\\regCard", "yongdali_regCard_");
+				
+				if(renameFileName != null) {
+					d.setRegCardImgOrigin(regCardImg.getOriginalFilename());
+					d.setRegCardImgRename(renameFileName);
+				}
+			}			
+			result = mService.insertDriver(d);
+		}
+		
+		
 		
 		if(result > 0) {
 			return "login&signUp/login";
