@@ -28,98 +28,91 @@
 
 <body>
 	<c:import url="../../common/nav.jsp"/>
+	<c:import url="../../user/myPage/userInfo.jsp"/>
+	
 	<div class="container">
 		<div class="row">
-			<div class="h2 jal">
-				예약 내역
-				<hr>
+			<div class="col-xs-12 col-md-12 h2 jal">
+				예약내역 <br> <br>
 			</div>
-		</div>
-		<div class="row" style="margin: 20px;">
-			<div class="col-xs-12 col-md-12 well text-center">
-				<div class="col-xs-3 col-md-3">
-					<select class="form-control" id="">
-						<option value="ㅇㅇ">상태별 조회</option>
-						<option value="ㅇㅇ">예약 대기</option>
-						<option value="ㅇㅇ">상태별 조회</option>
-					</select>
-				</div>
-				<div class="col-xs-7 col-md-7">
-					<div class="row">
-						<div class="col-xs-6 col-md-6">
-							<input type="date" class="form-control">
-						</div>
-						<div class="col-xs-6 col-md-6">
-							<input type="date" class="form-control">
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-2 col-md-2">
-					<button class="btn btn_ydl">전체보기</button>
-				</div>
+			<!-- 필터 -->
+			<div class="col-xs-2 col-md-2 text-center bszB1">
+				<select class="form-control ft54" name="rStatus" id="rStatus">
+					<option value="rst">상태별 조회</option>
+					<option value="pay">결제완료</option>
+					<option value="deal">배차완료</option>
+					<option value="pick">상차완료</option>
+					<option value="drop">하차완료</option>
+					<option value="canc">취소</option>
+				</select>
 			</div>
-		</div>
-		<div class="row" style="margin: 20px;">
-			<div class="col-xs-12 col-md-12"
-				style="padding: 0; border-radius: 16px; border: solid 1px #dedede; background-color: #ffffff;">
+			<div class="text-center"></div>
+			<div class="col-xs-3 col-md-3 text-center bszB">
+				<input placeholder="상차일" class="form-control ft54" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date" />
+			</div>
+			<div class="col-xs-3 col-md-3 text-center bszB">
+				<input placeholder="하차일" class="form-control ft54" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date" />
+			</div>
+			<div class="col-xs-3 col-md-3 text-center bszB">
+				<input type="search" class="form-control ft54" placeholder="검색">
+			</div>
+			<div class="col-xs-1 col-md-1 bszB">
+				<button class="btn btn_ydl sch">
+					<span class="glyphicon glyphicon-search" style="font-size: 22px"></span>
+				</button>
+			</div>
+			<div class="col-xs-12 col-md-12 tbPdR" >
 				<Br>
-				<table class="table table-striped table-hover text-center">
+				<table class="table table-hover text-center">
 					<thead>
 						<tr>
 							<td>예약 번호</td>
 							<td>진행 상태</td>
-							<td>예약 일자</td>
+ 							<td>예약 일자</td>
+ 							<td>상차일</td>
+ 							<td>하차일</td>
 							<td>출발지</td>
 							<td>도착지</td>
 							<td>결제 금액</td>
-							<td>차종</td>
+							<td>차량정보</td>
+							<td>차량정보</td>
+							<td>상세정보</td>
+							
+							
 						</tr>
 					</thead>
+					<c:forEach var="r" items="rList" varStatus="vs">
 						<tr>
-							<td>089</td>
-							<td>하차 완료</td>
-							<td>2020.01.12</td>
-							<td>부산시123</td>
-							<td>제주시 1234</td>
-							<td>123,000,34</td>
-							<td>라보99ton</td>
+							<td>예약 번호</td>
+							<td>진행 상태</td>
+ 							<td>예약 일자</td>
+ 							<td>상차일</td>
+ 							<td>하차일</td>
+							<td>출발지</td>
+							<td>도착지</td>
+							<td>결제 금액</td>
+							<td>차량정보</td>
+							<td>차량정보</td>
+							<td>상세정보</td>
 						</tr>
-						<tr>
-							<td>089</td>
-							<td>하차 완료</td>
-							<td>2020.01.12</td>
-							<td>부산시123</td>
-							<td>제주시 1234</td>
-							<td>123,000,34</td>
-							<td>라보99ton</td>
-						</tr>
-						<tr>
-							<td>089</td>
-							<td>하차 완료</td>
-							<td>2020.01.12</td>
-							<td>부산시123</td>
-							<td>제주시 1234</td>
-							<td>123,000,34</td>
-							<td>라보99ton</td>
-						</tr>
-						
+					</c:forEach>
 				</table>
 			</div>
-					<div class="row text-center">
-						<ul class="pagination ft_gr">
-							<li><a href="#"><<</a></li>
-							<li><a href="#"><</a></li>
-							<li><a href="#">1</a></li>
-							<li class="active"><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">></a></li>
-							<li><a href="#">>></a></li>
-						</ul>
-					</div>
 		</div>
+		<div class="row text-center">
+			<ul class="pagination ft_gr">
+				<li><a href="#"><<</a></li>
+				<li><a href="#"><</a></li>
+				<li><a href="#">1</a></li>
+				<li class="active"><a href="#">2</a></li>
+				<li><a href="#">3</a></li>
+				<li><a href="#">4</a></li>
+				<li><a href="#">5</a></li>
+				<li><a href="#">></a></li>
+				<li><a href="#">>></a></li>
+			</ul>
 		</div>
+	</div>
 	<c:import url="../../common/footer.jsp"/>
 </body>
 

@@ -8,6 +8,8 @@
 		<result property="aPlace" column="PLACE"/>
 		<result property="aName" column="NAME"/>
 		<result property="aAddress" column="ADDRESS"/>
+		<result property="aLatitude" column="LATITUDE"/>
+		<result property="aLongitude" column="LONGITUDE"/>
 		<result property="aPhone" column="PHONE"/>
 		<result property="aRecentDate" column="RECENTDATE"/>
 	</resultMap>
@@ -36,6 +38,39 @@
 		<result property="carImgRename" column="CAR_IMG_RENAME"/>
 	</resultMap>
 	
+	<!-- resultMap Reservation-->
+	<resultMap id="rsvResultSet" type="Reservation">
+		<id property="rNo" column="R_NO"/>
+		<result property="rMNo" column="R_M_NO"/>
+		<result property="rDNo" column="R_D_NO"/>
+		<result property="capacity" column="CAPACITY"/>
+		<result property="type" column="TYPE"/>
+		<result property="startName" column="START_NAME"/>
+		<result property="endName" column="END_NAME"/>
+		<result property="startPhone" column="START_PHONE"/>
+		<result property="endPhone" column="END_PHONE"/>
+		<result property="startAddr" column="START_ADDR"/>
+		<result property="endAddr" column="END_ADDR"/>
+		<result property="distance" column="DISTANCE"/>
+		<result property="rightLoad" column="RIGHT_LOAD"/>
+		<result property="rightUnload" column="RIGHT_UNLOAD"/>
+		<result property="startDate" column="STARTDATE"/>
+		<result property="startTime" column="STARTTIME"/>
+		<result property="endDate" column="ENDDATE"/>
+		<result property="endTime" column="ENDTIME"/>
+		<result property="helpLoad" column="HELP_LOAD"/>
+		<result property="helpUnload" column="HELP_UNLOAD"/>
+		<result property="luggage" column="LUGGAGE"/>
+		<result property="msg" column="MSG"/>
+		<result property="amount" column="AMOUNT"/>
+		<result property="payYN" column="PAY_YN"/>
+		<result property="dealYN" column="DEAL_YN"/>
+		<result property="dealDate" column="DEALDATE"/>
+		<result property="calcYN" column="CALC_YN"/>
+		<result property="calcDate" column="CALCDATE"/>
+		<result property="enrollDate" column="ENROLLDATE"/>
+	</resultMap>
+	
 	<!-- 폰번호 업데이트 -->
 	<update id="updatePhone" parameterType="Member">
 		UPDATE MEMBER
@@ -45,7 +80,6 @@
 	<!-- 비밀번호 업데이트 -->
 	
 	<!-- 프로필사진 업데이트 -->
-	
 	<update id="updateProfileImg" parameterType="Driver">
 		UPDATE DRIVER
 		SET ID_IMG_ORIGIN = #{idImgOrigin},
@@ -85,6 +119,8 @@
 		</choose>
 		NAME=#{aName},
 		ADDRESS=#{aAddress},
+		LATITUDE=#{aLatitude},
+		LONGITUDE=#{aLongitude},
 		PHONE=#{aPhone},
 		RECENTDATE=SYSDATE
 		WHERE A_NO=#{aNo}
@@ -94,17 +130,17 @@
 		INSERT INTO ADDRESS VALUES
 		<choose>
 			<when test="aPlace != null and aPlace !=''">
-				('A' || SEQ_ANO.NEXTVAL,#{aMno},#{aPlace},#{aName},#{aAddress},#{aPhone},SYSDATE)	
+				('A' || SEQ_ANO.NEXTVAL,#{aMno},#{aPlace},#{aName},#{aAddress},#{aLatitude},#{aLongitude},#{aPhone},SYSDATE)	
 			</when>
 			<otherwise>
-				('A' || SEQ_ANO.NEXTVAL,#{aMno},NULL,#{aName},#{aAddress},#{aPhone},SYSDATE)	
+				('A' || SEQ_ANO.NEXTVAL,#{aMno},NULL,#{aName},#{aAddress},#{aLatitude},#{aLongitude},#{aPhone},SYSDATE)	
 			</otherwise>
 		</choose>
 	</insert>
 	<!--  주소록 삭제 -->
-	<delete id="deleteAddr" parameterType="_int">
+	<delete id="deleteAddr" parameterType="Address">
 		DELETE FROM ADDRESS
-		WHERE A_NO={aNo}
+		WHERE A_NO=#{aNo}
 	</delete>
 	
 	<!-- 트럭정보  -->
@@ -114,5 +150,16 @@
 	WHERE D_M_NO=#{mNo}
 	</select>
 	
-	
+	<!-- 마이페이지 예약내역  -->
+	<select id="selectRsvListCount" resultMap="rsvResultSet">
+	SELECT (*)
+	FROM RESERVATION
+	WHERE R_M_NO=#{mNo}
+	</select>
+	<!-- 마이페이지 예약내역  -->
+	<select id="selectRsvList" resultMap="rsvResultSet">
+	SELECT *
+	FROM RESERVATION
+	WHERE R_M_NO=#{mNo}
+	</select>
 </mapper>

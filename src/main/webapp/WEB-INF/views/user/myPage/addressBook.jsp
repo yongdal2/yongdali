@@ -22,6 +22,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.js"></script>
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=03ea077d7ecc6636dffede985cc5c57d&libraries=services"></script>
     <title>용달이 | 예약 내역</title>
 </head>
 
@@ -115,6 +116,8 @@
                             </div>
                             <div class="col-xs-6 col-md-6 p0mt10">
                                 <input type="text" class="form-control noto addrIp" id="adAdr_address" name="adAdr_address">
+                                <input type="hidden" id="adLat" name="adLat">
+                                <input type="hidden" id="adLong" name="adLong">
                             </div>
                             <div class="col-xs-2 col-md-2 btn btn_ydl_l searchAddrBtn" id="searchAddr1btn" data-toggle="modal" data-target="#adSearchAddr" onclick="adSearchAddr()">
 								주소 검색
@@ -133,7 +136,7 @@
 								연락처<span class="red"> *</span>
                             </div>
                             <div class="col-xs-5 col-md-5 p0mt10">
-                                <input type="text" class="form-control noto addrIp" id="adPhone" name="adPhone">
+                                <input type="text" class="form-control noto addrIp" id="adPhone" name="adPhone" maxlength="13" onkeyup="inputPhoneNumber(this);">
                             </div>
                         </div>
                         <div class="col-xs-12 col-md-12 p0mt10" id="pwCheckText"></div>
@@ -187,6 +190,8 @@
                             </div>
                             <div class="col-xs-6 col-md-6 p0mt10">
                                 <input type="text" class="form-control noto addrIp" id="edAdr_address" name="edAdr_address">
+                                <input type="hidden" id="edLat" name="edLat">
+                                <input type="hidden" id="edLong" name="edLong">
                             </div>
                             <div class="col-xs-2 col-md-2 btn btn_ydl_l searchAddrBtn" onclick="edSearchAddr()">
 								주소 검색
@@ -205,7 +210,7 @@
 								연락처<span class="red"> *</span>
                             </div>
                             <div class="col-xs-5 col-md-5 p0mt10">
-                                <input type="text" class="form-control noto addrIp" id="edPhone" name="edPhone">
+                                <input type="text" class="form-control noto addrIp" id="edPhone" name="edPhone" maxlength="13" onkeyup="inputPhoneNumber(this);">
                             </div>
                             	<input type="hidden" id="edAno" name="edAno">
                         </div>
@@ -242,6 +247,8 @@
 						$("#edPlace").val(decodeURIComponent(data.aPlace).replace(/\+/g, " "));
 						$("#edName").val(decodeURIComponent(data.aName));
 						$("#edAdr_address").val(decodeURIComponent(data.aAddr1).replace(/\+/g, " "));
+						$("#edLat").val(data.aLat);
+						$("#edLong").val(data.aLong);
 						$("#edAdr_detail").val(decodeURIComponent(data.aAddr2).replace(/\+/g, " "));
 						$("#edPhone").val(decodeURIComponent(data.aPhone));
 					},error:function(){
@@ -257,12 +264,11 @@
 				console.log(aNo);
 				var delA = confirm( "삭제하시겠습니까?");
 				if(delA){
-					
-					document.location.href ="dAddr.myp";
+					var url="dAddr.myp?aNo="+aNo;
+					$(location).attr('href',url)
 				}else{
 					alert("윽");
 				}
-				
 		});
 		});
 	</script>
