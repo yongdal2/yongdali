@@ -25,6 +25,7 @@ public class MemberController_njh {
 		}
 	}
 	
+	
 	@RequestMapping("reservation.do")
 	public String reservation() {
 		return "user/reservation";

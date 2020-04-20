@@ -66,10 +66,7 @@ public class DriverController {
 		
 		int pageLimit = 15;
 		int boardLimit = 5;
-		System.out.println(mNo);
 		int listCount = dService.getListCount(mNo);
-		
-		System.out.println("listCount : " + listCount);
 	
 		PageInfo pi = Pagination.getPageInfo(currentPage,listCount,pageLimit,boardLimit);
 		
@@ -81,6 +78,7 @@ public class DriverController {
 		mv.setViewName("/driver/driverDetail");
 		
 		return mv;
+		
 	}
 	
 	/**
