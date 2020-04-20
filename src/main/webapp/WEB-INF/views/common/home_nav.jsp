@@ -72,7 +72,7 @@
 								<button class="btn btn-default navbar-btn driverPage" style="background: rgb(87,187,138); color: white;">기사 홈</button>
 							</li>
 							<li class="nav-item">
-								<button class="btn btn-default navbar-btn chatPage" onclick="adminChat();" style="background: none;border: none; position:relative;">
+								<button class="btn btn-default navbar-btn chatPage" style="background: none;border: none; position:relative;">
 									<svg class="bi bi-chat-dots-fill" style="color:rgb(87,187,138);" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
   									<path fill-rule="evenodd" d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 01-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 11-2 0 1 1 0 012 0zm4 0a1 1 0 11-2 0 1 1 0 012 0zm3 1a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
 									</svg>
@@ -86,7 +86,7 @@
 							</li>
 						</c:if>
 						<li class="nav-item">
-							<button class="btn btn-outline-default navbar-btn logout" style="background: white;" >로그아웃</button>
+							<button class="btn btn-outline-default navbar-btn logout" style="background: white;" onclick="location.href='logout1.me'">로그아웃</button>
 						</li>
 					</c:if>	
 				</ul>

@@ -145,8 +145,9 @@ public class MemberController {
 	 * @param status
 	 * @return
 	 */
-	@RequestMapping("logout.me")
+	@RequestMapping("logout1.me")
 	public String memberLogout(SessionStatus status) {
+		System.out.println("siab");
 		status.setComplete();
 		
 		return "redirect:home.do";

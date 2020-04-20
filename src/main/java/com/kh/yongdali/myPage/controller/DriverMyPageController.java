@@ -19,7 +19,7 @@ import com.kh.yongdali.driver.model.vo.Driver;
 import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.myPage.model.service.DriverMyPageService;
 
-@SessionAttributes("loginUser")
+@SessionAttributes({"loginUser","driver"})
 @Controller
 public class DriverMyPageController {
 	

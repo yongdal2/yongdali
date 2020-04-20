@@ -103,7 +103,9 @@
         <div class="container">
             <div class="footer row">
                 <div class="col-xs-10 col-lg-11">
-                	<input type="text" id="sender" value="${sessionScope.loginUser.mName }" style="display: none;">
+                	<input type="text" id="senderId" value="${sessionScope.loginUser.mId }" style="display: none;">
+                	<input type="text" id="senderName" value="${sessionScope.loginUser.mName }" style="display: none;">
+                	<input type="text" id="receiveId" style="display: none;">
                 	<input type="text" class="write-message" id="msgArea" placeholder="Type your message here"></input>
                     <!-- <textarea placeholder="궁금하신 점이 무엇인가요?" id="msgArea"></textarea> -->
                 </div>
@@ -115,117 +117,87 @@
         </div>
     </form>
     <script>
-    
-    	$(function(){
-    		openSocket();
-    	});
-    	var ws;
-    	var youMsg = document.getElementById("youMsg");
-    	var today = new Date();
+	    var socket;//socket객체 보관용
+		var connect=false;//연결이 되었는지
+		var today = new Date();
     	var hours = today.getHours();
 		var minutes = today.getMinutes();
+    
+    	$(function(){
+    		connectionSocket();
+    	})
+		
+    	//message token구성
+		function MessageFlag(id, room, msg, flag, receiveId){
+			this.id=id;
+			this.room=room;
+			this.msg=msg;
+			this.flag=flag;
+			this.receiveId=receiveId;
+		}
     	
-    	function openSocket(){
-			if(ws!==undefined && ws.readyState!==WebSocket.CLOSED){
-                
-                return;
-            }
-			
-			ws = new WebSocket("ws://192.168.110.45:8888/yongdali/kh.do");
-	    	
-    		ws.onopen = function(message){
-	    		console.log("확인");
-	    		var printHTML = "<li class='you'>";
-    			printHTML += "<div class='entete'>";
-    			printHTML += "<h2>"+'관리자'+"</h2>";
-    			printHTML += "<h3>"+hours+":"+minutes+"<h3>";
-    			printHTML += "</div>";
-    			printHTML += "<div class='message'id='youMsg'>"+'용달이에 오신걸 환영합니다.'+"</div>";	    			
-    			printHTML += "</li>";
+    	function connectionSocket(){
+    		connect = true;
+    		socket = new WebSocket('ws://192.168.0.80:8888/yongdali/chatting');
+    		/* 페이지 접속한 session id */
+    		var sessionid = '${sessionScope.loginUser.mId}';
+    		
+    		socket.onopen = function(e){
+    			//socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),"","createroom",$("#receiveId").val())));
+    			socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),"","createroom","admin@naver.com")));
+    		}
+    		socket.onmessage = function(e){
+    			console.log(e.data);
+    			var data=JSON.parse(e.data);
+    			
+    			console.log("세션아이디:"+sessionid);
+    			console.log("받는아이디:"+data["receiveId"]);
+    			
+    			if(data["flag"]!="room" && data["flag"]!="user"){
+    				if(sessionid == data["id"]){
+	    				var printHTML = "<li class='me'>";
+	        			printHTML += "<div class='entete'>";
+	        			printHTML += "<h3>"+hours+":"+minutes+"<h3>";
+	        			printHTML += "<h2>"+data["room"]+"</h2>";
+	        			printHTML += "</div>";
+	        			printHTML += "<div class='message' id='meMsg'>"+data["msg"]+"</div>";
+	        			printHTML += "</li>";
+	    			}else{    			
+	        			var printHTML = "<li class='you'>";
+		    			printHTML += "<div class='entete'>";
+		    			printHTML += "<h2>"+data["room"]+"</h2>";
+		    			printHTML += "<h3>"+hours+":"+minutes+"<h3>";
+		    			printHTML += "</div>";
+		    			printHTML += "<div class='message'id='youMsg'>"+data["msg"]+"</div>";	    			
+		    			printHTML += "</li>";	
+	    			}
+    				
+    			}
+	    			
+    				
+    		
     			
     			writeResponse(printHTML);
-	    	};
-  
-	    	ws.onmessage = function(event){
-	    		var data = event.data;
-	    		
-	    		/* 페이지 접속한 session id */
-	    		var sessionid = '${sessionScope.loginUser.mName}';
-	    		
-	    		/* 메시지 보낸 아이디 */
-	    		var currentuser_session = null;
-	    		var message = null;
-	    		
-	    		console.log(data);
-	    		
-	    		var strArray = data.split('|');
-	    		
-	    		for(var i = 0; i<strArray.length; i++){
-	    			console.log('str['+i+']: ' + strArray[i]);
-	    		}
-	    		
-	    		
-	    		message = strArray[0];
-	    		currentuser_session = strArray[1];
-	    		
-	    		console.log("message : " + message);
-	    		console.log("sessionid : " + sessionid);
-	    		console.log('current session id : ' + currentuser_session);
-	    		
-	    		if(sessionid != currentuser_session){
-	    			var printHTML = "<li class='you'>";
-	    			printHTML += "<div class='entete'>";
-	    			printHTML += "<h2>"+currentuser_session+"</h2>";
-	    			printHTML += "<h3>"+hours+":"+minutes+"<h3>";
-	    			printHTML += "</div>";
-	    			printHTML += "<div class='message'id='youMsg'>"+message+"</div>";	    			
-	    			printHTML += "</li>";
-	    		}else{
-	    			var printHTML = "<li class='me'>";
-	    			printHTML += "<div class='entete'>";
-	    			printHTML += "<h3>"+hours+":"+minutes+"<h3>";
-	    			printHTML += "<h2>"+currentuser_session+"</h2>";
-	    			printHTML += "</div>";
-	    			printHTML += "<div class='message' id='meMsg'>"+message+"</div>";
-	    			printHTML += "</li>";
-	    		} 
-    			writeResponse(printHTML);
-	    	};
-	    	
-	    	ws.onclose = function(message){
-	    		alert('채팅을 종료합니다!');
-	    	};
+    			
+    		}
+    		
     	}
     	
-    	
     	 function writeResponse(text){
-    		$("#chat").append(text);
-         }
-    	
-    	/* ws.onerror = function(message){
-    		youMsg.innerHTML += "에러 발생";
-    	}; */
-    	
-    	
+     		$("#chat").append(text);
+     		$("#chat").scrollTop($("#chat")[0].scrollHeight);
+          }
     	
     	function sendMessage(){
-    		/* var message = document.getElementById("msgArea");
-    		
-    		meMsg.innerHTML += message.value;
-    		
-    		ws.send(message.value);
-    		
-    		message.value = ""; */
-    		var message = $("#msgArea").val()+"|"+$("#sender").val();
-    		ws.send(message);
+    		//socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),$("#msgArea").val(),"msg",$("#receiveId").val())));
+    		socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),$("#msgArea").val(),"msg","admin@naver.com")));
     		$("#msgArea").val("");
 
     	}
     	
     	function disconnect(){
-            ws.close();
+    		socket.close();
         }
-    	
     	
     	
     </script>
