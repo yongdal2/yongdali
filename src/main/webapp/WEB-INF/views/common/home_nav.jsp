@@ -42,7 +42,7 @@
 			
 			<%-- <input type="text" id="test1" value="${loginUser.mId}"/> --%>
 			<div class="navbar-header col-lg-4">
-				<a class="navbar-brand" href="#" style="font-size: 30px; color: rgb(87,187,138); padding-top: 0px;">
+				<a class="navbar-brand" href="home.do" style="font-size: 30px; color: rgb(87,187,138); padding-top: 0px;">
 					<img alt="사진안들어감"src="${pageContext.request.contextPath}/resources/images/ydl_logo/ydl_lg_gr(150x50).png" class="d-inline-block align-top" style="height: 48px">
 				</a>
 			</div>
