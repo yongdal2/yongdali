@@ -34,8 +34,8 @@
 		<result property="carNo" column="CAR_NO"/>
 		<result property="idImgOrigin" column="ID_IMG_ORIGIN"/>
 		<result property="idImgRename" column="ID_IMG_RENAME"/>
-		<result property="carImgOrigin" column="CAR_IMG_ORIGIN"/>
-		<result property="carImgRename" column="CAR_IMG_RENAME"/>
+		<result property="regCardImgOrigin" column="REGCARD_IMG_ORIGIN"/>
+		<result property="regCardImgRename" column="REGCARD_IMG_RENAME"/>
 	</resultMap>
 	
 	<!-- resultMap Reservation-->
@@ -151,8 +151,8 @@
 	</select>
 	
 	<!-- 마이페이지 예약내역  -->
-	<select id="selectRsvListCount" resultMap="rsvResultSet">
-	SELECT (*)
+	<select id="selectRsvListCount" resultType="_int">
+	SELECT COUNT(*)
 	FROM RESERVATION
 	WHERE R_M_NO=#{mNo}
 	</select>

@@ -210,7 +210,9 @@ public class UserMyPageController {
 			
 			ArrayList<Reservation> rList = umpService.selectRsvList(pi,mNo);
 			
-			
+			mv.addObject("rList",rList);
+			mv.addObject("pi",pi);
+			mv.setViewName("user/myPage/myPageRSV");
 			return mv;
 		}
 		
