@@ -14,9 +14,13 @@ public interface AdminService {
 	 * @param pi
 	 * @return
 	 */
-	ArrayList<Member> selectList(PageInfo pi);
+	ArrayList<Member> selectMemList(PageInfo pi);
 
 	int getMemListCount();
+
+	ArrayList<Driver> selectDriList(PageInfo pi);
+	
+	int getDriListCount();
 
 	
 	

@@ -64,6 +64,50 @@
     border-radius: 50px;
 }
 
+/* .imgBtn{
+	float: inline;
+	border: 1px solid;
+	
+	-webkit-appearance: button;
+
+    cursor: pointer;
+        margin: 0;
+    font: inherit;
+    color: inherit;
+    box-sizing: border-box;
+    
+    user-select: none;
+    white-space: pre;
+    align-items: flex-start;
+    text-align: center;
+    
+    border-width: 2px;
+    border-style: groove;
+    border-color: buttonface;
+    border-image: initial;
+    
+    text-rendering: auto;
+       -webkit-writing-mode: horizontal-tb !important;
+   
+   
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    -webkit-rtl-ordering: logical;
+    
+    border-radius: 2px;
+    
+        font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+} */
+
+#adTitle{
+	
+}
 
 /* a태그 */
 a{

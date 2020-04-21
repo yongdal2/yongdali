@@ -66,7 +66,7 @@
 								</label> 이삿짐
 							</div>
 							<div id="load-content-div" class="content22">
-								<textarea name="luggage" id="load-content-area" cols="64" rows="3" placeholder="파손이나 분실시 확인할 수 있도록&#13;&#10;이삿짐 품목을 선택해주세요." readonly required></textarea>
+								<textarea name="luggage" id="load-content-area" cols="64" rows="3" placeholder="파손이나 분실시 확인할 수 있도록&#13;&#10;이삿짐 품목을 필히 선택해주세요." readonly required></textarea>
 							</div>
 						</div>
 					</div>
@@ -323,9 +323,7 @@
 									<span id="btwDay" class="charge-content"></span>
 								</div>
 								<div align="left">
-									<span class="charge-title">보관 기간
-										&nbsp;
-										<small>(60,000원/일)</small>
+									<span class="charge-title">보관 기간&nbsp;<small>(60,000원/일)</small>
 									</span>
 								</div>
 							</div>
@@ -1086,7 +1084,10 @@
 		<input type="hidden" id="helpLoadVal" name="helpLoad">
 		<input type="hidden" id="helpUnloadVal" name="helpUnload">
 	</form>
-
+	<script>
+	
+	
+	</script>
 	<!-- javascript files -->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
