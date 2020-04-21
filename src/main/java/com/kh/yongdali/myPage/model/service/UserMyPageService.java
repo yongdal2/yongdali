@@ -3,6 +3,7 @@ package com.kh.yongdali.myPage.model.service;
 import java.util.ArrayList;
 
 import com.kh.yongdali.common.PageInfo;
+import com.kh.yongdali.driver.model.vo.Driver;
 import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.myPage.model.vo.Address;
 import com.kh.yongdali.reservation.model.vo.Reservation;
@@ -43,7 +44,7 @@ public interface UserMyPageService {
 
 	/**
 	 * 주소록 수정
-	 * @param a
+	 * @param a기
 	 * @return
 	 */
 	int updateAddr(Address a);
@@ -77,6 +78,14 @@ public interface UserMyPageService {
 	 * @return
 	 */
 	ArrayList<Reservation> selectRsvList(PageInfo pi, String mNo);
+
+
+	/**
+	 * 기사정보 불러오기
+	 * @param dNo
+	 * @return
+	 */
+	Driver getRsvDinfo(String dNo);
 
 
 }
