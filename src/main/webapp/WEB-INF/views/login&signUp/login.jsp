@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<!-- 네이버 아이디로 로그인(네아로) -->
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
+
 <!DOCTYPE html>
 <html>
 
@@ -15,6 +21,19 @@
 </head>
 
 <body>
+	  <!-- 네이버 아이디로 로그인(네아로) -->
+	  <%
+	    String clientId = "CSQrLTztRmu9Z7lXy3kf";//애플리케이션 클라이언트 아이디값";
+	    String redirectURI = URLEncoder.encode("http://localhost:8081/yongdali/home.do", "UTF-8");
+	    SecureRandom random = new SecureRandom();
+	    String state = new BigInteger(130, random).toString();
+	    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+	    apiURL += "&client_id=" + clientId;
+	    apiURL += "&redirect_uri=" + redirectURI;
+	    apiURL += "&state=" + state;
+	    session.setAttribute("state", state);
+	 %>
+
 	<!-- interceptor용 (메인페이지 예약하러가기 클릭 시) -->
 	<script>
 		$(function(){
@@ -68,7 +87,7 @@
             <div class="easyEccessLogo">
                 <a href="#"><img src="${contextPath}/resources/images/login&signUp/facebookLogo.png" alt="페이스북"></a>
                 <a href="#"><img src="${contextPath}/resources/images/login&signUp/kakaoLogo.png" alt="카카오"></a>
-                <a href="#"><img src="${contextPath}/resources/images/login&signUp/naverLogo.png" alt="네이버"></a>
+                <a href="<%=apiURL%>"><img src="${contextPath}/resources/images/login&signUp/naverLogo.png" alt="네이버"></a>
             </div>
         </div>
     </div>
