@@ -776,6 +776,10 @@ $('#datepicker2').datepicker({
 	beforeShowDay: noBefore
 });
 
+$('#datepicker2').click(function(){
+	alert("상차일 다음 날부터 하차 예약이 가능하십니다.");
+});
+
 /* 바로 상하차 시 날짜시간 무효 */
 $("#checkLoad1").click(function(){
 	if($(this).prop("checked") == true) {
