@@ -64,6 +64,13 @@
     border-radius: 50px;
 }
 
+.imgBtn{
+	float: inline;
+	border: 1px solid;
+	
+}
+
+
 
 /* a태그 */
 a{
