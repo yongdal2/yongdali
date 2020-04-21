@@ -15,7 +15,7 @@
         <div OnClick="location.href ='aMem.ad'" style="width: 100px; height: 100px; background: #fcf7fc; cursor: pointer; border-radius: 10px; margin-right: 20px;">
               회원님 목록 페이지
         </div>
-        <div OnClick="location.href ='admin_Driver.ydl'" style="width: 100px; height: 100px; background: #6afcda; cursor: pointer; border-radius: 10px; margin-right: 20px;">
+        <div OnClick="location.href ='aDri.ad'" style="width: 100px; height: 100px; background: #6afcda; cursor: pointer; border-radius: 10px; margin-right: 20px;">
              기사님 목록 페이지	
         </div>
         
