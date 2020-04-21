@@ -171,7 +171,7 @@
 		
 		function connectionSocket(){
 			connect = true;
-			socket = new WebSocket('ws://192.168.110.45:8888/yongdali/chatting');
+			socket = new WebSocket('ws://172.30.1.31:8888/yongdali/chatting');
 			/* 페이지 접속한 session id */
 			var sessionid = $("#senderId").val();
 			
@@ -190,22 +190,19 @@
 				if(data["flag"]=="room"){
 					var rooms = data['msg'].split(",");
 					console.log(rooms);
-					var printHTML = "<div class='discussion'>";
-					printHTML += "<div class='photo'></div>";
-					printHTML += "<div class='desc-contact' id='nameArea'>";
-					/* printHTML += "<p class='name' id='listName'></p>"; */
-					printHTML += "</div>";
-					printHTML += "</div>";
 					
-					$("#chatList").append(printHTML);
-					 for(var i=0; i<rooms.length; i++){
-						  $(".discussion>#nameArea").append($("<p class='name' id='listName'>").html(rooms[i]).click(function(){
-							 $("#room").val($(this).html());
-					 		 checkClick(this);
-						 }));
-						/* $('#listName').html(rooms[i]); */
+					for(var i=0; i<rooms.length; i++){
+						var printHTML = "<div class='discussion'>";
+						printHTML += "<div class='photo'></div>";
+						printHTML += "<div class='desc-contact' id='nameArea'>";
+						printHTML += "<p class='name' id='listName' onclick='roomval(this);'>"+rooms[i]+"</p>";
+						printHTML += "</div>";
+						printHTML += "</div>";
+
 					}
 					 checkCurrentRoom(rooms);
+					
+					$("#chatList").append(printHTML);		 
 				}
 				
 				if(data["flag"]!="room" && data["flag"]!="user"){
@@ -231,7 +228,17 @@
 				}
 			
 			}
+		
+			
 		}
+		
+		function roomval(e){
+			/* alert(e.innerHTML); */
+			var roomName = e.innerHTML;
+			$("#room").val(roomName);
+			checkClick(e);
+		}
+		
 		function checkClick(e){
 			$(e).parent().find("p").css({background:"white"});
         	$(e).css({background:"lightgray"});

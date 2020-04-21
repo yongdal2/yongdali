@@ -116,7 +116,7 @@ public class ChattingServer {
 							s.getBasicRemote().sendObject(msg);
 						}
 						else if(m.getRoom().equals(msg.getReceiveId())) {
-							s.getBasicRemote().sendObject(new Message("admin","",rooms, "room"));//방현황 전송
+							//s.getBasicRemote().sendObject(new Message("admin","",rooms, "room"));//방현황 전송
 							s.getBasicRemote().sendObject(new Message("admin","",users, "user"));//userg현황전송
 							s.getBasicRemote().sendObject(msg);
 						}
