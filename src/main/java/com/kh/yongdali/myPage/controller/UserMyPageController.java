@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.common.Pagination;
+import com.kh.yongdali.driver.model.vo.Driver;
 import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.myPage.model.service.UserMyPageService;
 import com.kh.yongdali.myPage.model.vo.Address;
@@ -216,5 +217,27 @@ public class UserMyPageController {
 			return mv;
 		}
 		
+		//예약 드라이버 번호 불러오기
+		@RequestMapping("rDinfo.myp")
+		public void getRsvDinfo(HttpServletResponse rs, @RequestParam String dNo) throws IOException{
+			System.out.println(dNo);
+			Driver d = umpService.getRsvDinfo(dNo);
+			System.out.println(d);
+			
+			rs.setContentType("application/json; charset=utf-8");
+			
+			JSONObject adJob = new JSONObject();
+			adJob.put("name",URLEncoder.encode(d.getRegCardImgOrigin(), "UTF-8"));
+			adJob.put("phone",d.getRegCardImgRename());
+			adJob.put("img",d.getIdImgRename());
+			adJob.put("capacity",d.getCapacity());
+			adJob.put("type",URLEncoder.encode(d.getType(), "UTF-8"));
+			adJob.put("carNo",URLEncoder.encode(d.getCarNo(), "UTF-8"));
+			
+			PrintWriter out = rs.getWriter();
+			out.print(adJob);
+			out.flush();
+			out.close();
+		}
 		
 }

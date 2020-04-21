@@ -90,27 +90,67 @@
  							<td>상차일</td>
  							<td>하차일</td>
 							<td>출발지</td>
-							<td>dd</td>
+							<td>dd</span></td>
+							<td><button class="fas fa-truck" id="tInfo${ vs.index }" 
+							data-toggle="popover${ vs.index }"  title="차량정보"
+							data-content="" value="${ r.rDNo }"></button></td>
 							<td>결제 금액</td>
-							<td><span class="fas fa-truck" id="turck${vs.index }" ></span></td>
 							<td></td>
 							<td>${ r.msg }</td>
 						</tr>
 					</c:forEach>
 				</table>
 			</div>
+			<div class="row text-center">
+				<div class="col-md-2">
+					<div class="img-circle" style="background-image: url('https://img1.daumcdn.net/thumb/R750x0/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fcafeattach%2F1Xh2D%2Fe9efdcce7223d088ee2e401a429f62f86cdff6cb');">
+					<div></div>
+				</div>
+			</div>
+	
 		</div>
-		<button type=”button” class=”btn btn-default” title=”Popover
-			title” data-container=”body” data-toggle=”popover”
-			data-placement=”left” data-content=”Vivamus sagittis lacus vel augue
-			laoreet rutrum faucibus.” data-trigger=”hover”>Popover on
-			left</button>
+		<script>
+		
+		$(document).ready(function(){
 			
-			<script type="text/javascript">
-			$("[data-toggle='popover']").popover();
-			$("[data-toggle='popover']").popover({ options });
-			$("[data-toggle='popover']").popover({ delay:{‘show’:500, ‘hide’:1000} });
-			</script>
+			$('[data-toggle*="popover"]').popover({
+			    "html": true,
+			    "content": function(){
+			        var dNo = $(this).val();
+			        return '<img src="https://img1.daumcdn.net/thumb/R750x0/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fcafeattach%2F1Xh2D%2Fe9efdcce7223d088ee2e401a429f62f86cdff6cb">';
+			    }
+			});
+	
+			function dInfo(dNo){
+						
+				$.ajax({
+					url:"rDinfo.myp",
+					data:{dNo:dNo},
+					dataType:"json",
+					success:function(d){
+						console.log(d);	
+						var name = decodeURIComponent(d.name);
+						var phone = d.phone;
+						var carNo = decodeURIComponent(d.carNo);
+						var img = d.img;
+						var type = decodeURIComponent(d.type);
+						var capcacity = d.capacity;
+						
+						
+					},error:function(){
+						console.log("aj실패")
+					}
+				}); 
+				
+			    return 'ok';
+			}
+			
+		    
+		});
+		</script>
+		
+		<!-- <div class="img-circle" id="pro_img"
+						style="background-image: url('${pageContext.request.contextPath}/resources/images/driver/id/${driver.idImgRename}');">  -->
 		<div class="row text-center">
 			<ul class="pagination ft_gr">
 				<li><a href="#"><<</a></li>

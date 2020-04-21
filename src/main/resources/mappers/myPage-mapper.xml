@@ -162,4 +162,10 @@
 	FROM RESERVATION
 	WHERE R_M_NO=#{mNo}
 	</select>
+	<!--  마이페이지 기사정보 -->
+	<select id="getRsvDinfo" resultMap="driverResultSet">
+	SELECT M.NAME REGCARD_IMG_ORIGIN, M.PHONE REGCARD_IMG_RENAME, D.CAPACITY, D.TYPE, D.CAR_NO, D.ID_IMG_RENAME
+	FROM MEMBER M LEFT OUTER JOIN DRIVER D ON(M.M_NO=D.D_M_NO)
+	WHERE D.D_NO=#{dNo}
+	</select>
 </mapper>

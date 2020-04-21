@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.yongdali.common.PageInfo;
+import com.kh.yongdali.driver.model.vo.Driver;
 import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.myPage.model.vo.Address;
 import com.kh.yongdali.reservation.model.vo.Reservation;
@@ -58,6 +59,11 @@ public class UserMyPageDao {
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
 		return (ArrayList)sqlSession.selectList("myPageMapper.selectRsvList", mNo, rowBounds);
+	}
+
+
+	public Driver getRsvDinfo(String dNo) {
+		return sqlSession.selectOne("myPageMapper.getRsvDinfo",dNo);
 	}
 
 	
