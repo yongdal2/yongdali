@@ -107,7 +107,7 @@
 					<div></div>
 				</div>
 			</div>
-	
+	<img alt="" src="">
 		</div>
 		<script>
 		
@@ -117,7 +117,8 @@
 			    "html": true,
 			    "content": function(){
 			        var dNo = $(this).val();
-			        return '<img src="https://img1.daumcdn.net/thumb/R750x0/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fcafeattach%2F1Xh2D%2Fe9efdcce7223d088ee2e401a429f62f86cdff6cb">';
+			        return '<div class="img-circle" id="pro_img"
+						style="background-image: url('')';
 			    }
 			});
 	
