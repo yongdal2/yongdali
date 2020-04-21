@@ -5,6 +5,7 @@ var charge_add1=0;
 var charge_add2=0;
 var amount=0;
 
+// 총 결제 금액 계산 기능
 function calc(){
 	amount=(charge_opt1+charge_opt2+charge_dis+charge_days+charge_add1+charge_add2)*10000;
 	
@@ -25,7 +26,7 @@ span1.onclick = function() {
 	modal1.style.display = "none";
 }
 
-//모달 영역 밖에 클릭했을때 모달 닫기
+// 모달 영역 밖에 클릭했을때 모달 닫기
 $("#myModal1").mouseenter(function(){
 	window.onclick = function(event) {
 		if (event.target == modal1) {
@@ -48,25 +49,32 @@ $("#size1").click(function(){
     $("#guide-content2").css('display','block');
 });
 
-
-
-var sl1 = document.getElementById('sl1');
-var sl2 = document.getElementById('sl2');
-
 /* 차량 옵션 select태그 클릭시 글자색 변화 */
 function cl1(){
-    document.getElementById('sl1').style.color='black';
+	$('#sl1').css('color','black');
     addCarInfo1();
 }
 function cl2(){
-    document.getElementById('sl2').style.color='black';
+	$('#sl2').css('color','black');
     addCarInfo2();
 }
+
+/* 상하차 시간 태그 클릭시 글자색 변화 */
 function cl3(){
-    document.getElementById('sl3').style.color='black';
+	if($('#datepicker1').val()!=""){
+		$('#sl3').css('color','black');		
+	} else {
+		alert("상차일부터 선택해주세요.");
+		document.getElementById('sl3').selectedIndex = 0;
+	}
 }
 function cl4(){
-    document.getElementById('sl4').style.color='black';
+	if($('#datepicker2').val()!=""){
+		$('#sl4').css('color','black');	
+	} else {
+		alert("하차일부터 선택해주세요.");
+		document.getElementById('sl4').selectedIndex = 0;
+	}
 }
 
 //차량옵션에 정보 입력
@@ -84,8 +92,8 @@ function addCarInfo1(){
 		charge_opt1 = 8;
 	}
 	
-	// 값들 서로 연관 시킴
-	if(charge_opt2==0 && charge_dis==0){
+	// 거리와 계산 연관관계
+	if(charge_dis==0){
 		carInfo.innerHTML = sl1.value+"톤";
 	} else {
 		carInfo.innerHTML = sl1.value+"톤 / "+sl2.value;
@@ -99,15 +107,15 @@ function addCarInfo2(){
 		charge_opt2 = 2;
 	}
 	
-	// 값들 서로 연관 시킴
+	// 거리와 계산 연관관계
 	if(charge_dis==0){		
 		carInfo.innerHTML = sl1.value+"톤 / "+sl2.value;	
 	} else {
 		carInfo.innerHTML = sl1.value+"톤 / "+sl2.value;		
 		console.log("옵션1(+) : " + charge_opt1);
 		console.log("옵션2(+) : " + charge_opt2);
+		calc();
 	}
-	calc();
 }
 
 
@@ -416,7 +424,7 @@ function searchEndAddr() {
 			
 			/* 서울 지역 조건 */
 			if(!addr.includes("서울")){
-				alert("죄송합니다. 서울지역 한해서만 운영 가능합니다. 다시 입력해주세요.");
+				alert("죄송합니다.\n서울지역 한해서만 운영 가능합니다.\n다시 입력해주세요.");
 				modal34.style.display = "none";
 			} else {
 				
@@ -660,7 +668,7 @@ var edDate;
 // 하차 예약시 기간에 따른 비용
 var charge_days=0;
 
-// 바로 상차시 날짜 선택시 변수에 담기
+// 바로 상차 선택시, 상차 날짜 변수에 현재날짜 담기
 $('#checkLoad1').click(function(){
 	if($(this).is(":checked")){
 		var startYear = new Date().getFullYear();
@@ -682,8 +690,15 @@ $('#checkLoad1').click(function(){
 				console.log(days+"*60,000원 = " + charge_days);
 				$('#btwDay').html(days+"일");
 				$('#book-YN').html("O");
+				calc();
 			}
-			calc();
+		}
+	} else {
+		// 바로 상차 클릭 해제시, 하차 예약 날짜값 있으면 초기화
+		if($('#datepicker2').val()!=""){			
+			$('#datepicker2').datepicker('setDate',null);
+			document.getElementById('sl4').selectedIndex = 0;
+			document.getElementById('sl4').style.color="#8e8e8e";
 		}
 	}
 });
@@ -693,10 +708,13 @@ $('#checkLoad1').click(function(){
 function setEndDate(){
 	console.log($('#datepicker1').val());
 	console.log($('#checkLoad1').val());
-	if($('#datepicker1').val()=="" && $('#checkLoad1').val()==""){
+	
+	// 바로상차 체크유무와 상차 날짜 값이 없을경우 alert실행 
+	if($('#datepicker1').val()=="" && $('#checkLoad1').prop("checked")==false){
 		alert("상차 날짜 먼저 입력해주세요.");
 		$('#datepicker2').datepicker('setDate',null);
-	} else {		
+		$('#datepicker2').datepicker('destroy');
+	} else {
 		var endYMD = $('#datepicker2').val();
 		endDateStr = endYMD.substr(0,4)+"-"+endYMD.substr(6,2)+"-"+endYMD.substr(10,2);
 		stDate = new Date(startDateStr);
@@ -730,6 +748,7 @@ $('#datepicker1').datepicker({
 	yearRange: 'c-99:c+99',
 	maxDate: '+1y',
 	onSelect: function(selectedDate){	// 상차 날짜선택시 적용
+
 		var startYMD = $('#datepicker1').val();
 		startDateStr = startYMD.substr(0,4)+"-"+startYMD.substr(6,2)+"-"+startYMD.substr(10,2);
 		console.log(startDateStr);
@@ -737,16 +756,11 @@ $('#datepicker1').datepicker({
 		addDate = selectedDate.substr(0,10) + addDay + "일";
 		$('#datepicker2').datepicker('option','minDate',addDate);
 		
+		// 하차예약날짜값이 있는 상태에서 상차 날짜 예약시 하차예약날짜값 초기화
 		if($('#datepicker2').val()!=""){
-			days = Math.round((edDate.getTime()-stDate.getTime())/1000/60/60/24);
-			console.log("시작날짜로와 종료날짜 사이 일수 : " + days);
-			charge_days = 6*days;
-			console.log(days+"*60,000원 = " + charge_days);
-			$('#btwDay').html(days+"일");
-			$('#book-YN').html("O");
-			$('#days').val(days);
-			console.log("히든에 들어갈 일수 : "+$('#days').val());
-			calc();
+			$('#datepicker2').datepicker('setDate',null);
+			document.getElementById('sl4').selectedIndex = 0;
+			document.getElementById('sl4').style.color="#8e8e8e";
 		}
 	},
 	beforeShowDay: noBefore
@@ -786,6 +800,8 @@ $("#checkLoad2").click(function(){
 		$('#book-YN').html("X");
 		$('#btwDay').html("X");
 		$('#days').val("0");
+		charge_days = 0;
+		calc();
 	} else if($(this).prop("checked") == false) {    	  
 		$("#datepicker2").attr('disabled',false).css('background','white');
 		$("#sl4").attr('disabled',false).css('background','white');
