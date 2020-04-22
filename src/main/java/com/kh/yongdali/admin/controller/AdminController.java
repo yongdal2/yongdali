@@ -14,6 +14,7 @@ import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.common.Pagination;
 import com.kh.yongdali.driver.model.vo.Driver;
 import com.kh.yongdali.member.model.vo.Member;
+import com.kh.yongdali.reservation.model.vo.Reservation;
 
 @Controller
 public class AdminController {
@@ -130,11 +131,7 @@ public class AdminController {
 	public String adminHomeView4() {
 		return "admin/admin_Reser";
 	}
-	//정산 내역
-	@RequestMapping("admin_Cal.ydl")
-	public String adminHomeView5() {
-		return "admin/admin_Cal";
-	}	
+	
 	//환불 내역
 	@RequestMapping("admin_Refund.ydl")
 	public String adminHomeView6() {
@@ -149,3 +146,34 @@ public class AdminController {
 	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

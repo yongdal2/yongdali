@@ -55,12 +55,12 @@
 					<table class="table table-striped table-hover text-center">
 						<thead id="thead">
 							<tr>
-								<th>회원번호</th>
-								<th>회원ID(이메일)</th>
+								<th>예약번호</th>
+								<th>기사번호</th>
 								<th>이름</th>
 								<th>휴대폰번호</th>
-								<th>회원구분</th>
-								<th>회원상태</th>
+								<th>정산금액</th>
+								<th></th>
 								<th>알림설정</th>
 								<th>가입일</th>
 							</tr>

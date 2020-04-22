@@ -13,14 +13,15 @@
 		<typeAlias type="com.kh.yongdali.driver.model.vo.Driver" alias="Driver"/>
 		<typeAlias type="com.kh.yongdali.cs.model.vo.Notice" alias="Notice"/>
 		<typeAlias type="com.kh.yongdali.reservation.model.vo.Reservation" alias="Reservation"/>
+		<typeAlias type="com.kh.yongdali.payment.model.vo.Payment" alias="Payment"/>
 		<typeAlias type="com.kh.yongdali.myPage.model.vo.Address" alias="Address"/>
-		
 	</typeAliases>
 	
  	<mappers>
 		<mapper resource="mappers/member-mapper.xml"/>
 		<mapper resource="mappers/notice-mapper.xml"/>
 		<mapper resource="mappers/reservation-mapper_njh.xml"/>
+		<mapper resource="mappers/payment-mapper_njh.xml"/>
 		<mapper resource="mappers/address-mapper_njh.xml"/>
 		<mapper resource="mappers/reservation-mapper.xml"/>
 		<mapper resource="mappers/myPage-mapper.xml"/>

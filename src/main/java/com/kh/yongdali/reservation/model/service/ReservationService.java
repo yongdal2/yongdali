@@ -11,4 +11,6 @@ public interface ReservationService {
 	
 	public int insertReservation(Reservation r);
 
+	public int insertPayment();
+
 }
