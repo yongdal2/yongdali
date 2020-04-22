@@ -1,7 +1,7 @@
 package com.kh.yongdali.driver.model.vo;
 
 public class Driver {
-
+	
 	private String dNo;
 	private String dmNo;
 	private String capacity;

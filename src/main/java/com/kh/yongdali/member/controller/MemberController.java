@@ -1,10 +1,21 @@
 package com.kh.yongdali.member.controller;
 
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import javax.mail.Message.RecipientType;
@@ -13,6 +24,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -118,14 +131,14 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value="login.me", method=RequestMethod.POST)
 	public String memberLogin(@ModelAttribute Member m, Model model) {
-		logger.debug("로그인을 시도한 회원 아이디 : " + m.getmId());
+//		logger.debug("로그인을 시도한 회원 아이디 : " + m.getmId());
 		Member loginUser = mService.loginMember(m); 
 		System.out.println(loginUser);
 		
 		// 로그인 성공 
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getPwd(), loginUser.getPwd())) {
 			model.addAttribute("loginUser", loginUser);
-			logger.debug(loginUser.getmId());
+//			logger.debug(loginUser.getmId());
 			return "loginSuccess"; 
 		}
 		
@@ -140,6 +153,149 @@ public class MemberController {
 			
 		}	
 	}
+	
+
+//	네이버 아이디로 로그인(네아로)	
+	/** 네이버 아이디로 로그인(네아로)
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("naverLogin.me")
+	public String naverLogin(Model model, HttpServletRequest request) {
+	    String clientId = "CSQrLTztRmu9Z7lXy3kf";//애플리케이션 클라이언트 아이디값";
+	    String clientSecret = "k06arsdcFD";//애플리케이션 클라이언트 시크릿값";
+	    String code = request.getParameter("code");
+	    String state = request.getParameter("state");
+	    String redirectURI = null;
+		try {
+			redirectURI = URLEncoder.encode("http://localhost:8081/yongdali/naverLogin.me", "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	    String apiURL;
+	    apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
+	    apiURL += "client_id=" + clientId;
+	    apiURL += "&client_secret=" + clientSecret;
+	    apiURL += "&redirect_uri=" + redirectURI;
+	    apiURL += "&code=" + code;
+	    apiURL += "&state=" + state;
+	    String access_token = "";
+	    String refresh_token = "";
+//	    System.out.println("apiURL="+apiURL);
+	    try {
+	      URL url = new URL(apiURL);
+	      HttpURLConnection con = (HttpURLConnection)url.openConnection();
+	      con.setRequestMethod("GET");
+	      int responseCode = con.getResponseCode();
+	      BufferedReader br;
+//	      System.out.print("responseCode="+responseCode);
+	      if(responseCode==200) { // 정상 호출
+	        br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+	      } else {  // 에러 발생
+	        br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+	      }
+	      String inputLine;
+	      StringBuffer res = new StringBuffer();
+	      while ((inputLine = br.readLine()) != null) {
+	        res.append(inputLine);
+	      }
+	      br.close();
+	      if(responseCode==200) {
+	    	  // out.println(res.toString()); 
+	    	  // 블로그
+	    	  
+	    	// access_token 값 추출
+    		JSONParser parsing = new JSONParser();
+    		Object resObj = parsing.parse(res.toString());
+    		JSONObject resJsonObj = (JSONObject)resObj;
+    			        
+    		access_token = (String)resJsonObj.get("access_token");
+    		refresh_token = (String)resJsonObj.get("refresh_token");
+	    	  
+            String token = access_token; // 네이버 로그인 접근 토큰;
+            String header = "Bearer " + token; // Bearer 다음에 공백 추가
+
+            // 회원정보 조회 API 1.
+            String pInfoApiURL = "https://openapi.naver.com/v1/nid/me";
+
+            Map<String, String> requestHeaders = new HashMap<>();
+            requestHeaders.put("Authorization", header);
+            String responseBody = get(pInfoApiURL,requestHeaders);
+            
+            
+            Object responseBodyObj = parsing.parse(responseBody);
+            JSONObject jsonResponseBodyObj = (JSONObject)responseBodyObj;
+            JSONObject jsonresponseObj = (JSONObject) jsonResponseBodyObj.get("response");
+            
+            String email = jsonresponseObj.get("email").toString();
+            String name = jsonresponseObj.get("name").toString();
+            
+            Member loginUser = new Member(email, name);
+            logger.debug(loginUser.toString());
+            model.addAttribute("loginUser", loginUser);
+	      } 
+	    } catch (Exception e) {
+	      System.out.println(e);
+	    }
+		return "user/home";
+	}
+	
+	// 회원정보 조회 API 2.
+    private static String get(String apiUrl, Map<String, String> requestHeaders){
+        HttpURLConnection con = connect(apiUrl);
+        try {
+            con.setRequestMethod("GET");
+            for(Map.Entry<String, String> header :requestHeaders.entrySet()) {
+                con.setRequestProperty(header.getKey(), header.getValue());
+//                System.out.println("header.getKey() : " + header.getKey().toString());
+//                System.out.println("header.getValue() : " + header.getValue().toString());
+            }
+
+            int responseCode = con.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) { // 정상 호출
+                return readBody(con.getInputStream());
+            } else { // 에러 발생
+                return readBody(con.getErrorStream());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("API 요청과 응답 실패", e);
+        } finally {
+            con.disconnect();
+        }
+    }
+
+    // 회원정보 조회 API 3.
+    private static HttpURLConnection connect(String apiUrl){
+        try {
+            URL url = new URL(apiUrl);
+            return (HttpURLConnection)url.openConnection();
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("API URL이 잘못되었습니다. : " + apiUrl, e);
+        } catch (IOException e) {
+            throw new RuntimeException("연결이 실패했습니다. : " + apiUrl, e);
+        }
+    }
+
+    // 회원정보 조회 API 4.
+    private static String readBody(InputStream body){
+        InputStreamReader streamReader = new InputStreamReader(body);
+
+        try (BufferedReader lineReader = new BufferedReader(streamReader)) {
+            StringBuilder responseBody = new StringBuilder();
+
+            String line;
+            while ((line = lineReader.readLine()) != null) {
+                responseBody.append(line);
+            }
+
+            return responseBody.toString();
+        } catch (IOException e) {
+            throw new RuntimeException("API 응답을 읽는데 실패했습니다.", e);
+        }
+    }
+//	/네이버 아이디로 로그인(네아로)    
 	
 	/** 로그아웃
 	 * @param status
@@ -290,6 +446,7 @@ public class MemberController {
 			return "common/errorPage";
 		}
 	}
+	
 	
 
 }
