@@ -59,6 +59,10 @@ public class Member {
 		this.enrollDate = enrollDate;
 	}
 
+	public Member(String mId, String mName) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getmNo() {
 		return mNo;
 	}
