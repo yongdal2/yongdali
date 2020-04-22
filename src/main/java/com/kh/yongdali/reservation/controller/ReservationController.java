@@ -138,8 +138,10 @@ public class ReservationController {
 		int result1 = rService.insertReservation(r);
 		int result2 = 0;
 		if(result1 > 0) {
+			System.out.println("---------예약 insert 성공------------");
 			result2 = rService.insertPayment();
 			if(result2 > 0) {
+				System.out.println("---------결제 insert 성공------------");
 				mv.setViewName("user/paySuccess");				
 			} else {				
 				mv.setViewName("common/error");
