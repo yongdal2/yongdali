@@ -3,6 +3,7 @@ package com.kh.yongdali.admin.model.service;
 import java.util.ArrayList;
 
 import com.kh.yongdali.member.model.vo.Member;
+import com.kh.yongdali.reservation.model.vo.Reservation;
 import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.driver.model.vo.Driver;
 
@@ -21,6 +22,10 @@ public interface AdminService {
 	ArrayList<Driver> selectDriList(PageInfo pi);
 	
 	int getDriListCount();
+
+	int getCalListCount();
+
+	ArrayList<Reservation> selectCalList(PageInfo pi);
 
 	
 	

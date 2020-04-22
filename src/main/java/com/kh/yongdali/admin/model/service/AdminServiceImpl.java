@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.yongdali.admin.model.dao.AdminDao;
 import com.kh.yongdali.member.model.vo.Member;
+import com.kh.yongdali.reservation.model.vo.Reservation;
 import com.kh.yongdali.driver.model.vo.Driver;
 import com.kh.yongdali.common.PageInfo;
 
@@ -36,6 +37,18 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public ArrayList<Driver> selectDriList(PageInfo pi) {
 		return aDao.selectDriList(pi);
+	}
+
+	@Override
+	public int getCalListCount() {
+		
+		return aDao.getCalListCount();
+	}
+
+	@Override
+	public ArrayList<Reservation> selectCalList(PageInfo pi) {
+		
+		return aDao.selectCalList(pi);
 	}
 
 }

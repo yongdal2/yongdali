@@ -14,6 +14,7 @@ import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.common.Pagination;
 import com.kh.yongdali.driver.model.vo.Driver;
 import com.kh.yongdali.member.model.vo.Member;
+import com.kh.yongdali.reservation.model.vo.Reservation;
 
 @Controller
 public class AdminController {
@@ -132,8 +133,21 @@ public class AdminController {
 	}
 	//정산 내역
 	@RequestMapping("admin_Cal.ydl")
-	public String adminHomeView5() {
-		return "admin/admin_Cal";
+	public ModelAndView adminHomeView5(ModelAndView mv, @RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage) {
+		
+		int pageLimit =10;
+		int boardLimit=5;
+		int listCount = aService.getCalListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, pageLimit, boardLimit);
+		
+		ArrayList<Reservation> list = aService.selectCalList(pi);
+		
+		mv.addObject("list",list);
+		mv.addObject("pi",pi);
+		mv.setViewName("admin/admin_Cal");
+		
+		return mv;
 	}	
 	//환불 내역
 	@RequestMapping("admin_Refund.ydl")
@@ -149,3 +163,34 @@ public class AdminController {
 	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

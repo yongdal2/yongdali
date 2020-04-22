@@ -24,7 +24,7 @@ public class Reservation {
 	private Date startDate;		// 상차 날짜
 	private String startTime;	// 상차 시각
 	private Date endDate;		// 하차 날짜
-	private String endTime;	// 상차 시각
+	private String endTime;		// 상차 시각
 	private String helpLoad;	// 상차 도움
 	private String helpUnload;	// 하차 도움
 	private String luggage;		// 이삿집

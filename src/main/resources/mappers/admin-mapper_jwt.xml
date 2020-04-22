@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminMapperwt">
+		
+	<resultMap type="Member" id="AdminMemResultSet">
+		<id property="mNo" column="M_NO"/>
+		<result property="mId" column="M_ID"/>
+		<result property="pwd" column="PWD"/>
+		<result property="mName" column="NAME"/>
+		<result property="phone" column="PHONE"/>
+		<result property="mSort" column="M_SORT"/>
+		<result property="mStatus" column="M_STATUS"/>
+		<result property="pushEnabled" column="PUSH_ENABLED"/>
+		<result property="enrollDate" column="ENROLLDATE"/>
+	</resultMap>
+	
+		<resultMap type="Driver" id="AdminDriResultSet">
+		<id property="dNo" column="D_NO"/>
+		<result property="dmNo" column="D_M_NO"/>
+		<result property="capacity" column="CAPACITY"/>
+		<result property="type" column="TYPE"/>
+		<result property="carNo" column="CAR_NO"/>
+		<result property="idImgOrigin" column="ID_IMG_ORIGIN"/>
+		<result property="idImgRename" column="ID_IMG_RENAME"/>
+		<result property="regCardImgOrigin" column="CAR_IMG_ORIGIN"/>
+		<result property="regCardImgRename" column="CAR_IMG_RENAME"/>
+	</resultMap>
+	
+	<resultMap type="Reservation" id="reservationResultSet">
+		<id property="rNo" column="R_NO"/>	<!-- 예약번호 -->
+		<result property="rMNo" column="R_M_NO"/> <!-- 회원번호 -->
+		<result property="rDNo" column="R_D_NO"/> <!-- 운전자번호 -->
+		<result property="capacity" column="CAPACITY"/> <!-- 톤수 -->
+		<result property="type" column="TYPE"/> <!-- 차종 -->
+		<result property="startAddr" column="START_ADDR"/>	<!-- 출발지 -->
+		<result property="endAddr" column="END_ADDR"/>	<!-- 도착지 -->
+		<result property="startDate" column="STARTDATE"/>	<!-- 상차일 -->
+		<result property="endDate" column="ENDDATE"/>	<!-- 하차일 -->
+		<result property="helpLoad" column="HELP_LOAD"/>	<!-- 상차도움 -->
+		<result property="helpUnload" column="HELP_UNLOAD"/>	<!-- 하차도움 -->
+		<result property="luggage" column="LUGGAGE"/>	<!-- 짐 -->
+		<result property="msg" column="MSG"/>			<!-- 메시지 -->
+		<result property="dealYN" column="DEAL_YN"/>	<!-- 배차여부 -->
+		<result property="dealDate" column="DEALDATE"/>	<!-- 배차일 -->
+		<result property="calcYN" column="CALC_YN"/>	<!-- 정산여부 -->
+		<result property="enrollDate" column="ENROLLDATE"/><!-- 등록일 -->
+		<result property="amount" column="AMOUNT"/><!-- 결제유무 -->
+	</resultMap>
+	
+	<!-- <resultMap type="Driver" id="AdminDriResultSet">
+		<id property="dNo" column="D_NO"/>
+		<result property="dmNo" column="D_M_NO"/>
+		<result property="capacity" column="CAPACITY"/>
+		<result property="type" column="TYPE"/>
+		<result property="carNo" column="CAR_NO"/>
+		<result property="idImgOrigin" column="ID_IMG_ORIGIN"/>
+		<result property="idImgRename" column="ID_IMG_RENAME"/>
+		<result property="regCardImgOrigin" column="CAR_IMG_ORIGIN"/>
+		<result property="regCardImgRename" column="CAR_IMG_RENAME"/>
+		
+		
+	</resultMap> -->
+	
+	
+	
+	
+	<!-- 정산가능한 예약 내용리스트 count -->
+	<select id="getCalListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM RESERVATION
+		WHERE SYSDATE > ENDDATE
+	</select>
+	
+	<select id="selectCalList" resultMap="reservationResultSet">
+		SELECT *
+		FROM RESERVATION
+		WHERE SYSDATE > ENDDATE
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
