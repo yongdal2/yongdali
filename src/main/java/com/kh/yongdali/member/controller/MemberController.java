@@ -80,10 +80,10 @@ public class MemberController {
 		Date[] date = new Date[4];
 		String[] encPwdArr = new String[4];
 		
-		mList.add(new Member("admin@naver.com", "Admin!234", "관리자", "010-1111-1111", "관리자", "정상", "N")); 
-		mList.add(new Member("mem01@naver.com", "Mem!234", "홍멤버", "010-2222-2222", "일반", "정상", "Y"));
-		mList.add(new Member("biz01@naver.com", "Biz!234", "김거상", "010-3333-3333", "사업자", "정상", "N"));
-		mList.add(new Member("biz02@naver.com", "Biz!234", "최거상", "010-4444-4444", "사업자", "정상", "N"));
+		mList.add(new Member("admin@naver.com", "Admin!234", "관리자", "010-1111-1111", "관리자", "정상", "용달이", "N")); 
+		mList.add(new Member("mem01@naver.com", "Mem!234", "홍멤버", "010-2222-2222", "일반", "정상", "용달이", "Y"));
+		mList.add(new Member("biz01@naver.com", "Biz!234", "김거상", "010-3333-3333", "사업자", "정상", "용달이", "N"));
+		mList.add(new Member("biz02@naver.com", "Biz!234", "최거상", "010-4444-4444", "사업자", "정상", "용달이", "N"));
 		
 		sDate[0] = "2020-03-10";
 		sDate[1] = "2020-03-18";
@@ -370,27 +370,6 @@ public class MemberController {
 		return ranNum;	
 	}
 
-//	/** 회원가입_양식 제출(일반 회원만) 
-//	 * @param m
-//	 * @return
-//	 */
-//	@RequestMapping("insert.me")
-//	public String insertMember(@ModelAttribute Member m, Model model) {
-//		logger.debug(m.toString());
-//		
-//		m.setPwd(bcryptPasswordEncoder.encode(m.getPwd()));
-//		logger.debug(m.toString());
-//		
-//		int result = mService.insertMember(m);
-//		logger.debug("회원가입 insert 결과값 : " + String.valueOf(result));
-//		
-//		if(result > 0) {
-//			return "login&signUp/login";
-//		}else {
-//			model.addAttribute("msg", "샘플데이터 입력 실패!");
-//			return "common/errorPage";
-//		}
-//	}
 	
 	/** 회원가입_양식 제출(일반/사업자 공통) 
 	 * @param m

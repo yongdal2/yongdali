@@ -11,6 +11,7 @@ public class Member {
 	private String phone;
 	private String mSort;
 	private String mStatus;
+	private String signupType;
 	private String pushEnabled;
 	private Date enrollDate;
 	
@@ -18,22 +19,14 @@ public class Member {
 		super();
 	}
 
-	//-String mNo
-	public Member(String mId, String pwd, String mName, String phone, String mSort, String mStatus, String pushEnabled,
-			Date enrollDate) {
+	public Member(String mId, String mName) {
 		super();
 		this.mId = mId;
-		this.pwd = pwd;
 		this.mName = mName;
-		this.phone = phone;
-		this.mSort = mSort;
-		this.mStatus = mStatus;
-		this.pushEnabled = pushEnabled;
-		this.enrollDate = enrollDate;
 	}
-
-	//-String mNo, Date enrollDate
-	public Member(String mId, String pwd, String mName, String phone, String mSort, String mStatus,
+	
+	// - mNo, enrollDate
+	public Member(String mId, String pwd, String mName, String phone, String mSort, String mStatus, String signupType,
 			String pushEnabled) {
 		super();
 		this.mId = mId;
@@ -42,11 +35,13 @@ public class Member {
 		this.phone = phone;
 		this.mSort = mSort;
 		this.mStatus = mStatus;
+		this.signupType = signupType;
 		this.pushEnabled = pushEnabled;
 	}
-	
+
+	// 전체 필드
 	public Member(String mNo, String mId, String pwd, String mName, String phone, String mSort, String mStatus,
-			String pushEnabled, Date enrollDate) {
+			String signupType, String pushEnabled, Date enrollDate) {
 		super();
 		this.mNo = mNo;
 		this.mId = mId;
@@ -55,14 +50,9 @@ public class Member {
 		this.phone = phone;
 		this.mSort = mSort;
 		this.mStatus = mStatus;
+		this.signupType = signupType;
 		this.pushEnabled = pushEnabled;
 		this.enrollDate = enrollDate;
-	}
-
-	public Member(String mId, String mName) {
-		super();
-		this.mId = mId;
-		this.mName = mName;
 	}
 
 	public String getmNo() {
@@ -120,7 +110,15 @@ public class Member {
 	public void setmStatus(String mStatus) {
 		this.mStatus = mStatus;
 	}
+	
+	public String getSignupType() {
+		return signupType;
+	}
 
+	public void setSignupType(String signupType) {
+		this.signupType = signupType;
+	}
+	
 	public String getPushEnabled() {
 		return pushEnabled;
 	}
@@ -140,7 +138,12 @@ public class Member {
 	@Override
 	public String toString() {
 		return "Member [mNo=" + mNo + ", mId=" + mId + ", pwd=" + pwd + ", mName=" + mName + ", phone=" + phone
-				+ ", mSort=" + mSort + ", mStatus=" + mStatus + ", pushEnabled=" + pushEnabled + ", enrollDate="
-				+ enrollDate + "]";
+				+ ", mSort=" + mSort + ", mStatus=" + mStatus + ", signupType=" + signupType + ", pushEnabled="
+				+ pushEnabled + ", enrollDate=" + enrollDate + "]";
 	}
+
+
+
+
+
 }
