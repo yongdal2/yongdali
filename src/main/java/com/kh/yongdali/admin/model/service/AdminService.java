@@ -23,9 +23,7 @@ public interface AdminService {
 	
 	int getDriListCount();
 
-	int getCalListCount();
 
-	ArrayList<Reservation> selectCalList(PageInfo pi);
 
 	
 	

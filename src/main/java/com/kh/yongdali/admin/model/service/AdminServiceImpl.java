@@ -39,16 +39,6 @@ public class AdminServiceImpl implements AdminService {
 		return aDao.selectDriList(pi);
 	}
 
-	@Override
-	public int getCalListCount() {
-		
-		return aDao.getCalListCount();
-	}
 
-	@Override
-	public ArrayList<Reservation> selectCalList(PageInfo pi) {
-		
-		return aDao.selectCalList(pi);
-	}
 
 }

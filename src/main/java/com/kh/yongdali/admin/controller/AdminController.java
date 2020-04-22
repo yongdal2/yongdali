@@ -131,24 +131,7 @@ public class AdminController {
 	public String adminHomeView4() {
 		return "admin/admin_Reser";
 	}
-	//정산 내역
-	@RequestMapping("admin_Cal.ydl")
-	public ModelAndView adminHomeView5(ModelAndView mv, @RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage) {
-		
-		int pageLimit =10;
-		int boardLimit=5;
-		int listCount = aService.getCalListCount();
-		
-		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, pageLimit, boardLimit);
-		
-		ArrayList<Reservation> list = aService.selectCalList(pi);
-		
-		mv.addObject("list",list);
-		mv.addObject("pi",pi);
-		mv.setViewName("admin/admin_Cal");
-		
-		return mv;
-	}	
+	
 	//환불 내역
 	@RequestMapping("admin_Refund.ydl")
 	public String adminHomeView6() {

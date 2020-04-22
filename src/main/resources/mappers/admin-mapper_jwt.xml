@@ -61,21 +61,58 @@
 		
 	</resultMap> -->
 	
+	<!-- 
+	
+		public int getCalListCount() {
+		
+		return sqlSession.selectOne("adminMapperwt.getCalListCount");
+	}
+
+	public ArrayList<Reservation> selectCalList(PageInfo pi) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds =new RowBounds(offset,pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapperwt.selectCalList",null,rowBounds);
+	}
 	
 	
 	
-	<!-- 정산가능한 예약 내용리스트 count -->
-	<select id="getCalListCount" resultType="_int">
-		SELECT COUNT(*)
-		FROM RESERVATION
-		WHERE SYSDATE > ENDDATE
-	</select>
+		@Override
+	public int getCalListCount() {
+		
+		return aDao.getCalListCount();
+	}
+
+	@Override
+	public ArrayList<Reservation> selectCalList(PageInfo pi) {
+		
+		return aDao.selectCalList(pi);
+		
+		
+			int getCalListCount();
+
+	ArrayList<Reservation> selectCalList(PageInfo pi);
 	
-	<select id="selectCalList" resultMap="reservationResultSet">
-		SELECT *
-		FROM RESERVATION
-		WHERE SYSDATE > ENDDATE
-	</select>
+	//정산 내역
+	@RequestMapping("admin_Cal.ydl")
+	public ModelAndView adminHomeView5(ModelAndView mv, @RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage) {
+		
+		int pageLimit =10;
+		int boardLimit=5;
+		int listCount = aService.getCalListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, pageLimit, boardLimit);
+		
+		ArrayList<Reservation> list = aService.selectCalList(pi);
+		
+		mv.addObject("list",list);
+		mv.addObject("pi",pi);
+		mv.setViewName("admin/admin_Cal");
+		
+		return mv;
+	}	
+	 -->
+	
 	
 </mapper>
 
