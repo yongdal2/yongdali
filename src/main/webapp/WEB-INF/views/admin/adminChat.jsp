@@ -158,12 +158,19 @@
 	
 		$(function(){
 			connectionSocket();
+			
+			$('#msgArea').keypress(function(event){
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if(keycode == '13'){
+                	$('.sendBtn').trigger("click");
+                }
+            }); 
 		})
 		
 		//message token구성
-		function MessageFlag(id, room, msg, flag, receiveId){
+		function MessageFlag(id, roomName, msg, flag, receiveId){
 			this.id=id;
-			this.room=room;
+			this.roomName=roomName;
 			this.msg=msg;
 			this.flag=flag;
 			this.receiveId=receiveId;
@@ -171,7 +178,7 @@
 		
 		function connectionSocket(){
 			connect = true;
-			socket = new WebSocket('ws://172.30.1.31:8888/yongdali/chatting');
+			socket = new WebSocket('ws://192.168.110.45:8888/yongdali/chatting');
 			/* 페이지 접속한 session id */
 			var sessionid = $("#senderId").val();
 			
@@ -216,7 +223,7 @@
 	    			}else{    			
 	    				var printHTML = "<div class='message' id='youMsg'>";
 		              	printHTML += "<div class='name'>";
-		              	printHTML += "<h2>"+data["room"]+"</h2>";
+		              	printHTML += "<h2>"+data["roomName"]+"</h2>";
 		              	printHTML += "</div>";
 		              	printHTML += "<div class='messageArea'>";
 		    			printHTML += "<p class='text'>"+data["msg"]+"</p>";
