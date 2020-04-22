@@ -59,6 +59,12 @@ public class Member {
 		this.enrollDate = enrollDate;
 	}
 
+	public Member(String mId, String mName) {
+		super();
+		this.mId = mId;
+		this.mName = mName;
+	}
+
 	public String getmNo() {
 		return mNo;
 	}
