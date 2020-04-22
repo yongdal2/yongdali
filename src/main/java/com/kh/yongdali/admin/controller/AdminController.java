@@ -28,8 +28,8 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping("aMem.ad")
-	public ModelAndView adminMemList(ModelAndView mv,
-								@RequestParam(value= " currentPage", required = false, defaultValue = "1")
+	public ModelAndView adminMemList(ModelAndView mv, //" currentPage" 주의
+								@RequestParam(value= "currentPage", required = false, defaultValue = "1") 
 								int currentPage) { //현재 페이지가 필요한데, 없어도 되고, 있으면 기본값 1
 		
 		System.out.println("currentPage : " + currentPage);
@@ -47,6 +47,7 @@ public class AdminController {
 		//(int currentPage, int listCount, int pageLimit, int boardLimit)
 		
 		ArrayList<Member> list = aService.selectMemList(pi);
+		System.out.println(list);
 		//---------------------------------------------------
 		mv.addObject("list", list); 
 		mv.addObject("pi", pi);
@@ -78,6 +79,7 @@ public class AdminController {
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, pageLimit, boardLimit);
 		
 		ArrayList<Driver> list = aService.selectDriList(pi);
+		System.out.println(list);
 		//---------------------------------------------------
 		mv.addObject("list", list);
 		mv.addObject("pi", pi);

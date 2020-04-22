@@ -28,19 +28,18 @@
 		<div class="content container">
 			<div class="row">
 			<div id=title>
-				<h2 class="jal">관리자 페이지</h2>
-			<p>회원님 목록 / admin_Mem.jsp / 회원번호, 회원구분으로 sql</p>
+				<a id="adTitle" href="adminHome.ydl"><h2 class="jal">관리자 페이지</h2></a>
+			<p>회원님 목록 / admin_Mem.jsp / 회원번호, 회원구분으로 sql / a태그</p>
 			</div>
 				<hr>
 			</div>
-			
 			
 			
 			<div class="row" id="content">
 			<!-- <div id="content"> -->
 				<div class="col-lg-3 sidebar">
 					<a href="aMem.ad"><span class="sidebar_span">회원님 목록</span></a><br>
-					<a href="#"><span class="sidebar_span">기사님 목록</span></a><br>
+					<a href="aDri.ad"><span class="sidebar_span">기사님 목록</span></a><br>
 					<a href="#"><span class="sidebar_span">예약 내역</span></a><br>
 					<a href="#"><span class="sidebar_span">정산 내역</span></a><br> 
 					<a href="#"><span class="sidebar_span">환불 내역</span></a><br> 
@@ -51,8 +50,9 @@
 			<div class="row" id="rowList">
 				<div class="col-xs-12 col-md-12" id="table">
 					<br>
+					<p>대쉬보드 그래프...</p>
 				<!-- <table style="text-align: center" class="table table-striped table-hover text-center"> -->
-					<table class="table table-striped table-hover text-center">
+					<!-- <table class="table table-striped table-hover text-center">
 						<thead id="thead">
 							<tr>
 								<th>회원번호</th>
@@ -80,7 +80,7 @@
 							</tr>
 						</tbody>
 						</c:forEach>
-					</table>
+					</table> -->
 				</div>
 				
 				<!-- 페이징 처리 -->

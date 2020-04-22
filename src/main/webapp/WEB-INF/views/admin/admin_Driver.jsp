@@ -12,6 +12,12 @@
 <link rel="stylesheet"
 	href="${contextPath}/resources/css/admin/admin.css">
 
+<!-- Bootstrap cdn 설정 -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 </head>
 
@@ -29,7 +35,7 @@
 			<div class="row">
 			<div id=title>
 				<h2 class="jal">관리자 페이지</h2>
-				<h4 class="jal">: 기사님 목록</h4>
+				<!-- <h4 class="jal">: 기사님 목록</h4> -->
 			<p>기사님 목록 / admin_Driver.jsp / 사진은 버튼 누르면 팝업으로 띄우기 / 소제목 처리하기</p>
 			</div>
 				<hr>
@@ -56,7 +62,7 @@
 							<tr>
 								<th>기사번호</th>
 								<th>회원번호</th>
-								<!-- <th>이름</th> -->
+								<th>이름</th>
 								<th>차량 톤수</th>
 								<th>차종</th>
 								<th>차량번호</th>
@@ -70,12 +76,13 @@
 							<tr>
 								<td>${ a.dNo }</td>
 								<td>${ a.dmNo }</td>
+								<td>${ a.mName }</td>
 								<td>${ a.capacity }</td>
 								<td>${ a.type }</td>
 								<td>${ a.carNo }</td>
 								
 								 
-<%-- 								<td>${ a.mNo }</td>
+<%-- 							<td>${ a.mNo }</td>
 								<td>${ a.mId }</td>
 								<td>${ a.mName }</td>
 								<td>${ a.phone }</td>
@@ -84,21 +91,99 @@
 								<td>${ a.pushEnabled }</td>
 								<td>${ a.enrollDate }</td>  --%>
 								 
-		<%-- <div class="img-circle" id="pro_img"
-		style="background-image: url('${pageContext.request.contextPath}/resources/images/driver/id/${driver.idImgRename}');"> --%>
 	
 	
             <td>
-            	<div class="imgBtn" id="Origin" style="url('${pageContext.request.contextPath}/resources/images/driver/id/${a.idImgOrigin}');">원명</div>
-            	<div class="imgBtn" id="Rename" style="url('${pageContext.request.contextPath}/resources/images/driver/id/${a.idImgRename}');">가명</div>
+                    <button class="imgBtn" id="idImgOrigin" value="${pageContext.request.contextPath}/resources/images/driver/id/${a.idImgRename}");">사진1</button>
+                    <%-- <button class="imgBtn" id="idImgRename" style="url('${pageContext.request.contextPath}/resources/images/driver/id/${a.idImgRename}');">가명</button> --%>
            </td>
-            <td><input type="button" id="Origin" value="원명"  style="float:inline">
-                <input type="button" id="Rename" value="가명"  style="float:inline"></td>
+            <td>
+		            <%-- <button class="imgBtn" id="regCardImgOrigin" style="url('${pageContext.request.contextPath}/resources/images/driver/id/${a.regCardImgOrigin}');">원명</button> --%>
+		            <button class="imgBtn" id="regCardImgRename" value="${pageContext.request.contextPath}/resources/images/driver/id/${a.regCardImgRename}");">사진2</button>
+                <%-- <button id="popover_btn" data-toggle="popover" title="원명팝오버" data-content="url('${pageContext.request.contextPath}/resources/images/driver/id/${a.regCardImgRename}');" data-placement="bottom">팝오버</button> --%> 
+           </td>
 							</tr>
 						</tbody>
 						</c:forEach>
 					</table>
 				</div>
+				
+		<%-- <button class="img-circle" id="popup" style="background-image: url('${pageContext.request.contextPath}/resources/images/driver/id/${a.idImgRename}');">pro_img</button> --%>
+	
+	<%-- <img src="imgs/file.jpg" />
+	<img alt="gh1" src="${pageContext.request.contextPath}/resources/images/driver/id/${a.idImgRename}.jfif"/> --%>			
+
+	<script>
+	$('#idImgOrigin').popover({
+		  html: true,
+		  trigger: 'hover focus',
+		  content: function () {
+			  var url = $(this).val();
+		    return '<img alt="호호1" src="'+url+'" />';
+		  }
+		});
+	
+	$('#regCardImgRename').popover({
+		  html: true,
+		  trigger: 'hover focus',
+		  content: function () {
+			  var url = $(this).val();
+		    return '<img alt="호호2" src="'+url+'" />';
+		  }
+		});
+	</script>
+	
+<!-- 	
+<script>
+
+					// 팝오버을 실행하기 위해서 script에 popover함수를 실행해야 한다.
+					$(function(){ 
+						$('#idImgOrigin').popover({
+							// fade 효과 사용 여부
+							animation : true,
+							// 팝오버을 나타낼 특정 요소
+							container : false,
+							// 지연 설정
+							delay : {
+								show : 500,
+								hide : 100
+							},
+							// 템필릿
+							html : false,
+							// html false 경우 지정할 요소 selector
+							selector : false,
+							// html true일 경우 사용되는 popover 템플릿
+							template : '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+							// 팝오버 트리거(반응) 이벤트
+							trigger : 'hover focus',
+							viewport : {
+								selector : 'body',
+								padding : 0
+							},
+						// 방향 (설정하면 요소의 data-placement 설정의 무효된다.)
+						//placement: 'bottom',
+						// 제목 (설정하면 요소의 title 설정의 무효된다.)
+						//title: '',
+						// 컨텐츠 값 (설정하면 요소의 data-content값은 무효된다.)
+						// content: '',
+						//sanitize: true,
+						//sanitizeFn: null,
+						//whiteList: ''
+						});
+					});
+</script>
+ -->
+
+<!-- '+$(this).data('img')+' -->
+<!-- <img alt="호" src="${pageContext.request.contextPath}/resources/images/driver/id/${a.idImgRename}"/> -->
+		
+				
+				
+				
+				
+				
+				
+				
 				
 				<!-- 페이징 처리 -->
 				<div class="row text-center" style="height: 400px">
