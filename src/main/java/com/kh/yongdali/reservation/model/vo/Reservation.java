@@ -9,10 +9,11 @@ import java.sql.Date;
 public class Reservation {
 	private String rNo;			// 예약&결제 기본키
 	private String rMNo;		// 멤버 외래키
-	private float capacity;	// 차량 정보(톤)
+	private String rDNo;		// 기사 외래키
+	private float capacity;		// 차량 정보(톤)
 	private String type;		// 차량 옵션
 	private String startName;	// 상차할 이름
-	private String endName;	// 하차받을 이름
+	private String endName;		// 하차받을 이름
 	private String startPhone;	// 상차 연락처
 	private String endPhone;	// 하차 연락처
 	private String startAddr;	// 출발지
@@ -32,40 +33,10 @@ public class Reservation {
 	
 	public Reservation() {}
 	
-
 	public Reservation(String rNo, String rMNo) {
 		super();
 		this.rNo = rNo;
 		this.rMNo = rMNo;
-	}
-
-	public Reservation(String rNo, String rMNo, float capacity, String type, String startName, String endName,
-			String startPhone, String endPhone, String startAddr, String endAddr, String distance, String rightLoad,
-			String rightUnload, Date startDate, String startTime, Date endDate, String endTime, String helpLoad,
-			String helpUnload, String luggage, String msg, String amount) {
-		super();
-		this.rNo = rNo;
-		this.rMNo = rMNo;
-		this.capacity = capacity;
-		this.type = type;
-		this.startName = startName;
-		this.endName = endName;
-		this.startPhone = startPhone;
-		this.endPhone = endPhone;
-		this.startAddr = startAddr;
-		this.endAddr = endAddr;
-		this.distance = distance;
-		this.rightLoad = rightLoad;
-		this.rightUnload = rightUnload;
-		this.startDate = startDate;
-		this.startTime = startTime;
-		this.endDate = endDate;
-		this.endTime = endTime;
-		this.helpLoad = helpLoad;
-		this.helpUnload = helpUnload;
-		this.luggage = luggage;
-		this.msg = msg;
-		this.amount = amount;
 	}
 
 	public String getrNo() {
@@ -82,6 +53,14 @@ public class Reservation {
 
 	public void setrMNo(String rMNo) {
 		this.rMNo = rMNo;
+	}
+
+	public String getrDNo() {
+		return rDNo;
+	}
+
+	public void setrDNo(String rDNo) {
+		this.rDNo = rDNo;
 	}
 
 	public float getCapacity() {
@@ -246,15 +225,14 @@ public class Reservation {
 
 	@Override
 	public String toString() {
-		return "Reservation [rNo=" + rNo + ", rMNo=" + rMNo + ", capacity=" + capacity + ", type=" + type
-				+ ", startName=" + startName + ", endName=" + endName + ", startPhone=" + startPhone + ", endPhone="
-				+ endPhone + ", startAddr=" + startAddr + ", endAddr=" + endAddr + ", distance=" + distance
-				+ ", rightLoad=" + rightLoad + ", rightUnload=" + rightUnload + ", startDate=" + startDate
+		return "Reservation [rNo=" + rNo + ", rMNo=" + rMNo + ", rDNo=" + rDNo + ", capacity=" + capacity + ", type="
+				+ type + ", startName=" + startName + ", endName=" + endName + ", startPhone=" + startPhone
+				+ ", endPhone=" + endPhone + ", startAddr=" + startAddr + ", endAddr=" + endAddr + ", distance="
+				+ distance + ", rightLoad=" + rightLoad + ", rightUnload=" + rightUnload + ", startDate=" + startDate
 				+ ", startTime=" + startTime + ", endDate=" + endDate + ", endTime=" + endTime + ", helpLoad="
 				+ helpLoad + ", helpUnload=" + helpUnload + ", luggage=" + luggage + ", msg=" + msg + ", amount="
 				+ amount + "]";
 	}
-	
 }
 
 

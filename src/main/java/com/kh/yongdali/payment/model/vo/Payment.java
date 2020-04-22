@@ -5,7 +5,6 @@ import java.sql.Date;
 public class Payment {
 	private String pNo;
 	private String pRNo;
-	private String pDNo;
 	private String dealYN;
 	private Date dealDate;
 	private String cancYN;
@@ -20,7 +19,6 @@ public class Payment {
 		super();
 		this.pNo = pNo;
 		this.pRNo = pRNo;
-		this.pDNo = pDNo;
 		this.dealYN = dealYN;
 		this.dealDate = dealDate;
 		this.cancYN = cancYN;
@@ -43,14 +41,6 @@ public class Payment {
 
 	public void setpRNo(String pRNo) {
 		this.pRNo = pRNo;
-	}
-
-	public String getpDNo() {
-		return pDNo;
-	}
-
-	public void setpDNo(String pDNo) {
-		this.pDNo = pDNo;
 	}
 
 	public String getDealYN() {
