@@ -60,7 +60,9 @@ public class Member {
 	}
 
 	public Member(String mId, String mName) {
-		// TODO Auto-generated constructor stub
+		super();
+		this.mId = mId;
+		this.mName = mName;
 	}
 
 	public String getmNo() {

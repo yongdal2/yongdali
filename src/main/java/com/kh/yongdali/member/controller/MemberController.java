@@ -233,6 +233,7 @@ public class MemberController {
             String name = jsonresponseObj.get("name").toString();
             
             Member loginUser = new Member(email, name);
+            logger.debug(loginUser.toString());
             model.addAttribute("loginUser", loginUser);
 	      } 
 	    } catch (Exception e) {
