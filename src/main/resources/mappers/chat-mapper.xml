@@ -5,10 +5,9 @@
 <mapper namespace="chatMapper">
 
 	<!-- resultMap -->
-	<!-- <resultMap id="chatResultSet" type="Message">
+	<resultMap id="chatResultSet" type="Message">
 		
 	
-	</resultMap> -->
-
+	</resultMap>
 
 </mapper>
