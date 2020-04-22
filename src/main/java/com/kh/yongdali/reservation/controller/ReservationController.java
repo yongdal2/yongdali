@@ -137,7 +137,7 @@ public class ReservationController {
 		int result = rService.insertReservation(r);
 		
 		if(result > 0) {
-			mv.setViewName("user/paySuccess");			
+			mv.setViewName("user/paySuccess");
 		} else {
 			mv.setViewName("common/error");
 		}
