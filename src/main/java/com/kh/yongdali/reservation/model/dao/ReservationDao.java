@@ -22,5 +22,9 @@ public class ReservationDao {
 	public ArrayList<Address> getAddressList(String mno) {
 		return (ArrayList)sqlSession.selectList("addressMapper_njh.selectAddressList",mno);
 	}
+
+	public int insertPayment() {
+		return sqlSession.insert("paymentMapper_njh.insertPayment");
+	}
 	
 }

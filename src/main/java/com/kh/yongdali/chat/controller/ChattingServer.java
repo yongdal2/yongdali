@@ -115,7 +115,7 @@ public class ChattingServer {
 						}else if(!msg.getId().equals(msg.getReceiveId())) {
 							s.getBasicRemote().sendObject(msg);
 						}
-						else if(m.getRoom().equals(msg.getReceiveId())) {
+						else if(m.getRoomName().equals(msg.getReceiveId())) {
 							//s.getBasicRemote().sendObject(new Message("admin","",rooms, "room"));//방현황 전송
 							s.getBasicRemote().sendObject(new Message("admin","",users, "user"));//userg현황전송
 							s.getBasicRemote().sendObject(msg);
@@ -146,7 +146,7 @@ public class ChattingServer {
 		for(Session s : session.getOpenSessions()) {
 			Message m=(Message)(s.getUserProperties().get("msg"));
 			if(m!=null) {
-				rooms.add(m.getRoom());
+				rooms.add(m.getRoomName());
 			}
 		}
 		String[] roomStr=new String[rooms.size()];
