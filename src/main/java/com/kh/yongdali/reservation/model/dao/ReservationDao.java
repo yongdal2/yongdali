@@ -24,7 +24,7 @@ public class ReservationDao {
 	}
 
 	public int insertPayment() {
-		return sqlSession.insert("paymentMapper_njh");
+		return sqlSession.insert("paymentMapper_njh.insertPayment");
 	}
 	
 }
