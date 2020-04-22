@@ -10,6 +10,7 @@ public class Message {
 	private String flag; // 구분
 	private String receiveId; // 받는 사람
 	private String roomNo; // 방번호
+	private String msgNo; // 메시지번호
 	private Date createDate; // 방생성날짜
 	private Date sendDate; // 메시지 보낸 날짜
 	private String connectYN; // 대화종료 yn
@@ -44,7 +45,7 @@ public class Message {
 	}
 	
 	
-
+	
 	public Message(String id, String roomName, String receiveId, String roomNo, Date createDate, String connectYN) {
 		super();
 		this.id = id;
@@ -55,7 +56,18 @@ public class Message {
 		this.connectYN = connectYN;
 	}
 
-	public Message(String id, String roomName, String msg, String flag, String receiveId, String roomNo,
+	public Message(String id, String msg, String roomNo, String msgNo, Date sendDate) {
+		super();
+		this.id = id;
+		this.msg = msg;
+		this.roomNo = roomNo;
+		this.msgNo = msgNo;
+		this.sendDate = sendDate;
+	}
+
+
+
+	public Message(String id, String roomName, String msg, String flag, String receiveId, String roomNo, String msgNo,
 			Date createDate, Date sendDate, String connectYN) {
 		super();
 		this.id = id;
@@ -64,6 +76,7 @@ public class Message {
 		this.flag = flag;
 		this.receiveId = receiveId;
 		this.roomNo = roomNo;
+		this.msgNo = msgNo;
 		this.createDate = createDate;
 		this.sendDate = sendDate;
 		this.connectYN = connectYN;
@@ -113,6 +126,14 @@ public class Message {
 	
 	
 	
+	public String getMsgNo() {
+		return msgNo;
+	}
+
+	public void setMsgNo(String msgNo) {
+		this.msgNo = msgNo;
+	}
+
 	public String getRoomNo() {
 		return roomNo;
 	}
@@ -165,10 +186,11 @@ public class Message {
 	@Override
 	public String toString() {
 		return "Message [id=" + id + ", roomName=" + roomName + ", msg=" + msg + ", flag=" + flag + ", receiveId="
-				+ receiveId + ", roomNo=" + roomNo + ", createDate=" + createDate + ", sendDate=" + sendDate
-				+ ", connectYN=" + connectYN + "]";
+				+ receiveId + ", roomNo=" + roomNo + ", msgNo=" + msgNo + ", createDate=" + createDate + ", sendDate="
+				+ sendDate + ", connectYN=" + connectYN + "]";
 	}
 
+	
 	
 	
 
