@@ -9,15 +9,15 @@
 		<result property="type" column="TYPE"/> <!-- 차종 -->
 		<result property="startAddr" column="START_ADDR"/>	<!-- 출발지 -->
 		<result property="endAddr" column="END_ADDR"/>	<!-- 도착지 -->
-		<result property="startDate" column="STARTDATE"/>	<!-- 상차일 -->
-		<result property="endDate" column="ENDDATE"/>	<!-- 하차일 -->
+		<result property="startDate" column="START_DATE"/>	<!-- 상차일 -->
+		<result property="endDate" column="END_DATE"/>	<!-- 하차일 -->
 		<result property="helpLoad" column="HELP_LOAD"/>	<!-- 상차도움 -->
 		<result property="helpUnload" column="HELP_UNLOAD"/>	<!-- 하차도움 -->
 		<result property="luggage" column="LUGGAGE"/>	<!-- 짐 -->
 		<result property="msg" column="MSG"/>			<!-- 메시지 -->
 		<result property="dealYN" column="DEAL_YN"/>	<!-- 배차여부 -->
-		<result property="dealDate" column="DEALDATE"/>	<!-- 배차일 -->
-		<result property="enrollDate" column="ENROLLDATE"/><!-- 등록일 -->
+		<result property="dealDate" column="DEAL_DATE"/>	<!-- 배차일 -->
+		<result property="enrollDate" column="ENROLL_DATE"/><!-- 등록일 -->
 	</resultMap>
 	
 	<select id="mibaechar" resultMap="reservationResultSet">
