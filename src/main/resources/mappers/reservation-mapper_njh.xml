@@ -5,12 +5,11 @@
 <mapper namespace="reservationMapper_njh">
 	<insert id="insertReservation" parameterType="Reservation">
 		INSERT INTO RESERVATION
-		VALUES('R' || SEQ_RNO.NEXTVAL,#{rMNo},NULL,#{capacity},
+		VALUES('R' || SEQ_RNO.NEXTVAL,#{rMNo},null,#{capacity},
 		#{type},#{startName},#{endName},#{startPhone},#{endPhone},
 		#{startAddr},#{endAddr},#{distance},#{rightLoad},#{rightUnload},
 		#{startDate},#{startTime},#{endDate},#{endTime},#{helpLoad},
-		#{helpUnload},#{luggage},#{msg},#{amount},#{payYN},
-		DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT)
+		#{helpUnload},#{luggage},#{msg},#{amount})
 	</insert>
 </mapper>
     
