@@ -115,13 +115,13 @@ public class ReservationController {
 		// 차량크기, 거리, 결제금액 int로 변환하기
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		if (stDate != "") {
-			Date startDate = (Date) sdf.parse(stDate);
+			Date startDate = new Date(sdf.parse(stDate).getTime());
 			System.out.println(startDate);
 			r.setStartDate(startDate);
 		}
 
 		if (edDate != "") {
-			Date endDate = (Date) sdf.parse(edDate);
+			Date endDate = new Date(sdf.parse(edDate).getTime());
 			System.out.println(endDate);
 			r.setEndDate(endDate);
 		}
@@ -134,10 +134,16 @@ public class ReservationController {
 		// 세션에 저장되어있는 loginUser의 mId 불러오기
 		r.setrMNo(((Member)session.getAttribute("loginUser")).getmNo());
 		System.out.println(r.getrMNo());
-		int result = rService.insertReservation(r);
 		
-		if(result > 0) {
-			mv.setViewName("user/paySuccess");
+		int result1 = rService.insertReservation(r);
+		int result2 = 0;
+		if(result1 > 0) {
+			result2 = rService.insertPayment();
+			if(result2 > 0) {
+				mv.setViewName("user/paySuccess");				
+			} else {				
+				mv.setViewName("common/error");
+			}
 		} else {
 			mv.setViewName("common/error");
 		}
