@@ -13,7 +13,7 @@
 		<typeAlias type="com.kh.yongdali.driver.model.vo.Driver" alias="Driver"/>
 		<typeAlias type="com.kh.yongdali.cs.model.vo.Notice" alias="Notice"/>
 		<typeAlias type="com.kh.yongdali.reservation.model.vo.Reservation" alias="Reservation"/>
-		<typeAlias type="com.kh.yongdali.payment.model.vo.Reservation" alias="Payment"/>
+		<typeAlias type="com.kh.yongdali.payment.model.vo.Payment" alias="Payment"/>
 		<typeAlias type="com.kh.yongdali.myPage.model.vo.Address" alias="Address"/>
 	</typeAliases>
 	
