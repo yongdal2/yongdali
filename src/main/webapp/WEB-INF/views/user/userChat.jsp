@@ -139,7 +139,7 @@
     	
     	function connectionSocket(){
     		connect = true;
-    		socket = new WebSocket('ws://192.168.110.45:8888/yongdali/chatting');
+    		socket = new WebSocket('ws://172.30.1.31:8888/yongdali/chatting');
     		/* 페이지 접속한 session id */
     		var sessionid = $("#senderId").val();
     		var sessionName = $("#senderName").val();
