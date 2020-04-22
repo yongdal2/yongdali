@@ -1,34 +1,85 @@
 package com.kh.yongdali.chat.msg;
 
+import java.sql.Date;
 import java.util.Objects;
 
 public class Message {
-	private String id;
-	private String room;
-	private String msg;
-	private String flag;
-	private String receiveId;
+	private String id; //접속한 아이디
+	private String roomName; //방이름(접속한 사람 이름으로 설정)
+	private String msg; // 메시지 내용
+	private String flag; // 구분
+	private String receiveId; // 받는 사람
+	private String roomNo; // 방번호
+	private String msgNo; // 메시지번호
+	private Date createDate; // 방생성날짜
+	private Date sendDate; // 메시지 보낸 날짜
+	private String connectYN; // 대화종료 yn
+	
+	
+	// room> roomName
+	// + roomNo
+	// + date date
+	// + connectYN 대화종료시 yn
+	// 
 	
 	public Message() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Message(String id, String room, String msg, String flag) {
+	public Message(String id, String roomName, String msg, String flag) {
 		super();
 		this.id = id;
-		this.room = room;
+		this.roomName = roomName;
 		this.msg = msg;
 		this.flag = flag;
 	}
 
-	public Message(String id, String room, String msg, String flag, String receiveId) {
+	public Message(String id, String roomName, String msg, String flag, String receiveId) {
 		super();
 		this.id = id;
-		this.room = room;
+		this.roomName = roomName;
 		this.msg = msg;
 		this.flag = flag;
 		this.receiveId = receiveId;
+	}
+	
+	
+	
+	public Message(String id, String roomName, String receiveId, String roomNo, Date createDate, String connectYN) {
+		super();
+		this.id = id;
+		this.roomName = roomName;
+		this.receiveId = receiveId;
+		this.roomNo = roomNo;
+		this.createDate = createDate;
+		this.connectYN = connectYN;
+	}
+
+	public Message(String id, String msg, String roomNo, String msgNo, Date sendDate) {
+		super();
+		this.id = id;
+		this.msg = msg;
+		this.roomNo = roomNo;
+		this.msgNo = msgNo;
+		this.sendDate = sendDate;
+	}
+
+
+
+	public Message(String id, String roomName, String msg, String flag, String receiveId, String roomNo, String msgNo,
+			Date createDate, Date sendDate, String connectYN) {
+		super();
+		this.id = id;
+		this.roomName = roomName;
+		this.msg = msg;
+		this.flag = flag;
+		this.receiveId = receiveId;
+		this.roomNo = roomNo;
+		this.msgNo = msgNo;
+		this.createDate = createDate;
+		this.sendDate = sendDate;
+		this.connectYN = connectYN;
 	}
 
 	public String getId() {
@@ -39,12 +90,14 @@ public class Message {
 		this.id = id;
 	}
 
-	public String getRoom() {
-		return room;
+	
+
+	public String getRoomName() {
+		return roomName;
 	}
 
-	public void setRoom(String room) {
-		this.room = room;
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
 	}
 
 	public String getMsg() {
@@ -71,6 +124,50 @@ public class Message {
 		this.receiveId = receiveId;
 	}
 	
+	
+	
+	public String getMsgNo() {
+		return msgNo;
+	}
+
+	public void setMsgNo(String msgNo) {
+		this.msgNo = msgNo;
+	}
+
+	public String getRoomNo() {
+		return roomNo;
+	}
+
+	public void setRoomNo(String roomNo) {
+		this.roomNo = roomNo;
+	}
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	public Date getSendDate() {
+		return sendDate;
+	}
+
+	public void setSendDate(Date sendDate) {
+		this.sendDate = sendDate;
+	}
+	
+	
+
+	public String getConnectYN() {
+		return connectYN;
+	}
+
+	public void setConnectYN(String connectYN) {
+		this.connectYN = connectYN;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		// TODO Auto-generated method stub
@@ -85,13 +182,19 @@ public class Message {
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-	
 
 	@Override
 	public String toString() {
-		return "Message [id=" + id + ", room=" + room + ", msg=" + msg + ", flag=" + flag + ", receiveId=" + receiveId
-				+ "]";
+		return "Message [id=" + id + ", roomName=" + roomName + ", msg=" + msg + ", flag=" + flag + ", receiveId="
+				+ receiveId + ", roomNo=" + roomNo + ", msgNo=" + msgNo + ", createDate=" + createDate + ", sendDate="
+				+ sendDate + ", connectYN=" + connectYN + "]";
 	}
+
+	
+	
+	
+
+	
 	
 	
 	

@@ -143,13 +143,14 @@ public class ReservationController {
 			if(result2 > 0) {
 				System.out.println("---------결제 insert 성공------------");
 				mv.setViewName("user/paySuccess");				
-			} else {				
-				mv.setViewName("common/error");
+			} else {
+				mv.addObject("msg","결제 실패하셨습니다.");
+				mv.setViewName("common/errorPage");
 			}
 		} else {
-			mv.setViewName("common/error");
+			mv.addObject("msg","예약 실패하셨습니다.");
+			mv.setViewName("common/errorPage");
 		}
-		
 		return mv;
 	}
 

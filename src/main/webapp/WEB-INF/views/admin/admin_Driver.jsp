@@ -67,7 +67,7 @@
 								<th>차종</th>
 								<th>차량번호</th>
 								<th>증명사진</th>
-								<th>차량사진</th>
+								<th>차량등록증</th>
 							</tr>
 						</thead>
 						
@@ -76,30 +76,17 @@
 							<tr>
 								<td>${ a.dNo }</td>
 								<td>${ a.dmNo }</td>
-								<td>${ a.mName }</td>
+								<td>${ a.regCardImgOrigin }</td>
 								<td>${ a.capacity }</td>
 								<td>${ a.type }</td>
 								<td>${ a.carNo }</td>
-								
-								 
-<%-- 							<td>${ a.mNo }</td>
-								<td>${ a.mId }</td>
-								<td>${ a.mName }</td>
-								<td>${ a.phone }</td>
-								<td>${ a.mSort }</td>
-								<td>${ a.mStatus }</td>
-								<td>${ a.pushEnabled }</td>
-								<td>${ a.enrollDate }</td>  --%>
-								 
-	
-	
             <td>
-                    <button class="imgBtn" id="idImgOrigin" value="${pageContext.request.contextPath}/resources/images/driver/id/${a.idImgRename}");">사진1</button>
+                    <button class="imgBtn" id="idImgRename" value="${pageContext.request.contextPath}/resources/images/driver/id/${a.idImgRename}">상세보기</button>
                     <%-- <button class="imgBtn" id="idImgRename" style="url('${pageContext.request.contextPath}/resources/images/driver/id/${a.idImgRename}');">가명</button> --%>
            </td>
             <td>
 		            <%-- <button class="imgBtn" id="regCardImgOrigin" style="url('${pageContext.request.contextPath}/resources/images/driver/id/${a.regCardImgOrigin}');">원명</button> --%>
-		            <button class="imgBtn" id="regCardImgRename" value="${pageContext.request.contextPath}/resources/images/driver/id/${a.regCardImgRename}");">사진2</button>
+		            <button class="imgBtn" id="regCardImgRename" value="${pageContext.request.contextPath}/resources/images/driver/regCard/${a.regCardImgRename}");">상세보기</button>
                 <%-- <button id="popover_btn" data-toggle="popover" title="원명팝오버" data-content="url('${pageContext.request.contextPath}/resources/images/driver/id/${a.regCardImgRename}');" data-placement="bottom">팝오버</button> --%> 
            </td>
 							</tr>
@@ -114,7 +101,7 @@
 	<img alt="gh1" src="${pageContext.request.contextPath}/resources/images/driver/id/${a.idImgRename}.jfif"/> --%>			
 
 	<script>
-	$('#idImgOrigin').popover({
+	$('#idImgRename').popover({
 		  html: true,
 		  trigger: 'hover focus',
 		  content: function () {

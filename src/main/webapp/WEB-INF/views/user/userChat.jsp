@@ -126,12 +126,19 @@
     
     	$(function(){
     		connectionSocket();
+    		
+    		$('#msgArea').keypress(function(event){
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if(keycode == '13'){
+                	$('.sendBtn').trigger("click");
+                }
+            }); 
     	})
 		
     	//message token구성
-		function MessageFlag(id, room, msg, flag, receiveId){
+		function MessageFlag(id, roomName, msg, flag, receiveId){
 			this.id=id;
-			this.room=room;
+			this.roomName=roomName;
 			this.msg=msg;
 			this.flag=flag;
 			this.receiveId=receiveId;
@@ -139,7 +146,7 @@
     	
     	function connectionSocket(){
     		connect = true;
-    		socket = new WebSocket('ws://172.30.1.31:8888/yongdali/chatting');
+    		socket = new WebSocket('ws://192.168.110.45:8888/yongdali/chatting');
     		/* 페이지 접속한 session id */
     		var sessionid = $("#senderId").val();
     		var sessionName = $("#senderName").val();
@@ -181,7 +188,7 @@
 	    				var printHTML = "<li class='me'>";
 	        			printHTML += "<div class='entete'>";
 	        			printHTML += "<h3>"+hours+":"+minutes+"<h3>";
-	        			printHTML += "<h2>"+data["room"]+"</h2>";
+	        			printHTML += "<h2>"+data["roomName"]+"</h2>";
 	        			printHTML += "</div>";
 	        			printHTML += "<div class='message' id='meMsg'>"+data["msg"]+"</div>";
 	        			printHTML += "</li>";
@@ -189,7 +196,7 @@
 	    				if(data["id"]=="admin@naver.com" && data["receiveId"]==sessionName){
 		        			var printHTML = "<li class='you'>";
 			    			printHTML += "<div class='entete'>";
-			    			printHTML += "<h2>"+data["room"]+"</h2>";
+			    			printHTML += "<h2>"+data["roomName"]+"</h2>";
 			    			printHTML += "<h3>"+hours+":"+minutes+"<h3>";
 			    			printHTML += "</div>";
 			    			printHTML += "<div class='message'id='youMsg'>"+data["msg"]+"</div>";	    			
@@ -212,10 +219,29 @@
     	
     	 // 메시지 보내기 클릭
     	function sendMessage(){
+    		 var senderId = $("#senderId").val();
+    		 var roomName = $("#room").val();
+    		 var msg = $("#msgArea").val();
+    		 var flag = "msg";
+    		 var receiveId = "admin@naver.com";
     		//socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),$("#msgArea").val(),"msg",$("#receiveId").val())));
     		//											          아이디				     방이름(닉네임)              msg          flag		   메시지 받는 사람
-    		socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#room").val(),$("#msgArea").val(),"msg","admin@naver.com")));
+    		//socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#room").val(),$("#msgArea").val(),"msg","admin@naver.com")));
+    		socket.send(JSON.stringify(new MessageFlag(senderId,roomName,msg,flag,receiveId)));
     		$("#msgArea").val("");
+    		
+    		$.ajax({
+    			url:"userSendChat.ch",
+    			data:{id:senderId, room:roomName, msg:msg, flag:flag, receiveId:receiveId},
+    			type:"post",
+    			success:function(data){
+    				if(data=="success"){
+    					console.log(data);
+    				}
+    			},error:function(){
+    				console.log("전송실패");
+    			}
+    		})
 
     	}
     	
@@ -224,6 +250,25 @@
 												//	          아이디				     방이름(닉네임)       msg     flag		   메시지 받는 사람
     		socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),"","createroom","admin@naver.com")));
 			$("#room").val($("#senderName").val());
+			
+			var senderId = $("#senderId").val();
+			var roomName = $("#room").val();
+			var receiveId = "admin@naver.com";
+			
+			// 서블릿 > 
+			$.ajax({
+    			url:"userCreateChat.ch",
+    			data:{id:senderId, roomName:roomName, receiveId:receiveId},
+    			type:"post",
+    			success:function(data){
+    				if(data=="success"){
+    					console.log(data);
+    				}
+    			},error:function(){
+    				console.log("전송실패");
+    			}
+    		})
+			
     	}
     	
     	function disconnect(){
