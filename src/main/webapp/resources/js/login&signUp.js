@@ -291,7 +291,7 @@ $(document).ready(function(){
     	};
     });
     
-    // 비밀번호 찾기 이메일 존재 유무 및 가입타입 확인
+    // 비밀번호 찾기_이메일 존재 유무 및 가입타입 확인
     function findPwd_emailChk(){
     	var result = false;
     	$.ajax({
@@ -321,6 +321,7 @@ $(document).ready(function(){
     	return result;
     }
     
+    // 비밀번호 찾기_비밀번호 유효성 검사
     function findPwd_emailValidate(){ 
         let emailVal = $("#findPwd_email").val();  
         // 이메일 미입력
@@ -337,9 +338,6 @@ $(document).ready(function(){
             return true;
         }
     }
-    
-    
-    
     
 
     /*-- 회원가입 ----------------------------------------------*/
