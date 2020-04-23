@@ -34,4 +34,8 @@ public class MemberDao {
 	public int insertDriver(Driver d) {
 		return sqlSession.insert("memberMapper.insertDriver", d);
 	}
+
+	public int updatePwd(Member m) {
+		return sqlSession.update("memberMapper.updatePwd", m);
+	}
 }

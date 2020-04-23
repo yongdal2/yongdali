@@ -39,4 +39,9 @@ public class MemberServiceImpl implements MemberService {
 	public int insertDriver(Driver d) {
 		return mDao.insertDriver(d);
 	}
+
+	@Override
+	public int updatePwd(Member m) {
+		return mDao.updatePwd(m);
+	}
 }
