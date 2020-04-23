@@ -18,10 +18,10 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private AdminDao aDao;
 
+
 	@Override
 	public int getMemListCount() {
 		return aDao.getMemListCount();
-		
 	}
 
 	@Override
@@ -37,6 +37,16 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public ArrayList<Driver> selectDriList(PageInfo pi) {
 		return aDao.selectDriList(pi);
+	}
+
+	@Override
+	public int getResListCount() {
+		return aDao.getResListCount();
+	}
+
+	@Override
+	public ArrayList<Reservation> selectResList(PageInfo pi) {
+		return aDao.selectResList(pi);
 	}
 
 

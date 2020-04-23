@@ -92,6 +92,38 @@ public class AdminController {
 	
 	
 	
+	/**
+	 * Reservation List
+	 * @param mv
+	 * @param currentPage
+	 * @return
+	 */
+	@RequestMapping("aRes.ad")
+	public ModelAndView adminResList(ModelAndView mv,
+									@RequestParam(value = "currentPage", required = false, defaultValue = "1")
+									int currentPage) {
+		System.out.println("currentPage : " + currentPage);
+		
+		int listCount = aService.getResListCount();
+		System.out.println("ㄱlistCount : " + listCount);
+		
+		int pageLimit =5;
+		int boardLimit=10;
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, pageLimit, boardLimit);
+		
+		//ArrayList<Reservation> list = aService.selectResList(pi);
+		//System.out.println("ㄱlist : " + list);
+		//-----
+		//mv.addObject("list", list);
+		mv.addObject("pi", pi);
+		mv.setViewName("admin/admin_Reser");
+		
+		return mv;
+		
+	}	
+	
+	
 	
 	
 	
@@ -115,10 +147,6 @@ public class AdminController {
 	public String adminHomeView2() {
 		return "admin/admin_Mem";
 	}
-	
-	
-	
-	
 	
 	//기사님 목록
 	@RequestMapping("admin_Driver.ydl")

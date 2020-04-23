@@ -23,13 +23,12 @@
 	<!-- <div style="width: 100%; height: 100%; padding-top: 30px; padding-top: 30px;"> -->
 
 		<!-- main -->
-		<!-- <div class="container"> -->
 		<div id="white"> <!-- 하얀 테두리 -->
 		<div class="content container">
 			<div class="row">
 			<div id=title>
-				<a id="adTitle" href="adminHome.ydl"><h2 class="jal">관리자 페이지</h2></a>
-			<p>회원님 목록 / admin_Mem.jsp / 회원번호, 회원구분으로 sql / a태그</p>
+				<h2 class="jal"><a href="adminHome.ydl">관리자 페이지</a></h2>
+			<p>대쉬보드 만들기 가독성 좋은 그림 표</p>
 			</div>
 				<hr>
 			</div>
@@ -40,7 +39,7 @@
 				<div class="col-lg-3 sidebar">
 					<a href="aMem.ad"><span class="sidebar_span">회원님 목록</span></a><br>
 					<a href="aDri.ad"><span class="sidebar_span">기사님 목록</span></a><br>
-					<a href="#"><span class="sidebar_span">예약 내역</span></a><br>
+					<a href="aRes.ad"><span class="sidebar_span">예약 내역</span></a><br>
 					<a href="#"><span class="sidebar_span">정산 내역</span></a><br> 
 					<a href="#"><span class="sidebar_span">환불 내역</span></a><br> 
 					<a href="#"><span class="sidebar_span">채팅 내역</span></a>
@@ -142,7 +141,7 @@
 						</c:if>
 						</li>
 					</ul>
-				</div>
+				</div> <!-- 페이징 처리 -->
 			</div>	<!--  -->
 		</div>
 		</div> <!-- 하얀테두리 -->
