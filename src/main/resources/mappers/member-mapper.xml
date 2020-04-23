@@ -12,6 +12,7 @@
 		<result property="phone" column="PHONE"/>
 		<result property="mSort" column="M_SORT"/>
 		<result property="mStatus" column="M_STATUS"/>
+		<result property="signupType" column="SIGNUP_TYPE"/>
 		<result property="pushEnabled" column="PUSH_ENABLED"/>
 		<result property="enrollDate" column="ENROLLDATE"/>
 	</resultMap>
@@ -32,7 +33,7 @@
 	
 	<!-- 샘플 데이터 -->
 	<insert id="insertSampleMembers" parameterType="java.util.List">
-		INSERT INTO MEMBER(M_NO, M_ID, PWD, NAME, PHONE, M_SORT, M_STATUS, PUSH_ENABLED, ENROLLDATE)
+		INSERT INTO MEMBER(M_NO, M_ID, PWD, NAME, PHONE, M_SORT, M_STATUS, SIGNUP_TYPE, PUSH_ENABLED, ENROLLDATE)
 		SELECT 'M' || SEQ_MNO.NEXTVAL, A.*
 		FROM(
 		<foreach item="item" index="index" collection="list" separator="UNION ALL">
@@ -42,6 +43,7 @@
 					#{item.phone},
 					#{item.mSort},
 					#{item.mStatus},
+					#{item.signupType},
 					#{item.pushEnabled},
 					#{item.enrollDate}
 			FROM DUAL
@@ -73,6 +75,7 @@
 									#{phone},
 									#{mSort},
 									'정상',
+									#{signupType},
 									#{pushEnabled},
 									SYSDATE		
 									)
@@ -91,6 +94,13 @@
 									#{regCardImgRename}
 									)
 	</insert>
+	
+	<!-- 비밀번호 재설정 -->
+	<update id="updatePwd" parameterType="Member">
+		UPDATE MEMBER 
+		SET PWD = #{pwd}
+		WHERE M_ID = #{mId}
+	</update>
 </mapper>     
 
 

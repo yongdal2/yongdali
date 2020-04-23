@@ -1,9 +1,8 @@
 package com.kh.yongdali.chat.msg;
 
 import java.sql.Date;
-import java.util.Objects;
 
-public class Message {
+public class Room {
 	private String id; //접속한 아이디
 	private String roomName; //방이름(접속한 사람 이름으로 설정)
 	private String msg; // 메시지 내용
@@ -14,60 +13,13 @@ public class Message {
 	private Date createDate; // 방생성날짜
 	private Date sendDate; // 메시지 보낸 날짜
 	private String connectYN; // 대화종료 yn
-		
 	
-	// room> roomName
-	// + roomNo
-	// + date date
-	// + connectYN 대화종료시 yn
-	// 
-	
-	public Message() {
+	public Room() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	public Message(String id, String roomName, String msg, String flag) {
-		super();
-		this.id = id;
-		this.roomName = roomName;
-		this.msg = msg;
-		this.flag = flag;
-	}
 
-	public Message(String id, String roomName, String msg, String flag, String receiveId) {
-		super();
-		this.id = id;
-		this.roomName = roomName;
-		this.msg = msg;
-		this.flag = flag;
-		this.receiveId = receiveId;
-	}
-	
-	
-	
-	public Message(String id, String roomName, String receiveId, String roomNo, Date createDate, String connectYN) {
-		super();
-		this.id = id;
-		this.roomName = roomName;
-		this.receiveId = receiveId;
-		this.roomNo = roomNo;
-		this.createDate = createDate;
-		this.connectYN = connectYN;
-	}
-
-	public Message(String id, String msg, String roomNo, String msgNo, Date sendDate) {
-		super();
-		this.id = id;
-		this.msg = msg;
-		this.roomNo = roomNo;
-		this.msgNo = msgNo;
-		this.sendDate = sendDate;
-	}
-
-
-
-	public Message(String id, String roomName, String msg, String flag, String receiveId, String roomNo, String msgNo,
+	public Room(String id, String roomName, String msg, String flag, String receiveId, String roomNo, String msgNo,
 			Date createDate, Date sendDate, String connectYN) {
 		super();
 		this.id = id;
@@ -81,6 +33,20 @@ public class Message {
 		this.sendDate = sendDate;
 		this.connectYN = connectYN;
 	}
+	
+	
+
+	public Room(String id, String roomName, String flag, String receiveId, String roomNo, Date createDate,
+			String connectYN) {
+		super();
+		this.id = id;
+		this.roomName = roomName;
+		this.flag = flag;
+		this.receiveId = receiveId;
+		this.roomNo = roomNo;
+		this.createDate = createDate;
+		this.connectYN = connectYN;
+	}
 
 	public String getId() {
 		return id;
@@ -89,8 +55,6 @@ public class Message {
 	public void setId(String id) {
 		this.id = id;
 	}
-
-	
 
 	public String getRoomName() {
 		return roomName;
@@ -123,16 +87,6 @@ public class Message {
 	public void setReceiveId(String receiveId) {
 		this.receiveId = receiveId;
 	}
-	
-	
-	
-	public String getMsgNo() {
-		return msgNo;
-	}
-
-	public void setMsgNo(String msgNo) {
-		this.msgNo = msgNo;
-	}
 
 	public String getRoomNo() {
 		return roomNo;
@@ -140,6 +94,14 @@ public class Message {
 
 	public void setRoomNo(String roomNo) {
 		this.roomNo = roomNo;
+	}
+
+	public String getMsgNo() {
+		return msgNo;
+	}
+
+	public void setMsgNo(String msgNo) {
+		this.msgNo = msgNo;
 	}
 
 	public Date getCreateDate() {
@@ -157,8 +119,6 @@ public class Message {
 	public void setSendDate(Date sendDate) {
 		this.sendDate = sendDate;
 	}
-	
-	
 
 	public String getConnectYN() {
 		return connectYN;
@@ -169,31 +129,11 @@ public class Message {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
-		if(obj instanceof Message) {
-			Message m=(Message)obj;
-			return this.id.equals(m.getId());
-		}
-		return false;
-	}
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-
-	@Override
 	public String toString() {
-		return "Message [id=" + id + ", roomName=" + roomName + ", msg=" + msg + ", flag=" + flag + ", receiveId="
+		return "Room [id=" + id + ", roomName=" + roomName + ", msg=" + msg + ", flag=" + flag + ", receiveId="
 				+ receiveId + ", roomNo=" + roomNo + ", msgNo=" + msgNo + ", createDate=" + createDate + ", sendDate="
 				+ sendDate + ", connectYN=" + connectYN + "]";
 	}
-
-	
-	
-	
-
 	
 	
 	

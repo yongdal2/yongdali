@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 
 <!DOCTYPE html>
 
@@ -52,7 +51,7 @@
 				<input placeholder="상차일" class="form-control ft54" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date" />
 			</div>
 			<div class="col-xs-3 col-md-3 text-center bszB">
-				<input placeholder="하차일" class="form-control ft54" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date" />
+				<input placeholder="하차일" class="form-control ft54" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date1" />
 			</div>
 			<div class="col-xs-3 col-md-3 text-center bszB">
 				<input type="search" class="form-control ft54" placeholder="검색">
@@ -77,9 +76,6 @@
 							<td>결제 금액</td>
 							<td>차량정보</td>
 							<td>상세정보</td>
-							<td>메세지</td>
-							
-							
 						</tr>
 					</thead>
 					<c:forEach var="r" items="${ rList }" varStatus="vs">
@@ -90,24 +86,22 @@
  							<td>상차일</td>
  							<td>하차일</td>
 							<td>출발지</td>
-							<td>dd</span></td>
-							<td><button class="fas fa-truck" id="tInfo${ vs.index }" 
-							data-toggle="popover${ vs.index }"  title="차량정보"
-							data-content="" value="${ r.rDNo }"></button></td>
+							<td>dd</td>
 							<td>결제 금액</td>
-							<td></td>
-							<td>${ r.msg }</td>
+							<td><button class="fas fa-truck" id="tInfo${ vs.index }" data-toggle="popover${ vs.index }"  title="차량정보" value="${ r.rDNo }"></button></td>
+							<td><button class="btn btn_ydl_l" id="rDetailBtn${r.rNo }" value="${ r.rNo }" data-toggle="modal" data-target="#rDetail">상세정보 보기</button></td>
 						</tr>
 					</c:forEach>
 				</table>
+			
+			
 			</div>
-			<div class="row text-center">
-				<div class="col-md-2">
-					<div class="img-circle" style="background-image: url('https://img1.daumcdn.net/thumb/R750x0/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fcafeattach%2F1Xh2D%2Fe9efdcce7223d088ee2e401a429f62f86cdff6cb');">
-					<div></div>
-				</div>
+					<br>
+					이름 <br>
+					<span class="glyphicon glyphicon-phone"></span>
+					
 			</div>
-	<img alt="" src="">
+	
 		</div>
 		<script>
 		
@@ -115,15 +109,13 @@
 			
 			$('[data-toggle*="popover"]').popover({
 			    "html": true,
+			    trigger: "hover",
 			    "content": function(){
 			        var dNo = $(this).val();
-			        return '<div class="img-circle" id="pro_img"
-						style="background-image: url('')';
+			        return dInfo(dNo);
 			    }
 			});
-	
 			function dInfo(dNo){
-						
 				$.ajax({
 					url:"rDinfo.myp",
 					data:{dNo:dNo},
@@ -133,11 +125,10 @@
 						var name = decodeURIComponent(d.name);
 						var phone = d.phone;
 						var carNo = decodeURIComponent(d.carNo);
-						var img = d.img;
+						var img = "${pageContext.request.contextPath}/resources/images/driver/id/"+d.img;
 						var type = decodeURIComponent(d.type);
 						var capcacity = d.capacity;
-						
-						
+						console.log(img);
 					},error:function(){
 						console.log("aj실패")
 					}
@@ -145,10 +136,13 @@
 				
 			    return 'ok';
 			}
-			
 		    
 		});
 		</script>
+		
+		<div class="text-center">
+		<img class="img-circle" src="">
+		</div>
 		
 		<!-- <div class="img-circle" id="pro_img"
 						style="background-image: url('${pageContext.request.contextPath}/resources/images/driver/id/${driver.idImgRename}');">  -->
@@ -165,7 +159,203 @@
 				<li><a href="#">>></a></li>
 			</ul>
 		</div>
-	</div>
+		
+		
+		 <!-- 예약 상세보기 수정 -->
+    <div class="modal fade" id="rDetail" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content center-block mdRSV">
+                <br>
+                <div class="modal-body na mb_pd">
+                	
+                    <div class="row  text-left center-block modalBaseRSV">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-12 fw6 pr23 ft18">
+								<span class="h3 jal">예약 정보 상세 (<span id="rNo">rNo</span>)</span>
+								<span class="" style="display: hidden;" id="rSt"></span>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                        </div>
+                        <div class="row text-left pl23 pb5">
+                            <div class="col-xs-12 col-md-12 addrLa lg">
+								예약일자 : <span id="rDate"></span>
+                            </div>
+                            <div class="col-xs-6 col-md-6 p0mt10">
+                            	<span class="h4 fw6">출발지 정보</span>
+                            	<br><span class="small lg">이름</span><br>
+                            	<span class="h4" id="startName"></span>
+                            	<br><span class="small lg">연락처</span><br>
+                            	<span class="h4" id="startPhone"></span>
+                            	<br><span class="small lg">주소</span><br>
+                            	<span class="h4" id="startAddr"></span>
+                            	<br><span class="small lg">상차</span><br>
+                            	<span class="h4" id="pick"></span>
+                            	<br><span class="small lg">상차방법</span><br>
+                            	<span class="h4" id="helpLoad"></span>
+                            </div>
+                            <div class="col-xs-6 col-md-6 p0mt10">
+                            	<span class="h4 fw6">도착지 정보</span>
+                            	<br><span class="small lg">이름</span><br>
+                            	<span class="h4" id="endName"></span>
+                            	<br><span class="small lg">연락처</span><br>
+                            	<span class="h4" id="endPhone"> </span>
+                            	<br><span class="small lg">주소</span><br>
+                            	<span class="h4" id="endAddr"></span>
+                            	<br><span class="small lg">상차</span><br>
+                            	<span class="h4" id="drop"></span>
+                            	<br><span class="small lg">상차방법</span><br>
+                            	<span class="h4" id="helpUnload"></span>
+                            </div>
+                            <div class="col-xs-12 col-md-12 p0mt10">
+	                            <br>
+	                            <span class="h4 fw6" style="background: white;">짐 내역</span>
+	                            <br><span class="h4 lg" id="luggage"></span>
+	                            <br>
+	                            <div id="rMG" style="height: 50px">
+	                            <br><span class="h4 fw6" style="background: white;">전달 사항</span>
+		                            <br><span class="h4 lg" id="rMSG"></span>&nbsp;&nbsp;
+		                            <div class="far fa-edit hvDr" id="rmb1"></div>
+	                            </div>
+	                            <div id="rMG_E" style="display: none; height: 50px">
+	                            <br><span class="h4 fw6" style="background: white;">전달 사항</span>
+		                            <br><textarea rows="1" cols="60" style="font: 18px" id="nRmsg"></textarea>
+		                            <div class="fas fa-edit hvDr" id="rmb2"></div>
+	                            </div>
+                            </div>
+                            <div class="col-xs-12 col-md-12 p0mt10 text-right">
+                            <br>
+                            <div style="margin-right: 30px;">
+                            	결제금액<span class="h3 fw6" id=amount></span>원
+                            </div>
+                            </div>
+                            </div>
+                        <div class="col-xs-12 col-md-12 text-center">
+                            <button type="button" class="btn btn_ydl_l mdbtn" data-dismiss="modal">확인</button>
+                            <button type="button" id="cancRSV" class="btn btn_ydl_lr mdbtn" data-dismiss="modal">예약 취소</button>
+                        </div>
+                        <div class="col-xs-12 col-md-12 text-center">
+                        </div>
+                            
+                            
+                            <script type="text/javascript">
+                            $(document).ready(function(){
+                            	$('#rmb1').click(function(){
+                            	    $('[id*="rMG"]').toggle();
+                            	  });
+                            	
+                            	$('#rmb2').click(function(){
+                            		var nRmsg = $('#nRmsg').val();
+                            		var rNo = $('#rNo').text();
+                            		console.log(nRmsg);
+                            		console.log(rNo);
+                            		$.ajax({
+                    					url:"upRmsg.myp",
+                    					data:{"rMsg":nRmsg,"rNo":rNo},
+                    					success:function(data){
+                    						console.log(data);	
+	                            	    	$('#rMSG').html(decodeURIComponent(data).replace(/\+/g, " "));
+	                            	    	$('[id*="rMG"]').toggle();
+                    					},error:function(){
+                    						console.log("aj실패")
+                    					}
+                    				}); 
+                            	});
+	                            $(function(){
+	                    			$("button[id^='rDetailBtn']").on("click",function(){
+	                    				$.ajax({
+	                    					url:"rDetail.myp",
+	                    					data:{rNo:$(this).val()},
+	                    					dataType:"json",
+	                    					success:function(r){
+	                    						console.log(r);
+	                    						$("#rNo").text(r.rNo);
+	                    						$("#startName").text(r.startName);
+	                    						$("#startPhone").text(r.startPhone);
+	                    						$("#startAddr").text((r.startAddr).replace(",",""));
+	                    						if(r.rightLoad==null){
+		                    						$("#pick").text(r.startDate +" / "+ r.startTime);
+	                    						}else{
+		                    						$("#pick").text(r.rightUnload);
+	                    						}
+	                    						$("#helpLoad").text(r.helpLoad);
+	                    						$("#endName").text(r.endName);
+	                    						$("#endPhone").text(r.endPhone);
+	                    						$("#endAddr").text((r.endAddr).replace(",",""));
+	                    						if(r.rightUnload==null){
+	                    						$("#drop").text(r.endDate +" / "+ r.endTime);
+	                    						}else{
+	                    						$("#drop").text(r.rightUnload);
+	                    						}
+	                    						$("#helpUnload").text(r.helpLoad);
+	                    						$("#luggage").text(r.luggage);
+	                    						if(r.msg==null){
+	                    						$("#rMSG").text("");
+	                    						}else{
+	                    						$("#rMSG").text(r.msg);
+	                    						}
+	                    						$("#amount").text(r.amount);
+	                    						$("#rDate").text(r.payment.enrollDate);
+	                    					},error:function(){
+	                    						console.log("aj실패")
+	                    					}
+	                    				});
+	                    			});
+	                    		});
+	                            
+	                            });
+                            
+	                            $("#cancRSV").on("click",function(){
+	                            	var rNo = $("#rNo").text();
+	                            	console.log("rNo!!"+rNo)
+	                            	d_yn(rNo);
+	                            });
+	                            
+	                            function d_yn(rNo){
+	                				$.ajax({
+	                					url:"pDetail.myp",
+	                					data:{rNo:rNo},
+	                					dataType:"json",
+	                					success:function(p){
+	                						console.log(p);	
+	                						if(p.deal_y=="Y"){
+	                							var ccA = confirm( "배차가 완료된 예약입니다 취소하시겠습니까?");
+	                							if(ccA){
+	                								rsvCan(p.rNo,'Y');
+	                							}
+	                						}else{
+	                							var ccb =confirm("배차되지 않은 예약입니다. 취소하시겠습니까?");
+	                							rsvCan(p.rNo,'N');
+	                						}
+	                						
+	                					},error:function(){
+	                						console.log("aj실패")
+	                					}
+	                				}); 
+	                				
+	                			}
+	                            
+	                            function rsvCan(rNo,deal_yn){
+	                				$.ajax({
+	                					url:"rsvCan.myp",
+	                					data:{rNo:rNo, deal_yn:deal_yn},
+	                					dataType:"json",
+	                					success:function(p){
+	                						alert("예약이 취소되었습니다.");
+	                					},error:function(){
+	                						console.log("aj실패")
+	                					}
+	                				}); 
+	                				
+	                			}
+	                            
+                            </script>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 	<c:import url="../../common/footer.jsp"/>
 </body>
 

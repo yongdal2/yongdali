@@ -44,6 +44,12 @@ public interface MemberService {
 	 */
 	int insertDriver(Driver d);
 
+	/** 비밀번호 재설정
+	 * @param m
+	 * @return
+	 */
+	int updatePwd(Member m);
+
 
 	
 	

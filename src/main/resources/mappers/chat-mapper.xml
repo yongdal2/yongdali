@@ -5,9 +5,49 @@
 <mapper namespace="chatMapper">
 
 	<!-- resultMap -->
-	<resultMap id="chatResultSet" type="Message">
-		
+	<resultMap id="messageResultSet" type="Message">
+		<id property="msgNo" column="CM_NO"/>
+		<result property="roomNo" column="CM_CR_NO"/>
+		<result property="id" column="SENDID"/>
+		<result property="roomName" column="ROOMNAME"/>
+		<result property="msg" column="MESSAGE"/>
+		<result property="sendDate" column="SENDDATE"/>
+		<result property="flag" column="FLAG"/>
+		<result property="connectYN" column="CONNECTYN"/>
 	
 	</resultMap>
-
+	
+	<resultMap id="roomResultSet" type="Room">
+		<id property="roomNo" column="CR_NO"/>
+		<result property="id" column="SENDID"/>
+		<result property="receiveId" column="RECEIVEID"/>
+		<result property="roomName" column="ROOMNAME"/>
+		<result property="flag" column="FLAG"/>
+		<result property="createDate" column="CREATEDATE"/>
+		<result property="connectYN" column="CONNECTYN"/>
+	</resultMap>
+	
+	<insert id="userCreateChat" parameterType="Room">
+		INSERT INTO CHATROOM
+		VALUES('CR'||SEQ_CRNO.NEXTVAL,#{id},#{receiveId},
+			   #{roomName},#{flag},DEFAULT,DEFAULT)
+	</insert>
+	
+	<select id="selectNowRoom" resultMap="roomResultSet" parameterType="Room">
+		SELECT * 
+		FROM(
+		    SELECT 
+		        * 
+		    FROM CHATROOM
+		    ORDER BY ROWNUM DESC)
+		WHERE ROWNUM = 1
+		AND SENDID=#{id} 
+	</select>
+	
+	<insert id="userInsertMessage" parameterType="Message">
+		INSERT INTO CHATMESSAGE
+		VALUES('CM'||SEQ_CMNO.NEXTVAL,#{roomNo},#{id},#{roomName},#{msg},DEFAULT,#{flag},DEFAULT)
+	</insert>
+	
+	
 </mapper>

@@ -116,7 +116,6 @@ $(document).ready(function(){
     					},
     			type : "post",
     			success : function(result){
-    				console.log(result);
     				if(result == 'loginSuccess'){
     					location.href="home.do";
     				}else if(result == 'nonExistentId'){
@@ -210,6 +209,137 @@ $(document).ready(function(){
     		alert("필수 약관에 동의해야합니다.")
     	}
     })
+    
+    // 네이버 회원가입 버튼
+    $('#naverSignUp').click(function(){
+    	$('#pushEnabledForm').attr('action','easySignUpView.me');
+    	if($('.chkPolicy:eq(1)').attr('checked') == "checked" && $('.chkPolicy:eq(2)').attr('checked') == "checked"){
+    		$('#pushEnabledForm').trigger('submit');
+    	}else {
+    		alert("필수 약관에 동의해야합니다.")
+    	}
+    })
+    
+    
+    /*-- 비밀번호 찾기 ----------------------------------------------*/
+    // 이메일 체크(중복 및 유효성 검사)
+    $("#findPwd_email").focusout(function(){
+    	if(findPwd_emailValidate() == true){
+    		findPwd_emailChk();
+    	}
+    })
+    
+    // 비밀번호 찾기_인증번호 전송 & 재전송
+    $('#btn_findPwd_VeriCode, #btn_findPwd_resend').click(function(){
+    	let emailVal = $("#findPwd_email").val();  
+    	
+    	if(findPwd_emailValidate() == true){
+    		if(findPwd_emailChk() == true){
+    			$.ajax({
+        			url : "findPwdVeriCode.me",
+        			type : "post",
+        			data : {email : emailVal},
+        			success : function(ranNum){
+        				console.log(ranNum);
+        				console.log('Raejin0!234');
+        				alert("입력하신 이메일로 인증번호를 전송하였습니다.")
+        		    	$('#btn_findPwd_VeriCode').hide();
+        		    	$('#btn_findPwd_verify, #btn_findPwd_resend').show();
+        		    	
+        		        // 인증번호 '확인' 
+        		        $('#btn_findPwd_verify').click(function(){
+        		        	let inputVeriCode = $('input[name=inputVeriCode]').val();
+        		        	
+        		        	if(ranNum == inputVeriCode){
+        		        		$('input[name=isVerified]').val('Y');
+        		    			$('#verifyWrap, #veriMsg').hide();
+        		    			$('.successMsgBox').show();
+        		        	}else{
+        		        		displayErrorMsg($("#veriMsg"), '인증번호를 확인하세요.');
+        		        	}	
+        		        })
+        			}, 
+        			error : function(){
+                		var msg = "인증번호 전송 중 오류 발생";
+                    	location.href="error.ydl?msg="+msg;
+                	}
+        		});
+    		}
+    	} 
+    })
+    
+    // '비밀번호 찾기' 버튼 클릭 시 '전체 유효성 검사' 후 submit
+    $('#btn_submit_findPwdForm').click(function(){
+    	// 기본 정보 에러메시지 노출용
+    	if(findPwd_emailValidate() == true){
+    		findPwd_emailChk();
+    	};
+    	
+    	if($('input[name=isVerified]').val() == 'N'){
+    		displayErrorMsg($("#veriMsg"), '이메일을 인증하세요.');
+    	}
+    	
+    	if(pwdValidate() == true){
+
+    		pwdChkValidate();
+    	};
+    	
+    	if(findPwd_emailValidate() == true && findPwd_emailChk() == true && $('input[name=isVerified]').val() == 'Y'
+    		&& pwdValidate() == true && pwdChkValidate() == true){
+    		$('#findPwdForm').trigger('submit');
+    		alert("비밀번호를 재설정합니다.");
+    	};
+    });
+    
+    // 비밀번호 찾기 이메일 존재 유무 및 가입타입 확인
+    function findPwd_emailChk(){
+    	var result = false;
+    	$.ajax({
+    		url : "findPwd_emailChk.me",
+        	type : "get",
+        	data : { mId : $('#findPwd_email').val() },
+        	async : false,
+        	success : function(value){
+//        		console.log(value);
+        		if(value == "exist" ){
+        			$("#emailMsg").css("display","none");
+        			result = true; 
+        		}else if(value == "naver"){
+        			displayErrorMsg($("#emailMsg"), "간편 가입 회원입니다. 네이버로 로그인하세요.");
+        			result = false; 
+        		}
+        		else{
+        			displayErrorMsg($("#emailMsg"), '등록되지 않은 아이디입니다.');
+        			result = false; 
+        		}
+        	}
+        	, error : function(){
+        		var msg = "비밀번호 찾기 이메일 존재 유무 및 가입타입 확인 중 에러 발생";
+        		location.href="error.ydl?msg="+msg;
+        	}
+        })
+    	return result;
+    }
+    
+    function findPwd_emailValidate(){ 
+        let emailVal = $("#findPwd_email").val();  
+        // 이메일 미입력
+        if (emailVal == "" ){
+            displayErrorMsg($("#emailMsg"), '이메일을 입력하세요.');
+             return false;
+        }
+        // 이메일 정규표현식
+        else if(!chk(/^[\a-z0-9_-]{5,20}@[\a-zA-Z]+(\.[\a-zA-Z]+){1,2}$/, emailVal, $("#emailMsg"), "5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.")){
+             return false;
+        } 
+        else{
+            $("#emailMsg").css("display","none");
+            return true;
+        }
+    }
+    
+    
+    
     
 
     /*-- 회원가입 ----------------------------------------------*/
@@ -311,6 +441,7 @@ $(document).ready(function(){
         		&& pwdValidate() == true && pwdChkValidate() == true 
         		&& nameValidate() == true && phoneValidate() == true){
         		$('#signUpForm').trigger('submit');
+        		alert("용달이에 오신 것을 환영합니다~!");
         	};
         	
         // 사업자(기사) 회원가입	
@@ -330,9 +461,9 @@ $(document).ready(function(){
         		&& nameValidate() == true && phoneValidate() == true
         		&& carInfoValidate() == true && regImgValidate() == true){
         		$('#signUpForm').trigger('submit');
+        		alert("용달이에 오신 것을 환영합니다~!");
         	};
     	}
-
     });
     
     /*-- 함수 선언 -------------------*/
@@ -366,7 +497,11 @@ $(document).ready(function(){
         		if(value == "exist" ){
         			displayErrorMsg($("#emailMsg"), '이미 사용중이거나 탈퇴한 아이디입니다.');
         			result = false; 
-        		}else{
+        		}else if(value == "naver"){
+        			displayErrorMsg($("#emailMsg"), "네이버로 이미 가입 또는 탈퇴한 아이디입니다.");
+        			result = false; 
+        		}
+        		else{
         			$("#emailMsg").css("display","none");
         			result = true;
         		}

@@ -15,7 +15,7 @@ body{
     margin-top: 3%;
 }
 
-.agreeHeader{
+.agreeHeader, .findPwdHeader{
     /* margin-top: 80px; */
     margin-top: 6%;
 }

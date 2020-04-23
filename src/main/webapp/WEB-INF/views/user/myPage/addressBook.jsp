@@ -233,8 +233,6 @@
     	$("#btnInAddr").on("click",function(){
     		$("#inAddrForm").attr("action","iAddr.myp").submit();
     	});
-    </script>
-    <script>
 		$(function(){
 			$("button[id^='editAddrBtn']").on("click",function(){
 				$.ajax({

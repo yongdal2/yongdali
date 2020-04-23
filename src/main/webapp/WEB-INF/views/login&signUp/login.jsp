@@ -82,7 +82,7 @@
             </div>
         <!-- </form> -->
         <div class="forgotSignIn">
-            <a class="" href="#">비밀번호 재설정</a>
+            <a class="" href="findPwdView.me">비밀번호 재설정</a>
             <a class="" href="policyView.me">회원가입</a>
         </div>
 

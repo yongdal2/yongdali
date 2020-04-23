@@ -80,10 +80,10 @@ public class MemberController {
 		Date[] date = new Date[4];
 		String[] encPwdArr = new String[4];
 		
-		mList.add(new Member("admin@naver.com", "Admin!234", "관리자", "010-1111-1111", "관리자", "정상", "N")); 
-		mList.add(new Member("mem01@naver.com", "Mem!234", "홍멤버", "010-2222-2222", "일반", "정상", "Y"));
-		mList.add(new Member("biz01@naver.com", "Biz!234", "김거상", "010-3333-3333", "사업자", "정상", "N"));
-		mList.add(new Member("biz02@naver.com", "Biz!234", "최거상", "010-4444-4444", "사업자", "정상", "N"));
+		mList.add(new Member("admin@naver.com", "Admin!234", "관리자", "010-1111-1111", "관리자", "정상", "용달이", "N")); 
+		mList.add(new Member("mem01@naver.com", "Mem!234", "홍멤버", "010-2222-2222", "일반", "정상", "용달이", "Y"));
+		mList.add(new Member("biz01@naver.com", "Biz!234", "김거상", "010-3333-3333", "사업자", "정상", "용달이", "N"));
+		mList.add(new Member("biz02@naver.com", "Biz!234", "최거상", "010-4444-4444", "사업자", "정상", "용달이", "N"));
 		
 		sDate[0] = "2020-03-10";
 		sDate[1] = "2020-03-18";
@@ -122,7 +122,85 @@ public class MemberController {
 	public String loginView() {
 		return "login&signUp/login";
 	}
+	
+	
+	
+	/** 비밀번호 찾기 페이지
+	 * @return
+	 */
+	@RequestMapping("findPwdView.me") 
+	public String findPwdView() {
+		return "login&signUp/findPwd";
+	}
+	
+	@ResponseBody
+	@RequestMapping("findPwd_emailChk.me")
+	public String findPwd_emailChk(@RequestParam("mId") String mId) {
+		int result = mService.emailChk(mId);
+		
+		if(result > 0) {
+			Member m = new Member(mId);
+			Member mem = mService.loginMember(m);
+			String type = mem.getSignupType();
+			logger.debug(mem.toString());
+			logger.debug(type);
+			if(type.equals("네이버")) {
+				return "naver";
+			}else {
+				return "exist";
+			}
+		}else {
+			return "notExist";
+		}
+		
+	}
+	
+	/** 비밀번호 찾기 인증번호 전송
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="findPwdVeriCode.me", method=RequestMethod.POST)
+	public String findPwd_VeriCode(@RequestParam("email") String email) {
+		// 인증번호(난수) 생성
+		String ranNum = String.valueOf(new Random().nextInt(900000) + 100000);
+		
+		// MimeMessage 객체 생성
+		MimeMessage message = mailSender.createMimeMessage();
+		
+		// 메일 본문 변수에 담기
+		String content = "귀하의 인증코드는 " + ranNum + " 입니다. \n"
+				 + "(혹시 잘못 전달되었다면 이 이메일을 무시하셔도 됩니다)";
+		
+		try {
+			// MimeMessage 객체에 입력정보 삽입
+			message.setSubject("[용달이] 비밀번호 재설정 인증코드");
+			message.setText(content);
+			message.addRecipient(RecipientType.TO, new InternetAddress(email)); 
+			
+			// 메일 전송
+			mailSender.send(message);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+		return ranNum;	
+	}
 
+	@RequestMapping("findPwd.me")
+	public String findPwd(@ModelAttribute Member m, Model model) {
+		m.setPwd(bcryptPasswordEncoder.encode(m.getPwd()));
+		
+		int result = mService.updatePwd(m);
+		
+		System.out.println(result);
+		if(result > 0) {
+			System.out.println("비밀번호 재설정 성공");
+			return "login&signUp/login";
+		}else {
+			model.addAttribute("msg", "비밀번호 재설정 중 오류 발생");
+			return "common/errorPage";
+		}
+	}
+	
 	/** 로그인
 	 * @param m
 	 * @param model
@@ -150,10 +228,8 @@ public class MemberController {
 		// 비밀번호 틀림
 		else {
 			return "wrongPwd";
-			
 		}	
-	}
-	
+	}	
 
 //	네이버 아이디로 로그인(네아로)	
 	/** 네이버 아이디로 로그인(네아로)
@@ -202,40 +278,54 @@ public class MemberController {
 	        res.append(inputLine);
 	      }
 	      br.close();
-	      if(responseCode==200) {
-	    	  // out.println(res.toString()); 
-	    	  // 블로그
-	    	  
-	    	// access_token 값 추출
-    		JSONParser parsing = new JSONParser();
-    		Object resObj = parsing.parse(res.toString());
-    		JSONObject resJsonObj = (JSONObject)resObj;
-    			        
-    		access_token = (String)resJsonObj.get("access_token");
-    		refresh_token = (String)resJsonObj.get("refresh_token");
-	    	  
-            String token = access_token; // 네이버 로그인 접근 토큰;
-            String header = "Bearer " + token; // Bearer 다음에 공백 추가
-
-            // 회원정보 조회 API 1.
-            String pInfoApiURL = "https://openapi.naver.com/v1/nid/me";
-
-            Map<String, String> requestHeaders = new HashMap<>();
-            requestHeaders.put("Authorization", header);
-            String responseBody = get(pInfoApiURL,requestHeaders);
-            
-            
-            Object responseBodyObj = parsing.parse(responseBody);
-            JSONObject jsonResponseBodyObj = (JSONObject)responseBodyObj;
-            JSONObject jsonresponseObj = (JSONObject) jsonResponseBodyObj.get("response");
-            
-            String email = jsonresponseObj.get("email").toString();
-            String name = jsonresponseObj.get("name").toString();
-            
-            Member loginUser = new Member(email, name);
-            logger.debug(loginUser.toString());
-            model.addAttribute("loginUser", loginUser);
-	      } 
+		  if(responseCode==200) {
+			  // out.println(res.toString()); 
+			  
+			// access_token 값 추출
+			JSONParser parsing = new JSONParser();
+			Object resObj = parsing.parse(res.toString());
+			JSONObject resJsonObj = (JSONObject)resObj;
+				        
+			access_token = (String)resJsonObj.get("access_token");
+			refresh_token = (String)resJsonObj.get("refresh_token");
+			  
+			// 회원정보 조회 API 1.
+		    String token = access_token; // 네이버 로그인 접근 토큰;
+		    String header = "Bearer " + token; // Bearer 다음에 공백 추가
+		    
+		    String pInfoApiURL = "https://openapi.naver.com/v1/nid/me";
+		
+		    Map<String, String> requestHeaders = new HashMap<>();
+		    requestHeaders.put("Authorization", header);
+		    String responseBody = get(pInfoApiURL,requestHeaders);
+		    
+		    // 프로필 정보 추출 및 활용
+		    Object responseBodyObj = parsing.parse(responseBody);
+		    JSONObject jsonResponseBodyObj = (JSONObject)responseBodyObj;
+		    JSONObject jsonresponseObj = (JSONObject) jsonResponseBodyObj.get("response");
+		    
+		    String email = jsonresponseObj.get("email").toString();
+		    String name = jsonresponseObj.get("name").toString();
+		    
+		    // 가입 유무 확인
+		    int result = mService.emailChk(email);
+		    
+		    if(result > 0) {
+		    	Member m = new Member(email);
+		    	Member loginUser = mService.loginMember(m);
+		    	model.addAttribute("loginUser", loginUser);
+		    }
+		    else {
+		    	Member newMem = new Member(email, name, "일반", "네이버", "N");
+		    	int insertResult = mService.insertMember(newMem);
+		    	if(insertResult > 0) {
+		    		model.addAttribute("loginUser", newMem);
+		    	}else {
+		    		model.addAttribute("msg", "간편 로그인/회원가입 실패!");
+					return "common/errorPage";
+		    	}
+		    }
+		  } 
 	    } catch (Exception e) {
 	      System.out.println(e);
 	    }
@@ -249,8 +339,6 @@ public class MemberController {
             con.setRequestMethod("GET");
             for(Map.Entry<String, String> header :requestHeaders.entrySet()) {
                 con.setRequestProperty(header.getKey(), header.getValue());
-//                System.out.println("header.getKey() : " + header.getKey().toString());
-//                System.out.println("header.getValue() : " + header.getValue().toString());
             }
 
             int responseCode = con.getResponseCode();
@@ -297,7 +385,9 @@ public class MemberController {
     }
 //	/네이버 아이디로 로그인(네아로)    
 	
-	/** 로그아웃
+//	/네이버 아이디로 로그인(네아로)	
+    
+    /** 로그아웃
 	 * @param status
 	 * @return
 	 */
@@ -309,6 +399,7 @@ public class MemberController {
 		return "redirect:home.do";
 	}
 		
+	
 	/** 약관동의 페이지
 	 * @return
 	 */
@@ -317,7 +408,8 @@ public class MemberController {
 		return "login&signUp/policyChk";
 	}
 	
-	/** 회원가입_약관 동의 페이지
+	
+	/** 회원가입 페이지(용달이)
 	 * @param pushEnabled
 	 * @param model
 	 * @return
@@ -327,6 +419,18 @@ public class MemberController {
 		model.addAttribute("pushEnabled", pushEnabled);
 		return "login&signUp/signUpForm";
 	}
+	
+	/** 간편회원가입 페이지
+	 * @param pushEnabled
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("easySignUpView.me")
+	public String easySignUpView(@RequestParam("pushEnabled") char pushEnabled, Model model) {
+		model.addAttribute("pushEnabled", pushEnabled);
+		return "login&signUp/signUpForm";
+	}
+
 
 	/** 회원가입_이메일 중복검사
 	 * @param mId
@@ -338,11 +442,21 @@ public class MemberController {
 		int result = mService.emailChk(mId);
 		
 		if(result > 0) {
-			return "exist";
+			Member m = new Member(mId);
+			Member mem = mService.loginMember(m);
+			String type = mem.getSignupType();
+			logger.debug(mem.toString());
+			logger.debug(type);
+			if(type.equals("네이버")) {
+				return "naver";
+			}else {
+				return "exist";
+			}
 		}else {
 			return "available";
 		}
 	}
+	
 	
 	/** 회원가입_이메일 인증번호 전송
 	 * @return
@@ -374,28 +488,6 @@ public class MemberController {
 		return ranNum;	
 	}
 
-//	/** 회원가입_양식 제출(일반 회원만) 
-//	 * @param m
-//	 * @return
-//	 */
-//	@RequestMapping("insert.me")
-//	public String insertMember(@ModelAttribute Member m, Model model) {
-//		logger.debug(m.toString());
-//		
-//		m.setPwd(bcryptPasswordEncoder.encode(m.getPwd()));
-//		logger.debug(m.toString());
-//		
-//		int result = mService.insertMember(m);
-//		logger.debug("회원가입 insert 결과값 : " + String.valueOf(result));
-//		
-//		if(result > 0) {
-//			return "login&signUp/login";
-//		}else {
-//			model.addAttribute("msg", "샘플데이터 입력 실패!");
-//			return "common/errorPage";
-//		}
-//	}
-	
 	/** 회원가입_양식 제출(일반/사업자 공통) 
 	 * @param m
 	 * @return
@@ -405,15 +497,11 @@ public class MemberController {
 								, Model model, HttpServletRequest request
 								, @RequestParam(name="inputFile_idImg", required=true) MultipartFile idImg
 								, @RequestParam(name="inputFile_regCardImg", required=true) MultipartFile regCardImg) {
-//		logger.debug(m.toString());
 
 		m.setPwd(bcryptPasswordEncoder.encode(m.getPwd()));
 		
-//		int result = 1;
 		int result = mService.insertMember(m);
-//		logger.debug("회원가입 insert 결과값 : " + String.valueOf(result));
-		
-		
+				
 		if(m.getmSort().equals("사업자") && result == 1) {
 			// dmNo 삽입을 위해 기존 select문 활용
 			Member mem = mService.loginMember(m);
@@ -442,12 +530,21 @@ public class MemberController {
 		if(result > 0) {
 			return "login&signUp/login";
 		}else {
-			model.addAttribute("msg", "샘플데이터 입력 실패!");
+			model.addAttribute("msg", "회원가입 실패!");
 			return "common/errorPage";
 		}
 	}
 	
 	
+	/** 네이버 아이디로 회원가입
+	 * @param m
+	 * @param d
+	 * @return
+	 */
+	@RequestMapping("insertAsNaver.me")
+	public String insertMemAsNaver(@ModelAttribute Member m, Driver d) {
+		return null;
+	}
 
 }
 

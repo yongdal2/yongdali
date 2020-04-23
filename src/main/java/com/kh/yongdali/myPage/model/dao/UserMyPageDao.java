@@ -10,6 +10,7 @@ import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.driver.model.vo.Driver;
 import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.myPage.model.vo.Address;
+import com.kh.yongdali.payment.model.vo.Payment;
 import com.kh.yongdali.reservation.model.vo.Reservation;
 
 
@@ -58,12 +59,38 @@ public class UserMyPageDao {
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("myPageMapper.selectRsvList", mNo, rowBounds);
+		return (ArrayList)sqlSession.selectList("myPageMapper.selectRsvPayList", mNo, rowBounds);
 	}
 
 
 	public Driver getRsvDinfo(String dNo) {
 		return sqlSession.selectOne("myPageMapper.getRsvDinfo",dNo);
+	}
+
+	public int upRSVmsg(Reservation r) {
+		return sqlSession.update("myPageMapper.upRSVmsg", r);
+	}
+
+
+	public Reservation rDetail(String rNo) {
+		return sqlSession.selectOne("myPageMapper.rDetail", rNo);
+	}
+
+
+	public Payment pDetail(String rNo) {
+		return sqlSession.selectOne("myPageMapper.pDetail", rNo);
+	}
+
+
+	public int rsvCan(Payment p) {
+		int upCc =0;
+		
+		int upPc = sqlSession.update("myPageMapper.rscCanPayment",p);
+		
+		if(upPc > 0) {
+			upCc = sqlSession.update("myPageMapper.rscCanCalculate",p);
+		}
+		return upCc;
 	}
 
 	

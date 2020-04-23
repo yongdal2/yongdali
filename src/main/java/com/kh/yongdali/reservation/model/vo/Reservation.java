@@ -2,6 +2,8 @@ package com.kh.yongdali.reservation.model.vo;
 
 import java.sql.Date;
 
+import com.kh.yongdali.payment.model.vo.Payment;
+
 /**
  * @author user2
  *
@@ -31,12 +33,46 @@ public class Reservation {
 	private String msg;			// 전달 사항
 	private String amount;		// 총 결제 금액
 	
+	private Payment payment;	//payment
+	
 	public Reservation() {}
 	
 	public Reservation(String rNo, String rMNo) {
 		super();
 		this.rNo = rNo;
 		this.rMNo = rMNo;
+	}
+	
+
+	public Reservation(String rNo, String rMNo, String rDNo, float capacity, String type, String startName,
+			String endName, String startPhone, String endPhone, String startAddr, String endAddr, String distance,
+			String rightLoad, String rightUnload, Date startDate, String startTime, Date endDate, String endTime,
+			String helpLoad, String helpUnload, String luggage, String msg, String amount, Payment payment) {
+		super();
+		this.rNo = rNo;
+		this.rMNo = rMNo;
+		this.rDNo = rDNo;
+		this.capacity = capacity;
+		this.type = type;
+		this.startName = startName;
+		this.endName = endName;
+		this.startPhone = startPhone;
+		this.endPhone = endPhone;
+		this.startAddr = startAddr;
+		this.endAddr = endAddr;
+		this.distance = distance;
+		this.rightLoad = rightLoad;
+		this.rightUnload = rightUnload;
+		this.startDate = startDate;
+		this.startTime = startTime;
+		this.endDate = endDate;
+		this.endTime = endTime;
+		this.helpLoad = helpLoad;
+		this.helpUnload = helpUnload;
+		this.luggage = luggage;
+		this.msg = msg;
+		this.amount = amount;
+		this.payment = payment;
 	}
 
 	public String getrNo() {
@@ -221,6 +257,15 @@ public class Reservation {
 
 	public void setAmount(String amount) {
 		this.amount = amount;
+	}
+	
+
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
 	}
 
 	@Override
