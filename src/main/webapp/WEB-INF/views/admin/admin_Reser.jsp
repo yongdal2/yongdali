@@ -71,7 +71,7 @@ MEMBER에서 M_SORT가 '일반'인 사람의 PHONE</p>
 							<tr>
  								<td>모달창- 버튼으로. 
 	 								<button id="wrap">
-	 									<a href=""
+	 								<!-- 	<a href="" -->
 	 								</button>
  								</td>
 <!--								<td>${ a.rNo }</td>
