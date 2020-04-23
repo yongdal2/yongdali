@@ -229,7 +229,13 @@
                             	결제금액<span class="h3 fw6" id=amount></span>원
                             </div>
                             </div>
-                            
+                            </div>
+                        <div class="col-xs-12 col-md-12 text-center">
+                            <button type="button" class="btn btn_ydl_l mdbtn" data-dismiss="modal">확인</button>
+                            <button type="button" id="cancRSV" class="btn btn_ydl_lr mdbtn" data-dismiss="modal">예약 취소</button>
+                        </div>
+                        <div class="col-xs-12 col-md-12 text-center">
+                        </div>
                             
                             
                             <script type="text/javascript">
@@ -296,15 +302,55 @@
 	                    				});
 	                    			});
 	                    		});
-                            });
+	                            
+	                            });
+                            
+	                            $("#cancRSV").on("click",function(){
+	                            	var rNo = $("#rNo").text();
+	                            	console.log("rNo!!"+rNo)
+	                            	d_yn(rNo);
+	                            });
+	                            
+	                            function d_yn(rNo){
+	                				$.ajax({
+	                					url:"pDetail.myp",
+	                					data:{rNo:rNo},
+	                					dataType:"json",
+	                					success:function(p){
+	                						console.log(p);	
+	                						if(p.deal_y=="Y"){
+	                							var ccA = confirm( "배차가 완료된 예약입니다 취소하시겠습니까?");
+	                							if(ccA){
+	                								rsvCan(p.rNo,'Y');
+	                							}
+	                						}else{
+	                							var ccb =confirm("배차되지 않은 예약입니다. 취소하시겠습니까?");
+	                							rsvCan(p.rNo,'N');
+	                						}
+	                						
+	                					},error:function(){
+	                						console.log("aj실패")
+	                					}
+	                				}); 
+	                				
+	                			}
+	                            
+	                            function rsvCan(rNo,deal_yn){
+	                				$.ajax({
+	                					url:"rsvCan.myp",
+	                					data:{rNo:rNo, deal_yn:deal_yn},
+	                					dataType:"json",
+	                					success:function(p){
+	                						alert("예약이 취소되었습니다.");
+	                					},error:function(){
+	                						console.log("aj실패")
+	                					}
+	                				}); 
+	                				
+	                			}
+	                            
                             </script>
-                        </div>
-                        <div class="col-xs-12 col-md-12 text-center">
-                            <button type="button" class="btn btn_ydl_l mdbtn" data-dismiss="modal">확인</button>
-                            <button type="submit" id="cancRSV" class="btn btn_ydl_lr mdbtn" data-dismiss="modal">예약 취소</button>
-                        </div>
-                        <div class="col-xs-12 col-md-12 text-center">
-                        </div>
+                        
                     </div>
                 </div>
             </div>

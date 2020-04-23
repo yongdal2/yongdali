@@ -6,6 +6,7 @@ import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.driver.model.vo.Driver;
 import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.myPage.model.vo.Address;
+import com.kh.yongdali.payment.model.vo.Payment;
 import com.kh.yongdali.reservation.model.vo.Reservation;
 
 /**
@@ -102,6 +103,23 @@ public interface UserMyPageService {
 	 * @return
 	 */
 	Reservation rDetail(String rNo);
+
+
+	/**payment 정보 불러오기
+	 * @param rNo
+	 * @return
+	 */
+
+	Payment pDetail(String rNo);
+
+
+	/**
+	 * 예약취소
+	 * @return
+	 */
+
+
+	int rsvCan(Payment p);
 
 
 }

@@ -2,7 +2,6 @@ package com.kh.yongdali.myPage.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
@@ -27,6 +26,7 @@ import com.kh.yongdali.driver.model.vo.Driver;
 import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.myPage.model.service.UserMyPageService;
 import com.kh.yongdali.myPage.model.vo.Address;
+import com.kh.yongdali.payment.model.vo.Payment;
 import com.kh.yongdali.reservation.model.vo.Reservation;
 
 @Controller
@@ -270,6 +270,33 @@ public class UserMyPageController {
 				
 				return URLEncoder.encode(rMsg, "UTF-8");
 			}else {
+				return "fail";
+			}
+		}
+		
+		//payment 상세정보
+		@RequestMapping(value = "pDetail.myp")
+		public void pDetail(HttpServletResponse rs, @RequestParam String rNo, Payment p) throws JsonIOException, IOException {
+			
+			p = umpService.pDetail(rNo);
+			rs.setContentType("application/json; charset=utf-8");
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			gson.toJson(p, rs.getWriter());
+					
+					
+		}
+		
+		//예약 취소
+		@ResponseBody
+		@RequestMapping("rsvCan.myp")
+		public String rsvCan(Payment p,@RequestParam String rNo, @RequestParam String deal_yn) throws IOException {
+			p.setpRNo(rNo);
+			p.setDealYN(deal_yn);
+				int result = umpService.rsvCan(p);
+			
+			if(result>0) {
+				return "ok";
+			}else{
 				return "fail";
 			}
 		}
