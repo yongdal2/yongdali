@@ -23,7 +23,7 @@
 	<!-- <div style="width: 100%; height: 100%; padding-top: 30px; padding-top: 30px;"> -->
 
 		<!-- main -->
-		<div id="white"> <!-- 하얀 테두리 -->
+		<div id="white">
 		<div class="content container">
 			<div class="row">
 			<div id=title>
@@ -41,7 +41,7 @@ MEMBER에서 M_SORT가 '일반'인 사람의 PHONE</p>
 				<div class="col-lg-3 sidebar">
 					<a href="aMem.ad"><span class="sidebar_span">회원님 목록</span></a><br>
 					<a href="aDri.ad"><span class="sidebar_span">기사님 목록</span></a><br>
-					<a href="aRes.ad"><span class="sidebar_span">예약 내역</span></a><br>
+					<a href="aRes.ad"><span class="sidebar_span">: 예약 내역</span></a><br>
 					<a href="#"><span class="sidebar_span">정산 내역</span></a><br> 
 					<a href="#"><span class="sidebar_span">환불 내역</span></a><br> 
 					<a href="#"><span class="sidebar_span">채팅 내역</span></a>
@@ -55,14 +55,17 @@ MEMBER에서 M_SORT가 '일반'인 사람의 PHONE</p>
 					<table class="table table-striped table-hover text-center">
 						<thead id="thead">
 							<tr>
-								<th>상세보기</th> <!-- 모달창(집중) 예약컬럼의 전체 상세내역 -->
-								<th>예약번호</th>
-								<th>회원번호</th>
-								<th>기사번호</th>
-								<th>상차연락처</th>
-								<th>기사님연락처</th>
-								<th>상차일자</th>
-								<th>결제금액</th>
+							<!--	<th>상세보기</th>  모달창(집중) 예약컬럼의 전체 상세내역 -->
+								<td>예약 번호</td>
+								<td>진행 상태</td>
+	 							<td>예약 일자</td>
+	 							<td>상차일</td>
+	 							<td>하차일</td>
+								<td>출발지</td>
+								<td>도착지</td>
+								<td>결제 금액</td>
+								<td>차량정보</td>
+								<td>상세정보</td>
 							</tr>
 						</thead>
 						
@@ -71,7 +74,7 @@ MEMBER에서 M_SORT가 '일반'인 사람의 PHONE</p>
 							<tr>
  								<td>모달창- 버튼으로. 
 	 								<button id="wrap">
-	 								<!-- 	<a href="" -->
+	 									<!-- <a href="" -->
 	 								</button>
  								</td>
 <!--								<td>${ a.rNo }</td>

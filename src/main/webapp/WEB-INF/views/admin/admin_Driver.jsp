@@ -29,7 +29,7 @@
 	<!-- <div style="width: 100%; height: 100%; padding-top: 30px; padding-top: 30px;"> -->
 
 		<!-- main -->
-		<div id="white"> <!-- 하얀 테두리 -->
+		<div id="white">
 		<div class="content container">
 			<div class="row">
 			<div id=title>
@@ -44,7 +44,7 @@
 			<!-- <div id="content"> -->
 				<div class="col-lg-3 sidebar">
 					<a href="aMem.ad"><span class="sidebar_span">회원님 목록</span></a><br>
-					<a href="aDri.ad"><span class="sidebar_span">기사님 목록</span></a><br>
+					<a href="aDri.ad"><span class="sidebar_span">: 기사님 목록</span></a><br>
 					<a href="aRes.ad"><span class="sidebar_span">예약 내역</span></a><br>
 					<a href="#"><span class="sidebar_span">정산 내역</span></a><br> 
 					<a href="#"><span class="sidebar_span">환불 내역</span></a><br> 

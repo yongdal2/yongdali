@@ -48,31 +48,20 @@
     padding-top: 75px;
     padding-left: 300px;
     padding-right: 300px;
-    
 }
 
-
+/* 큰 제목 여백 :애니효과 범위 981최대 */
 #title{
 	margin-right: 981px;
 }
 
 
-
+/* 관리자 페이지 하얀배경 */
 #white{
 	background-color: ivory;
     border: 1px solid rgb(231, 234, 243);
     border-radius: 50px;
 }
-
-/* #adTitle{
-	display: inline-block; 
-    margin-right: 15px;
-    margin-bottom: 10px;
-    font-size: 17px;
-    font-family: 'yg-jalnan', Arial, Helvetica, sans-serif;
-    text-decoration: none;
-    color: rgb(43, 43, 43);
-} */
 
 
 /* a태그 */
