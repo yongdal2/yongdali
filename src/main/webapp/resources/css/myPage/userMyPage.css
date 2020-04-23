@@ -13,6 +13,10 @@ body {
 	min-width: 768px !important;
 }
 
+td {
+	vertical-align: middle !important;
+}
+
 .btn_ydl {
 	color: #fff;
 	background-color: rgb(87, 187, 138);
@@ -23,6 +27,11 @@ body {
 	color: rgb(87, 187, 138) !important;
 	background-color: white !important;
 	border-color: rgb(87, 187, 138) !important;
+}
+.btn_ydl_lr {
+	color: red !important;
+	background-color: white !important;
+	border-color: red !important;
 }
 
 .ydl_color {
@@ -65,6 +74,12 @@ a {
 	color: red;
 }
 /* 마이페이지 점보트론 */
+.fN{
+    line-height: 1.5em !important;
+    font-size: 8em !important;
+/*     color: white !important; */
+}
+
 #driverMyPjumbo {
 	 background-color: #fafbfc!important;
 	 border-top: rgba(87, 187, 138,0.9) solid 3px !important;
@@ -266,6 +281,10 @@ a {
 .mdC{
 	max-width: 440px !important;
 }
+
+.mdRSV{
+	max-width: 800px !important;
+}
 .modalBaseAd {
 	padding: 23px !important;
 	border: 1px solid #dedede !important;
@@ -273,6 +292,13 @@ a {
 	width: 100%;
 	max-width: 420px !important;
 }
+.modalBaseRSV {
+	padding: 23px !important;
+	border: 1px solid #dedede !important;
+	border-radius: 16px !important;
+	width: 100%;
+}
+
 .filBg {
 	background-color: #f3f5f7!important
 }
@@ -320,6 +346,9 @@ a {
 	width: 100% !important;
 	height: 35px !important;
 }
+.mb20 {
+	margin-bottom: 20px !important;	
+}
 .mb30 {
 	margin-bottom: 30px !important;	
 }
@@ -334,7 +363,9 @@ a {
 	padding: 10px !important;
 }
 /* 예약페이지  */
-
+.fa-edit:before{
+	font-size: 20px !important;
+}
 .bszB{
 	box-sizing: border-box !important;
 	padding-right: 10px !important;

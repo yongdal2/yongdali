@@ -54,22 +54,60 @@
 		<result property="distance" column="DISTANCE"/>
 		<result property="rightLoad" column="RIGHT_LOAD"/>
 		<result property="rightUnload" column="RIGHT_UNLOAD"/>
-		<result property="startDate" column="STARTDATE"/>
-		<result property="startTime" column="STARTTIME"/>
-		<result property="endDate" column="ENDDATE"/>
-		<result property="endTime" column="ENDTIME"/>
+		<result property="startDate" column="START_DATE"/>
+		<result property="startTime" column="START_TIME"/>
+		<result property="endDate" column="END_DATE"/>
+		<result property="endTime" column="END_TIME"/>
 		<result property="helpLoad" column="HELP_LOAD"/>
 		<result property="helpUnload" column="HELP_UNLOAD"/>
 		<result property="luggage" column="LUGGAGE"/>
 		<result property="msg" column="MSG"/>
 		<result property="amount" column="AMOUNT"/>
-		<result property="payYN" column="PAY_YN"/>
-		<result property="dealYN" column="DEAL_YN"/>
-		<result property="dealDate" column="DEALDATE"/>
-		<result property="calcYN" column="CALC_YN"/>
-		<result property="calcDate" column="CALCDATE"/>
-		<result property="enrollDate" column="ENROLLDATE"/>
 	</resultMap>
+	
+	<!-- resultMap Reservation&Payment-->
+	<resultMap id="rsvPayResultSet" type="Reservation">
+		<id property="rNo" column="R_NO"/>
+		<result property="rMNo" column="R_M_NO"/>
+		<result property="rDNo" column="R_D_NO"/>
+		<result property="capacity" column="CAPACITY"/>
+		<result property="type" column="TYPE"/>
+		<result property="startName" column="START_NAME"/>
+		<result property="endName" column="END_NAME"/>
+		<result property="startPhone" column="START_PHONE"/>
+		<result property="endPhone" column="END_PHONE"/>
+		<result property="startAddr" column="START_ADDR"/>
+		<result property="endAddr" column="END_ADDR"/>
+		<result property="distance" column="DISTANCE"/>
+		<result property="rightLoad" column="RIGHT_LOAD"/>
+		<result property="rightUnload" column="RIGHT_UNLOAD"/>
+		<result property="startDate" column="START_DATE"/>
+		<result property="startTime" column="START_TIME"/>
+		<result property="endDate" column="END_DATE"/>
+		<result property="endTime" column="END_TIME"/>
+		<result property="helpLoad" column="HELP_LOAD"/>
+		<result property="helpUnload" column="HELP_UNLOAD"/>
+		<result property="luggage" column="LUGGAGE"/>
+		<result property="msg" column="MSG"/>
+		<result property="amount" column="AMOUNT"/>
+		<association property="payment" resultMap="paymentResultSet"/>
+	</resultMap>
+	
+	<!-- resultMap Payment  -->
+	<resultMap id="paymentResultSet" type="Payment">
+		<id property="pNo" column="P_NO"/>
+		<result property="pRNo" column="P_R_NO"/>
+		<result property="dealYN" column="DEAL_YN"/>
+		<result property="dealDate" column="DEAL_DATE"/>
+		<result property="cancYN" column="CANC_YN"/>
+		<result property="cancDate" column="CANC_DATE"/>
+		<result property="payYN" column="PAY_YN"/>
+		<result property="enrollDate" column="ENROLL_DATE"/>
+	</resultMap>
+	
+<!-- 	<resultMap id="calculateResultSet" type="Caculate">
+	
+	</resultMap> -->
 	
 	<!-- 폰번호 업데이트 -->
 	<update id="updatePhone" parameterType="Member">
@@ -153,19 +191,34 @@
 	<!-- 마이페이지 예약내역  -->
 	<select id="selectRsvListCount" resultType="_int">
 	SELECT COUNT(*)
-	FROM RESERVATION
-	WHERE R_M_NO=#{mNo}
+	FROM RESERVATION R LEFT OUTER JOIN PAYMENT P ON(R.R_NO=P.P_R_NO)
+	WHERE R.R_M_NO = #{mNo}
+	ORDER BY TO_NUMBER(SUBSTR(R.R_NO, 2)) DESC
 	</select>
 	<!-- 마이페이지 예약내역  -->
-	<select id="selectRsvList" resultMap="rsvResultSet">
+	<select id="selectRsvPayList" resultMap="rsvResultSet">
 	SELECT *
-	FROM RESERVATION
-	WHERE R_M_NO=#{mNo}
+	FROM RESERVATION R LEFT OUTER JOIN PAYMENT P ON(R.R_NO=P.P_R_NO)
+	WHERE R.R_M_NO = #{mNo}
+	ORDER BY TO_NUMBER(SUBSTR(R.R_NO, 2)) DESC
 	</select>
+	
 	<!--  마이페이지 기사정보 -->
 	<select id="getRsvDinfo" resultMap="driverResultSet">
 	SELECT M.NAME REGCARD_IMG_ORIGIN, M.PHONE REGCARD_IMG_RENAME, D.CAPACITY, D.TYPE, D.CAR_NO, D.ID_IMG_RENAME
 	FROM MEMBER M LEFT OUTER JOIN DRIVER D ON(M.M_NO=D.D_M_NO)
 	WHERE D.D_NO=#{dNo}
 	</select>
+	<!-- 예약정보 상세보기 -->
+	<select id="rDetail" resultMap="rsvPayResultSet">
+	SELECT *
+	FROM RESERVATION R LEFT OUTER JOIN PAYMENT P ON(R.R_NO=P.P_R_NO)
+	WHERE R_NO = #{rNo}
+	</select>
+	<!-- 예약정보 msg 업데이트 -->
+	<update id="upRSVmsg" parameterType="Reservation">
+		UPDATE RESERVATION
+		SET MSG = #{msg}
+		WHERE R_NO = #{rNo}
+	</update>
 </mapper>

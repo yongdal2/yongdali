@@ -68,5 +68,15 @@ public class UserMyPageServiceImpl implements UserMyPageService {
 		return umpDao.getRsvDinfo(dNo);
 	}
 
+	@Override
+	public int upRSVmsg(Reservation r) {
+		return umpDao.upRSVmsg(r);
+	}
+
+	@Override
+	public Reservation rDetail(String rNo) {
+		return umpDao.rDetail(rNo);
+	}
+
 
 }

@@ -88,4 +88,20 @@ public interface UserMyPageService {
 	Driver getRsvDinfo(String dNo);
 
 
+	/**
+	 * 예약 메세지 업데이트
+	 * @param rMsg
+	 * @param rNo
+	 * @return
+	 */
+	int upRSVmsg(Reservation r);
+
+
+	/**예약페이지 상세보기
+	 * @param rNo
+	 * @return
+	 */
+	Reservation rDetail(String rNo);
+
+
 }
