@@ -80,10 +80,10 @@ public class MemberController {
 		Date[] date = new Date[4];
 		String[] encPwdArr = new String[4];
 		
-		mList.add(new Member("admin@naver.com", "Admin!234", "관리자", "010-1111-1111", "관리자", "정상", "N")); 
-		mList.add(new Member("mem01@naver.com", "Mem!234", "홍멤버", "010-2222-2222", "일반", "정상", "Y"));
-		mList.add(new Member("biz01@naver.com", "Biz!234", "김거상", "010-3333-3333", "사업자", "정상", "N"));
-		mList.add(new Member("biz02@naver.com", "Biz!234", "최거상", "010-4444-4444", "사업자", "정상", "N"));
+		mList.add(new Member("admin@naver.com", "Admin!234", "관리자", "010-1111-1111", "관리자", "정상", "용달이", "N")); 
+		mList.add(new Member("mem01@naver.com", "Mem!234", "홍멤버", "010-2222-2222", "일반", "정상", "용달이", "Y"));
+		mList.add(new Member("biz01@naver.com", "Biz!234", "김거상", "010-3333-3333", "사업자", "정상", "용달이", "N"));
+		mList.add(new Member("biz02@naver.com", "Biz!234", "최거상", "010-4444-4444", "사업자", "정상", "용달이", "N"));
 		
 		sDate[0] = "2020-03-10";
 		sDate[1] = "2020-03-18";
@@ -150,7 +150,6 @@ public class MemberController {
 		// 비밀번호 틀림
 		else {
 			return "wrongPwd";
-			
 		}	
 	}
 	
@@ -202,40 +201,39 @@ public class MemberController {
 	        res.append(inputLine);
 	      }
 	      br.close();
-	      if(responseCode==200) {
-	    	  // out.println(res.toString()); 
-	    	  // 블로그
-	    	  
-	    	// access_token 값 추출
-    		JSONParser parsing = new JSONParser();
-    		Object resObj = parsing.parse(res.toString());
-    		JSONObject resJsonObj = (JSONObject)resObj;
-    			        
-    		access_token = (String)resJsonObj.get("access_token");
-    		refresh_token = (String)resJsonObj.get("refresh_token");
-	    	  
-            String token = access_token; // 네이버 로그인 접근 토큰;
-            String header = "Bearer " + token; // Bearer 다음에 공백 추가
-
-            // 회원정보 조회 API 1.
-            String pInfoApiURL = "https://openapi.naver.com/v1/nid/me";
-
-            Map<String, String> requestHeaders = new HashMap<>();
-            requestHeaders.put("Authorization", header);
-            String responseBody = get(pInfoApiURL,requestHeaders);
-            
-            
-            Object responseBodyObj = parsing.parse(responseBody);
-            JSONObject jsonResponseBodyObj = (JSONObject)responseBodyObj;
-            JSONObject jsonresponseObj = (JSONObject) jsonResponseBodyObj.get("response");
-            
-            String email = jsonresponseObj.get("email").toString();
-            String name = jsonresponseObj.get("name").toString();
-            
-            Member loginUser = new Member(email, name);
-            logger.debug(loginUser.toString());
-            model.addAttribute("loginUser", loginUser);
-	      } 
+		  if(responseCode==200) {
+			  // out.println(res.toString()); 
+			  
+			// access_token 값 추출
+			JSONParser parsing = new JSONParser();
+			Object resObj = parsing.parse(res.toString());
+			JSONObject resJsonObj = (JSONObject)resObj;
+				        
+			access_token = (String)resJsonObj.get("access_token");
+			refresh_token = (String)resJsonObj.get("refresh_token");
+			  
+			// 회원정보 조회 API 1.
+		    String token = access_token; // 네이버 로그인 접근 토큰;
+		    String header = "Bearer " + token; // Bearer 다음에 공백 추가
+		    
+		    String pInfoApiURL = "https://openapi.naver.com/v1/nid/me";
+		
+		    Map<String, String> requestHeaders = new HashMap<>();
+		    requestHeaders.put("Authorization", header);
+		    String responseBody = get(pInfoApiURL,requestHeaders);
+		    
+		    // 프로필 정보 추출 및 활용
+		    Object responseBodyObj = parsing.parse(responseBody);
+		    JSONObject jsonResponseBodyObj = (JSONObject)responseBodyObj;
+		    JSONObject jsonresponseObj = (JSONObject) jsonResponseBodyObj.get("response");
+		    
+		    String email = jsonresponseObj.get("email").toString();
+		    String name = jsonresponseObj.get("name").toString();
+		    
+		    Member loginUser = new Member(email, name);
+		    logger.debug(loginUser.toString());
+		    model.addAttribute("loginUser", loginUser);
+		  } 
 	    } catch (Exception e) {
 	      System.out.println(e);
 	    }
@@ -249,8 +247,6 @@ public class MemberController {
             con.setRequestMethod("GET");
             for(Map.Entry<String, String> header :requestHeaders.entrySet()) {
                 con.setRequestProperty(header.getKey(), header.getValue());
-//                System.out.println("header.getKey() : " + header.getKey().toString());
-//                System.out.println("header.getValue() : " + header.getValue().toString());
             }
 
             int responseCode = con.getResponseCode();
@@ -374,27 +370,6 @@ public class MemberController {
 		return ranNum;	
 	}
 
-//	/** 회원가입_양식 제출(일반 회원만) 
-//	 * @param m
-//	 * @return
-//	 */
-//	@RequestMapping("insert.me")
-//	public String insertMember(@ModelAttribute Member m, Model model) {
-//		logger.debug(m.toString());
-//		
-//		m.setPwd(bcryptPasswordEncoder.encode(m.getPwd()));
-//		logger.debug(m.toString());
-//		
-//		int result = mService.insertMember(m);
-//		logger.debug("회원가입 insert 결과값 : " + String.valueOf(result));
-//		
-//		if(result > 0) {
-//			return "login&signUp/login";
-//		}else {
-//			model.addAttribute("msg", "샘플데이터 입력 실패!");
-//			return "common/errorPage";
-//		}
-//	}
 	
 	/** 회원가입_양식 제출(일반/사업자 공통) 
 	 * @param m

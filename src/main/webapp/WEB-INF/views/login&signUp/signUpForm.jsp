@@ -24,6 +24,7 @@
     <!-- content -->
     <div class="content">
         <form action="insert.me" method="post" id="signUpForm" enctype="multipart/form-data" novalidate>
+        	<input type="hidden" name="signupType" value="용달이">
             <div class="formRow">
                 <div class="formRow--item">
                     <!-- 이메일 -->

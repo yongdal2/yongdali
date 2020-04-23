@@ -26,7 +26,7 @@
 		<result property="regCardImgRename" column="CAR_IMG_RENAME"/>
 	</resultMap>
 	
-	<!-- <resultMap type="Driver" id="AdminDriResultSet">
+<!-- 		<resultMap type="Driver" id="driverResultSet">
 		<id property="dNo" column="D_NO"/>
 		<result property="dmNo" column="D_M_NO"/>
 		<result property="capacity" column="CAPACITY"/>
@@ -34,12 +34,9 @@
 		<result property="carNo" column="CAR_NO"/>
 		<result property="idImgOrigin" column="ID_IMG_ORIGIN"/>
 		<result property="idImgRename" column="ID_IMG_RENAME"/>
-		<result property="regCardImgOrigin" column="CAR_IMG_ORIGIN"/>
-		<result property="regCardImgRename" column="CAR_IMG_RENAME"/>
-		
-		
+		<result property="regCardImgOrigin" column="REGCARD_IMG_ORIGIN"/>
+		<result property="regCardImgRename" column="REGCARD_IMG_RENAME"/>
 	</resultMap> -->
-	
 	
 	
 	
@@ -57,31 +54,43 @@
 	</select>
 	
 	<!-- Driver List --> 
-	<select id="selectDriList" resultMap="AdminDriResultSet">
+<!-- 	<select id="selectDriList" resultMap="AdminDriResultSet">
 
-<!-- 		SELECT *
+		SELECT *
 		FROM MEMBER	
 		WHERE M_SORT = '사업자'
- -->
+
  		
-<!-- 		SELECT *
+		SELECT *
 		FROM MEMBER M 
 		JOIN DRIVER D ON(M.M_NO=D.D_M_NO)
- -->		
-	<!-- 	SELECT *
+		
+		SELECT *
 	    FROM DRIVER D 
 	    JOIN MEMBER M 
 	    ON(M.M_NO=D.D_M_NO)
 	    WHERE M.M_NO= M_NO
- -->
+
+ 	</select> -->
 <!-- 		SELECT *
 		FROM MEMBER
 		WHERE m_sort='사업자'
 		ORDER BY TO_NUMBER(SUBSTR(M_NO, 2)) DESC
  -->	
+ 	
+ 	<!--  마이페이지 기사정보 -->
+	<select id="selectDriList" resultMap="AdminDriResultSet">
+		   SELECT 
+		   D.D_NO, D.D_M_NO,
+		   M.NAME REGCARD_IMG_ORIGIN, 
+		   D.CAPACITY, D.TYPE, D.CAR_NO, 
+		   D.ID_IMG_RENAME, D.REGCARD_IMG_RENAME
+		FROM MEMBER M LEFT OUTER 
+		JOIN DRIVER D ON(M.M_NO = D.D_M_NO)
  	</select>
-
-	<!-- <select id="">
+ 	
+ 	
+ 	<!-- <select id="">
 		SELECT d.dNo, d.dmNo, d.capacity, d.type, d.carNo, d.idImgRename, d.regCardImgRename
 				m.mName
 		
@@ -92,7 +101,6 @@
 	</select> -->
 
 <!-- 	
-	
 	<select id="selectDriList" resultMap="AdminDriResultSet">
 		SELECT *
 		FROM DRIVER
@@ -106,6 +114,23 @@
 		SELECT COUNT(*)
 		FROM DRIVER
 	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 </mapper>
 

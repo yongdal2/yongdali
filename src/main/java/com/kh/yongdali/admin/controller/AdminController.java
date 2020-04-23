@@ -41,7 +41,7 @@ public class AdminController {
 		
 		
 		int pageLimit =5;
-		int boardLimit=7;
+		int boardLimit=10;
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, pageLimit, boardLimit);
 		
@@ -68,19 +68,19 @@ public class AdminController {
 	public ModelAndView adminDriList(ModelAndView mv,
 									@RequestParam(value = "currentPage", required = false, defaultValue = "1") 
 									int currentPage) {
-		System.out.println("currentPAge : " + currentPage);
+		System.out.println("currentPage : " + currentPage);
 		
 		int listCount = aService.getDriListCount();
 		
 		System.out.println("listCount : " + listCount);
 		
 		int pageLimit =5;
-		int boardLimit=7;
+		int boardLimit=10;
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, pageLimit, boardLimit);
 		
 		ArrayList<Driver> list = aService.selectDriList(pi);
-		System.out.println(list);
+		System.out.println("list : " + list );
 		//---------------------------------------------------
 		mv.addObject("list", list);
 		mv.addObject("pi", pi);
