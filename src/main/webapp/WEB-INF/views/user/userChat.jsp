@@ -107,6 +107,7 @@
                 	<input type="hidden" id="senderName" value="${sessionScope.loginUser.mName }" style="display: none;">
                 	<input type="hidden" id="room" style="display:none;">
                 	<input type="text" id="receiveId" style="display: none;">
+                	<input type="hidden" id="roomNo" value="${sessionScope.nowRoom.roomNo }" style="display: none;">
                 	<input type="text" class="write-message" id="msgArea" placeholder="Type your message here"></input>
                     <!-- <textarea placeholder="궁금하신 점이 무엇인가요?" id="msgArea"></textarea> -->
                 </div>
@@ -133,6 +134,7 @@
                 	$('.sendBtn').trigger("click");
                 }
             }); 
+
     	})
 		
     	//message token구성
@@ -146,7 +148,7 @@
     	
     	function connectionSocket(){
     		connect = true;
-    		socket = new WebSocket('ws://192.168.110.45:8888/yongdali/chatting');
+    		socket = new WebSocket('ws://192.168.25.20:8888/yongdali/chatting');
     		/* 페이지 접속한 session id */
     		var sessionid = $("#senderId").val();
     		var sessionName = $("#senderName").val();
@@ -162,27 +164,7 @@
     			
     			console.log("세션아이디:"+sessionid);
     			console.log("받는아이디:"+data["receiveId"]);
-    			
-    			/* if(data["flag"]!="room" && data["flag"]!="user"){
-    				if(sessionid == data["id"]){
-	    				var printHTML = "<li class='me'>";
-	        			printHTML += "<div class='entete'>";
-	        			printHTML += "<h3>"+hours+":"+minutes+"<h3>";
-	        			printHTML += "<h2>"+data["room"]+"</h2>";
-	        			printHTML += "</div>";
-	        			printHTML += "<div class='message' id='meMsg'>"+data["msg"]+"</div>";
-	        			printHTML += "</li>";
-	    			}else{    			
-	        			var printHTML = "<li class='you'>";
-		    			printHTML += "<div class='entete'>";
-		    			printHTML += "<h2>"+data["room"]+"</h2>";
-		    			printHTML += "<h3>"+hours+":"+minutes+"<h3>";
-		    			printHTML += "</div>";
-		    			printHTML += "<div class='message'id='youMsg'>"+data["msg"]+"</div>";	    			
-		    			printHTML += "</li>";	
-	    			}
-    				
-    			} */
+
     			if(data["flag"]!="room" && data["flag"]!="user"){
     				if(sessionid == data["id"]){
 	    				var printHTML = "<li class='me'>";
@@ -219,21 +201,22 @@
     	
     	 // 메시지 보내기 클릭
     	function sendMessage(){
-    		 var senderId = $("#senderId").val();
-    		 var roomName = $("#room").val();
-    		 var msg = $("#msgArea").val();
-    		 var flag = "msg";
-    		 var receiveId = "admin@naver.com";
+	   		 var senderId = $("#senderId").val();
+	   		 var roomName = $("#room").val();
+	   		 var receiveId = "admin@naver.com";
+	   		 var msg = $("#msgArea").val();
+	   		 var flag = "msg";
+	   		 var roomNo = $("#roomNo").val();
     		//socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),$("#msgArea").val(),"msg",$("#receiveId").val())));
     		//											          아이디				     방이름(닉네임)              msg          flag		   메시지 받는 사람
     		//socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#room").val(),$("#msgArea").val(),"msg","admin@naver.com")));
     		socket.send(JSON.stringify(new MessageFlag(senderId,roomName,msg,flag,receiveId)));
     		$("#msgArea").val("");
-    		
-    		$.ajax({
-    			url:"userSendChat.ch",
-    			data:{id:senderId, room:roomName, msg:msg, flag:flag, receiveId:receiveId},
-    			type:"post",
+    		    		
+	   		 
+    		 $.ajax({
+    			url:"userSendMessage.ch",
+    			data:{id:senderId, roomName:roomName, msg:msg, flag:flag, roomNo:roomNo},
     			success:function(data){
     				if(data=="success"){
     					console.log(data);
@@ -242,7 +225,6 @@
     				console.log("전송실패");
     			}
     		})
-
     	}
     	
     	// 방생성 클릭
@@ -254,13 +236,14 @@
 			var senderId = $("#senderId").val();
 			var roomName = $("#room").val();
 			var receiveId = "admin@naver.com";
-			
+			var flag = "createroom";
+			var roomNo = $("#roomNo");
 			// 서블릿 > 
 			$.ajax({
     			url:"userCreateChat.ch",
-    			data:{id:senderId, roomName:roomName, receiveId:receiveId},
-    			type:"post",
+    			data:{id:senderId, roomName:roomName, receiveId:receiveId, flag:flag},
     			success:function(data){
+    				roomNo.val("${sessionScope.nowRoom.roomNo}");
     				if(data=="success"){
     					console.log(data);
     				}
