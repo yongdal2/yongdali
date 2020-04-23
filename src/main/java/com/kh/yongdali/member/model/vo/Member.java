@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Member {
 
 	private String mNo;
-	private String mId;
+	private String mId; // email 
 	private String pwd;
 	private String mName;
 	private String phone;
@@ -19,10 +19,14 @@ public class Member {
 		super();
 	}
 
-	public Member(String mId, String mName) {
+	// 네아로
+	public Member(String mId, String mName, String mSort, String signupType, String pushEnabled) {
 		super();
 		this.mId = mId;
 		this.mName = mName;
+		this.mSort = mSort;
+		this.signupType = signupType;
+		this.pushEnabled = pushEnabled;
 	}
 	
 	// - mNo, enrollDate
@@ -53,6 +57,11 @@ public class Member {
 		this.signupType = signupType;
 		this.pushEnabled = pushEnabled;
 		this.enrollDate = enrollDate;
+	}
+
+	public Member(String mId) {
+		super();
+		this.mId = mId;
 	}
 
 	public String getmNo() {

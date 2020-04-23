@@ -58,12 +58,21 @@ public class UserMyPageDao {
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("myPageMapper.selectRsvList", mNo, rowBounds);
+		return (ArrayList)sqlSession.selectList("myPageMapper.selectRsvPayList", mNo, rowBounds);
 	}
 
 
 	public Driver getRsvDinfo(String dNo) {
 		return sqlSession.selectOne("myPageMapper.getRsvDinfo",dNo);
+	}
+
+	public int upRSVmsg(Reservation r) {
+		return sqlSession.update("myPageMapper.upRSVmsg", r);
+	}
+
+
+	public Reservation rDetail(String rNo) {
+		return sqlSession.selectOne("myPageMapper.rDetail", rNo);
 	}
 
 	

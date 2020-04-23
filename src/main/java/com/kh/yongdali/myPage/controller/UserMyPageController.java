@@ -6,9 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +14,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.common.Pagination;
 import com.kh.yongdali.driver.model.vo.Driver;
@@ -27,9 +28,7 @@ import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.myPage.model.service.UserMyPageService;
 import com.kh.yongdali.myPage.model.vo.Address;
 import com.kh.yongdali.reservation.model.vo.Reservation;
-import com.sun.org.apache.xml.internal.serialize.Printer;
 
-@SessionAttributes("loginUser")
 @Controller
 public class UserMyPageController {
 	@Autowired
@@ -207,9 +206,11 @@ public class UserMyPageController {
 			String mNo = loginUser.getmNo();
 			int rlistCount =umpService.getRsvListCount(mNo);
 			
-			PageInfo pi = Pagination.getPageInfo(currentPage, rlistCount, 5, 10);
+			PageInfo pi = Pagination.getPageInfo(currentPage, rlistCount, 5, 20);
 			
 			ArrayList<Reservation> rList = umpService.selectRsvList(pi,mNo);
+			
+			System.out.println(rList);
 			
 			mv.addObject("rList",rList);
 			mv.addObject("pi",pi);
@@ -238,6 +239,39 @@ public class UserMyPageController {
 			out.print(adJob);
 			out.flush();
 			out.close();
+		}
+		//예약 정보 상세보기
+		@RequestMapping(value = "rDetail.myp")
+		public void rDetail(HttpServletResponse rs, @RequestParam String rNo) throws JsonIOException, IOException {
+			
+			System.out.println("예상"+rNo);
+			Reservation rp = umpService.rDetail(rNo);
+			System.out.println(rp);
+			
+			rs.setContentType("application/json; charset=utf-8");
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			gson.toJson(rp, rs.getWriter());
+		}
+		
+		
+		//예약 msg 수정
+		@ResponseBody
+		@RequestMapping("upRmsg.myp")
+		public String upRSVmsg(Reservation r, @RequestParam String rMsg, @RequestParam String rNo) throws IOException {
+			r.setMsg(rMsg);
+			r.setrNo(rNo);
+			
+			System.out.println( r.getrNo() + r.getMsg());
+			
+			int result = umpService.upRSVmsg(r);
+			
+			System.out.println(result);
+			if(result>0) {
+				
+				return URLEncoder.encode(rMsg, "UTF-8");
+			}else {
+				return "fail";
+			}
 		}
 		
 }

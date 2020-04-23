@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 
 <html>
@@ -58,14 +57,13 @@
 						</div>
 				</div>
 				<div class="col-xs-3 col-md-3">
-					<div class="img-circle" id="pro_img"
-						style="background-image: url('https://img1.daumcdn.net/thumb/R750x0/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fcafeattach%2F1Xh2D%2Fe9efdcce7223d088ee2e401a429f62f86cdff6cb');">
-						<div class="editP sub text-center" data-toggle="modal"
-							data-target="#changePhoto">
-							<div class="glyphicon glyphicon-pencil"></div>
-						</div>
-					</div>
+					<div class="img-circle text-center align-middle" id="pro_img"
+						style="background-color: rgb(87, 187, 138);"><span class=""><c:out value="${fn:substring(loginUser.mName,0,1)}"/>
+						
+					</span></div>
+						
 				</div>
+			</div>
 			</div>
 		</div>
 	</div>

@@ -94,6 +94,13 @@
 									#{regCardImgRename}
 									)
 	</insert>
+	
+	<!-- 비밀번호 재설정 -->
+	<update id="updatePwd" parameterType="Member">
+		UPDATE MEMBER 
+		SET PWD = #{pwd}
+		WHERE M_ID = #{mId}
+	</update>
 </mapper>     
 
 
