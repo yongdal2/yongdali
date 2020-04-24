@@ -29,4 +29,9 @@ public class ChatDao {
 		return sqlSession.insert("chatMapper.userInsertMessage",m);
 	}
 
+	public Room selectPreRoom(Room r) {
+	
+		return sqlSession.selectOne("chatMapper.selectPreRoom",r);
+	}
+
 }

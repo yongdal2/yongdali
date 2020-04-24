@@ -14,7 +14,7 @@ public class Message {
 	private Date createDate; // 방생성날짜
 	private Date sendDate; // 메시지 보낸 날짜
 	private String connectYN; // 대화종료 yn
-		
+	private String chkRoom; // 방 있는지 체크	
 	
 	// room> roomName
 	// + roomNo
@@ -22,6 +22,7 @@ public class Message {
 	// + connectYN 대화종료시 yn
 	// 
 	
+
 	public Message() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -42,6 +43,18 @@ public class Message {
 		this.msg = msg;
 		this.flag = flag;
 		this.receiveId = receiveId;
+	}
+	
+	
+	
+	public Message(String id, String roomName, String msg, String flag, String receiveId, String chkRoom) {
+		super();
+		this.id = id;
+		this.roomName = roomName;
+		this.msg = msg;
+		this.flag = flag;
+		this.receiveId = receiveId;
+		this.chkRoom = chkRoom;
 	}
 	
 	
@@ -108,6 +121,14 @@ public class Message {
 		this.msg = msg;
 	}
 
+	public String getChkRoom() {
+		return chkRoom;
+	}
+	
+	public void setChkRoom(String chkRoom) {
+		this.chkRoom = chkRoom;
+	}
+	
 	public String getFlag() {
 		return flag;
 	}
@@ -187,9 +208,10 @@ public class Message {
 	public String toString() {
 		return "Message [id=" + id + ", roomName=" + roomName + ", msg=" + msg + ", flag=" + flag + ", receiveId="
 				+ receiveId + ", roomNo=" + roomNo + ", msgNo=" + msgNo + ", createDate=" + createDate + ", sendDate="
-				+ sendDate + ", connectYN=" + connectYN + "]";
+				+ sendDate + ", connectYN=" + connectYN + ", chkRoom=" + chkRoom + "]";
 	}
 
+	
 	
 	
 	
