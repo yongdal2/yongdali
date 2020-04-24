@@ -81,12 +81,17 @@
 	</select>
 	
 	
+	<!-- adminPage refund count and list -->
+	<select id="refundCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM ADREFUND <!-- AREFUND CREATE -->
+	</select>
 	
 	
+<!-- 	<select id="" resultMap="">
 	
-	
-	
-	
+	</select>
+	 -->
 	
 	
 	

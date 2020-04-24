@@ -22,10 +22,10 @@
         <div OnClick="location.href ='aRes.ad'" style="width: 100px; height: 100px; background: #404ced; cursor: pointer; border-radius: 10px; margin-right: 20px;">
              예약 내역 페이지	
         </div>
-        <div OnClick="location.href ='admin_Cal.ydl'" style="width: 100px; height: 100px; background: #fffc3b; cursor: pointer; border-radius: 10px; margin-right: 20px;">
+        <div OnClick="location.href ='aJung.ad'" style="width: 100px; height: 100px; background: #fffc3b; cursor: pointer; border-radius: 10px; margin-right: 20px;">
             정산 내역 페이지	
         </div>
-        <div OnClick="location.href ='admin_Refund.ydl'" style="width: 100px; height: 100px; background: #f78a4f; cursor: pointer; border-radius: 10px; margin-right: 20px;">
+        <div OnClick="location.href ='adRef.ad'" style="width: 100px; height: 100px; background: #f78a4f; cursor: pointer; border-radius: 10px; margin-right: 20px;">
             환불 내역 페이지	
         </div>
         <div OnClick="location.href ='admin_ChatLog.ydl'" style="width: 100px; height: 100px; background: #b4e83a; cursor: pointer; border-radius: 10px; margin-right: 20px;">

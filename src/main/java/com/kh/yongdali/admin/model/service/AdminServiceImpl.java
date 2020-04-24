@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.yongdali.admin.model.dao.AdminDao;
 import com.kh.yongdali.admin.model.vo.Calculate;
+import com.kh.yongdali.admin.model.vo.adRefund;
 import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.reservation.model.vo.Reservation;
 import com.kh.yongdali.driver.model.vo.Driver;
@@ -67,13 +68,22 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public ArrayList<Reservation> reserList(PageInfo pi) {
-		
 		return aDao.reserList(pi);
 	}
 
 	@Override
 	public int jungsan(String rNo) {
 		return aDao.jungsan(rNo);
+	}
+
+	@Override
+	public int refundCount() {
+		return aDao.refundCount();
+	}
+
+	@Override
+	public ArrayList<adRefund> adRefundList(PageInfo pi) {
+		return aDao.adRefundList(pi);
 	}
 
 

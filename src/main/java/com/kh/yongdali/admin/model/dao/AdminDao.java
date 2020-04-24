@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.reservation.model.vo.Reservation;
 import com.kh.yongdali.admin.model.vo.Calculate;
+import com.kh.yongdali.admin.model.vo.adRefund;
 import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.driver.model.vo.Driver;
 
@@ -97,6 +98,18 @@ public class AdminDao {
 
 	public int jungsan(String rNo) {
 		return sqlSession.update("calculateMapper.jungsan",rNo);
+	}
+
+	public int refundCount() {
+		return sqlSession.selectOne("adminMapper.refundCount");
+	}
+
+	public ArrayList<adRefund> adRefundList(PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper.refundLsit", null, rowBounds);
 	}
 
 
