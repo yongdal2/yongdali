@@ -41,7 +41,7 @@
 					<a href="aMem.ad"><span class="sidebar_span">회원님 목록</span></a><br>
 					<a href="aDri.ad"><span class="sidebar_span">기사님 목록</span></a><br>
 					<a href="#aRes.ad"><span class="sidebar_span">예약 내역</span></a><br>
-					<a href="#"><span class="sidebar_span">정산 내역</span></a><br> 
+					<a href="aJung.ad"><span class="sidebar_span">정산 내역</span></a><br> 
 					<a href="#"><span class="sidebar_span">환불 내역</span></a><br> 
 					<a href="#"><span class="sidebar_span">채팅 내역</span></a>
 				</div>
@@ -55,13 +55,12 @@
 						<thead id="thead">
 							<tr>
 								<th>회원번호</th>
+								<th>결제번호</th>
 								<th>회원ID(이메일)</th>
 								<th>이름</th>
 								<th>휴대폰번호</th>
-								<th>회원구분</th>
-								<th>회원상태</th>
-								<th>알림설정</th>
-								<th>가입일</th>
+								<th>환불금액</th>
+								<th>환불</th>
 							</tr>
 						</thead>
 						
@@ -69,13 +68,19 @@
 						<tbody id="tbody">
 							<tr>
 								<td>${ a.mNo }</td>
-								<td>${ a.mId }</td>
+								<td>${ a.rNo }</td>
+								<td>${ a.email }</td>
 								<td>${ a.mName }</td>
 								<td>${ a.phone }</td>
-								<td>${ a.mSort }</td>
-								<td>${ a.mStatus }</td>
-								<td>${ a.pushEnabled }</td>
-								<td>${ a.enrollDate }</td>
+								<td>${ a.cancAmount }</td>
+								<c:choose>
+									<c:when test="${a.calcYN = 0}">
+										<td><button onclick="refund(this.value)" value="${a.rNo}">환불하기</button></td>
+									</c:when>
+									<c:when test="${a.calcYN = 2}">
+										<td>환불 완료</td>									
+									</c:when>
+								</c:choose>
 							</tr>
 						</tbody>
 						</c:forEach>

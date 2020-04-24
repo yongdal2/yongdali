@@ -28,7 +28,6 @@
 			<div class="row">
 			<div id=title>
 				<h2 class="jal"><a href="adminHome.ydl">관리자 페이지</a></h2>
-			<p>회원님 목록 / admin_Mem.jsp / 회원번호, 회원구분으로 sql</p>
 			</div>
 				<hr>
 			</div>
@@ -41,7 +40,7 @@
 					<a href="aMem.ad"><span class="sidebar_span">회원님 목록</span></a><br>
 					<a href="aDri.ad"><span class="sidebar_span">기사님 목록</span></a><br>
 					<a href="aRes.ad"><span class="sidebar_span">예약 내역</span></a><br>
-					<a href="#"><span class="sidebar_span">정산 내역</span></a><br> 
+					<a href="aJung.ad"><span class="sidebar_span">정산 내역</span></a><br> 
 					<a href="#"><span class="sidebar_span">환불 내역</span></a><br> 
 					<a href="#"><span class="sidebar_span">채팅 내역</span></a>
 				</div>
@@ -54,28 +53,24 @@
 					<table class="table table-striped table-hover text-center">
 						<thead id="thead">
 							<tr>
-								<th>예약번호</th>
-								<th>기사번호</th>
-								<th>이름</th>
-								<th>휴대폰번호</th>
+								<th>정산번호</th>
+								<th>결제번호</th>
+								<th>용달이수익</th>
+								<th>기사코드</th>
 								<th>정산금액</th>
-								<th></th>
-								<th>알림설정</th>
-								<th>가입일</th>
+								<th>정산일</th>
 							</tr>
 						</thead>
 						
 						<c:forEach var="a" items="${ list }">
 						<tbody id="tbody">
 							<tr>
-								<td>${ a.mNo }</td>
-								<td>${ a.mId }</td>
-								<td>${ a.mName }</td>
-								<td>${ a.phone }</td>
-								<td>${ a.mSort }</td>
-								<td>${ a.mStatus }</td>
-								<td>${ a.pushEnabled }</td>
-								<td>${ a.enrollDate }</td>
+								<td>${ a.cNo }</td>
+								<td>${ a.cPNo }</td>
+								<td>${ a.fee }원</td>
+								<td>${ a.cDNo }</td>
+								<td>${ a.charge }원</td>
+								<td>${ a.calcDate }</td>
 							</tr>
 						</tbody>
 						</c:forEach>

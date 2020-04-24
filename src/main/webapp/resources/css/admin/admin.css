@@ -58,7 +58,7 @@
 
 /* 관리자 페이지 하얀배경 */
 #white{
-	background-color: ivory;
+	background-color: #ffffff;
     border: 1px solid rgb(231, 234, 243);
     border-radius: 50px;
 }
@@ -191,7 +191,7 @@ a{
 #table{
     padding: 0;
     border-radius: 16px;
-    border: solid 1px #dedede;
+    border: solid 1px #dedede; /* #5a8cff */
     background-color: #ffffff;
 }
 
@@ -214,7 +214,70 @@ th {
 
 
 
-
+ /* modal */
+     /*  *{         
+        margin:0; 
+        padding:0;
+      } */
+/*       a.button{
+        display:inline-block; 
+        padding: 10px 20px; 
+        text-decoration:none; 
+        color:rgb(90,140,255); 
+      } */
+      #modal{
+        display:none;
+        position:fixed; 
+        width:100%; height:100%;
+        top:0; left:0; 
+        background:rgba(0,0,0,0.9);
+      }
+      .modal-con{
+        /* display:none;
+        position:fixed; */
+        top:50%  !important; 
+        left:50% !important;
+        transform: translate(-50%,-50%);
+        max-width: 30%;
+        min-height: 90%;
+        background:#fff;
+        font-family: inherit;
+        border-radius: 25px;
+      }
+      .modal-con .title{
+        font-size:28px; 
+        padding: 15px; 
+        background : #ffffff;
+        font-weight: bold;
+        font-family: inherit;
+        color: #5a8cff;
+    	text-align: center;
+    	margin: 0px;
+      
+      }
+      .modal-con .con{
+        font-size:15px; 
+        line-height:1.3;
+        padding: 30px;
+        
+      }
+      .modal-con .close{
+        display:block;
+        position:absolute;
+        width:30px; height:30px;
+        border-radius:50%; 
+        border: 3px solid #000;
+        text-align:center; line-height: 27px;
+        text-decoration:none;
+        color:#000; font-size:20px; 
+        font-weight: bold;
+        right:10px; top:10px;
+      }
+#modal_hr{
+		border: 1px solid #5a8cff;
+	    margin-top: 0px;
+	    margin-bottom: 0px;
+}
 
 
 

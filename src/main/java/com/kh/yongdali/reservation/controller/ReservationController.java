@@ -109,8 +109,9 @@ public class ReservationController {
 	 */
 	@RequestMapping("pay.do")
 	public ModelAndView InsertReservation2(ModelAndView mv, Reservation r, HttpSession session,
-			@RequestParam("startDate1") String stDate, @RequestParam("endDate1") String edDate,
-			@RequestParam("capacity1") String capacity1) throws ParseException {
+											@RequestParam("startDate1") String stDate,
+											@RequestParam("endDate1") String edDate,
+											@RequestParam("capacity1") String capacity1) throws ParseException {
 		
 		// 차량크기, 거리, 결제금액 int로 변환하기
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -135,23 +136,13 @@ public class ReservationController {
 		r.setrMNo(((Member)session.getAttribute("loginUser")).getmNo());
 		System.out.println(r.getrMNo());
 		
-		int result1 = rService.insertReservation(r);
-		int result2 = 0;
-		if(result1 > 0) {
-			System.out.println("---------예약 insert 성공------------");
-			result2 = rService.insertPayment();
-			if(result2 > 0) {
-				System.out.println("---------결제 insert 성공------------");
-				mv.setViewName("user/paySuccess");				
-			} else {
-				mv.addObject("msg","결제 실패하셨습니다.");
-				mv.setViewName("common/errorPage");
-			}
+		int result = rService.insertReservation(r);
+		if(result > 0) {
+			mv.setViewName("user/paySuccess");
 		} else {
-			mv.addObject("msg","예약 실패하셨습니다.");
+			mv.addObject("msg","예약에 실패하셨습니다.");
 			mv.setViewName("common/errorPage");
 		}
 		return mv;
 	}
-
 }
