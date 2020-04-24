@@ -25,8 +25,8 @@
 		<result property="luggage" column="LUGGAGE"/>
 		<result property="msg" column="MSG"/>
 		<result property="amount" column="AMOUNT"/>
-		<result property="dealDate" column="DEAL_YN"/>
-		<result property="dealYN" column="DEAL_DATE"/>
+		<result property="dealYN" column="DEAL_YN"/>
+		<result property="dealDate" column="DEAL_DATE"/>
 	</resultMap>
 	
 	<select id="mibaechar" resultMap="reservationResultSet">

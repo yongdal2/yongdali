@@ -78,7 +78,7 @@ var calendar = $('#calendar').fullCalendar({
 			.append('<p><strong>하차지:</strong> ' + event.username + '</p>')
 			.append('<p><strong>상차일:</strong> ' + date1 + '</p>')
 			.append('<p><strong>하차일:</strong> ' + date2 + '</p>')
-			.append('<div class="popoverDescCalendar"><strong>정산금액:</strong> ' + (event.description*0.7) + '원 </div>'),
+			.append('<div class="popoverDescCalendar"><strong>정산금액:</strong> ' + Math.ceil(event.description*0.7) + '원 </div>'),
 			delay: {
 				show: "800",
 				hide: "50"

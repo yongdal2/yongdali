@@ -32,6 +32,8 @@ public class Reservation {
 	private String luggage;		// 이삿집
 	private String msg;			// 전달 사항
 	private String amount;		// 총 결제 금액
+	private Date dealDate;		// 거래성사일
+	private String dealYN; 		// 거래성사여부
 	
 	private Payment payment;	//payment
 	
@@ -44,10 +46,13 @@ public class Reservation {
 	}
 	
 
+	
+
 	public Reservation(String rNo, String rMNo, String rDNo, float capacity, String type, String startName,
 			String endName, String startPhone, String endPhone, String startAddr, String endAddr, String distance,
 			String rightLoad, String rightUnload, Date startDate, String startTime, Date endDate, String endTime,
-			String helpLoad, String helpUnload, String luggage, String msg, String amount, Payment payment) {
+			String helpLoad, String helpUnload, String luggage, String msg, String amount, Date dealDate, String dealYN,
+			Payment payment) {
 		super();
 		this.rNo = rNo;
 		this.rMNo = rMNo;
@@ -72,6 +77,8 @@ public class Reservation {
 		this.luggage = luggage;
 		this.msg = msg;
 		this.amount = amount;
+		this.dealDate = dealDate;
+		this.dealYN = dealYN;
 		this.payment = payment;
 	}
 
@@ -266,6 +273,23 @@ public class Reservation {
 
 	public void setPayment(Payment payment) {
 		this.payment = payment;
+	}
+	
+
+	public Date getDealDate() {
+		return dealDate;
+	}
+
+	public void setDealDate(Date dealDate) {
+		this.dealDate = dealDate;
+	}
+
+	public String getDealYN() {
+		return dealYN;
+	}
+
+	public void setDealYN(String dealYN) {
+		this.dealYN = dealYN;
 	}
 
 	@Override
