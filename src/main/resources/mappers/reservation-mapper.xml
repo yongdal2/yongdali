@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="reservationMapper">
-	<resultMap type="Reservation" id="reservationResultSet">
-		<id property="rNo" column="R_NO"/>	<!-- 예약번호 -->
-		<result property="rMNo" column="R_M_NO"/> <!-- 회원번호 -->
-		<result property="rDNo" column="R_D_NO"/> <!-- 운전자번호 -->
-		<result property="capacity" column="CAPACITY"/> <!-- 톤수 -->
-		<result property="type" column="TYPE"/> <!-- 차종 -->
-		<result property="startAddr" column="START_ADDR"/>	<!-- 출발지 -->
-		<result property="endAddr" column="END_ADDR"/>	<!-- 도착지 -->
-		<result property="startDate" column="START_DATE"/>	<!-- 상차일 -->
-		<result property="endDate" column="END_DATE"/>	<!-- 하차일 -->
-		<result property="helpLoad" column="HELP_LOAD"/>	<!-- 상차도움 -->
-		<result property="helpUnload" column="HELP_UNLOAD"/>	<!-- 하차도움 -->
-		<result property="luggage" column="LUGGAGE"/>	<!-- 짐 -->
-		<result property="msg" column="MSG"/>			<!-- 메시지 -->
-		<result property="dealYN" column="DEAL_YN"/>	<!-- 배차여부 -->
-		<result property="dealDate" column="DEAL_DATE"/>	<!-- 배차일 -->
-		<result property="enrollDate" column="ENROLL_DATE"/><!-- 등록일 -->
+	<resultMap id="reservationResultSet" type="Reservation">
+		<id property="rNo" column="R_NO"/>
+		<result property="rMNo" column="R_M_NO"/>
+		<result property="rDNo" column="R_D_NO"/>
+		<result property="capacity" column="CAPACITY"/>
+		<result property="type" column="TYPE"/>
+		<result property="startName" column="START_NAME"/>
+		<result property="endName" column="END_NAME"/>
+		<result property="startPhone" column="START_PHONE"/>
+		<result property="endPhone" column="END_PHONE"/>
+		<result property="startAddr" column="START_ADDR"/>
+		<result property="endAddr" column="END_ADDR"/>
+		<result property="distance" column="DISTANCE"/>
+		<result property="rightLoad" column="RIGHT_LOAD"/>
+		<result property="rightUnload" column="RIGHT_UNLOAD"/>
+		<result property="startDate" column="START_DATE"/>
+		<result property="startTime" column="START_TIME"/>
+		<result property="endDate" column="END_DATE"/>
+		<result property="endTime" column="END_TIME"/>
+		<result property="helpLoad" column="HELP_LOAD"/>
+		<result property="helpUnload" column="HELP_UNLOAD"/>
+		<result property="luggage" column="LUGGAGE"/>
+		<result property="msg" column="MSG"/>
+		<result property="amount" column="AMOUNT"/>
+		<result property="dealDate" column="DEAL_YN"/>
+		<result property="dealYN" column="DEAL_DATE"/>
 	</resultMap>
 	
 	<select id="mibaechar" resultMap="reservationResultSet">
@@ -25,7 +34,7 @@
 			SELECT *
 			FROM (SELECT *
 				FROM RESERVATION
-				ORDER BY ENROLL_DATE DESC)
+				ORDER BY START_DATE DESC)
 			WHERE DEAL_YN = 'N'
 			AND CAPACITY = (SELECT CAPACITY
 							FROM DRIVER
@@ -74,7 +83,7 @@
 		SELECT COUNT(*)
 			FROM (SELECT *
 				FROM RESERVATION
-				ORDER BY ENROLL_DATE DESC)
+				ORDER BY START_DATE DESC)
 			WHERE DEAL_YN = 'N'
 			AND CAPACITY = (SELECT CAPACITY
 							FROM DRIVER
@@ -94,7 +103,7 @@
             AND TYPE = (SELECT TYPE
 							FROM DRIVER
 							WHERE D_M_NO  = #{mNo})
-		ORDER BY ENROLL_DATE DESC
+		ORDER BY START_DATE DESC
 	</select>
 	
 	
