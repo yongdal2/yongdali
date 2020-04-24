@@ -11,8 +11,8 @@
 <!-- Custom Css -->
 <link rel="stylesheet"
 	href="${contextPath}/resources/css/admin/admin.css">
-
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 
 <body>
@@ -56,6 +56,12 @@ MEMBER에서 M_SORT가 '일반'인 사람의 PHONE</p>
 						<thead id="thead">
 							<tr>
 							<!--	<th>상세보기</th>  모달창(집중) 예약컬럼의 전체 상세내역 -->
+								<td>
+									<button>
+        								<a href="javascript:openModal('modal');" class="button modal-open">상세보기</a>
+    								</button>
+								</td>
+							
 								<td>예약 번호</td>
 								<td>진행 상태</td>
 	 							<td>예약 일자</td>
@@ -77,6 +83,7 @@ MEMBER에서 M_SORT가 '일반'인 사람의 PHONE</p>
 	 									<!-- <a href="" -->
 	 								</button>
  								</td>
+ 								
 <!--								<td>${ a.rNo }</td>
 								<td>${ a.rMNo }</td>
 								<td>${ a.rDNo }</td>
@@ -90,25 +97,51 @@ MEMBER에서 M_SORT가 '일반'인 사람의 PHONE</p>
 					</table>
 				</div>
 				
-				<!-- 페이징 처리 -->
-				<div class="row text-center" style="height: 400px">
+				<!-- modal -->
+				<div id="modal"></div>
+				<div class="modal-con modal">
+				<a href="javascript:;" class="close">X</a>
+				<p class="title">예약 상세내역</p>
+				<table class="con table table-striped table-hover text-center">
+					<thead>
+					<tr>
+	                 <td>상세내역</td>
+	                 <td>상세내역</td>
+	            	</tr>
+	            	</thead>
+	         
+	             <tr>
+	                 <td>123</td>
+	                 <td>456</td>
+	             </tr>
+	       		</table>
+	     		</div>
+				
+				
+					<!-- 페이징 처리 -->
+					<div class="row text-center" style="height: 400px">
 					<ul class="pagination ft_gr">
 					
 						<!-- << 처음  -->
 						<li>
-						<c:if test="${ pi.currentPage eq 1 }"><a>&lt;&lt; &nbsp;</a></c:if>
-						<c:if test="${ pi.currentPage ne 1 }"><a href="#.ad?currentPage=1">&lt;&lt; &nbsp;</a></c:if>
+						<c:if test="${ pi.currentPage eq 1 }">
+													<a>&lt;&lt; &nbsp;</a>
+												</c:if>
+						<c:if test="${ pi.currentPage ne 1 }">
+													<a href="#.ad?currentPage=1">&lt;&lt; &nbsp;</a>
+												</c:if>
 						</li>
 						
 						<!-- < -->
 						<li>
 						<c:if test="${ pi.currentPage ne 1 }">
 							<c:url var="before" value="aRes.ad">
-								<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
+								<c:param name="currentPage" value="${ pi.currentPage -1 }" />
 							</c:url>
 							<a href="${ before }">&lt; &nbsp;</a>
 						</c:if>
-						<c:if test="${ pi.currentPage eq 1 }"><a> &lt; &nbsp;</a>
+						<c:if test="${ pi.currentPage eq 1 }">
+													<a> &lt; &nbsp;</a>
 						</c:if>
 						</li>
 								
@@ -127,7 +160,6 @@ MEMBER에서 M_SORT가 '일반'인 사람의 PHONE</p>
 						</li>
 						</c:forEach>
 							
-																
 						<!-- > -->	
 						<li>
 						<a href="
@@ -143,7 +175,7 @@ MEMBER에서 M_SORT가 '일반'인 사람의 PHONE</p>
 						<li>
 						<c:if test="${ pi.currentPage ne pi.maxPage }">
 						<c:url var="lastPage" value="aRes.ad">
-								<c:param name="currentPage" value="${ pi.maxPage }"/>
+								<c:param name="currentPage" value="${ pi.maxPage }" />
 							</c:url>
 						<a href="${ lastPage }">&gt;&gt; &nbsp;</a>
 						</c:if>
@@ -161,7 +193,19 @@ MEMBER에서 M_SORT가 '일반'인 사람의 PHONE</p>
 
 
 <!-- 예약내역 상세보기 : 이목 집중 모달창 -->
-<script type="text/javascript"></script>
+      <script>
+      function openModal(modalname){
+          document.get
+          $("#modal").fadeIn(300);
+          $("."+modalname).fadeIn(300);
+        }
+        
+        $("#modal, .close").on('click',function(){
+          $("#modal").fadeOut(300);
+          $(".modal-con").fadeOut(300);
+        });
+        
+        </script>
 
 
 
