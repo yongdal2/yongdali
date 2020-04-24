@@ -80,7 +80,7 @@ MEMBER에서 M_SORT가 '일반'인 사람의 PHONE</p>
 							<tr>
  								<td>모달창- 버튼으로. 
 	 								<button id="wrap">
-	 									<!-- <a href="" -->
+	 									
 	 								</button>
  								</td>
  								
@@ -102,6 +102,7 @@ MEMBER에서 M_SORT가 '일반'인 사람의 PHONE</p>
 				<div class="modal-con modal">
 				<a href="javascript:;" class="close">X</a>
 				<p class="title">예약 상세내역</p>
+				<hr id="modal_hr">
 				<table class="con table table-striped table-hover text-center">
 					<thead>
 					<tr>
