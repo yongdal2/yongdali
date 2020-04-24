@@ -123,8 +123,6 @@ public class MemberController {
 		return "login&signUp/login";
 	}
 	
-	
-	
 	/** 비밀번호 찾기 페이지
 	 * @return
 	 */
@@ -185,6 +183,11 @@ public class MemberController {
 		return ranNum;	
 	}
 
+	/** 비밀번호 찾기
+	 * @param m
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("findPwd.me")
 	public String findPwd(@ModelAttribute Member m, Model model) {
 		m.setPwd(bcryptPasswordEncoder.encode(m.getPwd()));
@@ -209,22 +212,17 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value="login.me", method=RequestMethod.POST)
 	public String memberLogin(@ModelAttribute Member m, Model model) {
-//		logger.debug("로그인을 시도한 회원 아이디 : " + m.getmId());
 		Member loginUser = mService.loginMember(m); 
-		System.out.println(loginUser);
 		
 		// 로그인 성공 
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getPwd(), loginUser.getPwd())) {
 			model.addAttribute("loginUser", loginUser);
-//			logger.debug(loginUser.getmId());
 			return "loginSuccess"; 
 		}
-		
 		// 이메일 없음
 		else if(loginUser == null){
 			return "nonExistentId";
 		}
-		
 		// 비밀번호 틀림
 		else {
 			return "wrongPwd";
@@ -386,6 +384,15 @@ public class MemberController {
 //	/네이버 아이디로 로그인(네아로)    
 	
 //	/네이버 아이디로 로그인(네아로)	
+    
+// TODO 카카오 아이디로 로그인
+    /** 카카오 아이디로 로그인
+     * @return
+     */
+//    @RequestMapping("kakaoLogin.me")
+//    public String kakaoLogin() {
+//    	return "redirect:home.do";
+//    }
     
     /** 로그아웃
 	 * @param status

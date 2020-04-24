@@ -84,8 +84,8 @@
             <div class="easyEccessLogo">
                 <h2 class="easyEccessTitle">간편 회원가입</h2>
                 <a href="#"><img src="${contextPath}/resources/images/login&signUp/facebookLogo.png" alt="페이스북"></a>
-                <a href="#"><img src="${contextPath}/resources/images/login&signUp/kakaoLogo.png" alt="카카오"></a>
-                <%-- <a href="#"><img src="${contextPath}/resources/images/login&signUp/naverLogo.png" alt="네이버"></a> --%>
+                <%-- <a href="#"><img src="${contextPath}/resources/images/login&signUp/kakaoLogo.png" alt="카카오"></a> --%>
+                <img src="${contextPath}/resources/images/login&signUp/kakaoLogo.png" alt="카카오" id="kakaoSignUp">
                 <img src="${contextPath}/resources/images/login&signUp/naverLogo.png" alt="네이버" id="naverSignUp">
             </div>
         </div>
