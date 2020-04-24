@@ -34,6 +34,7 @@
 					<hr>
 				</div>
 
+<<<<<<< HEAD
 
 
 				<div class="row" id="content">
@@ -127,6 +128,115 @@
 										</c:if> <c:if test="${ p ne pi.currentPage }">
 											<a
 												href="<c:url var="pagination" value="aRes.ad">	
+=======
+			<!-- list -->
+			<div class="row" id="rowList">
+				<div class="col-xs-12 col-md-12" id="table">
+					<br>
+				<!-- <table style="text-align: center" class="table table-striped table-hover text-center"> -->
+					<table class="table table-striped table-hover text-center">
+						<thead id="thead">
+							<tr>
+							<!--	<th>상세보기</th>  모달창(집중) 예약컬럼의 전체 상세내역 -->
+								<td>
+									<button>
+        								<a href="javascript:openModal('modal');" class="button modal-open">상세보기</a>
+    								</button>
+								</td>
+							
+								<td>예약 번호</td>
+								<td>진행 상태</td>
+	 							<td>예약 일자</td>
+	 							<td>상차일</td>
+	 							<td>하차일</td>
+								<td>출발지</td>
+								<td>도착지</td>
+								<td>결제 금액</td>
+								<td>차량정보</td>
+								<td>상세정보</td>
+							</tr>
+						</thead>
+						
+						<c:forEach var="a" items="${ list }">
+						<tbody id="tbody">
+							<tr>
+ 								<td>모달창- 버튼으로. 
+	 								<button id="wrap">
+	 									
+	 								</button>
+ 								</td>
+ 								
+<!--								<td>${ a.rNo }</td>
+								<td>${ a.rMNo }</td>
+								<td>${ a.rDNo }</td>
+								<td>${ a.startPhone }</td>
+								<td>기사님연락처</td>
+								<td>${ a.startDate }</td>
+								<td>${ a.amount }</td> -->
+							</tr>
+						</tbody>
+						</c:forEach>
+					</table>
+				</div>
+				
+				<!-- modal -->
+				<div id="modal"></div>
+				<div class="modal-con modal">
+				<a href="javascript:;" class="close">X</a>
+				<p class="title">예약 상세내역</p>
+				<hr id="modal_hr">
+				<table class="con table table-striped table-hover text-center">
+					<thead>
+					<tr>
+	                 <td>상세내역</td>
+	                 <td>상세내역</td>
+	            	</tr>
+	            	</thead>
+	         
+	             <tr>
+	                 <td>123</td>
+	                 <td>456</td>
+	             </tr>
+	       		</table>
+	     		</div>
+				
+				
+					<!-- 페이징 처리 -->
+					<div class="row text-center" style="height: 400px">
+					<ul class="pagination ft_gr">
+					
+						<!-- << 처음  -->
+						<li>
+						<c:if test="${ pi.currentPage eq 1 }">
+													<a>&lt;&lt; &nbsp;</a>
+												</c:if>
+						<c:if test="${ pi.currentPage ne 1 }">
+													<a href="#.ad?currentPage=1">&lt;&lt; &nbsp;</a>
+												</c:if>
+						</li>
+						
+						<!-- < -->
+						<li>
+						<c:if test="${ pi.currentPage ne 1 }">
+							<c:url var="before" value="aRes.ad">
+								<c:param name="currentPage" value="${ pi.currentPage -1 }" />
+							</c:url>
+							<a href="${ before }">&lt; &nbsp;</a>
+						</c:if>
+						<c:if test="${ pi.currentPage eq 1 }">
+													<a> &lt; &nbsp;</a>
+						</c:if>
+						</li>
+								
+						<!-- 페이지 -->
+						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+						<li>
+						<c:if test="${ p eq pi.currentPage }">
+						<a><b><font color="#5a8cff">${ p }</font></b></a>
+						</c:if>							
+						<c:if test="${ p ne pi.currentPage }">
+						<a href="<c:url var="pagination" value="aRes.ad">	
+>>>>>>> branch 'master' of https://github.com/yongdal2/yongdali.git
 									<c:param name="currentPage" value="${ p }"/>
 								</c:url>
 						${ pagination }">${ p }</a>
