@@ -218,7 +218,7 @@ public class UserMyPageController {
 			return mv;
 		}
 		
-		//예약 드라이버 번호 불러오기
+		//예약 드라이버 정보 불러오기
 		@RequestMapping("rDinfo.myp")
 		public void getRsvDinfo(HttpServletResponse rs, @RequestParam String dNo) throws IOException{
 			System.out.println(dNo);
@@ -228,12 +228,17 @@ public class UserMyPageController {
 			rs.setContentType("application/json; charset=utf-8");
 			
 			JSONObject adJob = new JSONObject();
-			adJob.put("name",URLEncoder.encode(d.getRegCardImgOrigin(), "UTF-8"));
-			adJob.put("phone",d.getRegCardImgRename());
-			adJob.put("img",d.getIdImgRename());
-			adJob.put("capacity",d.getCapacity());
-			adJob.put("type",URLEncoder.encode(d.getType(), "UTF-8"));
-			adJob.put("carNo",URLEncoder.encode(d.getCarNo(), "UTF-8"));
+			if(d !=null) {
+				adJob.put("deal","Y");
+				adJob.put("name",URLEncoder.encode(d.getRegCardImgOrigin(), "UTF-8"));
+				adJob.put("phone",d.getRegCardImgRename());
+				adJob.put("img",d.getIdImgRename());
+				adJob.put("capacity",d.getCapacity());
+				adJob.put("type",URLEncoder.encode(d.getType(), "UTF-8"));
+				adJob.put("carNo",URLEncoder.encode(d.getCarNo(), "UTF-8"));
+			}else {
+				adJob.put("deal","N");
+			}
 			
 			PrintWriter out = rs.getWriter();
 			out.print(adJob);
@@ -279,21 +284,24 @@ public class UserMyPageController {
 		public void pDetail(HttpServletResponse rs, @RequestParam String rNo, Payment p) throws JsonIOException, IOException {
 			
 			p = umpService.pDetail(rNo);
+			
+			System.out.println(p);
 			rs.setContentType("application/json; charset=utf-8");
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			gson.toJson(p, rs.getWriter());
-					
-					
 		}
 		
 		//예약 취소
 		@ResponseBody
 		@RequestMapping("rsvCan.myp")
-		public String rsvCan(Payment p,@RequestParam String rNo, @RequestParam String deal_yn) throws IOException {
-			p.setpRNo(rNo);
-			p.setDealYN(deal_yn);
-				int result = umpService.rsvCan(p);
-			
+		public String rsvCan(Payment p,@RequestParam String pRNo, @RequestParam String dealYN) throws IOException {
+			p.setpRNo(pRNo);
+			p.setDealYN(dealYN);
+			System.out.println(p);
+
+			int result = umpService.rsvCan(p);
+
+			System.out.println("결과 : "+result);
 			if(result>0) {
 				return "ok";
 			}else{

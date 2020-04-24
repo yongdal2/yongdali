@@ -117,8 +117,6 @@ public interface UserMyPageService {
 	 * 예약취소
 	 * @return
 	 */
-
-
 	int rsvCan(Payment p);
 
 
