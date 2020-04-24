@@ -133,7 +133,7 @@
             <p class="time"> 15:09PM Today</p> -->
           </div>
           <div class="footer-chat">
-          	<input type="text" id="senderId" value="${sessionScope.loginUser.mId }" style="display: none;">
+          	<input type="hidden" id="senderId" value="${sessionScope.loginUser.mId }" >
             <input type="text" id="senderName" value="${sessionScope.loginUser.mName }" style="display: none;">
             <input type="hidden" id="room"/>
     		<input type="hidden" id="receiveId"/>
@@ -178,10 +178,10 @@
 		
 		function connectionSocket(){
 			connect = true;
-			socket = new WebSocket('ws://192.168.25.20:8888/yongdali/chatting');
+			socket = new WebSocket('ws://192.168.110.45:8888/yongdali/chatting');
 			/* 페이지 접속한 session id */
 			var sessionid = $("#senderId").val();
-			
+			var ccId = $("#ccId").val();
 			socket.onopen = function(e){
 //				socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),"","createroom","")));
 
@@ -193,8 +193,7 @@
 				console.log("세션아이디:"+sessionid);
 				console.log("받는아이디:"+data["receiveId"]);
 				
-				
-				if(data["flag"]=="room"){
+				if(data["flag"]=="room" ){
 					var rooms = data['msg'].split(",");
 					console.log(rooms);
 					

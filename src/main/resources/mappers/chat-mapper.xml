@@ -49,5 +49,11 @@
 		VALUES('CM'||SEQ_CMNO.NEXTVAL,#{roomNo},#{id},#{roomName},#{msg},DEFAULT,#{flag},DEFAULT)
 	</insert>
 	
+	<select id="selectPreRoom" resultMap="roomResultSet" parameterType="Room">
+		SELECT CR_NO FROM CHATROOM
+        WHERE SENDID=#{id}
+        AND CONNECTYN='Y'
+	</select>
+	
 	
 </mapper>

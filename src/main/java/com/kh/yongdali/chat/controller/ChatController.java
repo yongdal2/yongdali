@@ -1,12 +1,13 @@
 package com.kh.yongdali.chat.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
 
 import com.kh.yongdali.chat.model.service.ChatService;
 import com.kh.yongdali.chat.msg.Message;
@@ -31,20 +32,43 @@ public class ChatController {
 	
 	@RequestMapping("userCreateChat.ch")
 	@ResponseBody
-	public String userCreateChat(Room r, Model model,SessionStatus status) {
-		System.out.println(r);
-		int result = cService.userCreateChat(r);
-		Room nowRoom = cService.selectNowRoom(r);	
+	public String userCreateChat(Room r, Model model,HttpSession session) {
 		
-		if(result > 0) {
-			if(nowRoom != null) {
-				model.addAttribute("nowRoom", nowRoom);
-				System.out.println(nowRoom);
-			}
-			return "success";
+		
+		// 현재 로그인한 아이디로 생성된 채팅방이 있는지 여부를 체크
+		// 만약에 있으면 Roomno를 반환
+		Room preRoom = cService.selectPreRoom(r);
+		System.out.println(preRoom);
+		if(preRoom != null) {
+			return preRoom.getRoomNo();
 		}else {
-			return "fail";
+			int result = cService.userCreateChat(r);
+			if(result > 0) {
+				Room nowRoom = cService.selectNowRoom(r);		
+				return nowRoom.getRoomNo();
+			}else {
+				return "fail";
+			}
+			
 		}
+		
+		// 없으면 cService.userCreateChat(r)
+		// 무조건 생성되는 
+		
+		//방금 생성한 방 가져오기
+		//Room nowRoom = cService.selectNowRoom(r);	
+		
+		//if(result > 0) {
+//			if(nowRoom != null) {
+//				session.setAttribute("nowRoom", nowRoom);
+//				/* model.addAttribute("nowRoom", nowRoom); */
+//				System.out.println("NOW: "+ nowRoom);
+//			}
+		//	return nowRoom.getRoomNo();
+		//}else {
+		//	return "fail";
+		//}
+		//return "CR17";
 	}
 	
 	

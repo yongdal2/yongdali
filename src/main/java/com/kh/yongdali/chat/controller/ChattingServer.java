@@ -84,7 +84,7 @@ public class ChattingServer {
 		try {
 			if(flag.equals("msg")) {
 				for(Session s : session.getOpenSessions()) {
-					Message m=(Message)(s.getUserProperties().get("msg"));
+					Message m =(Message)(s.getUserProperties().get("msg"));
 					//s.getBasicRemote().sendObject(new Message("admin","",rooms, "room"));//방현황 전송
 					//s.getBasicRemote().sendObject(new Message("admin","",users, "user"));//userg현황전송
 					if(m!=null) {
@@ -117,7 +117,7 @@ public class ChattingServer {
 						}
 						else if(m.getRoomName().equals(msg.getReceiveId())) {
 							//s.getBasicRemote().sendObject(new Message("admin","",rooms, "room"));//방현황 전송
-							s.getBasicRemote().sendObject(new Message("admin","",users, "user"));//userg현황전송
+							s.getBasicRemote().sendObject(new Message("admin","",users, "user",m.getChkRoom()));//userg현황전송
 							s.getBasicRemote().sendObject(msg);
 						}
 						
@@ -126,8 +126,9 @@ public class ChattingServer {
 				}
 			}
 			else if(flag.equals("createroom")) {//채팅만들고 현황전송하기.!
+				System.out.println("1");
 				for(Session s : session.getOpenSessions()) {
-					s.getBasicRemote().sendObject(new Message("admin","",rooms, "room"));//방현황 전송
+					s.getBasicRemote().sendObject(new Message("admin","",rooms, "room","","YES"));//방현황 전송
 					s.getBasicRemote().sendObject(new Message("admin","",users, "user"));//userg현황전송
 				}
 			}
@@ -145,8 +146,9 @@ public class ChattingServer {
 		Set<String> rooms=new HashSet<String>();
 		for(Session s : session.getOpenSessions()) {
 			Message m=(Message)(s.getUserProperties().get("msg"));
-			if(m!=null) {
+			if(m !=null) {
 				rooms.add(m.getRoomName());
+				
 			}
 		}
 		String[] roomStr=new String[rooms.size()];
