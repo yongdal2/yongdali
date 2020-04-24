@@ -385,6 +385,15 @@ public class MemberController {
 	
 //	/네이버 아이디로 로그인(네아로)	
     
+// TODO 카카오 아이디로 로그인
+    /** 카카오 아이디로 로그인
+     * @return
+     */
+//    @RequestMapping("kakaoLogin.me")
+//    public String kakaoLogin() {
+//    	return "redirect:home.do";
+//    }
+    
     /** 로그아웃
 	 * @param status
 	 * @return

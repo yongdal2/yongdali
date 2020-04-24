@@ -33,10 +33,19 @@
     apiURL += "&state=" + state;
     session.setAttribute("state", state);
  %>
-	 
-
-
-
+ 
+ <!-- 카카오 아이디로 로그인(네아로) -->
+<%--  <%
+ 	String kClientId = "d29edd4146148b64b349b622e6a3f29f"; // 앱 REST API 키
+ 	String kRedirectURI = URLEncoder.encode("http://localhost:8081/yongdali/kakaoLogin.me", "UTF-8");
+    SecureRandom kRandom = new SecureRandom();
+    String kState = new BigInteger(130, kRandom).toString();
+ 	String kApiURL = "https://kauth.kakao.com/oauth/authorize?response_type=code";
+ 	kApiURL += "&client_id=" + kClientId;
+ 	kApiURL += "&redirect_uri=" + kRedirectURI;
+ 	/* kApiURL += "&state=" + kState;
+ 	session.setAttribute("state", kState); */
+ %> --%>
 
 	<!-- interceptor용 (메인페이지 예약하러가기 클릭 시) -->
 	<script>

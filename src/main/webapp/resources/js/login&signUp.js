@@ -220,6 +220,16 @@ $(document).ready(function(){
     	}
     })
     
+    // 카카오 회원가입 버튼
+    $('#kakaoSignUp').click(function(){
+    	$('#pushEnabledForm').attr('action','easySignUpView.me');
+    	if($('.chkPolicy:eq(1)').attr('checked') == "checked" && $('.chkPolicy:eq(2)').attr('checked') == "checked"){
+    		$('#pushEnabledForm').trigger('submit');
+    	}else {
+    		alert("필수 약관에 동의해야합니다.")
+    	}
+    })
+    
     
     /*-- 비밀번호 찾기 ----------------------------------------------*/
     // 이메일 체크(중복 및 유효성 검사)
