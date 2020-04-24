@@ -220,6 +220,16 @@ $(document).ready(function(){
     	}
     })
     
+    // 카카오 회원가입 버튼
+    $('#kakaoSignUp').click(function(){
+    	$('#pushEnabledForm').attr('action','easySignUpView.me');
+    	if($('.chkPolicy:eq(1)').attr('checked') == "checked" && $('.chkPolicy:eq(2)').attr('checked') == "checked"){
+    		$('#pushEnabledForm').trigger('submit');
+    	}else {
+    		alert("필수 약관에 동의해야합니다.")
+    	}
+    })
+    
     
     /*-- 비밀번호 찾기 ----------------------------------------------*/
     // 이메일 체크(중복 및 유효성 검사)
@@ -291,7 +301,7 @@ $(document).ready(function(){
     	};
     });
     
-    // 비밀번호 찾기 이메일 존재 유무 및 가입타입 확인
+    // 비밀번호 찾기_이메일 존재 유무 및 가입타입 확인
     function findPwd_emailChk(){
     	var result = false;
     	$.ajax({
@@ -321,6 +331,7 @@ $(document).ready(function(){
     	return result;
     }
     
+    // 비밀번호 찾기_비밀번호 유효성 검사
     function findPwd_emailValidate(){ 
         let emailVal = $("#findPwd_email").val();  
         // 이메일 미입력
@@ -337,9 +348,6 @@ $(document).ready(function(){
             return true;
         }
     }
-    
-    
-    
     
 
     /*-- 회원가입 ----------------------------------------------*/
