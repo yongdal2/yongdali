@@ -17,6 +17,7 @@
 		<typeAlias type="com.kh.yongdali.myPage.model.vo.Address" alias="Address"/>
 		<typeAlias type="com.kh.yongdali.chat.msg.Message" alias="Message"/>
 		<typeAlias type="com.kh.yongdali.chat.msg.Room" alias="Room"/>
+		<typeAlias type="com.kh.yongdali.admin.model.vo.Calculate" alias="Calculate"/>
 	</typeAliases>
 	
  	<mappers>
@@ -29,6 +30,7 @@
 		<mapper resource="mappers/myPage-mapper.xml"/>
 		<mapper resource="mappers/admin-mapper.xml"/>
 		<mapper resource="mappers/chat-mapper.xml"/>
+		<mapper resource="mappers/calculate-mapper.xml"/>
 	</mappers>
 	
 </configuration>  

@@ -131,6 +131,33 @@
 							WHERE D_M_NO = #{mNo})
 		ORDER BY DEAL_DATE DESC
 	</select>
+	
+	<select id="calcRCount" resultType="_int">
+		<![CDATA[
+			SELECT COUNT(*)
+			FROM RESERVATION
+			WHERE (
+				(RIGHT_UNLOAD IS NULL AND END_DATE <SYSDATE)
+			OR	(RIGHT_UNLOAD='바로 하차' AND RIGHT_LOAD IS NULL AND START_DATE<SYSDATE)
+			OR	(RIGHT_UNLOAD='바로 하차' AND RIGHT_LOAD='바로 상차' AND DEAL_DATE<SYSDATE)
+			AND (R_D_NO IS NOT NULL)
+			) 
+		]]>
+	</select>
+	
+	<select id="calList" resultMap="reservationResultSet">
+		<![CDATA[
+			SELECT *
+			FROM RESERVATION
+			WHERE (
+				(RIGHT_UNLOAD IS NULL AND END_DATE <SYSDATE)
+			OR	(RIGHT_UNLOAD='바로 하차' AND RIGHT_LOAD IS NULL AND START_DATE<SYSDATE)
+			OR	(RIGHT_UNLOAD='바로 하차' AND RIGHT_LOAD='바로 상차' AND DEAL_DATE<SYSDATE)
+			AND (R_D_NO IS NOT NULL)
+			) 	
+		]]>
+	</select>
+	
 </mapper>
 
 

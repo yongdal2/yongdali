@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="calculateMapper">
+
+	<!-- resultMap -->
+	<resultMap id="calResultSet" type="Calculate">
+		<id property="cNo" column="C_NO"/>
+		<result property="cPNo" column="C_P_NO"/>
+		<result property="fee" column="FEE"/>
+		<result property="cDNo" column="C_D_NO"/>
+		<result property="charge" column="CHARGE"/>
+		<result property="calcYN" column="CALC_YN"/>
+		<result property="calcDate" column="CALC_DATE"/>
+	</resultMap>
+	
+	<select id="selectJungCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM CALCULATE
+	</select>
+	
+	<select id="calList" resultMap="calResultSet">
+		SELECT *
+		FROM CALCULATE
+	</select>
+	
+	<update id="jungsan">
+		UPDATE PAYMENT
+		SET CALC_YN = 1
+		WHERE P_R_NO = #{rNo}
+	</update>
+
+	
+	
+</mapper>

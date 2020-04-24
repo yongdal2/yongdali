@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.reservation.model.vo.Reservation;
+import com.kh.yongdali.admin.model.vo.Calculate;
 import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.driver.model.vo.Driver;
 
@@ -40,6 +41,16 @@ public interface AdminService {
 	 * @return
 	 */
 	ArrayList<Reservation> selectResList(PageInfo pi);
+
+	int getJungListCount();
+
+	ArrayList<Calculate> calList(PageInfo pi);
+
+	int reserCount();
+
+	ArrayList<Reservation> reserList(PageInfo pi);
+
+	int jungsan(String rNo);
 
 
 	
