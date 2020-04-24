@@ -33,11 +33,11 @@ public class AdminController {
 								@RequestParam(value= "currentPage", required = false, defaultValue = "1") 
 								int currentPage) { //현재 페이지가 필요한데, 없어도 되고, 있으면 기본값 1
 		
-		System.out.println("currentPage : " + currentPage);
+		System.out.println("memberCurrentPage : " + currentPage);
 		
 		int listCount = aService.getMemListCount();
 		
-		System.out.println("listCount : " + listCount);
+		System.out.println("memberListCount : " + listCount);
 		
 		
 		int pageLimit =5;
@@ -48,7 +48,7 @@ public class AdminController {
 		//(int currentPage, int listCount, int pageLimit, int boardLimit)
 		
 		ArrayList<Member> list = aService.selectMemList(pi);
-		System.out.println(list);
+		System.out.println("memberList : " + list);
 		//---------------------------------------------------
 		mv.addObject("list", list); 
 		mv.addObject("pi", pi);
@@ -68,11 +68,11 @@ public class AdminController {
 	public ModelAndView adminDriList(ModelAndView mv,
 									@RequestParam(value = "currentPage", required = false, defaultValue = "1") 
 									int currentPage) {
-		System.out.println("currentPage : " + currentPage);
+		System.out.println("driverCurrentPage : " + currentPage);
 		
 		int listCount = aService.getDriListCount();
 		
-		System.out.println("listCount : " + listCount);
+		System.out.println("driverListCount : " + listCount);
 		
 		int pageLimit =5;
 		int boardLimit=10;
@@ -80,7 +80,7 @@ public class AdminController {
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, pageLimit, boardLimit);
 		
 		ArrayList<Driver> list = aService.selectDriList(pi);
-		System.out.println("list : " + list );
+		System.out.println("driverList : " + list );
 		//---------------------------------------------------
 		mv.addObject("list", list);
 		mv.addObject("pi", pi);
@@ -92,6 +92,38 @@ public class AdminController {
 	
 	
 	
+	/**
+	 * Reservation List
+	 * @param mv
+	 * @param currentPage
+	 * @return
+	 */
+	@RequestMapping("aRes.ad")
+	public ModelAndView adminResList(ModelAndView mv,
+									@RequestParam(value = "currentPage", required = false, defaultValue = "1")
+									int currentPage) {
+		System.out.println("reservationCurrentPage : " + currentPage);
+		
+		int listCount = aService.getResListCount();
+		System.out.println("reservationListCount : " + listCount);
+//		System.out.println("ㄱlistCount : " + listCount);
+		
+		int pageLimit =5;
+		int boardLimit=10;
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, pageLimit, boardLimit);
+		
+		//ArrayList<Reservation> list = aService.selectResList(pi);
+		//System.out.println("reservationLlist : " + list);
+//		  System.out.println("ㄱlist : " + list);
+		//-----
+		//mv.addObject("list", list);
+		mv.addObject("pi", pi);
+		mv.setViewName("admin/admin_Reser");
+		
+		return mv;
+		
+	}	
 	
 	
 	
@@ -115,10 +147,6 @@ public class AdminController {
 	public String adminHomeView2() {
 		return "admin/admin_Mem";
 	}
-	
-	
-	
-	
 	
 	//기사님 목록
 	@RequestMapping("admin_Driver.ydl")
@@ -146,34 +174,3 @@ public class AdminController {
 	
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

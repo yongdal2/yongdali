@@ -19,7 +19,7 @@
              기사님 목록 페이지	
         </div>
         
-        <div OnClick="location.href ='admin_Reser.ydl'" style="width: 100px; height: 100px; background: #404ced; cursor: pointer; border-radius: 10px; margin-right: 20px;">
+        <div OnClick="location.href ='aRes.ad'" style="width: 100px; height: 100px; background: #404ced; cursor: pointer; border-radius: 10px; margin-right: 20px;">
              예약 내역 페이지	
         </div>
         <div OnClick="location.href ='admin_Cal.ydl'" style="width: 100px; height: 100px; background: #fffc3b; cursor: pointer; border-radius: 10px; margin-right: 20px;">

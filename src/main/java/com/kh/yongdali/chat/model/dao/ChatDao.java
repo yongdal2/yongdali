@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.yongdali.chat.msg.Message;
+import com.kh.yongdali.chat.msg.Room;
 
 @Repository("cDao")
 public class ChatDao {
@@ -12,14 +13,20 @@ public class ChatDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public int userInsertChat(Message m) {
-		// TODO Auto-generated method stub
-		return sqlSession.insert("chatMapper.userInsertChat",m);
+
+	public int userCreateChat(Room r) {
+		
+		return sqlSession.insert("chatMapper.userCreateChat", r);
 	}
 
-	public int userCreateChat(Message m) {
+	public Room selectNowRoom(Room r) {
 		
-		return sqlSession.insert("chatMapper.userCreateChat", m);
+		return sqlSession.selectOne("chatMapper.selectNowRoom",r);
+	}
+
+	public int userInsertMessage(Message m) {
+		
+		return sqlSession.insert("chatMapper.userInsertMessage",m);
 	}
 
 }

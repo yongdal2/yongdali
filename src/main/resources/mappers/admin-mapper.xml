@@ -14,7 +14,7 @@
 		<result property="enrollDate" column="ENROLLDATE"/>
 	</resultMap>
 	
-		<resultMap type="Driver" id="AdminDriResultSet">
+	<resultMap type="Driver" id="AdminDriResultSet">
 		<id property="dNo" column="D_NO"/>
 		<result property="dmNo" column="D_M_NO"/>
 		<result property="capacity" column="CAPACITY"/>
@@ -26,17 +26,7 @@
 		<result property="regCardImgRename" column="CAR_IMG_RENAME"/>
 	</resultMap>
 	
-<!-- 		<resultMap type="Driver" id="driverResultSet">
-		<id property="dNo" column="D_NO"/>
-		<result property="dmNo" column="D_M_NO"/>
-		<result property="capacity" column="CAPACITY"/>
-		<result property="type" column="TYPE"/>
-		<result property="carNo" column="CAR_NO"/>
-		<result property="idImgOrigin" column="ID_IMG_ORIGIN"/>
-		<result property="idImgRename" column="ID_IMG_RENAME"/>
-		<result property="regCardImgOrigin" column="REGCARD_IMG_ORIGIN"/>
-		<result property="regCardImgRename" column="REGCARD_IMG_RENAME"/>
-	</resultMap> -->
+	
 	
 	
 	
@@ -53,32 +43,10 @@
 		FROM MEMBER
 	</select>
 	
+	
+	
+	
 	<!-- Driver List --> 
-<!-- 	<select id="selectDriList" resultMap="AdminDriResultSet">
-
-		SELECT *
-		FROM MEMBER	
-		WHERE M_SORT = '사업자'
-
- 		
-		SELECT *
-		FROM MEMBER M 
-		JOIN DRIVER D ON(M.M_NO=D.D_M_NO)
-		
-		SELECT *
-	    FROM DRIVER D 
-	    JOIN MEMBER M 
-	    ON(M.M_NO=D.D_M_NO)
-	    WHERE M.M_NO= M_NO
-
- 	</select> -->
-<!-- 		SELECT *
-		FROM MEMBER
-		WHERE m_sort='사업자'
-		ORDER BY TO_NUMBER(SUBSTR(M_NO, 2)) DESC
- -->	
- 	
- 	<!--  마이페이지 기사정보 -->
 	<select id="selectDriList" resultMap="AdminDriResultSet">
 		   SELECT 
 		   D.D_NO, D.D_M_NO,
@@ -88,26 +56,6 @@
 		FROM MEMBER M LEFT OUTER 
 		JOIN DRIVER D ON(M.M_NO = D.D_M_NO)
  	</select>
- 	
- 	
- 	<!-- <select id="">
-		SELECT d.dNo, d.dmNo, d.capacity, d.type, d.carNo, d.idImgRename, d.regCardImgRename
-				m.mName
-		
-		FROM DRIVER D
-		JOIN MEMBER M
-		ON d.
-			
-	</select> -->
-
-<!-- 	
-	<select id="selectDriList" resultMap="AdminDriResultSet">
-		SELECT *
-		FROM DRIVER
-		ORDER BY TO_NUMBER(SUBSTR(D_M_NO,2)) DESC
-	</select> -->
-	
-	
 	
 	<!-- 표현안함 -->
 	<select id="getDriListCount" resultType="_int">
@@ -116,6 +64,21 @@
 	</select>
 	
 	
+	
+	
+	<!-- RESERVATION LIST -->
+	<!-- <select id="selectResList" resultMap="AdminResResultSet">
+		SELECLT
+		
+		
+	
+	</select> -->
+	
+	<!-- 표현안함 -->
+	<select id="getResListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM RESERVATION
+	</select>
 	
 	
 	

@@ -10,6 +10,7 @@ import com.kh.yongdali.driver.model.vo.Driver;
 import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.myPage.model.dao.UserMyPageDao;
 import com.kh.yongdali.myPage.model.vo.Address;
+import com.kh.yongdali.payment.model.vo.Payment;
 import com.kh.yongdali.reservation.model.vo.Reservation;
 
 @Service("umpService")
@@ -76,6 +77,17 @@ public class UserMyPageServiceImpl implements UserMyPageService {
 	@Override
 	public Reservation rDetail(String rNo) {
 		return umpDao.rDetail(rNo);
+	}
+
+
+	@Override
+	public Payment pDetail(String rNo) {
+		return umpDao.pDetail(rNo);
+	}
+
+	@Override
+	public int rsvCan(Payment p) {
+		return umpDao.rsvCan(p);
 	}
 
 

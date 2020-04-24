@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.yongdali.member.model.vo.Member;
+import com.kh.yongdali.reservation.model.vo.Reservation;
 import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.driver.model.vo.Driver;
 
@@ -17,8 +18,10 @@ public class AdminDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
+	
 	/**
 	 * Member List
+	 * @param pi
 	 * @return
 	 */
 	public int getMemListCount() {
@@ -33,8 +36,10 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("adminMapper.selectMemList", null, rowBounds);
 	}
 
+
 	/** 
 	 * Driver List
+	 * @param pi
 	 * @return
 	 */
 	public int getDriListCount() {
@@ -47,6 +52,24 @@ public class AdminDao {
 		RowBounds rowBounds =new RowBounds(offset,pi.getBoardLimit());
 		
 		return (ArrayList)sqlSession.selectList("adminMapper.selectDriList", null, rowBounds);
+	}
+	
+
+	/**
+	 * Reservation List
+	 * @param pi
+	 * @return
+	 */
+	public int getResListCount() {
+		return sqlSession.selectOne("adminMapper.getResListCount");
+	}
+
+	public ArrayList<Reservation> selectResList(PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper.selectResList",null,rowBounds);
 	}
 
 

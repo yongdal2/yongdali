@@ -221,4 +221,17 @@
 		SET MSG = #{msg}
 		WHERE R_NO = #{rNo}
 	</update>
+	<!-- 결제정보 상세보기 -->
+	<select id="pDetail" resultMap="paymentResultSet">
+	SELECT *
+	FROM PAYMENT
+	WHERE P_R_NO = #{rNo}
+	</select>
+	
+	<update id="rscCanPayment" parameterType="Payment">
+		
+	</update>
+	<!-- <update id="rscCanCalculate" p>
+		
+	</update> -->
 </mapper>

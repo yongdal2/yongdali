@@ -10,6 +10,8 @@ import com.kh.yongdali.driver.model.vo.Driver;
 
 public interface AdminService {
 	
+	int getMemListCount();
+
 	/**
 	 * Admin_Mem 조회
 	 * @param pi
@@ -17,17 +19,31 @@ public interface AdminService {
 	 */
 	ArrayList<Member> selectMemList(PageInfo pi);
 
-	int getMemListCount();
-
-	ArrayList<Driver> selectDriList(PageInfo pi);
+	
 	
 	int getDriListCount();
 
+	/**
+	 * Admin_Dri 조회
+	 * @param pi
+	 * @return
+	 */
+	ArrayList<Driver> selectDriList(PageInfo pi);
+	
+
+	
+	int getResListCount();
+
+	/**
+	 * Reservation 조회
+	 * @param pi
+	 * @return
+	 */
+	ArrayList<Reservation> selectResList(PageInfo pi);
 
 
 	
 	
-	/* ArrayList<Driver> selectList(PageInfo pi); */
 	
 
 }
