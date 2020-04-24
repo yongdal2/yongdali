@@ -26,6 +26,8 @@ public interface ChatService {
 	 */
 	int userInsertMessage(Message m);
 
+	Room selectPreRoom(Room r);
+
 
 
 }

@@ -206,6 +206,7 @@ public class UserMyPageController {
 			String mNo = loginUser.getmNo();
 			int rlistCount =umpService.getRsvListCount(mNo);
 			
+			System.out.println();
 			PageInfo pi = Pagination.getPageInfo(currentPage, rlistCount, 5, 20);
 			
 			ArrayList<Reservation> rList = umpService.selectRsvList(pi,mNo);
