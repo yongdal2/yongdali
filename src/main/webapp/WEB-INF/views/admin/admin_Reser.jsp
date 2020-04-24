@@ -82,7 +82,7 @@
 											</c:choose>
 											<c:choose>
 												<c:when test="${a.endDate != null}">
-													<td>${a.startDate}</td>
+													<td>${a.endDate}</td>
 												</c:when>
 												<c:otherwise>
 													<td>-</td>
