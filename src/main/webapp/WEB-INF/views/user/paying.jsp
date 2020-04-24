@@ -33,7 +33,6 @@
 	<input name="luggage" type="hidden" value="${r.luggage}">
 	<input name="msg" type="hidden" value="${r.msg}">
 	<input id="amt" name="amount" type="hidden" value="${r.amount}">
-	<input id="payYN" name="payYN" type="hidden">
 </form>
 	
 	<script>
@@ -52,13 +51,12 @@
         }, function(rsp) {
             if ( rsp.success ) {
                 var msg = '결제가 완료되었습니다.';
-                payYN="Y";
+	            alert(msg);
+	            $('#payForm').submit();
             } else {
                 var msg = '결제에 실패하였습니다.';
+                location.href="error.ydl?msg="+msg;
             }
-            $('#payYN').val(payYN);
-            alert(msg);
-            $('#payForm').submit();
         });
     });
 	</script>
