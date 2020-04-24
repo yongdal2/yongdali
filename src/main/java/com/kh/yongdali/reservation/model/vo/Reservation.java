@@ -276,8 +276,10 @@ public class Reservation {
 				+ distance + ", rightLoad=" + rightLoad + ", rightUnload=" + rightUnload + ", startDate=" + startDate
 				+ ", startTime=" + startTime + ", endDate=" + endDate + ", endTime=" + endTime + ", helpLoad="
 				+ helpLoad + ", helpUnload=" + helpUnload + ", luggage=" + luggage + ", msg=" + msg + ", amount="
-				+ amount + "]";
+				+ amount + ", payment=" + payment + "]";
 	}
+
+	
 }
 
 
