@@ -726,6 +726,10 @@ function setEndDate(){
 		$('#btwDay').html(days+"일");
 		$('#book-YN').html("O");
 		calc();
+		$('#caution-div1').css('display','none');
+		$('#caution-div2').css('display','none');
+		$('#caution-div3').css('display','block');
+		
 	}
 }
 
@@ -771,10 +775,6 @@ $('#datepicker2').datepicker({
 	changeYear: true,
 	yearRange: 'c-99:c+99',
 	maxDate: '+1y',
-	onSelect: function(){
-
-		
-	},
 	beforeShowDay: noBefore
 });
 
@@ -783,6 +783,7 @@ $('#datepicker2').click(function(){
 	if($('#datepicker1').val()!="" || $('#checkLoad1').prop('checked')==true){
 		$('#caution-div1').css('display','none');
 		$('#caution-div2').css('display','block');
+		$('#caution-div3').css('display','none');
 		
 	}
 });
@@ -795,10 +796,16 @@ $("#checkLoad1").click(function(){
 		$('#datepicker1').datepicker('setDate',null);
 		document.getElementById('sl3').selectedIndex = 0;
 		document.getElementById('sl3').style.color="#8e8e8e";
+		$('#caution-div1').css('display','block');
+		$('#caution-div2').css('display','none');
+		$('#caution-div3').css('display','none');
 		
 	} else if($(this).prop("checked") == false) {    	  
 		$("#datepicker1").attr('disabled',false).css('background','white').val("");
 		$("#sl3").attr('disabled',false).css('background','white').val("");
+		$('#caution-div1').css('display','block');
+		$('#caution-div2').css('display','none');
+		$('#caution-div3').css('display','none');
 	}
 });
 
@@ -812,6 +819,7 @@ $("#checkLoad2").click(function(){
 		document.getElementById('sl4').style.color="#8e8e8e";
 		$('#caution-div1').css('display','block');
 		$('#caution-div2').css('display','none');
+		$('#caution-div3').css('display','none');
 		$('#book-YN').html("X");
 		$('#btwDay').html("X");
 		$('#days').val("0");

@@ -192,6 +192,9 @@
 									<!-- <small>* 보관 비용으로 1일마다 60,000원씩 청구됩니다. *</small> -->
 									<small>* 상차일 기준으로 다음날부터 예약이 가능하십니다.*</small>
 								</div>
+								<div id="caution-div3" style="display: none; color:red; height: 17px; padding: 0px; margin-bottom: 3px; font">
+									<small>* 짐 보관으로 1일마다 60,000원씩 청구됩니다. *</small>
+								</div>
 								<div style="display: flex;">
 									<div id="end-date-div" class="input-group date">
 										<input id="datepicker2" name="endDate1" type="text" placeholder="날짜 선택" onchange="setEndDate();">
