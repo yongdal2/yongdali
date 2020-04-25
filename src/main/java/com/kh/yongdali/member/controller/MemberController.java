@@ -141,11 +141,12 @@ public class MemberController {
 			Member mem = mService.loginMember(m);
 			String type = mem.getSignupType();
 			logger.debug(mem.toString());
-			logger.debug(type);
 			if(type.equals("네이버")) {
 				return "naver";
 			}else if(type.equals("페이스북")) {
 				return "facebook";
+			}else if(type.equals("카카오")) {
+				return "kakao";
 			}
 			else {
 				return "exist";
@@ -231,6 +232,44 @@ public class MemberController {
 			return "wrongPwd";
 		}	
 	}	
+	
+	@ResponseBody
+	@RequestMapping("kakaoLogin.me")
+	public String kakaoLogin(@RequestParam("email") String email, String name, Model model) {
+		
+	    // 가입 유무 확인
+	    int result = mService.emailChk(email);
+	    
+	    if(result > 0) {
+	    	Member m = new Member(email);
+	    	Member mem = mService.loginMember(m);
+	    	String type = mem.getSignupType();
+	    	System.out.println(type);
+	    	
+	    	if(type.equals("네이버")) {
+	    		return "naver";
+	    	}else if(type.equals("페이스북")){
+	    		return "facebook";
+	    	}else if(type.equals("카카오")) {
+	    		model.addAttribute("loginUser", mem);
+	    		return "kakao";
+	    	}
+	    	else{
+	    		return "yongdali";
+	    	}
+	    }
+	    else {
+	    	Member newMem = new Member(email, name, "일반", "카카오", "N");
+	    	int insertResult = mService.insertMember(newMem);
+	    	if(insertResult > 0) {
+	    		model.addAttribute("loginUser", newMem);
+	    		return "newMem";
+	    	}else {
+				return "error";
+	    	}
+	    }
+		
+	}
 
 //	네이버 아이디로 로그인(네아로)	
 	/** 네이버 아이디로 로그인(네아로)
@@ -380,9 +419,14 @@ public class MemberController {
     }
 //	/네이버 아이디로 로그인(네아로)    
 	
+    /** 페이스북 아이디로 로그인
+     * @param email
+     * @param name
+     * @param model
+     * @return
+     */
     @RequestMapping("fbLogin.me")
     public String facebookLogin(@RequestParam("email") String email, String name, Model model) {
-    	System.out.println(email + " : " + name);
     	
 	    // 가입 유무 확인
 	    int result = mService.emailChk(email);

@@ -320,8 +320,10 @@ $(document).ready(function(){
         		}else if(value == "facebook"){
         			displayErrorMsg($("#emailMsg"), "간편 가입 회원입니다. 페이스북으로 로그인하세요.");
         			result = false; 
-        		}
-        		else{
+        		}else if(value == "kakao"){
+        			displayErrorMsg($("#emailMsg"), "간편 가입 회원입니다. 카카오로 로그인하세요.");
+        			result = false; 
+        		}else{
         			displayErrorMsg($("#emailMsg"), '등록되지 않은 아이디입니다.');
         			result = false; 
         		}

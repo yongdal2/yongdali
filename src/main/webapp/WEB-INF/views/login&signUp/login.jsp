@@ -19,7 +19,6 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
     <script src="${contextPath}/resources/js/login&signUp.js"></script>
 	<script> <!-- 페이스북(FB) 아이디로 로그인-->
-	
 		// 2. SDK 로드 후 초기화(함수 실행)
 		window.fbAsyncInit = function() {
 		  FB.init({
@@ -28,18 +27,14 @@
 		    xfbml      : true,
 		    version    : 'v6.0'
 		  });
-		  
-  /* 	    FB.AppEvents.logPageView();    */
-		    
+		  	// 3. 페이스북 로그인
 			fbLogin = function(){
-				
 				FB.login(function(res){
 					console.log("login : ", res);
-					
 					if(res.status === 'connected'){
 						console.log("facebook conntected");
 						
-						// API 호출
+						// 3. 회원정보 호출 API(로그인/커넥션 성공시)
 						FB.api('/me',{fields: 'email,name'} ,function(resp){
 						    let email = resp.email;
 						    let name = resp.name;
@@ -56,14 +51,12 @@
 						   			else if(value == 'naver'){
 						   				alert("네이버 간편 가입 회원입니다. 네이버로 로그인하세요.");
 						   			}
-						   			else if(value =='google'){ // error
-						   				alert("구글 간편 가입 회원입니다. 네이버로 로그인하세요.");
+						   			else if(value =='kakao'){
+						   				alert("카카오 간편 가입 회원입니다. 카카오로 로그인하세요.");
 						   			}
 						   			else{
-						   				var msg = "페이스북 간편 로그 중 error 발생!";
-						        		location.href="error.ydl?msg="+msg;
+						   				alert("용달이 회원입니다. 용달이로 로그인하세요.");
 						   			}
-						   			
 						   		}, error : function(){
 					        		var msg = "페이스북 간편 로그 중 에러 발생!";
 					        		location.href="error.ydl?msg="+msg;
@@ -74,25 +67,7 @@
 					}
 				},{scope:'email'});
 			}
-  	
-  			
-  
-			// 3. 페이스북 계정으로의 로그인 여부 확인
-			// 3-1. response 파라미터값 확인
-			/* var callback = function(response){
-				console.log("response : " + response);
-				if(response.status == 'conntected'){
-					// 연결되었을 경우 앱 로그인 처리
-				}
-  			}
-			FB.getLoginStatus(callback); */
-			
-
 		};
-		
-
-		
-		
 		// 1. 비동기화방식으로 SDK 불러오기
 		(function(d, s, id){		
 		   var js, fjs = d.getElementsByTagName(s)[0];
@@ -102,7 +77,60 @@
 		   fjs.parentNode.insertBefore(js, fjs);
 		 }(document, 'script', 'facebook-jssdk'));
 	</script>	
-
+	<!-- 카카오 아이디로 로그인 -->
+	<script src="${contextPath}/resources/js/kakao.min.js"></script>
+    <script>
+        kakaoLogin = function(){
+        	// 1. SDK 초기화
+            Kakao.init('c2902431456434e92f377bfc927e6e09');
+        	
+        	// 2. 카카오 로그인
+            Kakao.Auth.login({ 
+                success: function() { 
+                      // 3. 회원정보 호출 API(로그인 성공시)
+                      Kakao.API.request({ 
+                    	    /* scope: 'email', */
+                            url: '/v2/user/me', 
+                            success: function(res) {                                   
+                                  let email = res.kakao_account.email;
+                                  let name = res.properties.nickname;
+                                	  
+                                  $.ajax({
+      						   		url : "kakaoLogin.me",
+      						   		type : "post",
+      						   		data : { email : email, name : name},
+      						   		success : function(value){
+      						   			console.log(value);
+      						   			if(value == 'kakao' || value == 'newMem'){
+      						   				location.href="home.do";
+      						   			}
+      						   			else if(value == 'naver'){
+      						   				alert("네이버 간편 가입 회원입니다. 네이버로 로그인하세요.");
+      						   			}
+      						   			else if(value =='facebook'){ // error
+      						   				alert("페이스북 간편 가입 회원입니다. 페이스북으로 로그인하세요.");
+      						   			}
+      						   			else{
+      						   				alert("용달이 회원입니다. 용달이로 로그인하세요.");
+      						   			}
+      						   		}, error : function(){
+      					        		var msg = "페이스북 간편 로그 중 에러 발생!";
+      					        		location.href="error.ydl?msg="+msg;
+      						   		}
+      						   	})
+                                  
+                           }, 
+                           fail: function(error) { 
+                                 console.log(JSON.stringify(error)); 
+                          } 
+                   }); 
+              }, 
+              fail: function(err) { 
+                    console.log(JSON.stringify(err)); 
+              } 
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -171,8 +199,10 @@
             <h2 class="easyEccessTitle">간편 로그인</h2>
             <div class="easyEccessLogo">
                 <%-- <a href="#"><img src="${contextPath}/resources/images/login&signUp/facebookLogo.png" alt="페이스북"></a> --%>
-                <img src="${contextPath}/resources/images/login&signUp/facebookLogo.png" alt="페이스북" onclick="fbLogin();">
-                <a href="#"><img src="${contextPath}/resources/images/login&signUp/kakaoLogo.png" alt="카카오"></a>
+                <%-- <a href="#"><img src="${contextPath}/resources/images/login&signUp/kakaoLogo.png" alt="카카오"></a> --%>
+                <img class="easyEccessBtn" src="${contextPath}/resources/images/login&signUp/facebookLogo.png" alt="페이스북" onclick="fbLogin();">
+                <!-- <div class="g-signin2" data-onsuccess="onSignIn" style="disply : none"></div> -->
+                <img class="easyEccessBtn" src="${contextPath}/resources/images/login&signUp/kakaoLogo.png" alt="카카오" onclick="kakaoLogin();">
                 <a href="<%=apiURL%>"><img src="${contextPath}/resources/images/login&signUp/naverLogo.png" alt="네이버"></a>
             </div>
         </div>
