@@ -70,7 +70,9 @@ function cl3(){
 }
 function cl4(){
 	if($('#datepicker2').val()!=""){
-		$('#sl4').css('color','black');	
+		$('#sl4').css('color','black');
+		$('#caution-div3').css('display','block');
+		$('#caution-div4').css('display','none');
 	} else {
 		alert("하차일부터 선택해주세요.");
 		document.getElementById('sl4').selectedIndex = 0;
