@@ -70,9 +70,7 @@ function cl3(){
 }
 function cl4(){
 	if($('#datepicker2').val()!=""){
-		$('#sl4').css('color','black');
-		$('#caution-div3').css('display','block');
-		$('#caution-div4').css('display','none');
+		$('#sl4').css('color','black');	
 	} else {
 		alert("하차일부터 선택해주세요.");
 		document.getElementById('sl4').selectedIndex = 0;
@@ -728,10 +726,6 @@ function setEndDate(){
 		$('#btwDay').html(days+"일");
 		$('#book-YN').html("O");
 		calc();
-		$('#caution-div1').css('display','block');
-		$('#caution-div2').css('display','none');
-		$('#caution-div3').css('display','none');
-		$('#caution-div4').css('display','block');
 	}
 }
 
@@ -777,6 +771,10 @@ $('#datepicker2').datepicker({
 	changeYear: true,
 	yearRange: 'c-99:c+99',
 	maxDate: '+1y',
+	onSelect: function(){
+
+		
+	},
 	beforeShowDay: noBefore
 });
 
@@ -814,8 +812,6 @@ $("#checkLoad2").click(function(){
 		document.getElementById('sl4').style.color="#8e8e8e";
 		$('#caution-div1').css('display','block');
 		$('#caution-div2').css('display','none');
-		$('#caution-div3').css('display','block');
-		$('#caution-div4').css('display','none');
 		$('#book-YN').html("X");
 		$('#btwDay').html("X");
 		$('#days').val("0");
