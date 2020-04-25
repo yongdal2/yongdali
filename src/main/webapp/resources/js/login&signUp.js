@@ -310,12 +310,15 @@ $(document).ready(function(){
         	data : { mId : $('#findPwd_email').val() },
         	async : false,
         	success : function(value){
-//        		console.log(value);
+        		console.log(value);
         		if(value == "exist" ){
         			$("#emailMsg").css("display","none");
         			result = true; 
         		}else if(value == "naver"){
         			displayErrorMsg($("#emailMsg"), "간편 가입 회원입니다. 네이버로 로그인하세요.");
+        			result = false; 
+        		}else if(value == "facebook"){
+        			displayErrorMsg($("#emailMsg"), "간편 가입 회원입니다. 페이스북으로 로그인하세요.");
         			result = false; 
         		}
         		else{

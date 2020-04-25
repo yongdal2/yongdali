@@ -18,6 +18,91 @@
     <link rel="stylesheet" href="${contextPath}/resources/css/login&signUp.css">   
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
     <script src="${contextPath}/resources/js/login&signUp.js"></script>
+	<script> <!-- 페이스북(FB) 아이디로 로그인-->
+	
+		// 2. SDK 로드 후 초기화(함수 실행)
+		window.fbAsyncInit = function() {
+		  FB.init({
+		    appId      : '2281323032164175',
+		    cookie     : true, 	
+		    xfbml      : true,
+		    version    : 'v6.0'
+		  });
+		  
+  /* 	    FB.AppEvents.logPageView();    */
+		    
+			fbLogin = function(){
+				
+				FB.login(function(res){
+					console.log("login : ", res);
+					
+					if(res.status === 'connected'){
+						console.log("facebook conntected");
+						
+						// API 호출
+						FB.api('/me',{fields: 'email,name'} ,function(resp){
+						    let email = resp.email;
+						    let name = resp.name;
+						   	
+						   	$.ajax({
+						   		url : "fbLoginAjax.me",
+						   		type : "post",
+						   		data : { email : email, name : name},
+						   		success : function(value){
+						   			console.log(value);
+						   			if(value == 'facebook' || value == 'newMem'){
+						   				location.href="home.do";
+						   			}
+						   			else if(value == 'naver'){
+						   				alert("네이버 간편 가입 회원입니다. 네이버로 로그인하세요.");
+						   			}
+						   			else if(value =='google'){ // error
+						   				alert("구글 간편 가입 회원입니다. 네이버로 로그인하세요.");
+						   			}
+						   			else{
+						   				var msg = "페이스북 간편 로그 중 error 발생!";
+						        		location.href="error.ydl?msg="+msg;
+						   			}
+						   			
+						   		}, error : function(){
+					        		var msg = "페이스북 간편 로그 중 에러 발생!";
+					        		location.href="error.ydl?msg="+msg;
+						   		}
+						   	})
+						   	
+						});
+					}
+				},{scope:'email'});
+			}
+  	
+  			
+  
+			// 3. 페이스북 계정으로의 로그인 여부 확인
+			// 3-1. response 파라미터값 확인
+			/* var callback = function(response){
+				console.log("response : " + response);
+				if(response.status == 'conntected'){
+					// 연결되었을 경우 앱 로그인 처리
+				}
+  			}
+			FB.getLoginStatus(callback); */
+			
+
+		};
+		
+
+		
+		
+		// 1. 비동기화방식으로 SDK 불러오기
+		(function(d, s, id){		
+		   var js, fjs = d.getElementsByTagName(s)[0];
+		   if (d.getElementById(id)) {return;}
+		   js = d.createElement(s); js.id = id;
+		   js.src = "https://connect.facebook.net/en_US/sdk.js";
+		   fjs.parentNode.insertBefore(js, fjs);
+		 }(document, 'script', 'facebook-jssdk'));
+	</script>	
+
 </head>
 
 <body>
@@ -34,19 +119,6 @@
     session.setAttribute("state", state);
  %>
  
- <!-- 카카오 아이디로 로그인(네아로) -->
-<%--  <%
- 	String kClientId = "d29edd4146148b64b349b622e6a3f29f"; // 앱 REST API 키
- 	String kRedirectURI = URLEncoder.encode("http://localhost:8081/yongdali/kakaoLogin.me", "UTF-8");
-    SecureRandom kRandom = new SecureRandom();
-    String kState = new BigInteger(130, kRandom).toString();
- 	String kApiURL = "https://kauth.kakao.com/oauth/authorize?response_type=code";
- 	kApiURL += "&client_id=" + kClientId;
- 	kApiURL += "&redirect_uri=" + kRedirectURI;
- 	/* kApiURL += "&state=" + kState;
- 	session.setAttribute("state", kState); */
- %> --%>
-
 	<!-- interceptor용 (메인페이지 예약하러가기 클릭 시) -->
 	<script>
 		$(function(){
@@ -98,12 +170,13 @@
         <div class="easyEccess">
             <h2 class="easyEccessTitle">간편 로그인</h2>
             <div class="easyEccessLogo">
-                <a href="#"><img src="${contextPath}/resources/images/login&signUp/facebookLogo.png" alt="페이스북"></a>
+                <%-- <a href="#"><img src="${contextPath}/resources/images/login&signUp/facebookLogo.png" alt="페이스북"></a> --%>
+                <img src="${contextPath}/resources/images/login&signUp/facebookLogo.png" alt="페이스북" onclick="fbLogin();">
                 <a href="#"><img src="${contextPath}/resources/images/login&signUp/kakaoLogo.png" alt="카카오"></a>
                 <a href="<%=apiURL%>"><img src="${contextPath}/resources/images/login&signUp/naverLogo.png" alt="네이버"></a>
             </div>
         </div>
     </div>
-</body>
 
+</body>
 </html>

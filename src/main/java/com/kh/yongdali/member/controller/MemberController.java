@@ -144,7 +144,10 @@ public class MemberController {
 			logger.debug(type);
 			if(type.equals("네이버")) {
 				return "naver";
-			}else {
+			}else if(type.equals("페이스북")) {
+				return "facebook";
+			}
+			else {
 				return "exist";
 			}
 		}else {
@@ -319,7 +322,7 @@ public class MemberController {
 		    	if(insertResult > 0) {
 		    		model.addAttribute("loginUser", newMem);
 		    	}else {
-		    		model.addAttribute("msg", "간편 로그인/회원가입 실패!");
+		    		model.addAttribute("msg", "네이버로 간편 로그인 중 오류 발생!");
 					return "common/errorPage";
 		    	}
 		    }
@@ -329,9 +332,7 @@ public class MemberController {
 	    }
 		return "user/home";
 	}
-	
-	// 회원정보 조회 API 2.
-    private static String get(String apiUrl, Map<String, String> requestHeaders){
+    private static String get(String apiUrl, Map<String, String> requestHeaders){ // 회원정보 조회 API 2.
         HttpURLConnection con = connect(apiUrl);
         try {
             con.setRequestMethod("GET");
@@ -350,10 +351,8 @@ public class MemberController {
         } finally {
             con.disconnect();
         }
-    }
-
-    // 회원정보 조회 API 3.
-    private static HttpURLConnection connect(String apiUrl){
+    } 
+    private static HttpURLConnection connect(String apiUrl){ // 회원정보 조회 API 3.
         try {
             URL url = new URL(apiUrl);
             return (HttpURLConnection)url.openConnection();
@@ -363,9 +362,7 @@ public class MemberController {
             throw new RuntimeException("연결이 실패했습니다. : " + apiUrl, e);
         }
     }
-
-    // 회원정보 조회 API 4.
-    private static String readBody(InputStream body){
+    private static String readBody(InputStream body){ // 회원정보 조회 API 4.
         InputStreamReader streamReader = new InputStreamReader(body);
 
         try (BufferedReader lineReader = new BufferedReader(streamReader)) {
@@ -383,16 +380,75 @@ public class MemberController {
     }
 //	/네이버 아이디로 로그인(네아로)    
 	
-//	/네이버 아이디로 로그인(네아로)	
+    @RequestMapping("fbLogin.me")
+    public String facebookLogin(@RequestParam("email") String email, String name, Model model) {
+    	System.out.println(email + " : " + name);
+    	
+	    // 가입 유무 확인
+	    int result = mService.emailChk(email);
+	    
+	    if(result > 0) {
+	    	Member m = new Member(email);
+	    	
+	    	
+	    	Member mem = mService.loginMember(m);
+	    	String type = mem.getSignupType();
+	    	
+	    	if(!type.equals("페이스북") ) {
+	    		System.out.println("네이버 간편 가입 회원입니다. 네이버로 로그인하세요.");
+	    		return "login&signUp/login";
+	    	}else {
+	    		model.addAttribute("loginUser", mem);
+	    		return "user/home";
+	    	}
+	    }
+	    else {
+	    	Member newMem = new Member(email, name, "일반", "페이스북", "N");
+	    	int insertResult = mService.insertMember(newMem);
+	    	if(insertResult > 0) {
+	    		model.addAttribute("loginUser", newMem);
+	    	}else {
+	    		model.addAttribute("msg", "페이스북으로 간편 로그인 중 오류 발생!");
+				return "common/errorPage";
+	    	}
+	    }
+    	return "user/home";
+    }
     
-// TODO 카카오 아이디로 로그인
-    /** 카카오 아이디로 로그인
-     * @return
-     */
-//    @RequestMapping("kakaoLogin.me")
-//    public String kakaoLogin() {
-//    	return "redirect:home.do";
-//    }
+    @ResponseBody
+    @RequestMapping(value="fbLoginAjax.me", method=RequestMethod.POST)
+    public String facebookLoginAjax(@RequestParam("email") String email, String name, Model model) {
+    	
+	    // 가입 유무 확인
+	    int result = mService.emailChk(email);
+	    
+	    if(result > 0) {
+	    	Member m = new Member(email);
+	    	Member mem = mService.loginMember(m);
+	    	String type = mem.getSignupType();
+	    	System.out.println(type);
+	    	
+	    	if(type.equals("네이버")) {
+	    		return "naver";
+	    	}else if(type.equals("페이스북")){
+	    		model.addAttribute("loginUser", mem);
+	    		return "facebook";
+	    	}else{
+	    		return "google";
+	    	}
+	    }
+	    else {
+	    	Member newMem = new Member(email, name, "일반", "페이스북", "N");
+	    	int insertResult = mService.insertMember(newMem);
+	    	if(insertResult > 0) {
+	    		model.addAttribute("loginUser", newMem);
+	    		return "newMem";
+	    	}else {
+				return "error";
+	    	}
+	    }
+    }
+    
     
     /** 로그아웃
 	 * @param status
