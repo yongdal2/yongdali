@@ -93,7 +93,7 @@ function addCarInfo1(){
 	}
 	
 	// 거리와 계산 연관관계
-	if(charge_dis==0){
+	if(charge_dis==0 && sl2.value==""){
 		carInfo.innerHTML = sl1.value+"톤";
 	} else {
 		carInfo.innerHTML = sl1.value+"톤 / "+sl2.value;
@@ -766,7 +766,7 @@ $('#datepicker1').datepicker({
 	beforeShowDay: noBefore
 });
 
-//하차 예약 클릭시 달력 표시
+// 하차 예약 클릭시 달력 표시
 $('#datepicker2').datepicker({
 	dateFormat:'yy년 mm월 dd일',
 	changeMonth: true,
@@ -776,13 +776,16 @@ $('#datepicker2').datepicker({
 	beforeShowDay: noBefore
 });
 
+// 하차 날짜 예약 클릭시 주의 사항 전달
 $('#datepicker2').click(function(){
 	if($('#datepicker1').val()!="" || $('#checkLoad1').prop('checked')==true){
-		alert("상차일 다음 날부터 하차 예약이 가능하십니다.");
+		$('#caution-div1').css('display','none');
+		$('#caution-div2').css('display','block');
+		
 	}
 });
 
-/* 바로 상하차 시 날짜시간 무효 */
+/* 바로 상차 시 날짜시간 무효 */
 $("#checkLoad1").click(function(){
 	if($(this).prop("checked") == true) {
 		$("#datepicker1").attr('disabled','disabled').css('background','#F8F8F8');
@@ -796,6 +799,8 @@ $("#checkLoad1").click(function(){
 		$("#sl3").attr('disabled',false).css('background','white').val("");
 	}
 });
+
+/* 바로 하차 시 날짜시간 무효 */
 $("#checkLoad2").click(function(){
 	if($(this).prop("checked") == true) {
 		$("#datepicker2").attr('disabled','disabled').css('background','#F8F8F8');
@@ -803,6 +808,8 @@ $("#checkLoad2").click(function(){
 		$('#datepicker2').datepicker('setDate',null);
 		document.getElementById('sl4').selectedIndex = 0;
 		document.getElementById('sl4').style.color="#8e8e8e";
+		$('#caution-div1').css('display','block');
+		$('#caution-div2').css('display','none');
 		$('#book-YN').html("X");
 		$('#btwDay').html("X");
 		$('#days').val("0");
