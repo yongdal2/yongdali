@@ -725,9 +725,11 @@ function setEndDate(){
 		console.log(days+"*60,000원 = " + charge_days);
 		$('#btwDay').html(days+"일");
 		$('#book-YN').html("O");
-		$('#days').val(days);
-		console.log("히든에 들어갈 일수 : "+$('#days').val());
 		calc();
+		$('#caution-div1').css('display','block');
+		$('#caution-div2').css('display','none');
+		$('#caution-div3').css('display','none');
+		$('#caution-div4').css('display','block');
 	}
 }
 
@@ -810,6 +812,8 @@ $("#checkLoad2").click(function(){
 		document.getElementById('sl4').style.color="#8e8e8e";
 		$('#caution-div1').css('display','block');
 		$('#caution-div2').css('display','none');
+		$('#caution-div3').css('display','block');
+		$('#caution-div4').css('display','none');
 		$('#book-YN').html("X");
 		$('#btwDay').html("X");
 		$('#days').val("0");

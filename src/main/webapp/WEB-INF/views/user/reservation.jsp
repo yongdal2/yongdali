@@ -187,71 +187,75 @@
 									</label>
 								</div>
 								<div style="display: block;">
-								<div id="caution-div1" style="display: block; height: 17px; margin-bottom: 3px;"></div>
-								<div id="caution-div2" style="display: none; color:red; height: 17px; padding: 0px; margin-bottom: 3px;">
-									<small>* 보관 비용으로 1일마다 60,000원씩 청구됩니다. *</small>
-								</div>
-								<div style="display: flex;">
-									<div id="end-date-div" class="input-group date">
-										<input id="datepicker2" name="endDate1" type="text" placeholder="날짜 선택" onchange="setEndDate();">
-										<div id="dt2" class="input-group-addon">
-											<span class="glyphicon glyphicon-th" style="color: white;"></span>
+									<div id="caution-div1" style="display: block; height: 17px; margin-bottom: 3px;"></div>
+									<div id="caution-div2" style="display: none; color:red; height: 17px; padding: 0px; margin-bottom: 3px;">
+										<small>* 상차일 기준으로 다음날부터 예약이 가능하십니다. *</small>
+									</div>
+									<div style="display: flex; height: 32px">
+										<div id="end-date-div" class="input-group date">
+											<input id="datepicker2" name="endDate1" type="text" placeholder="날짜 선택" onchange="setEndDate();">
+											<div id="dt2" class="input-group-addon">
+												<span class="glyphicon glyphicon-th" style="color: white;"></span>
+											</div>
+										</div>
+										<div>
+											<select name="endTime" id="sl4" onchange="cl4();">
+												<option class="opt3" value="" disabled selected>시간 선택</option>
+												<option class="opt4" value="00:00">00시 00분</option>
+												<option class="opt4" value="00:30">00시 30분</option>
+												<option class="opt4" value="01:00">01시 00분</option>
+												<option class="opt4" value="01:30">01시 30분</option>
+												<option class="opt4" value="02:00">02시 00분</option>
+												<option class="opt4" value="02:30">02시 30분</option>
+												<option class="opt4" value="03:00">03시 00분</option>
+												<option class="opt4" value="03:30">03시 30분</option>
+												<option class="opt4" value="04:00">04시 00분</option>
+												<option class="opt4" value="04:30">04시 30분</option>
+												<option class="opt4" value="05:00">05시 00분</option>
+												<option class="opt4" value="05:30">05시 30분</option>
+												<option class="opt4" value="06:00">06시 00분</option>
+												<option class="opt4" value="06:30">06시 30분</option>
+												<option class="opt4" value="07:00">07시 00분</option>
+												<option class="opt4" value="07:30">07시 30분</option>
+												<option class="opt4" value="08:00">08시 00분</option>
+												<option class="opt4" value="08:30">08시 30분</option>
+												<option class="opt4" value="09:00">09시 00분</option>
+												<option class="opt4" value="09:30">09시 30분</option>
+												<option class="opt4" value="10:00">10시 00분</option>
+												<option class="opt4" value="10:30">10시 30분</option>
+												<option class="opt4" value="11:00">11시 00분</option>
+												<option class="opt4" value="11:30">11시 30분</option>
+												<option class="opt4" value="12:00">12시 00분</option>
+												<option class="opt4" value="12:30">12시 30분</option>
+												<option class="opt4" value="13:00">13시 00분</option>
+												<option class="opt4" value="13:30">13시 30분</option>
+												<option class="opt4" value="14:00">14시 00분</option>
+												<option class="opt4" value="14:30">14시 30분</option>
+												<option class="opt4" value="15:00">15시 00분</option>
+												<option class="opt4" value="15:30">15시 30분</option>
+												<option class="opt4" value="16:00">16시 00분</option>
+												<option class="opt4" value="16:30">16시 30분</option>
+												<option class="opt4" value="17:00">17시 00분</option>
+												<option class="opt4" value="17:30">17시 30분</option>
+												<option class="opt4" value="18:00">18시 00분</option>
+												<option class="opt4" value="18:30">18시 30분</option>
+												<option class="opt4" value="19:00">19시 00분</option>
+												<option class="opt4" value="19:30">19시 30분</option>
+												<option class="opt4" value="20:00">20시 00분</option>
+												<option class="opt4" value="20:30">20시 30분</option>
+												<option class="opt4" value="21:00">21시 00분</option>
+												<option class="opt4" value="21:30">21시 30분</option>
+												<option class="opt4" value="22:00">22시 00분</option>
+												<option class="opt4" value="22:30">22시 30분</option>
+												<option class="opt4" value="23:00">23시 00분</option>
+												<option class="opt4" value="23:30">23시 30분</option>
+											</select>
 										</div>
 									</div>
-									<div>
-										<select name="endTime" id="sl4" onchange="cl4();">
-											<option class="opt3" value="" disabled selected>시간 선택</option>
-											<option class="opt4" value="00:00">00시 00분</option>
-											<option class="opt4" value="00:30">00시 30분</option>
-											<option class="opt4" value="01:00">01시 00분</option>
-											<option class="opt4" value="01:30">01시 30분</option>
-											<option class="opt4" value="02:00">02시 00분</option>
-											<option class="opt4" value="02:30">02시 30분</option>
-											<option class="opt4" value="03:00">03시 00분</option>
-											<option class="opt4" value="03:30">03시 30분</option>
-											<option class="opt4" value="04:00">04시 00분</option>
-											<option class="opt4" value="04:30">04시 30분</option>
-											<option class="opt4" value="05:00">05시 00분</option>
-											<option class="opt4" value="05:30">05시 30분</option>
-											<option class="opt4" value="06:00">06시 00분</option>
-											<option class="opt4" value="06:30">06시 30분</option>
-											<option class="opt4" value="07:00">07시 00분</option>
-											<option class="opt4" value="07:30">07시 30분</option>
-											<option class="opt4" value="08:00">08시 00분</option>
-											<option class="opt4" value="08:30">08시 30분</option>
-											<option class="opt4" value="09:00">09시 00분</option>
-											<option class="opt4" value="09:30">09시 30분</option>
-											<option class="opt4" value="10:00">10시 00분</option>
-											<option class="opt4" value="10:30">10시 30분</option>
-											<option class="opt4" value="11:00">11시 00분</option>
-											<option class="opt4" value="11:30">11시 30분</option>
-											<option class="opt4" value="12:00">12시 00분</option>
-											<option class="opt4" value="12:30">12시 30분</option>
-											<option class="opt4" value="13:00">13시 00분</option>
-											<option class="opt4" value="13:30">13시 30분</option>
-											<option class="opt4" value="14:00">14시 00분</option>
-											<option class="opt4" value="14:30">14시 30분</option>
-											<option class="opt4" value="15:00">15시 00분</option>
-											<option class="opt4" value="15:30">15시 30분</option>
-											<option class="opt4" value="16:00">16시 00분</option>
-											<option class="opt4" value="16:30">16시 30분</option>
-											<option class="opt4" value="17:00">17시 00분</option>
-											<option class="opt4" value="17:30">17시 30분</option>
-											<option class="opt4" value="18:00">18시 00분</option>
-											<option class="opt4" value="18:30">18시 30분</option>
-											<option class="opt4" value="19:00">19시 00분</option>
-											<option class="opt4" value="19:30">19시 30분</option>
-											<option class="opt4" value="20:00">20시 00분</option>
-											<option class="opt4" value="20:30">20시 30분</option>
-											<option class="opt4" value="21:00">21시 00분</option>
-											<option class="opt4" value="21:30">21시 30분</option>
-											<option class="opt4" value="22:00">22시 00분</option>
-											<option class="opt4" value="22:30">22시 30분</option>
-											<option class="opt4" value="23:00">23시 00분</option>
-											<option class="opt4" value="23:30">23시 30분</option>
-										</select>
+									<div id="caution-div3" style="display: block; height: 22px;"></div>
+									<div id="caution-div4" style="display: none; color:red; height: 22px;">
+										<small>* 보관 비용으로 1일마다 60,000원씩 청구됩니다. *</small>
 									</div>
-								</div>
 								</div>
 							</div>
 						</div>
