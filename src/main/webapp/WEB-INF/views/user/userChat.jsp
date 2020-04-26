@@ -25,7 +25,7 @@
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="userInfo">
-                <img src="${contextPath }/resources/images/ydl_logo/ydl_ic_gr(70X70).png" alt="" onclick="createRoom();">
+                <img src="${contextPath }/resources/images/ydl_logo/ydl_ic_gr(70X70).png" alt="" id="logo" onclick="createRoom();">
                 <div>
                     <h2>용달이</h2>
                     <h3>Live Chat</h3>
@@ -37,64 +37,7 @@
         <div class="row">
             <div class="chat col-xs-12">
                 <ul id="chat">
-                    <!-- <li class="you">
-                        <div class="entete">
-                            <span class="status green"></span>
-                            <h2>용달이</h2>
-                            <h3>10:12AM, Today</h3>
-                        </div>
-                        <div class="message" id="youMsg">
-                        </div>
-                    </li> -->
-                    <!-- <li class="me">
-                        <div class="entete">
-                            <h3>10:12AM, Today</h3>
-                            <h2>유승제</h2>
-                            <span class="status blue"></span>
-                        </div>
-                        <div class="message" id="meMsg">
-                        </div>
-                    </li> -->
-                    <!-- <li class="you">
-                        <div class="entete">
-                            <span class="status green"></span>
-                            <h2>용달이</h2>
-                            <h3>10:12AM, Today</h3>
-                        </div>
-                        <div class="message">
-                            자세한 내용은 '이용안내'를 참고 부탁드립니다.
-                        </div>
-                    </li>
-                    <li class="me">
-                        <div class="entete">
-                            <h3>10:12AM, Today</h3>
-                            <h2>유승제</h2>
-                            <span class="status blue"></span>
-                        </div>
-                        <div class="message">
-                            감사합니다.
-                        </div>
-                    </li>
-                    <li class="you">
-                        <div class="entete">
-                            <span class="status green"></span>
-                            <h2>용달이</h2>
-                            <h3>10:12AM, Today</h3>
-                        </div>
-                        <div class="message">
-                            즐거운 하루 되세염
-                        </div>
-                    </li>
-                    <li class="me">
-                        <div class="entete">
-                            <h3>10:12AM, Today</h3>
-                            <h2>유승제</h2>
-                            <span class="status blue"></span>
-                        </div>
-                        <div class="message">
-                            ㅂㅂ
-                        </div>
-                    </li> -->
+                    
                 </ul>
             </div>
         </div>
@@ -138,26 +81,82 @@
     	})
 		
     	//message token구성
-		function MessageFlag(id, roomName, msg, flag, receiveId,chkRoom){
+		function MessageFlag(id, roomName, msg, flag, receiveId,roomNo){
 			this.id=id;
 			this.roomName=roomName;
 			this.msg=msg;
 			this.flag=flag;
 			this.receiveId=receiveId;
-			this.chkRoom=chkRoom;
+			this.roomNo=roomNo;
 		}
     	
     	function connectionSocket(){
     		connect = true;
-    		socket = new WebSocket('ws://192.168.110.45:8888/yongdali/chatting');
+    		socket = new WebSocket('ws://192.168.25.20:8888/yongdali/chatting');
     		/* 페이지 접속한 session id */
     		var sessionid = $("#senderId").val();
     		var sessionName = $("#senderName").val();
     		
-    		socket.onopen = function(e){
-    			//socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),"","createroom",$("#receiveId").val())));
-    			//											          아이디				     방이름(닉네임)       msg     flag		   메시지 받는 사람
-    			//socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),"","createroom","admin@naver.com")));
+    		socket.onopen = function(e){    			
+    			var flag = "createroom";
+    			var roomNo = $("#roomNo");
+    			
+    			// 기존에 나눴던 대화 목록 가져오기 ajax
+    			$.ajax({
+    			url:"chkPreMessage.ch",
+    			dataType:"json",
+    			data:{id:sessionid},
+    			success:function(data){
+    				
+						console.log(data);
+						roomNo.val(data["roomNo"]);
+	    				// 접속한아이디
+	    		   		 var senderId = $("#senderId").val();
+	    	    		// 방이름(접속한사람이름)
+	    		   		 var roomName = $("#senderName").val();
+	    	    		// 받는 사람 아이디(고정)
+	    		   		 var receiveId = "admin@naver.com";
+	    	    		// 메시지
+	    		   		 var msg = senderId + "님이 접속하셨습니다.";
+	    	    		// 구분
+	    		   		 var flag = "msg";
+
+						 var nullRoom = data["nullRoom"];
+						
+						if(data["msg"]){
+		    				$('#logo').attr('onclick', '');//createRoom() 비활성화
+							var message = data["msg"];
+							for(var i in message){
+								var $sessionid = message[i].id;
+								
+								if($sessionid == sessionid){
+				    				var printHTML = "<li class='me'>";
+				        			printHTML += "<div class='entete'>";
+				        			printHTML += "<h3>"+hours+":"+minutes+"<h3>";
+				        			printHTML += "<h2>"+sessionName+"</h2>";
+				        			printHTML += "</div>";
+				        			printHTML += "<div class='message' id='meMsg'>"+ message[i].msg+"</div>";
+				        			printHTML += "</li>";
+				    			}else{    
+				        			var printHTML = "<li class='you'>";
+					    			printHTML += "<div class='entete'>";
+					    			printHTML += "<h2>관리자</h2>";
+					    			printHTML += "<h3>"+hours+":"+minutes+"<h3>";
+					    			printHTML += "</div>";
+					    			printHTML += "<div class='message'id='youMsg'>"+ message[i].msg+"</div>";	    			
+					    			printHTML += "</li>";	
+				    			}
+								writeResponse(printHTML);
+							}
+							socket.send(JSON.stringify(new MessageFlag(senderId,roomName,msg,flag,receiveId,roomNo.val())));
+						}else if(data["nullRoom"]){
+							alert("용달이 트럭을 클릭해주세요!");
+						}
+    					//roomNo.val(data);
+    			},error:function(){
+    				console.log("전송실패");
+    			}
+    		})
     		}
     		socket.onmessage = function(e){
     			console.log(e.data);
@@ -257,7 +256,6 @@
 			var roomNo = $("#roomNo");
 			console.dir("test : " + roomNo);
 			
-	    	socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),"","createroom","admin@naver.com")));
 			
 			// 서블릿 > 
 			$.ajax({
@@ -270,6 +268,8 @@
     				/* if(data=="success"){
     					console.log(data);
     				} */
+    				 console.log("처음roomNo뭐야!!!"+roomNo.val());
+			    	socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),"","createroom","admin@naver.com",roomNo.val())));
     			},error:function(){
     				console.log("전송실패");
     			}
