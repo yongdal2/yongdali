@@ -11,11 +11,12 @@ public class Payment {
 	private Date cancDate;
 	private String payYN;
 	private Date enrollDate;
+	private String cancAmount;
 	
 	public Payment() {}
 
 	public Payment(String pNo, String pRNo, String pDNo, String dealYN, Date dealDate, String cancYN, Date cancDate,
-			String payYN, Date enrollDate) {
+			String payYN, Date enrollDate, String cancAmount) {
 		super();
 		this.pNo = pNo;
 		this.pRNo = pRNo;
@@ -25,6 +26,7 @@ public class Payment {
 		this.cancDate = cancDate;
 		this.payYN = payYN;
 		this.enrollDate = enrollDate;
+		this.cancAmount = cancAmount;
 	}
 
 	public String getpNo() {
@@ -90,6 +92,22 @@ public class Payment {
 	public void setEnrollDate(Date enrollDate) {
 		this.enrollDate = enrollDate;
 	}
+
+	public String getCancAmount() {
+		return cancAmount;
+	}
+
+	public void setCancAmount(String cancAmount) {
+		this.cancAmount = cancAmount;
+	}
+
+	@Override
+	public String toString() {
+		return "Payment [pNo=" + pNo + ", pRNo=" + pRNo + ", dealYN=" + dealYN + ", dealDate=" + dealDate + ", cancYN="
+				+ cancYN + ", cancDate=" + cancDate + ", payYN=" + payYN + ", enrollDate=" + enrollDate
+				+ ", cancAmount=" + cancAmount + "]";
+	}
+	
 	
 	
 }

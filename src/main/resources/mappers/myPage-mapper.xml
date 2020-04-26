@@ -103,11 +103,9 @@
 		<result property="cancDate" column="CANC_DATE"/>
 		<result property="payYN" column="PAY_YN"/>
 		<result property="enrollDate" column="ENROLL_DATE"/>
+		<result property="cancAmount" column="CANC_AMOUNT"/>
 	</resultMap>
 	
-<!-- 	<resultMap id="calculateResultSet" type="Caculate">
-	
-	</resultMap> -->
 	
 	<!-- 폰번호 업데이트 -->
 	<update id="updatePhone" parameterType="Member">
@@ -196,7 +194,7 @@
 	ORDER BY TO_NUMBER(SUBSTR(R.R_NO, 2)) DESC
 	</select>
 	<!-- 마이페이지 예약내역  -->
-	<select id="selectRsvPayList" resultMap="rsvResultSet">
+	<select id="selectRsvPayList" resultMap="rsvPayResultSet">
 	SELECT *
 	FROM RESERVATION R LEFT OUTER JOIN PAYMENT P ON(R.R_NO=P.P_R_NO)
 	WHERE R.R_M_NO = #{mNo}
@@ -228,10 +226,35 @@
 	WHERE P_R_NO = #{rNo}
 	</select>
 	
+	<!-- 결제취소 금액 업데이트  -->
 	<update id="rscCanPayment" parameterType="Payment">
-		
+		UPDATE PAYMENT
+		SET CANC_YN ='Y', CANC_DATE = SYSDATE,
+		<choose>
+			<when test="dealYN ='N'">
+			CANC_AMOUNT = 0
+			</when>
+			<otherwise>
+			CANC_AMOUNT = (SELECT 
+		                    CASE WHEN (R.START_DATE - SYSDATE) >= 7 THEN (R.AMOUNT * 0
+		                    WHEN (R.START_DATE - SYSDATE) >= 3 THEN R.AMOUNT *0.5
+		                    ELSE R.AMOUNT * 1 END
+		                    FROM RESERVATION R JOIN PAYMENT P ON(R.R_NO=P.P_R_NO)
+		                    WHERE R.R_NO = #{pRNo})
+			</otherwise>
+		</choose>
+		WHERE P_R_NO = #{pRNo}
 	</update>
-	<!-- <update id="rscCanCalculate" p>
-		
-	</update> -->
+	<!-- 정산 리스트카운트  -->
+	<select id="getCalListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM RESERVATION R LEFT OUTER JOIN PAYMENT P ON(R.R_NO=P.P_R_NO)
+		WHERE R.R_D_NO= #{DNO}
+	</select>
+	<!-- 정산 예약내역  -->
+	<select id="selectCalList" resultMap="rsvPayResultSet">
+		SELECT *
+		FROM RESERVATION R LEFT OUTER JOIN PAYMENT P ON(R.R_NO=P.P_R_NO)
+		WHERE R.R_D_NO= #{DNO}
+	</select>
 </mapper>

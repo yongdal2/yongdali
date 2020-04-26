@@ -9,7 +9,7 @@
 		#{type},#{startName},#{endName},#{startPhone},#{endPhone},
 		#{startAddr},#{endAddr},#{distance},#{rightLoad},#{rightUnload},
 		#{startDate},#{startTime},#{endDate},#{endTime},#{helpLoad},
-		#{helpUnload},#{luggage},#{msg},#{amount})
+		#{helpUnload},#{luggage},#{msg},#{amount},default,default)
 	</insert>
 </mapper>
     

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!DOCTYPE html>
 
@@ -29,11 +30,20 @@
 <body>
 	<c:import url="../../common/nav.jsp"/>
 	<c:import url="../../user/myPage/userInfo.jsp"/>
-	
+	<c:if test="${ pi.listCount eq 0 }">
+	<div class="container">
+		<div class="row text-center">
+			<div class="col-xs-12 col-md-12 ">
+				<div class="h2 jal" style="margin-top: 150px; margin-bottom: 150px;">예약내역이 존재하지 않습니다</div>
+			</div>
+		</div>
+	</div>
+	</c:if>
+	<c:if test="${ pi.listCount > 0 }">
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-md-12 h2 jal">
-				예약내역 <br> <br>
+<!-- 				예약내역 <br> <br> -->
 			</div>
 			<!-- 필터 -->
 			<div class="col-xs-2 col-md-2 text-center bszB1">
@@ -63,7 +73,7 @@
 			</div>
 			<div class="col-xs-12 col-md-12 tbPdR" >
 				<Br>
-				<table class="table table-hover text-center">
+				<table class="table table-hover text-center noto">
 					<thead>
 						<tr>
 							<td>예약 번호</td>
@@ -80,29 +90,59 @@
 					</thead>
 					<c:forEach var="r" items="${ rList }" varStatus="vs">
 						<tr>
-							<td>${ r.rNo }</td>
-							<td>진행 상태</td>
- 							<td>예약 일자</td>
- 							<td>상차일</td>
- 							<td>하차일</td>
-							<td>출발지</td>
-							<td>dd</td>
-							<td>결제 금액</td>
-							<td><button class="fas fa-truck" id="tInfo${ vs.index }" data-toggle="popover${ vs.index }"  title="차량정보" value="${ r.rDNo }"></button></td>
+							<td class="fw6">${ r.rNo }</td> <!-- 예약번호 -->
+							<td><!-- 상태 -->
+								<c:set var="p" value="${ r.payment }"></c:set>
+								<c:choose>
+								<c:when test="${p.payYN eq 'Y' && p.cancYN eq 'Y' }"><span class="red">취소</span></c:when>
+								<c:when test="${p.payYN eq 'Y' && p.cancYN eq 'N' && p.dealYN eq 'N' }">결제 완료</c:when>
+								<c:when test="${p.dealYN eq 'Y' && p.cancYN eq 'N' }">배차 완료</c:when>
+								</c:choose>
+							</td>
+ 							<td><c:out value="${fn:replace(p.enrollDate,'2020','20')}"/></td><!-- 예약일자 -->
+ 							<td>
+							<c:choose>
+							<c:when test="${r.rightLoad eq null}"><c:out value="${fn:replace(r.startDate,'2020','20')}"/></c:when>
+							<c:otherwise>${r.rightLoad}</c:otherwise>
+							</c:choose>
+ 							</td>
+ 							<td>
+ 							<c:choose>
+							<c:when test="${r.rightLoad eq null}"><c:out value="${fn:replace(r.startDate,'2020','20')}"/></c:when>
+							<c:otherwise>${r.rightLoad}</c:otherwise>
+							</c:choose>
+ 							</td>
+							<td>
+							<c:forEach var="addr" items="${fn:split(r.startAddr, ',')}">
+											<span>${ addr }</span>
+											<br>
+							</c:forEach>
+							</td>
+							<td>
+							<c:forEach var="addr1" items="${fn:split(r.endAddr, ',')}">
+											<span>${ addr1 }</span>
+											<br>
+							</c:forEach>
+							</td>
+							<td>${ r.amount }원</td>
+							<td>
+							<c:choose>
+								<c:when test="${p.cancYN eq 'N'}">
+									<button class="fas fa-truck btn_no" id="tInfo${ vs.index }" data-toggle="popover${ vs.index }"  title="차량정보" value="${ r.rDNo }"></button>
+								</c:when>
+								<c:otherwise>
+									<button class="fas fa-truck btn_no red" disabled="disabled"></button>
+								</c:otherwise>
+							</c:choose>
+							
+							</td>
 							<td><button class="btn btn_ydl_l" id="rDetailBtn${r.rNo }" value="${ r.rNo }" data-toggle="modal" data-target="#rDetail">상세정보 보기</button></td>
 						</tr>
 					</c:forEach>
 				</table>
-			
-			
 			</div>
-					<br>
-					이름 <br>
-					<span class="glyphicon glyphicon-phone"></span>
-					
-			</div>
-	
 		</div>
+	</div>
 		<script>
 		
 		$(document).ready(function(){
@@ -121,20 +161,26 @@
 					data:{dNo:dNo},
 					dataType:"json",
 					success:function(d){
-						console.log(d);	
-						var name = decodeURIComponent(d.name);
-						var phone = d.phone;
+						dhtml ="";
+						console.log(d);
+						console.log(d.deal);
+						if(d.deal =='Y'){
+						var name = "<span>"+decodeURIComponent(d.name)+"기사님</span><br>";
+						var phone = <span>d.phone;
 						var carNo = decodeURIComponent(d.carNo);
 						var img = "${pageContext.request.contextPath}/resources/images/driver/id/"+d.img;
 						var type = decodeURIComponent(d.type);
 						var capcacity = d.capacity;
-						console.log(img);
+						dhtml = name + phone;
+						}else{
+						dhtml = "<span class='na fw6'>아직 배차전 입니다.</span>"; 
+						}
+						
 					},error:function(){
 						console.log("aj실패")
 					}
 				}); 
-				
-			    return 'ok';
+				return dhtml;
 			}
 		    
 		});
@@ -231,7 +277,7 @@
                             </div>
                             </div>
                         <div class="col-xs-12 col-md-12 text-center">
-                            <button type="button" class="btn btn_ydl_l mdbtn" data-dismiss="modal">확인</button>
+                            <button type="button" class="btn btn_ydl_l mdbtn" data-dismiss="modal" onclick="msgShow()">확인</button>
                             <button type="button" id="cancRSV" class="btn btn_ydl_lr mdbtn" data-dismiss="modal">예약 취소</button>
                         </div>
                         <div class="col-xs-12 col-md-12 text-center">
@@ -242,6 +288,7 @@
                             $(document).ready(function(){
                             	$('#rmb1').click(function(){
                             	    $('[id*="rMG"]').toggle();
+                            	    
                             	  });
                             	
                             	$('#rmb2').click(function(){
@@ -291,8 +338,10 @@
 	                    						$("#luggage").text(r.luggage);
 	                    						if(r.msg==null){
 	                    						$("#rMSG").text("");
+	                    						$("#nRmsg").val("");
 	                    						}else{
 	                    						$("#rMSG").text(r.msg);
+	                    						$("#nRmsg").val(r.msg);
 	                    						}
 	                    						$("#amount").text(r.amount);
 	                    						$("#rDate").text(r.payment.enrollDate);
@@ -311,6 +360,11 @@
 	                            	d_yn(rNo);
 	                            });
 	                            
+	                            function msgShow() {
+									$("#rMG").show();
+									$("#rMG_E").hide();
+								}
+	                            
 	                            function d_yn(rNo){
 	                				$.ajax({
 	                					url:"pDetail.myp",
@@ -318,14 +372,14 @@
 	                					dataType:"json",
 	                					success:function(p){
 	                						console.log(p);	
-	                						if(p.deal_y=="Y"){
+	                						if(p.dealYN=="Y"){
 	                							var ccA = confirm( "배차가 완료된 예약입니다 취소하시겠습니까?");
 	                							if(ccA){
-	                								rsvCan(p.rNo,'Y');
+	                								rsvCan(p.pRNo,'Y');
 	                							}
 	                						}else{
 	                							var ccb =confirm("배차되지 않은 예약입니다. 취소하시겠습니까?");
-	                							rsvCan(p.rNo,'N');
+	                							rsvCan(p.pRNo,'N');
 	                						}
 	                						
 	                					},error:function(){
@@ -335,13 +389,14 @@
 	                				
 	                			}
 	                            
-	                            function rsvCan(rNo,deal_yn){
+	                            function rsvCan(pRNo,dealYN){
 	                				$.ajax({
 	                					url:"rsvCan.myp",
-	                					data:{rNo:rNo, deal_yn:deal_yn},
-	                					dataType:"json",
+	                					data:{pRNo:pRNo, dealYN:dealYN},
 	                					success:function(p){
+	                						if(p=='ok'){
 	                						alert("예약이 취소되었습니다.");
+	                						}
 	                					},error:function(){
 	                						console.log("aj실패")
 	                					}
@@ -356,6 +411,7 @@
             </div>
         </div>
     </div>
+    </c:if>
 	<c:import url="../../common/footer.jsp"/>
 </body>
 

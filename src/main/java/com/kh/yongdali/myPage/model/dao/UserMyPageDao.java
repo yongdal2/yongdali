@@ -83,14 +83,8 @@ public class UserMyPageDao {
 
 
 	public int rsvCan(Payment p) {
-		int upCc =0;
 		
-		int upPc = sqlSession.update("myPageMapper.rscCanPayment",p);
-		
-		if(upPc > 0) {
-			upCc = sqlSession.update("myPageMapper.rscCanCalculate",p);
-		}
-		return upCc;
+		return sqlSession.update("myPageMapper.rscCanPayment",p);
 	}
 
 	

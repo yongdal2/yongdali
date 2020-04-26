@@ -32,4 +32,10 @@ public class ChatServiceImpl implements ChatService {
 		return cDao.userInsertMessage(m);
 	}
 
+	@Override
+	public Room selectPreRoom(Room r) {
+		
+		return cDao.selectPreRoom(r);
+	}
+
 }
