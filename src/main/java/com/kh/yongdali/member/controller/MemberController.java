@@ -233,6 +233,12 @@ public class MemberController {
 		}	
 	}	
 	
+	/** 카카오 아이디로 로그인
+	 * @param email
+	 * @param name
+	 * @param model
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping("kakaoLogin.me")
 	public String kakaoLogin(@RequestParam("email") String email, String name, Model model) {
@@ -347,8 +353,8 @@ public class MemberController {
 		    String email = jsonresponseObj.get("email").toString();
 		    String name = jsonresponseObj.get("name").toString();
 		    
-		    // 가입 유무 확인
-		    int result = mService.emailChk(email);
+		    // MVC2 로직처리 
+		    int result = mService.emailChk(email);  // 가입 유무 확인
 		    
 		    if(result > 0) {
 		    	Member m = new Member(email);
@@ -418,50 +424,10 @@ public class MemberController {
         }
     }
 //	/네이버 아이디로 로그인(네아로)    
-	
-    /** 페이스북 아이디로 로그인
-     * @param email
-     * @param name
-     * @param model
-     * @return
-     */
-    @RequestMapping("fbLogin.me")
-    public String facebookLogin(@RequestParam("email") String email, String name, Model model) {
-    	
-	    // 가입 유무 확인
-	    int result = mService.emailChk(email);
-	    
-	    if(result > 0) {
-	    	Member m = new Member(email);
-	    	
-	    	
-	    	Member mem = mService.loginMember(m);
-	    	String type = mem.getSignupType();
-	    	
-	    	if(!type.equals("페이스북") ) {
-	    		System.out.println("네이버 간편 가입 회원입니다. 네이버로 로그인하세요.");
-	    		return "login&signUp/login";
-	    	}else {
-	    		model.addAttribute("loginUser", mem);
-	    		return "user/home";
-	    	}
-	    }
-	    else {
-	    	Member newMem = new Member(email, name, "일반", "페이스북", "N");
-	    	int insertResult = mService.insertMember(newMem);
-	    	if(insertResult > 0) {
-	    		model.addAttribute("loginUser", newMem);
-	    	}else {
-	    		model.addAttribute("msg", "페이스북으로 간편 로그인 중 오류 발생!");
-				return "common/errorPage";
-	    	}
-	    }
-    	return "user/home";
-    }
-    
+	   
 	@ResponseBody
 	@RequestMapping(value="fbLoginAjax.me", method=RequestMethod.POST)
-	public String facebookLoginAjax(@RequestParam("email") String email, String name, Model model) {
+	public String facebookLogin(@RequestParam("email") String email, String name, Model model) {
 		
 	    // 가입 유무 확인
 	    int result = mService.emailChk(email);
@@ -492,8 +458,7 @@ public class MemberController {
 	    	}
 	    }
 	}
-    
-    
+     
     /** 로그아웃
 	 * @param status
 	 * @return
@@ -505,8 +470,7 @@ public class MemberController {
 		
 		return "redirect:home.do";
 	}
-		
-	
+			
 	/** 약관동의 페이지
 	 * @return
 	 */
@@ -514,8 +478,7 @@ public class MemberController {
 	public String policyChk() {
 		return "login&signUp/policyChk";
 	}
-	
-	
+
 	/** 회원가입 페이지(용달이)
 	 * @param pushEnabled
 	 * @param model
@@ -537,7 +500,6 @@ public class MemberController {
 		model.addAttribute("pushEnabled", pushEnabled);
 		return "login&signUp/signUpForm";
 	}
-
 
 	/** 회원가입_이메일 중복검사
 	 * @param mId
@@ -641,7 +603,6 @@ public class MemberController {
 			return "common/errorPage";
 		}
 	}
-	
 	
 	/** 네이버 아이디로 회원가입
 	 * @param m
