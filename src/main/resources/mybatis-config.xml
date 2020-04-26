@@ -18,6 +18,7 @@
 		<typeAlias type="com.kh.yongdali.chat.msg.Message" alias="Message"/>
 		<typeAlias type="com.kh.yongdali.chat.msg.Room" alias="Room"/>
 		<typeAlias type="com.kh.yongdali.admin.model.vo.Calculate" alias="Calculate"/>
+		<typeAlias type="com.kh.yongdali.admin.model.vo.adRefund" alias="adRefund"/>
 	</typeAliases>
 	
  	<mappers>
