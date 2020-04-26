@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -38,7 +38,17 @@
 <body>
 	<c:import url="../../common/nav_driver.jsp" />
 	<c:import url="../../driver/myPage/driverInfo.jsp" />
-
+	
+	<c:if test="${ pi.listCount eq 0 }">
+	<div class="container">
+		<div class="row text-center">
+			<div class="col-xs-12 col-md-12 ">
+				<div class="h2 jal" style="margin-top: 150px; margin-bottom: 150px;">정산내역이 존재하지 않습니다</div>
+			</div>
+		</div>
+	</div>
+	</c:if>
+	<c:if test="${ pi.listCount > 0 }">
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-md-12 h2 jal">
@@ -129,6 +139,7 @@
 			</ul>
 		</div>
 	</div>
+	</c:if>
 	<c:import url="../../common/footer.jsp" />
 </body>
 

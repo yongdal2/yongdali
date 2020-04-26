@@ -28,6 +28,7 @@
 			<div class="row">
 			<div id=title>
 				<h2 class="jal"><a href="adminHome.ydl">관리자 페이지</a></h2>
+				<p>aJung.ad </p>
 			</div>
 				<hr>
 			</div>
@@ -40,8 +41,8 @@
 					<a href="aMem.ad"><span class="sidebar_span">회원님 목록</span></a><br>
 					<a href="aDri.ad"><span class="sidebar_span">기사님 목록</span></a><br>
 					<a href="aRes.ad"><span class="sidebar_span">예약 내역</span></a><br>
-					<a href="aJung.ad"><span class="sidebar_span">정산 내역</span></a><br> 
-					<a href="#"><span class="sidebar_span">환불 내역</span></a><br> 
+					<a href="aJung.ad"><span class="sidebar_span">: 정산 내역</span></a><br> 
+					<a href="adRef.ad"><span class="sidebar_span">환불 내역</span></a><br> 
 					<a href="#"><span class="sidebar_span">채팅 내역</span></a>
 				</div>
 
@@ -84,13 +85,13 @@
 						<!-- << 처음  -->
 						<li>
 						<c:if test="${ pi.currentPage eq 1 }"><a>&lt;&lt; &nbsp;</a></c:if>
-						<c:if test="${ pi.currentPage ne 1 }"><a href="aMem.ad?currentPage=1">&lt;&lt; &nbsp;</a></c:if>
+						<c:if test="${ pi.currentPage ne 1 }"><a href="aJung.ad?currentPage=1">&lt;&lt; &nbsp;</a></c:if>
 						</li>
 						
 						<!-- < -->
 						<li>
 						<c:if test="${ pi.currentPage ne 1 }">
-							<c:url var="before" value="aMem.ad">
+							<c:url var="before" value="aJung.ad">
 								<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
 							</c:url>
 							<a href="${ before }">&lt; &nbsp;</a>
@@ -106,7 +107,7 @@
 						<a><b><font color="#5a8cff">${ p }</font></b></a>
 						</c:if>							
 						<c:if test="${ p ne pi.currentPage }">
-						<a href="<c:url var="pagination" value="aMem.ad">	
+						<a href="<c:url var="pagination" value="aJung.ad">	
 									<c:param name="currentPage" value="${ p }"/>
 								</c:url>
 						${ pagination }">${ p }</a>
@@ -119,17 +120,17 @@
 						<li>
 						<a href="
 						<c:if test="${ pi.currentPage ne pi.maxPage }">
-							<c:url var="after" value="aMem.ad">
+							<c:url var="after" value="aJung.ad">
 								<c:param name="currentPage" value="${ pi.currentPage +1 }"/>
 							</c:url>
 						</c:if>
 						${ after }">&gt; &nbsp;</a>
 						</li>
-
+aJung.ad
 						<!-- >> 의도: 마지막 페이지에서는 >> 표시 사라짐(현재페이지가 끝 페이지임을 표시)-->						
 						<li>
 						<c:if test="${ pi.currentPage ne pi.maxPage }">
-						<c:url var="lastPage" value="aMem.ad">
+						<c:url var="lastPage" value="aJung.ad">
 								<c:param name="currentPage" value="${ pi.maxPage }"/>
 							</c:url>
 						<a href="${ lastPage }">&gt;&gt; &nbsp;</a>

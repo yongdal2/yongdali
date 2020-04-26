@@ -28,7 +28,7 @@
 			<div class="row">
 			<div id=title>
 				<h2 class="jal"><a href="adminHome.ydl">관리자 페이지</a></h2>
-			<p>회원님 목록 / admin_Mem.jsp / 회원번호, 회원구분으로 sql</p>
+			<!-- <p>회원님 목록 / admin_Mem.jsp / 회원번호, 회원구분으로 sql</p> -->
 			</div>
 				<hr>
 			</div>
@@ -41,9 +41,9 @@
 					<a href="aMem.ad"><span class="sidebar_span">회원님 목록</span></a><br>
 					<a href="aDri.ad"><span class="sidebar_span">기사님 목록</span></a><br>
 					<a href="aRes.ad"><span class="sidebar_span">예약 내역</span></a><br>
-					<a href="#"><span class="sidebar_span">정산 내역</span></a><br> 
-					<a href="#"><span class="sidebar_span">환불 내역</span></a><br> 
-					<a href="#"><span class="sidebar_span">채팅 내역</span></a>
+					<a href="aJung.ad"><span class="sidebar_span">정산 내역</span></a><br> 
+					<a href="adRef.ad"><span class="sidebar_span">환불 내역</span></a><br> 
+					<a href="#"><span class="sidebar_span">: 채팅 내역</span></a>
 				</div>
 
 			<!-- list -->

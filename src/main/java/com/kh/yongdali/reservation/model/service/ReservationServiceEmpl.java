@@ -24,9 +24,4 @@ public class ReservationServiceEmpl implements ReservationService{
 	public ArrayList<Address> getAddressList(String mno) {
 		return rDao.getAddressList(mno);
 	}
-
-	@Override
-	public int insertPayment() {
-		return rDao.insertPayment();
-	}
 }

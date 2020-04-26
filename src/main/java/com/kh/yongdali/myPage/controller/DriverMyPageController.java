@@ -2,6 +2,7 @@ package com.kh.yongdali.myPage.controller;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,11 +16,14 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.yongdali.common.PageInfo;
+import com.kh.yongdali.common.Pagination;
 import com.kh.yongdali.driver.model.vo.Driver;
 import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.myPage.model.service.DriverMyPageService;
+import com.kh.yongdali.reservation.model.vo.Reservation;
 
-@SessionAttributes({"loginUser","driver"})
+@SessionAttributes({"driver"})
 @Controller
 public class DriverMyPageController {
 	
@@ -28,11 +32,7 @@ public class DriverMyPageController {
 	
 	
 
-	//드라이버 정산내역
-	@RequestMapping("driverSettle.myp")
-	public String driverSettleView() {
-		return "driver/myPage/driverSettle";
-	}
+
 	
 	
 	//======================드라이버 정보==============================
@@ -115,4 +115,31 @@ public class DriverMyPageController {
 			mv.setViewName("driver/myPage/truckInfo");
 			return mv;
 		}
+		
+	//===========================드라이버 정산 =========================
+		
+		//드라이버 정산내역
+		
+		@RequestMapping("driverSettle.myp")
+		public ModelAndView myRsvList(@SessionAttribute Driver driver, ModelAndView mv,
+									@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage) {
+			
+			
+			String dNo = driver.getdNo();
+			int clistCount =dmpService.getCalListCount(dNo);
+			
+			PageInfo pi = Pagination.getPageInfo(currentPage, clistCount, 5, 20);
+			
+			ArrayList<Reservation> cList = dmpService.selectCalList(pi,dNo);
+			
+			System.out.println(cList);
+			
+			mv.addObject("cList",cList);
+			mv.addObject("pi",pi);
+			mv.setViewName("driver/myPage/driverSettle");
+			return mv;
+		}
+		
+		
+		
 }

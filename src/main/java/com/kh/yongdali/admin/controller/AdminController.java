@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.yongdali.admin.model.service.AdminService;
 import com.kh.yongdali.admin.model.vo.Calculate;
+import com.kh.yongdali.admin.model.vo.adRefund;
 import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.common.Pagination;
 import com.kh.yongdali.driver.model.vo.Driver;
@@ -60,10 +62,11 @@ public class AdminController {
 
 	}
 
+
 	/**
 	 * Driver List
-	 * 
 	 * @param mv
+	 * @param currentPage
 	 * @return
 	 */
 	@RequestMapping("aDri.ad")
@@ -90,37 +93,42 @@ public class AdminController {
 		return mv;
 	}
 
-	/**
-	 * Reservation List
-	 * 
-	 * @param mv
-	 * @param currentPage
-	 * @return
-	 *//*
-		 * @RequestMapping("aRes.ad") public ModelAndView adminResList(ModelAndView mv,
-		 * 
-		 * @RequestParam(value = "currentPage", required = false, defaultValue = "1")
-		 * int currentPage) { System.out.println("reservationCurrentPage : " +
-		 * currentPage);
-		 * 
-		 * int listCount = aService.getResListCount();
-		 * System.out.println("reservationListCount : " + listCount); //
-		 * System.out.println("ㄱlistCount : " + listCount);
-		 * 
-		 * int pageLimit =5; int boardLimit=10;
-		 * 
-		 * PageInfo pi = Pagination.getPageInfo(currentPage, listCount, pageLimit,
-		 * boardLimit);
-		 * 
-		 * //ArrayList<Reservation> list = aService.selectResList(pi);
-		 * //System.out.println("reservationLlist : " + list); //
-		 * System.out.println("ㄱlist : " + list); //----- //mv.addObject("list", list);
-		 * mv.addObject("pi", pi); mv.setViewName("admin/admin_Reser");
-		 * 
-		 * return mv;
-		 * 
-		 * }
-		 */
+	
+//	
+//	/**
+//	 * Refund List
+//	 * 
+//	 * @param mv
+//	 * @param currentPage
+//	 * @return
+//	 */
+//		  @RequestMapping("aRefund.ad") 
+//		  public ModelAndView adminResList(ModelAndView mv,
+//				  @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
+//			  
+//		  System.out.println("refundCurrentPage : " + currentPage);
+//		  
+//		  int listCount = aService.getrefListCount();
+//		  System.out.println("refundListCount : " + listCount); 
+//		  // System.out.println("ㄱlistCount : " + listCount);
+//		  
+//		  int pageLimit =5; 
+//		  int boardLimit=10;
+//		  
+//		  PageInfo pi = Pagination.getPageInfo(currentPage, listCount, pageLimit, boardLimit);
+//		  
+//		  //ArrayList<Reservation> list = aService.selectResList(pi);
+//		  //System.out.println("reservationLlist : " + list); 
+//		  //System.out.println("ㄱlist : " + list); 
+//		  //----- 
+//		  //mv.addObject("list", list);
+//		  mv.addObject("pi", pi); 
+//		  mv.setViewName("admin/admin_Refund");
+//		  
+//		  return mv;
+//		  
+//		  }
+		 
 
 	// 드라이버 계정 계정정보
 	@RequestMapping("adminHome.ydl")
@@ -159,10 +167,32 @@ public class AdminController {
 	}
 
 	// 환불 내역
-	@RequestMapping("admin_Refund.ydl")
-	public String adminHomeView6() {
-		return "admin/admin_Refund";
-	}
+//	@RequestMapping("admin_Refund.ydl")
+//	public String adminHomeView6() {
+//		return "admin/admin_Refund";
+//	}
+	
+	@RequestMapping("adRef.ad")
+	public ModelAndView adminRefundView(ModelAndView mv, 
+			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
+		int listCount = aService.refundCount();
+		//======================================
+		
+		
+		int pageLimit = 5;
+		int boardLimit = 10;
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, pageLimit, boardLimit);
+		ArrayList<adRefund> list = aService.adRefundList(pi);
+		mv.addObject("pi",pi);
+		mv.addObject("list",list);
+		mv.setViewName("admin/admin_Refund");
+		
+		return mv;
+	} 
+	
+	
+	
 
 	// 채팅 내역
 	@RequestMapping("admin_ChatLog.ydl")

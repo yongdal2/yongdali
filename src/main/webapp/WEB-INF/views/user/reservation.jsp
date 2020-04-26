@@ -180,11 +180,20 @@
 									<input id="endDetailAddr" name="edDetailAddr" type="text" placeholder="상세 주소" required>
 								</div>
 								<div align="left">
-									<label id="end-check" class="checkbox-wrap">
+									<label id="end-check" class="checkbox-wrap" style="height: 18px; margin-bottom: 2px;">
 										<input id="checkLoad2" name="rightUnload" type="checkbox" value="바로 하차">
 										<i class="check-icon" style="margin-top: 2px;"></i>
-										<div style="font-size: 16px;">&nbsp;&nbsp;바로 하차</div>
+										<div style="font-size: 16px; height: 18px;">&nbsp;&nbsp;바로 하차</div>
 									</label>
+								</div>
+								<div style="display: block;">
+								<div id="caution-div1" style="display: block; height: 17px; margin-bottom: 3px;"></div>
+								<div id="caution-div2" style="display: none; color:red; height: 17px; padding: 0px; margin-bottom: 3px; font">
+									<!-- <small>* 보관 비용으로 1일마다 60,000원씩 청구됩니다. *</small> -->
+									<small>* 상차일 기준으로 다음날부터 예약이 가능하십니다.*</small>
+								</div>
+								<div id="caution-div3" style="display: none; color:red; height: 17px; padding: 0px; margin-bottom: 3px; font">
+									<small>* 짐 보관으로 1일마다 60,000원씩 청구됩니다. *</small>
 								</div>
 								<div style="display: flex;">
 									<div id="end-date-div" class="input-group date">
@@ -246,6 +255,7 @@
 											<option class="opt4" value="23:30">23시 30분</option>
 										</select>
 									</div>
+								</div>
 								</div>
 							</div>
 						</div>

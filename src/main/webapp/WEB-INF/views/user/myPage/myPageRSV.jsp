@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!DOCTYPE html>
 
@@ -29,11 +30,20 @@
 <body>
 	<c:import url="../../common/nav.jsp"/>
 	<c:import url="../../user/myPage/userInfo.jsp"/>
-	
+	<c:if test="${ pi.listCount eq 0 }">
+	<div class="container">
+		<div class="row text-center">
+			<div class="col-xs-12 col-md-12 ">
+				<div class="h2 jal" style="margin-top: 150px; margin-bottom: 150px;">예약내역이 존재하지 않습니다</div>
+			</div>
+		</div>
+	</div>
+	</c:if>
+	<c:if test="${ pi.listCount > 0 }">
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-md-12 h2 jal">
-				예약내역 <br> <br>
+<!-- 				예약내역 <br> <br> -->
 			</div>
 			<!-- 필터 -->
 			<div class="col-xs-2 col-md-2 text-center bszB1">
@@ -63,7 +73,7 @@
 			</div>
 			<div class="col-xs-12 col-md-12 tbPdR" >
 				<Br>
-				<table class="table table-hover text-center">
+				<table class="table table-hover text-center noto">
 					<thead>
 						<tr>
 							<td>예약 번호</td>
@@ -80,23 +90,52 @@
 					</thead>
 					<c:forEach var="r" items="${ rList }" varStatus="vs">
 						<tr>
-							<td>${ r.rNo }</td>
+							<td class="fw6">${ r.rNo }</td> <!-- 예약번호 -->
+							<td><!-- 상태 -->
+								<c:set var="p" value="${ r.payment }"></c:set>
+								<c:choose>
+								<c:when test="${p.payYN eq 'Y' && p.cancYN eq 'Y' }"><span class="red">취소</span></c:when>
+								<c:when test="${p.payYN eq 'Y' && p.cancYN eq 'N' && p.dealYN eq 'N' }">결제 완료</c:when>
+								<c:when test="${p.dealYN eq 'Y' && p.cancYN eq 'N' }">배차 완료</c:when>
+								</c:choose>
+							</td>
+ 							<td><c:out value="${fn:replace(p.enrollDate,'2020','20')}"/></td><!-- 예약일자 -->
+ 							<td>
+							<c:choose>
+							<c:when test="${r.rightLoad eq null}"><c:out value="${fn:replace(r.startDate,'2020','20')}"/></c:when>
+							<c:otherwise>${r.rightLoad}</c:otherwise>
+							</c:choose>
+ 							</td>
+ 							<td>
+ 							<c:choose>
+							<c:when test="${r.rightLoad eq null}"><c:out value="${fn:replace(r.startDate,'2020','20')}"/></c:when>
+							<c:otherwise>${r.rightLoad}</c:otherwise>
+							</c:choose>
+ 							</td>
+							<td>
+							<c:forEach var="addr" items="${fn:split(r.startAddr, ',')}">
+											<span>${ addr }</span>
+											<br>
+							</c:forEach>
+							</td>
+							<td>
+							<c:forEach var="addr1" items="${fn:split(r.endAddr, ',')}">
+											<span>${ addr1 }</span>
+											<br>
+							</c:forEach>
+							</td>
+							<td>${ r.amount }원</td>
 							<td>
 							<c:choose>
-							<c:when test="${r.payment.payYN == 'Y' && r.payment.cancYN == 'N' }">결제 완료</c:when>
-							<c:when test="${r.payment.payYN == 'Y' && r.payment.cancYN == 'Y' }">취소</c:when>
-							<c:when test="${r.payment.dealYN == 'Y' && r.payment.cancYN == 'N' }">배차 완료</c:when>
-							<c:otherwise> nn</c:otherwise>
+								<c:when test="${p.cancYN eq 'N'}">
+									<button class="fas fa-truck btn_no" id="tInfo${ vs.index }" data-toggle="popover${ vs.index }"  title="차량정보" value="${ r.rDNo }"></button>
+								</c:when>
+								<c:otherwise>
+									<button class="fas fa-truck btn_no red" disabled="disabled"></button>
+								</c:otherwise>
 							</c:choose>
-
+							
 							</td>
- 							<td>예약 일자</td>
- 							<td>상차일</td>
- 							<td>하차일</td>
-							<td>출발지</td>
-							<td>dd</td>
-							<td>결제 금액</td>
-							<td><button class="fas fa-truck btn_no" id="tInfo${ vs.index }" data-toggle="popover${ vs.index }"  title="차량정보" value="${ r.rDNo }"></button></td>
 							<td><button class="btn btn_ydl_l" id="rDetailBtn${r.rNo }" value="${ r.rNo }" data-toggle="modal" data-target="#rDetail">상세정보 보기</button></td>
 						</tr>
 					</c:forEach>
@@ -126,8 +165,8 @@
 						console.log(d);
 						console.log(d.deal);
 						if(d.deal =='Y'){
-						var name = "<span>기사님 성함 : "+decodeURIComponent(d.name)+"</span><br>";
-						var phone = d.phone;
+						var name = "<span>"+decodeURIComponent(d.name)+"기사님</span><br>";
+						var phone = <span>d.phone;
 						var carNo = decodeURIComponent(d.carNo);
 						var img = "${pageContext.request.contextPath}/resources/images/driver/id/"+d.img;
 						var type = decodeURIComponent(d.type);
@@ -372,6 +411,7 @@
             </div>
         </div>
     </div>
+    </c:if>
 	<c:import url="../../common/footer.jsp"/>
 </body>
 
