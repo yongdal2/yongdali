@@ -47,14 +47,14 @@ public class Message {
 	
 	
 	
-	public Message(String id, String roomName, String msg, String flag, String receiveId, String chkRoom) {
+	public Message(String id, String roomName, String msg, String flag, String receiveId, String roomNo) {
 		super();
 		this.id = id;
 		this.roomName = roomName;
 		this.msg = msg;
 		this.flag = flag;
 		this.receiveId = receiveId;
-		this.chkRoom = chkRoom;
+		this.roomNo = roomNo;
 	}
 	
 	

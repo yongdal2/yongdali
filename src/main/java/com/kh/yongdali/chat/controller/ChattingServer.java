@@ -81,6 +81,7 @@ public class ChattingServer {
 		
 		//message를 하는 기준값 현재는 room, user, msg, file로 구분되어있음.
 		String flag=msg.getFlag();
+		System.out.println("msg는 무엇이니 : " + msg);
 		try {
 			if(flag.equals("msg")) {
 				for(Session s : session.getOpenSessions()) {
@@ -128,7 +129,7 @@ public class ChattingServer {
 			else if(flag.equals("createroom")) {//채팅만들고 현황전송하기.!
 				System.out.println("1");
 				for(Session s : session.getOpenSessions()) {
-					s.getBasicRemote().sendObject(new Message("admin","",rooms, "room","","YES"));//방현황 전송
+					s.getBasicRemote().sendObject(new Message("admin","",rooms, "room","",msg.getRoomNo()));//방현황 전송
 					s.getBasicRemote().sendObject(new Message("admin","",users, "user"));//userg현황전송
 				}
 			}

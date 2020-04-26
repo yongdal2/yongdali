@@ -1,5 +1,7 @@
 package com.kh.yongdali.chat.model.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -33,5 +35,12 @@ public class ChatDao {
 	
 		return sqlSession.selectOne("chatMapper.selectPreRoom",r);
 	}
+
+	public ArrayList<Message> selectPreMessage(String roomNo) {
+		
+		return (ArrayList)sqlSession.selectList("chatMapper.selectPreMessage", roomNo);
+	}
+
+
 
 }
