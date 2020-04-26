@@ -1,5 +1,7 @@
 package com.kh.yongdali.chat.model.service;
 
+import java.util.ArrayList;
+
 import com.kh.yongdali.chat.msg.Message;
 import com.kh.yongdali.chat.msg.Room;
 
@@ -26,7 +28,16 @@ public interface ChatService {
 	 */
 	int userInsertMessage(Message m);
 
+	/**
+	 * 이전에 생성한 방 있는지 확인
+	 * @param r
+	 * @return
+	 */
 	Room selectPreRoom(Room r);
+
+	ArrayList<Message> selectPreMessage(String roomNo);
+
+
 
 
 

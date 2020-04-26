@@ -55,5 +55,10 @@
         AND CONNECTYN='Y'
 	</select>
 	
+	<select id="selectPreMessage" resultMap="messageResultSet">
+		SELECT * FROM CHATMESSAGE
+		WHERE CM_CR_NO=#{roomNo}
+	</select>
+	
 	
 </mapper>

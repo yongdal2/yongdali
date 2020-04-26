@@ -1,5 +1,11 @@
 package com.kh.yongdali.chat.controller;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 import com.kh.yongdali.chat.model.service.ChatService;
 import com.kh.yongdali.chat.msg.Message;
 import com.kh.yongdali.chat.msg.Room;
+import com.kh.yongdali.common.PageInfo;
+import com.kh.yongdali.common.Pagination;
+import com.kh.yongdali.cs.model.vo.Notice;
 
 @SessionAttributes("nowRoom")
 @Controller
@@ -84,5 +96,29 @@ public class ChatController {
 		}
 		
 	}
+	
+	@RequestMapping(value="chkPreMessage.ch")
+	public void preMessageChk(HttpServletResponse response, Room r) throws JsonIOException, IOException {
+		response.setContentType("application/json; charset=utf-8");
+		System.out.println("r: " + r);
+		Room preRoom = cService.selectPreRoom(r);
+		System.out.println("preRoom : " + preRoom );
+		Map message = new HashMap();
+		
+		if(preRoom != null) {
+			ArrayList<Message> m = cService.selectPreMessage(preRoom.getRoomNo());
+			message.put("msg",m);
+			message.put("roomNo",preRoom.getRoomNo());
+		}else {
+			String nullRoom = "nullRoom";
+			message.put("nullRoom",nullRoom);
+		}
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(message,response.getWriter());
+		
+		
+	}
+	
 	
 }
