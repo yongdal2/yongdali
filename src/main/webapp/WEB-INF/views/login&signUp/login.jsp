@@ -31,10 +31,11 @@
 			fbLogin = function(){
 				FB.login(function(res){
 					console.log("login : ", res);
+					
+					// 4. 로그인(커넥션) 상태 확인
 					if(res.status === 'connected'){
-						console.log("facebook conntected");
 						
-						// 3. 회원정보 호출 API(로그인/커넥션 성공시)
+						// 5. 회원정보 호출 API
 						FB.api('/me',{fields: 'email,name'} ,function(resp){
 						    let email = resp.email;
 						    let name = resp.name;
@@ -58,11 +59,10 @@
 						   				alert("용달이 회원입니다. 용달이로 로그인하세요.");
 						   			}
 						   		}, error : function(){
-					        		var msg = "페이스북 간편 로그 중 에러 발생!";
-					        		location.href="error.ydl?msg="+msg;
+						       		var msg = "페이스북 간편 로그 중 에러 발생!";
+						       		location.href="error.ydl?msg="+msg;
 						   		}
 						   	})
-						   	
 						});
 					}
 				},{scope:'email'});
@@ -166,30 +166,28 @@
 
     <!-- content -->
     <div class="content loginContent">
-        <!-- <form action="login.do" method="post" id="loginForm" novalidate> -->
-            <div class="formRow">
-                <div class="formRow--item">
-                    <!-- 이메일 -->
-                    <div class="emailWrap">
-                        <div class="formRow--input-wrapper js-inputWrapper">
-                            <input type="email" class="formRow--input js-input eng" name="mId" id="mId" placeholder="이메일"
-                                maxlength="50">
-                        </div>
+        <div class="formRow">
+            <div class="formRow--item">
+                <!-- 이메일 -->
+                <div class="emailWrap">
+                    <div class="formRow--input-wrapper js-inputWrapper">
+                        <input type="email" class="formRow--input js-input eng" name="mId" id="mId" placeholder="이메일"
+                            maxlength="50">
                     </div>
-                    <div id="emailMsg" class="msgBox"></div>
-                    <div class="pwdWrap">
-                        <div class="formRow--input-wrapper js-inputWrapper">
-                            <input type="password" class="formRow--input js-input" name="pwd" id="pwd" placeholder="비밀번호"
-                                maxlength="16" >
-                        </div>
-                    </div>
-                    <div id="pwdMsg" class="msgBox"></div>
                 </div>
+                <div id="emailMsg" class="msgBox"></div>
+                <div class="pwdWrap">
+                    <div class="formRow--input-wrapper js-inputWrapper">
+                        <input type="password" class="formRow--input js-input" name="pwd" id="pwd" placeholder="비밀번호"
+                            maxlength="16" >
+                    </div>
+                </div>
+                <div id="pwdMsg" class="msgBox"></div>
             </div>
-            <div class="btnArea">
-                <button type="button" class="submitBtn" id="loginBtn">로그인</button>
-            </div>
-        <!-- </form> -->
+        </div>
+        <div class="btnArea">
+            <button type="button" class="submitBtn" id="loginBtn">로그인</button>
+        </div>
         <div class="forgotSignIn">
             <a class="" href="findPwdView.me">비밀번호 재설정</a>
             <a class="" href="policyView.me">회원가입</a>
@@ -198,10 +196,7 @@
         <div class="easyEccess">
             <h2 class="easyEccessTitle">간편 로그인</h2>
             <div class="easyEccessLogo">
-                <%-- <a href="#"><img src="${contextPath}/resources/images/login&signUp/facebookLogo.png" alt="페이스북"></a> --%>
-                <%-- <a href="#"><img src="${contextPath}/resources/images/login&signUp/kakaoLogo.png" alt="카카오"></a> --%>
                 <img class="easyEccessBtn" src="${contextPath}/resources/images/login&signUp/facebookLogo.png" alt="페이스북" onclick="fbLogin();">
-                <!-- <div class="g-signin2" data-onsuccess="onSignIn" style="disply : none"></div> -->
                 <img class="easyEccessBtn" src="${contextPath}/resources/images/login&signUp/kakaoLogo.png" alt="카카오" onclick="kakaoLogin();">
                 <a href="<%=apiURL%>"><img src="${contextPath}/resources/images/login&signUp/naverLogo.png" alt="네이버"></a>
             </div>

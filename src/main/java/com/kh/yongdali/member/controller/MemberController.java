@@ -459,10 +459,10 @@ public class MemberController {
     	return "user/home";
     }
     
-    @ResponseBody
-    @RequestMapping(value="fbLoginAjax.me", method=RequestMethod.POST)
-    public String facebookLoginAjax(@RequestParam("email") String email, String name, Model model) {
-    	
+	@ResponseBody
+	@RequestMapping(value="fbLoginAjax.me", method=RequestMethod.POST)
+	public String facebookLoginAjax(@RequestParam("email") String email, String name, Model model) {
+		
 	    // 가입 유무 확인
 	    int result = mService.emailChk(email);
 	    
@@ -491,7 +491,7 @@ public class MemberController {
 				return "error";
 	    	}
 	    }
-    }
+	}
     
     
     /** 로그아웃
