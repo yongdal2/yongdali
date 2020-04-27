@@ -75,21 +75,27 @@
                 </div>
             </div> 
         </div>
-        <div class="easyEccess chooseSignIn">
+        
+       <div class="easyEccess chooseSignIn">
             <div class="yongdalLogo"> 
                 <h2 class="easyEccessTitle">용달이 회원가입</h2>
-                <%-- <a href="${contextPath}/signUpView.me"><img src="${contextPath}/resources/images/ydl_logo/ydl_ic_gr(70X70).png" alt="용달이"></a> --%>
            		<img src="${contextPath}/resources/images/ydl_logo/ydl_ic_gr(70X70).png" alt="용달이" id="yongdaliSignUp">
             </div>
             <div class="easyEccessLogo">
                 <h2 class="easyEccessTitle">간편 회원가입</h2>
                 <a href="#"><img src="${contextPath}/resources/images/login&signUp/facebookLogo.png" alt="페이스북"></a>
-                <%-- <a href="#"><img src="${contextPath}/resources/images/login&signUp/kakaoLogo.png" alt="카카오"></a> --%>
                 <img src="${contextPath}/resources/images/login&signUp/kakaoLogo.png" alt="카카오" id="kakaoSignUp">
                 <img src="${contextPath}/resources/images/login&signUp/naverLogo.png" alt="네이버" id="naverSignUp">
             </div>
         </div>
+        
+        <div  id="btnWrap">
+	        <div class="btnArea">
+	            <button type="button" class="submitBtn" id="easyEcsAgree">용달이 시작하기</button>
+	        </div>
+        </div>
     </div>
+    
 
     <!-- The Modal -->
     <div id="yongdaliPolicy" class="modal">

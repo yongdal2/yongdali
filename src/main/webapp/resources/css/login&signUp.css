@@ -505,8 +505,19 @@ select::-ms-expand {
     cursor: pointer; */
 }
 
+/* 약관 동의 */
+#btnWrap{
+	max-width: 380px;
+    min-width: 380px;
+    margin: auto;
+    background: white;
+    padding: 10px;
+    margin-top: 1.5rem;
+}
 
-
+#easyEcsAgree{
+	font-size: 25px;
+}
 
 /* 이용 약관1 (모달) */
 .bdkJUD {
