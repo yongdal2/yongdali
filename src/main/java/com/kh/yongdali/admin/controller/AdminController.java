@@ -93,42 +93,7 @@ public class AdminController {
 		return mv;
 	}
 
-	
-//	
-//	/**
-//	 * Refund List
-//	 * 
-//	 * @param mv
-//	 * @param currentPage
-//	 * @return
-//	 */
-//		  @RequestMapping("aRefund.ad") 
-//		  public ModelAndView adminResList(ModelAndView mv,
-//				  @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
-//			  
-//		  System.out.println("refundCurrentPage : " + currentPage);
-//		  
-//		  int listCount = aService.getrefListCount();
-//		  System.out.println("refundListCount : " + listCount); 
-//		  // System.out.println("ㄱlistCount : " + listCount);
-//		  
-//		  int pageLimit =5; 
-//		  int boardLimit=10;
-//		  
-//		  PageInfo pi = Pagination.getPageInfo(currentPage, listCount, pageLimit, boardLimit);
-//		  
-//		  //ArrayList<Reservation> list = aService.selectResList(pi);
-//		  //System.out.println("reservationLlist : " + list); 
-//		  //System.out.println("ㄱlist : " + list); 
-//		  //----- 
-//		  //mv.addObject("list", list);
-//		  mv.addObject("pi", pi); 
-//		  mv.setViewName("admin/admin_Refund");
-//		  
-//		  return mv;
-//		  
-//		  }
-		 
+ 
 
 	// 드라이버 계정 계정정보
 	@RequestMapping("adminHome.ydl")
@@ -172,10 +137,18 @@ public class AdminController {
 //		return "admin/admin_Refund";
 //	}
 	
+	/**
+	 * admin Refund list
+	 * @param mv
+	 * @param currentPage
+	 * @return
+	 */
 	@RequestMapping("adRef.ad")
 	public ModelAndView adminRefundView(ModelAndView mv, 
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
+		System.out.println("refundCurrentPage : " + currentPage);
 		int listCount = aService.refundCount();
+		System.out.println("refundlistCount : " + listCount);
 		//======================================
 		
 		

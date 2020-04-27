@@ -109,7 +109,7 @@ public class AdminDao {
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("adminMapper.refundLsit", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("adminMapper.refundList", null, rowBounds);
 	}
 
 
