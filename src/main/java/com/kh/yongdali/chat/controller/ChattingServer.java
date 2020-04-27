@@ -57,6 +57,8 @@ public class ChattingServer {
 		//사용자 가져오기
 		String users=checkUser(session);
 		
+		String roomsNo=checkRoomsNo(session);
+		
 		try {
 			//session.getBasicRemote().sendObject(new Message("admin","",rooms, "room"));//방현황 전송
 			//session.getBasicRemote().sendObject(new Message("admin","",users, "user"));//userg현황전송
@@ -78,6 +80,7 @@ public class ChattingServer {
 		//사용자 가져오기
 		String users=checkUser(session);
 		//*메세지를 문자로 전송하기 때문에 문자자료형을 사용함
+		String roomsNo=checkRoomsNo(session);
 		
 		//message를 하는 기준값 현재는 room, user, msg, file로 구분되어있음.
 		String flag=msg.getFlag();
@@ -129,7 +132,7 @@ public class ChattingServer {
 			else if(flag.equals("createroom")) {//채팅만들고 현황전송하기.!
 				System.out.println("1");
 				for(Session s : session.getOpenSessions()) {
-					s.getBasicRemote().sendObject(new Message("admin","",rooms, "room","",msg.getRoomNo()));//방현황 전송
+					s.getBasicRemote().sendObject(new Message("admin","",rooms, "room","",roomsNo));//방현황 전송
 					s.getBasicRemote().sendObject(new Message("admin","",users, "user"));//userg현황전송
 				}
 			}
@@ -149,6 +152,7 @@ public class ChattingServer {
 			Message m=(Message)(s.getUserProperties().get("msg"));
 			if(m !=null) {
 				rooms.add(m.getRoomName());
+				System.out.println("rooms : " + rooms);
 				
 			}
 		}
@@ -169,6 +173,21 @@ public class ChattingServer {
 		String[] usersStr=new String[users.size()];
 		users.toArray(usersStr);
 		return String.join(",", users);
+	}
+	
+	private String checkRoomsNo(Session session) {
+		//채팅방 확인하기
+		Set<String> roomsNo=new HashSet<String>();
+		for(Session s : session.getOpenSessions()) {
+			Message m=(Message)(s.getUserProperties().get("msg"));
+			if(m!=null) {
+				roomsNo.add(m.getRoomNo());
+				System.out.println("roomsNo : " + roomsNo);
+			}
+		}
+		String[] roomsNoStr=new String[roomsNo.size()];
+		roomsNo.toArray(roomsNoStr);
+		return String.join(",", roomsNo);
 	}
 	
 	

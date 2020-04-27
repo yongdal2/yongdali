@@ -120,5 +120,49 @@ public class ChatController {
 		
 	}
 	
+	/**
+	 * 관리자 채팅방 내에서 사용자 채팅방 메시지 찾기
+	 * @param response
+	 * @param r
+	 * @throws IOException 
+	 * @throws JsonIOException 
+	 */
+	@RequestMapping(value="adChkPreMessage.ch")
+	public void adPreMessageChk(HttpServletResponse response, Room r) throws JsonIOException, IOException {
+		response.setContentType("application/json; charset=utf-8");
+		
+		System.out.println("관리자채팅방 내 사용자방번호 : " + r.getRoomNo());
+		ArrayList<Message> preMsg = cService.selectPreMessage(r.getRoomNo());
+		Map message = new HashMap();
+		if(!preMsg.isEmpty()) {
+			message.put("preMsg", preMsg);			
+		}else {
+			String nullMsg = "nullMsg";
+			message.put("nullMsg", nullMsg);
+		}
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(message, response.getWriter());
+	}
+	
+	@RequestMapping(value="adChkPreRoom.ch")
+	public void adPreRoomChk(HttpServletResponse response, Room r) throws JsonIOException, IOException {
+		response.setContentType("application/json; charset=utf-8");
+		
+		ArrayList<Room> preRoom = cService.selectAdPreRoom(r);
+		System.out.println("관리자 preRoom : " + preRoom);
+		Map room1 = new HashMap();
+		if(!preRoom.isEmpty()) {
+			room1.put("preRoom", preRoom);
+		}else {
+			String nullRoom ="nullRoom";
+			room1.put("nullRoom", nullRoom);
+		}
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(room1, response.getWriter());
+		
+	}
+	
+	
 	
 }
