@@ -74,4 +74,13 @@ INSERT INTO RESERVATION VALUES('R' || SEQ_RNO.NEXTVAL,'M3',null,1.4,'호루','�
 INSERT INTO RESERVATION VALUES('R' || SEQ_RNO.NEXTVAL,'M4',null,1.4,'탑차','tomson','MicheL','010-3518-8215','010-8838-6688','서울 동작구 동작대로 335-1,초록색 대문','서울 서초구 남부순환로 2406,예술의전당 앞',4.24,null,null,null,null,null,null,'기사님 단독 상차','기사님과 함께 하차','Straw(1000)','Could you dance with me..  Catch my hand.. go ahead..','100000',DEFAULT,DEFAULT);
 INSERT INTO RESERVATION VALUES('R' || SEQ_RNO.NEXTVAL,'M2',null,1.4,'윙바디','Jackson','Sumi Kin','010-1111-3516','010-8632-1919','서울 송파구 올림픽로 240,현관 앞','서울 강남구 역삼1동 735-3,교보생명보험 305호',7.22,null,null,to_date('20/05/20','RR/MM/DD'),'12:00',to_date('20/05/24','RR/MM/DD'),'18:00','고객님이 직접 상차','기사님 단독 하차','Cake(10), Thermos(30)','Be careful with that Cakes, Thermos. You can get some tips.','330000',DEFAULT,DEFAULT);
 
+Insert into CHATROOM values ('CR' || SEQ_CRNO.nextval,'biz01@naver.com','admin@naver.com','김거상','createroom',to_date('20/04/27 17:41:40','YY/MM/DD HH24:MI:SS'),'Y');
+
+Insert into CHATMESSAGE values ('CM' || SEQ_CMNO.nextval,'CR1','admin@naver.com','관리자','안녕하세요 용달이입니다',to_date('20/04/27 17:41:50','YY/MM/DD HH24:MI:SS'),'msg','Y');
+Insert into CHATMESSAGE values ('CM' || SEQ_CMNO.nextval,'CR1','biz01@naver.com','김거상','정산 언제되나요?',to_date('20/04/27 17:41:59','YY/MM/DD HH24:MI:SS'),'msg','Y');
+Insert into CHATMESSAGE values ('CM' || SEQ_CMNO.nextval,'CR1','admin@naver.com','관리자','하차일 기준 다음날 정산됩니다!',to_date('20/04/27 17:42:11','YY/MM/DD HH24:MI:SS'),'msg','Y');
+Insert into CHATMESSAGE values ('CM' || SEQ_CMNO.nextval,'CR1','biz01@naver.com','김거상','수수료는 얼마 떼가나요?',to_date('20/04/27 17:42:34','YY/MM/DD HH24:MI:SS'),'msg','Y');
+Insert into CHATMESSAGE values ('CM' || SEQ_CMNO.nextval,'CR1','admin@naver.com','관리자','기사님께 70% 지급되고, 30%는 용달이 운영에 씁니다 :)',to_date('20/04/27 17:42:54','YY/MM/DD HH24:MI:SS'),'msg','Y');
+Insert into CHATMESSAGE values ('CM' || SEQ_CMNO.nextval,'CR1','biz01@naver.com','김거상','감사합니다 용달이최고',to_date('20/04/27 17:42:59','YY/MM/DD HH24:MI:SS'),'msg','Y');
+Insert into CHATMESSAGE values ('CM' || SEQ_CMNO.nextval,'CR1','admin@naver.com','관리자','네 감사합니다!',to_date('20/04/27 17:43:19','YY/MM/DD HH24:MI:SS'),'msg','Y');
 commit;
