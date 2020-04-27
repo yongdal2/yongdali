@@ -53,8 +53,7 @@ import com.kh.yongdali.member.model.vo.Member;
 public class MemberController {
 	@Autowired
 	private SaveFile saveFile;
-	
-	
+
 	@Autowired
 	private MemberService mService;
 	
@@ -131,6 +130,10 @@ public class MemberController {
 		return "login&signUp/findPwd";
 	}
 	
+	/** 비밀번호 찾기_이메일 확인
+	 * @param mId
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping("findPwd_emailChk.me")
 	public String findPwd_emailChk(@RequestParam("mId") String mId) {
