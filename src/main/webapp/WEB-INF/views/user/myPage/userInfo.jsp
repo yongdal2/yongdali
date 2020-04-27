@@ -46,24 +46,43 @@
 							<div class="h4 na">연락처</div>
 							<div class="h3 jal lg mgt">
 								${loginUser.phone}
-								<div class="glyphicon glyphicon-pencil hvDr" data-toggle="modal"
+								<div class="glyphicon glyphicon-pencil hvDr" data-toggle="modal" data-backdrop="static"
 									data-target="#changePhone"></div>
 							</div>
 						</div>
 					</div>
-					<div class="hvDr">
-						<span class="na h4" data-toggle="modal" data-target="#changePwd">
-							비밀번호 변경</span>
+					<div class="row">
+						<div class="col-xs-6 col-md-6">
+							<div class="hvDr">
+								<span class="na h4" data-toggle="modal" data-backdrop="static" data-target="#changePwd">
+									비밀번호 변경</span>
+							</div>
 						</div>
+						<div class="col-xs-6 col-md-6">
+							<div class="hvDr">
+								<div class="chkBox">
+			                        <span class="na h4"id='pushChk'>광고 수신 동의 &nbsp;
+			                        <c:choose>
+			                        	<c:when test="${loginUser.pushEnabled eq 'Y'}">
+			                        		<img src="${contextPath}/resources/images/login&signUp/checked-circle.png" alt="동의" id="chkPolicy">
+			                        	</c:when>
+			                        	<c:otherwise>
+			                        		<img src="${contextPath}/resources/images/login&signUp/unchecked-circle.png" alt="비동의" id="chkPolicy">
+			                        	</c:otherwise>
+			                        </c:choose>
+			                        
+			                        </span>
+			                    </div>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="col-xs-3 col-md-3">
 					<div class="img-circle text-center align-middle" id="pro_img"
-						style="background-color: rgb(87, 187, 138);"><span class=""><c:out value="${fn:substring(loginUser.mName,0,1)}"/>
-						
-					</span></div>
-						
+						style="background-color: rgb(87, 187, 138);"><span class="jal" style="font-size: 3em; line-height:4em; color:white; font-weight: 600;"> ${loginUser.mName}
+					</span>
+					</div>
 				</div>
-			</div>
 			</div>
 		</div>
 	</div>
@@ -146,6 +165,21 @@
 	</div>
 	
 	<script type="text/javascript">
+	
+	var checked = '/yongdali/resources/images/login&signUp/checked-circle.png';
+    var unchecked = '/yongdali/resources/images/login&signUp/unchecked-circle.png';
+    
+	 $('#pushChk').click(function(){  
+		 	if($('#chkPolicy').attr('src') == unchecked) {
+		 		var agree = conrfirm('광고수신 동')
+	            $('#chkPolicy').attr('src',checked).attr('checked',true);
+	            $('input[name=pushEnabled]').val('Y') ;
+	            
+	        } else{
+	            $('#chkPolicy').attr('src',unchecked).attr('checked',false);
+	            $('input[name=pushEnabled]').val('N');
+	        }
+	    });
 	/* 연락처 자릿수 자동 설정 */
 	function inputPhoneNumber(obj) {
 	    var number = obj.value.replace(/[^0-9]/g, "");

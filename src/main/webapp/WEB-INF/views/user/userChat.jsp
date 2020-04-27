@@ -52,11 +52,9 @@
                 	<input type="text" id="receiveId" style="display: none;">
                 	<input type="hidden" id="roomNo" value="${sessionScope.nowRoom.roomNo }">
                 	<input type="text" class="write-message" id="msgArea" placeholder="Type your message here"></input>
-                    <!-- <textarea placeholder="궁금하신 점이 무엇인가요?" id="msgArea"></textarea> -->
                 </div>
                 <div class="col-xs-2 col-lg-1">
                     <button type="button" class="sendBtn" onclick="sendMessage();"><img src="${contextPath }/resources/images/chat/send.png"></button>
-                	<button type="button" onclick="disconnect();">종료</button>
                 </div>
             </div>
         </div>
@@ -92,7 +90,7 @@
     	
     	function connectionSocket(){
     		connect = true;
-    		socket = new WebSocket('ws://192.168.25.20:8888/yongdali/chatting');
+    		socket = new WebSocket('ws://192.168.110.45:8888/yongdali/chatting');
     		/* 페이지 접속한 session id */
     		var sessionid = $("#senderId").val();
     		var sessionName = $("#senderName").val();
@@ -117,7 +115,7 @@
 	    	    		// 받는 사람 아이디(고정)
 	    		   		 var receiveId = "admin@naver.com";
 	    	    		// 메시지
-	    		   		 var msg = senderId + "님이 접속하셨습니다.";
+	    		   		 var msg = senderId + "님이 재접속하셨습니다.";
 	    	    		// 구분
 	    		   		 var flag = "msg";
 
@@ -198,7 +196,8 @@
     	
     	 function writeResponse(text){
      		$("#chat").append(text);
-     		$("#chat").scrollTop($("#chat")[0].scrollHeight);
+     		$(".contentArea").scrollTop($(".contentArea")[0].scrollHeight);
+     	
           }
     	
     	 // 메시지 보내기 클릭
@@ -219,9 +218,7 @@
     		//socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),$("#msgArea").val(),"msg",$("#receiveId").val())));
     		//											          아이디				     방이름(닉네임)              msg          flag		   메시지 받는 사람
     		//socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#room").val(),$("#msgArea").val(),"msg","admin@naver.com")));
-    	
-    		
-    		
+
     		socket.send(JSON.stringify(new MessageFlag(senderId,roomName,msg,flag,receiveId,roomNo)));
     		$("#msgArea").val("");
     		    		
@@ -241,7 +238,6 @@
     	
     	// 방생성 클릭
     	function createRoom(){
-												//	          아이디				     방이름(닉네임)       msg     flag		   메시지 받는 사람
 			$("#room").val($("#senderName").val());
 			
 			// 접속한아이디
@@ -263,23 +259,18 @@
     			data:{id:senderId, roomName:roomName, receiveId:receiveId, flag:flag},
     			success:function(data){
     				 roomNo.val(data);
-    				 //console.log(roomNo.val("${sessionScope.nowRoom}"));
-    				//roomNo.val("CR7");
-    				/* if(data=="success"){
-    					console.log(data);
-    				} */
     				 console.log("처음roomNo뭐야!!!"+roomNo.val());
+												//	          아이디				     방이름(닉네임)       msg     flag		   메시지 받는 사람
 			    	socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),"","createroom","admin@naver.com",roomNo.val())));
     			},error:function(){
     				console.log("전송실패");
     			}
     		})
+    		
+    		$('#logo').attr('onclick', '');//createRoom() 비활성화
 			
     	}
-    	
-    	function disconnect(){
-    		socket.close();
-        }
+
     	
     	
     </script>

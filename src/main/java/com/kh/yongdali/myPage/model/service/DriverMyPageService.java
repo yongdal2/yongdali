@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.driver.model.vo.Driver;
 import com.kh.yongdali.member.model.vo.Member;
+import com.kh.yongdali.myPage.model.vo.Filter;
 import com.kh.yongdali.reservation.model.vo.Reservation;
 
 public interface DriverMyPageService {
@@ -37,5 +38,20 @@ public interface DriverMyPageService {
 	 * @return
 	 */
 	ArrayList<Reservation> selectCalList(PageInfo pi, String dNo);
+
+	/**
+	 * 드라이버 정산 필터 카운트
+	 * @param f
+	 * @return
+	 */
+	int getFilCalListCount(Filter f);
+
+	/**
+	 * 드라이버 정산 필터 리스트
+	 * @param pi
+	 * @param f
+	 * @return
+	 */
+	ArrayList<Reservation> selectFilCalList(PageInfo pi, Filter f);
 
 }

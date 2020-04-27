@@ -37,8 +37,17 @@
 				<div class="row na mb30">
 					<div class="col-xs-9 col-md-10 h4">배송지 목록(${ listCount })</div>
 					<div class="col-xs-3 col-md-2 text-center">
-						<button class="btn btn_ydl_l" data-toggle="modal"
+					<c:choose>
+						<c:when test="${ listCount >= 5 }">
+						<p data-toggle="popover">
+							<button class="btn btn_ydl_l disabled">배송지 추가</button>
+						</p>
+						</c:when>
+						<c:otherwise>
+						<button class="btn btn_ydl_l" data-toggle="modal" data-backdrop="static"
 							data-target="#addAddr">배송지 추가</button>
+						</c:otherwise>
+					</c:choose>
 					</div>
 					<div class="col-xs-12 col-md-12 text-center noto">
 						<div class="col-xs-12 col-md-12">
@@ -63,7 +72,7 @@
 										<span>${ a.aPhone } </span>
 									</div>
 									<div class="col-xs-3 col-md-3">
-										<button class="btn btn-sm btn_ydl" id="editAddrBtn${vs.index}" data-toggle="modal"
+										<button class="btn btn-sm btn_ydl" id="editAddrBtn${vs.index}" data-toggle="modal" data-backdrop="static"
 											data-target="#editAddr" value="${ a.aNo }">수정</button>
 										<button class="btn btn-sm" id="deleteAddrBtn${vs.index}" value="${a.aNo }">삭제</button>
 									</div>
@@ -119,7 +128,7 @@
                                 <input type="hidden" id="adLat" name="adLat">
                                 <input type="hidden" id="adLong" name="adLong">
                             </div>
-                            <div class="col-xs-2 col-md-2 btn btn_ydl_l searchAddrBtn" id="searchAddr1btn" data-toggle="modal" data-target="#adSearchAddr" onclick="adSearchAddr()">
+                            <div class="col-xs-2 col-md-2 btn btn_ydl_l searchAddrBtn" id="searchAddr1btn" data-toggle="modal" data-backdrop="static" data-target="#adSearchAddr" onclick="adSearchAddr()">
 								주소 검색
                             </div>
                         </div>
@@ -227,6 +236,15 @@
         </div>
     </div>
     <script>
+    	$(document).ready(function() {
+		    $('[data-toggle="popover"]').popover({
+		    	trigger: "hover",
+		    	placement:'left',
+		    	html: true,
+		    	title:'주소록 안내',
+		    	content: '배송지는 최대 5개 까지 가능합니다<br> 삭제하고 이용해 주세요'
+		    });
+    	});
     	$("#btnUpAddr").on("click",function(){
     		$("#upAddrForm").attr("action","uAddr.myp").submit();
     	});
@@ -265,7 +283,7 @@
 					var url="dAddr.myp?aNo="+aNo;
 					$(location).attr('href',url)
 				}else{
-					alert("윽");
+					alert("취소되었습니다");
 				}
 		});
 		});

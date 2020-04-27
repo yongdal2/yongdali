@@ -675,10 +675,17 @@ $('#checkLoad1').click(function(){
 		var startMonth = new Date().getMonth()+1;
 		var startDay = new Date().getDate();
 		var addStartDay = startDay+1;
+		
 		startDateStr = startYear+"-"+startMonth+"-"+startDay;
 		stDate = new Date(startDateStr);
-		addDate = startYear+"년 "+startMonth+"월 "+addStartDay+"일";
-		console.log("바로 상차 선택날짜로부터 1일후 하차예약 가능날짜 : "+addDate);
+		
+		var stDate2 = new Date(startDateStr);
+		stDate2.setDate(addStartDay);
+		
+		addDate = startYear+"년 "+startMonth+"월 "+stDate2.getDate()+"일";
+		
+		console.log("바로 상차 선택날짜로부터 1일 후, 하차예약 가능날짜 : "+addDate);
+		
 		$('#datepicker2').datepicker('option','minDate',addDate);
 		$(this).val("바로 상차");
 		if($('#datepicker2').val()!=""){
@@ -729,7 +736,6 @@ function setEndDate(){
 		$('#caution-div1').css('display','none');
 		$('#caution-div2').css('display','none');
 		$('#caution-div3').css('display','block');
-		
 	}
 }
 
@@ -753,9 +759,11 @@ $('#datepicker1').datepicker({
 
 		var startYMD = $('#datepicker1').val();
 		startDateStr = startYMD.substr(0,4)+"-"+startYMD.substr(6,2)+"-"+startYMD.substr(10,2);
-		console.log(startDateStr);
-		var addDay = parseInt(selectedDate.substr(10,2)) + 2;
-		addDate = selectedDate.substr(0,10) + addDay + "일";
+		
+		var addStartDay = parseInt(startDateStr.substr(8,2)) + 1;
+		var stDate2 = new Date(startDateStr);
+		stDate2.setDate(addStartDay);
+		addDate = stDate2.getFullYear() + "년 " + (stDate2.getMonth()+1)+ "월 " + stDate2.getDate() + "일";
 		$('#datepicker2').datepicker('option','minDate',addDate);
 		
 		// 하차예약날짜값이 있는 상태에서 상차 날짜 예약시 하차예약날짜값 초기화

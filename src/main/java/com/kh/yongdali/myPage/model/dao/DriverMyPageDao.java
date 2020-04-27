@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.driver.model.vo.Driver;
+import com.kh.yongdali.myPage.model.vo.Filter;
 import com.kh.yongdali.reservation.model.vo.Reservation;
 
 @Repository("dmpDao")
@@ -33,6 +34,16 @@ public class DriverMyPageDao {
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return (ArrayList)sqlSession.selectList("myPageMapper.selectCalList", dNo, rowBounds);
+	}
+
+	public int getFilCalListCount(Filter f) {
+		return sqlSession.selectOne("myPageMapper.getFilCalListCount",f);
+	}
+
+	public ArrayList<Reservation> selectFilCalList(PageInfo pi, Filter f) {
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("myPageMapper.selectFilCalList", f, rowBounds);
 	}
 	
 	

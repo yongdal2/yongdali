@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.driver.model.vo.Driver;
 import com.kh.yongdali.myPage.model.dao.DriverMyPageDao;
+import com.kh.yongdali.myPage.model.vo.Filter;
 import com.kh.yongdali.reservation.model.vo.Reservation;
 
 @Service("dmpService")
@@ -33,6 +34,16 @@ public class DriverMyPageServiceImpl implements DriverMyPageService {
 	@Override
 	public ArrayList<Reservation> selectCalList(PageInfo pi, String dNo) {
 		return dmpDao.selectCalList(pi, dNo);
+	}
+
+	@Override
+	public int getFilCalListCount(Filter f) {
+		return dmpDao.getFilCalListCount(f);
+	}
+
+	@Override
+	public ArrayList<Reservation> selectFilCalList(PageInfo pi, Filter f) {
+		return dmpDao.selectFilCalList(pi, f);
 	}
 
 }
