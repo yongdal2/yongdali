@@ -69,8 +69,8 @@
 							</tr>
 						</thead>
 						
-						<c:forEach var="a" items="${ list }">
 						<tbody id="tbody">
+						<c:forEach var="a" items="${ list }">
 							<tr>
 								<td>${ a.dNo }</td>
 								<td>${ a.dmNo }</td>
@@ -78,18 +78,18 @@
 								<td>${ a.capacity }</td>
 								<td>${ a.type }</td>
 								<td>${ a.carNo }</td>
-            <td>
-                    <button class="imgBtn" id="idImgRename" value="${pageContext.request.contextPath}/resources/images/driver/id/${a.idImgRename}">상세보기</button>
-                    <%-- <button class="imgBtn" id="idImgRename" style="url('${pageContext.request.contextPath}/resources/images/driver/id/${a.idImgRename}');">가명</button> --%>
-           </td>
-            <td>
-		            <%-- <button class="imgBtn" id="regCardImgOrigin" style="url('${pageContext.request.contextPath}/resources/images/driver/id/${a.regCardImgOrigin}');">원명</button> --%>
-		            <button class="imgBtn" id="regCardImgRename" value="${pageContext.request.contextPath}/resources/images/driver/regCard/${a.regCardImgRename}");">상세보기</button>
-                <%-- <button id="popover_btn" data-toggle="popover" title="원명팝오버" data-content="url('${pageContext.request.contextPath}/resources/images/driver/id/${a.regCardImgRename}');" data-placement="bottom">팝오버</button> --%> 
-           </td>
+					            <td>
+					                    <button class="imgBtn" id="idImgRename"  value="resources/images/driver/id/${a.idImgRename}">상세보기</button>
+					                    <%-- <button class="imgBtn" id="idImgRename" style="url('${pageContext.request.contextPath}/resources/images/driver/id/${a.idImgRename}');">가명</button> --%>
+					           </td>
+					            <td>
+							            <%-- <button class="imgBtn" id="regCardImgOrigin" style="url('${pageContext.request.contextPath}/resources/images/driver/id/${a.regCardImgOrigin}');">원명</button> --%>
+							            <button class="imgBtn" id="regCardImgRename" value="resources/images/driver/regCard/${a.regCardImgRename}">상세보기</button>
+					                <%-- <button id="popover_btn" data-toggle="popover" title="원명팝오버" data-content="url('${pageContext.request.contextPath}/resources/images/driver/id/${a.regCardImgRename}');" data-placement="bottom">팝오버</button> --%> 
+					           </td>
 							</tr>
-						</tbody>
 						</c:forEach>
+						</tbody>
 					</table>
 				</div>
 				
@@ -99,7 +99,7 @@
 	<img alt="gh1" src="${pageContext.request.contextPath}/resources/images/driver/id/${a.idImgRename}.jfif"/> --%>			
 
 	<script>
-	$('#idImgRename').popover({
+	$('.imgBtn').popover({
 		  html: true,
 		  trigger: 'hover focus',
 		  content: function () {
@@ -107,7 +107,7 @@
 		    return '<img alt="호호1" src="'+url+'" />';
 		  }
 		});
-	
+	//배열중에서 id는 안딤
 	$('#regCardImgRename').popover({
 		  html: true,
 		  trigger: 'hover focus',
