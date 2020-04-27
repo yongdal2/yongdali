@@ -197,7 +197,8 @@
     	
     	 function writeResponse(text){
      		$("#chat").append(text);
-     		$("#chat").scrollTop($("#chat")[0].scrollHeight);
+     		$(".contentArea").scrollTop($(".contentArea")[0].scrollHeight);
+     	
           }
     	
     	 // 메시지 보내기 클릭

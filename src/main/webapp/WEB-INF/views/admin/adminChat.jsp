@@ -43,7 +43,7 @@
           <div class="header-chat">
             <img src="${contextPath }/resources/images/ydl_logo/ydl_ic_gr(70X70).png" style="width:50px; height:50px;">
             <p class="name" id="chatName"></p>
-            <button class="closeBtn" onclick="disconnect();">대화종료</button>
+            <!-- <button class="closeBtn" onclick="disconnect();">대화종료</button> -->
           </div>
           <div class="messages-chat">            
           </div>
@@ -222,7 +222,7 @@
         			
 					$.each(data,function(index,value){
        					console.log(value);
-       					if(value == 'preMsg'){
+       					if(value != 'nullMsg'){
 	       					for(var i=0;i<value.length;i++){
 			        				if(sessionid == value[i].id){
 			    						var printHTML = "<div class='message text-only'>";
@@ -297,11 +297,11 @@
 	
 		}
 		
-		function disconnect(){
+		/* function disconnect(){
 			alert("대화를 종료합니다!!");
-			socket.close();
 			
-	    }
+			
+	    } */
     
     </script>
   </body>
