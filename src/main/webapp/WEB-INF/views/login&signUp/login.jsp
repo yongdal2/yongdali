@@ -87,7 +87,7 @@
         	// 2. 카카오 로그인
             Kakao.Auth.login({ 
                 success: function() { 
-                      // 3. 회원정보 호출 API(로그인 성공시)
+                      // 3. 사용자 정보 추출 (사용자 API)
                       Kakao.API.request({ 
                     	    /* scope: 'email', */
                             url: '/v2/user/me', 
@@ -118,12 +118,11 @@
       					        		location.href="error.ydl?msg="+msg;
       						   		}
       						   	})
-                                  
                            }, 
                            fail: function(error) { 
                                  console.log(JSON.stringify(error)); 
-                          } 
-                   }); 
+                           } 
+                       }); 
               }, 
               fail: function(err) { 
                     console.log(JSON.stringify(err)); 

@@ -429,8 +429,8 @@ public class MemberController {
 	@RequestMapping(value="fbLoginAjax.me", method=RequestMethod.POST)
 	public String facebookLogin(@RequestParam("email") String email, String name, Model model) {
 		
-	    // 가입 유무 확인
-	    int result = mService.emailChk(email);
+		// MVC2 로직처리
+	    int result = mService.emailChk(email);  // 가입 유무 확인
 	    
 	    if(result > 0) {
 	    	Member m = new Member(email);
