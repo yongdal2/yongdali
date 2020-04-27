@@ -850,6 +850,11 @@ select::-ms-expand {
     cursor: pointer;
 }
 
+/* 페이스북 아이디로 로그인 */
+.easyEccessBtn{
+	cursor: pointer;
+}
+
 input[name="inputFile_idImg"], input[name="inputFile_regCardImg"]{
 	display: none;
 }

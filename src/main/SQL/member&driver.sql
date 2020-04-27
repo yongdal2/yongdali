@@ -127,6 +127,9 @@ NOCACHE;
 COMMIT;                        
 SELECT * FROM MEMBER;
 SELECT * FROM MEMBER WHERE M_ID = 'raejin0@naver.com';
+SELECT * FROM MEMBER WHERE M_ID = 'raejin0@gmail.com';
 --SELECT * FROM DRIVER;
 
 DELETE FROM MEMBER WHERE M_ID = 'raejin0@naver.com';
+DELETE FROM MEMBER WHERE M_ID = 'raejin0@gmail.com';
+COMMIT;

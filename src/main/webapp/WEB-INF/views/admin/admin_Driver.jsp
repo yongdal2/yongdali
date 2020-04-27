@@ -47,7 +47,7 @@
 					<a href="aRes.ad"><span class="sidebar_span">예약 내역</span></a><br>
 					<a href="aJung.ad"><span class="sidebar_span">정산 내역</span></a><br> 
 					<a href="adRef.ad"><span class="sidebar_span">환불 내역</span></a><br> 
-					<a href="#"><span class="sidebar_span">채팅 내역</span></a>
+					<!-- <a href="#"><span class="sidebar_span">채팅 내역</span></a> -->
 				</div>
 
 			<!-- list -->

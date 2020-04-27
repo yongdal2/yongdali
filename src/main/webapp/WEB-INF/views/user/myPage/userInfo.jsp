@@ -58,12 +58,10 @@
 				</div>
 				<div class="col-xs-3 col-md-3">
 					<div class="img-circle text-center align-middle" id="pro_img"
-						style="background-color: rgb(87, 187, 138);"><span class=""><c:out value="${fn:substring(loginUser.mName,0,1)}"/>
-						
-					</span></div>
-						
+						style="background-color: rgb(87, 187, 138);"><span class="jal" style="font-size: 3em; line-height:4em; color:white; font-weight: 600;"> ${loginUser.mName}
+					</span>
+					</div>
 				</div>
-			</div>
 			</div>
 		</div>
 	</div>

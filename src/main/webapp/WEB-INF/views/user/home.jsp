@@ -10,6 +10,20 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=03ea077d7ecc6636dffede985cc5c57d&libraries=services"></script>
+	
+	<!-- 카카오 아이디로 로그인 -->
+	<script src="${contextPath}/resources/js/kakao.min.js"></script>
+	<script type="text/javascript">
+		Kakao.API.request({
+		    url: '/v2/user/me',
+		    success: function(response) {
+		        console.log(response);
+		    },
+		    fail: function(error) {
+		        console.log(error);
+		    }
+		});
+	</script>
 </head>
 <body style="overflow-x: hidden;">
 	<!-- header -->

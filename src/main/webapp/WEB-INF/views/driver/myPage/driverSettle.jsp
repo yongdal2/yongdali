@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!DOCTYPE html>
 <html>
@@ -54,77 +54,102 @@
 			<div class="col-xs-12 col-md-12 h2 jal">
 				정산 <br> <br>
 			</div>
-
 			<!-- 필터 -->
-			<div class="col-xs-3 col-md-3 text-center bszB1">
-				<select class="form-control ft54">
-					<option value="ㅇㅇ">상태별 조회</option>
-					<option value="ㅇㅇ">예약 대기</option>
-					<option value="ㅇㅇ">상태별 조회</option>
+			<form action="driverFilter.myp">
+			<div class="col-xs-2 col-md-2 text-center bszB1">
+				<select class="form-control ft54" name="calStatus" id="calStatus">
+					<option value="cal">정산별 조회</option>
+					<option value="calcN">정산 전</option>
+					<option value="calcY">정산 완료</option>
 				</select>
 			</div>
-			<div class="col-xs-4 col-md-4 text-center bszB">
-				<input type="date" class="form-control ft54">
+			<div class="col-xs-3 col-md-3 text-center bszB">
+				<select class="form-control ft54" name="rsvStatus" id="rsvStatus">
+					<option value="rsv">상태별 조회</option>
+					<option value="pay">결제완료</option>
+					<option value="drop">하차완료</option>
+					<option value="canc">취소</option>
+				</select>
 			</div>
-
-			<div class="col-xs-4 col-md-4 text-center bszB">
-				<input type="date" class="form-control ft54">
+			<div class="text-center"></div>
+			<div class="col-xs-3 col-md-3 text-center bszB">
+				<input placeholder="상차일" class="form-control ft54" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="stDate" id="stDate"/>
+			</div>
+			<div class="col-xs-3 col-md-3 text-center bszB">
+				<input placeholder="하차일" class="form-control ft54" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="edDate" id="edDate"/>
 			</div>
 			<div class="col-xs-1 col-md-1 bszB">
 				<button class="btn btn_ydl_r sch">
 					<span class="glyphicon glyphicon-search" style=""></span>
 				</button>
 			</div>
+			</form>
 		</div>
 		<div class="h2">
 			<br>
 		</div>
 		<!-- 정산 테이블 -->
-		<div class="col-xs-12 col-md-12"
-			style="padding: 0; border-radius: 16px; border: solid 1px #dedede; background-color: #f3f5f7;">
-			<Br>
-			<table class="table table-striped table-hover text-center">
-				<thead>
-					<tr>
-						<td>예약 번호</td>
-						<td>진행 상태</td>
-						<td>예약 일자</td>
-						<td>출발지</td>
-						<td>도착지</td>
-						<td>결제 금액</td>
-						<td>차종</td>
-					</tr>
-				</thead>
-				<tr>
-					<td>089</td>
-					<td>하차 완료</td>
-					<td>2020.01.12</td>
-					<td>부산시123</td>
-					<td>제주시 1234</td>
-					<td>123,000,34</td>
-					<td>라보99ton</td>
-				</tr>
-				<tr>
-					<td>089</td>
-					<td>하차 완료</td>
-					<td>2020.01.12</td>
-					<td>부산시123</td>
-					<td>제주시 1234</td>
-					<td>123,000,34</td>
-					<td>라보99ton</td>
-				</tr>
-				<tr>
-					<td>089</td>
-					<td>하차 완료</td>
-					<td>2020.01.12</td>
-					<td>부산시123</td>
-					<td>제주시 1234</td>
-					<td>123,000,34</td>
-					<td>라보99ton</td>
-				</tr>
-
-			</table>
-		</div>
+					<div class="col-xs-12 col-md-12 tbPdR" >
+				<Br>
+				<table class="table table-hover text-center noto">
+					<thead>
+						<tr>
+							<td>예약 번호</td>
+							<td>진행 상태</td>
+ 							<td>예약 일자</td>
+ 							<td>상차일</td>
+ 							<td>하차일</td>
+							<td>출발지</td>
+							<td>도착지</td>
+							<td>결제 금액</td>
+							<td>정산 금액</td>
+							<td>정산 상태</td>
+							<td>정산 일자</td>
+						</tr>
+					</thead>
+					<c:forEach var="c" items="${ cList }" varStatus="vs">
+								<c:set var="p" value="${ c.payment }"></c:set>
+								<c:set var="cal" value="${ p.calculate }"></c:set>
+						<tr>
+							<td class="fw6">${ c.rNo }</td> <!-- 예약번호 -->
+							<td><!-- 상태 -->
+								<c:choose>
+								<c:when test="${p.payYN eq 'Y' && p.cancYN eq 'Y' }"><span class="red">취소</span></c:when>
+								<c:when test="${p.payYN eq 'Y' && p.cancYN eq 'N' && p.dealYN eq 'N' }">결제 완료</c:when>
+								<c:when test="${p.dealYN eq 'Y' && p.cancYN eq 'N' }">배차 완료</c:when>
+								</c:choose>
+							</td>
+ 							<td><c:out value="${fn:replace(p.enrollDate,'2020','20')}"/></td><!-- 예약일자 -->
+ 							<td>
+							<c:choose>
+							<c:when test="${c.rightLoad eq null}"><c:out value="${fn:replace(c.startDate,'2020','20')}"/></c:when>
+							<c:otherwise>${c.rightLoad}</c:otherwise>
+							</c:choose>
+ 							</td>
+ 							<td>
+ 							<c:choose>
+							<c:when test="${c.rightLoad eq null}"><c:out value="${fn:replace(c.startDate,'2020','20')}"/></c:when>
+							<c:otherwise>${c.rightLoad}</c:otherwise>
+							</c:choose>
+ 							</td>
+							<td>
+							<c:out value="${fn:split(c.startAddr, ',')[0]}"/>
+							</td>
+							<td>
+							<c:out value="${fn:split(c.endAddr, ',')[0]}"/>
+							</td>
+							<td>${ c.amount }원</td><!-- 계산금액  -->
+							<td>${ cal.charge }원</td><!-- 정산금액  -->
+							<td><c:choose>
+								<c:when test="${cal.calcYN eq 0}">정산 전</c:when>
+								<c:when test="${cal.calcYN eq 1}">정산 완료</c:when>
+								<c:otherwise>환불</c:otherwise>
+							</c:choose></td>
+							<td><c:out value="${fn:replace(cal.calcDate,'2020','20')}"/></td><!-- 예약일자 -->
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
 		<div class="row text-center">
 			<ul class="pagination ft_gr">
 				<li><a href="#"> <<</a></li>

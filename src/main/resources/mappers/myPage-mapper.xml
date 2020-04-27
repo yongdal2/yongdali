@@ -38,33 +38,6 @@
 		<result property="regCardImgRename" column="REGCARD_IMG_RENAME"/>
 	</resultMap>
 	
-	<!-- resultMap Reservation-->
-	<resultMap id="rsvResultSet" type="Reservation">
-		<id property="rNo" column="R_NO"/>
-		<result property="rMNo" column="R_M_NO"/>
-		<result property="rDNo" column="R_D_NO"/>
-		<result property="capacity" column="CAPACITY"/>
-		<result property="type" column="TYPE"/>
-		<result property="startName" column="START_NAME"/>
-		<result property="endName" column="END_NAME"/>
-		<result property="startPhone" column="START_PHONE"/>
-		<result property="endPhone" column="END_PHONE"/>
-		<result property="startAddr" column="START_ADDR"/>
-		<result property="endAddr" column="END_ADDR"/>
-		<result property="distance" column="DISTANCE"/>
-		<result property="rightLoad" column="RIGHT_LOAD"/>
-		<result property="rightUnload" column="RIGHT_UNLOAD"/>
-		<result property="startDate" column="START_DATE"/>
-		<result property="startTime" column="START_TIME"/>
-		<result property="endDate" column="END_DATE"/>
-		<result property="endTime" column="END_TIME"/>
-		<result property="helpLoad" column="HELP_LOAD"/>
-		<result property="helpUnload" column="HELP_UNLOAD"/>
-		<result property="luggage" column="LUGGAGE"/>
-		<result property="msg" column="MSG"/>
-		<result property="amount" column="AMOUNT"/>
-	</resultMap>
-	
 	<!-- resultMap Reservation&Payment-->
 	<resultMap id="rsvPayResultSet" type="Reservation">
 		<id property="rNo" column="R_NO"/>
@@ -104,9 +77,21 @@
 		<result property="payYN" column="PAY_YN"/>
 		<result property="enrollDate" column="ENROLL_DATE"/>
 		<result property="cancAmount" column="CANC_AMOUNT"/>
+		<result property="calcDate" column="CALC_AMOUNT"/>
+		<association property="calculate" resultMap="calculateResultSet"/>
 	</resultMap>
 	
-	
+	<!-- resultMap Calculate  -->
+	<resultMap id="calculateResultSet" type="Calculate">
+		<id property="cNo" column="C_NO"/>
+		<result property="cPNo" column="C_P_NO"/>
+		<result property="fee" column="FEE"/>
+		<result property="cDNo" column="C_D_NO"/>
+		<result property="charge" column="CHARGE"/>
+		<result property="calcYN" column="CALC_YN"/>
+		<result property="calcDate" column="CALC_DATE"/>
+	</resultMap>
+
 	<!-- 폰번호 업데이트 -->
 	<update id="updatePhone" parameterType="Member">
 		UPDATE MEMBER
@@ -255,6 +240,13 @@
 	<select id="selectCalList" resultMap="rsvPayResultSet">
 		SELECT *
 		FROM RESERVATION R LEFT OUTER JOIN PAYMENT P ON(R.R_NO=P.P_R_NO)
-		WHERE R.R_D_NO= #{DNO}
+		LEFT OUTER JOIN CALCULATE C ON (P.P_NO = C.C_P_NO)
+		WHERE R.R_D_NO= #{dNo}
+		ORDER BY TO_NUMBER(SUBSTR(R.R_NO, 2)) DESC
 	</select>
+<!-- 	<select id="" resultMap="rsvPayResultSet">
+		SELECT 	
+	
+	
+	</select> -->
 </mapper>
