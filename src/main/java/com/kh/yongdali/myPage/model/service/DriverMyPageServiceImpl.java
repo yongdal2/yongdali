@@ -37,13 +37,13 @@ public class DriverMyPageServiceImpl implements DriverMyPageService {
 	}
 
 	@Override
-	public int getFilterCountList(Filter f) {
-		return dmpDao.getFilterCountList(f);
+	public int getFilCalListCount(Filter f) {
+		return dmpDao.getFilCalListCount(f);
 	}
 
 	@Override
-	public ArrayList<Reservation> selectFilterCalList(PageInfo pi, Filter f) {
-		return dmpDao.selectFilterCalList(pi, f);
+	public ArrayList<Reservation> selectFilCalList(PageInfo pi, Filter f) {
+		return dmpDao.selectFilCalList(pi, f);
 	}
 
 }

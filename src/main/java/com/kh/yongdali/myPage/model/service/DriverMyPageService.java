@@ -44,7 +44,7 @@ public interface DriverMyPageService {
 	 * @param f
 	 * @return
 	 */
-	int getFilterCountList(Filter f);
+	int getFilCalListCount(Filter f);
 
 	/**
 	 * 드라이버 정산 필터 리스트
@@ -52,6 +52,6 @@ public interface DriverMyPageService {
 	 * @param f
 	 * @return
 	 */
-	ArrayList<Reservation> selectFilterCalList(PageInfo pi, Filter f);
+	ArrayList<Reservation> selectFilCalList(PageInfo pi, Filter f);
 
 }

@@ -48,7 +48,7 @@
 			<!-- 필터 -->
 			<form id = >
 			<div class="col-xs-2 col-md-2 text-center bszB1">
-				<select class="form-control ft54" name="calStatus" id="calStatus">
+				<select class="form-control ft54" name="rsvStatus" id="rsvStatus">
 					<option value="rsv">상태별 조회</option>
 					<option value="pay">결제완료</option>
 					<option value="deal">배차완료</option>
@@ -97,7 +97,7 @@
 							<td><!-- 상태 -->
 								<c:set var="p" value="${ r.payment }"></c:set>
 								<c:choose>
-								<c:when test="${p.payYN eq 'Y' && p.cancYN eq 'Y' }"><span class="red">취소</span></c:when>
+								<c:when test="${p.payYN eq 'Y' && p.cancYN eq 'Y' }"><span class="llg">취소</span></c:when>
 								<c:when test="${p.payYN eq 'Y' && p.cancYN eq 'N' && p.dealYN eq 'N' }">결제 완료</c:when>
 								<c:when test="${p.dealYN eq 'Y' && p.cancYN eq 'N' }">배차 완료</c:when>
 								</c:choose>
@@ -130,12 +130,12 @@
 									<button class="fas fa-truck btn_no" id="tInfo${ vs.index }" data-toggle="popover${ vs.index }"  title="차량정보" value="${ r.rDNo }"></button>
 								</c:when>
 								<c:otherwise>
-									<button class="fas fa-truck btn_no red" disabled="disabled"></button>
+									<button class="fas fa-truck btn_no llg" disabled="disabled"></button>
 								</c:otherwise>
 							</c:choose>
 							
 							</td>
-							<td><button class="btn btn_ydl_l" id="rDetailBtn${r.rNo }" value="${ r.rNo }" data-toggle="modal" data-target="#rDetail">상세정보 보기</button></td>
+							<td><button class="btn btn_ydl_l" id="rDetailBtn${r.rNo }" value="${ r.rNo }" data-toggle="modal" data-target="#rDetail"data-backdrop="static" data-keyboard="false">상세정보 보기</button></td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -402,7 +402,9 @@
 	                }
 	            } else {
 	                var ccb = confirm("배차되지 않은 예약입니다. 취소하시겠습니까?");
-	                rsvCan(p.pRNo, 'N');
+	               if(ccb){
+	            	   rsvCan(p.pRNo, 'N');
+	               }
 	            }
 	
 	        },
@@ -423,6 +425,7 @@
 	        success: function(p) {
 	            if (p == 'ok') {
 	                alert("예약이 취소되었습니다.");
+	                $(location).attr('href',"myRSV.myp")
 	            }
 	        },
 	        error: function() {

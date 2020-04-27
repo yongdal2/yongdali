@@ -45,7 +45,7 @@
 							<div class="h4 na">연락처</div>
 							<div class="h3 jal lg mgt">
 								${loginUser.phone}
-								<div class="glyphicon glyphicon-pencil hvDr" data-toggle="modal"
+								<div class="glyphicon glyphicon-pencil hvDr" data-toggle="modal" data-backdrop="static"
 									data-target="#changePhone"></div>
 							</div>
 						</div>
@@ -58,7 +58,7 @@
 				<div class="col-xs-3 col-md-3">
 					<div class="img-circle" id="pro_img"
 						style="background-image: url('${pageContext.request.contextPath}/resources/images/driver/id/${driver.idImgRename}');">
-						<div class="editP sub text-center" data-toggle="modal"
+						<div class="editP sub text-center" data-toggle="modal" data-backdrop="static"
 							data-target="#changePhoto">
 							<div class="glyphicon glyphicon-pencil"></div>
 						</div>
