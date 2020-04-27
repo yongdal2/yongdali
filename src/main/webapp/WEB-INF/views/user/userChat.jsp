@@ -55,7 +55,6 @@
                 </div>
                 <div class="col-xs-2 col-lg-1">
                     <button type="button" class="sendBtn" onclick="sendMessage();"><img src="${contextPath }/resources/images/chat/send.png"></button>
-                	<button type="button" onclick="disconnect();">종료</button>
                 </div>
             </div>
         </div>
@@ -271,10 +270,7 @@
     		$('#logo').attr('onclick', '');//createRoom() 비활성화
 			
     	}
-    	
-    	function disconnect(){
-    		socket.close();
-        }
+
     	
     	
     </script>

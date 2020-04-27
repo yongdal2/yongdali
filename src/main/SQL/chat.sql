@@ -46,7 +46,7 @@ CREATE TABLE CHATMESSAGE(
     CM_CR_NO VARCHAR2(50) /* 방 번호(FK) */,
     SENDID VARCHAR2(100) /* 보낸사람아이디 */,
     ROOMNAME VARCHAR2(50) /* 방이름 */,
-    MESSAGE VARCHAR2(50) /* 메시지 내용 */,
+    MESSAGE VARCHAR2(4000) /* 메시지 내용 */,
     SENDDATE DATE DEFAULT SYSDATE /* 메시지 보낸 날짜 */,
     FLAG VARCHAR2(50) /* 구분 */,
     CONNECTYN VARCHAR2(1) DEFAULT 'Y' /* 방 생성확인 */
