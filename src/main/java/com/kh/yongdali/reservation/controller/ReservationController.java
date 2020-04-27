@@ -138,9 +138,10 @@ public class ReservationController {
 		
 		int result = rService.insertReservation(r);
 		if(result > 0) {
-			mv.setViewName("user/paySuccess");
+			mv.setViewName("redirect:myRSV.myp");
+			
 		} else {
-			mv.addObject("msg","예약에 실패하셨습니다.");
+			mv.addObject("msg","예약에 실패하셨습니다."); 
 			mv.setViewName("common/errorPage");
 		}
 		return mv;

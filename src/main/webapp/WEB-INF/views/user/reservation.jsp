@@ -934,10 +934,8 @@
 									<span style="font-family: 'NeoDunggeunmo'; font-size: 17px;">선택하실 주소가 없어요..</span>
 									<br><br>
 									
-									
 									<!-- 주소록 추가 서블릿 나중에 넣으셈 -->
-									<button type="button" id="stALBtn" onclick="location.href='#'">추 가 하 러 가 기</button>
-									
+									<button type="button" id="stALBtn" onclick="location.href='addrBook.myp'">추 가 하 러 가 기</button>
 									
 								</div>
 							</div>
@@ -956,7 +954,6 @@
 										<div class="col-xs-3 col-md-3">배송지</div>
 										<div class="col-xs-4 col-md-4">주소</div>
 										<div class="col-xs-3 col-md-3">연락처</div>
-										<!-- <div class="col-xs-2 col-md-2">수정·삭제</div> -->
 									</div>
 								<c:forEach var="a" items="${ list }" varStatus="status">
 									<div class="row small aL-row">
@@ -974,10 +971,6 @@
 										<div class="col-xs-3 col-md-3" style="padding-top: 9px;">
 											<span>${ a.aPhone }</span>
 										</div>
-										<!-- <div class="col-xs-2 col-md-2" style="display: flex; padding-top: 6px;">
-											<div><button type="button" class="AddrModBtn1">수정</button></div>
-											<div><button type="button" class="AddrDelBtn1">삭제</button></div>
-										</div> -->
 										<input class="stANo" type="hidden" value="${ a.aNo }">
 										<input class="stAName" type="hidden" value="${ a.aName }">
 										<input class="stAddr1" type="hidden" value="${ addrList1[status.index] }">
@@ -1018,7 +1011,7 @@
 									<br><br>
 									
 									<!-- 주소록 추가 서블릿 나중에 넣으셈 -->
-									<button type="button" id="stALBtn" onclick="location.href='#'">추 가 하 러 가 기</button>
+									<button type="button" id="stALBtn" onclick="location.href='addrBook.myp'">추 가 하 러 가 기</button>
 									
 								</div>
 							</div>
@@ -1037,7 +1030,6 @@
 									<div class="col-xs-3 col-md-3">배송지</div>
 									<div class="col-xs-4 col-md-4">주소</div>
 									<div class="col-xs-3 col-md-3">연락처</div>
-									<!-- <div class="col-xs-2 col-md-2">수정·삭제</div> -->
 								</div>
 								<c:forEach var="a" items="${ list }" varStatus="status">
 									<div class="row small aL-row">
@@ -1055,10 +1047,6 @@
 										<div class="col-xs-3 col-md-3" style="padding-top: 9px;">
 											<span>${ a.aPhone }</span>
 										</div>
-										<!-- <div class="col-xs-2 col-md-2" style="display: flex; padding-top: 6px;">
-											<div><button type="button" class="AddrModBtn1">수정</button></div>
-											<div><button type="button" class="AddrDelBtn1">삭제</button></div>
-										</div> -->
 										<input class="edANo" type="hidden" value="${ a.aNo }">
 										<input class="edAName" type="hidden" value="${ a.aName }">
 										<input class="edAddr1" type="hidden" value="${ addrList1[status.index] }">
