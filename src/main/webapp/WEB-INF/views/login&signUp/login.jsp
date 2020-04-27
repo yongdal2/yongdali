@@ -59,7 +59,7 @@
 						   				alert("용달이 회원입니다. 용달이로 로그인하세요.");
 						   			}
 						   		}, error : function(){
-						       		var msg = "페이스북 간편 로그 중 에러 발생!";
+						       		var msg = "페이스북 간편 로그인 중 에러 발생!";
 						       		location.href="error.ydl?msg="+msg;
 						   		}
 						   	})
@@ -192,11 +192,11 @@
             <a class="" href="policyView.me">회원가입</a>
         </div>
 
-        <div class="easyEccess">
-            <h2 class="easyEccessTitle">간편 로그인</h2>
-            <div class="easyEccessLogo">
-                <img class="easyEccessBtn" src="${contextPath}/resources/images/login&signUp/facebookLogo.png" alt="페이스북" onclick="fbLogin();">
-                <img class="easyEccessBtn" src="${contextPath}/resources/images/login&signUp/kakaoLogo.png" alt="카카오" onclick="kakaoLogin();">
+        <div class="easyAccess">
+            <h2 class="easyAccessTitle">간편 로그인</h2>
+            <div class="easyAccessLogo">
+                <img class="easyAccessBtn" src="${contextPath}/resources/images/login&signUp/facebookLogo.png" alt="페이스북" onclick="fbLogin();">
+                <img class="easyAccessBtn" src="${contextPath}/resources/images/login&signUp/kakaoLogo.png" alt="카카오" onclick="kakaoLogin();">
                 <a href="<%=apiURL%>"><img src="${contextPath}/resources/images/login&signUp/naverLogo.png" alt="네이버"></a>
             </div>
         </div>

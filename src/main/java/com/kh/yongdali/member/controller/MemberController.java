@@ -258,8 +258,11 @@ public class MemberController {
 	    	}else if(type.equals("페이스북")){
 	    		model.addAttribute("loginUser", mem);
 	    		return "facebook";
-	    	}else{
-	    		return "google";
+	    	}else if(type.equals("카카오")) {
+	    		return "kakao";
+	    	}
+	    	else{
+	    		return "yongdali";
 	    	}
 	    }
 	    else {
@@ -271,6 +274,41 @@ public class MemberController {
 	    	}else {
 				return "error";
 	    	}
+	    }
+	}
+	
+	/** 페이스북 아이디로 회원가입
+	 * @param email
+	 * @param name
+	 * @param model
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="fbSingUpAjax.me", method=RequestMethod.POST)
+	public String facebookSignUp(@RequestParam("email") String email, String name, Model model) {
+		
+		// MVC2 로직처리
+	    int result = mService.emailChk(email);  // 가입 유무 확인
+	    
+	    if(result > 0) {
+	    	Member m = new Member(email);
+	    	Member mem = mService.loginMember(m);
+	    	String type = mem.getSignupType();
+	    	
+	    	if(type.equals("네이버")) {
+	    		return "naver";
+	    	}else if(type.equals("페이스북")){
+//	    		model.addAttribute("loginUser", mem);
+	    		return "facebook";
+	    	}else if(type.equals("카카오")) {
+	    		return "kakao";
+	    	}
+	    	else{
+	    		return "yongdali";
+	    	}
+	    }
+	    else {
+	    	return "newFb";
 	    }
 	}
 	
@@ -331,7 +369,8 @@ public class MemberController {
 	    String state = request.getParameter("state");
 	    String redirectURI = null;
 		try {
-			redirectURI = URLEncoder.encode("http://localhost:8081/yongdali/naverLogin.me", "UTF-8");
+//			redirectURI = URLEncoder.encode("http://localhost:8081/yongdali/naverLogin.me", "UTF-8");
+			redirectURI = URLEncoder.encode("http://localhost:8081/yongdali/home.do", "UTF-8");
 		} catch (UnsupportedEncodingException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -344,7 +383,6 @@ public class MemberController {
 	    apiURL += "&code=" + code;
 	    apiURL += "&state=" + state;
 	    String access_token = "";
-	    String refresh_token = "";
 //	    System.out.println("apiURL="+apiURL);
 	    try {
 	      URL url = new URL(apiURL);
@@ -352,7 +390,6 @@ public class MemberController {
 	      con.setRequestMethod("GET");
 	      int responseCode = con.getResponseCode();
 	      BufferedReader br;
-//	      System.out.print("responseCode="+responseCode);
 	      if(responseCode==200) { // 정상 호출
 	        br = new BufferedReader(new InputStreamReader(con.getInputStream()));
 	      } else {  // 에러 발생
@@ -365,15 +402,13 @@ public class MemberController {
 	      }
 	      br.close();
 		  if(responseCode==200) {
-			  // out.println(res.toString()); 
-			  
+
 			// access_token 값 추출
 			JSONParser parsing = new JSONParser();
 			Object resObj = parsing.parse(res.toString());
 			JSONObject resJsonObj = (JSONObject)resObj;
 				        
 			access_token = (String)resJsonObj.get("access_token");
-			refresh_token = (String)resJsonObj.get("refresh_token");
 			  
 			// 회원정보 조회 API 1.
 		    String token = access_token; // 네이버 로그인 접근 토큰;
@@ -400,9 +435,6 @@ public class MemberController {
 		    	Member m = new Member(email);
 		    	Member loginUser = mService.loginMember(m);
 		    	model.addAttribute("loginUser", loginUser);
-		    	
-		    	logger.debug(loginUser.toString());
-		    	logger.debug(loginUser.getPushEnabled());
 		    }
 		    else {
 		    	Member newMem = new Member(email, name, "일반", "네이버");
@@ -513,8 +545,18 @@ public class MemberController {
 	 * @return
 	 */
 	@RequestMapping("signUpView.me")
-	public String signUpForm(@RequestParam("pushEnabled") char pushEnabled, Model model) {
+	public String signUpForm(@RequestParam("pushEnabled") char pushEnabled, 
+															String email, 
+															String name,
+															String signupType,
+															Model model) {
+		
+		logger.debug(signupType);
+		
 		model.addAttribute("pushEnabled", pushEnabled);
+		model.addAttribute("email", email);
+		model.addAttribute("name", name);
+		model.addAttribute("signupType", signupType);
 		return "login&signUp/signUpForm";
 	}
 	
@@ -591,10 +633,18 @@ public class MemberController {
 	@RequestMapping("insert.me")
 	public String insertMember(@ModelAttribute Member m, Driver d
 								, Model model, HttpServletRequest request
+								, @RequestParam("easyAcsmId") String easyAcsmId , String easyAcsmName
 								, @RequestParam(name="inputFile_idImg", required=true) MultipartFile idImg
 								, @RequestParam(name="inputFile_regCardImg", required=true) MultipartFile regCardImg) {
-
-		m.setPwd(bcryptPasswordEncoder.encode(m.getPwd()));
+	
+		logger.debug(m.getSignupType());
+		
+		if(m.getPwd() != null) {
+			m.setPwd(bcryptPasswordEncoder.encode(m.getPwd()));
+		}else {
+			m.setmId(easyAcsmId);
+			m.setmName(easyAcsmName);
+		}
 		
 		int result = mService.insertMember(m);
 				
@@ -622,7 +672,6 @@ public class MemberController {
 			result += mService.insertDriver(d);
 		}
 		
-		// TODO 1 이면 일반회원, 2 면 기사회원가입 완료 페이지 띄우기
 		if(result > 0) {
 			return "login&signUp/login";
 		}else {

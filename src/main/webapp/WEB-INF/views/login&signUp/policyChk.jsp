@@ -10,8 +10,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>용달이 | 약관동의</title>
     <link rel="stylesheet" href="${contextPath}/resources/css/login&signUp.css">   
-    <script src="http://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+    <!-- <script src="http://code.jquery.com/jquery-3.1.1.slim.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
     <script src="${contextPath}/resources/js/login&signUp.js"></script>
+	    
 </head>
 <body>
     <!-- logo header -->
@@ -63,15 +65,16 @@
         </div>
         
        <c:if test="${isEasyAccessor ne true}">
-       <div class="easyEccess chooseSignIn">
+       <div class="easyAccess chooseSignIn">
             <div class="yongdalLogo"> 
-                <h2 class="easyEccessTitle">용달이 회원가입</h2>
+                <h2 class="easyAccessTitle">용달이 회원가입</h2>
            		<img src="${contextPath}/resources/images/ydl_logo/ydl_ic_gr(70X70).png" alt="용달이" id="yongdaliSignUp">
             </div>
-            <div class="easyEccessLogo">
-                <h2 class="easyEccessTitle">간편 회원가입</h2>
-                <a href="#"><img src="${contextPath}/resources/images/login&signUp/facebookLogo.png" alt="페이스북"></a>
-                <img src="${contextPath}/resources/images/login&signUp/kakaoLogo.png" alt="카카오" id="kakaoSignUp">
+            <div class="easyAccessLogo">
+                <h2 class="easyAccessTitle">간편 회원가입</h2>
+<%--                 <img class="easyAccessBtn" src="${contextPath}/resources/images/login&signUp/facebookLogo.png" alt="페이스북" id="fbSignUp" onclick="fbSignUp();"> --%>
+                <img class="easyAccessBtn" src="${contextPath}/resources/images/login&signUp/facebookLogo.png" alt="페이스북" id="fbSignUp">
+                <img class="easyAccessBtn" src="${contextPath}/resources/images/login&signUp/kakaoLogo.png" alt="카카오" id="kakaoSignUp">
                 <img src="${contextPath}/resources/images/login&signUp/naverLogo.png" alt="네이버" id="naverSignUp">
             </div>
         </div>

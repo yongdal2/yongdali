@@ -270,9 +270,10 @@ select::-ms-expand {
     color: #5A8CFF;
 }
 
-.easyEccess{
+.easyAccess{
     margin-top: 3rem;
     text-align: center;
+    display: block;
 }
 
 .forgotSignIn{
@@ -288,13 +289,13 @@ select::-ms-expand {
     cursor: pointer;
 }
 
-
-.easyEccess {
+/* 
+.easyAccess {
     display: block;
     
-}
+} */
 
-.easyEccessTitle{
+.easyAccessTitle{
     /* margin: 15px 0; */
     color: #757575;
     font-size: 12px;
@@ -313,7 +314,7 @@ select::-ms-expand {
     margin: 0px 200px 0px 80px;
 }
 
-.easyEccess img{
+.easyAccess img{
     width: 48px;
     height: 48px;
     background-position: left -80px top -80px;
@@ -377,7 +378,7 @@ select::-ms-expand {
     margin-right: 0.5rem;
 }
 
-/* .easyEccessLogo {
+/* .easyAccessLogo {
     margin-right: 10px;
 } */
 
@@ -841,6 +842,12 @@ select::-ms-expand {
     cursor: pointer;
 }
 
+/* 회원가입 */
+.readonly{
+	color: gray;
+    font-style: italic;
+}
+
 /* 회원가입 이미지 */
 .div_regImgWrap{
     height: 14rem;
@@ -862,7 +869,7 @@ select::-ms-expand {
 }
 
 /* 페이스북 아이디로 로그인 */
-.easyEccessBtn{
+.easyAccessBtn{
 	cursor: pointer;
 }
 
