@@ -28,7 +28,7 @@
 			<div class="row">
 			<div id=title>
 				<h2 class="jal"><a href="adminHome.ydl">관리자 페이지</a></h2>
-				<p>aJung.ad </p>
+				<!-- <p>aJung.ad </p> -->
 			</div>
 				<hr>
 			</div>
@@ -43,7 +43,7 @@
 					<a href="aRes.ad"><span class="sidebar_span">예약 내역</span></a><br>
 					<a href="aJung.ad"><span class="sidebar_span">: 정산 내역</span></a><br> 
 					<a href="adRef.ad"><span class="sidebar_span">환불 내역</span></a><br> 
-					<a href="#"><span class="sidebar_span">채팅 내역</span></a>
+					<!-- <a href="#"><span class="sidebar_span">채팅 내역</span></a> -->
 				</div>
 
 			<!-- list -->
@@ -126,7 +126,7 @@
 						</c:if>
 						${ after }">&gt; &nbsp;</a>
 						</li>
-aJung.ad
+
 						<!-- >> 의도: 마지막 페이지에서는 >> 표시 사라짐(현재페이지가 끝 페이지임을 표시)-->						
 						<li>
 						<c:if test="${ pi.currentPage ne pi.maxPage }">

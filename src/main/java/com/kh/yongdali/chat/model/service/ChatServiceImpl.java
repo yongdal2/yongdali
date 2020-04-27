@@ -1,5 +1,7 @@
 package com.kh.yongdali.chat.model.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,5 +39,13 @@ public class ChatServiceImpl implements ChatService {
 		
 		return cDao.selectPreRoom(r);
 	}
+
+	@Override
+	public ArrayList<Message> selectPreMessage(String roomNo) {
+		
+		return cDao.selectPreMessage(roomNo);
+	}
+
+
 
 }

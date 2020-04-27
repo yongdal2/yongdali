@@ -8,7 +8,7 @@ public class adRefund {
 	private String mName;
 	private String phone;
 	private String cancAmount;
-	private String cancYn;
+	private String calcYn;
 	
 
 	
@@ -18,7 +18,7 @@ public class adRefund {
 
 
 	public adRefund(String mNo, String rNo, String email, String mName, String phone, String cancAmount,
-			String cancYn) {
+			String calcYn) {
 		super();
 		this.mNo = mNo;
 		this.rNo = rNo;
@@ -26,7 +26,7 @@ public class adRefund {
 		this.mName = mName;
 		this.phone = phone;
 		this.cancAmount = cancAmount;
-		this.cancYn = cancYn;
+		this.calcYn = calcYn;
 	}
 
 
@@ -90,20 +90,20 @@ public class adRefund {
 	}
 
 
-	public String getCancYn() {
-		return cancYn;
+	public String getcalcYn() {
+		return calcYn;
 	}
 
 
-	public void setCancYn(String cancYn) {
-		this.cancYn = cancYn;
+	public void setcalcYn(String calcYn) {
+		this.calcYn = calcYn;
 	}
 
 
 	@Override
 	public String toString() {
 		return "adRefund [mNo=" + mNo + ", rNo=" + rNo + ", email=" + email + ", mName=" + mName + ", phone=" + phone
-				+ ", cancAmount=" + cancAmount + ", cancYn=" + cancYn + "]";
+				+ ", cancAmount=" + cancAmount + ", calcYn=" + calcYn + "]";
 	}
 	
 	

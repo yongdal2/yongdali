@@ -85,6 +85,11 @@ function searchStartAddr() {
 						console.log("출발지 위도 : " + startLat);
 						console.log("출발지 경도 : " + startLong);
 						
+						// 차무게와 옵션 두 값과 도착지의 값이 있을 경우 요금 미리 계산 실행
+						if($('#sl1').val()!="" && $('#sl2').val()!="" && endLat!=0){
+							preChargeFunc();
+						}
+						
 					}
 				});
 				
@@ -100,6 +105,8 @@ function searchStartAddr() {
 				// iframe을 넣은 element를 안보이게 한다.
 				// (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
 				element_layer.style.display = 'none';
+				
+				
 			}
             
         },
@@ -148,6 +155,11 @@ function searchEndAddr() {
 						endLong = result.y;
 						console.log("도착지 위도 : " + endLat);
 						console.log("도착지 경도 : " + endLong);
+						console.log("111111111111111111");
+						// 차무게와 옵션 두 값과 도착지의 값이 있을 경우 요금 미리 계산 실행
+						if($('#sl1').val()!="" && $('#sl2').val()!="" && startLat!=0){
+							preChargeFunc();
+						}
 					}
 				});
 				
@@ -163,6 +175,7 @@ function searchEndAddr() {
 				// iframe을 넣은 element를 안보이게 한다.
 				// (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
 				element_layer.style.display = 'none';
+				console.log("222222222222222222222");
 			}
 			
 		},
@@ -239,7 +252,7 @@ function preChargeFunc(){
 			var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(deg2rad(startLat)) * Math.cos(deg2rad(endLat)) * Math.sin(dLon/2) * Math.sin(dLon/2);
 			var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 			var d1 = R * c; // Distance in km
-			var d = d1.toFixed(1);
+			var d = d1.toFixed(2);
 			console.log("계산 거리 : "+d+" km");
 			
 			var distanceCharge = 0;

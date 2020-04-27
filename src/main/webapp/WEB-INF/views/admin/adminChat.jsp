@@ -178,7 +178,7 @@
 		
 		function connectionSocket(){
 			connect = true;
-			socket = new WebSocket('ws://192.168.110.45:8888/yongdali/chatting');
+			socket = new WebSocket('ws://192.168.25.20:8888/yongdali/chatting');
 			/* 페이지 접속한 session id */
 			var sessionid = $("#senderId").val();
 			var ccId = $("#ccId").val();
@@ -200,7 +200,7 @@
 					for(var i=0; i<rooms.length; i++){
 						var printHTML = "<div class='discussion'>";
 						printHTML += "<div class='photo'></div>";
-						printHTML += "<div class='desc-contact' id='nameArea'>";
+						printHTML += "<div class='desc-contact' id='nameArea' >";
 						printHTML += "<p class='name' id='listName' onclick='roomval(this);'>"+rooms[i]+"</p>";
 						printHTML += "</div>";
 						printHTML += "</div>";
@@ -268,6 +268,18 @@
 		function sendMessage(){
 			socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),$("#msgArea").val(),"msg",$("#room").val())));
 			$("#msgArea").val("");
+			
+			$.ajax({
+    			url:"userSendMessage.ch",
+    			data:{id:senderId, roomName:roomName, msg:msg, flag:flag, roomNo:roomNo},
+    			success:function(data){
+    				if(data=="success"){
+    					console.log(data);
+    				}
+    			},error:function(){
+    				console.log("전송실패");
+    			}
+    		})
 	
 		}
 		
