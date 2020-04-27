@@ -135,6 +135,9 @@ $(document).ready(function(){
     })
     
     /*-- 약관 ----------------------------------------------*/
+    // 간편로그인 여부 판단
+    
+    
     // 동의 체크    
     var checked = '/yongdali/resources/images/login&signUp/checked-circle.png';
     var unchecked = '/yongdali/resources/images/login&signUp/unchecked-circle.png';
@@ -199,6 +202,16 @@ $(document).ready(function(){
             modal.style.display = "none";
         }
     }
+    
+    // 용달이 시작하기(간편로그인 회원 약관동의)
+    $('#easyEcsAgree').click(function(){
+    	$('#pushEnabledForm').attr('action','setPushEnabled.me');
+    	if($('.chkPolicy:eq(1)').attr('checked') == "checked" && $('.chkPolicy:eq(2)').attr('checked') == "checked"){
+    		$('#pushEnabledForm').trigger('submit');
+    	}else {
+    		alert("필수 약관에 동의해야합니다.")
+    	}
+    })
     
     // 용달이 회원가입 버튼
     $('#yongdaliSignUp').click(function(){
@@ -290,7 +303,6 @@ $(document).ready(function(){
     	}
     	
     	if(pwdValidate() == true){
-
     		pwdChkValidate();
     	};
     	
@@ -310,7 +322,6 @@ $(document).ready(function(){
         	data : { mId : $('#findPwd_email').val() },
         	async : false,
         	success : function(value){
-        		console.log(value);
         		if(value == "exist" ){
         			$("#emailMsg").css("display","none");
         			result = true; 

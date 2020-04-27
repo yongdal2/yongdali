@@ -101,6 +101,12 @@
 		SET PWD = #{pwd}
 		WHERE M_ID = #{mId}
 	</update>
+	
+	<update id="setPushEnabled" parameterType="Member">
+		UPDATE MEMBER 
+		SET PUSH_ENABLED = #{pushEnabled}
+		WHERE M_ID = #{mId}
+	</update>
 </mapper>     
 
 

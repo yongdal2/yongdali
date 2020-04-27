@@ -23,6 +23,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -201,9 +202,7 @@ public class MemberController {
 		
 		int result = mService.updatePwd(m);
 		
-		System.out.println(result);
 		if(result > 0) {
-			System.out.println("비밀번호 재설정 성공");
 			return "login&signUp/login";
 		}else {
 			model.addAttribute("msg", "비밀번호 재설정 중 오류 발생");
@@ -235,6 +234,45 @@ public class MemberController {
 			return "wrongPwd";
 		}	
 	}	
+	   
+	/** 페이스북 아이디로 로그인
+	 * @param email
+	 * @param name
+	 * @param model
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="fbLoginAjax.me", method=RequestMethod.POST)
+	public String facebookLogin(@RequestParam("email") String email, String name, Model model) {
+		
+		// MVC2 로직처리
+	    int result = mService.emailChk(email);  // 가입 유무 확인
+	    
+	    if(result > 0) {
+	    	Member m = new Member(email);
+	    	Member mem = mService.loginMember(m);
+	    	String type = mem.getSignupType();
+	    	
+	    	if(type.equals("네이버")) {
+	    		return "naver";
+	    	}else if(type.equals("페이스북")){
+	    		model.addAttribute("loginUser", mem);
+	    		return "facebook";
+	    	}else{
+	    		return "google";
+	    	}
+	    }
+	    else {
+	    	Member newMem = new Member(email, name, "일반", "페이스북");
+	    	int insertResult = mService.insertMember(newMem);
+	    	if(insertResult > 0) {
+	    		model.addAttribute("loginUser", newMem);
+	    		return "newMem";
+	    	}else {
+				return "error";
+	    	}
+	    }
+	}
 	
 	/** 카카오 아이디로 로그인
 	 * @param email
@@ -253,7 +291,6 @@ public class MemberController {
 	    	Member m = new Member(email);
 	    	Member mem = mService.loginMember(m);
 	    	String type = mem.getSignupType();
-	    	System.out.println(type);
 	    	
 	    	if(type.equals("네이버")) {
 	    		return "naver";
@@ -268,7 +305,7 @@ public class MemberController {
 	    	}
 	    }
 	    else {
-	    	Member newMem = new Member(email, name, "일반", "카카오", "N");
+	    	Member newMem = new Member(email, name, "일반", "카카오");
 	    	int insertResult = mService.insertMember(newMem);
 	    	if(insertResult > 0) {
 	    		model.addAttribute("loginUser", newMem);
@@ -363,9 +400,12 @@ public class MemberController {
 		    	Member m = new Member(email);
 		    	Member loginUser = mService.loginMember(m);
 		    	model.addAttribute("loginUser", loginUser);
+		    	
+		    	logger.debug(loginUser.toString());
+		    	logger.debug(loginUser.getPushEnabled());
 		    }
 		    else {
-		    	Member newMem = new Member(email, name, "일반", "네이버", "N");
+		    	Member newMem = new Member(email, name, "일반", "네이버");
 		    	int insertResult = mService.insertMember(newMem);
 		    	if(insertResult > 0) {
 		    		model.addAttribute("loginUser", newMem);
@@ -427,48 +467,33 @@ public class MemberController {
         }
     }
 //	/네이버 아이디로 로그인(네아로)    
-	   
-	@ResponseBody
-	@RequestMapping(value="fbLoginAjax.me", method=RequestMethod.POST)
-	public String facebookLogin(@RequestParam("email") String email, String name, Model model) {
-		
-		// MVC2 로직처리
-	    int result = mService.emailChk(email);  // 가입 유무 확인
-	    
-	    if(result > 0) {
-	    	Member m = new Member(email);
-	    	Member mem = mService.loginMember(m);
-	    	String type = mem.getSignupType();
-	    	System.out.println(type);
-	    	
-	    	if(type.equals("네이버")) {
-	    		return "naver";
-	    	}else if(type.equals("페이스북")){
-	    		model.addAttribute("loginUser", mem);
-	    		return "facebook";
-	    	}else{
-	    		return "google";
-	    	}
-	    }
-	    else {
-	    	Member newMem = new Member(email, name, "일반", "페이스북", "N");
-	    	int insertResult = mService.insertMember(newMem);
-	    	if(insertResult > 0) {
-	    		model.addAttribute("loginUser", newMem);
-	    		return "newMem";
-	    	}else {
-				return "error";
-	    	}
-	    }
-	}
-     
+    
+    /** 간편로그인 회원 약관동의
+     * @param pushEnabled
+     * @param model
+     * @return
+     */
+    @RequestMapping("setPushEnabled.me")
+    public String setPushEnabled(@RequestParam("pushEnabled") String pushEnabled, Model model, HttpServletRequest request) {
+    	HttpSession session = request.getSession();
+    	Member m = (Member)session.getAttribute("loginUser");
+    	m.setPushEnabled(pushEnabled);
+    	
+    	int result = mService.setPushEnabled(m);
+    	if (result > 0) {
+    		return "redirect:home.do";
+    	}else {
+    		model.addAttribute("msg", "간편로그인 회원 약관동의 양식 제출 중 오류 발생");
+    		return "common/errorPage";
+    	}
+    }
+    
     /** 로그아웃
 	 * @param status
 	 * @return
 	 */
 	@RequestMapping("logout1.me")
 	public String memberLogout(SessionStatus status) {
-		System.out.println("siab");
 		status.setComplete();
 		
 		return "redirect:home.do";
@@ -528,7 +553,6 @@ public class MemberController {
 			return "available";
 		}
 	}
-	
 	
 	/** 회원가입_이메일 인증번호 전송
 	 * @return

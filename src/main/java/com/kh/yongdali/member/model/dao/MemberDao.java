@@ -38,4 +38,8 @@ public class MemberDao {
 	public int updatePwd(Member m) {
 		return sqlSession.update("memberMapper.updatePwd", m);
 	}
+
+	public int setPushEnabled(Member m) {
+		return sqlSession.update("memberMapper.setPushEnabled", m);
+	}
 }
