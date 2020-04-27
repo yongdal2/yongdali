@@ -60,5 +60,11 @@
 		WHERE CM_CR_NO=#{roomNo}
 	</select>
 	
+	<select id="selectAdPreRoom" resultMap="roomResultSet" parameterType="Room">
+		SELECT * FROM CHATROOM
+		WHERE RECEIVEID=#{id}
+		AND CONNECTYN='Y'
+	</select>
+	
 	
 </mapper>

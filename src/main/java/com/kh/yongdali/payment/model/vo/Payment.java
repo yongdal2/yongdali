@@ -2,6 +2,8 @@ package com.kh.yongdali.payment.model.vo;
 
 import java.sql.Date;
 
+import com.kh.yongdali.admin.model.vo.Calculate;
+
 public class Payment {
 	private String pNo;
 	private String pRNo;
@@ -12,11 +14,14 @@ public class Payment {
 	private String payYN;
 	private Date enrollDate;
 	private String cancAmount;
+	private String calcDate;
+	
+	private Calculate calculate;
 	
 	public Payment() {}
 
 	public Payment(String pNo, String pRNo, String pDNo, String dealYN, Date dealDate, String cancYN, Date cancDate,
-			String payYN, Date enrollDate, String cancAmount) {
+			String payYN, Date enrollDate, String cancAmount, String calcDate, Calculate calculate) {
 		super();
 		this.pNo = pNo;
 		this.pRNo = pRNo;
@@ -27,6 +32,8 @@ public class Payment {
 		this.payYN = payYN;
 		this.enrollDate = enrollDate;
 		this.cancAmount = cancAmount;
+		this.cancAmount = calcDate;
+		this.calculate = calculate;
 	}
 
 	public String getpNo() {
@@ -100,14 +107,33 @@ public class Payment {
 	public void setCancAmount(String cancAmount) {
 		this.cancAmount = cancAmount;
 	}
+	
+
+	public String getCalcDate() {
+		return calcDate;
+	}
+
+	public void setCalcDate(String calcDate) {
+		this.calcDate = calcDate;
+	}
+	
+	
+
+	public Calculate getCalculate() {
+		return calculate;
+	}
+
+	public void setCalculate(Calculate calculate) {
+		this.calculate = calculate;
+	}
 
 	@Override
 	public String toString() {
 		return "Payment [pNo=" + pNo + ", pRNo=" + pRNo + ", dealYN=" + dealYN + ", dealDate=" + dealDate + ", cancYN="
 				+ cancYN + ", cancDate=" + cancDate + ", payYN=" + payYN + ", enrollDate=" + enrollDate
-				+ ", cancAmount=" + cancAmount + "]";
+				+ ", cancAmount=" + cancAmount + ", calcDate=" + calcDate + ", calculate=" + calculate + "]";
 	}
-	
-	
+
+
 	
 }

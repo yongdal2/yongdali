@@ -46,6 +46,14 @@ public class ChatServiceImpl implements ChatService {
 		return cDao.selectPreMessage(roomNo);
 	}
 
+	@Override
+	public ArrayList<Room> selectAdPreRoom(Room r) {
+		
+		return cDao.selectAdPreRoom(r);
+	}
+
+
+
 
 
 }

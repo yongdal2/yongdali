@@ -41,6 +41,13 @@ public class ChatDao {
 		return (ArrayList)sqlSession.selectList("chatMapper.selectPreMessage", roomNo);
 	}
 
+	public ArrayList<Room> selectAdPreRoom(Room r) {
+		
+		return (ArrayList)sqlSession.selectList("chatMapper.selectAdPreRoom", r);
+	}
+
+
+
 
 
 }

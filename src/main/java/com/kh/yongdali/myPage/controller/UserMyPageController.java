@@ -55,8 +55,6 @@ public class UserMyPageController {
 		
 		int result = umpService.updatePhone(loginUser);
 
-		// m은 기존의 회원 값을 갖고 있기 때문에 새로 저장된 값을 불러오기 위해 다시한번 m을 저장해준다
-
 		if(result > 0) {
 			md.addAttribute("loginUser",loginUser);
 			
