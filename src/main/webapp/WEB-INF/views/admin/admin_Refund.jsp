@@ -19,7 +19,7 @@
 	<!-- Navigation -->
 	<%@ include file="../common/nav_admin.jsp"%>
 	<!-- 배경색 -->
-	<form action="SearchAdminMember" onsubmit="false">
+	
 		<div id="backg">
 			<!-- <div style="width: 100%; height: 100%; padding-top: 30px; padding-top: 30px;"> -->
 
@@ -37,7 +37,7 @@
 					</div>
 
 
-
+					
 					<div class="row" id="content">
 						<!-- <div id="content"> -->
 						<div class="col-lg-3 sidebar">
@@ -53,6 +53,7 @@
 						<div class="row" id="rowList">
 
 							<!-- 검색기능 -->
+							<form action="SearchAdminMember" onsubmit="false">
 							<div id="search">
 								<select id="searchCondition" class="search" name="memberSearch">
 									<option value="" selected="selected">선택</option>
@@ -69,13 +70,13 @@
 										<input type="text" name="content">
 										<input type="submit" value="검색">
 							</div>
-
+							</form>
 
 							<div class="col-xs-12 col-md-12" id="table">
 								<br>
 								<!-- <table style="text-align: center" class="table table-striped table-hover text-center"> -->
-								<table class="table table-striped table-hover text-center">
-									<thead id="thead">
+								<table id="rtable"class="table table-striped table-hover text-center">
+									<thead class="thead">
 										<tr>
 											<th>회원번호</th>
 											<th>결제번호</th>
@@ -84,36 +85,130 @@
 											<th>휴대폰번호</th>
 											<th>환불금액</th>
 											<th>환불</th>
+											<th>환불일자</th>
 										</tr>
 									</thead>
-
 									<c:forEach var="a" items="${ list }">
-										<tbody id="tbody">
-											<tr>
+										<tbody class="tbody">	
+											<tr class="tTr">
 												<td>${ a.mNo }</td>
 												<td>${ a.rNo }</td>
 												<td>${ a.email }</td>
 												<td>${ a.mName }</td>
 												<td>${ a.phone }</td>
 												<td>${ a.cancAmount }</td>
-								
 												<c:choose>
 													<c:when test="${a.calcYn eq 1}">
-														<td><button onclick="refund(this.value)" value="${a.rNo}">환불하기</button></td>
+														<td><input type="button" value="환불하기" onclick="button(this.value,'${a.rNo}')"></td>
 													</c:when>
 													<c:when test="${a.calcYn eq 2}">
 														<td>환불 완료</td>
 													</c:when>
 												</c:choose>
 											</tr>
-										</tbody>
+										</tbody>	
 									</c:forEach>
 								</table>
 							</div>
 							
 							<script>
-								function refund(aNo){
-									alert(aNo);
+								$(function(){
+									/* var button = $('#rtable tr').children().eq(6);
+									button.click(function(){
+										var index = $('.tr').index(this)+1;
+										var button = $('#rtable tr:eq('+index+')').children().eq(6);	
+										console.log(index);
+										console.log(button.text());
+									}); */
+									
+									
+									
+								});
+								function button(value,rNo){
+									console.log(value);
+									console.log(rNo);
+									
+									if(value == "환불하기"){
+										refund(rNo);
+									}
+								}
+								function refund(rNo){
+									console.log(rNo);
+									$.ajax({
+										url:"adminRefund.do",
+										type:"post",
+										data:{rNo:rNo},
+										success:function(data){
+											/* <tr class="tr">
+											<td>${ a.mNo }</td>
+											<td>${ a.rNo }</td>
+											<td>${ a.email }</td>
+											<td>${ a.mName }</td>
+											<td>${ a.phone }</td>
+											<td>${ a.cancAmount }</td>
+											<c:choose>
+												<c:when test="${a.calcYn eq 1}">
+													<td><input type="button" value="환불하기" onclick="button(this.value,'${a.rNo}')"></td>
+												</c:when>
+												<c:when test="${a.calcYn eq 2}">
+													<td>환불 완료</td>
+												</c:when>
+											</c:choose> */
+											/* <tr class="thead">
+											<th>회원번호</th>
+											<th>결제번호</th>
+											<th>회원ID(이메일)</th>
+											<th>이름</th>
+											<th>휴대폰번호</th>
+											<th>환불금액</th>
+											<th>환불</th>
+											<th>환불일자</th>
+										</tr> */
+											
+											$('.thead').remove(); 
+											$('.tbody').remove();
+											
+											listText = "";
+											
+											listText += "<thead class='thead'>";
+											listText += "<tr>";
+											listText += "<th>회원번호</th>";
+											listText += "<th>결제번호</th>";
+											listText += "<th>회원ID(이메일)</th>";
+											listText += "<th>이름</th>";
+											listText += "<th>휴대폰번호</th>";
+											listText += "<th>환불금액</th>";
+											listText += "<th>환불</th>";
+											listText += "<th>환불일자</th>";
+											listText += "</tr>";
+											listText += "</thead>";
+											
+											listText += "<tbody class='tbody'>";
+											for(var i=0; i<data.length; i++){
+												listText += "<tr class='tTr'>";
+												listText += "<td>"+data[i].mNo+"</td>";
+												listText += "<td>"+data[i].rNo+"</td>";
+												listText += "<td>"+data[i].email+"</td>";
+												listText += "<td>"+data[i].mName+"</td>";
+												listText += "<td>"+data[i].phone+"</td>";
+												listText += "<td>"+data[i].cancAmount+"</td>";
+												if(data[i].calcYn == 1){
+													listText += "<td><input type='button' value='환불하기' onclick='refund("+'"'+data[i].rNo+'"'+")'></td>";
+												}else if(data[i].calcYn == 2){
+													listText += "<td>환불완료</td>";
+												}
+												listText += "<td></td>";
+												listText += "</tr>";
+											}
+											listText += "</tbody>";
+											$('#rtable').html(listText);
+											
+											console.log(data);
+										},error:function(){
+											
+										}
+									});
+									
 								}
 							</script>
 
@@ -182,7 +277,7 @@
 
 			</div>
 		</div>
-	</form>
+	
 
 	<!-- Footer -->
 	<%@ include file="../common/footer.jsp"%>
@@ -191,9 +286,7 @@
 	<script>
 	
 	
-	function refund() {
-		
-	}
+
 	
 	
 	

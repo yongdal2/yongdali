@@ -1,9 +1,9 @@
 package com.kh.yongdali.admin.controller;
 
-import java.lang.ProcessBuilder.Redirect;
+import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 import com.kh.yongdali.admin.model.service.AdminService;
 import com.kh.yongdali.admin.model.vo.Calculate;
 import com.kh.yongdali.admin.model.vo.DriSearchCondition;
@@ -163,7 +166,7 @@ public class AdminController {
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, pageLimit, boardLimit);
 		ArrayList<adRefund> list = aService.adRefundList(pi);
 		
-		System.out.println(list.get(0).getcalcYn());
+		/* System.out.println(list.get(0).getcalcYn()); */
 		mv.addObject("pi",pi);
 		mv.addObject("list",list);
 		mv.setViewName("admin/admin_Refund");
@@ -327,7 +330,21 @@ public class AdminController {
 
 	}
 
-
+	@RequestMapping("adminRefund.do")
+	public void adminRefund(HttpServletResponse response, @RequestParam(value = "rNo")String rNo) throws JsonIOException, IOException{
+		System.out.println(rNo);
+		int result = aService.adminRefund(rNo);
+		ArrayList<adRefund> list =null;
+		if(result > 0) {
+			list = aService.adminRefundList();
+			System.out.println(list);
+		}else {
+			
+		}
+		response.setContentType("application/json; charset=utf-8");
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(list,response.getWriter());
+	}
 
 
 }
