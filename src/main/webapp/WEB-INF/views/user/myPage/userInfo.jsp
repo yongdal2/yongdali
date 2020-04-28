@@ -52,7 +52,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-xs-6 col-md-6">
+						<div class="col-xs-6 col-md-6" <c:if test="${loginUser.signupType eq '카카오'}">style="display: none;"</c:if>> 
 							<div class="hvDr">
 								<span class="na h4" data-toggle="modal" data-backdrop="static" data-target="#changePwd">
 									비밀번호 변경</span>
@@ -61,7 +61,7 @@
 						<div class="col-xs-6 col-md-6">
 							<div class="hvDr">
 								<div class="chkBox">
-			                        <span class="na h4"id='pushChk'>광고 수신 동의 &nbsp;
+			                        <span class="na h4"id='pushChk' >광고 수신 동의 &nbsp;
 			                        <c:choose>
 			                        	<c:when test="${loginUser.pushEnabled eq 'Y'}">
 			                        		<img src="${contextPath}/resources/images/login&signUp/checked-circle.png" alt="동의" id="chkPolicy">
@@ -171,15 +171,39 @@
     
 	 $('#pushChk').click(function(){  
 		 	if($('#chkPolicy').attr('src') == unchecked) {
-		 		var agree = conrfirm('광고수신 동')
-	            $('#chkPolicy').attr('src',checked).attr('checked',true);
-	            $('input[name=pushEnabled]').val('Y') ;
-	            
+		 		var chk = confirm('SMS, 이메일을 통한 서비스 및 광고성 이벤트 정보 수신에 동의하시겠습니까?');
+		 		if(chk){
+		 			pushChk('Y');
+		 		}
 	        } else{
-	            $('#chkPolicy').attr('src',unchecked).attr('checked',false);
-	            $('input[name=pushEnabled]').val('N');
+	        	var uchk = confirm('SMS, 이메일을 통한 서비스 및 광고성 이벤트 정보 수신에 동의를 취소하시겠습니까?')
+	        	if(uchk){
+	        		pushChk('N');
+	        	}
 	        }
 	    });
+	 
+	 function pushChk(YN){
+		 $.ajax({
+			 url:"pushChk.myp",
+			 data:{YN:YN},
+			 success:function(data){
+				 if(data=='Y'){
+					 alert("광고 수신 동의가 처리되었습니다.");
+					 $('#chkPolicy').attr('src',checked).attr('checked',true);
+					 
+				 }else if(data=='N'){
+					 alert("광고 수신 동의 취소가 처리되었습니다.");
+					  $('#chkPolicy').attr('src',unchecked).attr('checked',false);
+				 }else{
+					 alert("처리가 실패하였습니다.");
+				 }
+				},error:function(){
+					console.log("aj실패")
+				}
+			});
+		 };
+	 
 	/* 연락처 자릿수 자동 설정 */
 	function inputPhoneNumber(obj) {
 	    var number = obj.value.replace(/[^0-9]/g, "");
@@ -221,7 +245,7 @@
 				<div class="modal-body noto">
 					<div class="row"
 						style="text-align: left; margin: 0; border: 1px solid #dedede; border-radius: 16px; padding: 23px; background: #fff; width: 100%; max-width: 560px;">
-						<div class="col-md-12 fw6"
+						<div class="col-md-12 fw6" 
 							style="padding: 0; font-size: 20px; line-height: 29px; font-weight: 300;">
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 							비밀번호 변경

@@ -57,7 +57,7 @@
 							<br>
 							<span class="small">1:1채팅을 통해 답변해드리겠습니다.</span>
 							<br>
-							<span class="small hvbs">1:1채팅 바로가기</span>
+							<span class="small hvbs" id="chatGo">1:1채팅 바로가기</span>
 						</p>
 					</div>
 					<div class="col-xs-1 col-md-1">
