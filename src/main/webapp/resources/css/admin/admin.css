@@ -280,6 +280,10 @@ th {
 }
 
 
+/* 검색기능 */
+#search{   
+     display: flex;
+ }
 
 
 

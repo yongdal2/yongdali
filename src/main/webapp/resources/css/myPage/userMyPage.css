@@ -433,6 +433,16 @@ input[type=date]::-webkit-inner-spin-button {
 	border-bottom-color: rgb(87, 187, 138) !important;
 }
 
+.llg {
+	color: #c1c1c1 !important;
+}
+
+.chkBox img {
+    width: 20px;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
 
 
 

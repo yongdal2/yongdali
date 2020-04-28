@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.reservation.model.vo.Reservation;
 import com.kh.yongdali.admin.model.vo.Calculate;
+import com.kh.yongdali.admin.model.vo.SearchCondition;
 import com.kh.yongdali.admin.model.vo.adRefund;
 import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.driver.model.vo.Driver;
@@ -110,6 +111,23 @@ public class AdminDao {
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
 		return (ArrayList)sqlSession.selectList("adminMapper.refundList", null, rowBounds);
+	}
+
+	
+	
+	
+	/** 
+	 * 회원 검색
+	 * @param pi
+	 * @param sc
+	 * @return
+	 */
+	public ArrayList<Member> searchMemberList(PageInfo pi, SearchCondition sc) {
+
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper.searchMemberList", sc, rowBounds);
 	}
 
 

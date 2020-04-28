@@ -36,14 +36,14 @@ public class DriverMyPageDao {
 		return (ArrayList)sqlSession.selectList("myPageMapper.selectCalList", dNo, rowBounds);
 	}
 
-	public int getFilterCountList(Filter f) {
-		return sqlSession.selectOne("myPageMapper.getFilterCountList",f);
+	public int getFilCalListCount(Filter f) {
+		return sqlSession.selectOne("myPageMapper.getFilCalListCount",f);
 	}
 
-	public ArrayList<Reservation> selectFilterCalList(PageInfo pi, Filter f) {
+	public ArrayList<Reservation> selectFilCalList(PageInfo pi, Filter f) {
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		return (ArrayList)sqlSession.selectList("myPageMapper.selectFilterCalList", f, rowBounds);
+		return (ArrayList)sqlSession.selectList("myPageMapper.selectFilCalList", f, rowBounds);
 	}
 	
 	

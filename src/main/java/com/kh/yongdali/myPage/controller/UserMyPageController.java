@@ -3,6 +3,7 @@ package com.kh.yongdali.myPage.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
+import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +27,7 @@ import com.kh.yongdali.driver.model.vo.Driver;
 import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.myPage.model.service.UserMyPageService;
 import com.kh.yongdali.myPage.model.vo.Address;
+import com.kh.yongdali.myPage.model.vo.Filter;
 import com.kh.yongdali.payment.model.vo.Payment;
 import com.kh.yongdali.reservation.model.vo.Reservation;
 
@@ -216,6 +218,33 @@ public class UserMyPageController {
 			mv.setViewName("user/myPage/myPageRSV");
 			return mv;
 		}
+		
+//		// 나의 예약내역(필터 포함)
+//				@RequestMapping("myRSV.myp")
+//				public ModelAndView userFilterList(@SessionAttribute Member loginUser, ModelAndView mv, Filter f,
+//						@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage,
+//						
+//						@RequestParam(value="fSearch", required = false) String fSearch, 
+//						@RequestParam(value="rsvStatus", required = false) String rsvStatus,
+//						@RequestParam(value="stDate", required = false) Date stDate,
+//						@RequestParam("edDate", required = false) Date edDate) {
+//					
+//					
+//					f.setmNo(loginUser.getmNo());
+//					int flistCount =umpService.getFilRsvListCount(mNo);
+//					
+//					System.out.println();
+//					PageInfo pi = Pagination.getPageInfo(currentPage, rlistCount, 5, 20);
+//					
+//					ArrayList<Reservation> rList = umpService.selectRsvList(pi,mNo);
+//					
+//					System.out.println(rList);
+//					
+//					mv.addObject("rList",rList);
+//					mv.addObject("pi",pi);
+//					mv.setViewName("user/myPage/myPageRSV");
+//					return mv;
+//				}
 		
 		//예약 드라이버 정보 불러오기
 		@RequestMapping("rDinfo.myp")

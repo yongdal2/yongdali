@@ -44,7 +44,7 @@
 						</p>
 						</c:when>
 						<c:otherwise>
-						<button class="btn btn_ydl_l" data-toggle="modal"
+						<button class="btn btn_ydl_l" data-toggle="modal" data-backdrop="static"
 							data-target="#addAddr">배송지 추가</button>
 						</c:otherwise>
 					</c:choose>
@@ -72,7 +72,7 @@
 										<span>${ a.aPhone } </span>
 									</div>
 									<div class="col-xs-3 col-md-3">
-										<button class="btn btn-sm btn_ydl" id="editAddrBtn${vs.index}" data-toggle="modal"
+										<button class="btn btn-sm btn_ydl" id="editAddrBtn${vs.index}" data-toggle="modal" data-backdrop="static"
 											data-target="#editAddr" value="${ a.aNo }">수정</button>
 										<button class="btn btn-sm" id="deleteAddrBtn${vs.index}" value="${a.aNo }">삭제</button>
 									</div>
@@ -128,7 +128,7 @@
                                 <input type="hidden" id="adLat" name="adLat">
                                 <input type="hidden" id="adLong" name="adLong">
                             </div>
-                            <div class="col-xs-2 col-md-2 btn btn_ydl_l searchAddrBtn" id="searchAddr1btn" data-toggle="modal" data-target="#adSearchAddr" onclick="adSearchAddr()">
+                            <div class="col-xs-2 col-md-2 btn btn_ydl_l searchAddrBtn" id="searchAddr1btn" data-toggle="modal" data-backdrop="static" data-target="#adSearchAddr" onclick="adSearchAddr()">
 								주소 검색
                             </div>
                         </div>
