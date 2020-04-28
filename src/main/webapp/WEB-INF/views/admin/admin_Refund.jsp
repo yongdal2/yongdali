@@ -73,10 +73,10 @@
 								<td>${ a.phone }</td>
 								<td>${ a.cancAmount }</td>
 								<c:choose>
-									<c:when test="${a.calcYn = 0}">
+									<c:when test="${a.calcYn eq 0}">
 										<td><button onclick="refund(this.value)" value="${a.rNo}">환불하기</button></td>
 									</c:when>
-									<c:when test="${a.cancYn = 2}">
+									<c:when test="${a.calcYn eq 2}">
 										<td>환불 완료</td>									
 									</c:when>
 								</c:choose>

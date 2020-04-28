@@ -1,6 +1,7 @@
 package com.kh.yongdali.myPage.controller;
 
 import java.io.File;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -21,6 +22,7 @@ import com.kh.yongdali.common.Pagination;
 import com.kh.yongdali.driver.model.vo.Driver;
 import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.myPage.model.service.DriverMyPageService;
+import com.kh.yongdali.myPage.model.vo.Filter;
 import com.kh.yongdali.reservation.model.vo.Reservation;
 
 @SessionAttributes({"driver"})
@@ -29,11 +31,6 @@ public class DriverMyPageController {
 	
 	@Autowired
 	private DriverMyPageService dmpService;
-	
-	
-
-
-	
 	
 	//======================드라이버 정보==============================
 	//드라이버 프로필 사진 변경
@@ -139,6 +136,39 @@ public class DriverMyPageController {
 			mv.setViewName("driver/myPage/driverSettle");
 			return mv;
 		}
+		
+		@RequestMapping("driverFilter.myp")
+		
+		public ModelAndView driverFilterList(@SessionAttribute Driver driver, ModelAndView mv, Filter f,
+				@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage,
+				@RequestParam("calStatus") String calStatus, @RequestParam("rsvStatus") String rsvStatus,
+				@RequestParam("stDate") Date stDate, @RequestParam("edDate") Date edDate) {
+			
+			
+			f.setdNo(driver.getdNo());
+			f.setCalStatus(calStatus);
+			f.setRsvStatus(rsvStatus);
+			f.setStDate(stDate);
+			
+			System.out.println(f);
+			
+			int flistCount =dmpService.getFilCalListCount(f);
+			
+			PageInfo pi = Pagination.getPageInfo(currentPage, flistCount, 5, 20);
+			
+			ArrayList<Reservation> fCalList = dmpService.selectFilCalList(pi,f);
+			
+			
+			
+			System.out.println(fCalList);
+			
+			mv.addObject("cList",fCalList);
+			mv.addObject("pi",pi);
+			mv.setViewName("driver/myPage/driverSettle");
+			return mv;
+		}
+		
+		
 		
 		
 		

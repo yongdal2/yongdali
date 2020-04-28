@@ -37,6 +37,10 @@ public interface ChatService {
 
 	ArrayList<Message> selectPreMessage(String roomNo);
 
+	ArrayList<Room> selectAdPreRoom(Room r);
+
+
+
 
 
 

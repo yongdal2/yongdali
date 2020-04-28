@@ -69,7 +69,7 @@
 						</p>
 						<img
 							src="${contextPath}/resources/images/driver/regCard/${driver.regCardImgRename}"
-							height="327px" class="zoom-in" data-toggle="modal"
+							height="327px" class="zoom-in" data-toggle="modal" data-backdrop="static"
 									data-target="#zoomCRA"> <br>
 					</div>
 				</div>

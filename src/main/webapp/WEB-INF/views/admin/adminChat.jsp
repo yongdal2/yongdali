@@ -36,107 +36,23 @@
   
         <section class="discussions" id="chatList">
           <div class="discussion search">
-            <div class="searchbar">
-              <svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z" clip-rule="evenodd"/>
-                <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 100-11 5.5 5.5 0 000 11zM13 6.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z" clip-rule="evenodd"/>
-              </svg>
-              <input type="text" placeholder="Search..."></input>
-            </div>
           </div>
-          <!-- <div class="discussion message-active" id="">
-            <div class="photo">
-              <div class="online"></div>
-            </div>
-            <div class="desc-contact">
-              <p class="name">유승제</p>
-              마지막 메시지
-              <p class="message">마지막 메시지</p>
-            </div>
-          </div>
-  
-          <div class="discussion">
-            <div class="photo">
-              <div class="online"></div>
-            </div>
-            <div class="desc-contact">
-                <p class="name">유승제</p>
-                <p class="message">어쩌고 저쩌고 저쩌고</p>
-            </div>
-          </div>
-  
-          <div class="discussion">
-            <div class="photo">
-            </div>
-            <div class="desc-contact">
-                <p class="name">유승제</p>
-                <p class="message">어쩌고 저쩌고 저쩌고</p>
-            </div>
-          </div>
-  
-          <div class="discussion">
-            <div class="photo">
-              <div class="online"></div>
-            </div>
-            <div class="desc-contact">
-                <p class="name">유승제</p>
-                <p class="message">어쩌고 저쩌고 저쩌고</p>
-            </div>
-          </div>
-  
-          <div class="discussion">
-            <div class="photo">
-            </div>
-            <div class="desc-contact">
-                <p class="name">유승제</p>
-                <p class="message">어쩌고 저쩌고 저쩌고</p>
-            </div>
-          </div>
-  
-          <div class="discussion">
-            <div class="photo">
-            </div>
-            <div class="desc-contact">
-                <p class="name">유승제</p>
-                <p class="message">어쩌고 저쩌고 저쩌고</p>
-            </div>
-          </div>
-  
-          <div class="discussion">
-            <div class="photo">
-              <div class="online"></div>
-            </div>
-            <div class="desc-contact">
-                <p class="name">유승제</p>
-                <p class="message">어쩌고 저쩌고 저쩌고</p>
-            </div>
-          </div> -->
         </section>
 
         <section class="chat">
           <div class="header-chat">
             <img src="${contextPath }/resources/images/ydl_logo/ydl_ic_gr(70X70).png" style="width:50px; height:50px;">
-            <p class="name">유승제</p>
-            <button class="closeBtn" onclick="disconnect();">대화종료</button>
+            <p class="name" id="chatName"></p>
+            <!-- <button class="closeBtn" onclick="disconnect();">대화종료</button> -->
           </div>
           <div class="messages-chat">            
-            <!-- <div class="message text-only">
-              <div class="response" id="meMsg">
-                <p class="text"></p>
-              </div>
-            </div>
-            <p class="response-time time"></p> -->
-            
-            <!-- <div class="message" id="youMsg">
-              <p class="text"> 마지막 메시지</p>
-            </div>
-            <p class="time"> 15:09PM Today</p> -->
           </div>
           <div class="footer-chat">
           	<input type="hidden" id="senderId" value="${sessionScope.loginUser.mId }" >
             <input type="text" id="senderName" value="${sessionScope.loginUser.mName }" style="display: none;">
             <input type="hidden" id="room"/>
     		<input type="hidden" id="receiveId"/>
+    		<input type="hidden" id="roomNo"/>
             <input type="text" class="write-message" id="msgArea" placeholder="Type your message here"></input>
             <button class="sendBtn" onclick="sendMessage();">
               <svg class="bi bi-cursor" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -168,23 +84,49 @@
 		})
 		
 		//message token구성
-		function MessageFlag(id, roomName, msg, flag, receiveId){
+		function MessageFlag(id, roomName, msg, flag, receiveId, roomNo){
 			this.id=id;
 			this.roomName=roomName;
 			this.msg=msg;
 			this.flag=flag;
 			this.receiveId=receiveId;
+			this.roomNo=roomNo;
 		}
 		
 		function connectionSocket(){
 			connect = true;
-			socket = new WebSocket('ws://192.168.25.20:8888/yongdali/chatting');
+			socket = new WebSocket('ws://192.168.110.45:8888/yongdali/chatting');
 			/* 페이지 접속한 session id */
 			var sessionid = $("#senderId").val();
 			var ccId = $("#ccId").val();
 			socket.onopen = function(e){
 //				socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),"","createroom","")));
-
+				$.ajax({
+					url:"adChkPreRoom.ch",
+					dataType:"json",
+					data:{id:sessionid},
+					success:function(data){
+						var printHTML;
+						$.each(data,function(index,value){
+							console.log(value);
+							if(value != 'nullRoom'){
+								for(var i=0;i<value.length;i++){
+									var printHTML = "<div class='discussion'>";
+									printHTML += "<div class='photo'></div>";
+									printHTML += "<div class='desc-contact' id='nameArea'>";
+									printHTML += "<p class='name' id='roomNo1'>"+value[i].roomNo+"</p>";
+									printHTML += "<p class='name' id='listName' onclick='roomval(this);'>"+value[i].roomName+"</p>";
+									printHTML += "</div>";
+									printHTML += "</div>";
+									$("#chatList").append(printHTML);
+								}
+							}
+							
+						})
+					},error:function(){
+						console.log("전송실패");
+					}
+				})
 			}
 			socket.onmessage = function(e){
 				console.log(e.data);
@@ -195,20 +137,27 @@
 				
 				if(data["flag"]=="room" ){
 					var rooms = data['msg'].split(",");
+					var roomNo = data['roomNo'].split(",");
+					
 					console.log(rooms);
+					console.log(roomNo);
+					
+					var l=roomNo.length;
 					
 					for(var i=0; i<rooms.length; i++){
-						var printHTML = "<div class='discussion'>";
-						printHTML += "<div class='photo'></div>";
-						printHTML += "<div class='desc-contact' id='nameArea' >";
-						printHTML += "<p class='name' id='listName' onclick='roomval(this);'>"+rooms[i]+"</p>";
-						printHTML += "</div>";
-						printHTML += "</div>";
-
+						for(var j=l; j>=0; j--){
+							var printHTML = "<div class='discussion'>";
+							printHTML += "<div class='photo'></div>";
+							printHTML += "<div class='desc-contact' id='nameArea'>";
+							printHTML += "<p class='name' id='roomNo1'>"+roomNo[j]+"</p>";
+							printHTML += "<p class='name' id='listName' onclick='roomval(this);'>"+rooms[i]+"</p>";
+							printHTML += "</div>";
+							printHTML += "</div>";
+						}
 					}
-					 checkCurrentRoom(rooms);
 					
 					$("#chatList").append(printHTML);		 
+					
 				}
 				
 				if(data["flag"]!="room" && data["flag"]!="user"){
@@ -242,23 +191,73 @@
 			/* alert(e.innerHTML); */
 			var roomName = e.innerHTML;
 			$("#room").val(roomName);
+			
+			var roomNo = $(e).prev().text();
+			alert(roomNo);
+			$("#roomNo").val(roomNo);
+			
+			
 			checkClick(e);
 		}
 		
 		function checkClick(e){
-			$(e).parent().find("p").css({background:"white"});
-        	$(e).css({background:"lightgray"});
-		}
-		
-		//현재접속한 방을 확인하여 배경을 설정하는 로직.
-        function checkCurrentRoom(e){
-        	$(".desc-contact>p").css({background:"white"});
-        		$(".desc-contact>p").each(function(i,item){
-       				if($("#room").val()==$(item).html()){					
-       					$(item).css({background:"lightgray"});
+			/* $(e).parent().find("p").css({background:"white"});
+        	$(e).css({background:"lightgray"}); */
+        	$("#chatName").empty();
+        	$('.messages-chat').empty();
+        	
+        	var roomName = e.innerHTML;
+        	var roomNo = $(e).prev().text();
+        	var sessionid = $("#senderId").val();
+        	
+//        	$("#chatName").text(e.innerHTML);
+        	$("#chatName").text(roomName);
+        	
+        	$.ajax({
+        		url:"adChkPreMessage.ch",
+        		dataType:"json",
+        		data:{roomNo:roomNo},
+        		success:function(data){
+        			console.log(data);
+        			
+					$.each(data,function(index,value){
+       					console.log(value);
+       					if(value != 'nullMsg'){
+	       					for(var i=0;i<value.length;i++){
+			        				if(sessionid == value[i].id){
+			    						var printHTML = "<div class='message text-only'>";
+			    		    			printHTML += "<div class='response' id='meMsg'>";
+			    		    			printHTML += "<p class='text'>"+value[i].msg+"</p>";
+			    		    			printHTML += "</div>";
+			    		    			printHTML += "<p class='response-time time'>"+hours+":"+minutes+"</p>";
+			    		    			printHTML += "</div>";
+			    	    			}else{    			
+			    	    				var printHTML = "<div class='message' id='youMsg'>";
+			    		              	printHTML += "<div class='name'>";
+			    		              	printHTML += "<h2>"+value[i].roomName+"</h2>";
+			    		              	printHTML += "</div>";
+			    		              	printHTML += "<div class='messageArea'>";
+			    		    			printHTML += "<p class='text'>"+value[i].msg+"</p>";
+			    		    			printHTML += "<p class='time'>"+hours+":"+minutes+"</p>";
+			    		    			printHTML += "</div>";
+			    		    			printHTML += "</div>";
+			    	    			}
+			    					writeResponse(printHTML);
+			        			}
+       					}
+       						
+       				})
+					if(data["nullMsg"]){
+        				alert("새롭게 대화를 시작하세요!");
         			}
-        		});
-        }
+        		},error:function(){
+        			console.log("전송실패");
+        		}
+        	})
+        	// 기존 대화 불러오기
+        	
+        	
+		}
 		
 		 function writeResponse(text){
 			 $('.messages-chat').append(text);
@@ -266,7 +265,22 @@
 	    }
 		
 		function sendMessage(){
-			socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),$("#msgArea").val(),"msg",$("#room").val())));
+			// 접속한아이디
+	   		 var senderId = $("#senderId").val();
+   			// 방이름(접속한사람이름)
+	   		 var roomName = $("#senderName").val();
+   			// 받는 사람 아이디
+	   		 var receiveId = $("#room").val();
+   			// 메시지
+	   		 var msg = $("#msgArea").val();
+   			// 구분
+	   		 var flag = "msg";
+   			// 방번호
+	   		 var roomNo = $("#roomNo").val();
+   			
+			console.log("룸넘버알려조 : " + $("#roomNo").val());
+			/* socket.send(JSON.stringify(new MessageFlag($("#senderId").val(),$("#senderName").val(),$("#msgArea").val(),"msg",$("#room").val(),$("#roomNo").val()))); */
+			socket.send(JSON.stringify(new MessageFlag(senderId,roomName,msg,flag,receiveId,roomNo)));
 			$("#msgArea").val("");
 			
 			$.ajax({
@@ -283,9 +297,11 @@
 	
 		}
 		
-		function disconnect(){
-			socket.close();
-	    }
+		/* function disconnect(){
+			alert("대화를 종료합니다!!");
+			
+			
+	    } */
     
     </script>
   </body>

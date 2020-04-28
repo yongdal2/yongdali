@@ -46,9 +46,10 @@
 <!-- 				예약내역 <br> <br> -->
 			</div>
 			<!-- 필터 -->
+			<form id = >
 			<div class="col-xs-2 col-md-2 text-center bszB1">
-				<select class="form-control ft54" name="rStatus" id="rStatus">
-					<option value="rst">상태별 조회</option>
+				<select class="form-control ft54" name="rsvStatus" id="rsvStatus">
+					<option value="rsv">상태별 조회</option>
 					<option value="pay">결제완료</option>
 					<option value="deal">배차완료</option>
 					<option value="pick">상차완료</option>
@@ -58,20 +59,22 @@
 			</div>
 			<div class="text-center"></div>
 			<div class="col-xs-3 col-md-3 text-center bszB">
-				<input placeholder="상차일" class="form-control ft54" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date" />
+				<input placeholder="상차일" class="form-control ft54" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="stDate" id="stDate"/>
 			</div>
 			<div class="col-xs-3 col-md-3 text-center bszB">
-				<input placeholder="하차일" class="form-control ft54" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date1" />
+				<input placeholder="하차일" class="form-control ft54" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="edDate" id="stDate"/>
 			</div>
 			<div class="col-xs-3 col-md-3 text-center bszB">
-				<input type="search" class="form-control ft54" placeholder="검색">
+				<input type="search" class="form-control ft54" placeholder="검색" name="fSearch" id="fSearch">
 			</div>
-			<div class="col-xs-1 col-md-1 bszB">
-				<button class="btn btn_ydl sch">
-					<span class="glyphicon glyphicon-search" style="font-size: 22px"></span>
-				</button>
-			</div>
-			<div class="col-xs-12 col-md-12 tbPdR" >
+				<div class="col-xs-1 col-md-1 bszB">
+					<button class="btn btn_ydl sch">
+						<span class="glyphicon glyphicon-search" style="font-size: 22px"></span>
+					</button>
+				</div>
+			</form>
+				<!-- 테이블  -->
+				<div class="col-xs-12 col-md-12 tbPdR" >
 				<Br>
 				<table class="table table-hover text-center noto">
 					<thead>
@@ -94,7 +97,7 @@
 							<td><!-- 상태 -->
 								<c:set var="p" value="${ r.payment }"></c:set>
 								<c:choose>
-								<c:when test="${p.payYN eq 'Y' && p.cancYN eq 'Y' }"><span class="red">취소</span></c:when>
+								<c:when test="${p.payYN eq 'Y' && p.cancYN eq 'Y' }"><span class="llg">취소</span></c:when>
 								<c:when test="${p.payYN eq 'Y' && p.cancYN eq 'N' && p.dealYN eq 'N' }">결제 완료</c:when>
 								<c:when test="${p.dealYN eq 'Y' && p.cancYN eq 'N' }">배차 완료</c:when>
 								</c:choose>
@@ -113,78 +116,74 @@
 							</c:choose>
  							</td>
 							<td>
-							<c:forEach var="addr" items="${fn:split(r.startAddr, ',')}">
-											<span>${ addr }</span>
-											<br>
-							</c:forEach>
+							<c:out value="${fn:split(r.startAddr, ',')[0]}"/><br>
+							<span class="lg"><c:out value="${fn:split(r.startAddr, ',')[1]}"/></span><br>
 							</td>
 							<td>
-							<c:forEach var="addr1" items="${fn:split(r.endAddr, ',')}">
-											<span>${ addr1 }</span>
-											<br>
-							</c:forEach>
+							<c:out value="${fn:split(r.endAddr, ',')[0]}"/><br>
+							<span class="lg"><c:out value="${fn:split(r.endAddr, ',')[1]}"/></span><br>
 							</td>
-							<td>${ r.amount }원</td>
+							<td class="fw6">${ r.amount }원</td>
 							<td>
 							<c:choose>
 								<c:when test="${p.cancYN eq 'N'}">
 									<button class="fas fa-truck btn_no" id="tInfo${ vs.index }" data-toggle="popover${ vs.index }"  title="차량정보" value="${ r.rDNo }"></button>
 								</c:when>
 								<c:otherwise>
-									<button class="fas fa-truck btn_no red" disabled="disabled"></button>
+									<button class="fas fa-truck btn_no llg" disabled="disabled"></button>
 								</c:otherwise>
 							</c:choose>
 							
 							</td>
-							<td><button class="btn btn_ydl_l" id="rDetailBtn${r.rNo }" value="${ r.rNo }" data-toggle="modal" data-target="#rDetail">상세정보 보기</button></td>
+							<td><button class="btn btn_ydl_l" id="rDetailBtn${r.rNo }" value="${ r.rNo }" data-toggle="modal" data-target="#rDetail"data-backdrop="static" data-keyboard="false">상세정보 보기</button></td>
 						</tr>
 					</c:forEach>
 				</table>
 			</div>
 		</div>
 	</div>
-		<script>
-		
-		$(document).ready(function(){
-			
-			$('[data-toggle*="popover"]').popover({
-			    "html": true,
-			    trigger: "hover",
-			    "content": function(){
-			        var dNo = $(this).val();
-			        return dInfo(dNo);
-			    }
-			});
-			function dInfo(dNo){
-				$.ajax({
-					url:"rDinfo.myp",
-					data:{dNo:dNo},
-					dataType:"json",
-					success:function(d){
-						dhtml ="";
-						console.log(d);
-						console.log(d.deal);
-						if(d.deal =='Y'){
-						var name = "<span>"+decodeURIComponent(d.name)+"기사님</span><br>";
-						var phone = <span>d.phone;
-						var carNo = decodeURIComponent(d.carNo);
-						var img = "${pageContext.request.contextPath}/resources/images/driver/id/"+d.img;
-						var type = decodeURIComponent(d.type);
-						var capcacity = d.capacity;
-						dhtml = name + phone;
-						}else{
-						dhtml = "<span class='na fw6'>아직 배차전 입니다.</span>"; 
-						}
-						
-					},error:function(){
-						console.log("aj실패")
-					}
-				}); 
-				return dhtml;
-			}
-		    
-		});
-		</script>
+	<script>
+	$(document).ready(function() {
+	    $('[data-toggle*="popover"]').popover({
+	        "html": true,
+	        trigger: "hover",
+	        "content": function() {
+	            var dNo = $(this).val();
+	            return dInfo(dNo);
+	        }
+	    });
+
+	    function dInfo(dNo) {
+	        $.ajax({
+	            url: "rDinfo.myp",
+	            data: {
+	                dNo: dNo
+	            },
+	            dataType: "json",
+	            success: function(d) {
+	                dhtml = "";
+	                console.log(d);
+	                console.log(d.deal);
+	                if (d.deal == 'Y') {
+	                    var name = "<span>" + decodeURIComponent(d.name) + "기사님</span><br>";
+	                    var phone = "<span>" +d.phone + "</span>";
+	                    var carNo = decodeURIComponent(d.carNo);
+	                    var img = "${pageContext.request.contextPath}/resources/images/driver/id/" + d.img;
+	                    var type = decodeURIComponent(d.type);
+	                    var capcacity = d.capacity;
+	                    dhtml = name + phone;
+	                } else {
+	                    dhtml = "<span class='na fw6'>아직 배차전 입니다.</span>";
+	                }
+	            },
+	            error: function() {
+	                console.log("aj실패")
+	            }
+	        });
+	        return dhtml;
+	    }
+	});
+	</script>
 		
 		<div class="text-center">
 		<img class="img-circle" src="">
@@ -261,7 +260,7 @@
 	                            <div id="rMG" style="height: 50px">
 	                            <br><span class="h4 fw6" style="background: white;">전달 사항</span>
 		                            <br><span class="h4 lg" id="rMSG"></span>&nbsp;&nbsp;
-		                            <div class="far fa-edit hvDr" id="rmb1"></div>
+		                            <div class="btn_no far fa-edit hvDr" id="rmb1"></div>
 	                            </div>
 	                            <div id="rMG_E" style="display: none; height: 50px">
 	                            <br><span class="h4 fw6" style="background: white;">전달 사항</span>
@@ -282,135 +281,161 @@
                         </div>
                         <div class="col-xs-12 col-md-12 text-center">
                         </div>
-                            
-                            
-                            <script type="text/javascript">
-                            $(document).ready(function(){
-                            	$('#rmb1').click(function(){
-                            	    $('[id*="rMG"]').toggle();
-                            	    
-                            	  });
-                            	
-                            	$('#rmb2').click(function(){
-                            		var nRmsg = $('#nRmsg').val();
-                            		var rNo = $('#rNo').text();
-                            		console.log(nRmsg);
-                            		console.log(rNo);
-                            		$.ajax({
-                    					url:"upRmsg.myp",
-                    					data:{"rMsg":nRmsg,"rNo":rNo},
-                    					success:function(data){
-                    						console.log(data);	
-	                            	    	$('#rMSG').html(decodeURIComponent(data).replace(/\+/g, " "));
-	                            	    	$('[id*="rMG"]').toggle();
-                    					},error:function(){
-                    						console.log("aj실패")
-                    					}
-                    				}); 
-                            	});
-	                            $(function(){
-	                    			$("button[id^='rDetailBtn']").on("click",function(){
-	                    				$.ajax({
-	                    					url:"rDetail.myp",
-	                    					data:{rNo:$(this).val()},
-	                    					dataType:"json",
-	                    					success:function(r){
-	                    						console.log(r);
-	                    						$("#rNo").text(r.rNo);
-	                    						$("#startName").text(r.startName);
-	                    						$("#startPhone").text(r.startPhone);
-	                    						$("#startAddr").text((r.startAddr).replace(",",""));
-	                    						if(r.rightLoad==null){
-		                    						$("#pick").text(r.startDate +" / "+ r.startTime);
-	                    						}else{
-		                    						$("#pick").text(r.rightUnload);
-	                    						}
-	                    						$("#helpLoad").text(r.helpLoad);
-	                    						$("#endName").text(r.endName);
-	                    						$("#endPhone").text(r.endPhone);
-	                    						$("#endAddr").text((r.endAddr).replace(",",""));
-	                    						if(r.rightUnload==null){
-	                    						$("#drop").text(r.endDate +" / "+ r.endTime);
-	                    						}else{
-	                    						$("#drop").text(r.rightUnload);
-	                    						}
-	                    						$("#helpUnload").text(r.helpLoad);
-	                    						$("#luggage").text(r.luggage);
-	                    						if(r.msg==null){
-	                    						$("#rMSG").text("");
-	                    						$("#nRmsg").val("");
-	                    						}else{
-	                    						$("#rMSG").text(r.msg);
-	                    						$("#nRmsg").val(r.msg);
-	                    						}
-	                    						$("#amount").text(r.amount);
-	                    						$("#rDate").text(r.payment.enrollDate);
-	                    					},error:function(){
-	                    						console.log("aj실패")
-	                    					}
-	                    				});
-	                    			});
-	                    		});
-	                            
-	                            });
-                            
-	                            $("#cancRSV").on("click",function(){
-	                            	var rNo = $("#rNo").text();
-	                            	console.log("rNo!!"+rNo)
-	                            	d_yn(rNo);
-	                            });
-	                            
-	                            function msgShow() {
-									$("#rMG").show();
-									$("#rMG_E").hide();
-								}
-	                            
-	                            function d_yn(rNo){
-	                				$.ajax({
-	                					url:"pDetail.myp",
-	                					data:{rNo:rNo},
-	                					dataType:"json",
-	                					success:function(p){
-	                						console.log(p);	
-	                						if(p.dealYN=="Y"){
-	                							var ccA = confirm( "배차가 완료된 예약입니다 취소하시겠습니까?");
-	                							if(ccA){
-	                								rsvCan(p.pRNo,'Y');
-	                							}
-	                						}else{
-	                							var ccb =confirm("배차되지 않은 예약입니다. 취소하시겠습니까?");
-	                							rsvCan(p.pRNo,'N');
-	                						}
-	                						
-	                					},error:function(){
-	                						console.log("aj실패")
-	                					}
-	                				}); 
-	                				
-	                			}
-	                            
-	                            function rsvCan(pRNo,dealYN){
-	                				$.ajax({
-	                					url:"rsvCan.myp",
-	                					data:{pRNo:pRNo, dealYN:dealYN},
-	                					success:function(p){
-	                						if(p=='ok'){
-	                						alert("예약이 취소되었습니다.");
-	                						}
-	                					},error:function(){
-	                						console.log("aj실패")
-	                					}
-	                				}); 
-	                				
-	                			}
-	                            
-                            </script>
-                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
+	<script type = "text/javascript">
+		$("#btnUpAddr").on("click",function(){
+			$("#upAddrForm").attr("action","uAddr.myp").submit();
+		});
+	    $(document).ready(function() {
+	        $('#rmb1').click(function() {
+	            $('[id*="rMG"]').toggle();
+	        });
+	
+	        $('#rmb2').click(function() {
+	            var nRmsg = $('#nRmsg').val();
+	            var rNo = $('#rNo').text();
+	            console.log(nRmsg);
+	            console.log(rNo);
+	            $.ajax({
+	                url: "upRmsg.myp",
+	                data: {
+	                    "rMsg": nRmsg,
+	                    "rNo": rNo
+	                },
+	                success: function(data) {
+	                    console.log(data);
+	                    $('#rMSG').html(decodeURIComponent(data).replace(/\+/g, " "));
+	                    $('[id*="rMG"]').toggle();
+	                },
+	                error: function() {
+	                    console.log("aj실패")
+	                }
+	            });
+	        });
+	        
+	        $(function() {
+	            $("button[id^='rDetailBtn']").on("click", function() {
+	                $.ajax({
+	                    url: "rDetail.myp",
+	                    data: {
+	                        rNo: $(this).val()
+	                    },
+	                    dataType: "json",
+	                    success: function(r) {
+	                        console.log(r);
+	                        $("#rNo").text(r.rNo);
+	                        $("#startName").text(r.startName);
+	                        $("#startPhone").text(r.startPhone);
+	                        $("#startAddr").text((r.startAddr).replace(",", ""));
+	                        if (r.rightLoad == null) {
+	                            $("#pick").text(r.startDate + " / " + r.startTime);
+	                        } else {
+	                            $("#pick").text(r.rightUnload);
+	                        }
+	                        $("#helpLoad").text(r.helpLoad);
+	                        $("#endName").text(r.endName);
+	                        $("#endPhone").text(r.endPhone);
+	                        $("#endAddr").text((r.endAddr).replace(",", ""));
+	                        if (r.rightUnload == null) {
+	                            $("#drop").text(r.endDate + " / " + r.endTime);
+	                        } else {
+	                            $("#drop").text(r.rightUnload);
+	                        }
+	                        $("#helpUnload").text(r.helpLoad);
+	                        $("#luggage").text(r.luggage);
+	                        if (r.msg == null) {
+	                            $("#rMSG").text("");
+	                            $("#nRmsg").val("");
+	                        } else {
+	                            $("#rMSG").text(r.msg);
+	                            $("#nRmsg").val(r.msg);
+	                        }
+	                        $("#amount").text(r.amount);
+	                        $("#rDate").text(r.payment.enrollDate);
+	                        
+	                        if(r.payment.cancYN=='Y'){
+	                        	$('#cancRSV').attr('class', 'btn btn_ydl_lg mdbtn disabled'); 
+	                        	$('#rmb1').attr('class', 'btn btn_no far fa-edit lg disabled'); 
+	                        }else{
+	                        	$('#cancRSV').attr('class', 'btn btn_ydl_lr mdbtn'); 
+	                        	$('#rmb1').attr('class', 'btn_no far hvDr fa-edit'); 
+	                        	
+	                        }
+	                    },
+	                    error: function() {
+	                        console.log("aj실패")
+	                    }
+	                });
+	            });
+	        });
+	
+	    });
+	
+	$("#cancRSV").on("click", function() {
+	    var rNo = $("#rNo").text();
+	    console.log("rNo!!" + rNo)
+	    d_yn(rNo);
+	});
+	
+	function msgShow() {
+	    $("#rMG").show();
+	    $("#rMG_E").hide();
+	}
+	
+	function d_yn(rNo) {
+	    $.ajax({
+	        url: "pDetail.myp",
+	        data: {
+	            rNo: rNo
+	        },
+	        dataType: "json",
+	        success: function(p) {
+	            console.log(p);
+	            if (p.dealYN == "Y") {
+	                var ccA = confirm("배차가 완료된 예약입니다 취소하시겠습니까?");
+	                if (ccA) {
+	                    rsvCan(p.pRNo, 'Y');
+	                }
+	            } else {
+	                var ccb = confirm("배차되지 않은 예약입니다. 취소하시겠습니까?");
+	               if(ccb){
+	            	   rsvCan(p.pRNo, 'N');
+	               }
+	            }
+	
+	        },
+	        error: function() {
+	            console.log("aj실패")
+	        }
+	    });
+	
+	}
+	
+	function rsvCan(pRNo, dealYN) {
+	    $.ajax({
+	        url: "rsvCan.myp",
+	        data: {
+	            pRNo: pRNo,
+	            dealYN: dealYN
+	        },
+	        success: function(p) {
+	            if (p == 'ok') {
+	                alert("예약이 취소되었습니다.");
+	                $(location).attr('href',"myRSV.myp")
+	            }
+	        },
+	        error: function() {
+	            console.log("aj실패")
+	        }
+	    });
+	
+	}
+	
+	</script>
     </c:if>
 	<c:import url="../../common/footer.jsp"/>
 </body>
