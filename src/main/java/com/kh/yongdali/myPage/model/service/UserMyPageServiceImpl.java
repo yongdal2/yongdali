@@ -10,6 +10,7 @@ import com.kh.yongdali.driver.model.vo.Driver;
 import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.myPage.model.dao.UserMyPageDao;
 import com.kh.yongdali.myPage.model.vo.Address;
+import com.kh.yongdali.myPage.model.vo.Filter;
 import com.kh.yongdali.payment.model.vo.Payment;
 import com.kh.yongdali.reservation.model.vo.Reservation;
 
@@ -22,6 +23,11 @@ public class UserMyPageServiceImpl implements UserMyPageService {
 	@Override
 	public int updatePhone(Member m) {
 		return umpDao.updatePhone(m);
+	}
+	
+	@Override
+	public int pushUpdate(Member m) {
+		return umpDao.pushUpdate(m);
 	}
 	
 	@Override
@@ -55,13 +61,13 @@ public class UserMyPageServiceImpl implements UserMyPageService {
 	}
 
 	@Override
-	public int getRsvListCount(String mNo) {
-		return umpDao.getRsvListCount(mNo);
+	public int getRsvListCount(Filter f) {
+		return umpDao.getRsvListCount(f);
 	}
 
 	@Override
-	public ArrayList<Reservation> selectRsvList(PageInfo pi, String mNo) {
-		return umpDao.selectRsvList(pi, mNo);
+	public ArrayList<Reservation> selectRsvList(PageInfo pi, Filter f) {
+		return umpDao.selectRsvList(pi, f);
 	}
 
 	@Override
@@ -89,6 +95,8 @@ public class UserMyPageServiceImpl implements UserMyPageService {
 	public int rsvCan(Payment p) {
 		return umpDao.rsvCan(p);
 	}
+
+	
 
 
 }

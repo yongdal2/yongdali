@@ -150,17 +150,60 @@
 					</c:forEach>
 				</table>
 			</div>
+		<!--  페이징 처리  -->
 		<div class="row text-center">
 			<ul class="pagination ft_gr">
-				<li><a href="#"> <<</a></li>
-				<li><a href="#"> <</a></li>
-				<li><a href="#">1</a></li>
-				<li class="active"><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#">5</a></li>
-				<li><a href="#">></a></li>
-				<li><a href="#">>></a></li>
+				<!-- << , < -->
+				<li>
+					<c:if test="${ pi.currentPage eq 1 }"><a>&lt;&lt; &nbsp;</a></c:if>
+					<c:if test="${ pi.currentPage ne 1 }"><a href="myRSV.myp?currentPage=1">&lt;&lt; &nbsp;</a></c:if>
+				</li>
+				<li>
+					<c:if test="${ pi.currentPage ne 1 }">
+						<c:url var="before" value="myRSV.myp">
+							<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
+						</c:url>
+						<a href="${ before }">&lt; &nbsp;</a>
+					</c:if>
+				<c:if test="${ pi.currentPage eq 1 }">
+					<a> &lt; &nbsp;</a>
+				</c:if>
+				</li>
+						
+				<!-- 페이지 -->
+				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+				<li>
+				<c:if test="${ p eq pi.currentPage }">
+				<a><b><font color="#5a8cff">${ p }</font></b></a>
+				</c:if>							
+				<c:if test="${ p ne pi.currentPage }">
+				<a href="<c:url var="pagination" value="myRSV.myp">	
+							<c:param name="currentPage" value="${ p }"/>
+						</c:url>
+				${ pagination }">${ p }</a>
+				</c:if>
+				</li>
+				</c:forEach>
+				<!-- > -->	
+				<li>
+				<a href="
+				<c:if test="${ pi.currentPage ne pi.maxPage }">
+					<c:url var="after" value="myRSV.myp">
+						<c:param name="currentPage" value="${ pi.currentPage +1 }"/>
+					</c:url>
+				</c:if>
+				${ after }">&gt; &nbsp;</a>
+				</li>
+
+				<!-- >> 의도: 마지막 페이지에서는 >> 표시 사라짐(현재페이지가 끝 페이지임을 표시)-->						
+				<li>
+				<c:if test="${ pi.currentPage ne pi.maxPage }">
+				<c:url var="lastPage" value="myRSV.myp">
+						<c:param name="currentPage" value="${ pi.maxPage }"/>
+					</c:url>
+				<a href="${ lastPage }">&gt;&gt; &nbsp;</a>
+				</c:if>
+				</li>
 			</ul>
 		</div>
 	</div>
