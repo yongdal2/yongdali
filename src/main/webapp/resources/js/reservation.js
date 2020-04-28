@@ -536,16 +536,13 @@ var edANo = "";
 // 출발지 주소록에 선택한 주소값들 해당 input에 담기
 function addStAddrList(){
 	stANo = $('input[name="startAddrList"]:checked').closest("div").find('.stANo').val();
-	var stAName = $('input[name="startAddrList"]:checked').closest("div").find('.stAName').val();
-	var stAddr1 = $('input[name="startAddrList"]:checked').closest("div").find('.stAddr1').val();
-	var stAddr2 = $('input[name="startAddrList"]:checked').closest("div").find('.stAddr2').val();
-	var stAPhone = $('input[name="startAddrList"]:checked').closest("div").find('.stAPhone').val();
+	var stAName = $('input[name="startAddrList"]:checked').closest("div").find('.stAName').text();
+	var stAddr1 = $('input[name="startAddrList"]:checked').closest("div").find('.stAddr1').text();
+	var stAddr2 = $('input[name="startAddrList"]:checked').closest("div").find('.stAddr2').text();
+	var stAPhone = $('input[name="startAddrList"]:checked').closest("div").find('.stAPhone').text();
 	startLat = $('input[name="startAddrList"]:checked').closest("div").find('.stLat').val();
 	startLong = $('input[name="startAddrList"]:checked').closest("div").find('.stLong').val();
-	
-	console.log(startLat);
-	console.log(startLong);
-	
+		
 	$('#startName').val(stAName);
 	$('#startPhone').val(stAPhone);
 	$('#startAddr').val(stAddr1);
@@ -558,15 +555,12 @@ function addEdAddrList(){
 	
 	if(startLat != 0){
 		edANo = $('input[name="endAddrList"]:checked').closest("div").find('.edANo').val();
-		var edAName = $('input[name="endAddrList"]:checked').closest("div").find('.edAName').val();
-		var edAddr1 = $('input[name="endAddrList"]:checked').closest("div").find('.edAddr1').val();
-		var edAddr2 = $('input[name="endAddrList"]:checked').closest("div").find('.edAddr2').val();
-		var edAPhone = $('input[name="endAddrList"]:checked').closest("div").find('.edAPhone').val();
+		var edAName = $('input[name="endAddrList"]:checked').closest("div").find('.edAName').text();
+		var edAddr1 = $('input[name="endAddrList"]:checked').closest("div").find('.edAddr1').text();
+		var edAddr2 = $('input[name="endAddrList"]:checked').closest("div").find('.edAddr2').text();
+		var edAPhone = $('input[name="endAddrList"]:checked').closest("div").find('.edAPhone').text();
 		endLat = $('input[name="endAddrList"]:checked').closest("div").find('.edLat').val();
 		endLong = $('input[name="endAddrList"]:checked').closest("div").find('.edLong').val();
-		
-		console.log(endLat);
-		console.log(endLong);
 		
 		$('#endName').val(edAName);
 		$('#endPhone').val(edAPhone);

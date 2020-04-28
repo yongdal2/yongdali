@@ -2,7 +2,7 @@ package com.kh.yongdali.admin.model.vo;
 
 import java.sql.Date;
 
-public class SearchCondition {
+public class MemSearchCondition {
 
 	private String mNo;
 	private String mId; // email 
@@ -17,12 +17,12 @@ public class SearchCondition {
 	private Date enrollDate;
 	
 	
-	public SearchCondition() {
+	public MemSearchCondition() {
 		super();
 	}
 
 
-	public SearchCondition(String mNo, String mId, String pwd, String mName, String phone, String mSort, String mStatus,
+	public MemSearchCondition(String mNo, String mId, String pwd, String mName, String phone, String mSort, String mStatus,
 			String signupType, String pushEnabled, String content, Date enrollDate) {
 		super();
 		this.mNo = mNo;

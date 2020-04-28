@@ -26,11 +26,14 @@
             <div class="col-lg-3 sidebar">
                 <a href="dNoticeMain.no"><span class="sidebar_span">공지사항</span></a><br>
                 <a href="dFaqView.fa"><span class="sidebar_span">자주 묻는 질문</span></a><br>
+                <c:if test="${!empty loginUser && loginUser.mId ne 'admin@naver.com' }">
+                	<a onclick="chat();"><span class="sidebar_span"> 채팅</span></a>
+                </c:if>
                 <c:if test="${loginUser.mId eq 'admin@naver.com'}">
                 	<a onclick="adminChat();"><span class="sidebar_span">채팅</span></a>
                 </c:if>
-                <c:if test="${loginUser.mId ne 'admin@naver.com' }">
-                	<a onclick="chat();"><span class="sidebar_span"> 채팅</span></a>
+                <c:if test="${empty loginUser}">
+                	<a onclick="loginAlert();"><span class="sidebar_span">채팅</span></a>
                 </c:if>
             </div>
             <div class="col-lg-8 col-lg-offset-1">
@@ -141,6 +144,11 @@
    	function adminChat(){
       		location.href="${contextPath}/adminChat.ch";
      }
+   	
+   	function loginAlert(){
+   		alert("로그인 후 이용하세요!");
+   		location.href="${contextPath}/loginView.me";
+   	}
     </script>
 </body>
 </html>
