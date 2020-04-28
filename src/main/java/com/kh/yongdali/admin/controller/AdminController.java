@@ -1,5 +1,6 @@
 package com.kh.yongdali.admin.controller;
 
+import java.lang.ProcessBuilder.Redirect;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,7 +37,8 @@ public class AdminController {
 	 */
 	@RequestMapping("aMem.ad")
 	public ModelAndView adminMemList(ModelAndView mv, // " currentPage" 주의
-			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) { // 현재 페이지가
+			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) { 
+		// 현재 페이지가
 		// 필요한데, 없어도
 		// 되고, 있으면
 		// 기본값 1
@@ -160,6 +162,8 @@ public class AdminController {
 
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, pageLimit, boardLimit);
 		ArrayList<adRefund> list = aService.adRefundList(pi);
+		
+		System.out.println(list.get(0).getcalcYn());
 		mv.addObject("pi",pi);
 		mv.addObject("list",list);
 		mv.setViewName("admin/admin_Refund");
@@ -170,12 +174,12 @@ public class AdminController {
 
 
 
-	// 채팅 내역
-	@RequestMapping("admin_ChatLog.ydl")
-	public String adminHomeView7() {
-		return "admin/admin_ChatLog";
-	}
-
+	/*
+	 * // 채팅 내역
+	 * 
+	 * @RequestMapping("admin_ChatLog.ydl") public String adminHomeView7() { return
+	 * "admin/admin_ChatLog"; }
+	 */
 	@RequestMapping("aJung.ad")
 	public ModelAndView jungsanView(ModelAndView mv,
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
@@ -213,7 +217,7 @@ public class AdminController {
 	         int result2 = aService.junsan2(rNo);
 	         
 	         if (result2 > 0) {
-	            return "admin/admin_Reser";
+	            return "redirect:aRes.ad";
 	         } else {
 	            return "common/errorPage";
 	         }

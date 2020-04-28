@@ -34,7 +34,7 @@
 		<result property="mName" column="M_NAME"/>
 		<result property="phone" column="PHONE"/>
 		<result property="cancAmount" column="CANC_AMOUNT"/>
-		<result property="cancYn" column="CANC_YN"/>
+		<result property="calcYn" column="CALC_YN"/>
 	</resultMap>
 	
 	
