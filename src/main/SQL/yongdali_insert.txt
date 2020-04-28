@@ -114,8 +114,7 @@ Insert into CHATMESSAGE values ('CM' || SEQ_CMNO.nextval,'CR1','admin@naver.com'
 Insert into CHATMESSAGE values ('CM' || SEQ_CMNO.nextval,'CR1','biz01@naver.com','김거상','감사합니다 용달이최고',to_date('20/04/27 17:42:59','YY/MM/DD HH24:MI:SS'),'msg','Y');
 Insert into CHATMESSAGE values ('CM' || SEQ_CMNO.nextval,'CR1','admin@naver.com','관리자','네 감사합니다!',to_date('20/04/27 17:43:19','YY/MM/DD HH24:MI:SS'),'msg','Y');
 
--- 수정자 : 남지훈
--- 수정일시 : 200427_21:15
--- RESERVATION 샘플 데이터 30개 추가
-
+-- 수정자 : 장원태
+-- 수정일시 : 200428_17:44
+-- RESERVATION 샘플 데이터 값 수정
 commit;
