@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,7 @@
     <link rel="stylesheet" href="${contextPath}/resources/css/login&signUp.css">    
     <script src='https://kit.fontawesome.com/a076d05399.js'></script><!-- eye icon -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
-    <script src="${contextPath}/resources/js/login&signUp.js"></script>
+    <script src="${contextPath}/resources/js/login&signUp.js"></script>	
 </head>
 <body>
     <!-- logo header -->
@@ -24,9 +25,20 @@
     <!-- content -->
     <div class="content">
         <form action="insert.me" method="post" id="signUpForm" enctype="multipart/form-data" novalidate>
-        	<input type="hidden" name="signupType" value="용달이">
+        	<c:if test="${signupType eq null}">
+        		<input type="hidden" name="signupType" value="용달이">
+        	</c:if>
+        	<c:if test="${signupType ne null}">
+        		<input type="hidden" name="signupType" value="${signupType}">
+        	</c:if>
+        	
+        	
+        	
             <div class="formRow">
                 <div class="formRow--item">
+                    
+                  <!-- 용달이(일반) 회원가입 -->
+                    <c:if test="${email eq null }">
                     <!-- 이메일 -->
                     <div class="emailWrap">
                         <div class="formRow--input-wrapper js-inputWrapper">
@@ -60,6 +72,28 @@
                         <input type="text" class="formRow--input js-input" name="mName" placeholder="이름">
                     </div>
                     <div id="nameMsg" class="msgBox" ></div>
+                    </c:if>
+                  <!-- /용달이(일반) 회원가입 -->
+                    
+                  <!-- 간편 회원가입 -->
+                    <c:if test="${email ne null }">
+                    <input type="hidden" id="isEasyAcsSignUp" value="true">
+                    <!-- 이메일 -->
+                    <div class="emailWrap">
+                        <div class="formRow--input-wrapper js-inputWrapper">
+                            <input type="email" class="formRow--input js-input eng readonly" name="easyAcsmId" placeholder="이메일" maxlength="50"
+                            		value="${email}" readonly>
+                        </div>
+                    </div>    
+                    <!-- 이름 -->
+                    <div class="formRow--input-wrapper js-inputWrapper">
+                        <input type="text" class="formRow--input js-input readonly" name="easyAcsmName" placeholder="이름" 
+                        		value="${name}" readonly>
+                    </div>
+                    </c:if>
+
+                  <!-- /간편 회원가입 -->
+                  
                     <!-- 전화번호 -->
                     <div class="phoneWrap">
                         <div id="nation">

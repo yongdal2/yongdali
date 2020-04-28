@@ -135,6 +135,9 @@ $(document).ready(function(){
     })
     
     /*-- 약관 ----------------------------------------------*/
+    // 간편로그인 여부 판단
+    
+    
     // 동의 체크    
     var checked = '/yongdali/resources/images/login&signUp/checked-circle.png';
     var unchecked = '/yongdali/resources/images/login&signUp/unchecked-circle.png';
@@ -200,6 +203,16 @@ $(document).ready(function(){
         }
     }
     
+    // 용달이 시작하기(간편로그인 회원 약관동의)
+    $('#easyEcsAgree').click(function(){
+    	$('#pushEnabledForm').attr('action','setPushEnabled.me');
+    	if($('.chkPolicy:eq(1)').attr('checked') == "checked" && $('.chkPolicy:eq(2)').attr('checked') == "checked"){
+    		$('#pushEnabledForm').trigger('submit');
+    	}else {
+    		alert("필수 약관에 동의해야합니다.")
+    	}
+    })
+    
     // 용달이 회원가입 버튼
     $('#yongdaliSignUp').click(function(){
     	$('#pushEnabledForm').attr('action','signUpView.me');
@@ -210,6 +223,168 @@ $(document).ready(function(){
     	}
     })
     
+    /* 페이스북(FB) 아이디로 회원가입 */
+    // 페이스북 회원가입 버튼
+    $('#fbSignUp').click(function(){
+    	$('#pushEnabledForm').attr('action','signUpView.me');
+    	if($('.chkPolicy:eq(1)').attr('checked') == "checked" && $('.chkPolicy:eq(2)').attr('checked') == "checked"){
+//    		$('#pushEnabledForm').trigger('submit');
+    		fbSignUp();
+    	}else {
+    		alert("필수 약관에 동의해야합니다.")
+    	}
+    })
+    
+	
+	// 2. SDK 로드 후 초기화(함수 실행)
+	window.fbAsyncInit = function() {
+	  FB.init({
+	    appId      : '2281323032164175',
+	    cookie     : true, 	
+	    xfbml      : true,
+	    version    : 'v6.0'
+	  });
+	  	// 3. 페이스북 로그인
+		fbSignUp = function(){
+			FB.login(function(res){
+				console.log("login : ", res);
+				
+				// 4. 로그인(커넥션) 상태 확인
+				if(res.status === 'connected'){
+					console.log("connected");
+					
+					// 5. 회원정보 호출 API
+					FB.api('/me',{fields: 'email,name'} ,function(resp){
+						let pushEnabled = $('input[name=pushEnabled]').val();
+					    let email = resp.email;
+					    let name = resp.name;
+					    
+					    let servletUrl = "signUpView.me?pushEnabled=" + pushEnabled;
+					    servletUrl += "&email=" + email;
+					    servletUrl += "&name=" + name;
+					    servletUrl += "&signupType=페이스북";
+					    
+					    console.log(servletUrl);
+					   	
+					   	$.ajax({
+					   		url : "fbSignUpAjax.me",
+					   		type : "post",
+					   		data : { email : email, name : name},
+					   		success : function(value){
+					   			console.log(value);
+					   			if(value == 'facebook'){
+					   				alert("페이스북 간편 가입 회원입니다. 페이스북으로 로그인하세요.");
+					   			}
+					   			else if(value == 'naver'){
+					   				alert("네이버 간편 가입 회원입니다. 네이버로 로그인하세요.");
+					   			}
+					   			else if(value =='kakao'){
+					   				alert("카카오 간편 가입 회원입니다. 카카오로 로그인하세요.");
+					   			}
+					   			else if(value =='yongdali'){
+					   				alert("용달이 회원입니다. 용달이로 로그인하세요.");
+					   			}else{
+//					   				location.href="signUpView.me?pushEnabled=" + $('input[name=pushEnabled]').val();
+					   				location.href=servletUrl;
+					   			}
+					   		}, error : function(){
+					       		var msg = "페이스북 간편 회원가입 중 에러 발생!";
+					       		location.href="error.ydl?msg="+msg;
+					   		}
+					   	})
+					});
+				}
+			},{scope:'email'});
+		}
+	};
+	// 1. 비동기화방식으로 SDK 불러오기
+	(function(d, s, id){		
+	   var js, fjs = d.getElementsByTagName(s)[0];
+	   if (d.getElementById(id)) {return;}
+	   js = d.createElement(s); js.id = id;
+	   js.src = "https://connect.facebook.net/en_US/sdk.js";
+	   fjs.parentNode.insertBefore(js, fjs);
+	 }(document, 'script', 'facebook-jssdk'));
+	/* /페이스북(FB) 아이디로 회원가입 */
+           
+    /* 카카오 아이디로 회원가입 */
+    // 카카오 회원가입 버튼
+    $('#kakaoSignUp').click(function(){
+    	$('#pushEnabledForm').attr('action','signUpView.me');
+    	if($('.chkPolicy:eq(1)').attr('checked') == "checked" && $('.chkPolicy:eq(2)').attr('checked') == "checked"){
+    		kakaoSignUp();
+    	}else {
+    		alert("필수 약관에 동의해야합니다.")
+    	}
+    })
+    
+    kakaoSignUp = function(){
+    	// 1. SDK 초기화
+        Kakao.init('c2902431456434e92f377bfc927e6e09');
+    	
+    	// 2. 카카오 로그인
+        Kakao.Auth.login({ 
+            success: function() { 
+                  // 3. 사용자 정보 추출 (사용자 API)
+                  Kakao.API.request({ 
+                	    /* scope: 'email', */
+                        url: '/v2/user/me', 
+                        success: function(res) {  
+    						  console.log("회원정보 호출 API");
+    						  
+    						  let pushEnabled = $('input[name=pushEnabled]').val();
+                              let email = res.kakao_account.email;
+                              let name = res.properties.nickname;
+                              
+                              let servletUrl = "signUpView.me?pushEnabled=" + pushEnabled;
+	      					  servletUrl += "&email=" + email;
+	      					  servletUrl += "&name=" + name;
+	      					  servletUrl += "&signupType=카카오";
+	      					   
+	      					  console.log(servletUrl);
+                            	  
+                              $.ajax({
+  						   		url : "kakaoSignUpAjax.me",
+  						   		type : "post",
+  						   		data : { email : email, name : name},
+  						   		success : function(value){
+  						   			console.log(value);
+  						   			if(value == 'facebook'){
+  						   				alert("페이스북 간편 가입 회원입니다. 페이스북으로 로그인하세요.");
+  						   			}
+  						   			else if(value == 'naver'){
+  						   				alert("네이버 간편 가입 회원입니다. 네이버로 로그인하세요.");
+  						   			}
+  						   			else if(value =='kakao'){
+  						   				alert("카카오 간편 가입 회원입니다. 카카오로 로그인하세요.");
+  						   			}
+  						   			else if(value =='yongdali'){
+  						   				alert("용달이 회원입니다. 용달이로 로그인하세요.");
+  						   			}else{
+//  						   				location.href="signUpView.me?pushEnabled=" + $('input[name=pushEnabled]').val();
+  						   				location.href=servletUrl;
+  						   			}
+  						   		}, error : function(){
+  					        		var msg = "페이스북 간편 로그 중 에러 발생!";
+  					        		location.href="error.ydl?msg="+msg;
+  						   		}
+  						   	})
+                       }, 
+                       fail: function(error) { 
+                             console.log(JSON.stringify(error)); 
+                       } 
+                   }); 
+          }, 
+          fail: function(err) { 
+                console.log(JSON.stringify(err)); 
+          } 
+        });
+    }
+    
+    
+    
+	
+	
     // 네이버 회원가입 버튼
     $('#naverSignUp').click(function(){
     	$('#pushEnabledForm').attr('action','easySignUpView.me');
@@ -221,14 +396,14 @@ $(document).ready(function(){
     })
     
     // 카카오 회원가입 버튼
-    $('#kakaoSignUp').click(function(){
-    	$('#pushEnabledForm').attr('action','easySignUpView.me');
-    	if($('.chkPolicy:eq(1)').attr('checked') == "checked" && $('.chkPolicy:eq(2)').attr('checked') == "checked"){
-    		$('#pushEnabledForm').trigger('submit');
-    	}else {
-    		alert("필수 약관에 동의해야합니다.")
-    	}
-    })
+//    $('#kakaoSignUp').click(function(){
+//    	$('#pushEnabledForm').attr('action','easySignUpView.me');
+//    	if($('.chkPolicy:eq(1)').attr('checked') == "checked" && $('.chkPolicy:eq(2)').attr('checked') == "checked"){
+//    		$('#pushEnabledForm').trigger('submit');
+//    	}else {
+//    		alert("필수 약관에 동의해야합니다.")
+//    	}
+//    })
     
     
     /*-- 비밀번호 찾기 ----------------------------------------------*/
@@ -290,7 +465,6 @@ $(document).ready(function(){
     	}
     	
     	if(pwdValidate() == true){
-
     		pwdChkValidate();
     	};
     	
@@ -310,7 +484,6 @@ $(document).ready(function(){
         	data : { mId : $('#findPwd_email').val() },
         	async : false,
         	success : function(value){
-        		console.log(value);
         		if(value == "exist" ){
         			$("#emailMsg").css("display","none");
         			result = true; 
@@ -430,54 +603,54 @@ $(document).ready(function(){
     	phoneValidate();
     })
     
-    // '가입하기' 버튼 클릭 시 '전체 유효성 검사' 후 submit
-    $('#btn_submit_signUpForm').click(function(){
-    	// 기본 정보 에러메시지 노출용
-    	if(emailValidate() == true){
-    		emailDupChk();
-    	};
-    	
-    	if(pwdValidate() == true){
-    		pwdChkValidate();
-    	};
-    	
-    	if($('input[name=isVerified]').val() == 'N'){
-    		displayErrorMsg($("#veriMsg"), '이메일을 인증하세요.');
-    	}
-    	
-    	nameValidate();
-    	phoneValidate();
-    	
-    	if($('input[name=mSort]').val() == '일반'){
-        	// 기본 정보 전체 유효성 검사 후 제출용
-        	if(emailValidate() == true && emailDupChk() == true && $('input[name=isVerified]').val() == 'Y'
-        		&& pwdValidate() == true && pwdChkValidate() == true 
-        		&& nameValidate() == true && phoneValidate() == true){
-        		$('#signUpForm').trigger('submit');
-        		alert("용달이에 오신 것을 환영합니다~!");
-        	};
-        	
-        // 사업자(기사) 회원가입	
-    	}else{
-        	// 사업자 정보 에러메시지 노출용
-    		if(carCapacityValidate() == true){
-    			if(carTypeValidate() == true){
-    				carNoValidate();
-    			}
-    		}
-    		
-    		regImgValidate();
-    		
-    		// 사업자 정보 포함 전체 유효성 검사 후 제출용
-        	if(emailValidate() == true && emailDupChk() == true && $('input[name=isVerified]').val() == 'Y'
-        		&& pwdValidate() == true && pwdChkValidate() == true 
-        		&& nameValidate() == true && phoneValidate() == true
-        		&& carInfoValidate() == true && regImgValidate() == true){
-        		$('#signUpForm').trigger('submit');
-        		alert("용달이에 오신 것을 환영합니다~!");
-        	};
-    	}
-    });
+//    // '가입하기' 버튼 클릭 시 '전체 유효성 검사' 후 submit
+//    $('#btn_submit_signUpForm').click(function(){
+//    	// 기본 정보 에러메시지 노출용
+//    	if(emailValidate() == true){
+//    		emailDupChk();
+//    	};
+//    	
+//    	if(pwdValidate() == true){
+//    		pwdChkValidate();
+//    	};
+//    	
+//    	if($('input[name=isVerified]').val() == 'N'){
+//    		displayErrorMsg($("#veriMsg"), '이메일을 인증하세요.');
+//    	}
+//    	
+//    	nameValidate();
+//    	phoneValidate();
+//    	
+//    	if($('input[name=mSort]').val() == '일반'){
+//        	// 기본 정보 전체 유효성 검사 후 제출용
+//        	if(emailValidate() == true && emailDupChk() == true && $('input[name=isVerified]').val() == 'Y'
+//        		&& pwdValidate() == true && pwdChkValidate() == true 
+//        		&& nameValidate() == true && phoneValidate() == true){
+//        		$('#signUpForm').trigger('submit');
+//        		alert("용달이에 오신 것을 환영합니다~!");
+//        	};
+//        	
+//        // 사업자(기사) 회원가입	
+//    	}else{
+//        	// 사업자 정보 에러메시지 노출용
+//    		if(carCapacityValidate() == true){
+//    			if(carTypeValidate() == true){
+//    				carNoValidate();
+//    			}
+//    		}
+//    		
+//    		regImgValidate();
+//    		
+//    		// 사업자 정보 포함 전체 유효성 검사 후 제출용
+//        	if(emailValidate() == true && emailDupChk() == true && $('input[name=isVerified]').val() == 'Y'
+//        		&& pwdValidate() == true && pwdChkValidate() == true 
+//        		&& nameValidate() == true && phoneValidate() == true
+//        		&& carInfoValidate() == true && regImgValidate() == true){
+//        		$('#signUpForm').trigger('submit');
+//        		alert("용달이에 오신 것을 환영합니다~!");
+//        	};
+//    	}
+//    });
     
     /*-- 함수 선언 -------------------*/
     // 이메일 유효성 검사
@@ -831,6 +1004,85 @@ $(document).ready(function(){
     	
     	
     }
+    
+    // '가입하기' 버튼 클릭 시 '전체 유효성 검사' 후 submit
+    $('#btn_submit_signUpForm').click(function(){
+//    	if($('#isEasyAcsSignUp').val() == true){
+    	if($('#isEasyAcsSignUp').val()){
+    		if($('input[name=mSort]').val() == '일반'){
+            	if( phoneValidate() == true){
+            		$('#signUpForm').trigger('submit');
+            		alert("용달이에 오신 것을 환영합니다~!");
+            	};
+            	
+            // 사업자(기사) 회원가입	
+        	}else{
+            	// 사업자 정보 에러메시지 노출용
+        		if(carCapacityValidate() == true){
+        			if(carTypeValidate() == true){
+        				carNoValidate();
+        			}
+        		}
+        		
+        		regImgValidate();
+        		
+        		// 사업자 정보 포함 전체 유효성 검사 후 제출용
+            	if(emailValidate() == true && emailDupChk() == true && $('input[name=isVerified]').val() == 'Y'
+            		&& pwdValidate() == true && pwdChkValidate() == true 
+            		&& nameValidate() == true && phoneValidate() == true
+            		&& carInfoValidate() == true && regImgValidate() == true){
+            		$('#signUpForm').trigger('submit');
+            		alert("용달이에 오신 것을 환영합니다~!");
+            	};
+        	}
+    	}else{
+    		// 기본 정보 에러메시지 노출용
+        	if(emailValidate() == true){
+        		emailDupChk();
+        	};
+        	
+        	if(pwdValidate() == true){
+        		pwdChkValidate();
+        	};
+        	
+        	if($('input[name=isVerified]').val() == 'N'){
+        		displayErrorMsg($("#veriMsg"), '이메일을 인증하세요.');
+        	}
+        	
+        	nameValidate();
+        	phoneValidate();
+        	
+        	if($('input[name=mSort]').val() == '일반'){
+            	// 기본 정보 전체 유효성 검사 후 제출용
+            	if(emailValidate() == true && emailDupChk() == true && $('input[name=isVerified]').val() == 'Y'
+            		&& pwdValidate() == true && pwdChkValidate() == true 
+            		&& nameValidate() == true && phoneValidate() == true){
+            		$('#signUpForm').trigger('submit');
+            		alert("용달이에 오신 것을 환영합니다~!");
+            	};
+            	
+            // 사업자(기사) 회원가입	
+        	}else{
+            	// 사업자 정보 에러메시지 노출용
+        		if(carCapacityValidate() == true){
+        			if(carTypeValidate() == true){
+        				carNoValidate();
+        			}
+        		}
+        		
+        		regImgValidate();
+        		
+        		// 사업자 정보 포함 전체 유효성 검사 후 제출용
+            	if(emailValidate() == true && emailDupChk() == true && $('input[name=isVerified]').val() == 'Y'
+            		&& pwdValidate() == true && pwdChkValidate() == true 
+            		&& nameValidate() == true && phoneValidate() == true
+            		&& carInfoValidate() == true && regImgValidate() == true){
+            		$('#signUpForm').trigger('submit');
+            		alert("용달이에 오신 것을 환영합니다~!");
+            	};
+        	}
+    	}
+    });
     
     // 채팅창 열기용_탐희
     $(".chatPage").click(function(){

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+
 <!DOCTYPE html>
 <html>
 
@@ -7,9 +9,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>용달이 | 약관동의</title>
+    
+    <!-- 카카오 아이디로 로그인 -->
+    <script src="${contextPath}/resources/js/kakao.min.js"></script>
+    
     <link rel="stylesheet" href="${contextPath}/resources/css/login&signUp.css">   
-    <script src="http://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+    <!-- <script src="http://code.jquery.com/jquery-3.1.1.slim.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
     <script src="${contextPath}/resources/js/login&signUp.js"></script>
+	    
 </head>
 <body>
     <!-- logo header -->
@@ -25,10 +33,6 @@
             <div class="policy-header">
                 <div>약관동의</div>
                 <div class="chkAllDiv">
-                    <!-- <label class="checkbox-wrap">
-                        <input type="checkbox" name="" value="">
-                        <i class="check-icon"></i>
-                    </label> -->
                     <img src="${contextPath}/resources/images/login&signUp/unchecked-circle.png" alt="동의" id="chkAll" class="chkPolicy">
                     <div>모두 동의</div> 
                 </div>
@@ -36,10 +40,6 @@
             <div class="policy-list">
                 <div>
                     <div>
-                        <!-- <label class="checkbox-wrap">
-                            <input type="checkbox" name="" value="">
-                            <i class="check-icon"></i>
-                        </label> -->
                         <img src="${contextPath}/resources/images/login&signUp/unchecked-circle.png" alt="동의" class="chkPolicy">
                         <div>원트럭 이용약관 동의 (필수)</div>
                     </div>
@@ -50,10 +50,6 @@
                 </div>
                 <div>
                     <div class="chkBox">
-                        <!-- <label class="checkbox-wrap">
-                            <input type="checkbox" name="" value="">
-                            <i class="check-icon"></i>
-                        </label> -->
                         <img src="${contextPath}/resources/images/login&signUp/unchecked-circle.png" alt="동의" class="chkPolicy">
                         <div>개인정보 수집 및 이용에 관한 동의 (필수)</div>
                     </div>
@@ -64,10 +60,6 @@
                 </div>
                 <div>
                     <div class="chkBox">
-                        <!-- <label class="checkbox-wrap">
-                            <input type="checkbox" name="" value="">
-                            <i class="check-icon"></i>
-                        </label> -->
                         <form id="pushEnabledForm" method="get"><input type="hidden" name="pushEnabled" value="N"></form>
                         <img src="${contextPath}/resources/images/login&signUp/unchecked-circle.png" alt="동의" class="chkPolicy">
                         <div>SMS, 이메일을 통한 서비스 및 광고성 이벤트 정보 수신 동의 (선택)</div>
@@ -75,21 +67,31 @@
                 </div>
             </div> 
         </div>
-        <div class="easyEccess chooseSignIn">
+        
+       <c:if test="${isEasyAccessor ne true}">
+       <div class="easyAccess chooseSignIn">
             <div class="yongdalLogo"> 
-                <h2 class="easyEccessTitle">용달이 회원가입</h2>
-                <%-- <a href="${contextPath}/signUpView.me"><img src="${contextPath}/resources/images/ydl_logo/ydl_ic_gr(70X70).png" alt="용달이"></a> --%>
+                <h2 class="easyAccessTitle">용달이 회원가입</h2>
            		<img src="${contextPath}/resources/images/ydl_logo/ydl_ic_gr(70X70).png" alt="용달이" id="yongdaliSignUp">
             </div>
-            <div class="easyEccessLogo">
-                <h2 class="easyEccessTitle">간편 회원가입</h2>
-                <a href="#"><img src="${contextPath}/resources/images/login&signUp/facebookLogo.png" alt="페이스북"></a>
-                <%-- <a href="#"><img src="${contextPath}/resources/images/login&signUp/kakaoLogo.png" alt="카카오"></a> --%>
-                <img src="${contextPath}/resources/images/login&signUp/kakaoLogo.png" alt="카카오" id="kakaoSignUp">
+            <div class="easyAccessLogo">
+                <h2 class="easyAccessTitle">간편 회원가입</h2>
+<%--                 <img class="easyAccessBtn" src="${contextPath}/resources/images/login&signUp/facebookLogo.png" alt="페이스북" id="fbSignUp" onclick="fbSignUp();"> --%>
+                <img class="easyAccessBtn" src="${contextPath}/resources/images/login&signUp/facebookLogo.png" alt="페이스북" id="fbSignUp">
+                <img class="easyAccessBtn" src="${contextPath}/resources/images/login&signUp/kakaoLogo.png" alt="카카오" id="kakaoSignUp">
                 <img src="${contextPath}/resources/images/login&signUp/naverLogo.png" alt="네이버" id="naverSignUp">
             </div>
         </div>
+        </c:if>
+        <c:if test="${isEasyAccessor eq true}">
+        <div  id="btnWrap">
+	        <div class="btnArea">
+	            <button type="button" class="submitBtn" id="easyEcsAgree">용달이 시작하기</button>
+	        </div>
+        </div>
+        </c:if>
     </div>
+    
 
     <!-- The Modal -->
     <div id="yongdaliPolicy" class="modal">
