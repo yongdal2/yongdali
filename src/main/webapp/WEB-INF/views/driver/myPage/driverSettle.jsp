@@ -55,7 +55,7 @@
 				정산 <br> <br>
 			</div>
 			<!-- 필터 -->
-			<form action="driverFilter.myp">
+			<form id="filterForm">
 			<div class="col-xs-2 col-md-2 text-center bszB1">
 				<select class="form-control ft54" name="calStatus" id="calStatus">
 					<option value="cal">정산별 조회</option>
@@ -66,21 +66,21 @@
 			<div class="col-xs-3 col-md-3 text-center bszB">
 				<select class="form-control ft54" name="rsvStatus" id="rsvStatus">
 					<option value="rsv">상태별 조회</option>
-					<option value="pay">결제완료</option>
-					<option value="drop">하차완료</option>
+					<!-- <option value="pay">결제완료</option> 불피요--> 
+					<option value="drop">배차완료</option>
 					<option value="canc">취소</option>
 				</select>
 			</div>
 			<div class="text-center"></div>
 			<div class="col-xs-3 col-md-3 text-center bszB">
-				<input placeholder="상차일" class="form-control ft54" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="stDate" id="stDate"/>
+				<input placeholder="기간 검색 시작일" class="form-control ft54" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="stDate" id="stDate"/>
 			</div>
 			<div class="col-xs-3 col-md-3 text-center bszB">
-				<input placeholder="하차일" class="form-control ft54" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="edDate" id="edDate"/>
+				<input placeholder="기간 검색 종료일" class="form-control ft54" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="edDate" id="edDate"/>
 			</div>
 			<div class="col-xs-1 col-md-1 bszB">
-				<button class="btn btn_ydl_r sch">
-					<span class="glyphicon glyphicon-search" style=""></span>
+				<button class="btn btn_ydl_r sch" id="fBtn">
+					<span class="glyphicon glyphicon-search"></span>
 				</button>
 			</div>
 			</form>
@@ -107,106 +107,118 @@
 							<td>정산 일자</td>
 						</tr>
 					</thead>
-					<c:forEach var="c" items="${ cList }" varStatus="vs">
-								<c:set var="p" value="${ c.payment }"></c:set>
+					<c:forEach var="f" items="${ fList }" varStatus="vs">
+								<c:set var="p" value="${ f.payment }"></c:set>
 								<c:set var="cal" value="${ p.calculate }"></c:set>
+								
+								
 						<tr>
-							<td class="fw6">${ c.rNo }</td> <!-- 예약번호 -->
+							<td class="fw6">${ f.rNo }</td> <!-- 예약번호 -->
 							<td><!-- 상태 -->
 								<c:choose>
-								<c:when test="${p.payYN eq 'Y' && p.cancYN eq 'Y' }"><span class="red">취소</span></c:when>
-								<c:when test="${p.payYN eq 'Y' && p.cancYN eq 'N' && p.dealYN eq 'N' }">결제 완료</c:when>
-								<c:when test="${p.dealYN eq 'Y' && p.cancYN eq 'N' }">배차 완료</c:when>
+								<c:when test="${p.payYN eq 'Y' && p.cancYN eq 'Y' }"><span class="llg">취소</span></c:when>
+								<c:when test="${p.payYN eq 'Y' && p.cancYN eq 'N' && f.dealYN eq 'N' }">결제 완료</c:when>
+								<c:when test="${f.dealYN eq 'Y' && p.cancYN eq 'N' }">배차 완료</c:when>
 								</c:choose>
 							</td>
  							<td><c:out value="${fn:replace(p.enrollDate,'2020','20')}"/></td><!-- 예약일자 -->
  							<td>
 							<c:choose>
-							<c:when test="${c.rightLoad eq null}"><c:out value="${fn:replace(c.startDate,'2020','20')}"/></c:when>
-							<c:otherwise>${c.rightLoad}</c:otherwise>
+							<c:when test="${f.rightLoad eq null}"><c:out value="${fn:replace(f.startDate,'2020','20')}"/></c:when>
+							<c:otherwise>${f.rightLoad}</c:otherwise>
 							</c:choose>
  							</td>
  							<td>
  							<c:choose>
-							<c:when test="${c.rightLoad eq null}"><c:out value="${fn:replace(c.startDate,'2020','20')}"/></c:when>
-							<c:otherwise>${c.rightLoad}</c:otherwise>
+							<c:when test="${f.rightLoad eq null}"><c:out value="${fn:replace(f.startDate,'2020','20')}"/></c:when>
+							<c:otherwise>${f.rightLoad}</c:otherwise>
 							</c:choose>
  							</td>
 							<td>
-							<c:out value="${fn:split(c.startAddr, ',')[0]}"/>
+							<c:out value="${fn:split(f.startAddr, ',')[0]}"/>
 							</td>
 							<td>
-							<c:out value="${fn:split(c.endAddr, ',')[0]}"/>
+							<c:out value="${fn:split(f.endAddr, ',')[0]}"/>
 							</td>
-							<td>${ c.amount }원</td><!-- 계산금액  -->
+							<td>${ f.amount }원</td><!-- 계산금액  -->
 							<td>${ cal.charge }원</td><!-- 정산금액  -->
 							<td><c:choose>
-								<c:when test="${cal.calcYN eq 0}">정산 전</c:when>
-								<c:when test="${cal.calcYN eq 1}">정산 완료</c:when>
-								<c:otherwise>환불</c:otherwise>
-							</c:choose></td>
-							<td><c:out value="${fn:replace(cal.calcDate,'2020','20')}"/></td><!-- 예약일자 -->
+								<c:when test="${p.calcYN eq 1}">정산완료</c:when>
+								<c:when test="${p.calcYN eq 0}">정산 전</c:when>
+							</c:choose> </td>
+							<td><c:out value="${fn:replace(cal.calcDate,'2020','20')}"/></td><!-- 정산일자 -->
 						</tr>
 					</c:forEach>
 				</table>
 			</div>
 		<!--  페이징 처리  -->
-		<div class="row text-center">
-			<ul class="pagination ft_gr">
-				<!-- << , < -->
-				<li>
-					<c:if test="${ pi.currentPage eq 1 }"><a>&lt;&lt; &nbsp;</a></c:if>
-					<c:if test="${ pi.currentPage ne 1 }"><a href="myRSV.myp?currentPage=1">&lt;&lt; &nbsp;</a></c:if>
-				</li>
-				<li>
-					<c:if test="${ pi.currentPage ne 1 }">
-						<c:url var="before" value="myRSV.myp">
-							<c:param name="currentPage" value="${ pi.currentPage -1 }"/>
+	    <div class="row text-center">
+	    <ul class="pagination ft_gr">
+	        <!-- << , < -->
+	        <li>
+	            <c:if test="${ pi.currentPage eq 1 }"><a>&lt;&lt; &nbsp;</a></c:if>
+	            <c:if test="${ pi.currentPage ne 1 }"><a href="driverSettle.myp?currentPage=1">&lt;&lt; &nbsp;</a></c:if>
+	        </li>
+	        <li>
+	            <c:if test="${ pi.currentPage ne 1 }">
+	                <c:url var="before" value="driverSettle.myp">
+	                    <c:param name="currentPage" value="${ pi.currentPage-1 }" />
+	                </c:url>
+	                <a href="${ before }">&lt; &nbsp;</a>
+	            </c:if>
+	            <c:if test="${ pi.currentPage eq 1 }">
+	                <a> &lt; &nbsp;</a>
+	            </c:if>
+	        </li>
+	
+	        <!-- 페이지 -->
+	        <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+	            <li>
+	                <c:if test="${ p eq pi.currentPage }">
+	                    <a><b><font color="#5a8cff">${ p }</font></b></a>
+	                </c:if>
+	                <c:if test="${ p ne pi.currentPage }">
+	                    <a href="<c:url var="pagination" value="driverSettle.myp">	
+								<c:param name="currentPage" value="${ p } "/>
+							</c:url>
+					${ pagination }">${ p }</a>
+	                </c:if>
+	            </li>
+	        </c:forEach>
+	        <!-- > -->
+	        <li>
+	            <a href="
+					<c:if test="${ pi.currentPage ne pi.maxPage }">
+						<c:url var="after" value="driverSettle.myp">
+							<c:param name="currentPage" value="${ pi.currentPage+1 }"/>
 						</c:url>
-						<a href="${ before }">&lt; &nbsp;</a>
 					</c:if>
-				<c:if test="${ pi.currentPage eq 1 }">
-					<a> &lt; &nbsp;</a>
-				</c:if>
-				</li>
-						
-				<!-- 페이지 -->
-				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-				<li>
-				<c:if test="${ p eq pi.currentPage }">
-				<a><b><font color="#5a8cff">${ p }</font></b></a>
-				</c:if>							
-				<c:if test="${ p ne pi.currentPage }">
-				<a href="<c:url var="pagination" value="myRSV.myp">	
-							<c:param name="currentPage" value="${ p }"/>
-						</c:url>
-				${ pagination }">${ p }</a>
-				</c:if>
-				</li>
-				</c:forEach>
-				<!-- > -->	
-				<li>
-				<a href="
-				<c:if test="${ pi.currentPage ne pi.maxPage }">
-					<c:url var="after" value="myRSV.myp">
-						<c:param name="currentPage" value="${ pi.currentPage +1 }"/>
-					</c:url>
-				</c:if>
-				${ after }">&gt; &nbsp;</a>
-				</li>
-
-				<!-- >> 의도: 마지막 페이지에서는 >> 표시 사라짐(현재페이지가 끝 페이지임을 표시)-->						
-				<li>
-				<c:if test="${ pi.currentPage ne pi.maxPage }">
-				<c:url var="lastPage" value="myRSV.myp">
-						<c:param name="currentPage" value="${ pi.maxPage }"/>
-					</c:url>
-				<a href="${ lastPage }">&gt;&gt; &nbsp;</a>
-				</c:if>
-				</li>
-			</ul>
-		</div>
+					${ after }">&gt; &nbsp;</a>
+	        </li>
+	        <!-- >> 의도: 마지막 페이지에서는 >> 표시 사라짐(현재페이지가 끝 페이지임을 표시)-->
+	        <li>
+	            <c:if test="${ pi.currentPage ne pi.maxPage }">
+	                <c:url var="lastPage" value="driverSettle.myp">
+	                    <c:param name="currentPage" value="${ pi.maxPage }" />
+	                </c:url>
+	                <a href="${ lastPage }">&gt;&gt; &nbsp;</a>
+	            </c:if>
+	        </li>
+	    </ul>
+	</div>		
 	</div>
+	<script type="text/javascript">
+	$("#fBtn").on("click",function(){
+		if($('#stDate').val()==""){
+			$('#stDate').val("2000-01-01");
+		}
+		if($('#edDate').val()==""){
+			$('#edDate').val("2099-01-01");
+		}
+		
+		$("#filterForm").attr("action","driverSettle.myp").submit();
+	});
+	</script>
 	</c:if>
 	<c:import url="../../common/footer.jsp" />
 </body>

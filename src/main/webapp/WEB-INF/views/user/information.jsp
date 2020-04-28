@@ -38,7 +38,7 @@
 			<br>
 			<div class="row aos-init aos-animate">
 				<div class="ydl_abs_cont_sh" data-aos="fade-up"
-					data-aos-easing="ease-in-out-sine" data-aos-duration="800"
+					data-aos-easing="ease-in-out-sine" data-aos-duration="400"
 					data-aos-delay="0">
 					<div class="ydl_step_abs text_center col-md-12">
 						<h3 class="text-center">
@@ -64,7 +64,7 @@
 			</div>
 			<div class="row aos-init aos-animate">
 				<div class="ydl_abs_cont_sh" data-aos="fade-up"
-					data-aos-easing="ease-in-out-sine" data-aos-duration="800"
+					data-aos-easing="ease-in-out-sine" data-aos-duration="400"
 					data-aos-delay="200">
 					<div class="ydl_step_abs text_center col-md-12">
 						<h3 class="text-center">
@@ -92,7 +92,7 @@
 			</div>
 			<div class="row aos-init aos-animate">
 				<div class="ydl_abs_cont_sh" data-aos="fade-up"
-					data-aos-easing="ease-in-out-sine" data-aos-duration="800"
+					data-aos-easing="ease-in-out-sine" data-aos-duration="400"
 					data-aos-delay="200">
 					<div class="ydl_step_abs text_center col-md-12">
 						<h3 class="text-center">

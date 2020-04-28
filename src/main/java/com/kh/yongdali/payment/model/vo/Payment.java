@@ -14,14 +14,14 @@ public class Payment {
 	private String payYN;
 	private Date enrollDate;
 	private String cancAmount;
-	private String calcDate;
+	private String calcYN;
 	
 	private Calculate calculate;
 	
 	public Payment() {}
 
-	public Payment(String pNo, String pRNo, String pDNo, String dealYN, Date dealDate, String cancYN, Date cancDate,
-			String payYN, Date enrollDate, String cancAmount, String calcDate, Calculate calculate) {
+	public Payment(String pNo, String pRNo, String dealYN, Date dealDate, String cancYN, Date cancDate, String payYN,
+			Date enrollDate, String cancAmount, String calcYN, Calculate calculate) {
 		super();
 		this.pNo = pNo;
 		this.pRNo = pRNo;
@@ -32,7 +32,7 @@ public class Payment {
 		this.payYN = payYN;
 		this.enrollDate = enrollDate;
 		this.cancAmount = cancAmount;
-		this.cancAmount = calcDate;
+		this.calcYN = calcYN;
 		this.calculate = calculate;
 	}
 
@@ -107,17 +107,14 @@ public class Payment {
 	public void setCancAmount(String cancAmount) {
 		this.cancAmount = cancAmount;
 	}
-	
 
-	public String getCalcDate() {
-		return calcDate;
+	public String getCalcYN() {
+		return calcYN;
 	}
 
-	public void setCalcDate(String calcDate) {
-		this.calcDate = calcDate;
+	public void setCalcYN(String calcYN) {
+		this.calcYN = calcYN;
 	}
-	
-	
 
 	public Calculate getCalculate() {
 		return calculate;
@@ -131,9 +128,10 @@ public class Payment {
 	public String toString() {
 		return "Payment [pNo=" + pNo + ", pRNo=" + pRNo + ", dealYN=" + dealYN + ", dealDate=" + dealDate + ", cancYN="
 				+ cancYN + ", cancDate=" + cancDate + ", payYN=" + payYN + ", enrollDate=" + enrollDate
-				+ ", cancAmount=" + cancAmount + ", calcDate=" + calcDate + ", calculate=" + calculate + "]";
+				+ ", cancAmount=" + cancAmount + ", calcYN=" + calcYN + ", calculate=" + calculate + "]";
 	}
 
+	
 
 	
 }

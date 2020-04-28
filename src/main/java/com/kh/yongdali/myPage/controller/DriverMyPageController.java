@@ -2,6 +2,7 @@ package com.kh.yongdali.myPage.controller;
 
 import java.io.File;
 import java.sql.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -118,54 +119,44 @@ public class DriverMyPageController {
 		//드라이버 정산내역
 		
 		@RequestMapping("driverSettle.myp")
-		public ModelAndView myRsvList(@SessionAttribute Driver driver, ModelAndView mv,
-									@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage) {
-			
-			
-			String dNo = driver.getdNo();
-			int clistCount =dmpService.getCalListCount(dNo);
-			
-			PageInfo pi = Pagination.getPageInfo(currentPage, clistCount, 5, 20);
-			
-			ArrayList<Reservation> cList = dmpService.selectCalList(pi,dNo);
-			
-			System.out.println(cList);
-			
-			mv.addObject("cList",cList);
-			mv.addObject("pi",pi);
-			mv.setViewName("driver/myPage/driverSettle");
-			return mv;
-		}
-		
-		@RequestMapping("driverFilter.myp")
-		
-		public ModelAndView driverFilterList(@SessionAttribute Driver driver, ModelAndView mv, Filter f,
+		public ModelAndView myRsvList(@SessionAttribute Driver driver, ModelAndView mv, Filter f, HttpServletRequest rq,
 				@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage,
-				@RequestParam("calStatus") String calStatus, @RequestParam("rsvStatus") String rsvStatus,
-				@RequestParam("stDate") String stDate, @RequestParam("edDate") String edDate) {
+				@RequestParam(value="rsvStatus", required = false) String rsvStatus,
+				@RequestParam(value="fSearch", required = false) String fSearch) throws ParseException {
 			
+			String sDate = rq.getParameter("stDate");
+			if(sDate == null || sDate=="") {
+				sDate ="2000-01-01";
+			}
+			String eDate = rq.getParameter("edDate");
+			if(eDate == null || eDate=="") {
+				eDate ="2999-12-31";
+			}
 			
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date startDate = new Date(sdf.parse(sDate).getTime());
+			Date endDate = new Date(sdf.parse(eDate).getTime());
+							
+			f.setdNo(driver.getdNo());
+			f.setStDate(startDate);
+			f.setEdDate(endDate);
 			
 			System.out.println(f);
 			
-			int flistCount =dmpService.getFilCalListCount(f);
+			int rlistCount =dmpService.getCalListCount(f);
 			
-			PageInfo pi = Pagination.getPageInfo(currentPage, flistCount, 5, 20);
+			PageInfo pi = Pagination.getPageInfo(currentPage, rlistCount, 5, 10);
 			
-			ArrayList<Reservation> fCalList = dmpService.selectFilCalList(pi,f);
+			ArrayList<Reservation> fList = dmpService.selectCalList(pi,f);
 			
+			System.out.println(fList);
 			
-			
-			System.out.println(fCalList);
-			
-			mv.addObject("cList",fCalList);
+			mv.addObject("fList",fList);
 			mv.addObject("pi",pi);
 			mv.setViewName("driver/myPage/driverSettle");
 			return mv;
 		}
-		
-		
-		
+
 		
 		
 }

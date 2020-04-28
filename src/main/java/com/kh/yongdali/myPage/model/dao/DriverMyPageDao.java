@@ -26,25 +26,17 @@ public class DriverMyPageDao {
 		return sqlSession.selectOne("myPageMapper.truckInfoView",mNo);
 	}
 
-	public int getCalListCount(String dNo) {
-		return sqlSession.selectOne("myPageMapper.getCalListCount",dNo);
+	public int getCalListCount(Filter f) {
+		return sqlSession.selectOne("myPageMapper.getListCount",f);
 	}
 
-	public ArrayList<Reservation> selectCalList(PageInfo pi, String dNo) {
+	public ArrayList<Reservation> selectCalList(PageInfo pi, Filter f) {
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		return (ArrayList)sqlSession.selectList("myPageMapper.selectCalList", dNo, rowBounds);
+		return (ArrayList)sqlSession.selectList("myPageMapper.seLectList", f, rowBounds);
 	}
 
-	public int getFilCalListCount(Filter f) {
-		return sqlSession.selectOne("myPageMapper.getFilCalListCount",f);
-	}
-
-	public ArrayList<Reservation> selectFilCalList(PageInfo pi, Filter f) {
-		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
-		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		return (ArrayList)sqlSession.selectList("myPageMapper.selectFilCalList", f, rowBounds);
-	}
+	
 	
 	
 
