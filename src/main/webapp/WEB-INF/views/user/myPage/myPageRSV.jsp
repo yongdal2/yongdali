@@ -109,8 +109,8 @@
  							</td>
  							<td>
  							<c:choose>
-							<c:when test="${r.rightLoad eq null}"><c:out value="${fn:replace(r.startDate,'2020','20')}"/></c:when>
-							<c:otherwise>${r.rightLoad}</c:otherwise>
+							<c:when test="${r.rightUnload eq null}"><c:out value="${fn:replace(r.endDate,'2020','20')}"/></c:when>
+							<c:otherwise>${r.rightUnload}</c:otherwise>
 							</c:choose>
  							</td>
 							<td>
@@ -367,7 +367,7 @@
 	                        if (r.rightLoad == null) {
 	                            $("#pick").text(r.startDate + " / " + r.startTime);
 	                        } else {
-	                            $("#pick").text(r.rightUnload);
+	                            $("#pick").text(r.rightload);
 	                        }
 	                        $("#helpLoad").text(r.helpLoad);
 	                        $("#endName").text(r.endName);
@@ -469,6 +469,7 @@
 	}
 	
 	</script>
+	
     </c:if>
 	<c:import url="../../common/footer.jsp"/>
 </body>

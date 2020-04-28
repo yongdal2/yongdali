@@ -381,19 +381,26 @@ $(document).ready(function(){
         });
     }
     
-    
-    
-	
-	
+    /* 네이버 아이디로 회원가입 */
     // 네이버 회원가입 버튼
-    $('#naverSignUp').click(function(){
-    	$('#pushEnabledForm').attr('action','easySignUpView.me');
-    	if($('.chkPolicy:eq(1)').attr('checked') == "checked" && $('.chkPolicy:eq(2)').attr('checked') == "checked"){
-    		$('#pushEnabledForm').trigger('submit');
-    	}else {
-    		alert("필수 약관에 동의해야합니다.")
-    	}
-    })
+//    $('#naverSignUp').click(function(){
+//    	$('#pushEnabledForm').attr('action','easySignUpView.me');
+//    	if($('.chkPolicy:eq(1)').attr('checked') == "checked" && $('.chkPolicy:eq(2)').attr('checked') == "checked"){
+//    		let naverApiURL = $('#naverApiURL').val();
+//    		let pushEnabled = "&pushEnabled=" + $('input[name=pushEnabled').val();
+//    		let finalApiURL = naverApiURL + pushEnabled;
+//    		
+//    		console.log(naverApiURL);
+//    		console.log(pushEnabled);
+//    		console.log(finalApiURL);
+//
+//    		location.href=finalApiURL;
+//    	}else {
+//    		alert("필수 약관에 동의해야합니다.")
+//    	}
+//    })
+    
+    
     
     // 카카오 회원가입 버튼
 //    $('#kakaoSignUp').click(function(){

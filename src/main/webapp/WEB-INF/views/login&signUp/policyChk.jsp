@@ -2,6 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 
+<!-- 네이버 아이디로 로그인(네아로) -->
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
+
 <!DOCTYPE html>
 <html>
 
@@ -20,6 +25,19 @@
 	    
 </head>
 <body>
+  <!-- 네이버 아이디로 로그인(네아로) -->
+  <%
+    String clientId = "CSQrLTztRmu9Z7lXy3kf";//애플리케이션 클라이언트 아이디값";
+    String redirectURI = URLEncoder.encode("http://localhost:8081/yongdali/naverLogin.me", "UTF-8");
+    SecureRandom random = new SecureRandom();
+    String state = new BigInteger(130, random).toString();
+    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+    apiURL += "&client_id=" + clientId;
+    apiURL += "&redirect_uri=" + redirectURI;
+    apiURL += "&state=" + state;
+    session.setAttribute("state", state);
+ %>
+ 
     <!-- logo header -->
     <div class="header agreeHeader">
         <a href="home.do">
@@ -79,6 +97,7 @@
 <%--                 <img class="easyAccessBtn" src="${contextPath}/resources/images/login&signUp/facebookLogo.png" alt="페이스북" id="fbSignUp" onclick="fbSignUp();"> --%>
                 <img class="easyAccessBtn" src="${contextPath}/resources/images/login&signUp/facebookLogo.png" alt="페이스북" id="fbSignUp">
                 <img class="easyAccessBtn" src="${contextPath}/resources/images/login&signUp/kakaoLogo.png" alt="카카오" id="kakaoSignUp">
+                <input type="hidden" id="naverApiURL" value="<%=apiURL %>">
                 <img src="${contextPath}/resources/images/login&signUp/naverLogo.png" alt="네이버" id="naverSignUp">
             </div>
         </div>

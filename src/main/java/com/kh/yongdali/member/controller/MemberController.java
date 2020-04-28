@@ -67,7 +67,6 @@ public class MemberController {
 	
 	private Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
-	
 	/** 샘플데이터
 	 * @param model
 	 * @return
@@ -311,39 +310,7 @@ public class MemberController {
 	    	return "newFb";
 	    }
 	}
-	
-	
-	@ResponseBody
-	@RequestMapping(value="kakaoSignUpAjax.me", method=RequestMethod.POST)
-	public String kakaoSignUp(@RequestParam("email") String email, String name, Model model) {
 		
-		// MVC2 로직처리
-	    int result = mService.emailChk(email);  // 가입 유무 확인
-	    
-	    if(result > 0) {
-	    	Member m = new Member(email);
-	    	Member mem = mService.loginMember(m);
-	    	String type = mem.getSignupType();
-	    	
-	    	if(type.equals("네이버")) {
-	    		return "naver";
-	    	}else if(type.equals("페이스북")){
-//	    		model.addAttribute("loginUser", mem);
-	    		return "facebook";
-	    	}else if(type.equals("카카오")) {
-	    		return "kakao";
-	    	}
-	    	else{
-	    		return "yongdali";
-	    	}
-	    }
-	    else {
-	    	return "newFb";
-	    }
-	}
-	
-	
-	
 	/** 카카오 아이디로 로그인
 	 * @param email
 	 * @param name
@@ -386,6 +353,154 @@ public class MemberController {
 	    }
 	}
 
+	/**  카카오 아이디로 회원가입
+	 * @param email
+	 * @param name
+	 * @param model
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="kakaoSignUpAjax.me", method=RequestMethod.POST)
+	public String kakaoSignUp(@RequestParam("email") String email, String name) {
+		
+		// MVC2 로직처리
+	    int result = mService.emailChk(email);  // 가입 유무 확인
+	    
+	    if(result > 0) {
+	    	Member m = new Member(email);
+	    	Member mem = mService.loginMember(m);
+	    	String type = mem.getSignupType();
+	    	
+	    	if(type.equals("네이버")) {
+	    		return "naver";
+	    	}else if(type.equals("페이스북")){
+//	    		model.addAttribute("loginUser", mem);
+	    		return "facebook";
+	    	}else if(type.equals("카카오")) {
+	    		return "kakao";
+	    	}
+	    	else{
+	    		return "yongdali";
+	    	}
+	    }
+	    else {
+	    	return "newFb";
+	    }
+	}
+	
+	/** 네이버 아이디로 회원가입
+	 * @param email
+	 * @param name
+	 * @return
+	 */
+//	@RequestMapping("naverSignUpIdChk.me")
+//	public String naverSignUpIdChk(@RequestParam("email") String email, String name) {
+//		
+//	}
+	
+	/** 네이버 아이디로 회원가입
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("naverSignUp.me")
+	public String naverSignUp(Model model, HttpServletRequest request) {
+	    String clientId = "CSQrLTztRmu9Z7lXy3kf";//애플리케이션 클라이언트 아이디값";
+	    String clientSecret = "k06arsdcFD";//애플리케이션 클라이언트 시크릿값";
+	    String code = request.getParameter("code");
+	    String state = request.getParameter("state");
+	    String redirectURI = null;
+ 
+		try {
+//			redirectURI = URLEncoder.encode("http://localhost:8081/yongdali/naverLogin.me", "UTF-8");
+			redirectURI = URLEncoder.encode("http://localhost:8081/yongdali/insert.me", "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	    String apiURL;
+	    apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
+	    apiURL += "client_id=" + clientId;
+	    apiURL += "&client_secret=" + clientSecret;
+	    apiURL += "&redirect_uri=" + redirectURI;
+	    apiURL += "&code=" + code;
+	    apiURL += "&state=" + state;
+	    String access_token = "";
+//	    System.out.println("apiURL="+apiURL);
+	    try {
+	      URL url = new URL(apiURL);
+	      HttpURLConnection con = (HttpURLConnection)url.openConnection();
+	      con.setRequestMethod("GET");
+	      int responseCode = con.getResponseCode();
+	      BufferedReader br;
+	      if(responseCode==200) { // 정상 호출
+	        br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+	      } else {  // 에러 발생
+	        br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+	      }
+	      String inputLine;
+	      StringBuffer res = new StringBuffer();
+	      while ((inputLine = br.readLine()) != null) {
+	        res.append(inputLine);
+	      }
+	      br.close();
+		  if(responseCode==200) {
+
+			// access_token 값 추출
+			JSONParser parsing = new JSONParser();
+			Object resObj = parsing.parse(res.toString());
+			JSONObject resJsonObj = (JSONObject)resObj;
+				        
+			access_token = (String)resJsonObj.get("access_token");
+			  
+			// 회원정보 조회 API 1.
+		    String token = access_token; // 네이버 로그인 접근 토큰;
+		    String header = "Bearer " + token; // Bearer 다음에 공백 추가
+		    
+		    String pInfoApiURL = "https://openapi.naver.com/v1/nid/me";
+		
+		    Map<String, String> requestHeaders = new HashMap<>();
+		    requestHeaders.put("Authorization", header);
+		    String responseBody = get(pInfoApiURL,requestHeaders);
+		    
+		    // 프로필 정보 추출 및 활용
+		    Object responseBodyObj = parsing.parse(responseBody);
+		    JSONObject jsonResponseBodyObj = (JSONObject)responseBodyObj;
+		    JSONObject jsonresponseObj = (JSONObject) jsonResponseBodyObj.get("response");
+		    
+		    String email = jsonresponseObj.get("email").toString();
+		    String name = jsonresponseObj.get("name").toString();
+		    
+		    model.addAttribute("email", email);
+		    model.addAttribute("name", name);
+		    model.addAttribute("pushEnabled", "N");
+		    
+		    // MVC2 로직처리 
+		    int result = mService.emailChk(email);  // 가입 유무 확인
+		    
+		    if(result > 0) {
+		    	Member m = new Member(email);
+		    	Member loginUser = mService.loginMember(m);
+		    	model.addAttribute("loginUser", loginUser);
+		    }
+		    else {
+		    	Member newMem = new Member(email, name, "일반", "네이버", "N");
+		    	int insertResult = mService.insertMember(newMem);
+		    	if(insertResult > 0) {
+		    		model.addAttribute("loginUser", newMem);
+		    	}else {
+		    		model.addAttribute("msg", "네이버로 간편 로그인 중 오류 발생!");
+					return "common/errorPage";
+		    	}
+		    }
+		  } 
+	    } catch (Exception e) {
+	      System.out.println(e);
+	    }
+		return "login&signUp/signUpForm";
+	}
+		
+		
 //	네이버 아이디로 로그인(네아로)	
 	/** 네이버 아이디로 로그인(네아로)
 	 * @param model
@@ -468,7 +583,7 @@ public class MemberController {
 		    	model.addAttribute("loginUser", loginUser);
 		    }
 		    else {
-		    	Member newMem = new Member(email, name, "일반", "네이버");
+		    	Member newMem = new Member(email, name, "일반", "네이버", "N");
 		    	int insertResult = mService.insertMember(newMem);
 		    	if(insertResult > 0) {
 		    		model.addAttribute("loginUser", newMem);
@@ -481,7 +596,7 @@ public class MemberController {
 	    } catch (Exception e) {
 	      System.out.println(e);
 	    }
-		return "user/home";
+		return "redirect:home.do";
 	}
     private static String get(String apiUrl, Map<String, String> requestHeaders){ // 회원정보 조회 API 2.
         HttpURLConnection con = connect(apiUrl);

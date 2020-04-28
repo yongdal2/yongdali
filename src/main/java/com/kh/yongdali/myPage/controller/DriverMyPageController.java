@@ -145,10 +145,6 @@ public class DriverMyPageController {
 				@RequestParam("stDate") String stDate, @RequestParam("edDate") String edDate) {
 			
 			
-//			f.setdNo(driver.getdNo());
-//			f.setCalStatus(calStatus);
-//			f.setRsvStatus(rsvStatus);
-//			f.setStDate(stDate);
 			
 			System.out.println(f);
 			

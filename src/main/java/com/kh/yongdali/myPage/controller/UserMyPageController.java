@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
@@ -94,6 +95,10 @@ public class UserMyPageController {
 		}
 		
 	}
+	
+	//유저 비밀번호 변경
+	
+	
 		
 	
 	
@@ -221,46 +226,44 @@ public class UserMyPageController {
 		
 		// 나의 예약내역
 		@RequestMapping("myRSV.myp")
-		public ModelAndView myRsvList(@SessionAttribute Member loginUser, ModelAndView mv, Filter f,
+		public ModelAndView myRsvList(@SessionAttribute Member loginUser, ModelAndView mv, Filter f, HttpServletRequest rq,
 				@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage,
 				@RequestParam(value="rsvStatus", required = false) String rsvStatus,
-				@RequestParam(value="stDate", required = false) String sDate,
-				@RequestParam(value="edDate", required = false) String eDate,
 				@RequestParam(value="fSearch", required = false) String fSearch) throws ParseException {
-			
-			f.setmNo(loginUser.getmNo());
-			
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			
-			
 			String stDate = "";
 			String edDate = "";
 			
+			String sDate = rq.getParameter("stDate");
+			if(sDate == null || sDate=="") {
+				sDate ="2000-01-01";
+			}
+			String eDate = rq.getParameter("edDate");
+			if(eDate == null || eDate=="") {
+				eDate ="2999-12-31";
+			}
+			
+			f.setmNo(loginUser.getmNo());
+			
+			System.out.println(sDate);
+			System.out.println(eDate);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			
+			
+			
 			
 			// 상하차일 타입 Date로 변환하기
-			if (sDate != null) {
-				String sy = sDate.substring(0, 4);
-				String sm = sDate.substring(6, 8);
-				String sd = sDate.substring(10, 12);
-				stDate = sy + "-" + sm + "-" + sd;
-				if (stDate != "") {
+				stDate=sDate;
+				System.out.println(stDate);
 					Date startDate = new Date(sdf.parse(stDate).getTime());
-					System.out.println(startDate);
+					System.out.println("startDate:" + startDate);
 					f.setStDate(startDate);
-				}
 				
-			}
-			if (eDate != null) {
-				String ey = eDate.substring(0, 4);
-				String em = eDate.substring(6, 8);
-				String ed = eDate.substring(10, 12);
-				edDate = ey + "-" + em + "-" + ed;
-				if (edDate != "") {
+				System.out.println(startDate);
+				
+				edDate = eDate;
 					Date endDate = new Date(sdf.parse(edDate).getTime());
-					System.out.println(endDate);
+					System.out.println("endDate:" +endDate);
 					f.setEdDate(endDate);
-				}
-			}
 			
 			System.out.println(f);
 				
