@@ -10,6 +10,7 @@ import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.driver.model.vo.Driver;
 import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.myPage.model.vo.Address;
+import com.kh.yongdali.myPage.model.vo.Filter;
 import com.kh.yongdali.payment.model.vo.Payment;
 import com.kh.yongdali.reservation.model.vo.Reservation;
 
@@ -50,16 +51,16 @@ public class UserMyPageDao {
 	}
 
 
-	public int getRsvListCount(String mNo) {
-		return sqlSession.selectOne("myPageMapper.selectRsvListCount",mNo);
+	public int getRsvListCount(Filter f) {
+		return sqlSession.selectOne("myPageMapper.selectRsvListCount",f);
 	}
 
 
-	public ArrayList<Reservation> selectRsvList(PageInfo pi, String mNo) {
+	public ArrayList<Reservation> selectRsvList(PageInfo pi, Filter f) {
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("myPageMapper.selectRsvPayList", mNo, rowBounds);
+		return (ArrayList)sqlSession.selectList("myPageMapper.selectRsvPayList", f, rowBounds);
 	}
 
 
@@ -85,6 +86,11 @@ public class UserMyPageDao {
 	public int rsvCan(Payment p) {
 		
 		return sqlSession.update("myPageMapper.rscCanPayment",p);
+	}
+
+
+	public int pushUpdate(Member m) {
+		return sqlSession.update("myPageMapper.pushUpdate",m);
 	}
 
 	
