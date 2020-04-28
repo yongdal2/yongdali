@@ -31,12 +31,8 @@
         	<c:if test="${signupType ne null}">
         		<input type="hidden" name="signupType" value="${signupType}">
         	</c:if>
-        	
-        	
-        	
             <div class="formRow">
                 <div class="formRow--item">
-                    
                   <!-- 용달이(일반) 회원가입 -->
                     <c:if test="${email eq null }">
                     <!-- 이메일 -->
@@ -91,9 +87,7 @@
                         		value="${name}" readonly>
                     </div>
                     </c:if>
-
                   <!-- /간편 회원가입 -->
-                  
                     <!-- 전화번호 -->
                     <div class="phoneWrap">
                         <div id="nation">
