@@ -2,6 +2,8 @@ package com.kh.yongdali.admin.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.yongdali.admin.model.service.AdminService;
 import com.kh.yongdali.admin.model.vo.Calculate;
-import com.kh.yongdali.admin.model.vo.SearchCondition;
+import com.kh.yongdali.admin.model.vo.DriSearchCondition;
+import com.kh.yongdali.admin.model.vo.MemSearchCondition;
 import com.kh.yongdali.admin.model.vo.adRefund;
 import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.common.Pagination;
@@ -34,9 +37,9 @@ public class AdminController {
 	@RequestMapping("aMem.ad")
 	public ModelAndView adminMemList(ModelAndView mv, // " currentPage" 주의
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) { // 현재 페이지가
-																											// 필요한데, 없어도
-																											// 되고, 있으면
-																											// 기본값 1
+		// 필요한데, 없어도
+		// 되고, 있으면
+		// 기본값 1
 
 		System.out.println("memberCurrentPage : " + currentPage);
 
@@ -93,7 +96,7 @@ public class AdminController {
 		return mv;
 	}
 
- 
+
 
 	// 드라이버 계정 계정정보
 	@RequestMapping("adminHome.ydl")
@@ -132,11 +135,11 @@ public class AdminController {
 	}
 
 	// 환불 내역
-//	@RequestMapping("admin_Refund.ydl")
-//	public String adminHomeView6() {
-//		return "admin/admin_Refund";
-//	}
-	
+	//	@RequestMapping("admin_Refund.ydl")
+	//	public String adminHomeView6() {
+	//		return "admin/admin_Refund";
+	//	}
+
 	/**
 	 * admin Refund list
 	 * @param mv
@@ -150,22 +153,22 @@ public class AdminController {
 		int listCount = aService.refundCount();
 		System.out.println("refundlistCount : " + listCount);
 		//======================================
-		
-		
+
+
 		int pageLimit = 5;
 		int boardLimit = 10;
-		
+
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, pageLimit, boardLimit);
 		ArrayList<adRefund> list = aService.adRefundList(pi);
 		mv.addObject("pi",pi);
 		mv.addObject("list",list);
 		mv.setViewName("admin/admin_Refund");
-		
+
 		return mv;
 	} 
-	
-	
-	
+
+
+
 
 	// 채팅 내역
 	@RequestMapping("admin_ChatLog.ydl")
@@ -205,22 +208,22 @@ public class AdminController {
 		}
 	}
 
-	
-	
-	@RequestMapping("SearchAdminMenu")
-	public ModelAndView SearchAdminMenu(ModelAndView mv,
+
+
+	@RequestMapping("SearchAdminMember")
+	public ModelAndView SearchAdminMember(ModelAndView mv,
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage,
 			@RequestParam(value = "memberSearch") String memberSearch, 
 			@RequestParam(value = "content") String content,
-			SearchCondition sc) {
-		
+			MemSearchCondition sc) {
+
 		System.out.println(memberSearch);
 		System.out.println(content);
-		
-		
+
+
 		if(memberSearch.equals("mNo")) {
-			sc.setmNo(content);
-			
+			sc.setmNo(memberSearch); //content
+
 		}else if(memberSearch.equals("mId")){
 			sc.setmId(memberSearch);
 		}else if(memberSearch.equals("pwd")) {
@@ -238,12 +241,12 @@ public class AdminController {
 		}else if (memberSearch.equals("pushEnabled")) {
 			sc.setPushEnabled(memberSearch);
 		}
-//		}else if (memberSearch.equals("enrollDate")) {
-//			sc.setEnrollDate(content); DATE타입..
-//		}
-		
+		//		}else if (memberSearch.equals("enrollDate")) {
+		//			sc.setEnrollDate(content); DATE타입..
+		//		}
+
 		sc.setContent(content);
-		
+
 		int pageLimit = 5;
 		int boardLimit = 10;
 
@@ -252,13 +255,61 @@ public class AdminController {
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, pageLimit, boardLimit);
 
 		ArrayList<Member> list = aService.searchMemberList(pi, sc);
-		
+
 		System.out.println("searchMemberlist : " + list);
-		
+
 		mv.addObject("pi", pi);
 		mv.addObject("list", list);
 		mv.setViewName("admin/admin_Mem");
 		return mv;
 	}
+
+
+
+	@RequestMapping("SearchAdminDriver")
+	public ModelAndView SearchAdminDriver(ModelAndView mv,
+			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage,
+			@RequestParam(value = "driverSearch") String driverSearch,
+			@RequestParam(value = "content") String content,
+			DriSearchCondition sc) {
+
+		if(driverSearch.equals("dNo")) {
+			sc.setdNo(driverSearch);
+		}else if(driverSearch.equals("dmNo")) {
+			sc.setDmNo(driverSearch);
+		}else if(driverSearch.equals("mName")) {
+			sc.setmName(driverSearch);
+		}else if(driverSearch.equals("capacity")) {
+			sc.setCapacity(driverSearch);
+		}else if(driverSearch.equals("type")) {
+			sc.setType(driverSearch);
+		}else if(driverSearch.equals("carNo")) {
+			sc.setCarNo(driverSearch);
+		}
+
+		sc.setContent(content);
+
+
+		int pageLimit =5;
+		int boardLimit=10;
+
+		int listCount = aService.getDriListCount();
+
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, pageLimit, boardLimit);
+
+		ArrayList<Driver> list = aService.searchDriverList(sc,pi); 
+
+		System.out.println("searchDriverlist : " + list);
+		
+		mv.addObject("pi", pi);
+		mv.addObject("list", list);
+		mv.setViewName("admin/admin_Driver");
+		return mv; 
+
+	}
+
+
+
+
 }
-	
+

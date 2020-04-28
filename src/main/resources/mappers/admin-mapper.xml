@@ -57,6 +57,20 @@
 	
 	<!-- Driver List --> 
 	<select id="selectDriList" resultMap="AdminDriResultSet">
+		 
+		 SELECT
+		   D.D_NO,
+           D.D_M_NO,
+		   M.NAME REGCARD_IMG_ORIGIN, 
+		   D.CAPACITY, 
+           D.TYPE, 
+           D.CAR_NO,
+           D.ID_IMG_RENAME, 
+		   D.REGCARD_IMG_RENAME
+           FROM DRIVER D LEFT OUTER
+           JOIN MEMBER M ON(D.D_M_NO = M.M_NO)
+		 
+		 <!-- 
 		   SELECT 
 		   D.D_NO, D.D_M_NO,
 		   M.NAME REGCARD_IMG_ORIGIN, 
@@ -66,7 +80,7 @@
 		   D.ID_IMG_RENAME, 
 		   D.REGCARD_IMG_RENAME
 		FROM MEMBER M LEFT OUTER 
-		JOIN DRIVER D ON(M.M_NO = D.D_M_NO)
+		JOIN DRIVER D ON(M.M_NO = D.D_M_NO) -->
  	</select>
 	
 	<!-- 표현안함 -->
@@ -150,7 +164,36 @@
 		</if>
 	</select>
 		
-	
+	<select id="searchDriverList" resultMap="AdminDriResultSet">
+		SELECT
+		   D.D_NO,
+           D.D_M_NO,
+		   M.NAME REGCARD_IMG_ORIGIN, 
+		   D.CAPACITY, 
+           D.TYPE, 
+           D.CAR_NO
+           FROM DRIVER D LEFT OUTER
+           JOIN MEMBER M ON(D.D_M_NO = M.M_NO)
+           
+           <if test="dNo != null">
+           	WHERE D_NO LIKE '%' || #{content} || '%'
+           </if>
+           <if test="dmNo != null">
+           WHERE D_M_NO LIKE '%' || #{content} || '%'
+           </if>
+           <if test="mName != null">
+           WHERE NAME LIKE '%' || #{content} || '%'  
+           </if>
+           <if test="capacity != null">
+           WHERE CAPACITY LIKE '%' || #{content} || '%'  
+           </if>
+           <if test="type != null">
+           WHERE TYPE LIKE '%' || #{content} || '%'  
+           </if>
+           <if test="carNo != null">
+           WHERE CAR_NO LIKE '%' || #{content} || '%'  
+           </if>
+	</select>
 	
 	
 	
