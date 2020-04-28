@@ -107,14 +107,14 @@
       						   			else if(value == 'naver'){
       						   				alert("네이버 간편 가입 회원입니다. 네이버로 로그인하세요.");
       						   			}
-      						   			else if(value =='facebook'){ // error
+      						   			else if(value =='facebook'){ 
       						   				alert("페이스북 간편 가입 회원입니다. 페이스북으로 로그인하세요.");
       						   			}
       						   			else{
       						   				alert("용달이 회원입니다. 용달이로 로그인하세요.");
       						   			}
       						   		}, error : function(){
-      					        		var msg = "페이스북 간편 로그 중 에러 발생!";
+      					        		var msg = "카카오 간편 로그인 중 에러 발생!";
       					        		location.href="error.ydl?msg="+msg;
       						   		}
       						   	})

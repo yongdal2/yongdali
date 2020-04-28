@@ -961,21 +961,17 @@
 										<div class="col-xs-3 col-md-3">
 											<span>${ a.aPlace }</span>
 											<br>
-											<span>${ a.aName }</span>
+											<span class="stAName">${ a.aName }</span>
 										</div>
 										<div class="col-xs-4 col-md-4">
-											<span>${addrList1[status.index]}</span>
+											<span class="stAddr1">${addrList1[status.index]}</span>
 											<br>
-											<span>${addrList2[status.index]}</span>
+											<span class="stAddr2">${addrList2[status.index]}</span>
 										</div>
 										<div class="col-xs-3 col-md-3" style="padding-top: 9px;">
-											<span>${ a.aPhone }</span>
+											<span class="stAPhone">${ a.aPhone }</span>
 										</div>
 										<input class="stANo" type="hidden" value="${ a.aNo }">
-										<input class="stAName" type="hidden" value="${ a.aName }">
-										<input class="stAddr1" type="hidden" value="${ addrList1[status.index] }">
-										<input class="stAddr2" type="hidden" value="${ addrList2[status.index] }">
-										<input class="stAPhone" type="hidden" value="${ a.aPhone }">
 										<input class="stLat" type="hidden" value="${ a.aLatitude }">
 										<input class="stLong" type="hidden" value="${ a.aLongitude }">
 									</div>
@@ -1037,21 +1033,17 @@
 										<div class="col-xs-3 col-md-3">
 											<span>${ a.aPlace }</span>
 											<br>
-											<span>${ a.aName }</span>
+											<span class="edAName">${ a.aName }</span>
 										</div>
 										<div class="col-xs-4 col-md-4">
-											<span>${addrList1[status.index]}</span>
+											<span class="edAddr1">${addrList1[status.index]}</span>
 											<br>
-											<span>${addrList2[status.index]}</span>
+											<span class="edAddr2">${addrList2[status.index]}</span>
 										</div>
 										<div class="col-xs-3 col-md-3" style="padding-top: 9px;">
-											<span>${ a.aPhone }</span>
+											<span class="edAPhone">${ a.aPhone }</span>
 										</div>
 										<input class="edANo" type="hidden" value="${ a.aNo }">
-										<input class="edAName" type="hidden" value="${ a.aName }">
-										<input class="edAddr1" type="hidden" value="${ addrList1[status.index] }">
-										<input class="edAddr2" type="hidden" value="${ addrList2[status.index] }">
-										<input class="edAPhone" type="hidden" value="${ a.aPhone }">
 										<input class="edLat" type="hidden" value="${ a.aLatitude }">
 										<input class="edLong" type="hidden" value="${ a.aLongitude }">
 									</div>
