@@ -8,7 +8,6 @@
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,55 +18,6 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
     <script src="${contextPath}/resources/js/login&signUp.js"></script>
 	<script> <!-- 페이스북(FB) 아이디로 로그인-->
-		// 2. SDK 로드 후 초기화(함수 실행)
-		window.fbAsyncInit = function() {
-		  FB.init({
-		    appId      : '2281323032164175',
-		    cookie     : true, 	
-		    xfbml      : true,
-		    version    : 'v6.0'
-		  });
-		  	// 3. 페이스북 로그인
-			fbLogin = function(){
-				FB.login(function(res){
-					console.log("login : ", res);
-					
-					// 4. 로그인(커넥션) 상태 확인
-					if(res.status === 'connected'){
-						
-						// 5. 회원정보 호출 API
-						FB.api('/me',{fields: 'email,name'} ,function(resp){
-						    let email = resp.email;
-						    let name = resp.name;
-						   	
-						   	$.ajax({
-						   		url : "fbLoginAjax.me",
-						   		type : "post",
-						   		data : { email : email, name : name},
-						   		success : function(value){
-						   			console.log(value);
-						   			if(value == 'facebook' || value == 'newMem'){
-						   				location.href="home.do";
-						   			}
-						   			else if(value == 'naver'){
-						   				alert("네이버 간편 가입 회원입니다. 네이버로 로그인하세요.");
-						   			}
-						   			else if(value =='kakao'){
-						   				alert("카카오 간편 가입 회원입니다. 카카오로 로그인하세요.");
-						   			}
-						   			else{
-						   				alert("용달이 회원입니다. 용달이로 로그인하세요.");
-						   			}
-						   		}, error : function(){
-						       		var msg = "페이스북 간편 로그인 중 에러 발생!";
-						       		location.href="error.ydl?msg="+msg;
-						   		}
-						   	})
-						});
-					}
-				},{scope:'email'});
-			}
-		};
 		// 1. 비동기화방식으로 SDK 불러오기
 		(function(d, s, id){		
 		   var js, fjs = d.getElementsByTagName(s)[0];
@@ -76,6 +26,57 @@
 		   js.src = "https://connect.facebook.net/en_US/sdk.js";
 		   fjs.parentNode.insertBefore(js, fjs);
 		 }(document, 'script', 'facebook-jssdk'));
+		
+		// 2. SDK 로드 후 초기화(함수 실행)
+		window.fbAsyncInit = function() {
+		  FB.init({
+		    appId      : '2281323032164175',
+		    cookie     : true, 	
+		    xfbml      : true,
+		    version    : 'v6.0'
+		  });
+		};
+		
+	  	// 3. 페이스북 로그인
+		fbLogin = function(){
+			FB.login(function(res){
+				console.log("login : ", res);
+				
+				// 4. 로그인(커넥션) 상태 확인
+				if(res.status === 'connected'){
+					
+					// 5. 회원정보 호출 API
+					FB.api('/me',{fields: 'email,name'} ,function(resp){
+					    let email = resp.email;
+					    let name = resp.name;
+					   	
+					   	$.ajax({
+					   		url : "fbLoginAjax.me",
+					   		type : "post",
+					   		data : { email : email, name : name},
+					   		success : function(value){
+					   			console.log(value);
+					   			if(value == 'facebook' || value == 'newMem'){
+					   				location.href="home.do";
+					   			}
+					   			else if(value == 'naver'){
+					   				alert("네이버 간편 가입 회원입니다. 네이버로 로그인하세요.");
+					   			}
+					   			else if(value =='kakao'){
+					   				alert("카카오 간편 가입 회원입니다. 카카오로 로그인하세요.");
+					   			}
+					   			else{
+					   				alert("용달이 회원입니다. 용달이로 로그인하세요.");
+					   			}
+					   		}, error : function(){
+					       		var msg = "페이스북 간편 로그인 중 에러 발생!";
+					       		location.href="error.ydl?msg="+msg;
+					   		}
+					   	})
+					});
+				}
+			},{scope:'email'});
+		};
 	</script>	
 	<!-- 카카오 아이디로 로그인 -->
 	<script src="${contextPath}/resources/js/kakao.min.js"></script>
@@ -107,14 +108,14 @@
       						   			else if(value == 'naver'){
       						   				alert("네이버 간편 가입 회원입니다. 네이버로 로그인하세요.");
       						   			}
-      						   			else if(value =='facebook'){ // error
+      						   			else if(value =='facebook'){ 
       						   				alert("페이스북 간편 가입 회원입니다. 페이스북으로 로그인하세요.");
       						   			}
       						   			else{
       						   				alert("용달이 회원입니다. 용달이로 로그인하세요.");
       						   			}
       						   		}, error : function(){
-      					        		var msg = "페이스북 간편 로그 중 에러 발생!";
+      					        		var msg = "카카오 간편 로그인 중 에러 발생!";
       					        		location.href="error.ydl?msg="+msg;
       						   		}
       						   	})
@@ -195,12 +196,16 @@
         <div class="easyAccess">
             <h2 class="easyAccessTitle">간편 로그인</h2>
             <div class="easyAccessLogo">
-                <img class="easyAccessBtn" src="${contextPath}/resources/images/login&signUp/facebookLogo.png" alt="페이스북" onclick="fbLogin();">
+                <img class="easyAccessBtn" src="${contextPath}/resources/images/login&signUp/facebookLogo.png" alt="페이스북" onclick="fbLogin();" id="test">
                 <img class="easyAccessBtn" src="${contextPath}/resources/images/login&signUp/kakaoLogo.png" alt="카카오" onclick="kakaoLogin();">
                 <a href="<%=apiURL%>"><img src="${contextPath}/resources/images/login&signUp/naverLogo.png" alt="네이버"></a>
             </div>
         </div>
     </div>
-
+    <script>
+    	/* $('#test').click(function(){
+    		fbLogin();
+    	}) */
+    </script>
 </body>
 </html>

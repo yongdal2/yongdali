@@ -95,7 +95,7 @@
 		
 		function connectionSocket(){
 			connect = true;
-			socket = new WebSocket('ws://192.168.222.117:8888/yongdali/chatting');
+			socket = new WebSocket('ws://192.168.110.45:8081/yongdali/chatting');
 			/* 페이지 접속한 session id */
 			var sessionid = $("#senderId").val();
 			var ccId = $("#ccId").val();
@@ -193,7 +193,7 @@
 			$("#room").val(roomName);
 			
 			var roomNo = $(e).prev().text();
-			alert(roomNo);
+			//alert(roomNo);
 			$("#roomNo").val(roomNo);
 			
 			

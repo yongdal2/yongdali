@@ -10,7 +10,8 @@ import org.springframework.stereotype.Repository;
 import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.reservation.model.vo.Reservation;
 import com.kh.yongdali.admin.model.vo.Calculate;
-import com.kh.yongdali.admin.model.vo.SearchCondition;
+import com.kh.yongdali.admin.model.vo.DriSearchCondition;
+import com.kh.yongdali.admin.model.vo.MemSearchCondition;
 import com.kh.yongdali.admin.model.vo.adRefund;
 import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.driver.model.vo.Driver;
@@ -100,6 +101,11 @@ public class AdminDao {
 	public int jungsan(String rNo) {
 		return sqlSession.update("calculateMapper.jungsan",rNo);
 	}
+	
+	public int jungsan2(String rNo) {
+	    return sqlSession.update("reservationMapper.jungsan2",rNo);
+	}
+
 
 	public int refundCount() {
 		return sqlSession.selectOne("adminMapper.refundCount");
@@ -122,7 +128,7 @@ public class AdminDao {
 	 * @param sc
 	 * @return
 	 */
-	public ArrayList<Member> searchMemberList(PageInfo pi, SearchCondition sc) {
+	public ArrayList<Member> searchMemberList(PageInfo pi, MemSearchCondition sc) {
 
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
@@ -130,5 +136,21 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("adminMapper.searchMemberList", sc, rowBounds);
 	}
 
+	/**
+	 * 기사님 검색
+	 * @param pi
+	 * @param sc
+	 * @return
+	 */
+	public ArrayList<Driver> searchDriverList(PageInfo pi, DriSearchCondition sc) {
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper.searchDriverList",sc,rowBounds);
+	}
+
+	
+	
 
 }

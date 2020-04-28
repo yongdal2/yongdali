@@ -19,8 +19,7 @@ public class Member {
 		super();
 	}
 
-	
-	// 간편 로그인
+	// 간편 로그인(페이스북, 카카오)
 	public Member(String mId, String mName, String mSort, String signupType) {
 		super();
 		this.mId = mId;
@@ -29,15 +28,15 @@ public class Member {
 		this.signupType = signupType;
 	}
 	
-//	// 네아로
-//	public Member(String mId, String mName, String mSort, String signupType, String pushEnabled) {
-//		super();
-//		this.mId = mId;
-//		this.mName = mName;
-//		this.mSort = mSort;
-//		this.signupType = signupType;
-//		this.pushEnabled = pushEnabled;
-//	}
+	// 네아로
+	public Member(String mId, String mName, String mSort, String signupType, String pushEnabled) {
+		super();
+		this.mId = mId;
+		this.mName = mName;
+		this.mSort = mSort;
+		this.signupType = signupType;
+		this.pushEnabled = pushEnabled;
+	}
 	
 	// - mNo, enrollDate
 	public Member(String mId, String pwd, String mName, String phone, String mSort, String mStatus, String signupType,
