@@ -2,7 +2,6 @@ package com.kh.yongdali.myPage.model.vo;
 
 import java.sql.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
 
 
 public class Filter {

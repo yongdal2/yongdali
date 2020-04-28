@@ -109,8 +109,8 @@
  							</td>
  							<td>
  							<c:choose>
-							<c:when test="${r.rightUnLoad eq null}"><c:out value="${fn:replace(r.endDate,'2020','20')}"/></c:when>
-							<c:otherwise>${r.rightUnLoad}</c:otherwise>
+							<c:when test="${r.rightUnload eq null}"><c:out value="${fn:replace(r.endDate,'2020','20')}"/></c:when>
+							<c:otherwise>${r.rightUnload}</c:otherwise>
 							</c:choose>
  							</td>
 							<td>
