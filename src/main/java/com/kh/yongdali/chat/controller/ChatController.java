@@ -42,6 +42,13 @@ public class ChatController {
 		return "admin/adminChat";
 	}
 	
+	/**
+	 * 사용자 채팅방 생성
+	 * @param r
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("userCreateChat.ch")
 	@ResponseBody
 	public String userCreateChat(Room r, Model model,HttpSession session) {
@@ -84,6 +91,11 @@ public class ChatController {
 	}
 	
 	
+	/**
+	 * 메시지 보내기
+	 * @param m
+	 * @return
+	 */
 	@RequestMapping("userSendMessage.ch")
 	@ResponseBody
 	public String userInsertChat(Message m) {
@@ -97,6 +109,13 @@ public class ChatController {
 		
 	}
 	
+	/**
+	 * 현재 방에 이전 메시지 있는지 
+	 * @param response
+	 * @param r
+	 * @throws JsonIOException
+	 * @throws IOException
+	 */
 	@RequestMapping(value="chkPreMessage.ch")
 	public void preMessageChk(HttpServletResponse response, Room r) throws JsonIOException, IOException {
 		response.setContentType("application/json; charset=utf-8");
@@ -145,6 +164,13 @@ public class ChatController {
 		gson.toJson(message, response.getWriter());
 	}
 	
+	/**
+	 * 관리자 채팅방 내 채팅 리스트들 불러오기
+	 * @param response
+	 * @param r
+	 * @throws JsonIOException
+	 * @throws IOException
+	 */
 	@RequestMapping(value="adChkPreRoom.ch")
 	public void adPreRoomChk(HttpServletResponse response, Room r) throws JsonIOException, IOException {
 		response.setContentType("application/json; charset=utf-8");
