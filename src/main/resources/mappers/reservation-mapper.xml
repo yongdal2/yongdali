@@ -158,6 +158,12 @@
 		]]>
 	</select>
 	
+	<update id="jungsan2">
+		UPDATE RESERVATION
+		SET RIGHT_UNLOAD = NULL,
+			END_DATE = TO_DATE('49/12/31','YY/MM/DD')
+		WHERE R_NO = #{rNo}
+	</update>
 </mapper>
 
 

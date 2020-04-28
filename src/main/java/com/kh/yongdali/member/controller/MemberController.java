@@ -284,7 +284,7 @@ public class MemberController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="fbSingUpAjax.me", method=RequestMethod.POST)
+	@RequestMapping(value="fbSignUpAjax.me", method=RequestMethod.POST)
 	public String facebookSignUp(@RequestParam("email") String email, String name, Model model) {
 		
 		// MVC2 로직처리
@@ -311,6 +311,38 @@ public class MemberController {
 	    	return "newFb";
 	    }
 	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="kakaoSignUpAjax.me", method=RequestMethod.POST)
+	public String kakaoSignUp(@RequestParam("email") String email, String name, Model model) {
+		
+		// MVC2 로직처리
+	    int result = mService.emailChk(email);  // 가입 유무 확인
+	    
+	    if(result > 0) {
+	    	Member m = new Member(email);
+	    	Member mem = mService.loginMember(m);
+	    	String type = mem.getSignupType();
+	    	
+	    	if(type.equals("네이버")) {
+	    		return "naver";
+	    	}else if(type.equals("페이스북")){
+//	    		model.addAttribute("loginUser", mem);
+	    		return "facebook";
+	    	}else if(type.equals("카카오")) {
+	    		return "kakao";
+	    	}
+	    	else{
+	    		return "yongdali";
+	    	}
+	    }
+	    else {
+	    	return "newFb";
+	    }
+	}
+	
+	
 	
 	/** 카카오 아이디로 로그인
 	 * @param email
@@ -352,7 +384,6 @@ public class MemberController {
 				return "error";
 	    	}
 	    }
-		
 	}
 
 //	네이버 아이디로 로그인(네아로)	

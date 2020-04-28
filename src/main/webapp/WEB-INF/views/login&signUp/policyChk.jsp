@@ -9,6 +9,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>용달이 | 약관동의</title>
+    
+    <!-- 카카오 아이디로 로그인 -->
+    <script src="${contextPath}/resources/js/kakao.min.js"></script>
+    
     <link rel="stylesheet" href="${contextPath}/resources/css/login&signUp.css">   
     <!-- <script src="http://code.jquery.com/jquery-3.1.1.slim.min.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>

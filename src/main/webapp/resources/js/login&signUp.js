@@ -255,8 +255,6 @@ $(document).ready(function(){
 					
 					// 5. 회원정보 호출 API
 					FB.api('/me',{fields: 'email,name'} ,function(resp){
-						console.log("회원정보 호출 API");
-						
 						let pushEnabled = $('input[name=pushEnabled]').val();
 					    let email = resp.email;
 					    let name = resp.name;
@@ -267,10 +265,9 @@ $(document).ready(function(){
 					    servletUrl += "&signupType=페이스북";
 					    
 					    console.log(servletUrl);
-					    console.log("수정");
 					   	
 					   	$.ajax({
-					   		url : "fbSingUpAjax.me",
+					   		url : "fbSignUpAjax.me",
 					   		type : "post",
 					   		data : { email : email, name : name},
 					   		success : function(value){
@@ -309,8 +306,85 @@ $(document).ready(function(){
 	   fjs.parentNode.insertBefore(js, fjs);
 	 }(document, 'script', 'facebook-jssdk'));
 	/* /페이스북(FB) 아이디로 회원가입 */
-        
+           
+    /* 카카오 아이디로 회원가입 */
+    // 카카오 회원가입 버튼
+    $('#kakaoSignUp').click(function(){
+    	$('#pushEnabledForm').attr('action','signUpView.me');
+    	if($('.chkPolicy:eq(1)').attr('checked') == "checked" && $('.chkPolicy:eq(2)').attr('checked') == "checked"){
+    		kakaoSignUp();
+    	}else {
+    		alert("필수 약관에 동의해야합니다.")
+    	}
+    })
     
+    kakaoSignUp = function(){
+    	// 1. SDK 초기화
+        Kakao.init('c2902431456434e92f377bfc927e6e09');
+    	
+    	// 2. 카카오 로그인
+        Kakao.Auth.login({ 
+            success: function() { 
+                  // 3. 사용자 정보 추출 (사용자 API)
+                  Kakao.API.request({ 
+                	    /* scope: 'email', */
+                        url: '/v2/user/me', 
+                        success: function(res) {  
+    						  console.log("회원정보 호출 API");
+    						  
+    						  let pushEnabled = $('input[name=pushEnabled]').val();
+                              let email = res.kakao_account.email;
+                              let name = res.properties.nickname;
+                              
+                              let servletUrl = "signUpView.me?pushEnabled=" + pushEnabled;
+	      					  servletUrl += "&email=" + email;
+	      					  servletUrl += "&name=" + name;
+	      					  servletUrl += "&signupType=카카오";
+	      					   
+	      					  console.log(servletUrl);
+                            	  
+                              $.ajax({
+  						   		url : "kakaoSignUpAjax.me",
+  						   		type : "post",
+  						   		data : { email : email, name : name},
+  						   		success : function(value){
+  						   			console.log(value);
+  						   			if(value == 'facebook'){
+  						   				alert("페이스북 간편 가입 회원입니다. 페이스북으로 로그인하세요.");
+  						   			}
+  						   			else if(value == 'naver'){
+  						   				alert("네이버 간편 가입 회원입니다. 네이버로 로그인하세요.");
+  						   			}
+  						   			else if(value =='kakao'){
+  						   				alert("카카오 간편 가입 회원입니다. 카카오로 로그인하세요.");
+  						   			}
+  						   			else if(value =='yongdali'){
+  						   				alert("용달이 회원입니다. 용달이로 로그인하세요.");
+  						   			}else{
+//  						   				location.href="signUpView.me?pushEnabled=" + $('input[name=pushEnabled]').val();
+  						   				location.href=servletUrl;
+  						   			}
+  						   		}, error : function(){
+  					        		var msg = "페이스북 간편 로그 중 에러 발생!";
+  					        		location.href="error.ydl?msg="+msg;
+  						   		}
+  						   	})
+                       }, 
+                       fail: function(error) { 
+                             console.log(JSON.stringify(error)); 
+                       } 
+                   }); 
+          }, 
+          fail: function(err) { 
+                console.log(JSON.stringify(err)); 
+          } 
+        });
+    }
+    
+    
+    
+	
+	
     // 네이버 회원가입 버튼
     $('#naverSignUp').click(function(){
     	$('#pushEnabledForm').attr('action','easySignUpView.me');
@@ -322,14 +396,14 @@ $(document).ready(function(){
     })
     
     // 카카오 회원가입 버튼
-    $('#kakaoSignUp').click(function(){
-    	$('#pushEnabledForm').attr('action','easySignUpView.me');
-    	if($('.chkPolicy:eq(1)').attr('checked') == "checked" && $('.chkPolicy:eq(2)').attr('checked') == "checked"){
-    		$('#pushEnabledForm').trigger('submit');
-    	}else {
-    		alert("필수 약관에 동의해야합니다.")
-    	}
-    })
+//    $('#kakaoSignUp').click(function(){
+//    	$('#pushEnabledForm').attr('action','easySignUpView.me');
+//    	if($('.chkPolicy:eq(1)').attr('checked') == "checked" && $('.chkPolicy:eq(2)').attr('checked') == "checked"){
+//    		$('#pushEnabledForm').trigger('submit');
+//    	}else {
+//    		alert("필수 약관에 동의해야합니다.")
+//    	}
+//    })
     
     
     /*-- 비밀번호 찾기 ----------------------------------------------*/

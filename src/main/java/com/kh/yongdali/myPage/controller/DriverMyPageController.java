@@ -142,13 +142,13 @@ public class DriverMyPageController {
 		public ModelAndView driverFilterList(@SessionAttribute Driver driver, ModelAndView mv, Filter f,
 				@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage,
 				@RequestParam("calStatus") String calStatus, @RequestParam("rsvStatus") String rsvStatus,
-				@RequestParam("stDate") Date stDate, @RequestParam("edDate") Date edDate) {
+				@RequestParam("stDate") String stDate, @RequestParam("edDate") String edDate) {
 			
 			
-			f.setdNo(driver.getdNo());
-			f.setCalStatus(calStatus);
-			f.setRsvStatus(rsvStatus);
-			f.setStDate(stDate);
+//			f.setdNo(driver.getdNo());
+//			f.setCalStatus(calStatus);
+//			f.setRsvStatus(rsvStatus);
+//			f.setStDate(stDate);
 			
 			System.out.println(f);
 			

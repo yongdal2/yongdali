@@ -6,6 +6,7 @@ import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.driver.model.vo.Driver;
 import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.myPage.model.vo.Address;
+import com.kh.yongdali.myPage.model.vo.Filter;
 import com.kh.yongdali.payment.model.vo.Payment;
 import com.kh.yongdali.reservation.model.vo.Reservation;
 
@@ -22,6 +23,11 @@ public interface UserMyPageService {
 	 */
 	int updatePhone(Member m);
 	
+	/**광고 동의
+	 * @param loginUser
+	 * @return
+	 */
+	int pushUpdate(Member m);
 	
 	/**
 	 * 나의 주소록 갯수 조회
@@ -67,18 +73,18 @@ public interface UserMyPageService {
 
 	/**
 	 * 마이페이지 예약목록 카운트
-	 * @param mNo
+	 * @param f
 	 * @return
 	 */
-	int getRsvListCount(String mNo);
+	int getRsvListCount(Filter f);
 
 
 	/** 마이페이지 예약내역
 	 * @param pi
-	 * @param mNo
+	 * @param f
 	 * @return
 	 */
-	ArrayList<Reservation> selectRsvList(PageInfo pi, String mNo);
+	ArrayList<Reservation> selectRsvList(PageInfo pi, Filter f);
 
 
 	/**
@@ -118,6 +124,9 @@ public interface UserMyPageService {
 	 * @return
 	 */
 	int rsvCan(Payment p);
+
+
+	
 
 
 }
