@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.yongdali.admin.model.service.AdminService;
 import com.kh.yongdali.admin.model.vo.Calculate;
+import com.kh.yongdali.admin.model.vo.SearchCondition;
 import com.kh.yongdali.admin.model.vo.adRefund;
 import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.common.Pagination;
@@ -205,4 +205,60 @@ public class AdminController {
 		}
 	}
 
+	
+	
+	@RequestMapping("SearchAdminMenu")
+	public ModelAndView SearchAdminMenu(ModelAndView mv,
+			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage,
+			@RequestParam(value = "memberSearch") String memberSearch, 
+			@RequestParam(value = "content") String content,
+			SearchCondition sc) {
+		
+		System.out.println(memberSearch);
+		System.out.println(content);
+		
+		
+		if(memberSearch.equals("mNo")) {
+			sc.setmNo(content);
+			
+		}else if(memberSearch.equals("mId")){
+			sc.setmId(memberSearch);
+		}else if(memberSearch.equals("pwd")) {
+			sc.setPwd(memberSearch);
+		}else if (memberSearch.equals("mName")) {
+			sc.setmName(memberSearch);
+		}else if (memberSearch.equals("phone")) {
+			sc.setPhone(memberSearch);
+		}else if (memberSearch.equals("mSort")) {
+			sc.setmSort(memberSearch);
+		}else if (memberSearch.equals("mStatus")) {
+			sc.setmStatus(memberSearch);
+		}else if (memberSearch.equals("signupType")) {
+			sc.setSignupType(memberSearch);
+		}else if (memberSearch.equals("pushEnabled")) {
+			sc.setPushEnabled(memberSearch);
+		}
+//		}else if (memberSearch.equals("enrollDate")) {
+//			sc.setEnrollDate(content); DATE타입..
+//		}
+		
+		sc.setContent(content);
+		
+		int pageLimit = 5;
+		int boardLimit = 10;
+
+		int listCount = aService.getMemListCount();
+
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, pageLimit, boardLimit);
+
+		ArrayList<Member> list = aService.searchMemberList(pi, sc);
+		
+		System.out.println("searchMemberlist : " + list);
+		
+		mv.addObject("pi", pi);
+		mv.addObject("list", list);
+		mv.setViewName("admin/admin_Mem");
+		return mv;
+	}
 }
+	

@@ -50,6 +50,12 @@ public interface MemberService {
 	 */
 	int updatePwd(Member m);
 
+	/** 간편로그인 회원 약관동의
+	 * @param m
+	 * @return
+	 */
+	int setPushEnabled(Member m);
+
 
 	
 	

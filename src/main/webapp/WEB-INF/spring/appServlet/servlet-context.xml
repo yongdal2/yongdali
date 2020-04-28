@@ -34,6 +34,10 @@
 			<mapping path="/chat.ch"/>
 			<beans:bean id="chatInterceptor" class="com.kh.yongdali.common.interceptor.ChatInterceptor"/>
 		</interceptor>
+		<interceptor>
+			<mapping path="/home.do"/>
+			<beans:bean id="homeInterceptor" class="com.kh.yongdali.common.interceptor.HomeInterceptor"/>
+		</interceptor>
 	</interceptors>
 	
 	<!-- <beans:bean id="echoHandler" class="com.kh.yongdali.chat.config.EchoHandler" />

@@ -44,4 +44,9 @@ public class MemberServiceImpl implements MemberService {
 	public int updatePwd(Member m) {
 		return mDao.updatePwd(m);
 	}
+
+	@Override
+	public int setPushEnabled(Member m) {
+		return mDao.setPushEnabled(m);
+	}
 }

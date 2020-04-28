@@ -19,6 +19,7 @@
 	<!-- Navigation -->
 	<%@ include file="../common/nav_admin.jsp"%>
 	<!-- 배경색 -->
+<form action="SearchAdminMenu">	
 <div id="backg">
 	<!-- <div style="width: 100%; height: 100%; padding-top: 30px; padding-top: 30px;"> -->
 
@@ -46,10 +47,38 @@
 					<!-- <a href="#"><span class="sidebar_span">채팅 내역</span></a> -->
 				</div>
 
+
+	     
+
+
 			<!-- list -->
 			<div class="row" id="rowList">
+			
+			<!-- 검색기능 -->
+<div id="search" >
+    <select id="searchCondition" class="search" name="memberSearch">
+        <option value="" selected="selected">선택</option>
+        <option value="mNo">회원번호</option>
+        <option value="mId">회원ID(이메일)</option>
+        <option value="mName">이름</option>
+        <option value="phone">휴대폰번호</option>
+        <option value="mSort">회원구분</option>
+        <option value="mStatus">회원상태</option>
+        <option value="signupType">가입타입</option>
+        <option value="pushEnabled">알림설정</option>
+        <option value="enrollDate">가입일</option>
+      </select>
+    
+     
+            <input type="text" name="content" >
+            <input type="submit" value="검색">
+</div>
+
+
 				<div class="col-xs-12 col-md-12" id="table">
 					<br>
+					
+					
 				<!-- <table style="text-align: center" class="table table-striped table-hover text-center"> -->
 					<table class="table table-striped table-hover text-center">
 						<thead id="thead">
@@ -60,6 +89,7 @@
 								<th>휴대폰번호</th>
 								<th>회원구분</th>
 								<th>회원상태</th>
+								<th>가입타입</th>
 								<th>알림설정</th>
 								<th>가입일</th>
 							</tr>
@@ -74,6 +104,7 @@
 								<td>${ a.phone }</td>
 								<td>${ a.mSort }</td>
 								<td>${ a.mStatus }</td>
+								<td>${ a.signupType }</td>
 								<td>${ a.pushEnabled }</td>
 								<td>${ a.enrollDate }</td>
 							</tr>
@@ -81,7 +112,7 @@
 						</c:forEach>
 					</table>
 				</div>
-				
+ 
 				<!-- 페이징 처리 -->
 				<div class="row text-center" style="height: 400px">
 					<ul class="pagination ft_gr">
@@ -149,6 +180,9 @@
 		
 	</div>
 </div>
+
+</form>
+
 
 	<!-- Footer -->
 	<%@ include file="../common/footer.jsp"%>

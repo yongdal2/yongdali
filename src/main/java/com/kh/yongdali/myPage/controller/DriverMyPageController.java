@@ -32,11 +32,6 @@ public class DriverMyPageController {
 	@Autowired
 	private DriverMyPageService dmpService;
 	
-	
-
-
-	
-	
 	//======================드라이버 정보==============================
 	//드라이버 프로필 사진 변경
 	
@@ -143,10 +138,12 @@ public class DriverMyPageController {
 		}
 		
 		@RequestMapping("driverFilter.myp")
+		
 		public ModelAndView driverFilterList(@SessionAttribute Driver driver, ModelAndView mv, Filter f,
 				@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage,
 				@RequestParam("calStatus") String calStatus, @RequestParam("rsvStatus") String rsvStatus,
 				@RequestParam("stDate") Date stDate, @RequestParam("edDate") Date edDate) {
+			
 			
 			f.setdNo(driver.getdNo());
 			f.setCalStatus(calStatus);
@@ -155,21 +152,22 @@ public class DriverMyPageController {
 			
 			System.out.println(f);
 			
-			int flistCount =dmpService.getFilterCountList(f);
+			int flistCount =dmpService.getFilCalListCount(f);
 			
 			PageInfo pi = Pagination.getPageInfo(currentPage, flistCount, 5, 20);
 			
-			ArrayList<Reservation> fCalList = dmpService.selectFilterCalList(pi,f);
+			ArrayList<Reservation> fCalList = dmpService.selectFilCalList(pi,f);
+			
+			
 			
 			System.out.println(fCalList);
 			
-			mv.addObject("fCalList",fCalList);
+			mv.addObject("cList",fCalList);
 			mv.addObject("pi",pi);
 			mv.setViewName("driver/myPage/driverSettle");
 			return mv;
 		}
 		
-//		
 		
 		
 		

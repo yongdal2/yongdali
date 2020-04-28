@@ -11,6 +11,7 @@
 		<result property="mSort" column="M_SORT"/>
 		<result property="mStatus" column="M_STATUS"/>
 		<result property="pushEnabled" column="PUSH_ENABLED"/>
+		<result property="signupType" column="SIGNUP_TYPE"/>
 		<result property="enrollDate" column="ENROLLDATE"/>
 	</resultMap>
 	
@@ -22,8 +23,8 @@
 		<result property="carNo" column="CAR_NO"/>
 		<result property="idImgOrigin" column="ID_IMG_ORIGIN"/>
 		<result property="idImgRename" column="ID_IMG_RENAME"/>
-		<result property="regCardImgOrigin" column="CAR_IMG_ORIGIN"/>
-		<result property="regCardImgRename" column="CAR_IMG_RENAME"/>
+		<result property="regCardImgOrigin" column="REGCARD_IMG_ORIGIN"/>
+		<result property="regCardImgRename" column="REGCARD_IMG_RENAME"/>
 	</resultMap>
 	
 		<resultMap type="adRefund" id="AdminRefResultSet">
@@ -59,8 +60,11 @@
 		   SELECT 
 		   D.D_NO, D.D_M_NO,
 		   M.NAME REGCARD_IMG_ORIGIN, 
-		   D.CAPACITY, D.TYPE, D.CAR_NO, 
-		   D.ID_IMG_RENAME, D.REGCARD_IMG_RENAME
+		   D.CAPACITY, 
+		   D.TYPE,
+		   D.CAR_NO, 
+		   D.ID_IMG_RENAME, 
+		   D.REGCARD_IMG_RENAME
 		FROM MEMBER M LEFT OUTER 
 		JOIN DRIVER D ON(M.M_NO = D.D_M_NO)
  	</select>
@@ -109,8 +113,43 @@
 	</select>
 	
 	
+	<select id="searchMemberList" resultMap="AdminMemResultSet">
+		SELECT *
+		FROM MEMBER	
 	
-	
+		<!-- 1. IF문으로 하는 방법 -->
+		<if test="mNo != null">
+			WHERE M_NO LIKE '%' || #{content} || '%'
+		</if>
+		<if test="mId != null">
+			WHERE M_ID LIKE '%' || #{content} || '%'
+		</if>
+		<if test="pwd != null">
+			WHERE PWD LIKE '%' || #{content} || '%'
+		</if>
+		<if test="mName != null">
+			WHERE NAME LIKE '%' || #{content} || '%'
+		</if>
+		<if test="mName != null">
+			WHERE PHONE LIKE '%' || #{content} || '%'
+		</if>
+		<if test="mSort != null">
+			WHERE M_SORT LIKE '%' || #{content} || '%'
+		</if>
+		<if test="mStatus != null">
+			WHERE M_STATUS LIKE '%' || #{content} || '%'
+		</if>
+		<if test="signupType != null">
+			WHERE SIGNUP_TYPE LIKE '%' || #{content} || '%'
+		</if>
+		<if test="pushEnabled != null">
+			WHERE PUSH_ENABLED LIKE '%' || #{content} || '%'
+		</if>
+		<if test="enrollDate != null">
+			WHERE ENROLLDATE LIKE '%' || #{content} || '%'
+		</if>
+	</select>
+		
 	
 	
 	

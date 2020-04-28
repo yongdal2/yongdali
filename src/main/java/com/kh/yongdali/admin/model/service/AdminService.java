@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.reservation.model.vo.Reservation;
 import com.kh.yongdali.admin.model.vo.Calculate;
+import com.kh.yongdali.admin.model.vo.SearchCondition;
 import com.kh.yongdali.admin.model.vo.adRefund;
 import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.driver.model.vo.Driver;
@@ -67,7 +68,19 @@ public interface AdminService {
 	 */
 	ArrayList<adRefund> adRefundList(PageInfo pi);
 
+	
+	
+	
+	/**
+	 * 회원 검색
+	 * @param pi
+	 * @param sc
+	 * @return
+	 */
+	ArrayList<Member> searchMemberList(PageInfo pi, SearchCondition sc);
 
+
+	
 	
 	
 	
