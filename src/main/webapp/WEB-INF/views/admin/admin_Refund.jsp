@@ -76,7 +76,7 @@
 									<c:when test="${a.calcYn = 0}">
 										<td><button onclick="refund(this.value)" value="${a.rNo}">환불하기</button></td>
 									</c:when>
-									<c:when test="${a.calcYn = 2}">
+									<c:when test="${a.cancYn = 2}">
 										<td>환불 완료</td>									
 									</c:when>
 								</c:choose>
