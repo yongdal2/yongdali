@@ -26,13 +26,13 @@
 		<result property="createDate" column="CREATEDATE"/>
 		<result property="connectYN" column="CONNECTYN"/>
 	</resultMap>
-	
+	<!-- 사용자 방 생성 -->
 	<insert id="userCreateChat" parameterType="Room">
 		INSERT INTO CHATROOM
 		VALUES('CR'||SEQ_CRNO.NEXTVAL,#{id},#{receiveId},
 			   #{roomName},#{flag},DEFAULT,DEFAULT)
 	</insert>
-	
+	<!-- 방금 생성한 방 가져오기 -->
 	<select id="selectNowRoom" resultMap="roomResultSet" parameterType="Room">
 		SELECT * 
 		FROM(
@@ -44,22 +44,26 @@
 		AND SENDID=#{id} 
 	</select>
 	
+	<!-- 메시지 저장 -->
 	<insert id="userInsertMessage" parameterType="Message">
 		INSERT INTO CHATMESSAGE
 		VALUES('CM'||SEQ_CMNO.NEXTVAL,#{roomNo},#{id},#{roomName},#{msg},DEFAULT,#{flag},DEFAULT)
 	</insert>
 	
+	<!-- 이전에 생성한 방 있으면 방번호 가져오기 -->
 	<select id="selectPreRoom" resultMap="roomResultSet" parameterType="Room">
 		SELECT CR_NO FROM CHATROOM
         WHERE SENDID=#{id}
         AND CONNECTYN='Y'
 	</select>
 	
+	<!-- 해당 방번호에 이전 메시지들 가져오기 -->
 	<select id="selectPreMessage" resultMap="messageResultSet">
 		SELECT * FROM CHATMESSAGE
 		WHERE CM_CR_NO=#{roomNo}
 	</select>
 	
+	<!-- 관리자 채팅방 내 채팅 리스트들 가져오기 -->
 	<select id="selectAdPreRoom" resultMap="roomResultSet" parameterType="Room">
 		SELECT * FROM CHATROOM
 		WHERE RECEIVEID=#{id}
