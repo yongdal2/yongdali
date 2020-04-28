@@ -150,6 +150,14 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("adminMapper.searchDriverList",sc,rowBounds);
 	}
 
+	public int adminRefund(String rNo) {
+		return sqlSession.update("adminMapper.adminRefund",rNo);
+	}
+
+	public ArrayList<adRefund> adminRefundList() {
+		return (ArrayList)sqlSession.selectList("adminMapper.adminRefundList");
+	}
+
 	
 	
 

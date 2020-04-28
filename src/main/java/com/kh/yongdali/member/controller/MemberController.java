@@ -501,10 +501,6 @@ public class MemberController {
 	}
 		
 		
-		
-		
-		
-	
 //	네이버 아이디로 로그인(네아로)	
 	/** 네이버 아이디로 로그인(네아로)
 	 * @param model
@@ -600,7 +596,7 @@ public class MemberController {
 	    } catch (Exception e) {
 	      System.out.println(e);
 	    }
-		return "user/home";
+		return "redirect:home.do";
 	}
     private static String get(String apiUrl, Map<String, String> requestHeaders){ // 회원정보 조회 API 2.
         HttpURLConnection con = connect(apiUrl);

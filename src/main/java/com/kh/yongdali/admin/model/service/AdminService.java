@@ -89,6 +89,20 @@ public interface AdminService {
 	ArrayList<Driver> searchDriverList(DriSearchCondition sc, PageInfo pi);
 
 	
+	/**
+	 * 환불처리
+	 * @param rNo
+	 * @return
+	 */
+	int adminRefund(String rNo);
+
+	/**
+	 * 환불 처리후 리스트 불러오기
+	 * @return
+	 */
+	ArrayList<adRefund> adminRefundList();
+
+	
 
 
 	

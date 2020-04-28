@@ -134,34 +134,6 @@ btn1.onclick = function() {
 	modal2.style.display = "block";
 }
 
-//When the user clicks on <span> (x), close the modal
-span2.onclick = function() {
-	var s1 = $('.move-content1112');
-    var s2 = $('.move-content1113');
-    var userLoads = [];
-    
-    for(var i = 0; i<s1.length; i++){
-        if($(s1[i]).html()>0){
-            var title = $('.move-content112');
-            userLoads.push($(title[i]).html()+'('+$(s1[i]).html()+')');
-        }
-    }
-
-    for(var i = 0; i<s2.length; i++){
-        if($(s2[i]).html()>0){
-            var title = $('.move-content113');
-            userLoads.push($(title[i]).val()+'('+$(s2[i]).html()+')');
-        }
-    }
-    console.log(userLoads);
-
-    var arrayString = userLoads.join(', ');
-    $('#load-content-area').text(arrayString);
-    
-    modal2.style.display = "none";
-	modal2.style.display = "none";
-}
-
 //모달 영역 밖에 클릭했을때 모달 닫기
 // window 연결이 끊겨서 mouseenter로 연결하여 해결함
 $("#myModal2").mouseenter(function(){
@@ -298,6 +270,7 @@ $(function(){
             if($(s1[i]).html()>0){
                 var title = $('.move-content112');
                 userLoads.push($(title[i]).html()+'('+$(s1[i]).html()+')');
+                $(s1[i]).html("0");
             }
         }
 
@@ -305,6 +278,7 @@ $(function(){
             if($(s2[i]).html()>0){
                 var title = $('.move-content113');
                 userLoads.push($(title[i]).val()+'('+$(s2[i]).html()+')');
+                $(s2[i]).html("0");
             }
         }
         console.log(userLoads);
@@ -316,6 +290,37 @@ $(function(){
     });
 });
 
+//When the user clicks on <span> (x), close the modal
+span2.onclick = function() {
+	// 가구, 가전 관련 갯수
+	var s1 = $('.move-content1112');
+    // 기타 관련 갯수
+	var s2 = $('.move-content1113');
+    var userLoads = [];
+    
+    for(var i = 0; i<s1.length; i++){
+        if($(s1[i]).html()>0){
+            var title = $('.move-content112');
+            userLoads.push($(title[i]).html()+'('+$(s1[i]).html()+')');
+            $(s1[i]).html("0");
+        }
+    }
+
+    for(var i = 0; i<s2.length; i++){
+        if($(s2[i]).html()>0){
+            var title = $('.move-content113');
+            userLoads.push($(title[i]).val()+'('+$(s2[i]).html()+')');
+            $(s2[i]).html("0");
+        }
+    }
+    console.log(userLoads);
+    
+    var arrayString = userLoads.join(', ');
+    $('#load-content-area').text(arrayString);
+    
+    modal2.style.display = "none";
+	modal2.style.display = "none";
+}
 
 /* 출발지,도착지 주소 검색 후 위경도 변환 */
 
@@ -1023,25 +1028,30 @@ function addAddr(){
 
 // 예약하기 버튼 & 상하차 날짜 입력하지 않으면 return false 조건 적용
 $('#revForm').submit(function(){
-console.log($('#datepicker1').val());
 	// 바로 상차를 입력했거나 상차 날짜 입력되었거나
-	if($('#checkLoad1').is(":checked") || $('#datepicker1').val()!=""){
-		// 바로 상차를 입력했거나 하차 날짜 입력되었거나
-		if($('#checkLoad2').is(":checked") || $('#datepicker2').val()!=""){			
-			if(confirm("결제 진행하시겠습니까?")){
-				addAddr();
-				return;
-			} else {
+	if(amount <= 1000000){		
+		if($('#checkLoad1').is(":checked") || $('#datepicker1').val()!=""){
+			// 바로 상차를 입력했거나 하차 날짜 입력되었거나
+			if($('#checkLoad2').is(":checked") || $('#datepicker2').val()!=""){			
+				if(confirm("결제 진행하시겠습니까?")){
+					addAddr();
+					return;
+				} else {
+					return false;
+				}
+			} else {			
+				alert("하차 날짜를 지정해주세요.");
 				return false;
 			}
-		} else {			
-			alert("하차 날짜를 지정해주세요.");
+		} else {		
+			alert("상차 날짜를 지정해주세요.");
 			return false;
 		}
-	} else {		
-		alert("상차 날짜를 지정해주세요.");
+	} else {
+		alert("결제금액이 100만원 초과하셨습니다.\n100만원 이하로 다시 예약 부탁드리겠습니다.");
 		return false;
 	}
+	
 });
 
 
