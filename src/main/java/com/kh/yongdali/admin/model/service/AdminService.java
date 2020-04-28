@@ -55,7 +55,7 @@ public interface AdminService {
 
 	int jungsan(String rNo);
 
-	
+	int junsan2(String rNo);	
 	
 	
 	
@@ -87,6 +87,8 @@ public interface AdminService {
 	 * @return
 	 */
 	ArrayList<Driver> searchDriverList(DriSearchCondition sc, PageInfo pi);
+
+	
 
 
 	

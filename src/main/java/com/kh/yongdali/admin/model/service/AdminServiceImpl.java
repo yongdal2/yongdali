@@ -79,6 +79,12 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
+	   public int junsan2(String rNo) {
+	      return aDao.jungsan2(rNo);
+	}
+	
+	
+	@Override
 	public int refundCount() {
 		return aDao.refundCount();
 	}
@@ -100,6 +106,8 @@ public class AdminServiceImpl implements AdminService {
 	public ArrayList<Driver> searchDriverList(DriSearchCondition sc, PageInfo pi) {
 		return aDao.searchDriverList(pi,sc);
 	}
+
+
 
 
 

@@ -101,6 +101,11 @@ public class AdminDao {
 	public int jungsan(String rNo) {
 		return sqlSession.update("calculateMapper.jungsan",rNo);
 	}
+	
+	public int jungsan2(String rNo) {
+	    return sqlSession.update("reservationMapper.jungsan2",rNo);
+	}
+
 
 	public int refundCount() {
 		return sqlSession.selectOne("adminMapper.refundCount");
@@ -145,5 +150,7 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("adminMapper.searchDriverList",sc,rowBounds);
 	}
 
+	
+	
 
 }

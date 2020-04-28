@@ -132,7 +132,7 @@
 													trigger : 'hover focus',
 													content : function() {
 														var url = $(this).val();
-														return '<img alt="호호1" src="'+url+'" />';
+														return '<img alt="호호1" style="width: 100%;" src="'+url+'" />';
 													}
 												});
 								//배열중에서 id는 안딤
@@ -143,7 +143,7 @@
 													trigger : 'hover focus',
 													content : function() {
 														var url = $(this).val();
-														return '<img alt="호호2" src="'+url+'" />';
+														return '<img alt="호호2" style="width: 100%;" src="'+url+'" />';
 													}
 												});
 							</script>

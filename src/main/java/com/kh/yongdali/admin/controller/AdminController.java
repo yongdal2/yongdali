@@ -195,20 +195,35 @@ public class AdminController {
 		return mv;
 	}
 
+	/*
+	 * @RequestMapping("Jungsan.do") public String jungsan(String rNo) {
+	 * 
+	 * int result = aService.jungsan(rNo);
+	 * 
+	 * if (result > 0) { // 나의 예약페이지로 이동 return "admin/admin_Reser"; } else { return
+	 * "common/errorPage"; } }
+	 */
+
 	@RequestMapping("Jungsan.do")
-	public String jungsan(String rNo) {
+	   public String jungsan(String rNo) {
 
-		int result = aService.jungsan(rNo);
+	      int result1 = aService.jungsan(rNo);
 
-		if (result > 0) {
-			// 나의 예약페이지로 이동
-			return "admin/admin_Reser";
-		} else {
-			return "common/errorPage";
-		}
-	}
-
-
+	      if(result1>0) {
+	         int result2 = aService.junsan2(rNo);
+	         
+	         if (result2 > 0) {
+	            return "admin/admin_Reser";
+	         } else {
+	            return "common/errorPage";
+	         }
+	      }else {
+	         return "common/errorPage";
+	      }
+	      
+	      
+	   }
+	
 
 	@RequestMapping("SearchAdminMember")
 	public ModelAndView SearchAdminMember(ModelAndView mv,
