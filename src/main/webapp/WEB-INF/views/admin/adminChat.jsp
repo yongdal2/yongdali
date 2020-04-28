@@ -193,7 +193,7 @@
 			$("#room").val(roomName);
 			
 			var roomNo = $(e).prev().text();
-			alert(roomNo);
+			//alert(roomNo);
 			$("#roomNo").val(roomNo);
 			
 			
