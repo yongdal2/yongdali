@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
@@ -71,6 +73,26 @@ public class UserMyPageController {
 			md.addAttribute("msg", "회원정보 수정 실패!!");
 			return "common/errorPage";
 		}
+	}
+	
+	//광고 동의
+	@ResponseBody
+	@RequestMapping("pushChk.myp")
+	public String pushUpdate(@RequestParam("YN") String YN, @SessionAttribute Member loginUser) {
+		
+		loginUser.setPushEnabled(YN);
+		
+		System.out.println(YN);
+
+		int result = umpService.pushUpdate(loginUser);
+
+		System.out.println("광고 동의 결과 : "+ result +","+ YN);
+		if(result>0) {
+			return YN;
+		}else{
+			return "fail";
+		}
+		
 	}
 		
 	
@@ -199,17 +221,55 @@ public class UserMyPageController {
 		
 		// 나의 예약내역
 		@RequestMapping("myRSV.myp")
-		public ModelAndView myRsvList(@SessionAttribute Member loginUser, ModelAndView mv,
-									@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage) {
+		public ModelAndView myRsvList(@SessionAttribute Member loginUser, ModelAndView mv, Filter f,
+				@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage,
+				@RequestParam(value="rsvStatus", required = false) String rsvStatus,
+				@RequestParam(value="stDate", required = false) String sDate,
+				@RequestParam(value="edDate", required = false) String eDate,
+				@RequestParam(value="fSearch", required = false) String fSearch) throws ParseException {
+			
+			f.setmNo(loginUser.getmNo());
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			
 			
-			String mNo = loginUser.getmNo();
-			int rlistCount =umpService.getRsvListCount(mNo);
+			String stDate = "";
+			String edDate = "";
 			
-			System.out.println();
-			PageInfo pi = Pagination.getPageInfo(currentPage, rlistCount, 5, 20);
 			
-			ArrayList<Reservation> rList = umpService.selectRsvList(pi,mNo);
+			// 상하차일 타입 Date로 변환하기
+			if (sDate != null) {
+				String sy = sDate.substring(0, 4);
+				String sm = sDate.substring(6, 8);
+				String sd = sDate.substring(10, 12);
+				stDate = sy + "-" + sm + "-" + sd;
+				if (stDate != "") {
+					Date startDate = new Date(sdf.parse(stDate).getTime());
+					System.out.println(startDate);
+					f.setStDate(startDate);
+				}
+				
+			}
+			if (eDate != null) {
+				String ey = eDate.substring(0, 4);
+				String em = eDate.substring(6, 8);
+				String ed = eDate.substring(10, 12);
+				edDate = ey + "-" + em + "-" + ed;
+				if (edDate != "") {
+					Date endDate = new Date(sdf.parse(edDate).getTime());
+					System.out.println(endDate);
+					f.setEdDate(endDate);
+				}
+			}
+			
+			System.out.println(f);
+				
+				
+			int rlistCount =umpService.getRsvListCount(f);
+			
+			PageInfo pi = Pagination.getPageInfo(currentPage, rlistCount, 5, 10);
+			
+			ArrayList<Reservation> rList = umpService.selectRsvList(pi,f);
 			
 			System.out.println(rList);
 			
@@ -219,15 +279,14 @@ public class UserMyPageController {
 			return mv;
 		}
 		
-//		// 나의 예약내역(필터 포함)
+		// 나의 예약내역(필터 포함)
 //				@RequestMapping("myRSV.myp")
 //				public ModelAndView userFilterList(@SessionAttribute Member loginUser, ModelAndView mv, Filter f,
 //						@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage,
-//						
 //						@RequestParam(value="fSearch", required = false) String fSearch, 
 //						@RequestParam(value="rsvStatus", required = false) String rsvStatus,
 //						@RequestParam(value="stDate", required = false) Date stDate,
-//						@RequestParam("edDate", required = false) Date edDate) {
+//						@RequestParam(value="edDate", required = false) Date edDate) {
 //					
 //					
 //					f.setmNo(loginUser.getmNo());
