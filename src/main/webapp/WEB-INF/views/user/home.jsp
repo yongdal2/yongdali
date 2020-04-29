@@ -25,6 +25,7 @@
 		});
 	</script>
 </head>
+<c:set var="contextPath" value="${pageContext.servletContext.contextPath }" scope="application"/>
 <body style="overflow-x: hidden;">
 	<!-- header -->
 	<c:import url="../common/home_nav.jsp"/>
