@@ -129,7 +129,8 @@
 					}
 				})
 			}
-			socket.onmessage = function(e){
+
+ 			socket.onmessage = function(e){
 				console.log(e.data);
 				var data=JSON.parse(e.data);
 				
@@ -162,6 +163,10 @@
 				}
 				
 				if(data["flag"]!="room" && data["flag"]!="user"){
+					console.log("data : " + data)
+				}
+				
+				/* if(data["flag"]!="room" && data["flag"]!="user"){
 					if(sessionid == data["id"]){
 						var printHTML = "<div class='message text-only'>";
 		    			printHTML += "<div class='response' id='meMsg'>";
@@ -170,20 +175,18 @@
 		    			printHTML += "<p class='response-time time'>"+hours+":"+minutes+"</p>";
 		    			printHTML += "</div>";
 	    			}else{    	
-	    				if($("#chatRoomNo").text == data["roomNo"]){
-		    				var printHTML = "<div class='message' id='youMsg'>";
-			              	printHTML += "<div class='name'>";
-			              	printHTML += "<h2>"+data["roomName"]+"</h2>";
-			              	printHTML += "</div>";
-			              	printHTML += "<div class='messageArea'>";
-			    			printHTML += "<p class='text'>"+data["msg"]+"</p>";
-			    			printHTML += "<p class='time'>"+hours+":"+minutes+"</p>";
-			    			printHTML += "</div>";
-			    			printHTML += "</div>";
-	    				}
+	    				var printHTML = "<div class='message' id='youMsg'>";
+		              	printHTML += "<div class='name'>";
+		              	printHTML += "<h2>"+data["roomName"]+"</h2>";
+		              	printHTML += "</div>";
+		              	printHTML += "<div class='messageArea'>";
+		    			printHTML += "<p class='text'>"+data["msg"]+"</p>";
+		    			printHTML += "<p class='time'>"+hours+":"+minutes+"</p>";
+		    			printHTML += "</div>";
+		    			printHTML += "</div>";
 	    			}
 					writeResponse(printHTML);
-				}
+				} */
 			
 			}
 		
@@ -259,6 +262,43 @@
         		}
         	})
         	// 기존 대화 불러오기
+        	
+        	
+        	
+			socket.onmessage = function(e){
+				console.log(e.data);
+				var data=JSON.parse(e.data);
+				
+				console.log("세션아이디:"+sessionid);
+				console.log("받는아이디:"+data["receiveId"]);
+			
+	
+				if(data["flag"]!="room" && data["flag"]!="user"){
+					if(sessionid == data["id"]){
+						var printHTML = "<div class='message text-only'>";
+		    			printHTML += "<div class='response' id='meMsg'>";
+		    			printHTML += "<p class='text'>"+data["msg"]+"</p>";
+		    			printHTML += "</div>";
+		    			printHTML += "<p class='response-time time'>"+hours+":"+minutes+"</p>";
+		    			printHTML += "</div>";
+	    			}else{    	
+	    				if(roomNo == data["roomNo"]){
+		    				var printHTML = "<div class='message' id='youMsg'>";
+			              	printHTML += "<div class='name'>";
+			              	printHTML += "<h2>"+data["roomName"]+"</h2>";
+			              	printHTML += "</div>";
+			              	printHTML += "<div class='messageArea'>";
+			    			printHTML += "<p class='text'>"+data["msg"]+"</p>";
+			    			printHTML += "<p class='time'>"+hours+":"+minutes+"</p>";
+			    			printHTML += "</div>";
+			    			printHTML += "</div>";
+	    					
+	    				}
+	    			}
+					writeResponse(printHTML);
+				}
+			
+			}
         	
         	
 		}
