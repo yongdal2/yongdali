@@ -74,10 +74,10 @@ $(document).ready(function(){
 		location.href="loginView.me"
 	});
 	
-	$(".logout").click(function(){
-		location.href="logout1.me";
-		history.go();
-	});
+//	$(".logout").click(function(){
+//		location.href="logout1.me";
+//		history.go();
+//	});
 	
 	$(".driverPage").click(function(){
 		location.href="driverMain.ydl"
@@ -88,7 +88,7 @@ $(document).ready(function(){
 	});
 	
 	$(".adminPage").click(function(){
-		location.href="#"
+		location.href="adminHome.ydl"
 	});
 	
 	/*-- 로그인페이지 ----------------------------------------------*/
@@ -392,9 +392,19 @@ $(document).ready(function(){
     		// 2. ajax에서 url 호출할 경우 cross-origin 에러 발생했었으나 servelet에 @CrossOrigin 어노테이션 사용으로 오류제거함
     		// 3. 오류는 뜨지 않으나 여전히 url이 호출되지 않음(logger 안뜸)
     		$.ajax({
-    			url : apiURL,
+    			url : $('#apiURL').val(),
     			type : "get",
-    			sucess : function(value){
+    			dataType: 'jsonp',
+    			jsonpCallback: "myCallback",
+    			success: callBack('myCallback'),
+    			error : function(request,status,error){
+    				console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+    				var msg = "네이버 간편 회원가입 중 오류 발생";
+    				location.href="error.ydl?msg="+msg;
+    			}
+    		});
+//    			async:false,
+    			function callBack(value){
 		   			console.log(value);
 		   			if(value == 'facebook'){
 		   				alert("페이스북 간편 가입 회원입니다. 페이스북으로 로그인하세요.");
@@ -423,15 +433,12 @@ $(document).ready(function(){
 	  					  
 	  					location.href=servletUrl;
 		   			}
-    			}, error : function(){
-    				var msg = "네이버 간편 회원가입 중 오류 발생";
-                	location.href="error.ydl?msg="+msg;
-    			}
-    		})
+    			};
+    		
     	}else {
     		alert("필수 약관에 동의해야합니다.")
     	}
-    })
+    });
 
         
     /*-- 비밀번호 찾기 ----------------------------------------------*/
