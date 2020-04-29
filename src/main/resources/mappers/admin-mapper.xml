@@ -35,6 +35,7 @@
 		<result property="phone" column="PHONE"/>
 		<result property="cancAmount" column="CANC_AMOUNT"/>
 		<result property="calcYn" column="CALC_YN"/>
+		<result property="calcDate" column="CALC_DATE"/>
 	</resultMap>
 	
 	
@@ -112,12 +113,14 @@
 	
 	<select id="refundList" resultMap="AdminRefResultSet">
 	SELECT
+		M.NAME AS M_NAME,
 		M.M_NO AS M_NO,
 		P.P_NO AS R_NO,
 		M.M_ID AS EMAIL,
 		M.PHONE AS PHONE,
 		P.CANC_AMOUNT AS CANC_AMOUNT,
-		P.CALC_YN AS CALC_YN
+		P.CALC_YN AS CALC_YN,
+		C.CALC_DATE AS CALC_DATE
 
 	FROM RESERVATION R
 	JOIN MEMBER M ON(R.R_M_NO = M.M_NO)
@@ -202,18 +205,21 @@
 	
 	<select id="adminRefundList" resultMap="AdminRefResultSet">
 		SELECT
+		M.NAME AS M_NAME,
 		M.M_NO AS M_NO,
 		P.P_NO AS R_NO,
 		M.M_ID AS EMAIL,
 		M.PHONE AS PHONE,
 		P.CANC_AMOUNT AS CANC_AMOUNT,
-		P.CALC_YN AS CALC_YN
+		P.CALC_YN AS CALC_YN,
+		C.CALC_DATE AS CALC_DATE
 	
 		FROM RESERVATION R
 		JOIN MEMBER M ON(R.R_M_NO = M.M_NO)
 		JOIN PAYMENT P ON (R.R_NO = P.P_R_NO)
 		JOIN CALCULATE C ON (P.P_NO =C.C_P_NO)
 		WHERE C.CALC_YN ='Y'
+		ORDER BY C.CALC_DATE DESC
 	</select>
 	
 </mapper>

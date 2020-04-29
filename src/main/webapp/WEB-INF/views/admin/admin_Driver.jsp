@@ -129,7 +129,7 @@
 										.popover(
 												{
 													html : true,
-													trigger : 'hover focus',
+													trigger : 'hover',
 													content : function() {
 														var url = $(this).val();
 														return '<img alt="호호1" style="width: 100%;" src="'+url+'" />';
@@ -140,7 +140,7 @@
 										.popover(
 												{
 													html : true,
-													trigger : 'hover focus',
+													trigger : 'hover',
 													content : function() {
 														var url = $(this).val();
 														return '<img alt="호호2" style="width: 100%;" src="'+url+'" />';

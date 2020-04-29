@@ -76,7 +76,7 @@
 								<br>
 								<!-- <table style="text-align: center" class="table table-striped table-hover text-center"> -->
 								<table id="rtable"class="table table-striped table-hover text-center">
-									<thead class="thead">
+									<thead id="thead" class="thead">
 										<tr>
 											<th>회원번호</th>
 											<th>결제번호</th>
@@ -89,7 +89,7 @@
 										</tr>
 									</thead>
 									<c:forEach var="a" items="${ list }">
-										<tbody class="tbody">	
+										<tbody  id="tbody" class="tbody">	
 											<tr class="tTr">
 												<td>${ a.mNo }</td>
 												<td>${ a.rNo }</td>
@@ -100,11 +100,14 @@
 												<c:choose>
 													<c:when test="${a.calcYn eq 1}">
 														<td><input type="button" value="환불하기" onclick="button(this.value,'${a.rNo}')"></td>
+														<td> - </td>
 													</c:when>
 													<c:when test="${a.calcYn eq 2}">
 														<td>환불 완료</td>
+														<td>${ a.calcDate }</td>
 													</c:when>
 												</c:choose>
+												
 											</tr>
 										</tbody>	
 									</c:forEach>
@@ -194,9 +197,12 @@
 												listText += "<td>"+data[i].cancAmount+"</td>";
 												if(data[i].calcYn == 1){
 													listText += "<td><input type='button' value='환불하기' onclick='refund("+'"'+data[i].rNo+'"'+")'></td>";
+													listText += "<td> - </td>";
 												}else if(data[i].calcYn == 2){
 													listText += "<td>환불완료</td>";
+													listText += "<td>"+data[i].calcDate+"</td>";
 												}
+												
 												listText += "<td></td>";
 												listText += "</tr>";
 											}
