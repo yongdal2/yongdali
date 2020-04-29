@@ -21,7 +21,7 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
 				오류가 계속될 시 관리자에게 문의해 주세요!<hr>
-				<a href="lth.ydl" class="btn btn-default">메인페이지로 돌아가기</a>
+				<a href="home.do" class="btn btn-default">메인페이지로 돌아가기</a>
 			</div>
 			<div class="col-md-2"></div>
 		</div>
