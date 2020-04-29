@@ -72,26 +72,24 @@ $(document).ready(function(){
 	
 	$(".loginView").click(function(){
 		location.href="loginView.me"
-	})
+	});
 	
 	$(".logout").click(function(){
 		location.href="logout1.me";
-		
-	})
+		history.go();
+	});
 	
 	$(".driverPage").click(function(){
 		location.href="driverMain.ydl"
-	})
+	});
 	
 	$(".userPage").click(function(){
 		location.href="home.do"
-	})
+	});
 	
 	$(".adminPage").click(function(){
 		location.href="#"
-	})
-	
-	
+	});
 	
 	/*-- 로그인페이지 ----------------------------------------------*/
     // 엔터시 로그인 클릭
@@ -284,7 +282,6 @@ $(document).ready(function(){
 					   			else if(value =='yongdali'){
 					   				alert("용달이 회원입니다. 용달이로 로그인하세요.");
 					   			}else{
-//					   				location.href="signUpView.me?pushEnabled=" + $('input[name=pushEnabled]').val();
 					   				location.href=servletUrl;
 					   			}
 					   		}, error : function(){
@@ -382,37 +379,61 @@ $(document).ready(function(){
     }
     
     /* 네이버 아이디로 회원가입 */
-    // 네이버 회원가입 버튼
-//    $('#naverSignUp').click(function(){
-//    	$('#pushEnabledForm').attr('action','easySignUpView.me');
-//    	if($('.chkPolicy:eq(1)').attr('checked') == "checked" && $('.chkPolicy:eq(2)').attr('checked') == "checked"){
-//    		let naverApiURL = $('#naverApiURL').val();
-//    		let pushEnabled = "&pushEnabled=" + $('input[name=pushEnabled').val();
-//    		let finalApiURL = naverApiURL + pushEnabled;
-//    		
-//    		console.log(naverApiURL);
-//    		console.log(pushEnabled);
-//    		console.log(finalApiURL);
-//
-//    		location.href=finalApiURL;
-//    	}else {
-//    		alert("필수 약관에 동의해야합니다.")
-//    	}
-//    })
-    
-    
-    
-    // 카카오 회원가입 버튼
-//    $('#kakaoSignUp').click(function(){
-//    	$('#pushEnabledForm').attr('action','easySignUpView.me');
-//    	if($('.chkPolicy:eq(1)').attr('checked') == "checked" && $('.chkPolicy:eq(2)').attr('checked') == "checked"){
-//    		$('#pushEnabledForm').trigger('submit');
-//    	}else {
-//    		alert("필수 약관에 동의해야합니다.")
-//    	}
-//    })
-    
-    
+    // 네이버 회원가입 버튼 TODO
+    $('#naverSignUp').click(function(){
+    	$('#pushEnabledForm').attr('action','easySignUpView.me');
+    	if($('.chkPolicy:eq(1)').attr('checked') == "checked" && $('.chkPolicy:eq(2)').attr('checked') == "checked"){
+    		let apiURL = $('#apiURL').val();
+    		console.log(apiURL);
+    		
+    		// 1. 이렇게 호출할 경우 이상없이 호출됨
+//    		location.href=apiURL;
+    		
+    		// 2. ajax에서 url 호출할 경우 cross-origin 에러 발생했었으나 servelet에 @CrossOrigin 어노테이션 사용으로 오류제거함
+    		// 3. 오류는 뜨지 않으나 여전히 url이 호출되지 않음(logger 안뜸)
+    		$.ajax({
+    			url : apiURL,
+    			type : "get",
+    			sucess : function(value){
+		   			console.log(value);
+		   			if(value == 'facebook'){
+		   				alert("페이스북 간편 가입 회원입니다. 페이스북으로 로그인하세요.");
+		   			}
+		   			else if(value == 'naver'){
+		   				alert("네이버 간편 가입 회원입니다. 네이버로 로그인하세요.");
+		   			}
+		   			else if(value =='kakao'){
+		   				alert("카카오 간편 가입 회원입니다. 카카오로 로그인하세요.");
+		   			}
+		   			else if(value =='yongdali'){
+		   				alert("용달이 회원입니다. 용달이로 로그인하세요.");
+		   			}
+		   			else if(value =='unknown'){
+		   				alert("unknown");
+		   			}
+		   			else{
+						let pushEnabled = $('input[name=pushEnabled]').val();
+	                    let email = "test@naver.com"
+	                    let name = "tester"
+	                     
+	                    let servletUrl = "signUpView.me?pushEnabled=" + pushEnabled;
+	                    servletUrl += "&email=" + email;
+	                    servletUrl += "&name=" + name;
+	                    servletUrl += "&signupType=네이버";
+	  					  
+	  					location.href=servletUrl;
+		   			}
+    			}, error : function(){
+    				var msg = "네이버 간편 회원가입 중 오류 발생";
+                	location.href="error.ydl?msg="+msg;
+    			}
+    		})
+    	}else {
+    		alert("필수 약관에 동의해야합니다.")
+    	}
+    })
+
+        
     /*-- 비밀번호 찾기 ----------------------------------------------*/
     // 이메일 체크(중복 및 유효성 검사)
     $("#findPwd_email").focusout(function(){
@@ -873,7 +894,8 @@ $(document).ready(function(){
     $("input[name=carNo]").keyup(function(event){ 
         if (!(event.keyCode >=37 && event.keyCode<=40)) {
             var inputVal = $(this).val();
-            $(this).val(inputVal.replace(/[^ㄱ-힣0-9]/gi,''));                
+            $(this).val(inputVal.replace(/[^ㄱ-힣0-9]/gi,''));  
+//            $(this).val(inputVal.replace(/^[0-9]{2,3}[ㄱ-힣]{,1}[0-9]/gi,''));  
         } 
     });
     
@@ -945,7 +967,8 @@ $(document).ready(function(){
             return false;
         }
         // 차량번호 정규표현식
-        else if(!chk(/[가-힣0-9]{7,}/, $('input[name=carNo]').val(), $('#div_carInfoMsg'), "차량번호를 정확히 입력하세요.")){
+        // [가-힣0-9]{7,} TODO
+        else if(!chk(/^[0-9]{2,3}[ㄱ-힣]{1}[0-9]{4}$/, $('input[name=carNo]').val(), $('#div_carInfoMsg'), "차량번호를 정확히 입력하세요.")){
         	return false;
         }
         else{
@@ -985,7 +1008,8 @@ $(document).ready(function(){
             return false;
         }
         // 차량번호 정규표현식
-        else if(!chk(/[가-힣0-9]{7,}/, $('input[name=carNo]').val(), $('#div_carInfoMsg'), "차량번호를 정확히 입력하세요.")){
+    	//[가-힣0-9]{7,}
+        else if(!chk(/^[0-9]{2,3}[ㄱ-힣]{1}[0-9]{4}$/, $('input[name=carNo]').val(), $('#div_carInfoMsg'), "차량번호를 정확히 입력하세요.")){
         	return false;
         }
     	else{

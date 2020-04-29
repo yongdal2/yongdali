@@ -34,6 +34,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -389,22 +390,18 @@ public class MemberController {
 	}
 	
 	/** 네이버 아이디로 회원가입
-	 * @param email
-	 * @param name
-	 * @return
-	 */
-//	@RequestMapping("naverSignUpIdChk.me")
-//	public String naverSignUpIdChk(@RequestParam("email") String email, String name) {
-//		
-//	}
-	
-	/** 네이버 아이디로 회원가입
 	 * @param model
 	 * @param request
 	 * @return
 	 */
+	@CrossOrigin(origins="http://localhost:8081")
+	@ResponseBody
 	@RequestMapping("naverSignUp.me")
 	public String naverSignUp(Model model, HttpServletRequest request) {
+		logger.debug("naverSignUp.me 호출");
+		
+		String resultStr = "unknown";
+		
 	    String clientId = "CSQrLTztRmu9Z7lXy3kf";//애플리케이션 클라이언트 아이디값";
 	    String clientSecret = "k06arsdcFD";//애플리케이션 클라이언트 시크릿값";
 	    String code = request.getParameter("code");
@@ -413,7 +410,7 @@ public class MemberController {
  
 		try {
 //			redirectURI = URLEncoder.encode("http://localhost:8081/yongdali/naverLogin.me", "UTF-8");
-			redirectURI = URLEncoder.encode("http://localhost:8081/yongdali/insert.me", "UTF-8");
+			redirectURI = URLEncoder.encode("http://localhost:8081/yongdali/naverSignUp.me", "UTF-8");
 		} catch (UnsupportedEncodingException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -471,33 +468,38 @@ public class MemberController {
 		    String email = jsonresponseObj.get("email").toString();
 		    String name = jsonresponseObj.get("name").toString();
 		    
-		    model.addAttribute("email", email);
-		    model.addAttribute("name", name);
-		    model.addAttribute("pushEnabled", "N");
-		    
 		    // MVC2 로직처리 
 		    int result = mService.emailChk(email);  // 가입 유무 확인
 		    
 		    if(result > 0) {
 		    	Member m = new Member(email);
-		    	Member loginUser = mService.loginMember(m);
-		    	model.addAttribute("loginUser", loginUser);
+		    	Member mem = mService.loginMember(m);
+		    	String type = mem.getSignupType();
+		    	
+		    	logger.debug(mem.toString());
+		    	logger.debug(type);
+		    	
+		    	if(type.equals("네이버")) {
+		    		resultStr = "naver";
+		    	}else if(type.equals("페이스북")){
+		    		resultStr =  "facebook";
+		    	}else if(type.equals("카카오")) {
+		    		resultStr =  "kakao";
+		    	}
+		    	else{
+		    		resultStr =  "yongdali";
+		    	}
 		    }
 		    else {
-		    	Member newMem = new Member(email, name, "일반", "네이버", "N");
-		    	int insertResult = mService.insertMember(newMem);
-		    	if(insertResult > 0) {
-		    		model.addAttribute("loginUser", newMem);
-		    	}else {
-		    		model.addAttribute("msg", "네이버로 간편 로그인 중 오류 발생!");
-					return "common/errorPage";
-		    	}
+		    	String dateStr = email + "," + name;
+		    	logger.debug(dateStr);
+		    	resultStr = dateStr;
 		    }
 		  } 
 	    } catch (Exception e) {
 	      System.out.println(e);
 	    }
-		return "login&signUp/signUpForm";
+		return resultStr;
 	}
 		
 		
@@ -583,7 +585,7 @@ public class MemberController {
 		    	model.addAttribute("loginUser", loginUser);
 		    }
 		    else {
-		    	Member newMem = new Member(email, name, "일반", "네이버", "N");
+		    	Member newMem = new Member(email, name, "일반", "네이버");
 		    	int insertResult = mService.insertMember(newMem);
 		    	if(insertResult > 0) {
 		    		model.addAttribute("loginUser", newMem);
@@ -673,7 +675,6 @@ public class MemberController {
 	@RequestMapping("logout1.me")
 	public String memberLogout(SessionStatus status) {
 		status.setComplete();
-		
 		return "redirect:home.do";
 	}
 			
@@ -698,7 +699,6 @@ public class MemberController {
 															Model model) {
 		
 		logger.debug(signupType);
-		
 		model.addAttribute("pushEnabled", pushEnabled);
 		model.addAttribute("email", email);
 		model.addAttribute("name", name);
@@ -824,16 +824,6 @@ public class MemberController {
 			model.addAttribute("msg", "회원가입 실패!");
 			return "common/errorPage";
 		}
-	}
-	
-	/** 네이버 아이디로 회원가입
-	 * @param m
-	 * @param d
-	 * @return
-	 */
-	@RequestMapping("insertAsNaver.me")
-	public String insertMemAsNaver(@ModelAttribute Member m, Driver d) {
-		return null;
 	}
 
 }

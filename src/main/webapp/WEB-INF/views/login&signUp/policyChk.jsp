@@ -28,7 +28,7 @@
   <!-- 네이버 아이디로 로그인(네아로) -->
   <%
     String clientId = "CSQrLTztRmu9Z7lXy3kf";//애플리케이션 클라이언트 아이디값";
-    String redirectURI = URLEncoder.encode("http://localhost:8081/yongdali/naverLogin.me", "UTF-8");
+    String redirectURI = URLEncoder.encode("http://localhost:8081/yongdali/naverSignUp.me", "UTF-8");
     SecureRandom random = new SecureRandom();
     String state = new BigInteger(130, random).toString();
     String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
@@ -97,8 +97,8 @@
 <%--                 <img class="easyAccessBtn" src="${contextPath}/resources/images/login&signUp/facebookLogo.png" alt="페이스북" id="fbSignUp" onclick="fbSignUp();"> --%>
                 <img class="easyAccessBtn" src="${contextPath}/resources/images/login&signUp/facebookLogo.png" alt="페이스북" id="fbSignUp">
                 <img class="easyAccessBtn" src="${contextPath}/resources/images/login&signUp/kakaoLogo.png" alt="카카오" id="kakaoSignUp">
-                <input type="hidden" id="naverApiURL" value="<%=apiURL %>">
-                <img src="${contextPath}/resources/images/login&signUp/naverLogo.png" alt="네이버" id="naverSignUp">
+                <input type="hidden" id="apiURL" value="<%=apiURL %>">
+                <img class="easyAccessBtn" src="${contextPath}/resources/images/login&signUp/naverLogo.png" alt="네이버" id="naverSignUp">
             </div>
         </div>
         </c:if>
