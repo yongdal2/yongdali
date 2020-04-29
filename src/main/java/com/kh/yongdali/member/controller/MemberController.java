@@ -521,7 +521,7 @@ public class MemberController {
 	    String redirectURI = null;
 		try {
 //			redirectURI = URLEncoder.encode("http://localhost:8081/yongdali/naverLogin.me", "UTF-8");
-			redirectURI = URLEncoder.encode("http://192.168.20.3:8081/yongdali/home.do", "UTF-8");
+			redirectURI = URLEncoder.encode("http://localhost:8081/yongdali/home.do", "UTF-8");
 		} catch (UnsupportedEncodingException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
