@@ -43,6 +43,7 @@
           <div class="header-chat">
             <img src="${contextPath }/resources/images/ydl_logo/ydl_ic_gr(70X70).png" style="width:50px; height:50px;">
             <p class="name" id="chatName"></p>
+            <p class="name" id="chatRoomNo"></p>
             <!-- <button class="closeBtn" onclick="disconnect();">대화종료</button> -->
           </div>
           <div class="messages-chat">            
@@ -168,16 +169,18 @@
 		    			printHTML += "</div>";
 		    			printHTML += "<p class='response-time time'>"+hours+":"+minutes+"</p>";
 		    			printHTML += "</div>";
-	    			}else{    			
-	    				var printHTML = "<div class='message' id='youMsg'>";
-		              	printHTML += "<div class='name'>";
-		              	printHTML += "<h2>"+data["roomName"]+"</h2>";
-		              	printHTML += "</div>";
-		              	printHTML += "<div class='messageArea'>";
-		    			printHTML += "<p class='text'>"+data["msg"]+"</p>";
-		    			printHTML += "<p class='time'>"+hours+":"+minutes+"</p>";
-		    			printHTML += "</div>";
-		    			printHTML += "</div>";
+	    			}else{    	
+	    				if($("#chatRoomNo").text == data["roomNo"]){
+		    				var printHTML = "<div class='message' id='youMsg'>";
+			              	printHTML += "<div class='name'>";
+			              	printHTML += "<h2>"+data["roomName"]+"</h2>";
+			              	printHTML += "</div>";
+			              	printHTML += "<div class='messageArea'>";
+			    			printHTML += "<p class='text'>"+data["msg"]+"</p>";
+			    			printHTML += "<p class='time'>"+hours+":"+minutes+"</p>";
+			    			printHTML += "</div>";
+			    			printHTML += "</div>";
+	    				}
 	    			}
 					writeResponse(printHTML);
 				}
@@ -212,6 +215,7 @@
         	
 //        	$("#chatName").text(e.innerHTML);
         	$("#chatName").text(roomName);
+        	$("#chatRoomNo").text(roomNo);
         	
         	$.ajax({
         		url:"adChkPreMessage.ch",
