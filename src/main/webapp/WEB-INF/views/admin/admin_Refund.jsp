@@ -57,15 +57,13 @@
 							<div id="search">
 								<select id="searchCondition" class="search" name="memberSearch">
 									<option value="" selected="selected">선택</option>
-									<option value="">회원번호</option>
-									<option value="mId">회원ID(이메일)</option>
+									<option value="mNo">회원번호</option>
+									<option value="rNo">결제번호</option>
+									<option value="email">회원ID(이메일)</option>
 									<option value="mName">이름</option>
 									<option value="phone">휴대폰번호</option>
-									<option value="mSort">회원구분</option>
-									<option value="mStatus">회원상태</option>
-									<option value="signupType">가입타입</option>
-									<option value="pushEnabled">알림설정</option>
-									<option value="enrollDate">가입일</option>
+									<option value="cancAmount">환불금액</option>
+									<option value="calcDate">환불일자</option>
 								</select>
 										<input type="text" name="content">
 										<input type="submit" value="검색">
