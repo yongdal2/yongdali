@@ -23,6 +23,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -397,7 +398,9 @@ public class MemberController {
 	@CrossOrigin(origins="http://localhost:8081")
 	@ResponseBody
 	@RequestMapping("naverSignUp.me")
-	public String naverSignUp(Model model, HttpServletRequest request) {
+	public String naverSignUp(Model model, HttpServletRequest request, HttpServletResponse response) {
+//		test
+		//response.addHeader("Access-Control-Allow-Origin", "http://localhost:8081");
 		logger.debug("naverSignUp.me 호출");
 		
 		String resultStr = "unknown";
@@ -518,7 +521,7 @@ public class MemberController {
 	    String redirectURI = null;
 		try {
 //			redirectURI = URLEncoder.encode("http://localhost:8081/yongdali/naverLogin.me", "UTF-8");
-			redirectURI = URLEncoder.encode("http://localhost:8081/yongdali/home.do", "UTF-8");
+			redirectURI = URLEncoder.encode("http://192.168.20.3:8081/yongdali/home.do", "UTF-8");
 		} catch (UnsupportedEncodingException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
