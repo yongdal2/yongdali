@@ -134,34 +134,6 @@ btn1.onclick = function() {
 	modal2.style.display = "block";
 }
 
-//When the user clicks on <span> (x), close the modal
-span2.onclick = function() {
-	var s1 = $('.move-content1112');
-    var s2 = $('.move-content1113');
-    var userLoads = [];
-    
-    for(var i = 0; i<s1.length; i++){
-        if($(s1[i]).html()>0){
-            var title = $('.move-content112');
-            userLoads.push($(title[i]).html()+'('+$(s1[i]).html()+')');
-        }
-    }
-
-    for(var i = 0; i<s2.length; i++){
-        if($(s2[i]).html()>0){
-            var title = $('.move-content113');
-            userLoads.push($(title[i]).val()+'('+$(s2[i]).html()+')');
-        }
-    }
-    console.log(userLoads);
-
-    var arrayString = userLoads.join(', ');
-    $('#load-content-area').text(arrayString);
-    
-    modal2.style.display = "none";
-	modal2.style.display = "none";
-}
-
 //모달 영역 밖에 클릭했을때 모달 닫기
 // window 연결이 끊겨서 mouseenter로 연결하여 해결함
 $("#myModal2").mouseenter(function(){
@@ -298,6 +270,7 @@ $(function(){
             if($(s1[i]).html()>0){
                 var title = $('.move-content112');
                 userLoads.push($(title[i]).html()+'('+$(s1[i]).html()+')');
+                $(s1[i]).html("0");
             }
         }
 
@@ -305,6 +278,7 @@ $(function(){
             if($(s2[i]).html()>0){
                 var title = $('.move-content113');
                 userLoads.push($(title[i]).val()+'('+$(s2[i]).html()+')');
+                $(s2[i]).html("0");
             }
         }
         console.log(userLoads);
@@ -316,6 +290,37 @@ $(function(){
     });
 });
 
+//When the user clicks on <span> (x), close the modal
+span2.onclick = function() {
+	// 가구, 가전 관련 갯수
+	var s1 = $('.move-content1112');
+    // 기타 관련 갯수
+	var s2 = $('.move-content1113');
+    var userLoads = [];
+    
+    for(var i = 0; i<s1.length; i++){
+        if($(s1[i]).html()>0){
+            var title = $('.move-content112');
+            userLoads.push($(title[i]).html()+'('+$(s1[i]).html()+')');
+            $(s1[i]).html("0");
+        }
+    }
+
+    for(var i = 0; i<s2.length; i++){
+        if($(s2[i]).html()>0){
+            var title = $('.move-content113');
+            userLoads.push($(title[i]).val()+'('+$(s2[i]).html()+')');
+            $(s2[i]).html("0");
+        }
+    }
+    console.log(userLoads);
+    
+    var arrayString = userLoads.join(', ');
+    $('#load-content-area').text(arrayString);
+    
+    modal2.style.display = "none";
+	modal2.style.display = "none";
+}
 
 /* 출발지,도착지 주소 검색 후 위경도 변환 */
 
@@ -662,6 +667,21 @@ var edDate;
 // 하차 예약시 기간에 따른 비용
 var charge_days=0;
 
+// 이전 날짜 disabled 적용
+// 상차
+function noBefore(date){
+	if (date < new Date())
+		return [false];
+	return [true];
+}
+
+// 하차 : 상차 선택후 상차 예약 날짜에 따라 그 후의 날짜 나오게 조건
+function noBefore2(date){
+	if (date < new Date(addDate))
+		return [false];
+	return [true];
+}
+
 // 바로 상차 선택시, 상차 날짜 변수에 현재날짜 담기
 $('#checkLoad1').click(function(){
 	if($(this).is(":checked")){
@@ -673,6 +693,7 @@ $('#checkLoad1').click(function(){
 		startDateStr = startYear+"-"+startMonth+"-"+startDay;
 		stDate = new Date(startDateStr);
 		
+		// 4월 30+1일 -> 5월 1일로 전환시키기 위한 Date에 담아 처리
 		var stDate2 = new Date(startDateStr);
 		stDate2.setDate(addStartDay);
 		
@@ -680,7 +701,9 @@ $('#checkLoad1').click(function(){
 		
 		console.log("바로 상차 선택날짜로부터 1일 후, 하차예약 가능날짜 : "+addDate);
 		
+		// noBefore2와 같은 기능
 		$('#datepicker2').datepicker('option','minDate',addDate);
+		
 		$(this).val("바로 상차");
 		if($('#datepicker2').val()!=""){
 			days = Math.round((edDate.getTime()-stDate.getTime())/1000/60/60/24);
@@ -705,7 +728,51 @@ $('#checkLoad1').click(function(){
 });
 
 
-// 하차 예약시 날짜 선택시 변수에 담기
+// 상차 예약 클릭시 달력 표시 - 상차 선택에 따라 하차 가능일 조건 삽입
+$('#datepicker1').datepicker({
+	dateFormat:'yy년 mm월 dd일',
+	changeMonth: true,
+	changeYear: true,
+	yearRange: 'c-99:c+99',
+	maxDate: '+1y',
+	onSelect: function(selectedDate){	// 상차 날짜 선택 시 하차 날짜 표현 조건줌
+
+		var startYMD = $('#datepicker1').val();
+		startDateStr = startYMD.substr(0,4)+"-"+startYMD.substr(6,2)+"-"+startYMD.substr(10,2);
+		
+		var addStartDay = parseInt(startDateStr.substr(8,2)) + 1;
+		
+		// 4월 30+1일 -> 5월 1일로 전환시키기 위한 Date에 담아 처리
+		var stDate2 = new Date(startDateStr);
+		stDate2.setDate(addStartDay);
+		addDate = stDate2.getFullYear() + "-" + (stDate2.getMonth()+1)+ "-" + stDate2.getDate();
+		
+		// 하차예약날짜값이 있는 상태에서 상차 날짜 예약시 하차예약날짜값 초기화
+		if($('#datepicker2').val()!=""){
+			$('#datepicker2').datepicker('setDate',null);
+			document.getElementById('sl4').selectedIndex = 0;
+			document.getElementById('sl4').style.color="#8e8e8e";
+		}
+		$('#caution-div1').css('display','block');
+		$('#caution-div2').css('display','none');
+		$('#caution-div3').css('display','block');
+		$('#caution-div4').css('display','none');
+		$('#caution-div5').css('display','none');
+	},
+	beforeShowDay: noBefore
+});
+
+// 하차 예약 클릭시 달력 표시
+$('#datepicker2').datepicker({
+	dateFormat:'yy년 mm월 dd일',
+	changeMonth: true,
+	changeYear: true,
+	yearRange: 'c-99:c+99',
+	maxDate: '+1y',
+	beforeShowDay: noBefore2
+});
+
+// 하차 예약시 날짜 선택시 precharge 후, 세부 정보에 표현
 function setEndDate(){
 	console.log($('#datepicker1').val());
 	console.log($('#checkLoad1').val());
@@ -727,67 +794,23 @@ function setEndDate(){
 		$('#btwDay').html(days+"일");
 		$('#book-YN').html("O");
 		calc();
-		$('#caution-div1').css('display','none');
-		$('#caution-div2').css('display','none');
-		$('#caution-div3').css('display','block');
+		$('#caution-div3').css('display','none');
+		$('#caution-div4').css('display','none');
+		$('#caution-div5').css('display','block');
 	}
 }
-
-
-// 이전 날짜 disabled 적용
-function noBefore(date){
-	if (date < new Date())
-		return [false];
-	return [true];
-}
-
-
-// 상차 예약 클릭시 달력 표시 - 상차 선택에 따라 하차 가능일 조건 삽입
-$('#datepicker1').datepicker({
-	dateFormat:'yy년 mm월 dd일',
-	changeMonth: true,
-	changeYear: true,
-	yearRange: 'c-99:c+99',
-	maxDate: '+1y',
-	onSelect: function(selectedDate){	// 상차 날짜선택시 적용
-
-		var startYMD = $('#datepicker1').val();
-		startDateStr = startYMD.substr(0,4)+"-"+startYMD.substr(6,2)+"-"+startYMD.substr(10,2);
-		
-		var addStartDay = parseInt(startDateStr.substr(8,2)) + 1;
-		var stDate2 = new Date(startDateStr);
-		stDate2.setDate(addStartDay);
-		addDate = stDate2.getFullYear() + "년 " + (stDate2.getMonth()+1)+ "월 " + stDate2.getDate() + "일";
-		$('#datepicker2').datepicker('option','minDate',addDate);
-		
-		// 하차예약날짜값이 있는 상태에서 상차 날짜 예약시 하차예약날짜값 초기화
-		if($('#datepicker2').val()!=""){
-			$('#datepicker2').datepicker('setDate',null);
-			document.getElementById('sl4').selectedIndex = 0;
-			document.getElementById('sl4').style.color="#8e8e8e";
-		}
-	},
-	beforeShowDay: noBefore
-});
-
-// 하차 예약 클릭시 달력 표시
-$('#datepicker2').datepicker({
-	dateFormat:'yy년 mm월 dd일',
-	changeMonth: true,
-	changeYear: true,
-	yearRange: 'c-99:c+99',
-	maxDate: '+1y',
-	beforeShowDay: noBefore
-});
 
 // 하차 날짜 예약 클릭시 주의 사항 전달
 $('#datepicker2').click(function(){
 	if($('#datepicker1').val()!="" || $('#checkLoad1').prop('checked')==true){
-		$('#caution-div1').css('display','none');
-		$('#caution-div2').css('display','block');
 		$('#caution-div3').css('display','none');
-		
+		$('#caution-div4').css('display','block');
+		$('#caution-div5').css('display','none');
 	}
+});
+$('#datepicker1').click(function(){
+	$('#caution-div1').css('display','none');
+	$('#caution-div2').css('display','block');
 });
 
 /* 바로 상차 시 날짜시간 무효 */
@@ -798,16 +821,16 @@ $("#checkLoad1").click(function(){
 		$('#datepicker1').datepicker('setDate',null);
 		document.getElementById('sl3').selectedIndex = 0;
 		document.getElementById('sl3').style.color="#8e8e8e";
-		$('#caution-div1').css('display','block');
-		$('#caution-div2').css('display','none');
-		$('#caution-div3').css('display','none');
+		$('#caution-div3').css('display','block');
+		$('#caution-div4').css('display','none');
+		$('#caution-div5').css('display','none');
 		
 	} else if($(this).prop("checked") == false) {    	  
 		$("#datepicker1").attr('disabled',false).css('background','white').val("");
 		$("#sl3").attr('disabled',false).css('background','white').val("");
-		$('#caution-div1').css('display','block');
-		$('#caution-div2').css('display','none');
-		$('#caution-div3').css('display','none');
+		$('#caution-div3').css('display','block');
+		$('#caution-div4').css('display','none');
+		$('#caution-div5').css('display','none');
 	}
 });
 
@@ -819,9 +842,9 @@ $("#checkLoad2").click(function(){
 		$('#datepicker2').datepicker('setDate',null);
 		document.getElementById('sl4').selectedIndex = 0;
 		document.getElementById('sl4').style.color="#8e8e8e";
-		$('#caution-div1').css('display','block');
-		$('#caution-div2').css('display','none');
-		$('#caution-div3').css('display','none');
+		$('#caution-div3').css('display','block');
+		$('#caution-div4').css('display','none');
+		$('#caution-div5').css('display','none');
 		$('#book-YN').html("X");
 		$('#btwDay').html("X");
 		$('#days').val("0");
@@ -1010,7 +1033,7 @@ span7.onclick = function() {
 }
 
 
-//출발지와 도착지 각각의 주소 붙여 input hidden에다가 담기
+// 출발지와 도착지 각각의 주소 붙여 input hidden에다가 담기
 function addAddr(){
 	var stAddr1 = $('#startAddr').val();
 	var stAddr2 = $('#startDetailAddr').val();
@@ -1023,26 +1046,28 @@ function addAddr(){
 
 // 예약하기 버튼 & 상하차 날짜 입력하지 않으면 return false 조건 적용
 $('#revForm').submit(function(){
-console.log($('#datepicker1').val());
 	// 바로 상차를 입력했거나 상차 날짜 입력되었거나
-	if($('#checkLoad1').is(":checked") || $('#datepicker1').val()!=""){
-		// 바로 상차를 입력했거나 하차 날짜 입력되었거나
-		if($('#checkLoad2').is(":checked") || $('#datepicker2').val()!=""){			
-			if(confirm("결제 진행하시겠습니까?")){
-				addAddr();
-				return;
-			} else {
+	if(amount <= 1000000){		
+		if($('#checkLoad1').is(":checked") || $('#datepicker1').val()!=""){
+			// 바로 상차를 입력했거나 하차 날짜 입력되었거나
+			if($('#checkLoad2').is(":checked") || $('#datepicker2').val()!=""){			
+				if(confirm("결제 진행하시겠습니까?")){
+					addAddr();
+					return;
+				} else {
+					return false;
+				}
+			} else {			
+				alert("하차 날짜를 지정해주세요.");
 				return false;
 			}
-		} else {			
-			alert("하차 날짜를 지정해주세요.");
+		} else {		
+			alert("상차 날짜를 지정해주세요.");
 			return false;
 		}
-	} else {		
-		alert("상차 날짜를 지정해주세요.");
+	} else {
+		alert("결제금액이 100만원 초과하셨습니다.\n100만원 이하로 다시 예약 부탁드리겠습니다.");
 		return false;
 	}
+	
 });
-
-
-

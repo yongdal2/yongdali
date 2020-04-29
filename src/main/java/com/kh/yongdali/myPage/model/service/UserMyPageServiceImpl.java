@@ -87,7 +87,7 @@ public class UserMyPageServiceImpl implements UserMyPageService {
 
 
 	@Override
-	public Payment pDetail(String rNo) {
+	public Reservation pDetail(String rNo) {
 		return umpDao.pDetail(rNo);
 	}
 

@@ -205,6 +205,14 @@ public class UserMyPageController {
 				return "common/errorPage";
 			}
 		}
+		
+		//최근 사용 날자 업데이트
+		@RequestMapping("addrSys.myp")
+		public void addrSys(@RequestParam ("aNo") String aNo) {
+			
+		}
+		
+		
 		//주소록 삭제
 		@RequestMapping("dAddr.myp")
 		public String deleteAddr(Model md, 
@@ -230,8 +238,6 @@ public class UserMyPageController {
 				@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage,
 				@RequestParam(value="rsvStatus", required = false) String rsvStatus,
 				@RequestParam(value="fSearch", required = false) String fSearch) throws ParseException {
-			String stDate = "";
-			String edDate = "";
 			
 			String sDate = rq.getParameter("stDate");
 			if(sDate == null || sDate=="") {
@@ -242,29 +248,16 @@ public class UserMyPageController {
 				eDate ="2999-12-31";
 			}
 			
-			f.setmNo(loginUser.getmNo());
 			
-			System.out.println(sDate);
-			System.out.println(eDate);
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date startDate = new Date(sdf.parse(sDate).getTime());
+			Date endDate = new Date(sdf.parse(eDate).getTime());
+
 			
-			
-			
-			
-			// 상하차일 타입 Date로 변환하기
-				stDate=sDate;
-				System.out.println(stDate);
-					Date startDate = new Date(sdf.parse(stDate).getTime());
-					System.out.println("startDate:" + startDate);
-					f.setStDate(startDate);
-				
-				System.out.println(startDate);
-				
-				edDate = eDate;
-					Date endDate = new Date(sdf.parse(edDate).getTime());
-					System.out.println("endDate:" +endDate);
-					f.setEdDate(endDate);
-			
+			f.setmNo(loginUser.getmNo());
+			f.setStDate(startDate);
+			f.setEdDate(endDate);
+
 			System.out.println(f);
 				
 				
@@ -282,31 +275,6 @@ public class UserMyPageController {
 			return mv;
 		}
 		
-		// 나의 예약내역(필터 포함)
-//				@RequestMapping("myRSV.myp")
-//				public ModelAndView userFilterList(@SessionAttribute Member loginUser, ModelAndView mv, Filter f,
-//						@RequestParam(value="currentPage", required = false, defaultValue = "1") int currentPage,
-//						@RequestParam(value="fSearch", required = false) String fSearch, 
-//						@RequestParam(value="rsvStatus", required = false) String rsvStatus,
-//						@RequestParam(value="stDate", required = false) Date stDate,
-//						@RequestParam(value="edDate", required = false) Date edDate) {
-//					
-//					
-//					f.setmNo(loginUser.getmNo());
-//					int flistCount =umpService.getFilRsvListCount(mNo);
-//					
-//					System.out.println();
-//					PageInfo pi = Pagination.getPageInfo(currentPage, rlistCount, 5, 20);
-//					
-//					ArrayList<Reservation> rList = umpService.selectRsvList(pi,mNo);
-//					
-//					System.out.println(rList);
-//					
-//					mv.addObject("rList",rList);
-//					mv.addObject("pi",pi);
-//					mv.setViewName("user/myPage/myPageRSV");
-//					return mv;
-//				}
 		
 		//예약 드라이버 정보 불러오기
 		@RequestMapping("rDinfo.myp")
@@ -371,7 +339,7 @@ public class UserMyPageController {
 		
 		//payment 상세정보
 		@RequestMapping(value = "pDetail.myp")
-		public void pDetail(HttpServletResponse rs, @RequestParam String rNo, Payment p) throws JsonIOException, IOException {
+		public void pDetail(HttpServletResponse rs, @RequestParam String rNo, Reservation p) throws JsonIOException, IOException {
 			
 			p = umpService.pDetail(rNo);
 			
@@ -384,8 +352,8 @@ public class UserMyPageController {
 		//예약 취소
 		@ResponseBody
 		@RequestMapping("rsvCan.myp")
-		public String rsvCan(Payment p,@RequestParam String pRNo, @RequestParam String dealYN) throws IOException {
-			p.setpRNo(pRNo);
+		public String rsvCan(Payment p,@RequestParam String rNo, @RequestParam String dealYN) throws IOException {
+			p.setpRNo(rNo);
 			p.setDealYN(dealYN);
 			System.out.println(p);
 

@@ -43,10 +43,10 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-md-12 h2 jal">
-<!-- 				예약내역 <br> <br> -->
+ 				예약내역 <br> <br> 
 			</div>
 			<!-- 필터 -->
-			<form action="myRSV.myp">
+			<form id="filterForm">
 			<div class="col-xs-2 col-md-2 text-center bszB1">
 				<select class="form-control ft54" name="rsvStatus" id="rsvStatus">
 					<option value="rsv">상태별 조회</option>
@@ -66,7 +66,7 @@
 				<input type="search" class="form-control ft54" placeholder="검색" name="fSearch" id="fSearch">
 			</div>
 				<div class="col-xs-1 col-md-1 bszB">
-					<button class="btn btn_ydl sch">
+					<button class="btn btn_ydl sch" id="fBtn">
 						<span class="glyphicon glyphicon-search" style="font-size: 22px"></span>
 					</button>
 				</div>
@@ -96,8 +96,8 @@
 								<c:set var="p" value="${ r.payment }"></c:set>
 								<c:choose>
 								<c:when test="${p.payYN eq 'Y' && p.cancYN eq 'Y' }"><span class="llg">취소</span></c:when>
-								<c:when test="${p.payYN eq 'Y' && p.cancYN eq 'N' && p.dealYN eq 'N' }">결제 완료</c:when>
-								<c:when test="${p.dealYN eq 'Y' && p.cancYN eq 'N' }">배차 완료</c:when>
+								<c:when test="${p.payYN eq 'Y' && p.cancYN eq 'N' && r.dealYN eq 'N' }">결제 완료</c:when>
+								<c:when test="${r.dealYN eq 'Y' && p.cancYN eq 'N' }">배차 완료</c:when>
 								</c:choose>
 							</td>
  							<td><c:out value="${fn:replace(p.enrollDate,'2020','20')}"/></td><!-- 예약일자 -->
@@ -166,7 +166,7 @@
 	                    var name = "<span>" + decodeURIComponent(d.name) + "기사님</span><br>";
 	                    var phone = "<span>" +d.phone + "</span>";
 	                    var carNo = decodeURIComponent(d.carNo);
-	                    var img = "${pageContext.request.contextPath}/resources/images/driver/id/" + d.img;
+	                    var imgUrl = "${pageContext.request.contextPath}/resources/images/driver/id/" + d.img;
 	                    var type = decodeURIComponent(d.type);
 	                    var capcacity = d.capacity;
 	                    dhtml = name + phone;
@@ -224,9 +224,9 @@
                             	<span class="h4" id="endPhone"> </span>
                             	<br><span class="small lg">주소</span><br>
                             	<span class="h4" id="endAddr"></span>
-                            	<br><span class="small lg">상차</span><br>
+                            	<br><span class="small lg">하차</span><br>
                             	<span class="h4" id="drop"></span>
-                            	<br><span class="small lg">상차방법</span><br>
+                            	<br><span class="small lg">하차방법</span><br>
                             	<span class="h4" id="helpUnload"></span>
                             </div>
                             <div class="col-xs-12 col-md-12 p0mt10">
@@ -264,62 +264,69 @@
         </div>
     </div>
     <div class="row text-center">
-    <ul class="pagination ft_gr">
-        <!-- << , < -->
-        <li>
-            <c:if test="${ pi.currentPage eq 1 }"><a>&lt;&lt; &nbsp;</a></c:if>
-            <c:if test="${ pi.currentPage ne 1 }"><a href="myRSV.myp?currentPage=1">&lt;&lt; &nbsp;</a></c:if>
-        </li>
-        <li>
-            <c:if test="${ pi.currentPage ne 1 }">
-                <c:url var="before" value="myRSV.myp">
-                    <c:param name="currentPage" value="${ pi.currentPage -1 }" />
-                </c:url>
-                <a href="${ before }">&lt; &nbsp;</a>
-            </c:if>
-            <c:if test="${ pi.currentPage eq 1 }">
-                <a> &lt; &nbsp;</a>
-            </c:if>
-        </li>
-
-        <!-- 페이지 -->
-        <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-            <li>
-                <c:if test="${ p eq pi.currentPage }">
-                    <a><b><font color="#5a8cff">${ p }</font></b></a>
-                </c:if>
-                <c:if test="${ p ne pi.currentPage }">
-                    <a href="<c:url var=" pagination " value="myRSV.myp ">	
-							<c:param name="currentPage " value="${ p } "/>
+	    <ul class="pagination ft_gr"">
+	        <!-- << , < -->
+	        <li>
+	            <c:if test="${ pi.currentPage eq 1 }"><a>&lt;&lt; &nbsp;</a></c:if>
+	            <c:if test="${ pi.currentPage ne 1 }"><a href="myRSV.myp?currentPage=1">&lt;&lt; &nbsp;</a></c:if>
+	        </li>
+	        <li>
+	            <c:if test="${ pi.currentPage ne 1 }">
+	                <c:url var="before" value="myRSV.myp">
+	                    <c:param name="currentPage" value="${ pi.currentPage-1 }" />
+	                </c:url>
+	                <a href="${ before }">&lt; &nbsp;</a>
+	            </c:if>
+	            <c:if test="${ pi.currentPage eq 1 }">
+	                <a> &lt; &nbsp;</a>
+	            </c:if>
+	        </li>
+	
+	        <!-- 페이지 -->
+	        <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+	            <li>
+	                <c:if test="${ p eq pi.currentPage }">
+	                    <a><b>${ p }</b></a>
+	                </c:if>
+	                <c:if test="${ p ne pi.currentPage }">
+	                    <a href="<c:url var="pagination" value="myRSV.myp">	
+								<c:param name="currentPage" value="${ p } "/>
+							</c:url>
+					${ pagination }">${ p }</a>
+	                </c:if>
+	            </li>
+	        </c:forEach>
+	        <!-- > -->
+	        <li>
+	            <a href="
+					<c:if test="${ pi.currentPage ne pi.maxPage }">
+						<c:url var="after" value="myRSV.myp">
+							<c:param name="currentPage" value="${ pi.currentPage+1 }"/>
 						</c:url>
-				${ pagination }">${ p }</a>
-                </c:if>
-            </li>
-        </c:forEach>
-        <!-- > -->
-        <li>
-            <a href="
-				<c:if test=" ${ pi.currentPage ne pi.maxPage } ">
-					<c:url var="after " value="myRSV.myp ">
-						<c:param name="currentPage " value="${ pi.currentPage +1 } "/>
-					</c:url>
-				</c:if>
-				${ after }">&gt; &nbsp;</a>
-        </li>
-
-        <!-- >> 의도: 마지막 페이지에서는 >> 표시 사라짐(현재페이지가 끝 페이지임을 표시)-->
-        <li>
-            <c:if test="${ pi.currentPage ne pi.maxPage }">
-                <c:url var="lastPage" value="myRSV.myp">
-                    <c:param name="currentPage" value="${ pi.maxPage }" />
-                </c:url>
-                <a href="${ lastPage }">&gt;&gt; &nbsp;</a>
-            </c:if>
-        </li>
-    </ul>
-</div>
-    
+					</c:if>
+					${ after }">&gt; &nbsp;</a>
+	        </li>
+	        <!-- >> 의도: 마지막 페이지에서는 >> 표시 사라짐(현재페이지가 끝 페이지임을 표시)-->
+	        <li>
+	            <c:if test="${ pi.currentPage ne pi.maxPage }">
+	                <c:url var="lastPage" value="myRSV.myp">
+	                    <c:param name="currentPage" value="${ pi.maxPage }" />
+	                </c:url>
+	                <a href="${ lastPage }">&gt;&gt; &nbsp;</a>
+	            </c:if>
+	        </li>
+	    </ul>
+	</div>
 	<script type = "text/javascript">
+		$("#fBtn").on("click",function(){
+			if($('#stDate').val()==""){
+				$('#stDate').val("2000-01-01");
+			}
+			if($('#edDate').val()==""){
+				$('#edDate').val("2099-01-01");
+			}
+			$("#filterForm").attr("action","myRSV.myp").submit();
+		});
 		$("#btnUpAddr").on("click",function(){
 			$("#upAddrForm").attr("action","uAddr.myp").submit();
 		});
@@ -378,7 +385,7 @@
 	                        } else {
 	                            $("#drop").text(r.rightUnload);
 	                        }
-	                        $("#helpUnload").text(r.helpLoad);
+	                        $("#helpUnload").text(r.helpUnload);
 	                        $("#luggage").text(r.luggage);
 	                        if (r.msg == null) {
 	                            $("#rMSG").text("");
@@ -396,7 +403,6 @@
 	                        }else{
 	                        	$('#cancRSV').attr('class', 'btn btn_ydl_lr mdbtn'); 
 	                        	$('#rmb1').attr('class', 'btn_no far hvDr fa-edit'); 
-	                        	
 	                        }
 	                    },
 	                    error: function() {
@@ -422,37 +428,34 @@
 	function d_yn(rNo) {
 	    $.ajax({
 	        url: "pDetail.myp",
-	        data: {
-	            rNo: rNo
-	        },
+	        data: { rNo: rNo },
 	        dataType: "json",
-	        success: function(p) {
-	            console.log(p);
-	            if (p.dealYN == "Y") {
+	        success: function(r) {
+	            console.log("으앙");
+	            console.log(r);
+	            if (r.dealYN == "Y") {
 	                var ccA = confirm("배차가 완료된 예약입니다 취소하시겠습니까?");
 	                if (ccA) {
-	                    rsvCan(p.pRNo, 'Y');
+	                    rsvCan(r.rNo, 'Y');
 	                }
 	            } else {
 	                var ccb = confirm("배차되지 않은 예약입니다. 취소하시겠습니까?");
 	               if(ccb){
-	            	   rsvCan(p.pRNo, 'N');
+	            	   rsvCan(r.rNo, 'N');
 	               }
 	            }
-	
 	        },
 	        error: function() {
 	            console.log("aj실패")
 	        }
 	    });
-	
 	}
 	
-	function rsvCan(pRNo, dealYN) {
+	function rsvCan(rNo, dealYN) {
 	    $.ajax({
 	        url: "rsvCan.myp",
 	        data: {
-	            pRNo: pRNo,
+	            rNo: rNo,
 	            dealYN: dealYN
 	        },
 	        success: function(p) {
@@ -465,7 +468,6 @@
 	            console.log("aj실패")
 	        }
 	    });
-	
 	}
 	
 	</script>

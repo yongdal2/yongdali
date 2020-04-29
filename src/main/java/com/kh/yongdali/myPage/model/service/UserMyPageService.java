@@ -116,7 +116,7 @@ public interface UserMyPageService {
 	 * @return
 	 */
 
-	Payment pDetail(String rNo);
+	Reservation pDetail(String rNo);
 
 
 	/**

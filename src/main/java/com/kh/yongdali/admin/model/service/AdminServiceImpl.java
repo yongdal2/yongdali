@@ -107,6 +107,16 @@ public class AdminServiceImpl implements AdminService {
 		return aDao.searchDriverList(pi,sc);
 	}
 
+	@Override
+	public int adminRefund(String rNo) {
+		return aDao.adminRefund(rNo);
+	}
+
+	@Override
+	public ArrayList<adRefund> adminRefundList() {
+		return aDao.adminRefundList();
+	}
+
 
 
 

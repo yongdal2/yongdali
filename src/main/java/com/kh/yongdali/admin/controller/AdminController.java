@@ -1,8 +1,9 @@
 package com.kh.yongdali.admin.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 import com.kh.yongdali.admin.model.service.AdminService;
 import com.kh.yongdali.admin.model.vo.Calculate;
 import com.kh.yongdali.admin.model.vo.DriSearchCondition;
@@ -36,7 +40,8 @@ public class AdminController {
 	 */
 	@RequestMapping("aMem.ad")
 	public ModelAndView adminMemList(ModelAndView mv, // " currentPage" 주의
-			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) { // 현재 페이지가
+			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) { 
+		// 현재 페이지가
 		// 필요한데, 없어도
 		// 되고, 있으면
 		// 기본값 1
@@ -160,6 +165,8 @@ public class AdminController {
 
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, pageLimit, boardLimit);
 		ArrayList<adRefund> list = aService.adRefundList(pi);
+		
+		/* System.out.println(list.get(0).getcalcYn()); */
 		mv.addObject("pi",pi);
 		mv.addObject("list",list);
 		mv.setViewName("admin/admin_Refund");
@@ -170,12 +177,12 @@ public class AdminController {
 
 
 
-	// 채팅 내역
-	@RequestMapping("admin_ChatLog.ydl")
-	public String adminHomeView7() {
-		return "admin/admin_ChatLog";
-	}
-
+	/*
+	 * // 채팅 내역
+	 * 
+	 * @RequestMapping("admin_ChatLog.ydl") public String adminHomeView7() { return
+	 * "admin/admin_ChatLog"; }
+	 */
 	@RequestMapping("aJung.ad")
 	public ModelAndView jungsanView(ModelAndView mv,
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
@@ -213,7 +220,7 @@ public class AdminController {
 	         int result2 = aService.junsan2(rNo);
 	         
 	         if (result2 > 0) {
-	            return "admin/admin_Reser";
+	            return "redirect:aRes.ad";
 	         } else {
 	            return "common/errorPage";
 	         }
@@ -323,7 +330,21 @@ public class AdminController {
 
 	}
 
-
+	@RequestMapping("adminRefund.do")
+	public void adminRefund(HttpServletResponse response, @RequestParam(value = "rNo")String rNo) throws JsonIOException, IOException{
+		System.out.println(rNo);
+		int result = aService.adminRefund(rNo);
+		ArrayList<adRefund> list =null;
+		if(result > 0) {
+			list = aService.adminRefundList();
+			System.out.println(list);
+		}else {
+			
+		}
+		response.setContentType("application/json; charset=utf-8");
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(list,response.getWriter());
+	}
 
 
 }

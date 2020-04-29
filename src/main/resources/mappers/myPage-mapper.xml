@@ -64,6 +64,8 @@
 		<result property="luggage" column="LUGGAGE"/>
 		<result property="msg" column="MSG"/>
 		<result property="amount" column="AMOUNT"/>
+		<result property="dealYN" column="DEAL_YN"/>
+		<result property="dealDate" column="DEAL_DATE"/>
 		<association property="payment" resultMap="paymentResultSet"/>
 	</resultMap>
 	
@@ -71,14 +73,12 @@
 	<resultMap id="paymentResultSet" type="Payment">
 		<id property="pNo" column="P_NO"/>
 		<result property="pRNo" column="P_R_NO"/>
-		<result property="dealYN" column="DEAL_YN"/>
-		<result property="dealDate" column="DEAL_DATE"/>
 		<result property="cancYN" column="CANC_YN"/>
 		<result property="cancDate" column="CANC_DATE"/>
 		<result property="payYN" column="PAY_YN"/>
 		<result property="enrollDate" column="ENROLL_DATE"/>
 		<result property="cancAmount" column="CANC_AMOUNT"/>
-		<result property="calcDate" column="CALC_AMOUNT"/>
+		<result property="calcYN" column="CALC_YN"/>
 		<association property="calculate" resultMap="calculateResultSet"/>
 	</resultMap>
 	
@@ -181,7 +181,7 @@
 	
 	<!-- 마이페이지 예약내역  -->
 	<!-- ****************************************  -->
-	<select id="selectRsvListCount" resultType="_int">
+	<select id="getListCount" resultType="_int">
 	SELECT COUNT(*)
 	FROM RESERVATION R LEFT OUTER JOIN PAYMENT P ON(R.R_NO=P.P_R_NO)
 	LEFT OUTER JOIN CALCULATE C ON (P.P_NO = C.C_P_NO)
@@ -198,21 +198,31 @@
 				AND (P.PAY_YN = 'Y' AND P.CANC_YN ='N' AND R.DEAL_YN ='N')
 			</when>
 			<when test="rsvStatus =='deal'">
-				AND (P.PAY_YN = 'Y' AND P.CANC_YN ='N' AND R.DEAL_YN ='N')
+				AND (P.PAY_YN = 'Y' AND P.CANC_YN ='N' AND R.DEAL_YN ='Y')
 			</when>
 			<when test="rsvStatus =='canc'">
-				AND (P.DEAL_YN = 'Y' AND P.CANC_YN ='N')
+				AND (P.CANC_YN ='Y') 
 			</when>
 		</choose>
-			<![CDATA[ AND R.START_DATE BETWEEN #{stDate} AND #{edDate} ]]>
+		<choose><!-- 정산상태 -->
+			<when test="calStatus =='calcN'">
+				AND (P.CALC_YN = 0)
+			</when>
+			<when test="calStatus =='calcY'">
+				AND (P.CALC_YN = 1)
+			</when>
+		</choose>
+			<![CDATA[ AND ((R.START_DATE BETWEEN #{stDate} AND #{edDate}) 
+					OR ((R.RIGHT_LOAD ='바로 상차') AND (P.ENROLL_DATE BETWEEN #{stDate} AND #{edDate})))]]>
 		<if test="fSearch != null">
-			<![CDATA[ 	AND ((R.START_ADDR LIKE '%'||#{fSearch}||'%') OR (R.END_ADDR LIKE '%'||#{fSearch}||'%') OR (R.MSG LIKE '%'||#{fSearch}||'%') OR(R.LUGGAGE LIKE '%'||#{fSearch}||'%'))]]>
+			<![CDATA[ 	AND ((R.START_ADDR LIKE '%'||#{fSearch}||'%') OR (R.END_ADDR LIKE '%'||#{fSearch}||'%') 
+						OR (R.MSG LIKE '%'||#{fSearch}||'%') OR(R.LUGGAGE LIKE '%'||#{fSearch}||'%'))]]>
 		</if>
 	</select>
 	
 	
 	<!-- 마이페이지 예약내역  -->
-	<select id="selectRsvPayList" resultMap="rsvPayResultSet">
+	<select id="seLectList" resultMap="rsvPayResultSet">
 	SELECT *
 	FROM RESERVATION R LEFT OUTER JOIN PAYMENT P ON(R.R_NO=P.P_R_NO)
 	LEFT OUTER JOIN CALCULATE C ON (P.P_NO = C.C_P_NO)
@@ -229,15 +239,25 @@
 				AND (P.PAY_YN = 'Y' AND P.CANC_YN ='N' AND R.DEAL_YN ='N')
 			</when>
 			<when test="rsvStatus =='deal'">
-				AND (P.PAY_YN = 'Y' AND P.CANC_YN ='N' AND R.DEAL_YN ='N')
+				AND (P.PAY_YN = 'Y' AND P.CANC_YN ='N' AND R.DEAL_YN ='Y')
 			</when>
 			<when test="rsvStatus =='canc'">
-				AND (P.DEAL_YN = 'Y' AND P.CANC_YN ='N')
+				AND (P.CANC_YN ='Y')
 			</when>
 		</choose>
-			<![CDATA[ AND R.START_DATE BETWEEN #{stDate} AND #{edDate} ]]>
+		<choose><!-- 정산상태 -->
+			<when test="calStatus =='calcN'">
+				AND (P.CALC_YN = 0)
+			</when>
+			<when test="calStatus =='calcY'">
+				AND (P.CALC_YN = 1)
+			</when>
+		</choose>
+			<![CDATA[ AND ((R.START_DATE BETWEEN #{stDate} AND #{edDate}) 
+					OR ((R.RIGHT_LOAD ='바로 상차') AND (P.ENROLL_DATE BETWEEN #{stDate} AND #{edDate})))]]>
 		<if test="fSearch != null">
-			<![CDATA[ 	AND ((R.START_ADDR LIKE '%'||#{fSearch}||'%') OR (R.END_ADDR LIKE '%'||#{fSearch}||'%') OR (R.MSG LIKE '%'||#{fSearch}||'%') OR(R.LUGGAGE LIKE '%'||#{fSearch}||'%'))]]>
+			<![CDATA[ 	AND ((R.START_ADDR LIKE '%'||#{fSearch}||'%') OR (R.END_ADDR LIKE '%'||#{fSearch}||'%') 
+						OR (R.MSG LIKE '%'||#{fSearch}||'%') OR(R.LUGGAGE LIKE '%'||#{fSearch}||'%'))]]>
 		</if>
 		ORDER BY TO_NUMBER(SUBSTR(R.R_NO, 2)) DESC
 	</select>
@@ -261,10 +281,10 @@
 		WHERE R_NO = #{rNo}
 	</update>
 	<!-- 결제정보 상세보기 -->
-	<select id="pDetail" resultMap="paymentResultSet">
-	SELECT *
-	FROM PAYMENT
-	WHERE P_R_NO = #{rNo}
+	<select id="pDetail" resultMap="rsvPayResultSet">
+	SELECT R_NO, DEAL_YN
+	FROM RESERVATION
+	WHERE R_NO = #{rNo}
 	</select>
 	
 	<!-- 결제취소 금액 업데이트  -->
@@ -286,56 +306,4 @@
 		</choose>
 		WHERE P_R_NO = #{pRNo}
 	</update>
-	<!-- 정산 리스트카운트  -->
-	<select id="getCalListCount" resultType="_int">
-		SELECT COUNT(*)
-		FROM RESERVATION R LEFT OUTER JOIN PAYMENT P ON(R.R_NO=P.P_R_NO)
-		WHERE R.R_D_NO= #{DNO}
-	</select>
-	<!-- 정산 예약내역  -->
-	<select id="selectCalList" resultMap="rsvPayResultSet">
-		SELECT *
-		FROM RESERVATION R LEFT OUTER JOIN PAYMENT P ON(R.R_NO=P.P_R_NO)
-		LEFT OUTER JOIN CALCULATE C ON (P.P_NO = C.C_P_NO)
-		WHERE R.R_D_NO= #{dNo}
-		ORDER BY TO_NUMBER(SUBSTR(R.R_NO, 2)) DESC
-	</select>
-	<!-- 정산 필터 숫자-->
- 	<select id="getFilterListCount" resultType="_int">
-		SELECT COUNT(*)
-		FROM RESERVATION R LEFT OUTER JOIN PAYMENT P ON(R.R_NO=P.P_R_NO)
-		LEFT OUTER JOIN CALCULATE C ON (P.P_NO = C.C_P_NO)
-		<choose>
-			<when test="mNo != null">
-			WHERE R.R_M_NO = #{mNo}
-			</when>
-			<otherwise>
-			WHERE R.R_D_NO = #{dNo}
-			</otherwise>
-		</choose>
-			<![CDATA[ AND (R.START_DATE > #{stDate}}) AND (R.START_DATE < #{edDate}) ]]>
-		<if test="fSearch != null">
-			<![CDATA[ 	AND ((R.START_ADDR LIKE '%'||#{fSearch}||'%') OR (R.END_ADDR LIKE '%'||#{fSearch}||'%') OR (R.MSG LIKE '%'||#{fSearch}||'%') OR(R.LUGGAGE LIKE '%'||#{fSearch}||'%'))]]>
-		</if>
-	</select>
-	<!-- 정산 필터-->
- 	<select id="selectFilterList" resultMap="rsvPayResultSet">
-		SELECT *
-		FROM RESERVATION R LEFT OUTER JOIN PAYMENT P ON(R.R_NO=P.P_R_NO)
-		LEFT OUTER JOIN CALCULATE C ON (P.P_NO = C.C_P_NO)
-		<choose>
-			<when test="mNo != null">
-			WHERE R.R_M_NO = #{mNo}
-			</when>
-			<otherwise>
-			WHERE R.R_D_NO = #{dNo}
-			</otherwise>
-		</choose>
-			<![CDATA[ AND (R.START_DATE > #{stDate}}) AND (R.START_DATE < #{edDate}) ]]>
-		<if test="fSearch != null">
-			<![CDATA[ 	AND ((R.START_ADDR LIKE '%'||#{fSearch}||'%') OR (R.END_ADDR LIKE '%'||#{fSearch}||'%') OR (R.MSG LIKE '%'||#{fSearch}||'%') OR(R.LUGGAGE LIKE '%'||#{fSearch}||'%'))]]>
-		</if>
-		ORDER BY TO_NUMBER(SUBSTR(R.R_NO, 2)) DESC
-		
-	</select>
 </mapper>

@@ -52,7 +52,7 @@ public class UserMyPageDao {
 
 
 	public int getRsvListCount(Filter f) {
-		return sqlSession.selectOne("myPageMapper.selectRsvListCount",f);
+		return sqlSession.selectOne("myPageMapper.getListCount",f);
 	}
 
 
@@ -60,7 +60,7 @@ public class UserMyPageDao {
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("myPageMapper.selectRsvPayList", f, rowBounds);
+		return (ArrayList)sqlSession.selectList("myPageMapper.seLectList", f, rowBounds);
 	}
 
 
@@ -78,7 +78,7 @@ public class UserMyPageDao {
 	}
 
 
-	public Payment pDetail(String rNo) {
+	public Reservation pDetail(String rNo) {
 		return sqlSession.selectOne("myPageMapper.pDetail", rNo);
 	}
 

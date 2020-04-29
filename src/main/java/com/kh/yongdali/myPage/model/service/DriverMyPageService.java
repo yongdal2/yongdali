@@ -26,32 +26,17 @@ public interface DriverMyPageService {
 
 	/**
 	 * 정산 listCount
-	 * @param dNo
+	 * @param f
 	 * @return
 	 */
-	int getCalListCount(String dNo);
+	int getCalListCount(Filter f);
 
 	/**
 	 * 유저 정산내역
 	 * @param pi
-	 * @param dNo
-	 * @return
-	 */
-	ArrayList<Reservation> selectCalList(PageInfo pi, String dNo);
-
-	/**
-	 * 드라이버 정산 필터 카운트
 	 * @param f
 	 * @return
 	 */
-	int getFilCalListCount(Filter f);
-
-	/**
-	 * 드라이버 정산 필터 리스트
-	 * @param pi
-	 * @param f
-	 * @return
-	 */
-	ArrayList<Reservation> selectFilCalList(PageInfo pi, Filter f);
+	ArrayList<Reservation> selectCalList(PageInfo pi, Filter f);
 
 }
