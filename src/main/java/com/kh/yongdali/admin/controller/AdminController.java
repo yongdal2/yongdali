@@ -18,6 +18,7 @@ import com.kh.yongdali.admin.model.service.AdminService;
 import com.kh.yongdali.admin.model.vo.Calculate;
 import com.kh.yongdali.admin.model.vo.DriSearchCondition;
 import com.kh.yongdali.admin.model.vo.MemSearchCondition;
+import com.kh.yongdali.admin.model.vo.RefSearchCondition;
 import com.kh.yongdali.admin.model.vo.adRefund;
 import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.common.Pagination;
@@ -262,10 +263,10 @@ public class AdminController {
 			sc.setSignupType(memberSearch);
 		}else if (memberSearch.equals("pushEnabled")) {
 			sc.setPushEnabled(memberSearch);
+			/* 등록일자를 검색하는 것보다 정렬하든지 없어도 됨
+			 * }else if (memberSearch.equals("		")) { sc.setEnrollDate(content);
+			 */
 		}
-		//		}else if (memberSearch.equals("enrollDate")) {
-		//			sc.setEnrollDate(content); DATE타입..
-		//		}
 
 		sc.setContent(content);
 
@@ -329,6 +330,47 @@ public class AdminController {
 		return mv; 
 
 	}
+	
+	
+	@RequestMapping("SearchAdminRefund")
+	public ModelAndView SearchAdminRefund(ModelAndView mv,
+				@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage,
+				@RequestParam(value = "refundSearch") String refundSearch,
+				@RequestParam(value = "content") String content,
+				RefSearchCondition sc) {
+		
+		if(refundSearch.equals("mNo")) {
+			sc.setmNo(refundSearch);
+		}else if(refundSearch.equals("rNo")) {
+			sc.setrNo(refundSearch);
+		}else if(refundSearch.equals("email")) {
+			sc.setEmail(refundSearch);
+		}else if(refundSearch.equals("mName")) {
+			sc.setmName(refundSearch);
+		}else if(refundSearch.equals("phone")) {
+			sc.setPhone(refundSearch);
+		}else if(refundSearch.equals("cancAmount")) {
+			sc.setCancAmount(refundSearch);
+//		}else if (refundSearch.equals("calcDate")) {
+//			sc.setCalcDate(refundSearch); 가입일과 똑같음.
+//		}
+		}
+		
+		sc.setContent(content);
+		
+		int pageLimit =5;
+		int boardLimit=10;
+		
+		/*
+		 * int listCount = aService.getRefListCount();
+		 * System.out.println("refundListCount : " + listCount );
+		 */
+		
+		return mv;
+	}
+	
+	
+	
 
 	@RequestMapping("adminRefund.do")
 	public void adminRefund(HttpServletResponse response, @RequestParam(value = "rNo")String rNo) throws JsonIOException, IOException{
