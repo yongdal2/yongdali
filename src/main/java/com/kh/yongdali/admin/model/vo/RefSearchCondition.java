@@ -1,6 +1,8 @@
 package com.kh.yongdali.admin.model.vo;
 
-public class refSearchCondition {
+import java.sql.Date;
+
+public class RefSearchCondition {
 	
 	private String mNo;
 	private String rNo;
@@ -10,17 +12,21 @@ public class refSearchCondition {
 	private String cancAmount;
 	private String calcYn;
 	private String content;
+	private Date calcDate;
+
 	
 	
 	
-	
-	public refSearchCondition() {
+	public RefSearchCondition() {
 		super();
 	}
+
+
 	
-	
-	public refSearchCondition(String mNo, String rNo, String email, String mName, String phone, String cancAmount,
-			String calcYn, String content) {
+
+
+	public RefSearchCondition(String mNo, String rNo, String email, String mName, String phone, String cancAmount,
+			String calcYn, String content, Date calcDate) {
 		super();
 		this.mNo = mNo;
 		this.rNo = rNo;
@@ -30,7 +36,10 @@ public class refSearchCondition {
 		this.cancAmount = cancAmount;
 		this.calcYn = calcYn;
 		this.content = content;
+		this.calcDate = calcDate;
 	}
+
+
 
 
 	public String getmNo() {
@@ -38,9 +47,13 @@ public class refSearchCondition {
 	}
 
 
+
+
 	public void setmNo(String mNo) {
 		this.mNo = mNo;
 	}
+
+
 
 
 	public String getrNo() {
@@ -48,9 +61,13 @@ public class refSearchCondition {
 	}
 
 
+
+
 	public void setrNo(String rNo) {
 		this.rNo = rNo;
 	}
+
+
 
 
 	public String getEmail() {
@@ -58,9 +75,13 @@ public class refSearchCondition {
 	}
 
 
+
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+
 
 
 	public String getmName() {
@@ -68,9 +89,13 @@ public class refSearchCondition {
 	}
 
 
+
+
 	public void setmName(String mName) {
 		this.mName = mName;
 	}
+
+
 
 
 	public String getPhone() {
@@ -78,9 +103,13 @@ public class refSearchCondition {
 	}
 
 
+
+
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
+
 
 
 	public String getCancAmount() {
@@ -88,9 +117,13 @@ public class refSearchCondition {
 	}
 
 
+
+
 	public void setCancAmount(String cancAmount) {
 		this.cancAmount = cancAmount;
 	}
+
+
 
 
 	public String getCalcYn() {
@@ -98,9 +131,13 @@ public class refSearchCondition {
 	}
 
 
+
+
 	public void setCalcYn(String calcYn) {
 		this.calcYn = calcYn;
 	}
+
+
 
 
 	public String getContent() {
@@ -108,23 +145,38 @@ public class refSearchCondition {
 	}
 
 
+
+
 	public void setContent(String content) {
 		this.content = content;
 	}
 
 
+
+
+	public Date getCalcDate() {
+		return calcDate;
+	}
+
+
+
+
+	public void setCalcDate(Date calcDate) {
+		this.calcDate = calcDate;
+	}
+
+
+
+
 	@Override
 	public String toString() {
-		return "refSearchCondition [mNo=" + mNo + ", rNo=" + rNo + ", email=" + email + ", mName=" + mName + ", phone="
-				+ phone + ", cancAmount=" + cancAmount + ", calcYn=" + calcYn + ", content=" + content + "]";
+		return "RefSearchCondition [mNo=" + mNo + ", rNo=" + rNo + ", email=" + email + ", mName=" + mName + ", phone="
+				+ phone + ", cancAmount=" + cancAmount + ", calcYn=" + calcYn + ", content=" + content + ", calcDate="
+				+ calcDate + "]";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 
+	
+	
+	
+	
 }
