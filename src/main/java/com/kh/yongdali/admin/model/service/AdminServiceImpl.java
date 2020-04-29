@@ -117,6 +117,10 @@ public class AdminServiceImpl implements AdminService {
 		return aDao.adminRefundList();
 	}
 
+	/*
+	 * @Override public int getRefListCount() { return aDao.(); }
+	 */
+
 
 
 

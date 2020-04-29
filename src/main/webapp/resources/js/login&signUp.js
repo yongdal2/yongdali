@@ -380,62 +380,65 @@ $(document).ready(function(){
     
     /* 네이버 아이디로 회원가입 */
     // 네이버 회원가입 버튼 TODO
-//    $('#naverSignUp').click(function(){
-//    	$('#pushEnabledForm').attr('action','easySignUpView.me');
-//    	if($('.chkPolicy:eq(1)').attr('checked') == "checked" && $('.chkPolicy:eq(2)').attr('checked') == "checked"){
-//    		let apiURL = $('#apiURL').val();
-//    		console.log(apiURL);
-//    		
-//    		// 1. 이렇게 호출할 경우 이상없이 호출됨
-////    		location.href=apiURL;
-//    		
-//    		// 2. ajax에서 url 호출할 경우 cross-origin 에러 발생했었으나 servelet에 @CrossOrigin 어노테이션 사용으로 오류제거함
-//    		// 3. 오류는 뜨지 않으나 여전히 url이 호출되지 않음(logger 안뜸)
-//    		$.ajax({
-//    			url : $('#apiURL').val(),
-//    			type : "get",
-////    			async:false,
-//    			success : function(value){
-//		   			console.log(value);
-//		   			if(valueS == 'facebook'){
-//		   				alert("페이스북 간편 가입 회원입니다. 페이스북으로 로그인하세요.");
-//		   			}
-//		   			else if(value == 'naver'){
-//		   				alert("네이버 간편 가입 회원입니다. 네이버로 로그인하세요.");
-//		   			}
-//		   			else if(value =='kakao'){
-//		   				alert("카카오 간편 가입 회원입니다. 카카오로 로그인하세요.");
-//		   			}
-//		   			else if(value =='yongdali'){
-//		   				alert("용달이 회원입니다. 용달이로 로그인하세요.");
-//		   			}
-//		   			else if(value =='unknown'){
-//		   				alert("unknown");
-//		   			}
-//		   			else{
-//						let pushEnabled = $('input[name=pushEnabled]').val();
-//	                    let email = "test@naver.com"
-//	                    let name = "tester"
-//	                     
-//	                    let servletUrl = "signUpView.me?pushEnabled=" + pushEnabled;
-//	                    servletUrl += "&email=" + email;
-//	                    servletUrl += "&name=" + name;
-//	                    servletUrl += "&signupType=네이버";
-//	  					  
-//	  					location.href=servletUrl;
-//		   			}
-//    			}, error : function(request,status,error){
-//    				console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-//
-//
-//    				var msg = "네이버 간편 회원가입 중 오류 발생";
-////                	location.href="error.ydl?msg="+msg;
-//    			}
-//    		})
-//    	}else {
-//    		alert("필수 약관에 동의해야합니다.")
-//    	}
-//    })
+    $('#naverSignUp').click(function(){
+    	$('#pushEnabledForm').attr('action','easySignUpView.me');
+    	if($('.chkPolicy:eq(1)').attr('checked') == "checked" && $('.chkPolicy:eq(2)').attr('checked') == "checked"){
+    		let apiURL = $('#apiURL').val();
+    		console.log(apiURL);
+    		
+    		// 1. 이렇게 호출할 경우 이상없이 호출됨
+//    		location.href=apiURL;
+    		
+    		// 2. ajax에서 url 호출할 경우 cross-origin 에러 발생했었으나 servelet에 @CrossOrigin 어노테이션 사용으로 오류제거함
+    		// 3. 오류는 뜨지 않으나 여전히 url이 호출되지 않음(logger 안뜸)
+    		$.ajax({
+    			url : $('#apiURL').val(),
+    			type : "get",
+    			dataType: 'jsonp',
+    			jsonpCallback: "myCallback",
+    			success: callBack('myCallback'),
+    			error : function(request,status,error){
+    				console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+    				var msg = "네이버 간편 회원가입 중 오류 발생";
+    				location.href="error.ydl?msg="+msg;
+    			}
+    		});
+//    			async:false,
+    			function callBack(value){
+		   			console.log(value);
+		   			if(value == 'facebook'){
+		   				alert("페이스북 간편 가입 회원입니다. 페이스북으로 로그인하세요.");
+		   			}
+		   			else if(value == 'naver'){
+		   				alert("네이버 간편 가입 회원입니다. 네이버로 로그인하세요.");
+		   			}
+		   			else if(value =='kakao'){
+		   				alert("카카오 간편 가입 회원입니다. 카카오로 로그인하세요.");
+		   			}
+		   			else if(value =='yongdali'){
+		   				alert("용달이 회원입니다. 용달이로 로그인하세요.");
+		   			}
+		   			else if(value =='unknown'){
+		   				alert("unknown");
+		   			}
+		   			else{
+						let pushEnabled = $('input[name=pushEnabled]').val();
+	                    let email = "test@naver.com"
+	                    let name = "tester"
+	                     
+	                    let servletUrl = "signUpView.me?pushEnabled=" + pushEnabled;
+	                    servletUrl += "&email=" + email;
+	                    servletUrl += "&name=" + name;
+	                    servletUrl += "&signupType=네이버";
+	  					  
+	  					location.href=servletUrl;
+		   			}
+    			};
+    		
+    	}else {
+    		alert("필수 약관에 동의해야합니다.")
+    	}
+    });
 
         
     /*-- 비밀번호 찾기 ----------------------------------------------*/

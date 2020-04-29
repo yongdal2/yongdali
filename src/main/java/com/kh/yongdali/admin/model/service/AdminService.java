@@ -102,6 +102,9 @@ public interface AdminService {
 	 */
 	ArrayList<adRefund> adminRefundList();
 
+	/*
+	 * int getRefListCount();
+	 */
 	
 
 
