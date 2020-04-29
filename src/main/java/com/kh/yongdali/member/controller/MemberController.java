@@ -782,7 +782,8 @@ public class MemberController {
 	@RequestMapping("insert.me")
 	public String insertMember(@ModelAttribute Member m, Driver d
 								, Model model, HttpServletRequest request
-								, @RequestParam("easyAcsmId") String easyAcsmId , String easyAcsmName
+								, @RequestParam(name="easyAcsmId", required=false) String easyAcsmId 
+								, @RequestParam(name="easyAcsmName", required=false) String easyAcsmName
 								, @RequestParam(name="inputFile_idImg", required=true) MultipartFile idImg
 								, @RequestParam(name="inputFile_regCardImg", required=true) MultipartFile regCardImg) {
 	
