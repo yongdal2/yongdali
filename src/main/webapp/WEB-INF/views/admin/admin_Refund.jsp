@@ -53,9 +53,9 @@
 						<div class="row" id="rowList">
 
 							<!-- 검색기능 -->
-							<form action="SearchAdminMember" onsubmit="false">
+							<form action="SearchAdminRefund" onsubmit="false">
 							<div id="search">
-								<select id="searchCondition" class="search" name="memberSearch">
+								<select id="searchCondition" class="search" name="refundSearch">
 									<option value="" selected="selected">선택</option>
 									<option value="mNo">회원번호</option>
 									<option value="rNo">결제번호</option>
