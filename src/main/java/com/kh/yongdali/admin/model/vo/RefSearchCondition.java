@@ -22,6 +22,7 @@ public class RefSearchCondition {
 	}
 
 
+	
 
 
 	public RefSearchCondition(String mNo, String rNo, String email, String mName, String phone, String cancAmount,
