@@ -35,5 +35,4 @@ public class ReservationServiceEmpl implements ReservationService{
 		return rDao.modifyAddr(a);
 	}
 	
-	
 }

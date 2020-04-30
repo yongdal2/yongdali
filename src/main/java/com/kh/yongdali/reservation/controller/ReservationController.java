@@ -1,10 +1,14 @@
 package com.kh.yongdali.reservation.controller;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.myPage.model.vo.Address;
 import com.kh.yongdali.reservation.model.service.ReservationService;
@@ -149,7 +156,7 @@ public class ReservationController {
 	}
 	
 	/**
-	 * 주소록 삭제
+	 * 주소록 삭제(ajax)
 	 * @param response
 	 * @param aNo
 	 */
@@ -170,6 +177,13 @@ public class ReservationController {
 		
 	}
 	
+	/**
+	 * 주소록 수정(ajax)
+	 * @param a
+	 * @param addr1
+	 * @param addr2
+	 * @return
+	 */
 	@RequestMapping("addrModi.do")
 	@ResponseBody
 	public String modifyAddr(Address a, String addr1, String addr2) {
@@ -192,6 +206,20 @@ public class ReservationController {
 		} else {
 			return "fail";
 		}
+	}
+	
+	
+	@RequestMapping(value="selectAddrList.do")
+	public void selectAddrList(HttpServletResponse response, HttpSession session) throws JsonIOException, IOException {
+		System.out.println("안녕4");
+		// 인코딩
+		response.setContentType("application/json; charset=UTF-8");
+		String mno = ((Member)session.getAttribute("loginUser")).getmNo();
+		ArrayList<Address> list = rService.getAddressList(mno);
+		Map address = new HashMap();
+		address.put("list",list);
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		gson.toJson(address,response.getWriter());
 	}
 }
 

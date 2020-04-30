@@ -26,7 +26,6 @@ public class HomeInterceptor extends HandlerInterceptorAdapter {
 		}
 		else {
 			if(loginUser.getPushEnabled() == null) {
-//				request.setAttribute("isEasyAccessor", "Y");
 				request.setAttribute("isEasyAccessor", true);
 				request.getRequestDispatcher("/WEB-INF/views/login&signUp/policyChk.jsp").forward(request, response);
 				return false;
