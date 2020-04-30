@@ -45,8 +45,7 @@ public class AdminController {
 		// 현재 페이지가
 		// 필요한데, 없어도
 		// 되고, 있으면
-		// 기본값 1
-
+		// 기본값 1 . 값은 currentPage로 들어옴.
 		System.out.println("memberCurrentPage : " + currentPage);
 
 		int listCount = aService.getMemListCount();
@@ -104,24 +103,6 @@ public class AdminController {
 
 
 
-	// 드라이버 계정 계정정보
-	@RequestMapping("adminHome.ydl")
-	public String adminHomeView1() {
-		return "admin/admin";
-	}
-
-	// 회원님 목록
-	@RequestMapping("admin_Mem.ydl")
-	public String adminHomeView2() {
-		return "admin/admin_Mem";
-	}
-
-	// 기사님 목록
-	@RequestMapping("admin_Driver.ydl")
-	public String adminHomeView3() {
-		return "admin/admin_Driver";
-	}
-
 	// 예약 내역
 	@RequestMapping("aRes.ad")
 	public ModelAndView adminReserView(ModelAndView mv,
@@ -140,14 +121,9 @@ public class AdminController {
 		return mv;
 	}
 
-	// 환불 내역
-	//	@RequestMapping("admin_Refund.ydl")
-	//	public String adminHomeView6() {
-	//		return "admin/admin_Refund";
-	//	}
 
 	/**
-	 * admin Refund list
+	 * 환불내역
 	 * @param mv
 	 * @param currentPage
 	 * @return
@@ -178,11 +154,11 @@ public class AdminController {
 
 
 
-	/*
-	 * // 채팅 내역
-	 * 
-	 * @RequestMapping("admin_ChatLog.ydl") public String adminHomeView7() { return
-	 * "admin/admin_ChatLog"; }
+	/**
+	 * 정산내역
+	 * @param mv
+	 * @param currentPage
+	 * @return
 	 */
 	@RequestMapping("aJung.ad")
 	public ModelAndView jungsanView(ModelAndView mv,
@@ -233,6 +209,15 @@ public class AdminController {
 	   }
 	
 
+	/**
+	 * 회원님 검색
+	 * @param mv
+	 * @param currentPage
+	 * @param memberSearch
+	 * @param content
+	 * @param sc
+	 * @return
+	 */
 	@RequestMapping("SearchAdminMember")
 	public ModelAndView SearchAdminMember(ModelAndView mv,
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage,
@@ -289,6 +274,15 @@ public class AdminController {
 
 
 
+	/**
+	 * 기사님 검색
+	 * @param mv
+	 * @param currentPage
+	 * @param driverSearch
+	 * @param content
+	 * @param sc
+	 * @return
+	 */
 	@RequestMapping("SearchAdminDriver")
 	public ModelAndView SearchAdminDriver(ModelAndView mv,
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage,
@@ -332,6 +326,15 @@ public class AdminController {
 	}
 	
 	
+	/**
+	 * 환불 검색
+	 * @param mv
+	 * @param currentPage
+	 * @param refundSearch
+	 * @param content
+	 * @param sc
+	 * @return
+	 */
 	@RequestMapping("SearchAdminRefund")
 	public ModelAndView SearchAdminRefund(ModelAndView mv,
 				@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage,
@@ -361,17 +364,30 @@ public class AdminController {
 		int pageLimit =5;
 		int boardLimit=10;
 		
-		/*
-		 * int listCount = aService.getRefListCount();
-		 * System.out.println("refundListCount : " + listCount );
-		 */
+		int listCount = aService.refListCount();
 		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, pageLimit, boardLimit);
+
+		ArrayList<adRefund> list = aService.searchAdminRefund(sc,pi); 
+
+		System.out.println("searchAdminRefund : " + list);
+		
+		mv.addObject("pi", pi);
+		mv.addObject("list", list);
+		mv.setViewName("admin/admin_Refund");
 		return mv;
 	}
 	
 	
 	
 
+	/**
+	 * 환불내역 환불버튼 ajax
+	 * @param response
+	 * @param rNo
+	 * @throws JsonIOException
+	 * @throws IOException
+	 */
 	@RequestMapping("adminRefund.do")
 	public void adminRefund(HttpServletResponse response, @RequestParam(value = "rNo")String rNo) throws JsonIOException, IOException{
 		System.out.println(rNo);

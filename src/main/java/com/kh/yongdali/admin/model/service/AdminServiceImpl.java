@@ -10,6 +10,7 @@ import com.kh.yongdali.admin.model.dao.AdminDao;
 import com.kh.yongdali.admin.model.vo.Calculate;
 import com.kh.yongdali.admin.model.vo.DriSearchCondition;
 import com.kh.yongdali.admin.model.vo.MemSearchCondition;
+import com.kh.yongdali.admin.model.vo.RefSearchCondition;
 import com.kh.yongdali.admin.model.vo.adRefund;
 import com.kh.yongdali.member.model.vo.Member;
 import com.kh.yongdali.reservation.model.vo.Reservation;
@@ -107,22 +108,40 @@ public class AdminServiceImpl implements AdminService {
 		return aDao.searchDriverList(pi,sc);
 	}
 
+	/**
+	 * 환불 리스트 갯수 불러오기
+	 */
 	@Override
 	public int adminRefund(String rNo) {
 		return aDao.adminRefund(rNo);
 	}
+
+	
+
 
 	@Override
 	public ArrayList<adRefund> adminRefundList() {
 		return aDao.adminRefundList();
 	}
 
-	/*
-	 * @Override public int getRefListCount() { return aDao.(); }
+	@Override
+	public int refListCount() {
+		return aDao.refListCount();
+	}
+
+	/**
+	 * 환불 검색기능
 	 */
+	@Override
+	public ArrayList<adRefund> searchAdminRefund(RefSearchCondition sc, PageInfo pi) {
+		return aDao.searchAdminRefund(pi,sc);
+	}
 
 
 
 
 
+
+
+	
 }
