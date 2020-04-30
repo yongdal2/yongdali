@@ -171,7 +171,7 @@
                 <!-- 이메일 -->
                 <div class="emailWrap">
                     <div class="formRow--input-wrapper js-inputWrapper">
-                        <input type="email" class="formRow--input js-input eng" name="mId" id="mId" placeholder="이메일"
+                        <input type="email" class="formRow--input js-input eng emailChk" name="mId" id="mId" placeholder="이메일"
                             maxlength="50">
                     </div>
                 </div>
