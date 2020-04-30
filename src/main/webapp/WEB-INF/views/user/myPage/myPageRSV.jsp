@@ -299,14 +299,14 @@
 	                console.log(d);
 	                console.log(d.deal);
 	                if (d.deal == 'Y') {
-	                    var name = "<b><span>" + decodeURIComponent(d.name) + "<b>기사님</span><br>";
+	                    var name = "<b><span>" + decodeURIComponent(d.name) + "기사님</b></span><br>";
 	                    var phone = "<span>" +d.phone + "</span>";
 	                    var carNo = "<span>"+decodeURIComponent(d.carNo)+"<span>";
 	                    var imgUrl = "${pageContext.request.contextPath}/resources/images/driver/id/" + d.img;
 	                    var img = '<img class="img-thumbnail img-circle" style="width: 150px; height: 150px;  overflow: hidden;" src='+imgUrl+' />'
 	                    var type = "<br><span>" + decodeURIComponent(d.type);
-	                    var capacity = " / "+d.capacity+"ton<br><br><span>";
-	                    dhtml = '<div class="text-center na">'+img + name + phone + type + capacity;
+	                    var capacity = " / "+d.capacity+"ton<br><span>";
+	                    dhtml = '<div class="text-center noto">'+img + name + phone + type + capacity;
 	                } else {
 	                    dhtml = "<span class='na fw6'>아직 배차전 입니다.</span>";
 	                }
