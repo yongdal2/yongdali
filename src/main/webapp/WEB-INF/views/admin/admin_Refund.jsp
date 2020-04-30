@@ -116,10 +116,28 @@
 									console.log(value);
 									console.log(rNo);
 									
+									/* ajax로 값 받아오기 전 */
 									if(value == "환불하기"){
-										refund(rNo);
+										
+										 if (confirm("환불 하시겠습니까?") == true){    //확인
+											refund(rNo);
+										 }else{   //취소
+											return false;
+										 }
+										
 									}
+									
 								}
+								/* ajax */
+								function check(rNo){
+									 if (confirm("환불 하시겠습니까?") == true){    //확인
+										 refund(rNo);
+									 }else{   //취소
+									     return false;
+									 }
+									
+								}
+								
 								function refund(rNo){
 									console.log(rNo);
 									$.ajax({
@@ -128,13 +146,7 @@
 										data:{rNo:rNo},
 										
 										success:function(data){
-											if(data=='환불'){
-								        	    alert("환불처리 하시겠습니까?");
-											/* 	$('checked',true);
-											}else(data=='취소'){
-												alert("취소처리 되었습니다.");
-												$('checked',false); */
-											}
+											
 											$('.thead').remove(); 
 											$('.tbody').remove();
 											
@@ -163,7 +175,7 @@
 												listText += "<td>"+data[i].phone+"</td>";
 												listText += "<td>"+data[i].cancAmount+"</td>";
 												if(data[i].calcYn == 1){
-													listText += "<td><input type='button' value='환불하기' onclick='refund("+'"'+data[i].rNo+'"'+")'></td>";
+													listText += "<td><input type='button' value='환불하기' onclick='check("+'"'+data[i].rNo+'"'+")'></td>";
 													listText += "<td> - </td>";
 												}else if(data[i].calcYn == 2){
 													listText += "<td>환불완료</td>";
