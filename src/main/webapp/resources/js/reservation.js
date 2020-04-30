@@ -12,7 +12,7 @@ function calc(){
 	$('#amount').html(amount.toLocaleString()+"원");
 	$('#amountVal').val(amount);
 }
-
+/*----------------------------------------------차무게&차옵션--------------------------------------------*/
 /* 차량 안내 */
 $('#carGuide-ment').click(function(){
 	$('#myModal1').css('display','block');
@@ -119,6 +119,7 @@ function addCarInfo2(){
 }
 
 
+/*----------------------------------------------이삿짐 선택--------------------------------------------*/
 /* 이삿짐 선택 모달 */
 //Get the modal
 var modal2 = document.getElementById("myModal2");
@@ -258,7 +259,6 @@ $(function(){
     });
 });
 
-
 /* 유저가 선택한 짐들 div에 담기 */
 $(function(){
     $(document).on('click','#loadBtn',function(){
@@ -322,6 +322,8 @@ span2.onclick = function() {
 	modal2.style.display = "none";
 }
 
+
+/*----------------------------------------------주소--------------------------------------------*/
 /* 출발지,도착지 주소 검색 후 위경도 변환 */
 
 //모달 배경화면 생성
@@ -498,7 +500,7 @@ $("#myModal34").mouseenter(function(){
 	}
 });
 
-
+/*----------------------------------------------거리계산--------------------------------------------*/
 /* 출발지에서 도착지까지의 거리 계산 */
 function preChargeFunc(){
 	if(endLat!=0 && startLat!=0){
@@ -533,7 +535,7 @@ function preChargeFunc(){
 		calc();
 	}
 }
-
+/*----------------------------------------------주소록--------------------------------------------*/
 // 최신 사용한 주소록 알아내기 위한 변수 선언
 var stANo = "";
 var edANo = "";
@@ -614,7 +616,6 @@ $("#myModal7").mouseenter(function(){
 	}
 });
 
-
 // x 버튼 눌렀을때 모달6,7 닫기
 $('#modal-close6').click(function(){
 	$('input[name="startAddrList"]:checked').prop('checked', false);
@@ -626,7 +627,223 @@ $('#modal-close7').click(function(){
 	modal7.style.display = "none";
 });
 
+//출발지 주소록
+$('#stAddrList').click(function(){
+	$('#myModal6').css('display','block');
+});
 
+// 출발지 주소록 모달 닫기
+var span6 = document.getElementById("modal-close6");
+span6.onclick = function() {
+	$('#myModal6').css('display','none');
+}
+
+
+// 도착지 주소록
+$('#edAddrList').click(function(){
+	$('#myModal7').css('display','block');
+});
+
+// 도착지 주소록 모달 닫기
+var span7 = document.getElementById("modal-close7");
+span7.onclick = function() {
+	$('#myModal7').css('display','none');
+}
+
+
+// 출발지와 도착지 각각의 주소 붙여 input hidden에다가 담기
+function addAddr(){
+	var stAddr1 = $('#startAddr').val();
+	var stAddr2 = $('#startDetailAddr').val();
+	var edAddr1 = $('#endAddr').val();
+	var edAddr2 = $('#endDetailAddr').val();
+	$('#addStAddr').val(stAddr1+","+stAddr2);
+	$('#addEdAddr').val(edAddr1+","+edAddr2);
+}
+
+//출발지 주소 수정 모달 팝업 띄우기
+$('.stAddrModi').click(function(){
+	
+	var aNo = $(this).closest('div').find('.stANo').val();
+	var place = $(this).closest('div').find('.stAPlace').text();
+	var name = $(this).closest('div').find('.stAName').text();
+	var phone = $(this).closest('div').find('.stAPhone').text();
+	var addr1 = $(this).closest('div').find('.stAddr1').text();
+	var addr2 = $(this).closest('div').find('.stAddr2').text();
+	var latitude = $(this).closest('div').find('.stLat').val();
+	var longitude = $(this).closest('div').find('.stLong').val();
+	
+	$('#ano').val(aNo);
+	$('#addr-place').val(place);
+	$('#addr-name').val(name);
+	$('#addr-phone').val(phone);
+	$('#addr-basic').val(addr1);
+	$('#addr-detail').val(addr2);
+	$('#latitude').val(latitude);
+	$('#longitude').val(longitude);
+	$('#myModal9').css('display','block');
+});
+
+
+
+// 출발지 주소 수정
+$('#addr-md-btn').click(function(){
+	if(confirm("변경하신 주소로 수정하시겠습니까?")){				
+		$.ajax({
+			url:"addrModi.do",
+			data:{
+				aNo:$('#ano').val(),
+				aPlace:$('#addr-place').val(),
+				aName:$('#addr-name').val(),
+				aPhone:$('#addr-phone').val(),
+				addr1:$('#addr-basic').val(),
+				addr2:$('#addr-detail').val(),
+				aLatitude:$('#latitude').val(),
+				aLongitude:$('#longitude').val()
+			},
+			type:"post",
+			success:function(data){
+				alert("수정이 완료되었습니다.");
+				$('#myModal9').css('display','none');
+				location.reload();
+			}, error:function(data){
+				alert("수정이 실패하였습니다.");
+			}
+		});
+	}
+});
+
+// 출발지 삭제
+$('.stAddrDele').click(function(){
+	var aNo = $(this).closest('div').find('.stANo').val();
+	
+	if(confirm("선택하신 주소를 삭제하시겠습니까?")){
+		$.ajax({
+			url:"addrDele.do",
+			data:{aNo:aNo},
+			type:"post",
+			success:function(date){
+				alert("삭제가 완료되었습니다.");
+			}, error:function(data){
+				alert("삭제가 실패하였습니다.");
+			}
+		});
+		$(this).closest('div').remove();
+	}
+});
+	
+	
+// 도착지 주소 수정 모달 팝업 띄우기
+$('.edAddrModi').click(function(){
+	
+	var aNo = $(this).closest('div').find('.edANo').val();
+	var place = $(this).closest('div').find('.edAPlace').text();
+	var name = $(this).closest('div').find('.edAName').text();
+	var phone = $(this).closest('div').find('.edAPhone').text();
+	var addr1 = $(this).closest('div').find('.edAddr1').text();
+	var addr2 = $(this).closest('div').find('.edAddr2').text();
+	var latitude = $(this).closest('div').find('.edLat').val();
+	var longitude = $(this).closest('div').find('.edLong').val();
+	
+	$('#ano').val(aNo);
+	$('#addr-place').val(place);
+	$('#addr-name').val(name);
+	$('#addr-phone').val(phone);
+	$('#addr-basic').val(addr1);
+	$('#addr-detail').val(addr2);
+	$('#latitude').val(latitude);
+	$('#longitude').val(longitude);
+	$('#myModal9').css('display','block');
+});	
+
+// 도착지 삭제
+$('.edAddrDele').click(function(){
+	var aNo = $(this).closest('div').find('.edANo').val();
+	
+	if(confirm("선택하신 주소를 삭제하시겠습니까?")){
+		$.ajax({
+			url:"addrDele.do",
+			data:{aNo:aNo},
+			type:"post",
+			success:function(date){
+				alert("삭제가 완료되었습니다.");
+			}, error:function(data){
+				alert("삭제가 실패하였습니다.");
+			}
+		});
+		$(this).closest('div').remove();
+	}
+});
+
+// 주소록 수정 창에 검색
+function SearchMdAddr(){
+	modal34.style.display = "block";
+	new daum.Postcode({
+		oncomplete: function(data) {
+			// 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+			
+			// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+			// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+			var addr = ''; // 주소 변수
+			
+			//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+			if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+				addr = data.roadAddress;
+			} else { // 사용자가 지번 주소를 선택했을 경우(J)
+				addr = data.jibunAddress;
+			}
+			
+			/* 서울 지역 조건 */
+			if(!addr.includes("서울")){
+				alert("죄송합니다.\n서울지역 한해서만 운영 가능합니다.\n다시 입력해주세요.");
+				modal34.style.display = "none";
+			} else {
+				
+				// 주소로 상세 정보를 검색
+				geocoder.addressSearch(addr, function(results, status) {
+					// 정상적으로 검색이 완료됐으면
+					if (status === daum.maps.services.Status.OK) {
+						
+						var result = results[0]; //첫번째 결과의 값을 활용
+						$('#latitude').val(result.x);
+						$('#longitude').val(result.y);
+					}
+				});
+				
+				// 수정 주소창에 담기
+				$('#addr-basic').val(addr);
+				
+				// iframe을 넣은 element를 안보이게 한다.
+				// (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
+				element_layer.style.display = 'none';
+				
+				// 모달 닫기
+				modal34.style.display = "none";
+				
+				// 상세주소 select 하기
+				$('#addr-detail').select();
+			}
+		},
+		width : '100%',
+		height : '100%',
+		maxSuggestItems : 5
+	}).embed(element_layer);
+	
+	// iframe을 넣은 element를 보이게 한다.
+	element_layer.style.display = 'block';
+	// iframe을 넣은 element의 위치를 화면의 가운데로 이동시킨다.
+	initLayerPosition();
+}
+
+// 주소록 수정 닫기
+$('#modal-close9').click(function(){
+	if(confirm("주소록 수정을 취소하시겠습니까?")){							
+		$('#myModal9').css('display','none');
+	}
+});
+
+
+/*----------------------------------------------연락처--------------------------------------------*/
 /* 연락처 자릿수 자동 설정 */
 function inputPhoneNumber(obj) {
     var number = obj.value.replace(/[^0-9]/g, "");
@@ -654,7 +871,7 @@ function inputPhoneNumber(obj) {
     obj.value = phone;
 }
 
-
+/*----------------------------------------------날짜--------------------------------------------*/
 /* 날짜 설정 */
 /* 상차 날짜  */
 var startDateStr;
@@ -858,6 +1075,7 @@ $("#checkLoad2").click(function(){
 	}
 });
 
+/*----------------------------------------------상하차 도움--------------------------------------------*/
 // '도움 필요하지 않아요' 클릭시
 $('#helpUnload-ch').click(function(){
 	$('#helpLoad').text("고객님이 직접 상차");
@@ -1007,161 +1225,8 @@ span5.onclick = function() {
 	$('#checkHelp2').prop('checked',false);
 }
 
-/*---------------------------------- 주소록------------------------------------*/
-// 출발지 주소록
-$('#stAddrList').click(function(){
-	$('#myModal6').css('display','block');
-});
+/*----------------------------------------------주소록--------------------------------------------*/
 
-// 출발지 주소록 모달 닫기
-var span6 = document.getElementById("modal-close6");
-span6.onclick = function() {
-	$('#myModal6').css('display','none');
-}
-
-
-// 도착지 주소록
-$('#edAddrList').click(function(){
-	$('#myModal7').css('display','block');
-});
-
-// 도착지 주소록 모달 닫기
-var span7 = document.getElementById("modal-close7");
-span7.onclick = function() {
-	$('#myModal7').css('display','none');
-}
-
-
-// 출발지와 도착지 각각의 주소 붙여 input hidden에다가 담기
-function addAddr(){
-	var stAddr1 = $('#startAddr').val();
-	var stAddr2 = $('#startDetailAddr').val();
-	var edAddr1 = $('#endAddr').val();
-	var edAddr2 = $('#endDetailAddr').val();
-	$('#addStAddr').val(stAddr1+","+stAddr2);
-	$('#addEdAddr').val(edAddr1+","+edAddr2);
-}
-
-//출발지 주소 수정 모달 팝업 띄우기
-$('.stAddrModi').click(function(){
-	
-	var aNo = $(this).closest('div').find('.stANo').val();
-	var place = $(this).closest('div').find('.stAPlace').text();
-	var name = $(this).closest('div').find('.stAName').text();
-	var phone = $(this).closest('div').find('.stAPhone').text();
-	var addr1 = $(this).closest('div').find('.stAddr1').text();
-	var addr2 = $(this).closest('div').find('.stAddr2').text();
-	var latitude = $(this).closest('div').find('.stLat').val();
-	var longitude = $(this).closest('div').find('.stLong').val();
-	
-	$('#ano').val(aNo);
-	$('#addr-place').val(place);
-	$('#addr-name').val(name);
-	$('#addr-phone').val(phone);
-	$('#addr-basic').val(addr1);
-	$('#addr-detail').val(addr2);
-	$('#latitude').val(latitude);
-	$('#longitude').val(longitude);
-	$('#myModal9').css('display','block');
-});
-
-
-
-// 출발지 주소 수정
-$('#addr-md-btn').click(function(){
-	if(confirm("변경하신 주소로 수정하시겠습니까?")){				
-		$.ajax({
-			url:"addrModi.do",
-			data:{
-				aNo:$('#ano').val(),
-				aPlace:$('#addr-place').val(),
-				aName:$('#addr-name').val(),
-				aPhone:$('#addr-phone').val(),
-				addr1:$('#addr-basic').val(),
-				addr2:$('#addr-detail').val(),
-				aLatitude:$('#latitude').val(),
-				aLongitude:$('#longitude').val()
-			},
-			type:"post",
-			success:function(data){
-				alert("수정이 완료되었습니다.");
-				$('#myModal9').css('display','none');
-				location.reload();
-			}, error:function(data){
-				alert("수정이 실패하였습니다.");
-			}
-		});
-	}
-});
-
-// 출발지 삭제
-$('.stAddrDele').click(function(){
-	var aNo = $(this).closest('div').find('.stANo').val();
-	
-	if(confirm("선택하신 주소를 삭제하시겠습니까?")){
-		$.ajax({
-			url:"addrDele.do",
-			data:{aNo:aNo},
-			type:"post",
-			success:function(date){
-				alert("삭제가 완료되었습니다.");
-			}, error:function(data){
-				alert("삭제가 실패하였습니다.");
-			}
-		});
-		$(this).closest('div').remove();
-	}
-});
-	
-	
-// 도착지 주소 수정 모달 팝업 띄우기
-$('.edAddrModi').click(function(){
-	
-	var aNo = $(this).closest('div').find('.edANo').val();
-	var place = $(this).closest('div').find('.edAPlace').text();
-	var name = $(this).closest('div').find('.edAName').text();
-	var phone = $(this).closest('div').find('.edAPhone').text();
-	var addr1 = $(this).closest('div').find('.edAddr1').text();
-	var addr2 = $(this).closest('div').find('.edAddr2').text();
-	var latitude = $(this).closest('div').find('.edLat').val();
-	var longitude = $(this).closest('div').find('.edLong').val();
-	
-	$('#ano').val(aNo);
-	$('#addr-place').val(place);
-	$('#addr-name').val(name);
-	$('#addr-phone').val(phone);
-	$('#addr-basic').val(addr1);
-	$('#addr-detail').val(addr2);
-	$('#latitude').val(latitude);
-	$('#longitude').val(longitude);
-	$('#myModal9').css('display','block');
-});	
-
-// 도착지 삭제
-$('.edAddrDele').click(function(){
-	var aNo = $(this).closest('div').find('.edANo').val();
-	
-	if(confirm("선택하신 주소를 삭제하시겠습니까?")){
-		$.ajax({
-			url:"addrDele.do",
-			data:{aNo:aNo},
-			type:"post",
-			success:function(date){
-				alert("삭제가 완료되었습니다.");
-			}, error:function(data){
-				alert("삭제가 실패하였습니다.");
-			}
-		});
-		$(this).closest('div').remove();
-	}
-});
-
-// 주소록 수정 닫기
-$('#modal-close9').click(function(){
-	if(confirm("주소록 수정을 취소하시겠습니까?")){							
-		$('#myModal9').css('display','none');
-	}
-});
 
 /*---------------------------------------------SUBMIT----------------------------------*/
 // 예약하기 버튼 & 상하차 날짜 입력하지 않으면 return false 조건 적용
@@ -1189,5 +1254,4 @@ $('#revForm').submit(function(){
 		alert("결제금액이 100만원 초과하셨습니다.\n100만원 이하로 다시 예약 부탁드리겠습니다.");
 		return false;
 	}
-	
 });
