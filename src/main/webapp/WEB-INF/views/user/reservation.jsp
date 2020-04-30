@@ -75,7 +75,8 @@
 						<div class="edge11">
 							<div class="title11">
 								<button id="stAddrList" type="button" class="addrList">
-									<img src="${pageContext.request.contextPath}/resources/images/reservation/magnifying-glass-black.svg" alt="검색" style="width: 17px; height: 17px;"> 주소록
+									<img src="${pageContext.request.contextPath}/resources/images/reservation/magnifying-glass-black.svg" alt="검색" style="width: 17px; height: 17px;">
+									<div>주소록</div>
 								</button>
 								출발지 정보
 							</div>
@@ -961,29 +962,31 @@
 										<div class="col-xs-3 col-md-3">연락처</div>
 										<div class="col-xs-2 col-md-2">수정·삭제</div>
 									</div>
-								<c:forEach var="a" items="${ list }" varStatus="status">
-									<div class="row small aL-row">
-										<input type="radio" class="col-xs-2 col-md-2" name="startAddrList" style="margin-top: 10px; cursor: pointer;">
-										<div class="col-xs-2 col-md-2">
-											<span class="stAPlace">${ a.aPlace }</span>
-											<br>
-											<span class="stAName">${ a.aName }</span>
+								<div id="addrList-div1">
+									<c:forEach var="a" items="${ list }" varStatus="status">
+										<div class="row small aL-row">
+											<input type="radio" class="col-xs-2 col-md-2" name="startAddrList" style="margin-top: 10px; cursor: pointer;">
+											<div class="col-xs-2 col-md-2">
+												<span class="stAPlace">${ a.aPlace }</span>
+												<br>
+												<span class="stAName">${ a.aName }</span>
+											</div>
+											<div class="col-xs-3 col-md-3">
+												<span class="stAddr1">${addrList1[status.index]}</span>
+												<br>
+												<span class="stAddr2">${addrList2[status.index]}</span>
+											</div>
+											<div class="col-xs-3 col-md-3" style="padding-top: 7px;">
+												<span class="stAPhone">${ a.aPhone }</span>
+											</div>
+											<input class="stAddrModi col-xs-1 col-md-1" type="button" value="수정" style="margin-right: 2px;">
+											<input class="stAddrDele col-xs-1 col-md-1" type="button" value="삭제">
+											<input class="stANo" type="hidden" value="${ a.aNo }">
+											<input class="stLat" type="hidden" value="${ a.aLatitude }">
+											<input class="stLong" type="hidden" value="${ a.aLongitude }">
 										</div>
-										<div class="col-xs-3 col-md-3">
-											<span class="stAddr1">${addrList1[status.index]}</span>
-											<br>
-											<span class="stAddr2">${addrList2[status.index]}</span>
-										</div>
-										<div class="col-xs-3 col-md-3" style="padding-top: 7px;">
-											<span class="stAPhone">${ a.aPhone }</span>
-										</div>
-										<input class="stAddrModi col-xs-1 col-md-1" type="button" value="수정" style="margin-right: 2px;">
-										<input class="stAddrDele col-xs-1 col-md-1" type="button" value="삭제">
-										<input class="stANo" type="hidden" value="${ a.aNo }">
-										<input class="stLat" type="hidden" value="${ a.aLatitude }">
-										<input class="stLong" type="hidden" value="${ a.aLongitude }">
-									</div>
-								</c:forEach>
+									</c:forEach>
+								</div>
 							</div>
 						</div>
 					</div>
