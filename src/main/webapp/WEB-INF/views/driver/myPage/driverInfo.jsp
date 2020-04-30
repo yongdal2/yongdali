@@ -6,27 +6,15 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="AOS - Animate On Scroll library using CSS3">
-    <meta name="keywords" content="AOS, animate on scroll, css3 scroll animations, simple scroll animations">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myPage/driverMyPage.css"/>
     <link href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-
 </head>
 <body>
-	<script>
-		$(document).ready(function() {
-			$("#header1>.jumbotron").css("display","none");
-		});
-	</script>
-	
 	<!-- 점보트론 -->
 	<div class="jumbotron" id="driverMyPjumbo">
 		<div class="container">
@@ -50,10 +38,30 @@
 							</div>
 						</div>
 					</div>
-					<div class="hvDr">
-						<span class="na h4" data-toggle="modal" data-target="#changePwd">
-							비밀번호 변경</span>
+					<div class="row">
+						<div class="col-xs-6 col-md-6" <c:if test="${loginUser.signupType ne '용달이'}">style="display: none;"</c:if>> 
+							<div class="hvDr">
+								<span class="na h4" data-toggle="modal" data-backdrop="static" data-target="#changePwd">
+									비밀번호 변경</span>
+							</div>
 						</div>
+						<div class="col-xs-6 col-md-6">
+							<div class="hvDr">
+								<div class="chkBox">
+			                        <span class="na h4"id='pushChk' >광고 수신 동의 &nbsp;
+			                        <c:choose>
+			                        	<c:when test="${loginUser.pushEnabled eq 'Y'}">
+			                        		<img src="${contextPath}/resources/images/info/checked-circle_r.png" alt="동의" id="chkPush">
+			                        	</c:when>
+			                        	<c:otherwise>
+			                        		<img src="${contextPath}/resources/images/info/unchecked-circle_r.png" alt="비동의" id="chkPush">
+			                        	</c:otherwise>
+			                        </c:choose>
+			                        </span>
+			                    </div>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="col-xs-3 col-md-3">
 					<div class="img-circle" id="pro_img"
@@ -144,41 +152,6 @@
 			</div>
 		</div>
 	</div>
-
-	<script type="text/javascript">
-	/* 연락처 자릿수 자동 설정 */
-	function inputPhoneNumber(obj) {
-	    var number = obj.value.replace(/[^0-9]/g, "");
-	    var phone = "";
-
-	    if(number.length < 4) {
-	        return number;
-	    } else if(number.length < 7) {
-	        phone += number.substr(0, 3);
-	        phone += "-";
-	        phone += number.substr(3);
-	    } else if(number.length < 11) {
-	        phone += number.substr(0, 3);
-	        phone += "-";
-	        phone += number.substr(3, 3);
-	        phone += "-";
-	        phone += number.substr(6);
-	    } else {
-	        phone += number.substr(0, 3);
-	        phone += "-";
-	        phone += number.substr(3, 4);
-	        phone += "-";
-	        phone += number.substr(7);
-	    }
-	    obj.value = phone;
-	}
-	$("#nPhoneBtn").on("click",function(){
-		$("#updatePhone").attr("action","uPhone.myp").submit();
-	});
-	$("#nPhotoBtn").on("click",function(){
-		$("#updateImg").attr("action","uImg.myp").submit();
-	});
-	</script>
 	<!-- 비밀번호 변경 모달 -->
 	<div class="modal fade" id="changePwd" role="dialog">
 		<div class="modal-dialog">
@@ -235,5 +208,83 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+	//마이페이지 점보트론 제거
+	$(document).ready(function() {
+		$("#header1>.jumbotron").css("display","none");
+	});
+	//
+	/* 광고 동의  */
+	var checked = '/yongdali/resources/images/info/checked-circle_r.png';
+    var unchecked = '/yongdali/resources/images/info/unchecked-circle_r.png';
+    
+	 $('#pushChk').click(function(){  
+		 	if($('#chkPush').attr('src') == unchecked) {
+		 		var chk = confirm('SMS, 이메일을 통한 서비스 및 광고성 이벤트 정보 수신에 동의하시겠습니까?');
+		 		if(chk){
+		 			pushChk('Y');
+		 		}
+	        } else{
+	        	var uchk = confirm('SMS, 이메일을 통한 서비스 및 광고성 이벤트 정보 수신에 동의를 취소하시겠습니까?')
+	        	if(uchk){
+	        		pushChk('N');
+	        	}
+	        }
+	    });
+	 
+	 function pushChk(YN){
+		 $.ajax({
+			 url:"pushChk.myp",
+			 data:{YN:YN},
+			 success:function(data){
+				 if(data=='Y'){
+					 alert("광고 수신 동의가 처리되었습니다.");
+					 $('#chkPush').attr('src',checked).attr('checked',true);
+					 
+				 }else if(data=='N'){
+					 alert("광고 수신 동의 취소가 처리되었습니다.");
+					  $('#chkPush').attr('src',unchecked).attr('checked',false);
+				 }else{
+					 alert("처리가 실패하였습니다.");
+				 }
+				},error:function(){
+					console.log("aj실패")
+				}
+			});
+		 };
+	 
+	/* 연락처 자릿수 자동 설정 */
+	function inputPhoneNumber(obj) {
+	    var number = obj.value.replace(/[^0-9]/g, "");
+	    var phone = "";
+
+	    if(number.length < 4) {
+	        return number;
+	    } else if(number.length < 7) {
+	        phone += number.substr(0, 3);
+	        phone += "-";
+	        phone += number.substr(3);
+	    } else if(number.length < 11) {
+	        phone += number.substr(0, 3);
+	        phone += "-";
+	        phone += number.substr(3, 3);
+	        phone += "-";
+	        phone += number.substr(6);
+	    } else {
+	        phone += number.substr(0, 3);
+	        phone += "-";
+	        phone += number.substr(3, 4);
+	        phone += "-";
+	        phone += number.substr(7);
+	    }
+	    obj.value = phone;
+	}
+	$("#nPhoneBtn").on("click",function(){
+		$("#updatePhone").attr("action","uPhone.myp").submit();
+	});
+	$("#nPhotoBtn").on("click",function(){
+		$("#updateImg").attr("action","uImg.myp").submit();
+	});
+	</script>
 </body>
 </html>

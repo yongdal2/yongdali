@@ -172,6 +172,12 @@
 		WHERE A_NO=#{aNo}
 	</delete>
 	
+	<!--  주소록 최근 사용일자 변경 -->
+	<update id="addrSys" parameterType="Address">
+		UPDATE ADDRESS
+		SET RECENTDATE = SYSDATE
+		WHERE A_NO = #{aNo}	
+	</update>
 	<!-- 트럭정보  -->
 	<select id="truckInfoView" resultMap="driverResultSet">
 	SELECT *

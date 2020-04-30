@@ -52,7 +52,7 @@
 					<option value="rsv">상태별 조회</option>
 					<option value="pay">결제완료</option>
 					<option value="deal">배차완료</option>
-					<option value="canc">취소</option>
+					<option value="canc">취소</option> 
 				</select>
 			</div>
 			<div class="text-center"></div>
@@ -131,7 +131,6 @@
 									<button class="fas fa-truck btn_no llg" disabled="disabled"></button>
 								</c:otherwise>
 							</c:choose>
-							
 							</td>
 							<td><button class="btn btn_ydl_l" id="rDetailBtn${r.rNo }" value="${ r.rNo }" data-toggle="modal" data-target="#rDetail"data-backdrop="static" data-keyboard="false">상세정보 보기</button></td>
 						</tr>
@@ -140,49 +139,7 @@
 			</div>
 		</div>
 	</div>
-	<script>
-	$(document).ready(function() {
-	    $('[data-toggle*="popover"]').popover({
-	        "html": true,
-	        trigger: "hover",
-	        "content": function() {
-	            var dNo = $(this).val();
-	            return dInfo(dNo);
-	        }
-	    });
-
-	    function dInfo(dNo) {
-	        $.ajax({
-	            url: "rDinfo.myp",
-	            data: {
-	                dNo: dNo
-	            },
-	            dataType: "json",
-	            success: function(d) {
-	                dhtml = "";
-	                console.log(d);
-	                console.log(d.deal);
-	                if (d.deal == 'Y') {
-	                    var name = "<span>" + decodeURIComponent(d.name) + "기사님</span><br>";
-	                    var phone = "<span>" +d.phone + "</span>";
-	                    var carNo = decodeURIComponent(d.carNo);
-	                    var imgUrl = "${pageContext.request.contextPath}/resources/images/driver/id/" + d.img;
-	                    var type = decodeURIComponent(d.type);
-	                    var capcacity = d.capacity;
-	                    dhtml = name + phone;
-	                } else {
-	                    dhtml = "<span class='na fw6'>아직 배차전 입니다.</span>";
-	                }
-	            },
-	            error: function() {
-	                console.log("aj실패")
-	            }
-	        });
-	        return dhtml;
-	    }
-	});
-	</script>
-		
+	
 		 <!-- 예약 상세보기 수정 -->
     <div class="modal fade" id="rDetail" role="dialog">
         <div class="modal-dialog modal-lg">
@@ -286,7 +243,7 @@
 	        <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 	            <li>
 	                <c:if test="${ p eq pi.currentPage }">
-	                    <a><b>${ p }</b></a>
+	                    <a style="color: rgb(87, 187, 138) !important;"><b>${ p }</b></a>
 	                </c:if>
 	                <c:if test="${ p ne pi.currentPage }">
 	                    <a href="<c:url var="pagination" value="myRSV.myp">	
@@ -318,6 +275,50 @@
 	    </ul>
 	</div>
 	<script type = "text/javascript">
+	$(document).ready(function() {
+	    $('[data-toggle*="popover"]').popover({
+	        "html": true,
+	        trigger: "hover",
+	        "content": function() {
+	        	var str ="";
+	            var dNo = $(this).val();
+	            str =dInfo(dNo);
+	            return str;
+	        }
+	    });
+
+	    function dInfo(dNo) {
+	        $.ajax({
+	            url: "rDinfo.myp",
+	            data: {
+	                dNo: dNo
+	            },
+	            dataType: "json",
+	            success: function(d) {
+	                dhtml = "";
+	                console.log(d);
+	                console.log(d.deal);
+	                if (d.deal == 'Y') {
+	                    var name = "<b><span>" + decodeURIComponent(d.name) + "<b>기사님</span><br>";
+	                    var phone = "<span>" +d.phone + "</span>";
+	                    var carNo = "<span>"+decodeURIComponent(d.carNo)+"<span>";
+	                    var imgUrl = "${pageContext.request.contextPath}/resources/images/driver/id/" + d.img;
+	                    var img = '<img class="img-thumbnail img-circle" style="width: 150px; height: 150px;  overflow: hidden;" src='+imgUrl+' />'
+	                    var type = "<br><span>" + decodeURIComponent(d.type);
+	                    var capacity = " / "+d.capacity+"ton<br><br><span>";
+	                    dhtml = '<div class="text-center na">'+img + name + phone + type + capacity;
+	                } else {
+	                    dhtml = "<span class='na fw6'>아직 배차전 입니다.</span>";
+	                }
+	            },
+	            error: function() {
+	                console.log("aj실패")
+	            }
+	        });
+	        return dhtml;
+	    }
+	});
+	
 		$("#fBtn").on("click",function(){
 			if($('#stDate').val()==""){
 				$('#stDate').val("2000-01-01");
@@ -374,7 +375,7 @@
 	                        if (r.rightLoad == null) {
 	                            $("#pick").text(r.startDate + " / " + r.startTime);
 	                        } else {
-	                            $("#pick").text(r.rightload);
+	                            $("#pick").text(r.rightLoad);
 	                        }
 	                        $("#helpLoad").text(r.helpLoad);
 	                        $("#endName").text(r.endName);
@@ -431,7 +432,6 @@
 	        data: { rNo: rNo },
 	        dataType: "json",
 	        success: function(r) {
-	            console.log("으앙");
 	            console.log(r);
 	            if (r.dealYN == "Y") {
 	                var ccA = confirm("배차가 완료된 예약입니다 취소하시겠습니까?");
@@ -469,9 +469,7 @@
 	        }
 	    });
 	}
-	
 	</script>
-	
     </c:if>
 	<c:import url="../../common/footer.jsp"/>
 </body>

@@ -52,7 +52,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-xs-6 col-md-6" <c:if test="${loginUser.signupType eq '카카오'}">style="display: none;"</c:if>> 
+						<div class="col-xs-6 col-md-6" <c:if test="${loginUser.signupType ne '용달이'}">style="display: none;"</c:if>> 
 							<div class="hvDr">
 								<span class="na h4" data-toggle="modal" data-backdrop="static" data-target="#changePwd">
 									비밀번호 변경</span>
@@ -64,13 +64,12 @@
 			                        <span class="na h4"id='pushChk' >광고 수신 동의 &nbsp;
 			                        <c:choose>
 			                        	<c:when test="${loginUser.pushEnabled eq 'Y'}">
-			                        		<img src="${contextPath}/resources/images/login&signUp/checked-circle.png" alt="동의" id="chkPolicy">
+			                        		<img src="${contextPath}/resources/images/login&signUp/checked-circle.png" alt="동의" id="chkPush">
 			                        	</c:when>
 			                        	<c:otherwise>
-			                        		<img src="${contextPath}/resources/images/login&signUp/unchecked-circle.png" alt="비동의" id="chkPolicy">
+			                        		<img src="${contextPath}/resources/images/login&signUp/unchecked-circle.png" alt="비동의" id="chkPush">
 			                        	</c:otherwise>
 			                        </c:choose>
-			                        
 			                        </span>
 			                    </div>
 							</div>
@@ -163,14 +162,67 @@
 			</div>
 		</div>
 	</div>
-	
+	<!-- 비밀번호 변경 모달 -->
+	<div class="modal fade" id="changePwd" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<br>
+				<div class="modal-body noto">
+				<form id ="upPwdForm">
+					<div class="row"
+						style="text-align: left; margin: 0; border: 1px solid #dedede; border-radius: 16px; padding: 23px; background: #fff; width: 100%; max-width: 560px;">
+						<div class="col-md-12 fw6" 
+							style="padding: 0; font-size: 20px; line-height: 29px; font-weight: 300;">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							비밀번호 변경
+						</div>
+						<div class="col-md-12"
+							style="padding: 0; margin-top: 16px; font-size: 16px; line-height: 24px;">
+							기존 비밀번호</div>
+						<div class="col-md-12" style="padding: 0; margin-top: 10px;">
+							<label for="nowPassword" style="display: none;"></label>
+							<input type="password" class="form-control noto" id="nowPassword" style="width: 100%; height: 46px;">
+						</div>
+						<div class="col-md-12" 
+							style="padding: 0; margin-top: 15px; font-size: 16px; line-height: 24px;">
+							새 비밀번호</div>
+						<div id="pwAlert"class="col-md-12"
+							style="padding: 0; margin-top: 5px; font-size: 14px; color: #525252; line-height: 20px;">
+							8~16자 영문 대 소문자, 숫자, 특수문자(#?!@$%^&*)를 사용하세요.</div>
+						<div class="col-md-12" style="padding: 0; margin-top: 10px;">
+							<label for="newPassword" style="display: none;"></label>
+							<input type="password" class="form-control noto" id="newPassword" style="width: 100%; height: 46px; color: #525252;">
+						</div>
+						<div class="col-md-12" style="padding: 0; margin-top: 15px; font-size: 16px; line-height: 24px;"> 새 비밀번호 확인</div>
+						<div class="col-md-12" style="padding: 0; margin-top: 10px;">
+							<label for="newPasswordCheck" style="display: none;"></label>
+							<input type="password" class="form-control noto" id="newPasswordCheck" style="width: 100%; height: 46px; color: #525252;">
+						</div>
+						<div class="col-sm-12" id="pwCheckText" style="padding: 0; margin-top: 5px; display: none;"></div>
+						<div class="col-md-12 text-right">
+							<button type="button" class="btn btn-lg" data-dismiss="modal" style="margin: 20px 10px 0px 10px; color: gray;">취소</button>
+							<button type="button" id="upPwdBtn" class="btn btn-lg btn_ydl" data-dismiss="modal" style="margin: 20px 10px 0px 10px;">수정하기</button>
+						</div>
+						<!-- ip1 = nowPassword -->
+						<!-- ip2 = newPassword -->
+						<!-- ip3 = nowPassword -->
+						<!-- 8~16 = nowPassword -->
+						<!-- 패스워드 일치 알림= pwCheckText -->
+					</div>
+					</form>
+				</div>
+				<br>
+			</div>
+		</div>
+	</div>
 	<script type="text/javascript">
-	
+	/* 광고 동의  */
 	var checked = '/yongdali/resources/images/login&signUp/checked-circle.png';
     var unchecked = '/yongdali/resources/images/login&signUp/unchecked-circle.png';
     
 	 $('#pushChk').click(function(){  
-		 	if($('#chkPolicy').attr('src') == unchecked) {
+		 	if($('#chkPush').attr('src') == unchecked) {
 		 		var chk = confirm('SMS, 이메일을 통한 서비스 및 광고성 이벤트 정보 수신에 동의하시겠습니까?');
 		 		if(chk){
 		 			pushChk('Y');
@@ -190,11 +242,11 @@
 			 success:function(data){
 				 if(data=='Y'){
 					 alert("광고 수신 동의가 처리되었습니다.");
-					 $('#chkPolicy').attr('src',checked).attr('checked',true);
+					 $('#chkPush').attr('src',checked).attr('checked',true);
 					 
 				 }else if(data=='N'){
 					 alert("광고 수신 동의 취소가 처리되었습니다.");
-					  $('#chkPolicy').attr('src',unchecked).attr('checked',false);
+					  $('#chkPush').attr('src',unchecked).attr('checked',false);
 				 }else{
 					 alert("처리가 실패하였습니다.");
 				 }
@@ -230,68 +282,66 @@
 	    }
 	    obj.value = phone;
 	}
-	
+		/* 연락처 수정 submit */
 		$("#nPhoneBtn").on("click",function(){
 			$("#updatePhone").attr("action","uPhone.myp").submit();
 		});
-	</script>
+		
+		/* 비밀번호 변경*/
+		/* $("#upPwdBtn").on("click",function(){
+			$("#upPwdForm").attr("action","uPwd.myp").submit();
+		}); */
+		
+		/* 	<!-- ip1 = nowPassword -->
+			<!-- ip2 = newPassword -->
+			<!-- ip3 = newPasswordCheck -->
+			<!-- 8~16 = nowPassword -->
+			<!-- 패스워드 일치 알림= pwCheckText --> */
+			// chk
+			
+			function chkPwd(pwd){
+				var regPwd = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*]).{8,16}$/"
+					if(pwd.test(regPwd)){
+						return true
+					}else if(pwd==""){
+						alert("비밀번호를 입력하세요");
+						return false
+					}else{
+						return false
+					}
+			};
+			
+			var nPwd = $('#newPassword').val();
+			var nPwdChk = $('#newPasswordCheck').val();
 	
-	<!-- 비밀번호 변경 모달 -->
-	<div class="modal fade" id="changePwd" role="dialog">
-		<div class="modal-dialog">
-			<!-- Modal content-->
-			<div class="modal-content">
-				<br>
-				<div class="modal-body noto">
-					<div class="row"
-						style="text-align: left; margin: 0; border: 1px solid #dedede; border-radius: 16px; padding: 23px; background: #fff; width: 100%; max-width: 560px;">
-						<div class="col-md-12 fw6" 
-							style="padding: 0; font-size: 20px; line-height: 29px; font-weight: 300;">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							비밀번호 변경
-						</div>
-						<div class="col-md-12"
-							style="padding: 0; margin-top: 16px; font-size: 16px; line-height: 24px;">
-							기존 비밀번호</div>
-						<div class="col-md-12" style="padding: 0; margin-top: 10px;">
-							<label for="nowPassword" style="display: none;"></label> <input
-								type="password" class="form-control noto" id="nowPassword"
-								style="width: 100%; height: 46px;">
-						</div>
-						<div class="col-md-12"
-							style="padding: 0; margin-top: 15px; font-size: 16px; line-height: 24px;">
-							새 비밀번호</div>
-						<div class="col-md-12"
-							style="padding: 0; margin-top: 5px; font-size: 14px; color: #525252; line-height: 20px;">
-							8~16자 영문 대 소문자, 숫자, 특수문자(#?!@$%^&*)를 사용하세요.</div>
-						<div class="col-md-12" style="padding: 0; margin-top: 10px;">
-							<label for="newPassword" style="display: none;"></label> <input
-								type="password" class="form-control noto" id="newPassword"
-								style="width: 100%; height: 46px; color: #525252;">
-						</div>
-						<div class="col-md-12"
-							style="padding: 0; margin-top: 15px; font-size: 16px; line-height: 24px;">
-							새 비밀번호 확인</div>
-						<div class="col-md-12" style="padding: 0; margin-top: 10px;">
-							<label for="newPasswordCheck" style="display: none;"></label> <input
-								type="password" class="form-control noto" id="newPasswordCheck"
-								style="width: 100%; height: 46px; color: #525252;">
-						</div>
-						<div class="col-sm-12" id="pwCheckText"
-							style="padding: 0; margin-top: 5px; display: none;"></div>
-						<div class="col-md-12 text-right">
-							<button type="button" class="btn btn-lg"
-								data-dismiss="modal"
-								style="margin: 20px 10px 0px 10px; color: gray;">취소</button>
-							<button type="submit" class="btn btn-lg btn_ydl"
-								data-dismiss="modal" style="margin: 20px 10px 0px 10px;">수정하기</button>
-						</div>
-					</div>
-				</div>
-				<br>
-			</div>
-		</div>
-	</div>
-
-
+			function nPwdChk(){
+			 
+			var nowPwd = nowPassword.val();
+			 
+				 $.ajax({
+					 url:"pushChk.myp",
+					 data:{nPwdChk:nPwdChk},
+					 success:function(data){
+						 if(data=='Y'){
+							 alert("광고 수신 동의가 처리되었습니다.");
+							 $('#chkPush').attr('src',checked).attr('checked',true);
+							 
+						 }else if(data=='N'){
+							 alert("광고 수신 동의 취소가 처리되었습니다.");
+							  $('#chkPush').attr('src',unchecked).attr('checked',false);
+						 }else{
+							 alert("처리가 실패하였습니다.");
+						 }
+						},error:function(){
+							console.log("aj실패")
+						}
+					});
+				 };
+			
+			
+			
+			
+			
+		
+	</script>
 </html>
