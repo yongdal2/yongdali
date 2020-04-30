@@ -130,10 +130,10 @@
 										success:function(data){
 											if(data=='환불'){
 								        	    alert("환불처리 하시겠습니까?");
-												$('checked',true);
+											/* 	$('checked',true);
 											}else(data=='취소'){
 												alert("취소처리 되었습니다.");
-												$('checked',false);
+												$('checked',false); */
 											}
 											$('.thead').remove(); 
 											$('.tbody').remove();
