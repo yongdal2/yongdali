@@ -7,6 +7,7 @@ import com.kh.yongdali.reservation.model.vo.Reservation;
 import com.kh.yongdali.admin.model.vo.Calculate;
 import com.kh.yongdali.admin.model.vo.DriSearchCondition;
 import com.kh.yongdali.admin.model.vo.MemSearchCondition;
+import com.kh.yongdali.admin.model.vo.RefSearchCondition;
 import com.kh.yongdali.admin.model.vo.adRefund;
 import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.driver.model.vo.Driver;
@@ -102,9 +103,17 @@ public interface AdminService {
 	 */
 	ArrayList<adRefund> adminRefundList();
 
-	/*
-	 * int getRefListCount();
-	 */
+	int refListCount();
+
+	ArrayList<adRefund> searchAdminRefund(RefSearchCondition sc, PageInfo pi);
+
+	
+
+
+
+
+
+
 	
 
 

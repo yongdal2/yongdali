@@ -125,6 +125,13 @@ public interface UserMyPageService {
 	 */
 	int rsvCan(Payment p);
 
+	/**
+	 * 주소록 사용날짜 업데이트
+	 * @param aNo
+	 * @return
+	 */
+	int addrSys(String aNo);
+	
 
 	
 

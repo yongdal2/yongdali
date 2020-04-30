@@ -51,6 +51,7 @@ public class UserMyPageController {
 	//==========================유저 정보 ========================================
 	
 	//유저 폰번호 업데이트
+	
 	@RequestMapping("uPhone.myp")
 	public String userPhoneUpdate(Model md, @SessionAttribute Member loginUser,
 			@RequestParam("uPhone") String phone) {
@@ -207,9 +208,27 @@ public class UserMyPageController {
 		}
 		
 		//최근 사용 날자 업데이트
+		@ResponseBody
 		@RequestMapping("addrSys.myp")
-		public void addrSys(@RequestParam ("aNo") String aNo) {
+		public String addrSys(@RequestParam ("aNo") String aNo) {
 			
+			System.out.println(aNo);
+			
+			int result = 0;
+			
+			if(aNo != "" ) {
+				
+				result = umpService.addrSys(aNo);
+				
+				System.out.println(result);
+				
+			}
+			if(result>0) {
+				
+				return "Y";
+			}else {
+				return "fail";
+			}
 		}
 		
 		
@@ -366,5 +385,7 @@ public class UserMyPageController {
 				return "fail";
 			}
 		}
+		
+		
 		
 }

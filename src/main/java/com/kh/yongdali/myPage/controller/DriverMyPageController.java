@@ -60,7 +60,7 @@ public class DriverMyPageController {
 		
 		
 		if (result > 0) {
-			return "redirect:driver/myPage/truckInfo";
+			return "redirect:truckInfo.myp";
 		}else {
 			return "common/errorPage";
 		}

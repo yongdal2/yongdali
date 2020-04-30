@@ -136,7 +136,7 @@
 													}
 												});
 								//배열중에서 id는 안딤
-								$('#regCardImgRename')
+								/* $('#regCardImgRename')
 										.popover(
 												{
 													html : true,
@@ -145,7 +145,7 @@
 														var url = $(this).val();
 														return '<img alt="호호2" style="width: 100%;" src="'+url+'" />';
 													}
-												});
+												}); */
 							</script>
 
 							<!-- 	

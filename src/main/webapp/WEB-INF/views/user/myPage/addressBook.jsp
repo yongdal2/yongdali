@@ -9,15 +9,12 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="AOS - Animate On Scroll library using CSS3">
-    <meta name="keywords" content="AOS, animate on scroll, css3 scroll animations, simple scroll animations">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myPage/userMyPage.css" />
     <link href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.js"></script>
@@ -25,7 +22,6 @@
 	<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=03ea077d7ecc6636dffede985cc5c57d&libraries=services"></script>
     <title>용달이 | 예약 내역</title>
 </head>
-
 <body>
     <c:import url="../../common/nav.jsp" />
     <c:import url="../../user/myPage/userInfo.jsp" />
@@ -235,7 +231,28 @@
             </div>
         </div>
     </div>
+    <!-- 배송지 주소 추가 주소 검색 모달 -->
+	<div id=modalAd class="modalAddr">
+		<div id="layerAd">
+			<img id="btncloseLayerAd" src="https://t1.daumcdn.net/postcode/resource/images/close.png" onclick="closeDaumPostcodeAd()" alt="닫기 버튼">
+		</div>		
+	</div>
+	<!-- 배송지 주소 수정 주소 검색 모달 -->
+	<div id="modalEd" class="modalAddr">
+		<div id="layerEd">
+			<img id="btncloseLayerEd" src="https://t1.daumcdn.net/postcode/resource/images/close.png" onclick="closeDaumPostcodeEd()" alt="닫기 버튼">
+		</div>		
+	</div>
     <script>
+    	/*submint */
+    	$("#btnUpAddr").on("click",function(){
+    		$("#upAddrForm").attr("action","uAddr.myp").submit();
+    	});
+    	$("#btnInAddr").on("click",function(){
+    		$("#inAddrForm").attr("action","iAddr.myp").submit();
+    	});
+    	
+    	/*  기사정보 팝오버  */
     	$(document).ready(function() {
 		    $('[data-toggle="popover"]').popover({
 		    	trigger: "hover",
@@ -245,12 +262,7 @@
 		    	content: '배송지는 최대 5개 까지 가능합니다<br> 삭제하고 이용해 주세요'
 		    });
     	});
-    	$("#btnUpAddr").on("click",function(){
-    		$("#upAddrForm").attr("action","uAddr.myp").submit();
-    	});
-    	$("#btnInAddr").on("click",function(){
-    		$("#inAddrForm").attr("action","iAddr.myp").submit();
-    	});
+    	/* 주소록 표시 */
 		$(function(){
 			$("button[id^='editAddrBtn']").on("click",function(){
 				$.ajax({
@@ -288,19 +300,7 @@
 		});
 		});
 	</script>
-    <!-- 배송지 주소 추가 주소 검색 모달 -->
-	<div id=modalAd class="modalAddr">
-		<div id="layerAd">
-			<img id="btncloseLayerAd" src="https://t1.daumcdn.net/postcode/resource/images/close.png" onclick="closeDaumPostcodeAd()" alt="닫기 버튼">
-		</div>		
-	</div>
-	<!-- 배송지 주소 수정 주소 검색 모달 -->
-	<div id="modalEd" class="modalAddr">
-		<div id="layerEd">
-			<img id="btncloseLayerEd" src="https://t1.daumcdn.net/postcode/resource/images/close.png" onclick="closeDaumPostcodeEd()" alt="닫기 버튼">
-		</div>		
-	</div>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/myPage/userAddrBook.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/myPage/userAddrBook.js"></script>
 	<c:import url="../../common/footer.jsp" />
 </body>
 </html>

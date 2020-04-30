@@ -96,6 +96,11 @@ public class UserMyPageServiceImpl implements UserMyPageService {
 		return umpDao.rsvCan(p);
 	}
 
+	@Override
+	public int addrSys(String aNo) {
+		return umpDao.addrSys(aNo);
+	}
+
 	
 
 

@@ -12,9 +12,10 @@ public class adRefund {
 	private String cancAmount;
 	private String calcYn;
 	private Date calcDate;
+
+			
 	public adRefund() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public adRefund(String mNo, String rNo, String email, String mName, String phone, String cancAmount, String calcYn,
 			Date calcDate) {

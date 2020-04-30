@@ -175,7 +175,7 @@
 	        <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 	            <li>
 	                <c:if test="${ p eq pi.currentPage }">
-	                    <a><b><font color="#5a8cff">${ p }</font></b></a>
+	                    <a style="color: rgb(241, 95, 95) !important;"><b>${ p }</b></a>
 	                </c:if>
 	                <c:if test="${ p ne pi.currentPage }">
 	                    <a href="<c:url var="pagination" value="driverSettle.myp">	
