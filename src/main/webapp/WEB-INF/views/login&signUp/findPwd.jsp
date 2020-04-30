@@ -30,7 +30,7 @@
                     <!-- 이메일 -->
                     <div class="emailWrap">
                         <div class="formRow--input-wrapper js-inputWrapper">
-                            <input type="email" id="findPwd_email" class="formRow--input js-input eng" name="mId" placeholder="이메일" maxlength="50">
+                            <input type="email" id="findPwd_email" class="formRow--input js-input eng emailChk" name="mId" placeholder="이메일" maxlength="50">
                         </div>
                         <div id="emailMsg" class="msgBox"></div>
                        	<div class="successMsgBox"><input type="hidden" name="isVerified" value="N">* 인증번호 확인 완료</div>

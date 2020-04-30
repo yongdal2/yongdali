@@ -101,35 +101,70 @@ $(document).ready(function(){
     }); 
 	
     $("#loginBtn").click(function(){
+//    	if(findPwd_emailValidate() == true){
+//    		findPwd_emailChk();
+//    	}
+    	
     	var mId = $("input[type=email]").val();
     	var pwd = $("#pwd").val();
-    	if(mId == "" ){
-    		displayErrorMsg($("#emailMsg"), '이메일을 입력하세요.');
-    	}else{
-    		$.ajax({
-    			url : "login.me",
-    			data : {
-    					 mId : mId,
-    					 pwd : pwd
-    					},
-    			type : "post",
-    			success : function(result){
-    				if(result == 'loginSuccess'){
-    					location.href="home.do";
-    				}else if(result == 'nonExistentId'){
-    					displayErrorMsg($("#emailMsg"), '존재하지 않는 이메일입니다.');
-    				}else{
-    					displayErrorMsg($("#pwdMsg"), '비밀번호가 틀렸습니다.');
-    					$("#emailMsg").css("display","none");
-    				}
-    			}
-    			, error : function(){
-	        		var msg = "로그인 중 에러 발생!";
-	        		location.href="error.ydl?msg="+msg;
+//    	if(mId == "" ){
+//    		displayErrorMsg($("#emailMsg"), '이메일을 입력하세요.');
+//    	}else
+    	
+    	if(findPwd_emailValidate() == true){
+    		if(findPwd_emailChk() == true){
+    			$.ajax({
+        			url : "login.me",
+        			data : {
+        					 mId : mId,
+        					 pwd : pwd
+        					},
+        			type : "post",
+        			success : function(result){
+        				if(result == 'loginSuccess'){
+        					location.href="home.do";
+        				}else if(result == 'nonExistentId'){
+        					displayErrorMsg($("#emailMsg"), '존재하지 않는 이메일입니다.');
+        				}else{
+        					displayErrorMsg($("#pwdMsg"), '비밀번호가 틀렸습니다.');
+        					$("#emailMsg").css("display","none");
+        				}
+        			}
+        			, error : function(){
+    	        		var msg = "로그인 중 에러 발생!";
+    	        		location.href="error.ydl?msg="+msg;
 
-    			}
-    		})
+        			}
+        		})
+    		}
+    		
     	}
+    	
+//    	if(findPwd_emailValidate() == true, findPwd_emailChk() == true){
+//    		$.ajax({
+//    			url : "login.me",
+//    			data : {
+//    					 mId : mId,
+//    					 pwd : pwd
+//    					},
+//    			type : "post",
+//    			success : function(result){
+//    				if(result == 'loginSuccess'){
+//    					location.href="home.do";
+//    				}else if(result == 'nonExistentId'){
+//    					displayErrorMsg($("#emailMsg"), '존재하지 않는 이메일입니다.');
+//    				}else{
+//    					displayErrorMsg($("#pwdMsg"), '비밀번호가 틀렸습니다.');
+//    					$("#emailMsg").css("display","none");
+//    				}
+//    			}
+//    			, error : function(){
+//	        		var msg = "로그인 중 에러 발생!";
+//	        		location.href="error.ydl?msg="+msg;
+//
+//    			}
+//    		})
+//    	}
     })
     
     /*-- 약관 ----------------------------------------------*/
@@ -436,11 +471,13 @@ $(document).ready(function(){
 //      		alert("필수 약관에 동의해야합니다.")
 //      	}
 //      })
+    
+    
 
         
     /*-- 비밀번호 찾기 ----------------------------------------------*/
-    // 이메일 체크(중복 및 유효성 검사)
-    $("#findPwd_email").focusout(function(){
+    // 이메일 체크(중복 및 유효성 검사) : 비밀번호 찾기 및 로그인
+    $(".emailChk").focusout(function(){
     	if(findPwd_emailValidate() == true){
     		findPwd_emailChk();
     	}
@@ -513,7 +550,7 @@ $(document).ready(function(){
     	$.ajax({
     		url : "findPwd_emailChk.me",
         	type : "get",
-        	data : { mId : $('#findPwd_email').val() },
+        	data : { mId : $('.emailChk').val() },
         	async : false,
         	success : function(value){
         		if(value == "exist" ){
@@ -543,7 +580,7 @@ $(document).ready(function(){
     
     // 비밀번호 찾기_비밀번호 유효성 검사
     function findPwd_emailValidate(){ 
-        let emailVal = $("#findPwd_email").val();  
+        let emailVal = $(".emailChk").val();  
         // 이메일 미입력
         if (emailVal == "" ){
             displayErrorMsg($("#emailMsg"), '이메일을 입력하세요.');
@@ -635,54 +672,6 @@ $(document).ready(function(){
     	phoneValidate();
     })
     
-//    // '가입하기' 버튼 클릭 시 '전체 유효성 검사' 후 submit
-//    $('#btn_submit_signUpForm').click(function(){
-//    	// 기본 정보 에러메시지 노출용
-//    	if(emailValidate() == true){
-//    		emailDupChk();
-//    	};
-//    	
-//    	if(pwdValidate() == true){
-//    		pwdChkValidate();
-//    	};
-//    	
-//    	if($('input[name=isVerified]').val() == 'N'){
-//    		displayErrorMsg($("#veriMsg"), '이메일을 인증하세요.');
-//    	}
-//    	
-//    	nameValidate();
-//    	phoneValidate();
-//    	
-//    	if($('input[name=mSort]').val() == '일반'){
-//        	// 기본 정보 전체 유효성 검사 후 제출용
-//        	if(emailValidate() == true && emailDupChk() == true && $('input[name=isVerified]').val() == 'Y'
-//        		&& pwdValidate() == true && pwdChkValidate() == true 
-//        		&& nameValidate() == true && phoneValidate() == true){
-//        		$('#signUpForm').trigger('submit');
-//        		alert("용달이에 오신 것을 환영합니다~!");
-//        	};
-//        	
-//        // 사업자(기사) 회원가입	
-//    	}else{
-//        	// 사업자 정보 에러메시지 노출용
-//    		if(carCapacityValidate() == true){
-//    			if(carTypeValidate() == true){
-//    				carNoValidate();
-//    			}
-//    		}
-//    		
-//    		regImgValidate();
-//    		
-//    		// 사업자 정보 포함 전체 유효성 검사 후 제출용
-//        	if(emailValidate() == true && emailDupChk() == true && $('input[name=isVerified]').val() == 'Y'
-//        		&& pwdValidate() == true && pwdChkValidate() == true 
-//        		&& nameValidate() == true && phoneValidate() == true
-//        		&& carInfoValidate() == true && regImgValidate() == true){
-//        		$('#signUpForm').trigger('submit');
-//        		alert("용달이에 오신 것을 환영합니다~!");
-//        	};
-//    	}
-//    });
     
     /*-- 함수 선언 -------------------*/
     // 이메일 유효성 검사
