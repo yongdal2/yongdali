@@ -12,6 +12,7 @@ import com.kh.yongdali.reservation.model.vo.Reservation;
 import com.kh.yongdali.admin.model.vo.Calculate;
 import com.kh.yongdali.admin.model.vo.DriSearchCondition;
 import com.kh.yongdali.admin.model.vo.MemSearchCondition;
+import com.kh.yongdali.admin.model.vo.RefSearchCondition;
 import com.kh.yongdali.admin.model.vo.adRefund;
 import com.kh.yongdali.common.PageInfo;
 import com.kh.yongdali.driver.model.vo.Driver;
@@ -150,13 +151,62 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("adminMapper.searchDriverList",sc,rowBounds);
 	}
 
+	
+	
+	/**
+	 * 환불내역 리스트
+	 * @param rNo
+	 * @return
+	 */
 	public int adminRefund(String rNo) {
 		return sqlSession.update("adminMapper.adminRefund",rNo);
 	}
 
+	/** 페이징 처리 빼고 
+	 * 환불 내역에 rNo로 환불버튼 
+	 * @param rNo
+	 * @return
+	 */
 	public ArrayList<adRefund> adminRefundList() {
+		
 		return (ArrayList)sqlSession.selectList("adminMapper.adminRefundList");
 	}
+
+	
+	
+	/**
+	 * 환불 검색
+	 * @param rNo
+	 * @return
+	 */
+	public ArrayList<adRefund> searchRefundList(PageInfo pi, DriSearchCondition sc) {
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper.searchRefundList",sc,rowBounds);
+	}
+
+	/**
+	 * 환불 시 검색 내역 리스트
+	 * @return
+	 */
+	public int refListCount() {
+		return sqlSession.selectOne("adminMapper.getrefListCount");
+	}
+
+	public ArrayList<adRefund> searchAdminRefund(PageInfo pi, RefSearchCondition sc) {
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper.searchAdminRefund",sc,rowBounds);
+	}
+
+	
+	
+
+	
 
 	
 	

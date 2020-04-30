@@ -63,7 +63,6 @@
 									<option value="mName">이름</option>
 									<option value="phone">휴대폰번호</option>
 									<option value="cancAmount">환불금액</option>
-									<option value="calcDate">환불일자</option>
 								</select>
 										<input type="text" name="content">
 										<input type="submit" value="검색">
@@ -87,7 +86,7 @@
 										</tr>
 									</thead>
 									<c:forEach var="a" items="${ list }">
-										<tbody  id="tbody" class="tbody">	
+										<tbody  class="tbody">	
 											<tr class="tTr">
 												<td>${ a.mNo }</td>
 												<td>${ a.rNo }</td>
@@ -113,18 +112,6 @@
 							</div>
 							
 							<script>
-								$(function(){
-									/* var button = $('#rtable tr').children().eq(6);
-									button.click(function(){
-										var index = $('.tr').index(this)+1;
-										var button = $('#rtable tr:eq('+index+')').children().eq(6);	
-										console.log(index);
-										console.log(button.text());
-									}); */
-									
-									
-									
-								});
 								function button(value,rNo){
 									console.log(value);
 									console.log(rNo);
@@ -140,38 +127,13 @@
 										type:"post",
 										data:{rNo:rNo},
 										success:function(data){
-											/* <tr class="tr">
-											<td>${ a.mNo }</td>
-											<td>${ a.rNo }</td>
-											<td>${ a.email }</td>
-											<td>${ a.mName }</td>
-											<td>${ a.phone }</td>
-											<td>${ a.cancAmount }</td>
-											<c:choose>
-												<c:when test="${a.calcYn eq 1}">
-													<td><input type="button" value="환불하기" onclick="button(this.value,'${a.rNo}')"></td>
-												</c:when>
-												<c:when test="${a.calcYn eq 2}">
-													<td>환불 완료</td>
-												</c:when>
-											</c:choose> */
-											/* <tr class="thead">
-											<th>회원번호</th>
-											<th>결제번호</th>
-											<th>회원ID(이메일)</th>
-											<th>이름</th>
-											<th>휴대폰번호</th>
-											<th>환불금액</th>
-											<th>환불</th>
-											<th>환불일자</th>
-										</tr> */
 											
 											$('.thead').remove(); 
 											$('.tbody').remove();
 											
 											listText = "";
 											
-											listText += "<thead class='thead'>";
+											listText += "<thead id='thead' class='thead'>";
 											listText += "<tr>";
 											listText += "<th>회원번호</th>";
 											listText += "<th>결제번호</th>";
