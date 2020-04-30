@@ -13,6 +13,7 @@
 <style>
 button {
 	background: #F15F5F;
+	color: white;
 }
 
 @font-face {
@@ -47,6 +48,10 @@ tfoot {
 
 	<!-- Main Content -->
 	<div class="container">
+	<jsp:useBean id="now" class="java.util.Date" />
+	<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd" var="nowD" />
+
+	
 		<div class="row">
 			<div class="col-lg-12 col-md-10 mx-auto">
 				<h1
@@ -78,12 +83,21 @@ tfoot {
 								<td align="center" colspan="3">${r.startAddr }</td>
 								<td align="center" colspan="3">${r.endAddr }</td>
 								<td align="center"><fmt:formatDate value="${r.startDate }"
-										type="date" pattern="yyyy-MM-dd" /></td>
+										type="date" pattern="yyyy-MM-dd" var='startD'/></td>
 								<td align="center"><fmt:formatDate value="${r.endDate }"
 										type="date" pattern="yyyy-MM-dd" /></td>
-								<td align="center"><button class='dealB btn btn-sm'
-										style='color: white;' onclick='edit(this.value)'
-										value="${r.rNo }">배차취소</button></td>
+								<c:choose>
+									<c:when test="${empty r.startDate}">
+										<td>배차완료</td>
+									</c:when>
+									<c:when test="${startD > nowD }">
+										<td><button class='dealB btn btn-sm' value="${r.rNo }" onclick='edit(this.value)' style="color: white">
+											배차취소</button></td>
+									</c:when>
+									<c:otherwise>
+										<td>배차완료</td>
+									</c:otherwise>
+								</c:choose>
 							</tr>
 						</c:forEach>
 					</tbody>

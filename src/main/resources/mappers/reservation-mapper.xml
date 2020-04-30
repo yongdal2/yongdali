@@ -42,6 +42,7 @@
             AND TYPE = (SELECT TYPE
 							FROM DRIVER
 							WHERE D_M_NO  = #{mNo})
+			AND (START_DATE > SYSDATE OR RIGHT_LOAD = '바로상차')
 			AND ROWNUM <=10
 		]]>
 	</select>
@@ -53,6 +54,7 @@
 			WHERE R_D_NO = (SELECT D_NO
 							FROM DRIVER
 							WHERE D_M_NO = #{mNo})
+			AND (START_DATE > SYSDATE OR RIGHT_LOAD = '바로상차')
 			AND ROWNUM <= 10
 		]]>
 	</select>
@@ -91,6 +93,7 @@
             AND TYPE = (SELECT TYPE
 							FROM DRIVER
 							WHERE D_M_NO  = #{mNo})
+			AND (START_DATE > SYSDATE OR RIGHT_LOAD = '바로상차')
 	</select>
 	
 	<select id="baeList" resultMap="reservationResultSet">
@@ -120,7 +123,7 @@
 			FROM RESERVATION
 			WHERE R_D_NO = (SELECT D_NO
 							FROM DRIVER
-							WHERE D_M_NO = #{mNo})
+							WHERE D_M_NO = #{mNo})							
 	</select>
 	
 	<select id="myDetail" resultMap="reservationResultSet">
