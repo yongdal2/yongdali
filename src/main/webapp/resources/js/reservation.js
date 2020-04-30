@@ -1237,18 +1237,39 @@ span5.onclick = function() {
 }
 
 /*----------------------------------------------주소록--------------------------------------------*/
-
-
+// 유저 최근 사용 주소록 업데이트
+function addrSys(aNo){
+	$.ajax({
+		url: "addrSys.myp",
+		data: { aNo: aNo },
+		success: function(msg) { 
+			console.log(msg);
+			if (msg == "Y") {
+				console.log("성공");
+			} else {
+				console.log("실패");
+			}
+		},
+		error: function() {
+			console.log("aj실패")
+		}
+	});
+}
 /*---------------------------------------------SUBMIT----------------------------------*/
 // 예약하기 버튼 & 상하차 날짜 입력하지 않으면 return false 조건 적용
 $('#revForm').submit(function(){
-	// 이삿짐을 선택했거나 결제금액이 100만원 이하이거나 바로 상차를 입력했거나 상차 날짜 입력되었거나
+	// 이삿짐을 선택했거나 결제금액이 100만원 이하이거나 바로 상하차를 입력했거나 상하차 날짜 입력되었거나
 	if($('#load-content-area').text()!=""){
 		if(amount <= 1000000){		
 			if($('#checkLoad1').is(":checked") || $('#datepicker1').val()!=""){
-				// 바로 상차를 입력했거나 하차 날짜 입력되었거나
 				if($('#checkLoad2').is(":checked") || $('#datepicker2').val()!=""){			
 					if(confirm("결제 진행하시겠습니까?")){
+						if(stANo!=""){							
+							addrSys(stANo);
+						}
+						if(edANo!=""){
+							addrSys(edANo);							
+						}
 						addAddr();
 						return;
 					} else {
