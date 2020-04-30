@@ -22,5 +22,13 @@ public class ReservationDao {
 	public ArrayList<Address> getAddressList(String mno) {
 		return (ArrayList)sqlSession.selectList("addressMapper_njh.selectAddressList",mno);
 	}
+
+	public int deleteAddr(String aNo) {
+		return sqlSession.delete("myPageMapper.deleteAddr", aNo);
+	}
+
+	public int modifyAddr(Address a) {
+		return sqlSession.update("myPageMapper.updateAddr", a);
+	}
 	
 }

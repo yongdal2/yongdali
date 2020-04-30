@@ -956,26 +956,29 @@
 								<div class="col-xs-12 col-md-12" style="min-height: 261px;">
 									<div class="row fw6" style="border-bottom: 1px solid black;">
 										<div class="col-xs-2 col-md-2">선택</div>
-										<div class="col-xs-3 col-md-3">배송지</div>
-										<div class="col-xs-4 col-md-4">주소</div>
+										<div class="col-xs-2 col-md-2">배송지</div>
+										<div class="col-xs-3 col-md-3">주소</div>
 										<div class="col-xs-3 col-md-3">연락처</div>
+										<div class="col-xs-2 col-md-2">수정·삭제</div>
 									</div>
 								<c:forEach var="a" items="${ list }" varStatus="status">
 									<div class="row small aL-row">
 										<input type="radio" class="col-xs-2 col-md-2" name="startAddrList" style="margin-top: 10px; cursor: pointer;">
-										<div class="col-xs-3 col-md-3">
-											<span>${ a.aPlace }</span>
+										<div class="col-xs-2 col-md-2">
+											<span class="stAPlace">${ a.aPlace }</span>
 											<br>
 											<span class="stAName">${ a.aName }</span>
 										</div>
-										<div class="col-xs-4 col-md-4">
+										<div class="col-xs-3 col-md-3">
 											<span class="stAddr1">${addrList1[status.index]}</span>
 											<br>
 											<span class="stAddr2">${addrList2[status.index]}</span>
 										</div>
-										<div class="col-xs-3 col-md-3" style="padding-top: 9px;">
+										<div class="col-xs-3 col-md-3" style="padding-top: 7px;">
 											<span class="stAPhone">${ a.aPhone }</span>
 										</div>
+										<input class="stAddrModi col-xs-1 col-md-1" type="button" value="수정" style="margin-right: 2px;">
+										<input class="stAddrDele col-xs-1 col-md-1" type="button" value="삭제">
 										<input class="stANo" type="hidden" value="${ a.aNo }">
 										<input class="stLat" type="hidden" value="${ a.aLatitude }">
 										<input class="stLong" type="hidden" value="${ a.aLongitude }">
@@ -1026,26 +1029,29 @@
 							<div class="col-xs-12 col-md-12" style="min-height: 261px;">
 								<div class="row fw6" style="border-bottom: 1px solid black;">
 									<div class="col-xs-2 col-md-2">선택</div>
-									<div class="col-xs-3 col-md-3">배송지</div>
-									<div class="col-xs-4 col-md-4">주소</div>
+									<div class="col-xs-2 col-md-2">배송지</div>
+									<div class="col-xs-3 col-md-3">주소</div>
 									<div class="col-xs-3 col-md-3">연락처</div>
+									<div class="col-xs-2 col-md-2">수정·삭제</div>
 								</div>
 								<c:forEach var="a" items="${ list }" varStatus="status">
 									<div class="row small aL-row">
 										<input type="radio" class="col-xs-2 col-md-2" name="endAddrList" style="margin-top: 10px; cursor: pointer;">
-										<div class="col-xs-3 col-md-3">
-											<span>${ a.aPlace }</span>
+										<span class="col-xs-2 col-md-2">
+											<span class="edAPlace">${ a.aPlace }</span>
 											<br>
 											<span class="edAName">${ a.aName }</span>
-										</div>
-										<div class="col-xs-4 col-md-4">
+										</span>
+										<span class="col-xs-3 col-md-3">
 											<span class="edAddr1">${addrList1[status.index]}</span>
 											<br>
 											<span class="edAddr2">${addrList2[status.index]}</span>
-										</div>
-										<div class="col-xs-3 col-md-3" style="padding-top: 9px;">
+										</span>
+										<span class="col-xs-3 col-md-3" style="padding-top: 7px;">
 											<span class="edAPhone">${ a.aPhone }</span>
-										</div>
+										</span>
+										<input class="edAddrModi col-xs-1 col-md-1" type="button" value="수정">
+										<input class="edAddrDele col-xs-1 col-md-1" type="button" value="삭제">
 										<input class="edANo" type="hidden" value="${ a.aNo }">
 										<input class="edLat" type="hidden" value="${ a.aLatitude }">
 										<input class="edLong" type="hidden" value="${ a.aLongitude }">
@@ -1068,7 +1074,43 @@
 				<span id="modal-close8" class="close11" style="width: 30px;">&times;</span>
 			</div>
 		</div>
-
+		<!-- Modal9 : 주소록 수정창 -->
+		<div id="myModal9" class="modal11" style="padding-top: 11.5%;">
+			<div class="modal-content11" style="width: 400px">
+				<span id="modal-close9" class="close11" style="width: 30px;">&times;</span>
+				<div class="modal-addr-div" style="width: 398px; height: 390px;">
+					<div class="addr-title-div">
+						<span class="addr-title">주소록 수정</span>
+					</div>
+		            <div style="padding-top: 30px; padding-left: 30px;">
+		                <div class="addr-row">
+		                    <div>배송지명 <span class="addr-star" style="margin-right: 20px;">*</span><input type="text" id="addr-place" class="addr-input"></div>
+		                </div>
+		                <div class="addr-row">
+		                    <div>수령인 <span class="addr-star" style="margin-right: 34.5px;">*</span><input type="text" id="addr-name" class="addr-input"></div>
+		                </div>
+		                <div class="addr-row">
+		                    <div>연락처 <span class="addr-star" style="margin-right: 34.5px;">*</span><input type="text" id="addr-phone" class="addr-input" onKeyup="inputPhoneNumber(this);"></div>
+		                </div>
+		                <div class="addr-row" style="margin-bottom: 10px;">
+		                    <div>주소 <span class="addr-star" style="margin-right: 45px;">*</span>
+		                        <input type="text" id="addr-basic" class="addr-input" placeholder="기본 주소" readonly>
+		                        <input type="button" id="addr-sc-btn" value="검색" onclick="SearchMdAddr();">
+		                        <input type="hidden" id="latitude">
+		                        <input type="hidden" id="longitude">
+		                        <input type="hidden" id="ano">
+		                    </div>
+		                </div>
+		                <div>
+		                    <input type="text" id="addr-detail" class="addr-input" placeholder="상세 주소">
+		                </div>
+		            </div>
+		            <div align="center" style="margin-top: 25px;">
+		                <input type="button" id="addr-md-btn" value="수 정 하 기">
+		            </div>
+				</div>
+			</div>
+		</div>
 		<!-- hidden 값들 -->
 		<input type="hidden" id="addStAddr" name="startAddr">
 		<input type="hidden" id="addEdAddr" name="endAddr">
@@ -1077,9 +1119,67 @@
 		<input type="hidden" id="helpLoadVal" name="helpLoad">
 		<input type="hidden" id="helpUnloadVal" name="helpUnload">
 	</form>
+	
 	<script>
-	
-	
+		function SearchMdAddr(){
+			modal34.style.display = "block";
+			new daum.Postcode({
+				oncomplete: function(data) {
+					// 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+					
+					// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+					// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+					var addr = ''; // 주소 변수
+					
+					//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+					if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+						addr = data.roadAddress;
+					} else { // 사용자가 지번 주소를 선택했을 경우(J)
+						addr = data.jibunAddress;
+					}
+					
+					/* 서울 지역 조건 */
+					if(!addr.includes("서울")){
+						alert("죄송합니다.\n서울지역 한해서만 운영 가능합니다.\n다시 입력해주세요.");
+						modal34.style.display = "none";
+					} else {
+						
+						// 주소로 상세 정보를 검색
+						geocoder.addressSearch(addr, function(results, status) {
+							// 정상적으로 검색이 완료됐으면
+							if (status === daum.maps.services.Status.OK) {
+								
+								var result = results[0]; //첫번째 결과의 값을 활용
+								$('#latitude').val(result.x);
+								$('#longitude').val(result.y);
+							}
+						});
+						
+						// 수정 주소창에 담기
+						$('#addr-basic').val(addr);
+						
+						// iframe을 넣은 element를 안보이게 한다.
+						// (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
+						element_layer.style.display = 'none';
+						
+						// 모달 닫기
+						modal34.style.display = "none";
+						
+						// 상세주소 select 하기
+						$('#addr-detail').select();
+					}
+				},
+				width : '100%',
+				height : '100%',
+				maxSuggestItems : 5
+			}).embed(element_layer);
+			
+			// iframe을 넣은 element를 보이게 한다.
+			element_layer.style.display = 'block';
+			// iframe을 넣은 element의 위치를 화면의 가운데로 이동시킨다.
+			initLayerPosition();
+		}
+		
 	</script>
 	<!-- javascript files -->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

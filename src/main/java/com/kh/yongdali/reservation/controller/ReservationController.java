@@ -1,9 +1,9 @@
 package com.kh.yongdali.reservation.controller;
 
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.sql.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.yongdali.member.model.vo.Member;
@@ -146,4 +147,71 @@ public class ReservationController {
 		}
 		return mv;
 	}
+	
+	/**
+	 * 주소록 삭제
+	 * @param response
+	 * @param aNo
+	 */
+	@RequestMapping("addrDele.do")
+	@ResponseBody
+	public String deleteAddr(String aNo) {
+		
+		System.out.println("aNo : " + aNo);
+		
+		int result = rService.deleteAddr(aNo);
+		System.out.println("결과값 : " + result);
+		
+		if(result > 0) {
+			return "ok";
+		} else {
+			return "fail";
+		}
+		
+	}
+	
+	@RequestMapping("addrModi.do")
+	@ResponseBody
+	public String modifyAddr(Address a, String addr1, String addr2) {
+		
+		a.setaAddress(addr1+","+addr2);
+		
+		System.out.println(a.getaNo());
+		System.out.println(a.getaPlace());
+		System.out.println(a.getaName());
+		System.out.println(a.getaPhone());
+		System.out.println(a.getaAddress());
+		System.out.println(a.getaLatitude());
+		System.out.println(a.getaLongitude());
+		
+		
+		int result = rService.modifyAddr(a);
+		
+		if(result > 0) {
+			return "ok";
+		} else {
+			return "fail";
+		}
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

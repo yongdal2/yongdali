@@ -24,4 +24,16 @@ public class ReservationServiceEmpl implements ReservationService{
 	public ArrayList<Address> getAddressList(String mno) {
 		return rDao.getAddressList(mno);
 	}
+
+	@Override
+	public int deleteAddr(String aNo) {
+		return rDao.deleteAddr(aNo);
+	}
+
+	@Override
+	public int modifyAddr(Address a) {
+		return rDao.modifyAddr(a);
+	}
+	
+	
 }

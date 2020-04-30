@@ -96,7 +96,7 @@
 		
 		function connectionSocket(){
 			connect = true;
-			socket = new WebSocket('ws://192.168.20.3:8081/yongdali/chatting');
+			socket = new WebSocket('ws://192.168.25.35:8081/yongdali/chatting');
 			/* 페이지 접속한 session id */
 			var sessionid = $("#senderId").val();
 			var ccId = $("#ccId").val();
@@ -162,10 +162,6 @@
 					
 				}
 				
-				if(data["flag"]!="room" && data["flag"]!="user"){
-					console.log("data : " + data)
-				}
-				
 				/* if(data["flag"]!="room" && data["flag"]!="user"){
 					if(sessionid == data["id"]){
 						var printHTML = "<div class='message text-only'>";
@@ -210,6 +206,7 @@
 			/* $(e).parent().find("p").css({background:"white"});
         	$(e).css({background:"lightgray"}); */
         	$("#chatName").empty();
+        	$("#chatRoomNo").empty();
         	$('.messages-chat').empty();
         	
         	var roomName = e.innerHTML;
@@ -272,8 +269,33 @@
 				console.log("세션아이디:"+sessionid);
 				console.log("받는아이디:"+data["receiveId"]);
 			
-	
-				if(data["flag"]!="room" && data["flag"]!="user"){
+				if(data["flag"]=="room" ){
+					var rooms = data['msg'].split(",");
+					var roomNo = data['roomNo'].split(",");
+					
+					console.log(rooms);
+					console.log(roomNo);
+					
+					var l=roomNo.length;
+					
+					for(var i=0; i<rooms.length; i++){
+						for(var j=l; j>=0; j--){
+							var printHTML = "<div class='discussion'>";
+							printHTML += "<div class='photo'></div>";
+							printHTML += "<div class='desc-contact' id='nameArea'>";
+							printHTML += "<p class='name' id='roomNo1'>"+roomNo[j]+"</p>";
+							printHTML += "<p class='name' id='listName' onclick='roomval(this);'>"+rooms[i]+"</p>";
+							printHTML += "</div>";
+							printHTML += "</div>";
+						}
+					}
+					
+					$("#chatList").append(printHTML);		 
+					
+				}
+				
+				else if(data["flag"]=="msg"){
+					console.log("나들어와써");
 					if(sessionid == data["id"]){
 						var printHTML = "<div class='message text-only'>";
 		    			printHTML += "<div class='response' id='meMsg'>";
@@ -282,7 +304,8 @@
 		    			printHTML += "<p class='response-time time'>"+hours+":"+minutes+"</p>";
 		    			printHTML += "</div>";
 	    			}else{    	
-	    				if(roomNo == data["roomNo"]){
+	    				console.log("이거뭐니?" + $("#chatRoomNo").text());
+	    				if($("#chatRoomNo").text() == data["roomNo"]){
 		    				var printHTML = "<div class='message' id='youMsg'>";
 			              	printHTML += "<div class='name'>";
 			              	printHTML += "<h2>"+data["roomName"]+"</h2>";
