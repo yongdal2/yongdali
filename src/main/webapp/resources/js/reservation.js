@@ -697,8 +697,7 @@ $('#checkLoad1').click(function(){
 		var stDate2 = new Date(startDateStr);
 		stDate2.setDate(addStartDay);
 		
-		addDate = startYear+"년 "+startMonth+"월 "+stDate2.getDate()+"일";
-		
+		addDate = stDate2.getFullYear()+"년 "+(stDate2.getMonth()+1)+"월 "+stDate2.getDate()+"일";
 		console.log("바로 상차 선택날짜로부터 1일 후, 하차예약 가능날짜 : "+addDate);
 		
 		// noBefore2와 같은 기능
@@ -1008,7 +1007,7 @@ span5.onclick = function() {
 	$('#checkHelp2').prop('checked',false);
 }
 
-
+/*---------------------------------- 주소록------------------------------------*/
 // 출발지 주소록
 $('#stAddrList').click(function(){
 	$('#myModal6').css('display','block');
@@ -1043,7 +1042,128 @@ function addAddr(){
 	$('#addEdAddr').val(edAddr1+","+edAddr2);
 }
 
+//출발지 주소 수정 모달 팝업 띄우기
+$('.stAddrModi').click(function(){
+	
+	var aNo = $(this).closest('div').find('.stANo').val();
+	var place = $(this).closest('div').find('.stAPlace').text();
+	var name = $(this).closest('div').find('.stAName').text();
+	var phone = $(this).closest('div').find('.stAPhone').text();
+	var addr1 = $(this).closest('div').find('.stAddr1').text();
+	var addr2 = $(this).closest('div').find('.stAddr2').text();
+	var latitude = $(this).closest('div').find('.stLat').val();
+	var longitude = $(this).closest('div').find('.stLong').val();
+	
+	$('#ano').val(aNo);
+	$('#addr-place').val(place);
+	$('#addr-name').val(name);
+	$('#addr-phone').val(phone);
+	$('#addr-basic').val(addr1);
+	$('#addr-detail').val(addr2);
+	$('#latitude').val(latitude);
+	$('#longitude').val(longitude);
+	$('#myModal9').css('display','block');
+});
 
+
+
+// 출발지 주소 수정
+$('#addr-md-btn').click(function(){
+	if(confirm("변경하신 주소로 수정하시겠습니까?")){				
+		$.ajax({
+			url:"addrModi.do",
+			data:{
+				aNo:$('#ano').val(),
+				aPlace:$('#addr-place').val(),
+				aName:$('#addr-name').val(),
+				aPhone:$('#addr-phone').val(),
+				addr1:$('#addr-basic').val(),
+				addr2:$('#addr-detail').val(),
+				aLatitude:$('#latitude').val(),
+				aLongitude:$('#longitude').val()
+			},
+			type:"post",
+			success:function(data){
+				alert("수정이 완료되었습니다.");
+				$('#myModal9').css('display','none');
+				location.reload();
+			}, error:function(data){
+				alert("수정이 실패하였습니다.");
+			}
+		});
+	}
+});
+
+// 출발지 삭제
+$('.stAddrDele').click(function(){
+	var aNo = $(this).closest('div').find('.stANo').val();
+	
+	if(confirm("선택하신 주소를 삭제하시겠습니까?")){
+		$.ajax({
+			url:"addrDele.do",
+			data:{aNo:aNo},
+			type:"post",
+			success:function(date){
+				alert("삭제가 완료되었습니다.");
+			}, error:function(data){
+				alert("삭제가 실패하였습니다.");
+			}
+		});
+		$(this).closest('div').remove();
+	}
+});
+	
+	
+// 도착지 주소 수정 모달 팝업 띄우기
+$('.edAddrModi').click(function(){
+	
+	var aNo = $(this).closest('div').find('.edANo').val();
+	var place = $(this).closest('div').find('.edAPlace').text();
+	var name = $(this).closest('div').find('.edAName').text();
+	var phone = $(this).closest('div').find('.edAPhone').text();
+	var addr1 = $(this).closest('div').find('.edAddr1').text();
+	var addr2 = $(this).closest('div').find('.edAddr2').text();
+	var latitude = $(this).closest('div').find('.edLat').val();
+	var longitude = $(this).closest('div').find('.edLong').val();
+	
+	$('#ano').val(aNo);
+	$('#addr-place').val(place);
+	$('#addr-name').val(name);
+	$('#addr-phone').val(phone);
+	$('#addr-basic').val(addr1);
+	$('#addr-detail').val(addr2);
+	$('#latitude').val(latitude);
+	$('#longitude').val(longitude);
+	$('#myModal9').css('display','block');
+});	
+
+// 도착지 삭제
+$('.edAddrDele').click(function(){
+	var aNo = $(this).closest('div').find('.edANo').val();
+	
+	if(confirm("선택하신 주소를 삭제하시겠습니까?")){
+		$.ajax({
+			url:"addrDele.do",
+			data:{aNo:aNo},
+			type:"post",
+			success:function(date){
+				alert("삭제가 완료되었습니다.");
+			}, error:function(data){
+				alert("삭제가 실패하였습니다.");
+			}
+		});
+		$(this).closest('div').remove();
+	}
+});
+
+// 주소록 수정 닫기
+$('#modal-close9').click(function(){
+	if(confirm("주소록 수정을 취소하시겠습니까?")){							
+		$('#myModal9').css('display','none');
+	}
+});
+
+/*---------------------------------------------SUBMIT----------------------------------*/
 // 예약하기 버튼 & 상하차 날짜 입력하지 않으면 return false 조건 적용
 $('#revForm').submit(function(){
 	// 바로 상차를 입력했거나 상차 날짜 입력되었거나

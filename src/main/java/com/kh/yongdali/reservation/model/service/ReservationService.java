@@ -11,4 +11,8 @@ public interface ReservationService {
 	
 	public int insertReservation(Reservation r);
 
+	public int deleteAddr(String aNo);
+
+	public int modifyAddr(Address a);
+
 }
