@@ -88,7 +88,8 @@ $(document).ready(function(){
 	});
 	
 	$(".adminPage").click(function(){
-		location.href="adminHome.ydl"
+		location.href="aMem.ad"
+//			location.href="adminHome.ydl"
 	});
 	
 	/*-- 로그인페이지 ----------------------------------------------*/

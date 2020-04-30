@@ -29,7 +29,7 @@
 					<div class="row">
 						<div id=title>
 							<h2 class="jal">
-								<a href="adminHome.ydl">관리자 페이지</a>
+								<a href="aMem.ad">관리자 페이지</a>
 							</h2>
 							<!-- <p>회원번호, 회원구분으로 sql, 소제목 처리하기, 검색기능 넣기</p> -->
 						</div>

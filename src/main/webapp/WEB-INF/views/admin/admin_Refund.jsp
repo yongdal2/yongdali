@@ -30,7 +30,7 @@
 					<div class="row">
 						<div id=title>
 							<h2 class="jal">
-								<a href="adminHome.ydl">관리자 페이지</a>
+								<a href="aMem.ad">관리자 페이지</a>
 							</h2>
 						</div>
 						<hr>
@@ -126,8 +126,15 @@
 										url:"adminRefund.do",
 										type:"post",
 										data:{rNo:rNo},
+										
 										success:function(data){
-											
+											if(data=='환불'){
+								        	    alert("환불처리 하시겠습니까?");
+												$('checked',true);
+											}else(data=='취소'){
+												alert("취소처리 되었습니다.");
+												$('checked',false);
+											}
 											$('.thead').remove(); 
 											$('.tbody').remove();
 											

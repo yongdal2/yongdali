@@ -27,7 +27,8 @@
 		<div class="content container">
 			<div class="row">
 			<div id=title>
-				<h2 class="jal"><a href="adminHome.ydl">관리자 페이지</a></h2>
+				<h2 class="jal"><a href="aMem.ad">관리자 페이지</a></h2>
+			<!-- 	<h2 class="jal"><a href="adminHome.ydl">관리자 페이지</a></h2> -->
 				<!-- <p>aJung.ad </p> -->
 			</div>
 				<hr>

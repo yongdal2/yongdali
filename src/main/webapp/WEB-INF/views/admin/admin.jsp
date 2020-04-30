@@ -27,7 +27,7 @@
 		<div class="content container">
 			<div class="row">
 			<div id=title>
-				<h2 class="jal"><a href="adminHome.ydl">관리자 페이지</a></h2>
+				<h2 class="jal"><a href="aMem.ad">관리자 페이지</a></h2>
 			<!-- <p>대쉬보드 만들기 가독성 좋은 그림 표</p> -->
 			</div>
 				<hr>
@@ -49,7 +49,7 @@
 			<div class="row" id="rowList">
 				<div class="col-xs-12 col-md-12" id="table">
 					<br>
-					<p>대쉬보드 그래프...</p>
+					<!-- <p>대쉬보드 그래프...</p> -->
 				<!-- <table style="text-align: center" class="table table-striped table-hover text-center"> -->
 					<!-- <table class="table table-striped table-hover text-center">
 						<thead id="thead">

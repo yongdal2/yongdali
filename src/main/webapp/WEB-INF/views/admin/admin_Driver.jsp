@@ -39,7 +39,7 @@
 					<div class="row">
 						<div id=title>
 							<h2 class="jal">
-								<a href="adminHome.ydl">관리자 페이지</a>
+								<a href="aMem.ad">관리자 페이지</a>
 							</h2>
 							<!-- <p>기사님 목록 / admin_Driver.jsp / 사진은 버튼 누르면 팝업으로 띄우기 / 소제목 처리하기, 검색기능 넣기</p> -->
 						</div>
