@@ -275,8 +275,23 @@ input[type=date]::-webkit-inner-spin-button {
   }
 }
 @media (min-width: 992px) {
-  .tbPdR {
+/*   .tbPdR { */
     padding-right: 37px !important
   }
+}
+
+.pagination>li>a {
+	border: none !important;
+	color: black !important;
+}
+
+.llg {
+	color: #c1c1c1 !important;
+}
+
+.chkBox img {
+    width: 20px;
+    margin-right: 12px;
+    cursor: pointer;
 }
 

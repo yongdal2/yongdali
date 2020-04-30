@@ -446,7 +446,6 @@ input[type=date]::-webkit-inner-spin-button {
 
 
 
-
 @media (min-width: 768px) {
   .tbPdR {
     padding-right: 17px !important
@@ -457,3 +456,13 @@ input[type=date]::-webkit-inner-spin-button {
     padding-right: 37px !important
   }
 }
+
+.pagination>li>a {
+	border: none !important;
+	color: black !important;
+}
+
+
+
+
+

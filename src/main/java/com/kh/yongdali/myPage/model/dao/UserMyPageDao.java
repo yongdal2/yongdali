@@ -93,6 +93,11 @@ public class UserMyPageDao {
 		return sqlSession.update("myPageMapper.pushUpdate",m);
 	}
 
+
+	public int addrSys(String aNo) {
+		return sqlSession.update("myPageMapper.addrSys", aNo);
+	}
+
 	
 
 }
