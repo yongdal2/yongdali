@@ -954,42 +954,42 @@
 							</div>
 							<br>
 							<div class="col-xs-12 col-md-12 text-center noto">
-								<div class="col-xs-12 col-md-12" style="min-height: 261px;">
+								<div id="stAddrList-div1" class="col-xs-12 col-md-12" style="min-height: 261px;">
 									<div class="row fw6" style="border-bottom: 1px solid black;">
 										<div class="col-xs-2 col-md-2">선택</div>
 										<div class="col-xs-2 col-md-2">배송지</div>
-										<div class="col-xs-3 col-md-3">주소</div>
-										<div class="col-xs-3 col-md-3">연락처</div>
+										<div class="col-xs-4 col-md-4">주소</div>
+										<div class="col-xs-2 col-md-2">연락처</div>
 										<div class="col-xs-2 col-md-2">수정·삭제</div>
 									</div>
-								<div id="addrList-div1">
-									<c:forEach var="a" items="${ list }" varStatus="status">
-										<div class="row small aL-row">
-											<input type="radio" class="col-xs-2 col-md-2" name="startAddrList" style="margin-top: 10px; cursor: pointer;">
-											<div class="col-xs-2 col-md-2">
-												<span class="stAPlace">${ a.aPlace }</span>
-												<br>
-												<span class="stAName">${ a.aName }</span>
+									<div id="stAddrList-div11">
+										<c:forEach var="a" items="${ list }" varStatus="status">
+											<div class="row small aL-row">
+												<input type="radio" class="col-xs-2 col-md-2" name="startAddrList" style="margin-top: 10px; cursor: pointer;">
+												<div class="col-xs-2 col-md-2">
+													<span class="stAPlace">${ a.aPlace }</span>
+													<br>
+													<span class="stAName">${ a.aName }</span>
+												</div>
+												<div class="col-xs-4 col-md-4">
+													<span class="stAddr1">${addrList1[status.index]}</span>
+													<br>
+													<span class="stAddr2">${addrList2[status.index]}</span>
+												</div>
+												<div class="col-xs-2 col-md-2" style="padding-top: 7px;">
+													<span class="stAPhone">${ a.aPhone }</span>
+												</div>
+												<input class="stAddrModi col-xs-1 col-md-1" type="button" value="수정" style="margin-right: 2px;" onclick="modifyAddr1('${ a.aNo }','${ a.aPlace }','${ a.aName }','${ a.aPhone }','${addrList1[status.index]}','${addrList2[status.index]}','${ a.aLatitude }','${ a.aLongitude }');">
+												<input class="stAddrDele col-xs-1 col-md-1" type="button" value="삭제" onclick="deleteAddr('${ a.aNo }');">
+												<input class="stANo" type="hidden" value="${ a.aNo }">
+												<input class="stLat" type="hidden" value="${ a.aLatitude }">
+												<input class="stLong" type="hidden" value="${ a.aLongitude }">
 											</div>
-											<div class="col-xs-3 col-md-3">
-												<span class="stAddr1">${addrList1[status.index]}</span>
-												<br>
-												<span class="stAddr2">${addrList2[status.index]}</span>
-											</div>
-											<div class="col-xs-3 col-md-3" style="padding-top: 7px;">
-												<span class="stAPhone">${ a.aPhone }</span>
-											</div>
-											<input class="stAddrModi col-xs-1 col-md-1" type="button" value="수정" style="margin-right: 2px;">
-											<input class="stAddrDele col-xs-1 col-md-1" type="button" value="삭제">
-											<input class="stANo" type="hidden" value="${ a.aNo }">
-											<input class="stLat" type="hidden" value="${ a.aLatitude }">
-											<input class="stLong" type="hidden" value="${ a.aLongitude }">
-										</div>
-									</c:forEach>
+										</c:forEach>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
 					<div align="center">
 						<button type="button" id="stALBtn">선 택 하 기</button>
 					</div>
@@ -1017,7 +1017,6 @@
 									<span style="font-family: 'NeoDunggeunmo'; font-size: 17px;">주소록이 없어요..</span>
 									<br><br>
 									<button type="button" id="stALBtn" onclick="location.href='addrBook.myp'">추 가 하 러 가 기</button>
-									
 								</div>
 							</div>
 						</div>
@@ -1029,7 +1028,7 @@
 						</div>
 						<br>
 						<div class="col-xs-12 col-md-12 text-center noto" style="min-height: 261px;">
-							<div class="col-xs-12 col-md-12" style="min-height: 261px;">
+							<div id="edAddrList-div1" class="col-xs-12 col-md-12" style="min-height: 261px;">
 								<div class="row fw6" style="border-bottom: 1px solid black;">
 									<div class="col-xs-2 col-md-2">선택</div>
 									<div class="col-xs-2 col-md-2">배송지</div>
@@ -1037,29 +1036,31 @@
 									<div class="col-xs-3 col-md-3">연락처</div>
 									<div class="col-xs-2 col-md-2">수정·삭제</div>
 								</div>
-								<c:forEach var="a" items="${ list }" varStatus="status">
-									<div class="row small aL-row">
-										<input type="radio" class="col-xs-2 col-md-2" name="endAddrList" style="margin-top: 10px; cursor: pointer;">
-										<span class="col-xs-2 col-md-2">
-											<span class="edAPlace">${ a.aPlace }</span>
-											<br>
-											<span class="edAName">${ a.aName }</span>
-										</span>
-										<span class="col-xs-3 col-md-3">
-											<span class="edAddr1">${addrList1[status.index]}</span>
-											<br>
-											<span class="edAddr2">${addrList2[status.index]}</span>
-										</span>
-										<span class="col-xs-3 col-md-3" style="padding-top: 7px;">
-											<span class="edAPhone">${ a.aPhone }</span>
-										</span>
-										<input class="edAddrModi col-xs-1 col-md-1" type="button" value="수정">
-										<input class="edAddrDele col-xs-1 col-md-1" type="button" value="삭제">
-										<input class="edANo" type="hidden" value="${ a.aNo }">
-										<input class="edLat" type="hidden" value="${ a.aLatitude }">
-										<input class="edLong" type="hidden" value="${ a.aLongitude }">
-									</div>
-								</c:forEach>
+								<div id="edAddrList-div11">
+									<c:forEach var="a" items="${ list }" varStatus="status">
+										<div class="row small aL-row">
+											<input type="radio" class="col-xs-2 col-md-2" name="endAddrList" style="margin-top: 10px; cursor: pointer;">
+											<span class="col-xs-2 col-md-2">
+												<span class="edAPlace">${ a.aPlace }</span>
+												<br>
+												<span class="edAName">${ a.aName }</span>
+											</span>
+											<span class="col-xs-3 col-md-3">
+												<span class="edAddr1">${addrList1[status.index]}</span>
+												<br>
+												<span class="edAddr2">${addrList2[status.index]}</span>
+											</span>
+											<span class="col-xs-3 col-md-3" style="padding-top: 7px;">
+												<span class="edAPhone">${ a.aPhone }</span>
+											</span>
+											<input class="edAddrModi col-xs-1 col-md-1" type="button" value="수정" onclick="modifyAddr1('${ a.aNo }','${ a.aPlace }','${ a.aName }','${ a.aPhone }','${addrList1[status.index]}','${addrList2[status.index]}','${ a.aLatitude }','${ a.aLongitude }');">
+											<input class="edAddrDele col-xs-1 col-md-1" type="button" value="삭제" onclick="deleteAddr('${ a.aNo }');">
+											<input class="edANo" type="hidden" value="${ a.aNo }">
+											<input class="edLat" type="hidden" value="${ a.aLatitude }">
+											<input class="edLong" type="hidden" value="${ a.aLongitude }">
+										</div>
+									</c:forEach>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -1109,7 +1110,7 @@
 		                </div>
 		            </div>
 		            <div align="center" style="margin-top: 25px;">
-		                <input type="button" id="addr-md-btn" value="수 정 하 기">
+		                <input type="button" id="addr-md-btn" value="수 정 하 기" onclick="modifyAddr2();">
 		            </div>
 				</div>
 			</div>

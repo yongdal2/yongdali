@@ -629,17 +629,6 @@ $('#modal-close7').click(function(){
 
 //출발지 주소록
 $('#stAddrList').click(function(){
-	
-	$.ajax({
-		url:"selectAddrList.do",
-		dataType:"json",
-		success:function(data){
-			console.log("성공");
-		}, error:function(){
-			console.log("실패");
-		}
-	});
-	
 	$('#myModal6').css('display','block');
 });
 
@@ -673,17 +662,7 @@ function addAddr(){
 }
 
 //출발지 주소 수정 모달 팝업 띄우기
-$('.stAddrModi').click(function(){
-	
-	var aNo = $(this).closest('div').find('.stANo').val();
-	var place = $(this).closest('div').find('.stAPlace').text();
-	var name = $(this).closest('div').find('.stAName').text();
-	var phone = $(this).closest('div').find('.stAPhone').text();
-	var addr1 = $(this).closest('div').find('.stAddr1').text();
-	var addr2 = $(this).closest('div').find('.stAddr2').text();
-	var latitude = $(this).closest('div').find('.stLat').val();
-	var longitude = $(this).closest('div').find('.stLong').val();
-	
+function modifyAddr1(aNo, place, name, phone, addr1, addr2, latitude, longitude ){
 	$('#ano').val(aNo);
 	$('#addr-place').val(place);
 	$('#addr-name').val(name);
@@ -693,12 +672,10 @@ $('.stAddrModi').click(function(){
 	$('#latitude').val(latitude);
 	$('#longitude').val(longitude);
 	$('#myModal9').css('display','block');
-});
+}
 
-
-
-// 출발지 주소 수정
-$('#addr-md-btn').click(function(){
+// 주소 수정
+function modifyAddr2(){
 	if(confirm("변경하신 주소로 수정하시겠습니까?")){				
 		$.ajax({
 			url:"addrModi.do",
@@ -716,18 +693,140 @@ $('#addr-md-btn').click(function(){
 			success:function(data){
 				alert("수정이 완료되었습니다.");
 				$('#myModal9').css('display','none');
-				location.reload();
+				$('#stAddrList-div11').remove();
+				$('#edAddrList-div11').remove();
+				
+				$.ajax({
+					url:"selectAddrList.do",
+					dataType:"json",
+					success:function(data){
+						var list = data["list"];
+						console.log("성공");
+						
+						// 출발지 주소록 불러오기
+						$stTableBody1 = $("#stAddrList-div1");
+						$stTableBody11 = $("<div id='stAddrList-div11'>");
+						
+						for(var i in list){
+							var $div = $("<div class='row small aL-row'>");
+							var $rad = $("<input type='radio' class='col-xs-2 col-md-2' name='startAddrList' style='margin-top: 10px; cursor: pointer;'>")
+							var $nameDiv = $("<span class='col-xs-2 col-md-2'>");
+							var $place = $("<span class='stAPlace'>");
+							$place.text(list[i].aPlace);
+							var $name = $("<span class='stAName'>");
+							$name.text(list[i].aName);
+							$nameDiv.append($place);
+							$nameDiv.append("<br>");
+							$nameDiv.append($name);
+							
+							var addr1 = list[i].aAddress.split(',')[0];
+							var addr2 = list[i].aAddress.split(',')[1];
+							var $addrDiv = $("<span class='col-xs-4 col-md-4'>");
+							var $addr1 = $("<span class='stAddr1'>");
+							$addr1.text(addr1);
+							var $addr2 = $("<span class='stAddr2'>");
+							$addr2.text(addr2);
+							$addrDiv.append($addr1);
+							$addrDiv.append("<br>");
+							$addrDiv.append($addr2);
+							
+							var $phoneDiv = $("<span class='col-xs-2 col-md-2' style='padding-top: 7px;'>");
+							var $phone = $("<span class='stAPhone'>");
+							$phone.text(list[i].aPhone);
+							$phoneDiv.append($phone);
+							
+							var $modiBtn = $("<input class='stAddrModi col-xs-1 col-md-1' type='button' value='수정' style='margin-right: 2px;' onclick = 'modifyAddr1(" +'"'+ list[i].aNo +'","'+list[i].aPlace+'","'+list[i].aName+'","'+list[i].aPhone+'","'+addr1+'","'+addr2+'","'+list[i].aLatitude+'","'+list[i].aLongitude +'");' +"'>");
+							var $deleBtn = $("<input class='stAddrDele col-xs-1 col-md-1' type='button' value='삭제' onclick ='deleteAddr(" +'"'+list[i].aNo+'"'+");'>");
+							var $stANo = $("<input class='stANo' type='hidden'>");
+							$stANo.attr("value",list[i].aNo);
+							var $stLat = $("<input class='stLat' type='hidden'>");
+							$stLat.attr("value",list[i].aLatitude);
+							var $stLong = $("<input class='stLong' type='hidden'>");
+							$stLong.attr("value", list[i].aLongitude);
+							
+							$div.append($rad);
+							$div.append($nameDiv);
+							$div.append($addrDiv);
+							$div.append($addrDiv);
+							$div.append($phoneDiv);
+							$div.append($modiBtn);
+							$div.append($deleBtn);
+							$div.append($stANo);
+							$div.append($stLat);
+							$div.append($stLong);
+							$stTableBody11.append($div);
+						}
+						$stTableBody1.append($stTableBody11);
+						
+						
+						// 도착지 주소록 불러오기
+						$edTableBody1 = $("#edAddrList-div1");
+						$edTableBody11 = $("<div id='edAddrList-div11'>");
+						
+						for(var i in list){
+							var $div = $("<div class='row small aL-row'>");
+							var $rad = $("<input type='radio' class='col-xs-2 col-md-2' name='endAddrList' style='margin-top: 10px; cursor: pointer;'>")
+							var $nameDiv = $("<span class='col-xs-2 col-md-2'>");
+							var $place = $("<span class='edAPlace'>");
+							$place.text(list[i].aPlace);
+							var $name = $("<span class='edAName'>");
+							$name.text(list[i].aName);
+							$nameDiv.append($place);
+							$nameDiv.append("<br>");
+							$nameDiv.append($name);
+							
+							var addr1 = list[i].aAddress.split(',')[0];
+							var addr2 = list[i].aAddress.split(',')[1];
+							var $addrDiv = $("<span class='col-xs-4 col-md-4'>");
+							var $addr1 = $("<span class='edAddr1'>");
+							$addr1.text(addr1);
+							var $addr2 = $("<span class='edAddr2'>");
+							$addr2.text(addr2);
+							$addrDiv.append($addr1);
+							$addrDiv.append("<br>");
+							$addrDiv.append($addr2);
+							
+							var $phoneDiv = $("<span class='col-xs-2 col-md-2' style='padding-top: 7px;'>");
+							var $phone = $("<span class='edAPhone'>");
+							$phone.text(list[i].aPhone);
+							$phoneDiv.append($phone);
+							
+							var $modiBtn = $("<input class='edAddrModi col-xs-1 col-md-1' type='button' value='수정' style='margin-right: 2px;' onclick = 'modifyAddr1(" +'"'+ list[i].aNo +'","'+list[i].aPlace+'","'+list[i].aName+'","'+list[i].aPhone+'","'+addr1+'","'+addr2+'","'+list[i].aLatitude+'","'+list[i].aLongitude +'");' +"'>");
+							var $deleBtn = $("<input class='edAddrDele col-xs-1 col-md-1' type='button' value='삭제' onclick ='deleteAddr(" +'"'+list[i].aNo+'"'+");'>");
+							var $stANo = $("<input class='edANo' type='hidden'>");
+							$stANo.attr("value",list[i].aNo);
+							var $stLat = $("<input class='edLat' type='hidden'>");
+							$stLat.attr("value",list[i].aLatitude);
+							var $stLong = $("<input class='edLong' type='hidden'>");
+							$stLong.attr("value", list[i].aLongitude);
+							
+							$div.append($rad);
+							$div.append($nameDiv);
+							$div.append($addrDiv);
+							$div.append($addrDiv);
+							$div.append($phoneDiv);
+							$div.append($modiBtn);
+							$div.append($deleBtn);
+							$div.append($stANo);
+							$div.append($stLat);
+							$div.append($stLong);
+							$edTableBody11.append($div);
+						}
+						$edTableBody1.append($edTableBody11);
+						
+					}, error:function(){
+						console.log("실패");
+					}
+				});
 			}, error:function(data){
 				alert("수정이 실패하였습니다.");
 			}
 		});
 	}
-});
+}
 
-// 출발지 삭제
-$('.stAddrDele').click(function(){
-	var aNo = $(this).closest('div').find('.stANo').val();
-	
+// 주소록 삭제
+function deleteAddr(aNo){
 	if(confirm("선택하신 주소를 삭제하시겠습니까?")){
 		$.ajax({
 			url:"addrDele.do",
@@ -735,56 +834,136 @@ $('.stAddrDele').click(function(){
 			type:"post",
 			success:function(date){
 				alert("삭제가 완료되었습니다.");
+				
+				$('#stAddrList-div11').remove();
+				$('#edAddrList-div11').remove();
+				
+				$.ajax({
+					url:"selectAddrList.do",
+					dataType:"json",
+					success:function(data){
+						var list = data["list"];
+						console.log("성공");
+						// 출발지 주소록 불러오기
+						$stTableBody1 = $("#stAddrList-div1");
+						$stTableBody11 = $("<div id='stAddrList-div11'>");
+						
+						for(var i in list){
+							var $div = $("<div class='row small aL-row'>");
+							var $rad = $("<input type='radio' class='col-xs-2 col-md-2' name='startAddrList' style='margin-top: 10px; cursor: pointer;'>")
+							var $nameDiv = $("<span class='col-xs-2 col-md-2'>");
+							var $place = $("<span class='stAPlace'>");
+							$place.text(list[i].aPlace);
+							var $name = $("<span class='stAName'>");
+							$name.text(list[i].aName);
+							$nameDiv.append($place);
+							$nameDiv.append("<br>");
+							$nameDiv.append($name);
+							
+							var addr1 = list[i].aAddress.split(',')[0];
+							var addr2 = list[i].aAddress.split(',')[1];
+							var $addrDiv = $("<span class='col-xs-4 col-md-4'>");
+							var $addr1 = $("<span class='stAddr1'>");
+							$addr1.text(addr1);
+							var $addr2 = $("<span class='stAddr2'>");
+							$addr2.text(addr2);
+							$addrDiv.append($addr1);
+							$addrDiv.append("<br>");
+							$addrDiv.append($addr2);
+							
+							var $phoneDiv = $("<span class='col-xs-2 col-md-2' style='padding-top: 7px;'>");
+							var $phone = $("<span class='stAPhone'>");
+							$phone.text(list[i].aPhone);
+							$phoneDiv.append($phone);
+							
+							var $modiBtn = $("<input class='stAddrModi col-xs-1 col-md-1' type='button' value='수정' style='margin-right: 2px;' onclick = 'modifyAddr1(" +'"'+ list[i].aNo +'","'+list[i].aPlace+'","'+list[i].aName+'","'+list[i].aPhone+'","'+addr1+'","'+addr2+'","'+list[i].aLatitude+'","'+list[i].aLongitude +'");' +"'>");
+							var $deleBtn = $("<input class='edAddrDele col-xs-1 col-md-1' type='button' value='삭제' onclick ='deleteAddr(" +'"'+list[i].aNo+'"'+");'>");
+							var $stANo = $("<input class='stANo' type='hidden'>");
+							$stANo.attr("value",list[i].aNo);
+							var $stLat = $("<input class='stLat' type='hidden'>");
+							$stLat.attr("value",list[i].aLatitude);
+							var $stLong = $("<input class='stLong' type='hidden'>");
+							$stLong.attr("value", list[i].aLongitude);
+							
+							$div.append($rad);
+							$div.append($nameDiv);
+							$div.append($addrDiv);
+							$div.append($addrDiv);
+							$div.append($phoneDiv);
+							$div.append($modiBtn);
+							$div.append($deleBtn);
+							$div.append($stANo);
+							$div.append($stLat);
+							$div.append($stLong);
+							$stTableBody11.append($div);
+						}
+						$stTableBody1.append($stTableBody11);
+						
+						
+						// 도착지 주소록 불러오기
+						$edTableBody1 = $("#edAddrList-div1");
+						$edTableBody11 = $("<div id='edAddrList-div11'>");
+						
+						for(var i in list){
+							var $div = $("<div class='row small aL-row'>");
+							var $rad = $("<input type='radio' class='col-xs-2 col-md-2' name='endAddrList' style='margin-top: 10px; cursor: pointer;'>")
+							var $nameDiv = $("<span class='col-xs-2 col-md-2'>");
+							var $place = $("<span class='edAPlace'>");
+							$place.text(list[i].aPlace);
+							var $name = $("<span class='edAName'>");
+							$name.text(list[i].aName);
+							$nameDiv.append($place);
+							$nameDiv.append("<br>");
+							$nameDiv.append($name);
+							
+							var addr1 = list[i].aAddress.split(',')[0];
+							var addr2 = list[i].aAddress.split(',')[1];
+							var $addrDiv = $("<span class='col-xs-4 col-md-4'>");
+							var $addr1 = $("<span class='edAddr1'>");
+							$addr1.text(addr1);
+							var $addr2 = $("<span class='edAddr2'>");
+							$addr2.text(addr2);
+							$addrDiv.append($addr1);
+							$addrDiv.append("<br>");
+							$addrDiv.append($addr2);
+							
+							var $phoneDiv = $("<span class='col-xs-2 col-md-2' style='padding-top: 7px;'>");
+							var $phone = $("<span class='edAPhone'>");
+							$phone.text(list[i].aPhone);
+							$phoneDiv.append($phone);
+							
+							var $modiBtn = $("<input class='edAddrModi col-xs-1 col-md-1' type='button' value='수정' style='margin-right: 2px;' onclick = 'modifyAddr1(" +'"'+ list[i].aNo +'","'+list[i].aPlace+'","'+list[i].aName+'","'+list[i].aPhone+'","'+addr1+'","'+addr2+'","'+list[i].aLatitude+'","'+list[i].aLongitude +'");' +"'>");
+							var $deleBtn = $("<input class='edAddrDele col-xs-1 col-md-1' type='button' value='삭제' onclick ='deleteAddr(" +'"'+list[i].aNo+'"'+");'>");
+							var $stANo = $("<input class='edANo' type='hidden'>");
+							$stANo.attr("value",list[i].aNo);
+							var $stLat = $("<input class='edLat' type='hidden'>");
+							$stLat.attr("value",list[i].aLatitude);
+							var $stLong = $("<input class='edLong' type='hidden'>");
+							$stLong.attr("value", list[i].aLongitude);
+							
+							$div.append($rad);
+							$div.append($nameDiv);
+							$div.append($addrDiv);
+							$div.append($addrDiv);
+							$div.append($phoneDiv);
+							$div.append($modiBtn);
+							$div.append($deleBtn);
+							$div.append($stANo);
+							$div.append($stLat);
+							$div.append($stLong);
+							$edTableBody11.append($div);
+						}
+						$edTableBody1.append($edTableBody11);
+					}, error:function(){
+						console.log("실패");
+					}
+				});
 			}, error:function(data){
 				alert("삭제가 실패하였습니다.");
 			}
 		});
-		$(this).closest('div').remove();
 	}
-});
-	
-	
-// 도착지 주소 수정 모달 팝업 띄우기
-$('.edAddrModi').click(function(){
-	
-	var aNo = $(this).closest('div').find('.edANo').val();
-	var place = $(this).closest('div').find('.edAPlace').text();
-	var name = $(this).closest('div').find('.edAName').text();
-	var phone = $(this).closest('div').find('.edAPhone').text();
-	var addr1 = $(this).closest('div').find('.edAddr1').text();
-	var addr2 = $(this).closest('div').find('.edAddr2').text();
-	var latitude = $(this).closest('div').find('.edLat').val();
-	var longitude = $(this).closest('div').find('.edLong').val();
-	
-	$('#ano').val(aNo);
-	$('#addr-place').val(place);
-	$('#addr-name').val(name);
-	$('#addr-phone').val(phone);
-	$('#addr-basic').val(addr1);
-	$('#addr-detail').val(addr2);
-	$('#latitude').val(latitude);
-	$('#longitude').val(longitude);
-	$('#myModal9').css('display','block');
-});	
-
-// 도착지 삭제
-$('.edAddrDele').click(function(){
-	var aNo = $(this).closest('div').find('.edANo').val();
-	
-	if(confirm("선택하신 주소를 삭제하시겠습니까?")){
-		$.ajax({
-			url:"addrDele.do",
-			data:{aNo:aNo},
-			type:"post",
-			success:function(date){
-				alert("삭제가 완료되었습니다.");
-			}, error:function(data){
-				alert("삭제가 실패하였습니다.");
-			}
-		});
-		$(this).closest('div').remove();
-	}
-});
+}
 
 // 주소록 수정 창에 검색
 function SearchMdAddr(){
