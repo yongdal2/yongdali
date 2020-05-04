@@ -211,7 +211,6 @@ public class ReservationController {
 	
 	@RequestMapping(value="selectAddrList.do")
 	public void selectAddrList(HttpServletResponse response, HttpSession session) throws JsonIOException, IOException {
-		System.out.println("안녕4");
 		// 인코딩
 		response.setContentType("application/json; charset=UTF-8");
 		String mno = ((Member)session.getAttribute("loginUser")).getmNo();
