@@ -131,6 +131,13 @@ public interface UserMyPageService {
 	 * @return
 	 */
 	int addrSys(String aNo);
+
+	/**
+	 * 비밀번호 업데이트
+	 * @param m
+	 * @return
+	 */
+	int uPwd(Member m);
 	
 
 	

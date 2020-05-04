@@ -22,12 +22,6 @@
 </head>
 <body>
 	<body>
-	<script>
-		$(document).ready(function() {
-			$("#header1>.jumbotron").css("display","none");
-		});
-	</script>
-	
 	<!-- 점보트론 -->
 	<div class="jumbotron" id="driverMyPjumbo">
 		<div class="container">
@@ -182,7 +176,7 @@
 							기존 비밀번호</div>
 						<div class="col-md-12" style="padding: 0; margin-top: 10px;">
 							<label for="nowPassword" style="display: none;"></label>
-							<input type="password" class="form-control noto" id="nowPassword" style="width: 100%; height: 46px;">
+							<input type="password" class="noto" id="nowPwd" style="width: 100%; height: 46px;">
 						</div>
 						<div class="col-md-12" 
 							style="padding: 0; margin-top: 15px; font-size: 16px; line-height: 24px;">
@@ -191,24 +185,19 @@
 							style="padding: 0; margin-top: 5px; font-size: 14px; color: #525252; line-height: 20px;">
 							8~16자 영문 대 소문자, 숫자, 특수문자(#?!@$%^&*)를 사용하세요.</div>
 						<div class="col-md-12" style="padding: 0; margin-top: 10px;">
-							<label for="newPassword" style="display: none;"></label>
-							<input type="password" class="form-control noto" id="newPassword" style="width: 100%; height: 46px; color: #525252;">
+							<label for="newPassword" style="display: block;"></label>
+							<input type="password" class="noto" id="newPwd" name="newPwd" style="width: 100%; height: 46px; color: #525252;">
 						</div>
 						<div class="col-md-12" style="padding: 0; margin-top: 15px; font-size: 16px; line-height: 24px;"> 새 비밀번호 확인</div>
 						<div class="col-md-12" style="padding: 0; margin-top: 10px;">
-							<label for="newPasswordCheck" style="display: none;"></label>
-							<input type="password" class="form-control noto" id="newPasswordCheck" style="width: 100%; height: 46px; color: #525252;">
+							<label for="newPasswordCheck" id="pwdCheck" style="display: none;"></label>
+							<input type="password" class="noto" id="newPwdChk" style="width: 100%; height: 46px; color: #525252;">
 						</div>
-						<div class="col-sm-12" id="pwCheckText" style="padding: 0; margin-top: 5px; display: none;"></div>
+						<div class="col-sm-12" id="pwdMsg" style="padding: 0; margin-top: 5px; display: none;"></div>
 						<div class="col-md-12 text-right">
 							<button type="button" class="btn btn-lg" data-dismiss="modal" style="margin: 20px 10px 0px 10px; color: gray;">취소</button>
 							<button type="button" id="upPwdBtn" class="btn btn-lg btn_ydl" data-dismiss="modal" style="margin: 20px 10px 0px 10px;">수정하기</button>
 						</div>
-						<!-- ip1 = nowPassword -->
-						<!-- ip2 = newPassword -->
-						<!-- ip3 = nowPassword -->
-						<!-- 8~16 = nowPassword -->
-						<!-- 패스워드 일치 알림= pwCheckText -->
 					</div>
 					</form>
 				</div>
@@ -217,6 +206,82 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+	$(document).ready(function() {
+		$("#header1>.jumbotron").css("display","none");
+	});
+	
+	/* 비밀번호 업데이트  */
+	$("#upPwdBtn").on("click",function(){
+		var nowPwd = $("#nowPwd").val();
+		var nPwd = $("#newPwd").val();
+		var nPwdChk = $("#newPwdChk").val();
+		
+			// 비밀번호 입력
+	        if( nPwd ==''){
+	        	alert('변경 비밀번호를 입력하세요');
+	            $("#newPwd").focus();
+	            return false;
+	        }else if(!nPwd.test(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*]).{8,16}$/)){
+	        	alert('8~16자 영문 대 소문자, 숫자, 특수문자(#?!@$%^&*)를 사용하세요.');
+	        	return false;
+	        }
+			
+	        // 비밀번호 확인
+	        if($("#nPwdChk").val() ==''){
+	        	warningModal('비밀번호를 다시 한번 더 입력하세요');
+	            $("#newPwdChk").focus();
+	            return false;
+	        }
+			
+	        // 동일 비밀번호
+			if(nPwd !== nPwdChk){
+	 			alert('비밀번호를 동일하게 입력하세요');
+		    	$("#newPwdChk").focus();
+		    	return false;
+			}
+				
+	        if(nowPwdChk(nowPwd) !='Y'){
+	        	alert('비밀번호가 틀렸습니다.')
+	        	return false;
+	        }
+	        
+	        
+	       var pwdAn = uPwd(nPwd);
+			alert(pwdAn);
+	});
+	
+	
+	function uPwd (newPwd){
+		$.ajax({
+			 url:"uPwd.myp",
+			 data:{ newPwd:newPwd },
+			 success:function(data){
+				 console.log("uPwd : "+ data);
+				 if(data=='Y'){
+					 return true;				 
+				 }else{
+					 return false;
+				 }
+				},error:function(){
+					console.log("aj실패")
+				}
+			});
+	}
+	
+	function nowPwdChk(nowPwd){
+		 $.ajax({
+			 url:"chkPwd.myp",
+			 data:{ nowPwd:nowPwd },
+			 success:function(data){
+				 console.log("chkPwd : "+ data);
+				 return data;
+				},error:function(){
+					console.log("aj실패");
+				}
+			});
+	 };
+
+	
 	/* 광고 동의  */
 	var checked = '/yongdali/resources/images/login&signUp/checked-circle.png';
     var unchecked = '/yongdali/resources/images/login&signUp/unchecked-circle.png';
@@ -286,62 +351,6 @@
 		$("#nPhoneBtn").on("click",function(){
 			$("#updatePhone").attr("action","uPhone.myp").submit();
 		});
-		
-		/* 비밀번호 변경*/
-		/* $("#upPwdBtn").on("click",function(){
-			$("#upPwdForm").attr("action","uPwd.myp").submit();
-		}); */
-		
-		/* 	<!-- ip1 = nowPassword -->
-			<!-- ip2 = newPassword -->
-			<!-- ip3 = newPasswordCheck -->
-			<!-- 8~16 = nowPassword -->
-			<!-- 패스워드 일치 알림= pwCheckText --> */
-			// chk
-			
-			function chkPwd(pwd){
-				var regPwd = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*]).{8,16}$/"
-					if(pwd.test(regPwd)){
-						return true
-					}else if(pwd==""){
-						alert("비밀번호를 입력하세요");
-						return false
-					}else{
-						return false
-					}
-			};
-			
-			var nPwd = $('#newPassword').val();
-			var nPwdChk = $('#newPasswordCheck').val();
-	
-			function nPwdChk(){
-			 
-			var nowPwd = nowPassword.val();
-			 
-				 $.ajax({
-					 url:"pushChk.myp",
-					 data:{nPwdChk:nPwdChk},
-					 success:function(data){
-						 if(data=='Y'){
-							 alert("광고 수신 동의가 처리되었습니다.");
-							 $('#chkPush').attr('src',checked).attr('checked',true);
-							 
-						 }else if(data=='N'){
-							 alert("광고 수신 동의 취소가 처리되었습니다.");
-							  $('#chkPush').attr('src',unchecked).attr('checked',false);
-						 }else{
-							 alert("처리가 실패하였습니다.");
-						 }
-						},error:function(){
-							console.log("aj실패")
-						}
-					});
-				 };
-			
-			
-			
-			
-			
 		
 	</script>
 </html>

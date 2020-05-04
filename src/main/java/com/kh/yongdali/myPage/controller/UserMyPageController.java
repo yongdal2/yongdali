@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +39,9 @@ import com.kh.yongdali.reservation.model.vo.Reservation;
 public class UserMyPageController {
 	@Autowired
 	private UserMyPageService umpService;
+	
+	@Autowired
+	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
 	//추후에 home.controller로 이동 *******************
 	@RequestMapping("information.ydl")
@@ -97,13 +101,44 @@ public class UserMyPageController {
 		
 	}
 	
-	//유저 비밀번호 변경
-	
-	
+	//유저 비밀번호 확인
+	@ResponseBody
+	@RequestMapping("chkPwd.myp")	
+	public String chkPwd(@RequestParam("nowPwd") String nowPwd, @SessionAttribute Member loginUser) {
 		
-	
-	
-	
+		if(bcryptPasswordEncoder.matches(nowPwd, loginUser.getPwd())) {
+			return "Y";
+		}else {
+			return "N";
+		}
+	}
+	//유저 비밀번호 변경
+	@ResponseBody
+	@RequestMapping("uPwd.myp")	
+	public String uPwd(@RequestParam("newPwd") String newPwd, 
+						@SessionAttribute Member loginUser, Member m, Model model) {
+		
+		m.setmNo(loginUser.getmNo());
+		
+		String enNewPwd = bcryptPasswordEncoder.encode(newPwd);
+		
+		m.setPwd(bcryptPasswordEncoder.encode(enNewPwd));
+		
+		int result = 0;
+		
+		if(newPwd != null && newPwd.equals("")) {
+			result = umpService.uPwd(m);
+		}
+		
+		if(result > 0) {
+			
+			loginUser.setPwd(enNewPwd);
+			model.addAttribute("loginUser", loginUser);
+			return "Y";
+		}else {
+			return "N";
+		}
+	}
 	
 	
 	//===================================주소록=========================================

@@ -98,6 +98,11 @@ public class UserMyPageDao {
 		return sqlSession.update("myPageMapper.addrSys", aNo);
 	}
 
+
+	public int uPwd(Member m) {
+		return sqlSession.update("myPageMapper.uPwd",m);
+	}
+
 	
 
 }

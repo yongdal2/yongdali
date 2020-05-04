@@ -100,8 +100,11 @@
 		WHERE M_NO = #{mNo}
 	</update>
 	<!-- 비밀번호 업데이트 -->
-	
-	
+	<update id="uPwd" parameterType="Member">
+		UPDATE MEMBER
+		SET PWD = #{pwd}
+		WHERE M_NO = #{mNo}	
+	</update>
 	<!-- 광고 동의 업데이트-->
 	<update id="pushUpdate" parameterType="Member">
 		UPDATE MEMBER

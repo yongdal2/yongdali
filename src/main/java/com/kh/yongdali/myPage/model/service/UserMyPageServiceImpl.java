@@ -101,6 +101,11 @@ public class UserMyPageServiceImpl implements UserMyPageService {
 		return umpDao.addrSys(aNo);
 	}
 
+	@Override
+	public int uPwd(Member m) {
+		return umpDao.uPwd(m);
+	}
+
 	
 
 
