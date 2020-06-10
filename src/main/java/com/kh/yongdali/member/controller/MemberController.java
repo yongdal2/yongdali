@@ -727,6 +727,7 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping("emailDup.me")
 	public String emailDupChk(@RequestParam("mId") String mId) {
+		logger.debug("emailDup.me");
 		int result = mService.emailChk(mId);
 		
 		if(result > 0) {
