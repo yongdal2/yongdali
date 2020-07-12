@@ -59,7 +59,7 @@
                 <div>
                     <div>
                         <img src="${contextPath}/resources/images/login&signUp/unchecked-circle.png" alt="동의" class="chkPolicy">
-                        <div>원트럭 이용약관 동의 (필수)</div>
+                        <div>용달이 이용약관 동의 (필수)</div>
                     </div>
                     <span class="detail" id="viewYondaliPolicy">
                         <img src="${contextPath}/resources/images/magnifying-glass-black.svg" alt="상세보기">
