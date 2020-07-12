@@ -198,7 +198,7 @@
             <div class="easyAccessLogo">
                 <img class="easyAccessBtn" src="${contextPath}/resources/images/login&signUp/facebookLogo.png" alt="페이스북" onclick="fbLogin();" id="test">
                 <img class="easyAccessBtn" src="${contextPath}/resources/images/login&signUp/kakaoLogo.png" alt="카카오" onclick="kakaoLogin();">
-                <a href="<%=apiURL%>"><img src="${contextPath}/resources/images/login&signUp/naverLogo.png" alt="네이버"></a>
+                <img src="${contextPath}/resources/images/login&signUp/naverLogo.png" alt="네이버" onclick="window.open('<%=apiURL%>','NAVER','location = no, resizeable = no, width = 500, height = 500')">
             </div>
         </div>
     </div>
