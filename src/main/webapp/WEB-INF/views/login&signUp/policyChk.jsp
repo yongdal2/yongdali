@@ -13,7 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>용달이 | 약관동의</title>
+    <title>용달이 | 약관 동의</title>
     
     <!-- 카카오 아이디로 로그인 -->
     <script src="${contextPath}/resources/js/kakao.min.js"></script>
@@ -49,7 +49,7 @@
     <div class="content signInAgree">
         <div class="policy">
             <div class="policy-header">
-                <div>약관동의</div>
+                <div>약관 동의</div>
                 <div class="chkAllDiv">
                     <img src="${contextPath}/resources/images/login&signUp/unchecked-circle.png" alt="동의" id="chkAll" class="chkPolicy">
                     <div>모두 동의</div> 
@@ -63,7 +63,7 @@
                     </div>
                     <span class="detail" id="viewYondaliPolicy">
                         <img src="${contextPath}/resources/images/magnifying-glass-black.svg" alt="상세보기">
-                        <div>내용보기</div> 
+                        <div>내용 보기</div> 
                     </sapn>
                 </div>
                 <div>
@@ -73,7 +73,7 @@
                     </div>
                     <span class="detail" id="viewPersonalInfoPolicy">
                         <img src="${contextPath}/resources/images/magnifying-glass-black.svg" alt="상세보기">
-                        <div>내용보기</div> 
+                        <div>내용 보기</div> 
                     </span>
                 </div>
                 <div>
